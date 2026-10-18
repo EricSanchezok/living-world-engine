@@ -967,5 +967,369 @@
     "status": "reviewed",
     "dependencies": [],
     "evidence": []
+  },
+  {
+    "id": "yue-lanzhou-province-geography",
+    "statement": "越国有十三州；岚州在南部，面积第八、富足第二，辛州富足在先。岚州多水网、适宜稻作；嘉元位居岚州中部，虽非府城却为第一大城，乡鲁大运河贯穿越国南北并穿过嘉元。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "长期行政地理与水道回溯，财富排序为该阶段地方格局，未来可以改变。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20417649",
+        "chapterSha256": "628f1970be0653fe2c552f7a239295dd0d476f8a9b40c3859b81dad9f21aa667",
+        "start": 0,
+        "end": 334,
+        "anchorSha256": "64861314bcd21413b804b33937384c3b33a19768c03f9b45297a9c7ef9b78820"
+      }
+    ]
+  },
+  {
+    "id": "yue-home-province-name-boundary",
+    "statement": "王门主说韩立可能离开镜州甚至越国；随后旅途回顾将韩故乡所在州写作越州。两者都不是越国的同一行政层级，但仅一处越州称字不能证明另一个故乡州；保留异文，现有镜州不搬迁或再造。",
+    "classification": "canon",
+    "validAtOpening": false,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "后文叙述称名差异，不作新的T0实体或更改地理的依据。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20397144",
+        "chapterSha256": "031a545207eeccdb2775b8d16a7313c9b292c2ff293f01d3b98c95c33f059d7d",
+        "start": 1754,
+        "end": 1912,
+        "anchorSha256": "e9d1da4dc1c892da7a0db772ea36780db988cc8d05b4569f6e50bc064848e6c1"
+      },
+      {
+        "chapterId": "qq-20426408",
+        "chapterSha256": "00f3c12e3422e68ae8779f4b39c8c046dc5e46c2c848844393bedfedac84cb9c",
+        "start": 137,
+        "end": 323,
+        "anchorSha256": "d1809cf4e5c3c378359f53ec0311ca41ebb92b4000e5f2928a553d995570bcd8"
+      }
+    ]
+  },
+  {
+    "id": "yue-mo-ghost-hand-testimony",
+    "statement": "墨居仁自述早年在越国岚州武林以鬼手成名、白手创基并威慑黑白两道；声威强度及顺逆生死为自述，不等客观所有人服从。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "他回述入七玄门前旧事；保留说话者与夸称边界。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20042723",
+        "chapterSha256": "c0e9a1f8f68a2e4f88f0e145bb2ce3c98497d5688f712ced36b02071f9afb007",
+        "start": 366,
+        "end": 566,
+        "anchorSha256": "13f8cc89713a13ff61c05e256362652745b4fa2ca5d80bb99e21bdcad6087357"
+      }
+    ]
+  },
+  {
+    "id": "yue-family-sect-network",
+    "statement": "万小山所知的越国家族制度：有年头的修仙家族多由门派弟子血脉延续，浅层法诀传续并作为门派外围，具有一定独立性，一般有门派支持；不能推成所有家族都唯一隶属七派或高阶功法全无。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "可回溯的长期社会联系仍保留万小山知识来源及一般性，具体族派关系另据材料。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20530370",
+        "chapterSha256": "6bd211182206cdf8d4361084276620efeec64eb77c350ee4a5a195a6877e2735",
+        "start": 1112,
+        "end": 1238,
+        "anchorSha256": "0717208bb9c59ba16f0a99b2067fe7f7fb7ecf200f4e104e592cb9a4f1a5167d"
+      },
+      {
+        "chapterId": "qq-20530370",
+        "chapterSha256": "6bd211182206cdf8d4361084276620efeec64eb77c350ee4a5a195a6877e2735",
+        "start": 3063,
+        "end": 3188,
+        "anchorSha256": "a1a641168171c9c2378ea4ffeff30bb4b0f4511f53baecc65931e78fba1eb6d7"
+      }
+    ]
+  },
+  {
+    "id": "yue-tainan-arrival-and-family-contacts",
+    "statement": "席铁牛复述两名修士打算先去太南谷再赴会，半日路涉及骑飞禽而非行人统一距离。万小山初见十五六岁，瞒家远出，与韩结识后发通音符入谷；家传位置和韩早先猜测随后被实际入谷闭合。青颜真人是父亲至交与当届主持之一；七姐九哥当次到谷，不等开篇已在那里。韩的八层修为、随身丹符与小山的后期旅程不前置。",
+    "classification": "canon",
+    "validAtOpening": false,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "韩入修仙界后的事件；小山当前幼年状态沿已有年龄补写，本批职务和人物相识不自动倒灌。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20523075",
+        "chapterSha256": "fa2e3ca10fed9e09fe6f35ac01130a8b6b582802a09556b58d914d8ac4f8fe73",
+        "start": 72,
+        "end": 196,
+        "anchorSha256": "67098c98a65961e2de3922736ee6c365e5bd5a170f46416162a078d273914d96"
+      },
+      {
+        "chapterId": "qq-20523075",
+        "chapterSha256": "fa2e3ca10fed9e09fe6f35ac01130a8b6b582802a09556b58d914d8ac4f8fe73",
+        "start": 287,
+        "end": 444,
+        "anchorSha256": "1a0e56a5862b30b2715e0ffa489559447499aa2d1819a136062f65bf0552ad63"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 2025,
+        "end": 2074,
+        "anchorSha256": "062d5d86d17d1e5dc48340d3a1b81f91b8bd5c3f926edb18dd49633a99dbe124"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 2239,
+        "end": 2688,
+        "anchorSha256": "daabf0376b55d6970b38db90260c1f53ed71a24cd59de0ab030ec726c59cdd0a"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 828,
+        "end": 1077,
+        "anchorSha256": "4656db6fa30157d77d64433be40b455f66b2a2c18679aaf72cdf1ef02930178b"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1202,
+        "end": 1344,
+        "anchorSha256": "08d765f591925e154d48b325015ee1b96896bff9afd38077f0b46657f44ae410"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 2163,
+        "end": 2428,
+        "anchorSha256": "dfe5e12e0194d4ee7ebe0cdd972b48f2f39f23a22baa0ff741153fe00e872988"
+      },
+      {
+        "chapterId": "qq-20536860",
+        "chapterSha256": "443080fd2259586686f3de708f0c8c97b90d31b62a013dec14644f845188fbbe",
+        "start": 32,
+        "end": 180,
+        "anchorSha256": "20aafb9a3d1b9e075eaabb1837cb0d397af0feddd231b07aa1ccf66822dd37c7"
+      },
+      {
+        "chapterId": "qq-20536860",
+        "chapterSha256": "443080fd2259586686f3de708f0c8c97b90d31b62a013dec14644f845188fbbe",
+        "start": 241,
+        "end": 442,
+        "anchorSha256": "df22a5a20b14e70ca0a543deaecb89d0f53585924aec85bb3972747935d2965a"
+      },
+      {
+        "chapterId": "qq-20536860",
+        "chapterSha256": "443080fd2259586686f3de708f0c8c97b90d31b62a013dec14644f845188fbbe",
+        "start": 564,
+        "end": 827,
+        "anchorSha256": "c820be29aad292dd8792e4db7f9588a2eeb8ec541ab844eee83d1155c6845f27"
+      }
+    ]
+  },
+  {
+    "id": "yue-tainan-valley-physical-layout",
+    "statement": "太南谷三面环山，迷雾坡为观察到的唯一出口，内部上百亩，有宫殿式楼阁和青砖广场。通音符请求谷内人开阵接引，不是发符便自动破解禁制；无携带交换货物的强制入谷规定。村民受困两三日是当地旧闻，不设每次闯谷固定饥饿天数或必死结果。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "实际空间和长期门禁做有据回溯，当届会期、人数与摊位交易另外发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 1330,
+        "end": 1747,
+        "anchorSha256": "d3d843ee991cca6466b718bedf2239002dfcf09faf1b1d84bcb15f8145152138"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1202,
+        "end": 1344,
+        "anchorSha256": "08d765f591925e154d48b325015ee1b96896bff9afd38077f0b46657f44ae410"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1583,
+        "end": 1813,
+        "anchorSha256": "75613f74d64e6f4bee3d84e86dbdccfd72486d0852770df8c80751ae897447c9"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 2163,
+        "end": 2428,
+        "anchorSha256": "dfe5e12e0194d4ee7ebe0cdd972b48f2f39f23a22baa0ff741153fe00e872988"
+      }
+    ]
+  },
+  {
+    "id": "yue-tainan-traveller-identities",
+    "statement": "当届散修圈有苍狼岭黑木黑金同胞、飞莲洞红莲、菩露山苦桑、天水寨胡萍姑熊大力夫妇、云门涧吴九指、石拓谷黄孝天。松纹自报卧牛山青牛观挂单道士，后连续持钥及对话称青纹，沿同一人，不合青颜。熊天哑但能表达行动；苦桑诵经不即时回话不等聋哑。吴当次十六七岁、第八层圆满，在来谷路上得偷技并承诺会内不再用；黄二十一二岁，法力强于道士是韩判断，嗜睡因功法为青纹解释。叶豹自报名与秦叶岭所属；威胁切磋尚不是已决斗。",
+    "classification": "canon",
+    "validAtOpening": false,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "共同赴会、技艺所得、青年年龄为后期阶段；保持源身份，年龄或当期住处未给的不能据此精确回填开篇。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20542675",
+        "chapterSha256": "37ccc78ebc4ca9f0adb4e5618fa509ab41a2701dce0a77b1c0daf31d32f049f5",
+        "start": 834,
+        "end": 1251,
+        "anchorSha256": "a516caafd0e1cdbe37cf2074166e2a7a9168e41b5a7f66118907fb37694bd7b0"
+      },
+      {
+        "chapterId": "qq-20542675",
+        "chapterSha256": "37ccc78ebc4ca9f0adb4e5618fa509ab41a2701dce0a77b1c0daf31d32f049f5",
+        "start": 2028,
+        "end": 2197,
+        "anchorSha256": "3447dbb6086fae9761b06057da62d687c8f3762e71bf1f8bd08f8bb852ba62fc"
+      },
+      {
+        "chapterId": "qq-20545950",
+        "chapterSha256": "23b6da53dee9d2adaf0d4912f5e47968387b5ac078a16168d750169f30c7a06c",
+        "start": 1960,
+        "end": 2133,
+        "anchorSha256": "1c44fe59d728fabaa706a31c09a773a534e74f33a6f34b811f305289c28fa92a"
+      },
+      {
+        "chapterId": "qq-20550912",
+        "chapterSha256": "60d38d8cd3f15620bdad65aa5289c4ff4ca115e685261a49e911eaecb66b82ae",
+        "start": 1529,
+        "end": 1889,
+        "anchorSha256": "2bf0ba93e9e4f18a8566e292e81f5addb0b1a469f2597826e068d26fd33cf030"
+      },
+      {
+        "chapterId": "qq-20550912",
+        "chapterSha256": "60d38d8cd3f15620bdad65aa5289c4ff4ca115e685261a49e911eaecb66b82ae",
+        "start": 2011,
+        "end": 2195,
+        "anchorSha256": "685fcaf8b77be521edbbf254c526dc5a3cefad66f7f3a156ef1ebb3a2d24ccf7"
+      },
+      {
+        "chapterId": "qq-20550912",
+        "chapterSha256": "60d38d8cd3f15620bdad65aa5289c4ff4ca115e685261a49e911eaecb66b82ae",
+        "start": 2572,
+        "end": 2722,
+        "anchorSha256": "096c3f0b4e7e88cc174a7908715f5e37b3e32b90d1efb75e3616f7a5819c1854"
+      },
+      {
+        "chapterId": "qq-20553899",
+        "chapterSha256": "efffebd0c77dc94dcb17bcd91e5f51071cf602c8b3779eb6fb3dd461dc752bfb",
+        "start": 651,
+        "end": 1298,
+        "anchorSha256": "bfabf4388f96a953859b732f6aa11fa24339e37b065652b271179d3fcc5b1317"
+      },
+      {
+        "chapterId": "qq-20553899",
+        "chapterSha256": "efffebd0c77dc94dcb17bcd91e5f51071cf602c8b3779eb6fb3dd461dc752bfb",
+        "start": 1522,
+        "end": 1888,
+        "anchorSha256": "fb29d0ff975fe234222b9339881004ec5877a8a051ba2a3c9b19287cf8d51462"
+      },
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 588,
+        "end": 732,
+        "anchorSha256": "e1a6e5d810aa4a325324df57326f1c073036c62ee9ffe26a12b6129daeec5214"
+      }
+    ]
+  },
+  {
+    "id": "yue-guest-ward-operation",
+    "statement": "太南谷客舍青光禁法能弹拒接触，可用天眼术看见；对应符箓贴上开孔，持符人收好符后进入，孔随后弥合。符为可重复持有的对应钥匙，不因一次通过就默认消耗，也不意味着可开其他禁制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "既有客舍禁制与验证方法可回溯；韩与青纹之间的借钥仅是后期交接，不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20542675",
+        "chapterSha256": "37ccc78ebc4ca9f0adb4e5618fa509ab41a2701dce0a77b1c0daf31d32f049f5",
+        "start": 2028,
+        "end": 2197,
+        "anchorSha256": "3447dbb6086fae9761b06057da62d687c8f3762e71bf1f8bd08f8bb852ba62fc"
+      },
+      {
+        "chapterId": "qq-20550912",
+        "chapterSha256": "60d38d8cd3f15620bdad65aa5289c4ff4ca115e685261a49e911eaecb66b82ae",
+        "start": 1529,
+        "end": 1889,
+        "anchorSha256": "2bf0ba93e9e4f18a8566e292e81f5addb0b1a469f2597826e068d26fd33cf030"
+      }
+    ]
+  },
+  {
+    "id": "yue-foundation-supply-account",
+    "statement": "黑木介绍十年一届升仙会，七派各十名额和十筑基丹、四十岁以上不收。关于筑基丹，他所述越国七派联合约十年炼出几鼎千余颗且不足自用是当时供需叙述，不生成每十年自动入库千丹；必须服丹才能筑基的当地知识不能覆盖天灵根等明示例外。太南会当次已过半、还十余日也不等所有届数固定同天开闭。",
+    "classification": "testimony",
+    "validAtOpening": false,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "当次对话与产量概数留资料，当前运行库存及发放需实际材料、炼制与分配。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 32,
+        "end": 332,
+        "anchorSha256": "187d6f0bf9671cb94a4b4ca8671390673d870c4a428787f0d8a2bb35da73298f"
+      },
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 804,
+        "end": 1106,
+        "anchorSha256": "785e13d4a89eed43cad86127b37102b21c611e3cc6d9d4e98914d0933a5155be"
+      },
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 1571,
+        "end": 1787,
+        "anchorSha256": "5001aa936248b2c2aa938dc28ec232243c33d9d3bafcebc27d2d484c7951cd12"
+      },
+      {
+        "chapterId": "qq-20553899",
+        "chapterSha256": "efffebd0c77dc94dcb17bcd91e5f51071cf602c8b3779eb6fb3dd461dc752bfb",
+        "start": 1688,
+        "end": 1888,
+        "anchorSha256": "4b2b4e129876e4370e40cebaae262844cb593ab7510be374d45f49603a98ff6d"
+      }
+    ]
+  },
+  {
+    "id": "yue-present-guesthouse-custody",
+    "statement": "为太南谷补足一栋当前空置的东侧客舍和一张相配通行符。唐清现保管该符并受托接待，可商议借宿或借符；未有租客、租金债务与自动扣费，其他楼阁无同钥通行权。客舍与符的具体当期安排为原创，不等韩立后来留宿的同一房号。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "读者在所列正文阶段获知；人物只持自己已经经历或获告的知识。",
+    "openingReason": "补足有限物件、当前使用和保管权限；不预置后期散修圈关系或万能开禁能力。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
   }
 ]

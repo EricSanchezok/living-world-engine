@@ -43,6 +43,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "yue-thirteen-provinces",
+          "predicate": "territorial-structure",
+          "value": {
+            "kind": "text",
+            "value": "越国下分十三州，岚州位于南部。"
+          },
+          "description": "越国下分十三州，岚州位于南部。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-yue-route-yue-xinzhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-xinzhou"
+          },
+          "description": "前往辛州需沿州际道路或实际遁行，行程仍有距离。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -100,6 +124,18 @@
             "value": "路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。"
           },
           "description": "路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-lanzhou-water-and-produce",
+          "predicate": "regional-economy",
+          "value": {
+            "kind": "text",
+            "value": "水道湖泊与运河众多，稻作兴盛；岚州面积居十三州第八，富足仅次于辛州。"
+          },
+          "description": "水道湖泊与运河众多，稻作兴盛；岚州面积居十三州第八，富足仅次于辛州。",
           "access": {
             "kind": "public"
           }
@@ -520,6 +556,30 @@
             "value": "谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。"
           },
           "description": "谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-tainan-valley-layout",
+          "predicate": "physical-layout",
+          "value": {
+            "kind": "text",
+            "value": "谷地三面环山，迷雾坡通往谷外；内有上百亩土地、宫殿式楼阁与青砖交易广场。"
+          },
+          "description": "谷地三面环山，迷雾坡通往谷外；内有上百亩土地、宫殿式楼阁与青砖交易广场。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-tainan-valley-route-yue-tainan-guesthouse",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-tainan-guesthouse"
+          },
+          "description": "从谷内步行可到东侧客舍门外，入内须通过门禁。",
           "access": {
             "kind": "public"
           }
@@ -9202,6 +9262,18 @@
               "name": "唐清的私用行囊",
               "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
               "status": "observed"
+            },
+            {
+              "id": "known-yue-tainan-guesthouse",
+              "name": "东侧客舍",
+              "description": "自己受托接待的空客舍。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-tainan-guest-key",
+              "name": "通行符",
+              "description": "自己当前保管的东侧客舍通行符。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -9221,6 +9293,18 @@
               "local_entity_id": "known-yue-tainan-host-pouch",
               "canonical_entity_ids": [
                 "yue-tainan-host-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-tainan-guesthouse",
+              "canonical_entity_ids": [
+                "yue-tainan-guesthouse"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-tainan-guest-key",
+              "canonical_entity_ids": [
+                "yue-tainan-guest-key"
               ]
             }
           ],
@@ -9273,6 +9357,21 @@
                 "value": "自己是筑基修士。"
               },
               "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "guesthouse-custody",
+              "subjectId": "self",
+              "predicate": "custody",
+              "value": {
+                "kind": "text",
+                "value": "东侧客舍现空置，我保管相配通行符；可与来客商议借宿或借符，尚未约定租金或出借。"
+              },
+              "description": "东侧客舍现空置，我保管相配通行符；可与来客商议借宿或借符，尚未约定租金或出借。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -19960,6 +20059,106 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "yue-xinzhou",
+      "name": "辛州",
+      "kind": "location",
+      "placement": "human-yue",
+      "description": "越国富足居前的州域。",
+      "facts": [
+        {
+          "id": "yue-xinzhou-route-human-yue",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-yue"
+          },
+          "description": "可沿州际道路离开辛州前往越国其他州域。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-tainan-guesthouse",
+      "name": "太南谷东侧客舍",
+      "kind": "location",
+      "placement": "yue-tainan-valley",
+      "description": "谷内东侧的客舍，门外有一方供来客停步的石阶。",
+      "facts": [
+        {
+          "id": "yue-tainan-guesthouse-state",
+          "predicate": "occupancy",
+          "value": {
+            "kind": "text",
+            "value": "屋内现无人居住，由唐清负责接待安排。"
+          },
+          "description": "屋内现无人居住，由唐清负责接待安排。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-tainan-guesthouse-ward",
+          "predicate": "entry-condition",
+          "value": {
+            "kind": "text",
+            "value": "青光禁制会弹拒闯入；相配通行符贴上后可暂开孔，移符入内后孔自行弥合。"
+          },
+          "description": "青光禁制会弹拒闯入；相配通行符贴上后可暂开孔，移符入内后孔自行弥合。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际施展能看见该禁制的天眼术，或触探并验证门禁，再由持符人演示相配通行符。"
+          }
+        },
+        {
+          "id": "yue-tainan-guesthouse-route-yue-tainan-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-tainan-valley"
+          },
+          "description": "从客舍出入谷内同样需相配通行符或实际解除禁制。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-tainan-guest-key",
+      "name": "东侧客舍通行符",
+      "kind": "item",
+      "placement": "yue-tainan-host",
+      "description": "唐清保管的一张通行符，符纸完整。",
+      "facts": [
+        {
+          "id": "yue-tainan-guest-key-use",
+          "predicate": "use-method",
+          "value": {
+            "kind": "text",
+            "value": "贴于东侧客舍的青光禁制可暂开通行孔，收回后仍可再用；不能开启别处禁制。"
+          },
+          "description": "贴于东侧客舍的青光禁制可暂开通行孔，收回后仍可再用；不能开启别处禁制。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-tainan-host"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -20436,6 +20635,11 @@
     {
       "id": "yue-separate-seals",
       "text": "血色外层风禁、环山迷雾、第三层古禁、青石殿隔识与地下机关是不同机制。月阳宝珠只能处理其有能力影响的雾瘴，不自动打开所有门；高境界隐修若能规避入口限制也不把通常限制从世界删除。",
+      "severity": "hard"
+    },
+    {
+      "id": "yue-guest-key-not-universal",
+      "text": "太南谷客舍的通行符只对应自身禁制，使用后仍留有实际符纸；权限、保管和借还须以实际关系为准。通音符只传讯请求接引，不能替代接应者开阵。",
       "severity": "hard"
     }
   ],
@@ -21472,7 +21676,8 @@
     ],
     "entity:yue-tainan-host": [
       "yue-present-life",
-      "yue-values"
+      "yue-values",
+      "yue-present-guesthouse-custody"
     ],
     "fact:yue-tainan-host-cultivation-state": [
       "yue-present-life",
@@ -22916,6 +23121,55 @@
     "fact:yue-yan-allocation-ledger-stock-source": [
       "yue-present-life",
       "yue-values"
+    ],
+    "fact:yue-thirteen-provinces": [
+      "yue-lanzhou-province-geography"
+    ],
+    "fact:yue-lanzhou-water-and-produce": [
+      "yue-lanzhou-province-geography"
+    ],
+    "fact:yue-tainan-valley-layout": [
+      "yue-tainan-valley-physical-layout"
+    ],
+    "entity:yue-xinzhou": [
+      "yue-lanzhou-province-geography"
+    ],
+    "entity:yue-tainan-guesthouse": [
+      "yue-guest-ward-operation",
+      "yue-present-guesthouse-custody"
+    ],
+    "entity:yue-tainan-guest-key": [
+      "yue-present-guesthouse-custody"
+    ],
+    "fact:yue-tainan-guesthouse-state": [
+      "yue-present-guesthouse-custody"
+    ],
+    "fact:yue-tainan-guesthouse-ward": [
+      "yue-guest-ward-operation"
+    ],
+    "fact:yue-tainan-guest-key-use": [
+      "yue-present-guesthouse-custody",
+      "yue-guest-ward-operation"
+    ],
+    "fact:human-yue-route-yue-xinzhou": [
+      "yue-lanzhou-province-geography",
+      "yue-present-life"
+    ],
+    "fact:yue-xinzhou-route-human-yue": [
+      "yue-lanzhou-province-geography",
+      "yue-present-life"
+    ],
+    "fact:yue-tainan-valley-route-yue-tainan-guesthouse": [
+      "yue-present-guesthouse-custody"
+    ],
+    "fact:yue-tainan-guesthouse-route-yue-tainan-valley": [
+      "yue-guest-ward-operation",
+      "yue-present-guesthouse-custody"
+    ],
+    "law:yue-guest-key-not-universal": [
+      "yue-guest-ward-operation",
+      "yue-present-guesthouse-custody",
+      "yue-tainan-valley-physical-layout"
     ]
   }
 }
