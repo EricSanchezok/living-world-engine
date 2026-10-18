@@ -417,6 +417,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "minghe-xuling-insectarium-route-to-minghe-blackwind-inner-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-blackwind-inner-room"
+          },
+          "description": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-xuling-insectarium-route-conditions-minghe-blackwind-inner-room",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。"
+          },
+          "description": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -789,6 +813,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "minghe-inner-shore-route-to-minghe-bone-plain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-bone-plain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-inner-shore-route-conditions-minghe-bone-plain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。"
+          },
+          "description": "沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-inner-shore-route-to-minghe-black-hills",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-black-hills"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-inner-shore-route-conditions-minghe-black-hills",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。"
+          },
+          "description": "经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -849,6 +921,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "minghe-withered-wood-route-to-minghe-blue-fog",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-blue-fog"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-withered-wood-route-conditions-minghe-blue-fog",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。"
+          },
+          "description": "洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-withered-wood-route-to-minghe-black-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-black-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-withered-wood-route-conditions-minghe-black-lake",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。"
+          },
+          "description": "林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -908,6 +1028,30 @@
           "description": "有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "minghe-yingu-mountains-route-to-minghe-black-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-black-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-yingu-mountains-route-conditions-minghe-black-lake",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。"
+          },
+          "description": "沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -1101,6 +1245,78 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-to-minghe-grey-mountains",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-grey-mountains"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-conditions-minghe-grey-mountains",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。"
+          },
+          "description": "洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-to-minghe-green-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-green-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-conditions-minghe-green-lake",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。"
+          },
+          "description": "这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-to-minghe-qingyuan-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-hall"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-cave-route-conditions-minghe-qingyuan-hall",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经青石通道入厅须得到主人许可。"
+          },
+          "description": "经青石通道入厅须得到主人许可。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -1160,7 +1376,7 @@
       "id": "minghe-jinyan-island",
       "name": "金焰岛",
       "kind": "location",
-      "placement": "minghe-space",
+      "placement": "minghe-green-lake",
       "description": "湖中岛屿，金色建筑映照水面，外有防护禁制。",
       "facts": [
         {
@@ -1209,6 +1425,30 @@
           "description": "金焰候会客与日常居住之处，金饰与收藏分室保管。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "minghe-jinyan-island-route-to-minghe-green-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-green-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-jinyan-island-route-conditions-minghe-green-lake",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。"
+          },
+          "description": "穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -1475,6 +1715,21 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-qing-yuan-zi-stabilizer-study",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "已试验本地两种稳身样材，能诊察缓慢滋养的适用性；尚无可对所有病体照抄的成方。"
+          },
+          "description": "已试验本地两种稳身样材，能诊察缓慢滋养的适用性；尚无可对所有病体照抄的成方。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-qing-yuan-zi"
+            ]
+          }
         }
       ],
       "meters": [
@@ -1634,6 +1889,30 @@
               "name": "阴气观测基础札记",
               "description": "解释如何区分源波动和导槽漏流的小册，青元子可考虑向可靠合作者讲授，不含七门锁阴主阵控制。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-stabilizer-samples",
+              "name": "稳身灵物甲乙样材",
+              "description": "自己保管的两种本地稳身样材，数量已点清，施用先诊察。",
+              "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-stabilizer-notes",
+              "name": "稳身样材观察札",
+              "description": "自己的观察札，记缓慢滋养而非万用成方。",
+              "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-grey-mountains",
+              "name": "灰白山脉",
+              "description": "自己勘过的裂隙山顶，可准备法阵离境，但无法保证外界门牌。",
+              "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-seven-platform-room",
+              "name": "峭壁阵台",
+              "description": "自己洞府峭壁下调阴气用的阵台，普通人须得到许可才能接近。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -1725,6 +2004,30 @@
               "local_entity_id": "known-minghe-observation-notes",
               "canonical_entity_ids": [
                 "minghe-observation-notes"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-stabilizer-samples",
+              "canonical_entity_ids": [
+                "minghe-stabilizer-samples"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-stabilizer-notes",
+              "canonical_entity_ids": [
+                "minghe-stabilizer-notes"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-grey-mountains",
+              "canonical_entity_ids": [
+                "minghe-grey-mountains"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-seven-platform-room",
+              "canonical_entity_ids": [
+                "minghe-seven-platform-room"
               ]
             }
           ],
@@ -1822,6 +2125,21 @@
                 "value": "此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。"
               },
               "description": "此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "stabilizer-study",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "已试验本地两种稳身样材，能诊察缓慢滋养的适用性；尚无可对所有病体照抄的成方。"
+              },
+              "description": "已试验本地两种稳身样材，能诊察缓慢滋养的适用性；尚无可对所有病体照抄的成方。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -2060,6 +2378,18 @@
               "name": "金焰宫日常预算",
               "description": "主人核准由金澜管理的日常预算，不包括所有私藏。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-ancient-ice-block",
+              "name": "酒窟万年玄冰",
+              "description": "自己酒窟里的玄冰，珍酒靠它醇化。",
+              "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-green-lake",
+              "name": "金焰翠湖",
+              "description": "洞府所在湖面，熟悉自家岛禁与湖中妖鱼习性。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2121,6 +2451,18 @@
               "local_entity_id": "known-minghe-jinyan-household-stock",
               "canonical_entity_ids": [
                 "minghe-jinyan-household-stock"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-ancient-ice-block",
+              "canonical_entity_ids": [
+                "minghe-ancient-ice-block"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-green-lake",
+              "canonical_entity_ids": [
+                "minghe-green-lake"
               ]
             }
           ],
@@ -2411,6 +2753,18 @@
               "name": "虫粮进货记录",
               "description": "记录甲乙两批用途、原批号与领用日期，可和箱底标记核对。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-xuling-blackwind-pavilion",
+              "name": "黑风阁",
+              "description": "自己祭炼的阁楼，常用于隔探私谈，启用与维持需要法力。",
+              "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-blackwind-inner-room",
+              "name": "黑风阁内室",
+              "description": "自己黑风阁中的私谈内室，须展开阁楼并开启门户。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2484,6 +2838,18 @@
               "local_entity_id": "known-minghe-food-receipt",
               "canonical_entity_ids": [
                 "minghe-food-receipt"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-xuling-blackwind-pavilion",
+              "canonical_entity_ids": [
+                "minghe-xuling-blackwind-pavilion"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-blackwind-inner-room",
+              "canonical_entity_ids": [
+                "minghe-blackwind-inner-room"
               ]
             }
           ],
@@ -2972,7 +3338,7 @@
       "name": "长元族行旅地",
       "kind": "location",
       "placement": "fengyuan-continent",
-      "description": "此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。",
+      "description": "稀少长元族行旅者暂居的谷地，客舍各有界限；黄元子在此保有自己的住处和物资。",
       "facts": [
         {
           "id": "minghe-changyuan-route-fengyuan-continent",
@@ -3008,7 +3374,7 @@
       "name": "碧原小筑",
       "kind": "location",
       "placement": "fengyuan-continent",
-      "description": "此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。",
+      "description": "草原边缘的小筑，屋外禁制与地势相接，院中可展开小型阵图试验。",
       "facts": [
         {
           "id": "minghe-biyuan-route-fengyuan-continent",
@@ -3044,7 +3410,7 @@
       "name": "不灭洞",
       "kind": "location",
       "placement": "fengyuan-continent",
-      "description": "此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。",
+      "description": "岩壁深洞留出练体的空坪，石面有旧撞痕，私藏收在干燥内室。",
       "facts": [
         {
           "id": "minghe-bumie-route-fengyuan-continent",
@@ -3080,7 +3446,7 @@
       "name": "九幻居所",
       "kind": "location",
       "placement": "fengyuan-continent",
-      "description": "此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。",
+      "description": "遮掩于几重幻幕后的清静居所，门前窄径须主人解除相应禁制方能通行。",
       "facts": [
         {
           "id": "minghe-jiuhuan-route-fengyuan-continent",
@@ -3116,7 +3482,7 @@
       "name": "血怨峡",
       "kind": "location",
       "placement": "fengyuan-continent",
-      "description": "此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。",
+      "description": "狭长峡谷终年风声低沉，石阶通向独处修行的侧洞，来客须在外通传。",
       "facts": [
         {
           "id": "minghe-xueyuan-route-fengyuan-continent",
@@ -4694,6 +5060,21 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "minghe-gate-warden-milk-seal-training",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。"
+          },
+          "description": "已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "minghe-gate-warden"
+            ]
+          }
         }
       ],
       "meters": [
@@ -4805,6 +5186,12 @@
               "name": "蜉蝣圣地接引阵",
               "description": "封闭阵室，进入空间需要真实阵器、双方条件与授权。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-milk-extraction-seal",
+              "name": "取乳密符",
+              "description": "自己保管的封符，只有长老专门许可方可发出；本次送材许可不准取乳。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -4848,6 +5235,12 @@
               "local_entity_id": "known-minghe-outer-gate",
               "canonical_entity_ids": [
                 "minghe-outer-gate"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-milk-extraction-seal",
+              "canonical_entity_ids": [
+                "minghe-milk-extraction-seal"
               ]
             }
           ],
@@ -4930,6 +5323,21 @@
                 "value": "此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。"
               },
               "description": "此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "milk-seal-training",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。"
+              },
+              "description": "已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -6230,7 +6638,7 @@
           "goals": [
             {
               "id": "current-purpose",
-              "description": "解释近期两组读数不同，并安全修好断裂的导阴槽。",
+              "description": "查清两组读数为何不同，安全修补查出的故障并复测。",
               "priority": 0.5,
               "progress": 0
             }
@@ -6579,6 +6987,12 @@
               "name": "金焰候一壶碧灵酒",
               "description": "主人仅存一壶成熟碧灵酒，领用要另问主人。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-ancient-ice-block",
+              "name": "酒窟万年玄冰",
+              "description": "酒窟实际用来醇酒的冰块，移动和凿取须报主人。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6616,6 +7030,12 @@
               "local_entity_id": "known-minghe-jinyan-wine",
               "canonical_entity_ids": [
                 "minghe-jinyan-wine"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-ancient-ice-block",
+              "canonical_entity_ids": [
+                "minghe-ancient-ice-block"
               ]
             }
           ],
@@ -6834,6 +7254,12 @@
               "name": "盘垣损坏的灯罩",
               "description": "私用灵灯外罩裂开，仍可带到器修棚修补，未送出。",
               "status": "observed"
+            },
+            {
+              "id": "minghe-review-minghe-green-lake",
+              "name": "金焰翠湖",
+              "description": "日常巡看的湖面与岛边，远方来客仍须通报。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6859,6 +7285,12 @@
               "local_entity_id": "known-minghe-lamp-cover",
               "canonical_entity_ids": [
                 "minghe-lamp-cover"
+              ]
+            },
+            {
+              "local_entity_id": "minghe-review-minghe-green-lake",
+              "canonical_entity_ids": [
+                "minghe-green-lake"
               ]
             }
           ],
@@ -7432,7 +7864,7 @@
       "id": "minghe-qingyuan-exit-array",
       "name": "青元子离境阵台",
       "kind": "item",
-      "placement": "minghe-qingyuan-cave",
+      "placement": "minghe-grey-mountains",
       "description": "依真实空间条件施法开裂离境，目的地只能在外界适合处落定，不能承诺任意门牌。",
       "facts": [
         {
@@ -7695,18 +8127,6 @@
       "description": "一群尚未成熟的噬金虫，饲养消耗与生长需要真实时间和材料。",
       "facts": [
         {
-          "id": "minghe-immature-gold-insects-individual-count",
-          "predicate": "individual-count",
-          "value": {
-            "kind": "number",
-            "value": 120
-          },
-          "description": "individual-count",
-          "access": {
-            "kind": "private"
-          }
-        },
-        {
           "id": "minghe-immature-gold-insects-maturity",
           "predicate": "maturity",
           "value": {
@@ -7733,17 +8153,34 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "minghe-immature-gold-insects-group-boundary",
+          "predicate": "group-boundary",
+          "value": {
+            "kind": "text",
+            "value": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。"
+          },
+          "description": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 120
+        }
+      ]
     },
     {
       "id": "minghe-fresh-milk",
       "name": "神池凝乳",
       "kind": "item",
-      "placement": "minghe-milk-pool",
+      "placement": "minghe-collection-brick",
       "description": "一份达到可采状态的凝乳；取走后池中此份耗尽，新的形成需要时间与条件。",
       "facts": [
         {
@@ -7757,11 +8194,28 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "minghe-fresh-milk-use-boundary",
+          "predicate": "use-boundary",
+          "value": {
+            "kind": "text",
+            "value": "服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。"
+          },
+          "description": "服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-milk-dose",
+          "amount": 1
+        }
+      ]
     },
     {
       "id": "minghe-sealed-milk",
@@ -7781,11 +8235,28 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "minghe-sealed-milk-use-boundary",
+          "predicate": "use-boundary",
+          "value": {
+            "kind": "text",
+            "value": "服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。"
+          },
+          "description": "服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-milk-dose",
+          "amount": 1
+        }
+      ]
     },
     {
       "id": "minghe-old-demon-fragment",
@@ -7842,11 +8313,28 @@
             "kind": "discoverable",
             "condition": "开封或核对酒藏量记。"
           }
+        },
+        {
+          "id": "minghe-jinyan-wine-division-boundary",
+          "predicate": "division-boundary",
+          "value": {
+            "kind": "text",
+            "value": "这一壶可分八小杯；倒出、饮用或泼洒均扣相应用量，空壶仍可留存但不再含酒。"
+          },
+          "description": "这一壶可分八小杯；倒出、饮用或泼洒均扣相应用量，空壶仍可留存但不再含酒。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-wine-cup",
+          "amount": 8
+        }
+      ]
     },
     {
       "id": "minghe-wine-crock",
@@ -8610,13 +9098,13 @@
       "description": "水下活动的一小群针鱼，会对进入其活动范围的生物作出反应。",
       "facts": [
         {
-          "id": "minghe-needle-fish-individual-count",
-          "predicate": "individual-count",
+          "id": "minghe-needle-fish-group-boundary",
+          "predicate": "group-boundary",
           "value": {
-            "kind": "number",
-            "value": 24
+            "kind": "text",
+            "value": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。"
           },
-          "description": "individual-count",
+          "description": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。",
           "access": {
             "kind": "private"
           }
@@ -8636,7 +9124,12 @@
           "value": 4
         }
       ],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 24
+        }
+      ]
     },
     {
       "id": "minghe-bone-creatures",
@@ -8646,13 +9139,25 @@
       "description": "依林地阴气活动的六具白骨生物，离开枯林会快速衰败。",
       "facts": [
         {
-          "id": "minghe-bone-creatures-individual-count",
-          "predicate": "individual-count",
+          "id": "minghe-bone-creatures-group-boundary",
+          "predicate": "group-boundary",
           "value": {
-            "kind": "number",
-            "value": 6
+            "kind": "text",
+            "value": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。"
           },
-          "description": "individual-count",
+          "description": "数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-bone-creatures-habitat-dependence",
+          "predicate": "habitat-dependence",
+          "value": {
+            "kind": "text",
+            "value": "只有残骨落在枯林中且阴气仍在才可重聚；残骨带到林外被击碎化灰后，该个体扣除，不得再次生成。"
+          },
+          "description": "只有残骨落在枯林中且阴气仍在才可重聚；残骨带到林外被击碎化灰后，该个体扣除，不得再次生成。",
           "access": {
             "kind": "private"
           }
@@ -8672,7 +9177,12 @@
           "value": 5
         }
       ],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 6
+        }
+      ]
     },
     {
       "id": "minghe-finished-seal-box",
@@ -8713,6 +9223,1037 @@
             "entityId": "minghe-box-smith"
           },
           "description": "交付前属于制作者。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-bone-plain",
+      "name": "白骨原",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "黑黄草地逐渐稀疏，异形骨骼层层散落，阴风卷起腐气；灰骨堆中偶有细微碰撞。",
+      "facts": [
+        {
+          "id": "minghe-bone-plain-route-to-minghe-inner-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-inner-shore"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-bone-plain-route-conditions-minghe-inner-shore",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。"
+          },
+          "description": "沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-bone-plain-route-to-minghe-blood-marsh",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-blood-marsh"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-bone-plain-route-conditions-minghe-blood-marsh",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。"
+          },
+          "description": "骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-blood-marsh",
+      "name": "血沼",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "暗红泥水之间有低矮石脊，夜间常能听到振翅声；干岸与沼内活动范围不同。",
+      "facts": [
+        {
+          "id": "minghe-blood-marsh-route-to-minghe-bone-plain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-bone-plain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blood-marsh-route-conditions-minghe-bone-plain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。"
+          },
+          "description": "骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blood-marsh-route-to-minghe-blue-fog",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-blue-fog"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blood-marsh-route-conditions-minghe-blue-fog",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。"
+          },
+          "description": "沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-blue-fog",
+      "name": "蓝雾洼地",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "低洼处悬着蓝色怪雾，身影入雾后很快模糊；能避开浓雾的高地绕路更远。",
+      "facts": [
+        {
+          "id": "minghe-blue-fog-route-to-minghe-blood-marsh",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-blood-marsh"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blue-fog-route-conditions-minghe-blood-marsh",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。"
+          },
+          "description": "沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blue-fog-route-to-minghe-withered-wood",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-withered-wood"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blue-fog-route-conditions-minghe-withered-wood",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。"
+          },
+          "description": "洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-black-lake",
+      "name": "枯林外黑湖",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "湖面黑如墨，绿雾贴水流动，岸边枯枝深陷淤泥；水面没有显眼渡船。",
+      "facts": [
+        {
+          "id": "minghe-black-lake-route-to-minghe-withered-wood",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-withered-wood"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-lake-route-conditions-minghe-withered-wood",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。"
+          },
+          "description": "林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-lake-route-to-minghe-yingu-mountains",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-yingu-mountains"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-lake-route-conditions-minghe-yingu-mountains",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。"
+          },
+          "description": "沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-black-hills",
+      "name": "黑气林丘",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "阴气凝于灰色灌木和暗色高树之间，许多丘陵有茂密枝叶覆盖，山腹并非天然都有洞府。",
+      "facts": [
+        {
+          "id": "minghe-black-hills-route-to-minghe-mist-island-waters",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-mist-island-waters"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-hills-route-conditions-minghe-mist-island-waters",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。"
+          },
+          "description": "林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-hills-route-to-minghe-inner-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-inner-shore"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-black-hills-route-conditions-minghe-inner-shore",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。"
+          },
+          "description": "经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-mist-island-waters",
+      "name": "噬灵雾水域",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "碧黑广水中岛屿星布，浓雾团遮住部分岛屿，接近浓雾时灵力运转会受牵制。",
+      "facts": [
+        {
+          "id": "minghe-mist-island-waters-route-to-minghe-black-hills",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-black-hills"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-mist-island-waters-route-conditions-minghe-black-hills",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。"
+          },
+          "description": "林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-grey-mountains",
+      "name": "灰白山脉",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "灰白石脊起伏，山顶空旷，几处旧空间裂隙只有在特定波动时才可辨认。",
+      "facts": [
+        {
+          "id": "minghe-grey-mountains-route-to-minghe-qingyuan-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-grey-mountains-route-conditions-minghe-qingyuan-cave",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。"
+          },
+          "description": "洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-green-lake",
+      "name": "金焰翠湖",
+      "kind": "location",
+      "placement": "minghe-space",
+      "description": "薄灰雾罩着碧绿湖面，水中灵气浓厚，巨鱼在深处游动；远方岛宫映出金光。",
+      "facts": [
+        {
+          "id": "minghe-green-lake-route-to-minghe-qingyuan-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-green-lake-route-conditions-minghe-qingyuan-cave",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。"
+          },
+          "description": "这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-green-lake-route-to-minghe-jinyan-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-jinyan-island"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-green-lake-route-conditions-minghe-jinyan-island",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。"
+          },
+          "description": "穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-qingyuan-hall",
+      "name": "白沙厅",
+      "kind": "location",
+      "placement": "minghe-qingyuan-cave",
+      "description": "普通青石通道尽头铺着白色细沙，数盆矮花木散出浓郁草木气息，桌椅不多。",
+      "facts": [
+        {
+          "id": "minghe-qingyuan-hall-route-to-minghe-qingyuan-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-hall-route-conditions-minghe-qingyuan-cave",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经青石通道入厅须得到主人许可。"
+          },
+          "description": "经青石通道入厅须得到主人许可。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-hall-route-to-minghe-seven-platform-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-seven-platform-room"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-hall-route-conditions-minghe-seven-platform-room",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。"
+          },
+          "description": "从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-hall-route-to-minghe-qingyuan-guest-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-guest-court"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-hall-route-conditions-minghe-qingyuan-guest-court",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经偏厅到客院，尚未受邀者不能当作公共客栈。"
+          },
+          "description": "经偏厅到客院，尚未受邀者不能当作公共客栈。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-seven-platform-room",
+      "name": "峭壁阵台",
+      "kind": "location",
+      "placement": "minghe-qingyuan-cave",
+      "description": "几座玉台位于峭壁下方，青石柱间白幕挡住滚滚黑雾，石壁通道通向洞府白沙厅。",
+      "facts": [
+        {
+          "id": "minghe-seven-platform-room-route-to-minghe-qingyuan-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-hall"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-seven-platform-room-route-conditions-minghe-qingyuan-hall",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。"
+          },
+          "description": "从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-qingyuan-guest-court",
+      "name": "洞府石屋院",
+      "kind": "location",
+      "placement": "minghe-qingyuan-cave",
+      "description": "大小石屋围成安静院落，屋内青石桌床齐备；是否留宿要先得到主人许可。",
+      "facts": [
+        {
+          "id": "minghe-qingyuan-guest-court-route-to-minghe-qingyuan-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-qingyuan-hall"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-qingyuan-guest-court-route-conditions-minghe-qingyuan-hall",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经偏厅到客院，尚未受邀者不能当作公共客栈。"
+          },
+          "description": "经偏厅到客院，尚未受邀者不能当作公共客栈。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-grey-bone-group",
+      "name": "骨原阴骨群",
+      "kind": "group",
+      "placement": "minghe-bone-plain",
+      "description": "阴气鼓动的十二具杂骨，破坏主骨及驱散所附阴气可使其失去活动。",
+      "facts": [
+        {
+          "id": "minghe-grey-bone-group-group-boundary",
+          "predicate": "group-boundary",
+          "value": {
+            "kind": "text",
+            "value": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。"
+          },
+          "description": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-grey-bone-group-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "minghe-grey-bone-group-force",
+          "definition_id": "force",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "minghe-blood-bat-group",
+      "name": "血沼人面血蝠",
+      "kind": "group",
+      "placement": "minghe-blood-marsh",
+      "description": "十八只血蝠在沼岸觅食，普通撕裂后可尝试重合，相克火焰或多次实伤会杀死。",
+      "facts": [
+        {
+          "id": "minghe-blood-bat-group-group-boundary",
+          "predicate": "group-boundary",
+          "value": {
+            "kind": "text",
+            "value": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。"
+          },
+          "description": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-blood-bat-group-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "minghe-blood-bat-group-force",
+          "definition_id": "force",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 18
+        }
+      ]
+    },
+    {
+      "id": "minghe-blue-ghost-group",
+      "name": "雾中厉魄",
+      "kind": "group",
+      "placement": "minghe-blue-fog",
+      "description": "八团可变形厉魄藏于蓝雾，普通兵刃难以伤其形体，克魂火焰和法术仍可灭杀。",
+      "facts": [
+        {
+          "id": "minghe-blue-ghost-group-group-boundary",
+          "predicate": "group-boundary",
+          "value": {
+            "kind": "text",
+            "value": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。"
+          },
+          "description": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-blue-ghost-group-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "minghe-blue-ghost-group-force",
+          "definition_id": "force",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "minghe-green-lake-fish",
+      "name": "翠湖妖鱼群",
+      "kind": "group",
+      "placement": "minghe-green-lake",
+      "description": "九尾巨型妖鱼在深水活动，平时不浮出；水中自有食物，不能无偿转成旅人坐骑。",
+      "facts": [
+        {
+          "id": "minghe-green-lake-fish-group-boundary",
+          "predicate": "group-boundary",
+          "value": {
+            "kind": "text",
+            "value": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。"
+          },
+          "description": "同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-green-lake-fish-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "minghe-green-lake-fish-force",
+          "definition_id": "force",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "minghe-creature-count",
+          "amount": 9
+        }
+      ]
+    },
+    {
+      "id": "minghe-collection-brick",
+      "name": "集乳淬晶砖",
+      "kind": "item",
+      "placement": "minghe-milk-pool",
+      "description": "嵌在神池底下的晶砖与灵脉紧合，砖纹中封着现有凝乳；缺专门符不能随手倒出。",
+      "facts": [
+        {
+          "id": "minghe-collection-brick-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-sanctuary-office"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-collection-brick-extraction-condition",
+          "predicate": "extraction-condition",
+          "value": {
+            "kind": "text",
+            "value": "取出砖内已有神乳，需取乳密符、掌握符法的合格操作者及神池实际接触。成功耗尽该符，从砖内神乳实体扣除一份并向接乳容器增加等量；若整份移动已有神乳实体，则保持原数量而不能另加一份。无符可尝试十余年体内真火分炼，持续法力与条件均须成立。"
+          },
+          "description": "取出砖内已有神乳，需取乳密符、掌握符法的合格操作者及神池实际接触。成功耗尽该符，从砖内神乳实体扣除一份并向接乳容器增加等量；若整份移动已有神乳实体，则保持原数量而不能另加一份。无符可尝试十余年体内真火分炼，持续法力与条件均须成立。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-milk-extraction-seal",
+      "name": "取乳密符",
+      "kind": "item",
+      "placement": "minghe-inspection-court",
+      "description": "外巡院封存的一张专门取乳符，持符不免除圣地许可和守兽阻拦；成功取乳即耗去。",
+      "facts": [
+        {
+          "id": "minghe-milk-extraction-seal-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-sanctuary-office"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-milk-extraction-seal-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-stabilizer-samples",
+      "name": "稳身灵物甲乙样材",
+      "kind": "container",
+      "placement": "minghe-qingyuan-cave",
+      "description": "分装五份当地样材，甲三份乙两份；用途在缓慢滋养肉身，须先诊察适应性。",
+      "facts": [
+        {
+          "id": "minghe-stabilizer-samples-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-qing-yuan-zi"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-stabilizer-samples-bounded-use",
+          "predicate": "bounded-use",
+          "value": {
+            "kind": "text",
+            "value": "每次试用一种先取一份并记反应；持续疗程须重新诊察与补充材料，当前五份不够多年疗程。不能凭使用此样材恢复已散失的精魂。"
+          },
+          "description": "每次试用一种先取一份并记反应；持续疗程须重新诊察与补充材料，当前五份不够多年疗程。不能凭使用此样材恢复已散失的精魂。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "minghe-stabilizer-a",
+          "amount": 3
+        },
+        {
+          "definition_id": "minghe-stabilizer-b",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "minghe-stabilizer-notes",
+      "name": "稳身样材观察札",
+      "kind": "item",
+      "placement": "minghe-qingyuan-cave",
+      "description": "记录甲乙样材浸液与肉身适应的观察，尚不是对任何患者都可照抄的成方。",
+      "facts": [
+        {
+          "id": "minghe-stabilizer-notes-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-qing-yuan-zi"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-xuling-blackwind-pavilion",
+      "name": "黑风阁",
+      "kind": "item",
+      "placement": "canon-xu-ling",
+      "description": "通体乌黑的微型阁楼可随祭炼改变大小，内室供私谈与静修，黑气形成隔探屏障。",
+      "facts": [
+        {
+          "id": "minghe-xuling-blackwind-pavilion-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xu-ling"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-xuling-blackwind-pavilion-bounded-operation",
+          "predicate": "bounded-operation",
+          "value": {
+            "kind": "text",
+            "value": "虚灵启动耗20法力，每个本地时辰维持耗5法力；可邀来客缩形进入，但隔探并非面对一切力量永不破，强攻与特殊探测需实际判断。"
+          },
+          "description": "虚灵启动耗20法力，每个本地时辰维持耗5法力；可邀来客缩形进入，但隔探并非面对一切力量永不破，强攻与特殊探测需实际判断。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-xuling-blackwind-pavilion-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-muqing-tianmu-mirror",
+      "name": "天木镜",
+      "kind": "item",
+      "placement": "canon-mu-qing",
+      "description": "木青长久培炼的木纹青镜，吐纳木气，由她随身保管。",
+      "facts": [
+        {
+          "id": "minghe-muqing-tianmu-mirror-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-qing"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-muqing-tianmu-mirror-bounded-operation",
+          "predicate": "bounded-operation",
+          "value": {
+            "kind": "text",
+            "value": "木青已会祭镜护身，每次开启耗20法力、持续每个本地时辰耗5；防护随修为及攻击实际裁定，不凭宝物名保证抵挡所有神通。"
+          },
+          "description": "木青已会祭镜护身，每次开启耗20法力、持续每个本地时辰耗5；防护随修为及攻击实际裁定，不凭宝物名保证抵挡所有神通。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "minghe-muqing-tianmu-mirror-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-ancient-ice-block",
+      "name": "酒窟万年玄冰",
+      "kind": "item",
+      "placement": "minghe-wine-cellar",
+      "description": "酒窟内一方寒气凝重的玄冰，酒壶贴近藏放使味道更醇；移走会改变窟内冷藏条件。",
+      "facts": [
+        {
+          "id": "minghe-ancient-ice-block-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-jin-yan-hou"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "minghe-blackwind-inner-room",
+      "name": "黑风阁内室",
+      "kind": "location",
+      "placement": "minghe-xuling-blackwind-pavilion",
+      "description": "阁内铺着青砖，几张座椅围着一张乌木桌，门边黑气随阁楼主人的法诀开合。",
+      "facts": [
+        {
+          "id": "minghe-blackwind-inner-room-route-to-minghe-xuling-insectarium",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "minghe-xuling-insectarium"
+          },
+          "description": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "minghe-blackwind-inner-room-route-conditions-minghe-xuling-insectarium",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。"
+          },
+          "description": "黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。",
           "access": {
             "kind": "private"
           }
@@ -9225,6 +10766,8 @@
     ],
     "entity:minghe-jinyan-island": [
       "minghe-jin-and-xu-old-acquaintances",
+      "minghe-current-life",
+      "minghe-entry-landscape",
       "minghe-current-life"
     ],
     "fact:minghe-inner-shore-route-minghe-jinyan-island": [
@@ -9894,7 +11437,9 @@
     ],
     "entity:minghe-qingyuan-exit-array": [
       "minghe-current-life",
-      "minghe-current-values"
+      "minghe-current-values",
+      "minghe-transit-boundaries",
+      "minghe-current-life"
     ],
     "fact:minghe-qingyuan-exit-array-owned-by": [
       "minghe-current-life"
@@ -9958,9 +11503,6 @@
       "minghe-insect-time-and-cost",
       "minghe-current-values"
     ],
-    "fact:minghe-immature-gold-insects-individual-count": [
-      "minghe-current-values"
-    ],
     "fact:minghe-immature-gold-insects-maturity": [
       "minghe-insect-time-and-cost"
     ],
@@ -9969,6 +11511,8 @@
     ],
     "entity:minghe-fresh-milk": [
       "minghe-current-life",
+      "minghe-current-values",
+      "minghe-crystal-brick",
       "minghe-current-values"
     ],
     "fact:minghe-fresh-milk-owned-by": [
@@ -9976,6 +11520,7 @@
     ],
     "entity:minghe-sealed-milk": [
       "minghe-current-life",
+      "minghe-current-values",
       "minghe-current-values"
     ],
     "fact:minghe-sealed-milk-owned-by": [
@@ -10240,15 +11785,9 @@
       "minghe-current-life",
       "minghe-current-values"
     ],
-    "fact:minghe-needle-fish-individual-count": [
-      "minghe-current-values"
-    ],
     "entity:minghe-bone-creatures": [
       "minghe-sacred-space",
       "minghe-current-life",
-      "minghe-current-values"
-    ],
-    "fact:minghe-bone-creatures-individual-count": [
       "minghe-current-values"
     ],
     "law:minghe-limited-sacred-stay": [
@@ -10282,6 +11821,566 @@
     "fact:minghe-lamp-cover-repair-need": [
       "minghe-current-life",
       "minghe-current-values"
+    ],
+    "entity:minghe-bone-plain": [
+      "minghe-entry-landscape",
+      "minghe-current-life"
+    ],
+    "entity:minghe-blood-marsh": [
+      "minghe-local-ecology",
+      "minghe-current-life"
+    ],
+    "entity:minghe-blue-fog": [
+      "minghe-local-ecology",
+      "minghe-current-life"
+    ],
+    "entity:minghe-black-lake": [
+      "minghe-entry-landscape",
+      "minghe-current-life"
+    ],
+    "entity:minghe-black-hills": [
+      "minghe-entry-landscape",
+      "minghe-current-life"
+    ],
+    "entity:minghe-mist-island-waters": [
+      "minghe-spirit-devouring-mist",
+      "minghe-current-life"
+    ],
+    "entity:minghe-grey-mountains": [
+      "minghe-transit-boundaries",
+      "minghe-current-life"
+    ],
+    "entity:minghe-green-lake": [
+      "minghe-entry-landscape",
+      "minghe-current-life"
+    ],
+    "entity:minghe-qingyuan-hall": [
+      "minghe-qingyuan-tenure",
+      "minghe-current-life"
+    ],
+    "entity:minghe-seven-platform-room": [
+      "minghe-qingyuan-tenure",
+      "minghe-current-life"
+    ],
+    "entity:minghe-qingyuan-guest-court": [
+      "minghe-current-life",
+      "minghe-current-life"
+    ],
+    "fact:minghe-inner-shore-route-to-minghe-bone-plain": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-inner-shore-route-conditions-minghe-bone-plain": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-plain-route-to-minghe-inner-shore": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-plain-route-conditions-minghe-inner-shore": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-plain-route-to-minghe-blood-marsh": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-plain-route-conditions-minghe-blood-marsh": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blood-marsh-route-to-minghe-bone-plain": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blood-marsh-route-conditions-minghe-bone-plain": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blood-marsh-route-to-minghe-blue-fog": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blood-marsh-route-conditions-minghe-blue-fog": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blue-fog-route-to-minghe-blood-marsh": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blue-fog-route-conditions-minghe-blood-marsh": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blue-fog-route-to-minghe-withered-wood": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blue-fog-route-conditions-minghe-withered-wood": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-withered-wood-route-to-minghe-blue-fog": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-withered-wood-route-conditions-minghe-blue-fog": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-withered-wood-route-to-minghe-black-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-withered-wood-route-conditions-minghe-black-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-lake-route-to-minghe-withered-wood": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-lake-route-conditions-minghe-withered-wood": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-lake-route-to-minghe-yingu-mountains": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-lake-route-conditions-minghe-yingu-mountains": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-yingu-mountains-route-to-minghe-black-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-yingu-mountains-route-conditions-minghe-black-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-hills-route-to-minghe-mist-island-waters": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-hills-route-conditions-minghe-mist-island-waters": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-mist-island-waters-route-to-minghe-black-hills": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-mist-island-waters-route-conditions-minghe-black-hills": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-inner-shore-route-to-minghe-black-hills": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-inner-shore-route-conditions-minghe-black-hills": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-hills-route-to-minghe-inner-shore": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-black-hills-route-conditions-minghe-inner-shore": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-to-minghe-grey-mountains": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-conditions-minghe-grey-mountains": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-grey-mountains-route-to-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-grey-mountains-route-conditions-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-to-minghe-green-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-conditions-minghe-green-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-green-lake-route-to-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-green-lake-route-conditions-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-green-lake-route-to-minghe-jinyan-island": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-green-lake-route-conditions-minghe-jinyan-island": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-jinyan-island-route-to-minghe-green-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-jinyan-island-route-conditions-minghe-green-lake": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-to-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-cave-route-conditions-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-to-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-conditions-minghe-qingyuan-cave": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-to-minghe-seven-platform-room": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-conditions-minghe-seven-platform-room": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-seven-platform-room-route-to-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-seven-platform-room-route-conditions-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-to-minghe-qingyuan-guest-court": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-hall-route-conditions-minghe-qingyuan-guest-court": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-guest-court-route-to-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-qingyuan-guest-court-route-conditions-minghe-qingyuan-hall": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "quantity:minghe-creature-count": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "quantity:minghe-milk-dose": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "quantity:minghe-stabilizer-a": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "quantity:minghe-stabilizer-b": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "quantity:minghe-wine-cup": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-needle-fish-group-boundary": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-creatures-group-boundary": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-immature-gold-insects-group-boundary": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "entity:minghe-grey-bone-group": [
+      "minghe-local-ecology",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-grey-bone-group-group-boundary": [
+      "minghe-current-values"
+    ],
+    "entity:minghe-blood-bat-group": [
+      "minghe-local-ecology",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blood-bat-group-group-boundary": [
+      "minghe-current-values"
+    ],
+    "entity:minghe-blue-ghost-group": [
+      "minghe-local-ecology",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blue-ghost-group-group-boundary": [
+      "minghe-current-values"
+    ],
+    "entity:minghe-green-lake-fish": [
+      "minghe-entry-landscape",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-green-lake-fish-group-boundary": [
+      "minghe-current-values"
+    ],
+    "fact:minghe-bone-creatures-habitat-dependence": [
+      "minghe-local-ecology",
+      "minghe-current-values"
+    ],
+    "entity:minghe-collection-brick": [
+      "minghe-crystal-brick",
+      "minghe-current-life"
+    ],
+    "fact:minghe-collection-brick-owned-by": [
+      "minghe-crystal-brick",
+      "minghe-current-life"
+    ],
+    "entity:minghe-milk-extraction-seal": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-milk-extraction-seal-owned-by": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-collection-brick-extraction-condition": [
+      "minghe-crystal-brick",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-fresh-milk-use-boundary": [
+      "minghe-milk-and-beasts",
+      "minghe-current-values"
+    ],
+    "fact:minghe-sealed-milk-use-boundary": [
+      "minghe-milk-and-beasts",
+      "minghe-current-values"
+    ],
+    "entity:minghe-stabilizer-samples": [
+      "minghe-body-stabilizing-resources",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-stabilizer-samples-owned-by": [
+      "minghe-body-stabilizing-resources",
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "entity:minghe-stabilizer-notes": [
+      "minghe-current-life"
+    ],
+    "fact:minghe-stabilizer-notes-owned-by": [
+      "minghe-current-life"
+    ],
+    "fact:minghe-stabilizer-samples-bounded-use": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "entity:minghe-xuling-blackwind-pavilion": [
+      "minghe-xuling-treasures",
+      "minghe-current-life"
+    ],
+    "fact:minghe-xuling-blackwind-pavilion-owned-by": [
+      "minghe-xuling-treasures",
+      "minghe-current-life"
+    ],
+    "fact:minghe-xuling-blackwind-pavilion-bounded-operation": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "entity:minghe-muqing-tianmu-mirror": [
+      "minghe-muqing-heirloom",
+      "minghe-current-life"
+    ],
+    "fact:minghe-muqing-tianmu-mirror-owned-by": [
+      "minghe-muqing-heirloom",
+      "minghe-current-life"
+    ],
+    "fact:minghe-muqing-tianmu-mirror-bounded-operation": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "cognition:canon-mu-qing": [
+      "minghe-current-life"
+    ],
+    "cognition:canon-jin-ling-ape": [
+      "minghe-current-life"
+    ],
+    "entity:minghe-ancient-ice-block": [
+      "minghe-wine-and-treasures",
+      "minghe-current-life"
+    ],
+    "fact:minghe-ancient-ice-block-owned-by": [
+      "minghe-wine-and-treasures",
+      "minghe-current-life"
+    ],
+    "fact:minghe-jinyan-wine-division-boundary": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "entity:minghe-blackwind-inner-room": [
+      "minghe-xuling-treasures",
+      "minghe-current-life"
+    ],
+    "fact:minghe-blackwind-inner-room-route-to-minghe-xuling-insectarium": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-blackwind-inner-room-route-conditions-minghe-xuling-insectarium": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-xuling-insectarium-route-to-minghe-blackwind-inner-room": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-xuling-insectarium-route-conditions-minghe-blackwind-inner-room": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:minghe-gate-warden-milk-seal-training": [
+      "minghe-current-life",
+      "minghe-current-values"
+    ],
+    "fact:canon-qing-yuan-zi-stabilizer-study": [
+      "minghe-current-life",
+      "minghe-current-values"
     ]
-  }
+  },
+  "quantityDefinitions": [
+    {
+      "id": "minghe-creature-count",
+      "name": "冥河群体生命个体",
+      "unit": "只",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "minghe-milk-dose",
+      "name": "冥河神乳可分用量",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "minghe-stabilizer-a",
+      "name": "稳身甲类样材",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "minghe-stabilizer-b",
+      "name": "稳身乙类样材",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "minghe-wine-cup",
+      "name": "碧灵酒分杯",
+      "unit": "杯",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    }
+  ],
+  "agentCognition": [
+    {
+      "agent_id": "canon-mu-qing",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "minghe-review-minghe-muqing-tianmu-mirror",
+            "name": "天木镜",
+            "description": "自己自得道以来培炼的镜子，现由自己保管。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "minghe-review-minghe-muqing-tianmu-mirror",
+            "canonical_entity_ids": [
+              "minghe-muqing-tianmu-mirror"
+            ]
+          }
+        ],
+        "evidence": [],
+        "claims": []
+      }
+    },
+    {
+      "agent_id": "canon-jin-ling-ape",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "minghe-review-minghe-muqing-tianmu-mirror",
+            "name": "天木镜",
+            "description": "见过主人培炼的木纹镜，自己并未获赠。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "minghe-review-minghe-muqing-tianmu-mirror",
+            "canonical_entity_ids": [
+              "minghe-muqing-tianmu-mirror"
+            ]
+          }
+        ],
+        "evidence": [],
+        "claims": []
+      }
+    }
+  ]
 }
