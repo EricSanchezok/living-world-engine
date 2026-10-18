@@ -42,7 +42,8 @@
     "openingState": "future-or-time-undetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "outerstar-qiyuan-city"
+      "outerstar-qiyuan-city",
+      "outer-reviewed-xuyun-years"
     ],
     "aliases": [],
     "reason": "后期带路人物年龄不详，不把后期职业直接前置。"
@@ -54,9 +55,14 @@
     "openingState": "reserved-human-inner-star-timeline",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "outerstar-market-claims"
+      "outerstar-market-claims",
+      "outer-reviewed-secret-market",
+      "outer-reviewed-miaoyin-choice"
     ],
-    "aliases": [],
+    "aliases": [
+      "范左使",
+      "范门主（后期）"
+    ],
     "reason": "保留唯一原著身份索引，待妙音门及乱星海时间线判断；当前只给原创当值鉴定师，不复制后期角色。"
   },
   {
@@ -66,7 +72,9 @@
     "openingState": "future-or-time-undetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "outerstar-buried-top-stone"
+      "outerstar-buried-top-stone",
+      "outer-reviewed-secret-market",
+      "outer-reviewed-miaoyin-choice"
     ],
     "aliases": [],
     "reason": "后期人物在开篇出生与年龄待专门时间线定位，关系不提前发放。"
@@ -101,7 +109,8 @@
     "openingState": "present",
     "classification": "source-and-explicit-original-calibration",
     "claimIds": [
-      "outerstar-qiyuan-city"
+      "outerstar-qiyuan-city",
+      "outer-reviewed-villages-and-mortals"
     ],
     "aliases": []
   },
@@ -411,7 +420,7 @@
   },
   {
     "id": "canon-gui-xuangui",
-    "label": "玄龟（后称归道友、乌道友）",
+    "label": "玄龟",
     "kind": "person",
     "openingState": "present",
     "classification": "source-and-explicit-original-calibration",
@@ -420,7 +429,10 @@
       "outerstar-present-life",
       "outerstar-bounded-values"
     ],
-    "aliases": []
+    "aliases": [
+      "归道友",
+      "乌道友（后期异文）"
+    ]
   },
   {
     "id": "canon-gui-xuangui-provisions",
@@ -1293,7 +1305,8 @@
     "classification": "source-and-explicit-original-calibration",
     "claimIds": [
       "outerstar-present-life",
-      "outerstar-bounded-values"
+      "outerstar-bounded-values",
+      "outer-reviewed-current-corrections"
     ],
     "aliases": []
   },
@@ -1751,5 +1764,553 @@
       "紫灵姑娘"
     ],
     "reason": "跨区统一的资料身份；后来在人界坠魔谷、大晋及其他界的记录引用此ID，均不据此定T0生日、所在或记忆。"
+  },
+  {
+    "id": "innerstar-yi-jing",
+    "label": "易敬",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-war-transit",
+      "outer-reviewed-xuyun-years"
+    ],
+    "aliases": [
+      "易道友",
+      "易姓大汉"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-liu",
+    "label": "刘夫人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-war-transit"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-zhang",
+    "label": "瘦削张道友",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-war-transit"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "innerstar-gu-transit",
+    "label": "顾姓传送守卫",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-war-transit"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "innerstar-qian-transit",
+    "label": "乾姓传送守卫",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-war-transit"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-jinxia",
+    "label": "金霞道士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-transformation-fight"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-huo-elder",
+    "label": "霍氏兄长",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-transformation-fight"
+    ],
+    "aliases": [
+      "霍氏兄弟之一"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-huo-younger",
+    "label": "霍氏弟弟",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-transformation-fight"
+    ],
+    "aliases": [
+      "霍氏兄弟之一"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-qiu-hunter",
+    "label": "秋姓猎队老者",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [
+      "鸠面老者"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-min",
+    "label": "闵姓修士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-xuan-hunter",
+    "label": "宣姓猎队修士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-miaohe",
+    "label": "妙鹤真人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors",
+      "outer-reviewed-miaoyin-choice"
+    ],
+    "aliases": [
+      "齐姓道士（连续线索推定）"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-sifa",
+    "label": "四法上人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-xuanji",
+    "label": "漩矶",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-false-worm",
+    "label": "假冒虫魔的青年",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-whiteface",
+    "label": "目睹虫魔的白面修士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-sun-qingling",
+    "label": "青灵门孙师叔",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-gongsun-xing",
+    "label": "公孙杏",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [
+      "黄衣少女"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-li-qingling",
+    "label": "青灵门李师侄",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-blue-qingling",
+    "label": "青灵门蓝衣女修",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-huang-mingli",
+    "label": "黄明礼",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-yun-tianxiao",
+    "label": "云天啸",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market",
+      "outer-reviewed-miaoyin-choice"
+    ],
+    "aliases": [
+      "云啸天"
+    ],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-fat-qi",
+    "label": "秘市齐姓胖老者",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-red-scarf",
+    "label": "红巾怪人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-market-guard",
+    "label": "秘市灰袍守门人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-sun-exchanger",
+    "label": "秘市黑肤孙姓修士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-qing",
+    "label": "青夫人",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-wu-exchanger",
+    "label": "秘市灰发吴姓老者",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-red-buyer",
+    "label": "红衣买卵修士",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-lihuo",
+    "label": "离火蛟",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-fengxi-independence"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-biyun",
+    "label": "碧云门",
+    "kind": "social-group",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-hunting-rumors"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-qingling",
+    "label": "青灵门",
+    "kind": "social-group",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-tingfeng",
+    "label": "听风阁",
+    "kind": "location",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-secret-market",
+    "label": "外海秘市",
+    "kind": "location",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "future-outerstar-qingling-master",
+    "label": "公孙杏之父",
+    "kind": "person",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-qingling-rescue"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-ziyun-eagle",
+    "label": "紫云鹰",
+    "kind": "species",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-eggs-and-species"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-yinyi-bird",
+    "label": "银翼鸟",
+    "kind": "species",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-fog-and-abyss"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-liuli-beast",
+    "label": "琉璃兽",
+    "kind": "species",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-later-beasts-and-craft"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-three-color-algae",
+    "label": "三色藻",
+    "kind": "plant",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-later-beasts-and-craft"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-panli-worm",
+    "label": "盘黎蚓",
+    "kind": "species",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-wohu-shark",
+    "label": "卧虎鲨",
+    "kind": "species",
+    "openingState": "future-or-opening-underdetermined",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-secret-market"
+    ],
+    "aliases": [],
+    "reason": "已核来源身份；本段不足推定开篇年龄、境界、所在与后期物品归属，不能预置后续行为。"
+  },
+  {
+    "id": "outerstar-blackstone-dock",
+    "label": "黑石城外泊埠",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-current-corrections"
+    ],
+    "aliases": [],
+    "reason": "该实体开篇已写入真实状态；来源、原创和标定分别见声明。"
+  },
+  {
+    "id": "outerstar-shuangfeng-island",
+    "label": "双峰岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-two-islands",
+      "outer-reviewed-current-corrections"
+    ],
+    "aliases": [],
+    "reason": "该实体开篇已写入真实状态；来源、原创和标定分别见声明。"
+  },
+  {
+    "id": "outerstar-nanli-island",
+    "label": "南黎岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-with-explicit-opening-boundary",
+    "claimIds": [
+      "outer-reviewed-two-islands",
+      "outer-reviewed-current-corrections"
+    ],
+    "aliases": [],
+    "reason": "该实体开篇已写入真实状态；来源、原创和标定分别见声明。"
   }
 ]
