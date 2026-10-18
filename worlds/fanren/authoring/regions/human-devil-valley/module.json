@@ -1361,6 +1361,19 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dv-pool-cave-depth",
+          "predicate": "water-depth",
+          "value": {
+            "kind": "text",
+            "value": "碧潭深数百丈；潜入二三百丈仍不到底，继续百余丈才到青石潭底。没有常开干燥通路。"
+          },
+          "description": "碧潭深数百丈；潜入二三百丈仍不到底，继续百余丈才到青石潭底。没有常开干燥通路。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以实际潜行、测深或可靠探查确认潭底，不能仅凭岸上望一眼得知。"
+          }
         }
       ],
       "meters": [],
@@ -3344,7 +3357,7 @@
       "name": "熔岩金阳芝",
       "kind": "container",
       "placement": "dv-lava-cave",
-      "description": "热岩边生长的金阳芝，是火属性丹药材料；开篇药用量标定六份。",
+      "description": "热岩边生长的金阳芝，可作火属性灵丹材料。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -10907,7 +10920,8 @@
     ],
     "entity:dv-jinyangzhi": [
       "dv-ancient-relics",
-      "dv-opening-values"
+      "dv-opening-values",
+      "dv-lava-herbs-identity"
     ],
     "entity:dv-nanlong-retreat": [
       "dv-opening-life"
@@ -11914,6 +11928,9 @@
     ],
     "fact:canon-da-yan-valley-testimony": [
       "dv-dayan-friends-history"
+    ],
+    "fact:dv-pool-cave-depth": [
+      "dv-pool-depth"
     ]
   },
   "quantityDefinitions": [
