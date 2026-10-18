@@ -402,13 +402,16 @@
   },
   {
     "id": "steppe-later-offices",
-    "statement": "林银屏、徐姓仙师、祝/毕/田锺、乐姓女子及其他后期法士的开篇境界和职务不因后期出场就成立。徐氏不到四百岁入中期、后数十年才入后期不足推出十岁韩立当夜的具体修为；本轮只为仲氏作有据存活回溯。",
+    "statement": "林银屏、徐姓仙师、祝/毕/田锺、乐姓女子及其他后期法士的开篇境界和职务不因后期出场就成立。徐氏不到四百岁入中期、后数十年才入后期不足推出十岁韩立当夜的具体修为；仲、穆、谷的数百年经历另有存活回溯依据，具体早年状态仍以明确补写区分。",
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
     "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
     "status": "reviewed",
-    "dependencies": [],
+    "dependencies": [
+      "steppe-mu-prior-study",
+      "steppe-gu-spy-and-snake"
+    ],
     "evidence": [
       {
         "chapterId": "qq-25455920",
@@ -4258,5 +4261,54 @@
         "anchorSha256": "6e6a55cc1ca5326612df9bf079f0d5c705b5fdfd0d5c1fcd91d374f7e46c044d"
       }
     ]
+  },
+  {
+    "id": "steppe-mu-and-gu-opening-life",
+    "statement": "数百年修学/养蛇支持穆与谷及蛇在开篇已存。当前穆设结丹初期、谷结丹初期，蛇设二级个体；二人各自住草原且未加入御灵的当期生活为明确补写，不声称原文已定其境界/加入年份。穆仅掌初步丹阳火控制，谷有御兽与喂养经验，不授后期元婴附灵术、军职或韩的知识。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "依据已有数百年经历回溯生存，早年境界、地点与未入御灵状态为必要标定；后期任何同一身份行动不被强制。",
+    "status": "reviewed",
+    "dependencies": [
+      "steppe-mu-prior-study",
+      "steppe-gu-spy-and-snake"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "steppe-tribe-current-branches",
+    "statement": "天风、金阳、拜火各设一个可往来的当期部落营地和生活网络。三部T0延续存在、相对位置、当前凡人掌事/法士、粮料、雇佣与关系是必要补写，原著后期部名及人物只提供身份依据，不证明初始名次/军队。原创人物不占有原文明定的后期领袖职位。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-holy-ding-early-custody",
+    "statement": "圣殿传承圣鼎沿后期同一仿鼎，开篇设已炼成且封存南部分殿内库；炼成年份、此时所在、当值保管人及解封条件是明确标定。它能承载合适祭仪媒介，并非虚天鼎真体，也未存有已降临分身；当前没有已凑齐的七级祭品或化界石，普通人只能见外殿，不能从库名直接获跨界秘密。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "后文明确某代大能按圣兽所授仿制法制鼎；具体早于T0与此处存放属可辨补写，不冒充已给绝对年份。",
+    "status": "reviewed",
+    "dependencies": [
+      "steppe-tianlan-descent-boundaries"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "steppe-current-work-and-asset-limits",
+    "statement": "当期新公库有真实粮料、灵石与受托保管人；私人行囊与族产分别所有。穆可用火处理一份药材/练习材料，谷须喂养具体蛇并处理毒伤风险；记账、交付、训练及通行都要行动。新生活网只让人物可互动，不保证任务成功或未来照小说走。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
   }
 ]

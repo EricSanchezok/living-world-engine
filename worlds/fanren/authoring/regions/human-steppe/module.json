@@ -211,6 +211,79 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "steppe-mulan-north-route-steppe-tianfeng-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-camp"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mulan-north-travel-steppe-tianfeng-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mulan-north-route-steppe-baihuo-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-baihuo-camp"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mulan-north-travel-steppe-baihuo-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mulan-north-route-steppe-gu-reed-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-gu-reed-house"
+          },
+          "description": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "沿水沟实际探查、向当地知路者问路或由其引路；不能只凭远方地名获坐标。"
+          }
+        },
+        {
+          "id": "steppe-mulan-north-travel-steppe-gu-reed-house",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。"
+          },
+          "description": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -268,6 +341,30 @@
             "value": "越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。"
           },
           "description": "越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-central-marches-route-steppe-jinyang-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-camp"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-central-marches-travel-steppe-jinyang-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
           "access": {
             "kind": "public"
           }
@@ -952,6 +1049,30 @@
             "value": "营地或院落内步行可达；封库、私物和授课另遵实际权限。"
           },
           "description": "营地或院落内步行可达；封库、私物和授课另遵实际权限。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianlan-school-route-steppe-holy-ding-vault",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-holy-ding-vault"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianlan-school-travel-steppe-holy-ding-vault",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
           "access": {
             "kind": "public"
           }
@@ -4595,6 +4716,12 @@
               "name": "天澜祭仪封卷",
               "description": "保存本殿供奉与呼请传统的资料；本院没有凑齐跨界重铸分身所需祭品和主持者。兽形符号不是实体分身。",
               "status": "observed"
+            },
+            {
+              "id": "known-steppe-yu-su",
+              "name": "俞素",
+              "description": "内库验封者，自己不会直接拿内库物品。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -4668,6 +4795,12 @@
               "local_entity_id": "known-steppe-summon-reference",
               "canonical_entity_ids": [
                 "steppe-summon-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-yu-su",
+              "canonical_entity_ids": [
+                "steppe-yu-su"
               ]
             }
           ],
@@ -6243,6 +6376,3710 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "steppe-tianfeng-camp",
+      "name": "天风部低岗营地",
+      "kind": "location",
+      "placement": "steppe-mulan-north",
+      "description": "风从低岗两侧穿过，羊皮帐围着避风土墙；车轴、药材和干草各自堆在棚下。",
+      "facts": [
+        {
+          "id": "steppe-tianfeng-camp-route-steppe-mulan-north",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-mulan-north"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-camp-travel-steppe-mulan-north",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-camp-route-steppe-tianfeng-hearth",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-hearth"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-camp-travel-steppe-tianfeng-hearth",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-camp-route-steppe-tianfeng-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-store"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-camp-travel-steppe-tianfeng-store",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-tianfeng-hearth",
+      "name": "穆氏炼火石屋",
+      "kind": "location",
+      "placement": "steppe-tianfeng-camp",
+      "description": "石屋外墙留着熏痕，内有浅炉与干燥药架；热量须由实际燃料或操作者法力产生。",
+      "facts": [
+        {
+          "id": "steppe-tianfeng-hearth-route-steppe-tianfeng-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-camp"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-hearth-travel-steppe-tianfeng-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-tianfeng-store",
+      "name": "天风当期共库",
+      "kind": "location",
+      "placement": "steppe-tianfeng-camp",
+      "description": "粮袋和练法材料按领用人记账，私人的丹药另收。",
+      "facts": [
+        {
+          "id": "steppe-tianfeng-store-route-steppe-tianfeng-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-camp"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-store-travel-steppe-tianfeng-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-jinyang-camp",
+      "name": "金阳部井坡营地",
+      "kind": "location",
+      "placement": "steppe-central-marches",
+      "description": "两条放牧路在浅井边交会，前棚接待货队；守夜轮值册挂在门边。",
+      "facts": [
+        {
+          "id": "steppe-jinyang-camp-route-steppe-central-marches",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-central-marches"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-camp-travel-steppe-central-marches",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-camp-route-steppe-jinyang-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-store"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-camp-travel-steppe-jinyang-store",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-jinyang-store",
+      "name": "金阳轮值公库",
+      "kind": "location",
+      "placement": "steppe-jinyang-camp",
+      "description": "布册记录井绳、口粮与修士值守费用，开锁不等于财产归个人。",
+      "facts": [
+        {
+          "id": "steppe-jinyang-store-route-steppe-jinyang-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-camp"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-store-travel-steppe-jinyang-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-baihuo-camp",
+      "name": "拜火部炊烟营地",
+      "kind": "location",
+      "placement": "steppe-mulan-north",
+      "description": "营地用泥灶集中烤肉和烘皮；一间小石棚供法士练习控火，火盆有人轮流看守。",
+      "facts": [
+        {
+          "id": "steppe-baihuo-camp-route-steppe-mulan-north",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-mulan-north"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-baihuo-camp-travel-steppe-mulan-north",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。"
+          },
+          "description": "沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-baihuo-camp-route-steppe-baihuo-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-baihuo-store"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-baihuo-camp-travel-steppe-baihuo-store",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-baihuo-store",
+      "name": "拜火部共用火棚",
+      "kind": "location",
+      "placement": "steppe-baihuo-camp",
+      "description": "干柴、草药和陶炉分列，外人可议价换取材料，需先问管事。",
+      "facts": [
+        {
+          "id": "steppe-baihuo-store-route-steppe-baihuo-camp",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-baihuo-camp"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-baihuo-store-travel-steppe-baihuo-camp",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-gu-reed-house",
+      "name": "芦沟兽舍",
+      "kind": "location",
+      "placement": "steppe-mulan-north",
+      "description": "离主要牧路有一段距离，低墙围着温湿兽栏；谷双蒲在此调配喂食和处理外伤。",
+      "facts": [
+        {
+          "id": "steppe-gu-reed-house-route-steppe-mulan-north",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-mulan-north"
+          },
+          "description": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "沿水沟实际探查、向当地知路者问路或由其引路；不能只凭远方地名获坐标。"
+          }
+        },
+        {
+          "id": "steppe-gu-reed-house-travel-steppe-mulan-north",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。"
+          },
+          "description": "芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-holy-ding-vault",
+      "name": "分殿内库",
+      "kind": "location",
+      "placement": "steppe-tianlan-school",
+      "description": "厚石门锁住内库，门内有一座低石台和验封记录；进入须取得保管者许可或实际突破门禁。",
+      "facts": [
+        {
+          "id": "steppe-holy-ding-vault-route-steppe-tianlan-school",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianlan-school"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-holy-ding-vault-travel-steppe-tianlan-school",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。"
+          },
+          "description": "院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-tianfeng-tribe-reference",
+      "name": "天风部",
+      "kind": "organization",
+      "placement": "steppe-tianfeng-camp",
+      "description": "由牧户、法士与各项生计关系组成的慕兰部落；当期库房和职务以这里的真实记录为限。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-jinyang-tribe-reference",
+      "name": "金阳部",
+      "kind": "organization",
+      "placement": "steppe-jinyang-camp",
+      "description": "由牧户、法士与各项生计关系组成的慕兰部落；当期库房和职务以这里的真实记录为限。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-baihuo-tribe-reference",
+      "name": "拜火部",
+      "kind": "organization",
+      "placement": "steppe-baihuo-camp",
+      "description": "由牧户、法士与各项生计关系组成的慕兰部落；当期库房和职务以这里的真实记录为限。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-mu-tianfeng",
+      "name": "穆姓法士",
+      "kind": "person",
+      "placement": "steppe-tianfeng-hearth",
+      "description": "天风部修习丹阳火的法士，常把药炉温度看得比称呼更要紧。他愿意教肯反复练习的人，却不愿别人擅动自己的火炉。",
+      "facts": [
+        {
+          "id": "canon-mu-tianfeng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mu-tianfeng"
+            ]
+          }
+        },
+        {
+          "id": "canon-mu-tianfeng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期；五行火术与初步丹阳火收束，可持续温炉；尚未掌握大规模灵火攻伐，使用仍消耗法力。"
+          },
+          "description": "结丹初期；五行火术与初步丹阳火收束，可持续温炉；尚未掌握大规模灵火攻伐，使用仍消耗法力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mu-tianfeng"
+            ]
+          }
+        },
+        {
+          "id": "canon-mu-tianfeng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mu-tianfeng"
+            ]
+          }
+        },
+        {
+          "id": "canon-mu-tianfeng-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-mu-tianfeng-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-mu-tianfeng-mana",
+          "definition_id": "mana",
+          "current": 400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-mu-tianfeng-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-mu-tianfeng-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-mu-tianfeng-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-mu-tianfeng-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-mu-tianfeng-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 110
+        }
+      ],
+      "agent": {
+        "id": "canon-mu-tianfeng",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天风部修习丹阳火的法士，常把药炉温度看得比称呼更要紧。他愿意教肯反复练习的人，却不愿别人擅动自己的火炉。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "先检验新送药材是否够干，再与库管谈清这次练火应由谁供料。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "穆姓法士",
+              "description": "天风部修习丹阳火的法士，常把药炉温度看得比称呼更要紧。他愿意教肯反复练习的人，却不愿别人擅动自己的火炉。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "穆氏炼火石屋",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mu-tianfeng-pouch",
+              "name": "穆姓法士的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-yan-qiu",
+              "name": "晏秋",
+              "description": "自己指导的炼气弟子，正在练习温炉。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-he-yue",
+              "name": "禾岳",
+              "description": "掌管部落共库的禾岳，要先谈清供料份额。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-tianfeng-tribe-reference",
+              "name": "天风部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-mu-hearth",
+              "name": "穆氏浅口药炉",
+              "description": "普通耐火炉，可配法力温炉烘药，不能凭空添药材或保证炼丹成功。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-mu-practice-material",
+              "name": "穆氏练火药材",
+              "description": "已购两份普通干药，练火消耗需从这批扣除，新三份尚待禾岳同意。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-mu-tianfeng"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-hearth"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mu-tianfeng-pouch",
+              "canonical_entity_ids": [
+                "canon-mu-tianfeng-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-yan-qiu",
+              "canonical_entity_ids": [
+                "steppe-yan-qiu"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-he-yue",
+              "canonical_entity_ids": [
+                "steppe-he-yue"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-tianfeng-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-tribe-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-mu-hearth",
+              "canonical_entity_ids": [
+                "steppe-mu-hearth"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-mu-practice-material",
+              "canonical_entity_ids": [
+                "steppe-mu-practice-material"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "结丹初期；五行火术与初步丹阳火收束，可持续温炉；尚未掌握大规模灵火攻伐，使用仍消耗法力。"
+              },
+              "description": "结丹初期；五行火术与初步丹阳火收束，可持续温炉；尚未掌握大规模灵火攻伐，使用仍消耗法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "先检验新送药材是否够干，再与库管谈清这次练火应由谁供料。"
+              },
+              "description": "先检验新送药材是否够干，再与库管谈清这次练火应由谁供料。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是结丹修士。"
+              },
+              "description": "自己是结丹修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-mu-tianfeng-pouch",
+      "name": "穆姓法士的私用行囊",
+      "kind": "item",
+      "placement": "canon-mu-tianfeng",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-mu-tianfeng-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "steppe-he-yue",
+      "name": "禾岳",
+      "kind": "person",
+      "placement": "steppe-tianfeng-store",
+      "description": "天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。",
+      "facts": [
+        {
+          "id": "steppe-he-yue-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-he-yue"
+            ]
+          }
+        },
+        {
+          "id": "steppe-he-yue-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "粮料记账、干药保存、驱车；懂慕兰语与商旅数字。"
+          },
+          "description": "粮料记账、干药保存、驱车；懂慕兰语与商旅数字。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-he-yue"
+            ]
+          }
+        },
+        {
+          "id": "steppe-he-yue-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-he-yue"
+            ]
+          }
+        },
+        {
+          "id": "steppe-he-yue-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-he-yue-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-he-yue-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "steppe-he-yue-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "steppe-he-yue-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-he-yue-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "steppe-he-yue-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 64
+        }
+      ],
+      "agent": {
+        "id": "steppe-he-yue",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "禾岳",
+              "description": "天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "天风当期共库",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-he-yue-pouch",
+              "name": "禾岳的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mu-tianfeng",
+              "name": "穆姓法士",
+              "description": "长期在本部修行的穆氏，私用药材和部落粮食要分账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-chi-ning",
+              "name": "赤宁",
+              "description": "拜火管火棚的法士，可商谈烘药费用。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-tianfeng-tribe-reference",
+              "name": "天风部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-tianfeng-current-stock",
+              "name": "天风当期粮药库",
+              "description": "禾岳受托保管的冬粮、干药和练法材料。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-he-yue"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-he-yue-pouch",
+              "canonical_entity_ids": [
+                "steppe-he-yue-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mu-tianfeng",
+              "canonical_entity_ids": [
+                "canon-mu-tianfeng"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-chi-ning",
+              "canonical_entity_ids": [
+                "steppe-chi-ning"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-tianfeng-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-tribe-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-tianfeng-current-stock",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-current-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "粮料记账、干药保存、驱车；懂慕兰语与商旅数字。"
+              },
+              "description": "粮料记账、干药保存、驱车；懂慕兰语与商旅数字。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。"
+              },
+              "description": "把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-he-yue-pouch",
+      "name": "禾岳的私用行囊",
+      "kind": "item",
+      "placement": "steppe-he-yue",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-he-yue-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-he-yue"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-yan-qiu",
+      "name": "晏秋",
+      "kind": "person",
+      "placement": "steppe-tianfeng-hearth",
+      "description": "天风炼气女弟子，喜欢用小火烘药和修补器物，遇见不懂的事会写在木片上。",
+      "facts": [
+        {
+          "id": "steppe-yan-qiu-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yan-qiu"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yan-qiu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气六层；基础引火、辨干药和低阶法力感应；懂慕兰文字。"
+          },
+          "description": "炼气六层；基础引火、辨干药和低阶法力感应；懂慕兰文字。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yan-qiu"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yan-qiu-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yan-qiu"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yan-qiu-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-yan-qiu-teacher",
+          "predicate": "teacher",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "teacher",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-yan-qiu-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "steppe-yan-qiu-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-yan-qiu-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "steppe-yan-qiu-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "steppe-yan-qiu-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-yan-qiu-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "steppe-yan-qiu-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 16
+        }
+      ],
+      "agent": {
+        "id": "steppe-yan-qiu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天风炼气女弟子，喜欢用小火烘药和修补器物，遇见不懂的事会写在木片上。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "请穆氏检查自己的温炉法，再陪禾岳验一批新药。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "晏秋",
+              "description": "天风炼气女弟子，喜欢用小火烘药和修补器物，遇见不懂的事会写在木片上。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "穆氏炼火石屋",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-yan-qiu-pouch",
+              "name": "晏秋的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mu-tianfeng",
+              "name": "穆姓法士",
+              "description": "教自己温炉和丹阳火入门的先生。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-tianfeng-tribe-reference",
+              "name": "天风部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-yan-qiu"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-hearth"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-yan-qiu-pouch",
+              "canonical_entity_ids": [
+                "steppe-yan-qiu-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mu-tianfeng",
+              "canonical_entity_ids": [
+                "canon-mu-tianfeng"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-tianfeng-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-tianfeng-tribe-reference"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼气六层；基础引火、辨干药和低阶法力感应；懂慕兰文字。"
+              },
+              "description": "炼气六层；基础引火、辨干药和低阶法力感应；懂慕兰文字。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "请穆氏检查自己的温炉法，再陪禾岳验一批新药。"
+              },
+              "description": "请穆氏检查自己的温炉法，再陪禾岳验一批新药。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是炼气修士。"
+              },
+              "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-yan-qiu-pouch",
+      "name": "晏秋的私用行囊",
+      "kind": "item",
+      "placement": "steppe-yan-qiu",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-yan-qiu-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-yan-qiu"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-su-ran",
+      "name": "苏染",
+      "kind": "person",
+      "placement": "steppe-jinyang-store",
+      "description": "金阳轮值库管，看重守夜人能吃饱，愿意交换井绳和盐，不喜欢没有期限的借用。",
+      "facts": [
+        {
+          "id": "steppe-su-ran-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-su-ran"
+            ]
+          }
+        },
+        {
+          "id": "steppe-su-ran-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "账册、井绳维护、饲养驮畜；慕兰口语。"
+          },
+          "description": "账册、井绳维护、饲养驮畜；慕兰口语。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-su-ran"
+            ]
+          }
+        },
+        {
+          "id": "steppe-su-ran-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-su-ran"
+            ]
+          }
+        },
+        {
+          "id": "steppe-su-ran-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-su-ran-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-su-ran-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "steppe-su-ran-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "steppe-su-ran-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-su-ran-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "steppe-su-ran-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 72
+        }
+      ],
+      "agent": {
+        "id": "steppe-su-ran",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "金阳轮值库管，看重守夜人能吃饱，愿意交换井绳和盐，不喜欢没有期限的借用。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "为下一轮守夜安排口粮，与阿洛约定修井时辰和工料。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "苏染",
+              "description": "金阳轮值库管，看重守夜人能吃饱，愿意交换井绳和盐，不喜欢没有期限的借用。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "金阳轮值公库",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-su-ran-pouch",
+              "name": "苏染的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-a-luo",
+              "name": "阿洛",
+              "description": "受部落供奉巡井的法士，修井料由自己核对。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-jinyang-tribe-reference",
+              "name": "金阳部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-jinyang-current-stock",
+              "name": "金阳当期轮值储备",
+              "description": "用于现有井坡巡守的有限物资。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-su-ran"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-jinyang-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-su-ran-pouch",
+              "canonical_entity_ids": [
+                "steppe-su-ran-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-a-luo",
+              "canonical_entity_ids": [
+                "steppe-a-luo"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-jinyang-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-jinyang-tribe-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-jinyang-current-stock",
+              "canonical_entity_ids": [
+                "steppe-jinyang-current-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "账册、井绳维护、饲养驮畜；慕兰口语。"
+              },
+              "description": "账册、井绳维护、饲养驮畜；慕兰口语。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "为下一轮守夜安排口粮，与阿洛约定修井时辰和工料。"
+              },
+              "description": "为下一轮守夜安排口粮，与阿洛约定修井时辰和工料。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-su-ran-pouch",
+      "name": "苏染的私用行囊",
+      "kind": "item",
+      "placement": "steppe-su-ran",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-su-ran-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-su-ran"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-a-luo",
+      "name": "阿洛",
+      "kind": "person",
+      "placement": "steppe-jinyang-camp",
+      "description": "受金阳供奉的筑基法士，熟悉沿井坡的短途巡视，认为守好水井和辨明来人同样要紧。",
+      "facts": [
+        {
+          "id": "steppe-a-luo-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-a-luo"
+            ]
+          }
+        },
+        {
+          "id": "steppe-a-luo-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基初期；土石加固、小范围警铃符与御器巡行；侦测不自动知道来者姓名。"
+          },
+          "description": "筑基初期；土石加固、小范围警铃符与御器巡行；侦测不自动知道来者姓名。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-a-luo"
+            ]
+          }
+        },
+        {
+          "id": "steppe-a-luo-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-a-luo"
+            ]
+          }
+        },
+        {
+          "id": "steppe-a-luo-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-a-luo-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "steppe-a-luo-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-a-luo-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "steppe-a-luo-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "steppe-a-luo-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-a-luo-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "steppe-a-luo-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 45
+        }
+      ],
+      "agent": {
+        "id": "steppe-a-luo",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "受金阳供奉的筑基法士，熟悉沿井坡的短途巡视，认为守好水井和辨明来人同样要紧。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检修井边一枚警铃符，再同苏染核清维修料。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "阿洛",
+              "description": "受金阳供奉的筑基法士，熟悉沿井坡的短途巡视，认为守好水井和辨明来人同样要紧。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "金阳部井坡营地",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-a-luo-pouch",
+              "name": "阿洛的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-su-ran",
+              "name": "苏染",
+              "description": "为自己安排巡夜粮料的管事，借料需记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-jinyang-tribe-reference",
+              "name": "金阳部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-jinyang-bell",
+              "name": "井坡警铃符",
+              "description": "布在井边的单枚低阶警铃符，受触动可鸣响，不能辨来人真实身份；损坏需材料修理。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-a-luo"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-jinyang-camp"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-a-luo-pouch",
+              "canonical_entity_ids": [
+                "steppe-a-luo-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-su-ran",
+              "canonical_entity_ids": [
+                "steppe-su-ran"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-jinyang-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-jinyang-tribe-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-jinyang-bell",
+              "canonical_entity_ids": [
+                "steppe-jinyang-bell"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "筑基初期；土石加固、小范围警铃符与御器巡行；侦测不自动知道来者姓名。"
+              },
+              "description": "筑基初期；土石加固、小范围警铃符与御器巡行；侦测不自动知道来者姓名。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检修井边一枚警铃符，再同苏染核清维修料。"
+              },
+              "description": "检修井边一枚警铃符，再同苏染核清维修料。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-a-luo-pouch",
+      "name": "阿洛的私用行囊",
+      "kind": "item",
+      "placement": "steppe-a-luo",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-a-luo-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-a-luo"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-chi-ning",
+      "name": "赤宁",
+      "kind": "person",
+      "placement": "steppe-baihuo-store",
+      "description": "拜火部管火棚的筑基法士，能控火却愿听凡人谈柴火贵贱，教人时会先要求留出退路。",
+      "facts": [
+        {
+          "id": "steppe-chi-ning-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-chi-ning"
+            ]
+          }
+        },
+        {
+          "id": "steppe-chi-ning-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基初期；基础火灵术、温度控制和药材烘干；不能凭意念招来天地火灵。"
+          },
+          "description": "筑基初期；基础火灵术、温度控制和药材烘干；不能凭意念招来天地火灵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-chi-ning"
+            ]
+          }
+        },
+        {
+          "id": "steppe-chi-ning-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-chi-ning"
+            ]
+          }
+        },
+        {
+          "id": "steppe-chi-ning-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-baihuo-tribe-reference"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-chi-ning-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "steppe-chi-ning-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-chi-ning-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "steppe-chi-ning-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "steppe-chi-ning-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-chi-ning-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "steppe-chi-ning-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 38
+        }
+      ],
+      "agent": {
+        "id": "steppe-chi-ning",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "拜火部管火棚的筑基法士，能控火却愿听凡人谈柴火贵贱，教人时会先要求留出退路。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "比较两份干柴的火候，教新来的牧户安全封炉，保留足够木料过夜。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "赤宁",
+              "description": "拜火部管火棚的筑基法士，能控火却愿听凡人谈柴火贵贱，教人时会先要求留出退路。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "拜火部共用火棚",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-chi-ning-pouch",
+              "name": "赤宁的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-he-yue",
+              "name": "禾岳",
+              "description": "从天风运来草药的管事，谈过一次烘药委托。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-baihuo-tribe-reference",
+              "name": "拜火部",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-baihuo-current-stock",
+              "name": "拜火火棚料箱",
+              "description": "赤宁受托保管的干柴工料、普通干药和值守粮食。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-chi-ning"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-baihuo-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-chi-ning-pouch",
+              "canonical_entity_ids": [
+                "steppe-chi-ning-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-he-yue",
+              "canonical_entity_ids": [
+                "steppe-he-yue"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-baihuo-tribe-reference",
+              "canonical_entity_ids": [
+                "steppe-baihuo-tribe-reference"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-baihuo-current-stock",
+              "canonical_entity_ids": [
+                "steppe-baihuo-current-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "筑基初期；基础火灵术、温度控制和药材烘干；不能凭意念招来天地火灵。"
+              },
+              "description": "筑基初期；基础火灵术、温度控制和药材烘干；不能凭意念招来天地火灵。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "比较两份干柴的火候，教新来的牧户安全封炉，保留足够木料过夜。"
+              },
+              "description": "比较两份干柴的火候，教新来的牧户安全封炉，保留足够木料过夜。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-chi-ning-pouch",
+      "name": "赤宁的私用行囊",
+      "kind": "item",
+      "placement": "steppe-chi-ning",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-chi-ning-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-chi-ning"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "canon-gu-shuangpu",
+      "name": "谷双蒲",
+      "kind": "person",
+      "placement": "steppe-gu-reed-house",
+      "description": "在芦沟养蛇的慕兰修士，习惯先看伤口和食量再听夸耀。他不轻易让陌生人碰自己的灵兽，也愿为可信的行旅处理毒伤。",
+      "facts": [
+        {
+          "id": "canon-gu-shuangpu-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-gu-shuangpu"
+            ]
+          }
+        },
+        {
+          "id": "canon-gu-shuangpu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期；神识控物、低阶御兽、识常见蛇毒与外伤；未掌握元婴附灵合体法。"
+          },
+          "description": "结丹初期；神识控物、低阶御兽、识常见蛇毒与外伤；未掌握元婴附灵合体法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-gu-shuangpu"
+            ]
+          }
+        },
+        {
+          "id": "canon-gu-shuangpu-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-gu-shuangpu"
+            ]
+          }
+        },
+        {
+          "id": "canon-gu-shuangpu-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "mulan-tribal-community"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-gu-shuangpu-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-gu-shuangpu-mana",
+          "definition_id": "mana",
+          "current": 400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-gu-shuangpu-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-gu-shuangpu-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-gu-shuangpu-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-gu-shuangpu-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-gu-shuangpu-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 95
+        }
+      ],
+      "agent": {
+        "id": "canon-gu-shuangpu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "在芦沟养蛇的慕兰修士，习惯先看伤口和食量再听夸耀。他不轻易让陌生人碰自己的灵兽，也愿为可信的行旅处理毒伤。",
+            "voice": "话少，常先问你见到了什么；谈养蛇时讲观察和代价，不先泄露自己的全套手艺。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "观察双尾蛇换食后的反应，安排岑禾补送饲料，并让兽栏保持温湿。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "谷双蒲",
+              "description": "在芦沟养蛇的慕兰修士，习惯先看伤口和食量再听夸耀。他不轻易让陌生人碰自己的灵兽，也愿为可信的行旅处理毒伤。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "芦沟兽舍",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-gu-shuangpu-pouch",
+              "name": "谷双蒲的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-cen-he",
+              "name": "岑禾",
+              "description": "来送饲料的行商，尚未收到本次全部交付款。",
+              "status": "observed"
+            },
+            {
+              "id": "known-mulan-tribal-community",
+              "name": "慕兰部落共同体",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-gu-feed",
+              "name": "谷氏灵兽饲料",
+              "description": "已在栏中备好的五份饲料；岑禾未交的货不算本库存。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-gu-doubletail-snake",
+              "name": "双尾翡翠蛇",
+              "description": "自己长期培养的双尾蛇，当前二级；投喂和御兽要观察状态，不能仅凭命令保证任何战斗成功。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-gu-shuangpu"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-gu-reed-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-gu-shuangpu-pouch",
+              "canonical_entity_ids": [
+                "canon-gu-shuangpu-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-cen-he",
+              "canonical_entity_ids": [
+                "steppe-cen-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-mulan-tribal-community",
+              "canonical_entity_ids": [
+                "mulan-tribal-community"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-gu-feed",
+              "canonical_entity_ids": [
+                "steppe-gu-feed"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-gu-doubletail-snake",
+              "canonical_entity_ids": [
+                "canon-gu-doubletail-snake"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "结丹初期；神识控物、低阶御兽、识常见蛇毒与外伤；未掌握元婴附灵合体法。"
+              },
+              "description": "结丹初期；神识控物、低阶御兽、识常见蛇毒与外伤；未掌握元婴附灵合体法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "观察双尾蛇换食后的反应，安排岑禾补送饲料，并让兽栏保持温湿。"
+              },
+              "description": "观察双尾蛇换食后的反应，安排岑禾补送饲料，并让兽栏保持温湿。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是结丹修士。"
+              },
+              "description": "自己是结丹修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-gu-shuangpu-pouch",
+      "name": "谷双蒲的私用行囊",
+      "kind": "item",
+      "placement": "canon-gu-shuangpu",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-gu-shuangpu-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-gu-shuangpu"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "steppe-cen-he",
+      "name": "岑禾",
+      "kind": "person",
+      "placement": "steppe-gu-reed-house",
+      "description": "给芦沟送鲜肉和药草的慕兰行商，熟悉蛇栏周围的路，知道交易该先说清价钱而非赌术士心情。",
+      "facts": [
+        {
+          "id": "steppe-cen-he-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-cen-he"
+            ]
+          }
+        },
+        {
+          "id": "steppe-cen-he-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "辨饲料腐败、草药采集和沿河认路；不具灵根，不懂神识御兽。"
+          },
+          "description": "辨饲料腐败、草药采集和沿河认路；不具灵根，不懂神识御兽。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-cen-he"
+            ]
+          }
+        },
+        {
+          "id": "steppe-cen-he-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-cen-he"
+            ]
+          }
+        },
+        {
+          "id": "steppe-cen-he-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "mulan-tribal-community"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-cen-he-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-cen-he-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "steppe-cen-he-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "steppe-cen-he-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "steppe-cen-he-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "steppe-cen-he-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 56
+        }
+      ],
+      "agent": {
+        "id": "steppe-cen-he",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "给芦沟送鲜肉和药草的慕兰行商，熟悉蛇栏周围的路，知道交易该先说清价钱而非赌术士心情。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把本次三份饲料交付条件谈妥，再带走应付的一笔铜钱。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "岑禾",
+              "description": "给芦沟送鲜肉和药草的慕兰行商，熟悉蛇栏周围的路，知道交易该先说清价钱而非赌术士心情。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "芦沟兽舍",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-cen-he-pouch",
+              "name": "岑禾的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-gu-shuangpu",
+              "name": "谷双蒲",
+              "description": "芦沟养蛇的客人，能收草药但也会挑质量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-mulan-tribal-community",
+              "name": "慕兰部落共同体",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-cen-feed-cargo",
+              "name": "岑禾待售饲料",
+              "description": "三份尚未交付的饲料，质量、价格和付款须双方确认。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-gu-doubletail-snake",
+              "name": "双尾翡翠蛇",
+              "description": "兽栏里两条尾的绿蛇，主人嘱咐不要伸手靠近。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-cen-he"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-gu-reed-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-cen-he-pouch",
+              "canonical_entity_ids": [
+                "steppe-cen-he-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-gu-shuangpu",
+              "canonical_entity_ids": [
+                "canon-gu-shuangpu"
+              ]
+            },
+            {
+              "local_entity_id": "known-mulan-tribal-community",
+              "canonical_entity_ids": [
+                "mulan-tribal-community"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-cen-feed-cargo",
+              "canonical_entity_ids": [
+                "steppe-cen-feed-cargo"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-gu-doubletail-snake",
+              "canonical_entity_ids": [
+                "canon-gu-doubletail-snake"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "辨饲料腐败、草药采集和沿河认路；不具灵根，不懂神识御兽。"
+              },
+              "description": "辨饲料腐败、草药采集和沿河认路；不具灵根，不懂神识御兽。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把本次三份饲料交付条件谈妥，再带走应付的一笔铜钱。"
+              },
+              "description": "把本次三份饲料交付条件谈妥，再带走应付的一笔铜钱。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-cen-he-pouch",
+      "name": "岑禾的私用行囊",
+      "kind": "item",
+      "placement": "steppe-cen-he",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-cen-he-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-cen-he"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-yu-su",
+      "name": "俞素",
+      "kind": "person",
+      "placement": "steppe-holy-ding-vault",
+      "description": "分殿受托验封内库的元婴女修，做事安静细致，讨厌把祖传仪礼当作随时表演的戏法。",
+      "facts": [
+        {
+          "id": "steppe-yu-su-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yu-su"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yu-su-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期；分殿防护封禁、神识验纹与普通炼器保养；知道圣鼎祭仪需要真实媒介与条件，但未备齐跨界仪式。"
+          },
+          "description": "元婴初期；分殿防护封禁、神识验纹与普通炼器保养；知道圣鼎祭仪需要真实媒介与条件，但未备齐跨界仪式。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yu-su"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yu-su-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yu-su"
+            ]
+          }
+        },
+        {
+          "id": "steppe-yu-su-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "tianlan-temple-network"
+          },
+          "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "steppe-yu-su-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "steppe-yu-su-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "steppe-yu-su-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "steppe-yu-su-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "steppe-yu-su-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "steppe-yu-su-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "steppe-yu-su-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 180
+        }
+      ],
+      "agent": {
+        "id": "steppe-yu-su",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "分殿受托验封内库的元婴女修，做事安静细致，讨厌把祖传仪礼当作随时表演的戏法。",
+            "voice": "说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对封门灵石余量，听取莘禾教学用料申请后再安排内库例行保养。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "俞素",
+              "description": "分殿受托验封内库的元婴女修，做事安静细致，讨厌把祖传仪礼当作随时表演的戏法。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "分殿内库",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-yu-su-pouch",
+              "name": "俞素的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-shen-he",
+              "name": "莘禾",
+              "description": "分殿教师，请领教学习料要实际记录。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tianlan-temple-network",
+              "name": "天澜圣殿",
+              "description": "自己当前有往来与责任的族群或机构，公产另有保管规则。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-tianlan-holy-ding",
+              "name": "传承圣鼎",
+              "description": "古法仿制的传承器物，低石台上封存；未启动，鼎内没有已降临的兽形实体。",
+              "status": "observed"
+            },
+            {
+              "id": "known-steppe-holy-vault-lock",
+              "name": "内库门封",
+              "description": "配八枚低阶灵石的封门设施，当前完好；实际解封或破坏会改变门禁，不使整片分殿绝对不可进。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "steppe-yu-su"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "steppe-holy-ding-vault"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-yu-su-pouch",
+              "canonical_entity_ids": [
+                "steppe-yu-su-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-shen-he",
+              "canonical_entity_ids": [
+                "steppe-shen-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-tianlan-temple-network",
+              "canonical_entity_ids": [
+                "tianlan-temple-network"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-tianlan-holy-ding",
+              "canonical_entity_ids": [
+                "canon-tianlan-holy-ding"
+              ]
+            },
+            {
+              "local_entity_id": "known-steppe-holy-vault-lock",
+              "canonical_entity_ids": [
+                "steppe-holy-vault-lock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "元婴初期；分殿防护封禁、神识验纹与普通炼器保养；知道圣鼎祭仪需要真实媒介与条件，但未备齐跨界仪式。"
+              },
+              "description": "元婴初期；分殿防护封禁、神识验纹与普通炼器保养；知道圣鼎祭仪需要真实媒介与条件，但未备齐跨界仪式。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核对封门灵石余量，听取莘禾教学用料申请后再安排内库例行保养。"
+              },
+              "description": "核对封门灵石余量，听取莘禾教学用料申请后再安排内库例行保养。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "steppe-yu-su-pouch",
+      "name": "俞素的私用行囊",
+      "kind": "item",
+      "placement": "steppe-yu-su",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "steppe-yu-su-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-yu-su"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "steppe-tianfeng-current-stock",
+      "name": "天风当期粮药库",
+      "kind": "item",
+      "placement": "steppe-tianfeng-store",
+      "description": "禾岳受托保管的冬粮、干药和练法材料。",
+      "facts": [
+        {
+          "id": "steppe-tianfeng-current-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-tianfeng-tribe-reference"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-tianfeng-current-stock-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-he-yue"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 120
+        },
+        {
+          "definition_id": "herb-packet",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 25
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 36
+        }
+      ]
+    },
+    {
+      "id": "steppe-mu-hearth",
+      "name": "穆氏浅口药炉",
+      "kind": "item",
+      "placement": "steppe-tianfeng-hearth",
+      "description": "普通耐火炉，可配法力温炉烘药，不能凭空添药材或保证炼丹成功。",
+      "facts": [
+        {
+          "id": "steppe-mu-hearth-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mu-hearth-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-mu-practice-material",
+      "name": "穆氏练火药材",
+      "kind": "item",
+      "placement": "steppe-tianfeng-hearth",
+      "description": "已购两份普通干药，练火消耗需从这批扣除，新三份尚待禾岳同意。",
+      "facts": [
+        {
+          "id": "steppe-mu-practice-material-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-mu-practice-material-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mu-tianfeng"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "steppe-jinyang-current-stock",
+      "name": "金阳当期轮值储备",
+      "kind": "item",
+      "placement": "steppe-jinyang-store",
+      "description": "用于现有井坡巡守的有限物资。",
+      "facts": [
+        {
+          "id": "steppe-jinyang-current-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-tribe-reference"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-current-stock-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-su-ran"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 100
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 16
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 28
+        }
+      ]
+    },
+    {
+      "id": "steppe-jinyang-bell",
+      "name": "井坡警铃符",
+      "kind": "item",
+      "placement": "steppe-jinyang-camp",
+      "description": "布在井边的单枚低阶警铃符，受触动可鸣响，不能辨来人真实身份；损坏需材料修理。",
+      "facts": [
+        {
+          "id": "steppe-jinyang-bell-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-jinyang-tribe-reference"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-jinyang-bell-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-a-luo"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-baihuo-current-stock",
+      "name": "拜火火棚料箱",
+      "kind": "item",
+      "placement": "steppe-baihuo-store",
+      "description": "赤宁受托保管的干柴工料、普通干药和值守粮食。",
+      "facts": [
+        {
+          "id": "steppe-baihuo-current-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-baihuo-tribe-reference"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-baihuo-current-stock-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-chi-ning"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 32
+        },
+        {
+          "definition_id": "grain",
+          "amount": 80
+        },
+        {
+          "definition_id": "herb-packet",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "steppe-gu-feed",
+      "name": "谷氏灵兽饲料",
+      "kind": "item",
+      "placement": "steppe-gu-reed-house",
+      "description": "已在栏中备好的五份饲料；岑禾未交的货不算本库存。",
+      "facts": [
+        {
+          "id": "steppe-gu-feed-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-gu-shuangpu"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-gu-feed-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-gu-shuangpu"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "steppe-cen-feed-cargo",
+      "name": "岑禾待售饲料",
+      "kind": "item",
+      "placement": "steppe-cen-he",
+      "description": "三份尚未交付的饲料，质量、价格和付款须双方确认。",
+      "facts": [
+        {
+          "id": "steppe-cen-feed-cargo-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-cen-he"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-cen-feed-cargo-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-cen-he"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "canon-tianlan-holy-ding",
+      "name": "传承圣鼎",
+      "kind": "item",
+      "placement": "steppe-holy-ding-vault",
+      "description": "古法仿制的传承器物，低石台上封存；未启动，鼎内没有已降临的兽形实体。",
+      "facts": [
+        {
+          "id": "canon-tianlan-holy-ding-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tianlan-temple-network"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-tianlan-holy-ding-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-yu-su"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-tianlan-holy-ding-capability",
+          "predicate": "capability",
+          "value": {
+            "kind": "text",
+            "value": "可按正确祭仪承载媒介、力量和分神塑形；须操作者实际会法、有法力、祭品与相应跨界条件，不从一句召请凭空生圣兽。"
+          },
+          "description": "可按正确祭仪承载媒介、力量和分神塑形；须操作者实际会法、有法力、祭品与相应跨界条件，不从一句召请凭空生圣兽。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yu-su"
+            ]
+          }
+        },
+        {
+          "id": "canon-tianlan-holy-ding-unique",
+          "predicate": "unique-identity",
+          "value": {
+            "kind": "text",
+            "value": "此物是圣殿传承仿鼎，不是虚天鼎真体；移动或交接沿同一器物，不生成副本。"
+          },
+          "description": "此物是圣殿传承仿鼎，不是虚天鼎真体；移动或交接沿同一器物，不生成副本。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "steppe-yu-su"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "steppe-holy-vault-lock",
+      "name": "内库门封",
+      "kind": "item",
+      "placement": "steppe-holy-ding-vault",
+      "description": "配八枚低阶灵石的封门设施，当前完好；实际解封或破坏会改变门禁，不使整片分殿绝对不可进。",
+      "facts": [
+        {
+          "id": "steppe-holy-vault-lock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tianlan-temple-network"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "steppe-holy-vault-lock-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "steppe-yu-su"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "canon-gu-doubletail-snake",
+      "name": "双尾翡翠蛇",
+      "kind": "creature",
+      "placement": "steppe-gu-reed-house",
+      "description": "一条翠色双尾灵蛇，蜷在温湿兽栏里。受惊会警戒或吐毒，熟悉谷双蒲的喂养手势。",
+      "facts": [
+        {
+          "id": "canon-gu-doubletail-snake-keeper",
+          "predicate": "keeper",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-gu-shuangpu"
+          },
+          "description": "keeper",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-gu-doubletail-snake-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-gu-shuangpu"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-gu-doubletail-snake-level",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "二级妖蛇。"
+          },
+          "description": "二级妖蛇。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-gu-shuangpu"
+            ]
+          }
+        },
+        {
+          "id": "canon-gu-doubletail-snake-poison",
+          "predicate": "capability",
+          "value": {
+            "kind": "text",
+            "value": "可在受威胁时吐毒或咬伤，需要真实接触和毒液；伤害受修为、护体、解毒手段影响，不见元婴必死。"
+          },
+          "description": "可在受威胁时吐毒或咬伤，需要真实接触和毒液；伤害受修为、护体、解毒手段影响，不见元婴必死。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际观察灵蛇行动、接触毒伤痕迹或从知情者得知。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-gu-doubletail-snake-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-gu-doubletail-snake-force",
+          "definition_id": "force",
+          "value": 2
+        }
+      ],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -6399,6 +10236,11 @@
     {
       "id": "steppe-cooperative-array-inputs",
       "text": "多人灵术大阵可由法士承担阵器位置，但须真实参与、主持、相应术法能力和法力；不能仅宣称结阵就生成无数参与者或施放器物。协作人数、当前消耗与受击中断应依实际局势判定。",
+      "severity": "hard"
+    },
+    {
+      "id": "steppe-ritual-and-animal-care",
+      "text": "圣殿分神降临须真实已有器物、会法操作者、法力和适当媒介，并满足跨界条件；物种图像或普通典礼不能替代。灵兽进食、毒液和受伤处理按实际主体与数量变化，不因主人有命令就忽略距离、状态与防御。",
       "severity": "hard"
     }
   ],
@@ -7389,6 +11231,554 @@
     "law:steppe-cooperative-array-inputs": [
       "steppe-formation-and-fire-inputs",
       "steppe-lingshu"
+    ],
+    "entity:steppe-tianfeng-camp": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-tianfeng-hearth": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "entity:steppe-tianfeng-store": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-jinyang-camp": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-jinyang-store": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-baihuo-camp": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-baihuo-store": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-gu-reed-house": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "entity:steppe-holy-ding-vault": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "entity:steppe-tianfeng-tribe-reference": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-jinyang-tribe-reference": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-baihuo-tribe-reference": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-mulan-north-route-steppe-tianfeng-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-mulan-north-travel-steppe-tianfeng-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianfeng-camp-route-steppe-mulan-north": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianfeng-camp-travel-steppe-mulan-north": [
+      "steppe-values"
+    ],
+    "fact:steppe-central-marches-route-steppe-jinyang-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-central-marches-travel-steppe-jinyang-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-jinyang-camp-route-steppe-central-marches": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-jinyang-camp-travel-steppe-central-marches": [
+      "steppe-values"
+    ],
+    "fact:steppe-mulan-north-route-steppe-baihuo-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-mulan-north-travel-steppe-baihuo-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-baihuo-camp-route-steppe-mulan-north": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-baihuo-camp-travel-steppe-mulan-north": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianfeng-camp-route-steppe-tianfeng-hearth": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianfeng-camp-travel-steppe-tianfeng-hearth": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianfeng-hearth-route-steppe-tianfeng-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianfeng-hearth-travel-steppe-tianfeng-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianfeng-camp-route-steppe-tianfeng-store": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianfeng-camp-travel-steppe-tianfeng-store": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianfeng-store-route-steppe-tianfeng-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianfeng-store-travel-steppe-tianfeng-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-jinyang-camp-route-steppe-jinyang-store": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-jinyang-camp-travel-steppe-jinyang-store": [
+      "steppe-values"
+    ],
+    "fact:steppe-jinyang-store-route-steppe-jinyang-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-jinyang-store-travel-steppe-jinyang-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-baihuo-camp-route-steppe-baihuo-store": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-baihuo-camp-travel-steppe-baihuo-store": [
+      "steppe-values"
+    ],
+    "fact:steppe-baihuo-store-route-steppe-baihuo-camp": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-baihuo-store-travel-steppe-baihuo-camp": [
+      "steppe-values"
+    ],
+    "fact:steppe-tianlan-school-route-steppe-holy-ding-vault": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-tianlan-school-travel-steppe-holy-ding-vault": [
+      "steppe-values"
+    ],
+    "fact:steppe-holy-ding-vault-route-steppe-tianlan-school": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-holy-ding-vault-travel-steppe-tianlan-school": [
+      "steppe-values"
+    ],
+    "fact:steppe-mulan-north-route-steppe-gu-reed-house": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-mulan-north-travel-steppe-gu-reed-house": [
+      "steppe-values"
+    ],
+    "fact:steppe-gu-reed-house-route-steppe-mulan-north": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-gu-reed-house-travel-steppe-mulan-north": [
+      "steppe-values"
+    ],
+    "entity:canon-mu-tianfeng": [
+      "steppe-mu-and-gu-opening-life",
+      "steppe-values"
+    ],
+    "fact:canon-mu-tianfeng-cultivation-state": [
+      "steppe-mu-and-gu-opening-life",
+      "steppe-values"
+    ],
+    "fact:canon-mu-tianfeng-learned-skill": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-mu-tianfeng-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:canon-mu-tianfeng-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:canon-mu-tianfeng-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-he-yue": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-he-yue-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-he-yue-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-he-yue-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-he-yue-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-he-yue-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-yan-qiu": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-yan-qiu-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-yan-qiu-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-yan-qiu-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-yan-qiu-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-yan-qiu-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-su-ran": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-su-ran-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-su-ran-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-su-ran-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-su-ran-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-su-ran-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-a-luo": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-a-luo-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-a-luo-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-a-luo-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-a-luo-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-a-luo-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-chi-ning": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-chi-ning-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-chi-ning-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-chi-ning-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-chi-ning-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-chi-ning-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:canon-gu-shuangpu": [
+      "steppe-mu-and-gu-opening-life",
+      "steppe-values"
+    ],
+    "fact:canon-gu-shuangpu-cultivation-state": [
+      "steppe-mu-and-gu-opening-life",
+      "steppe-values"
+    ],
+    "fact:canon-gu-shuangpu-learned-skill": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-gu-shuangpu-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:canon-gu-shuangpu-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:canon-gu-shuangpu-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-cen-he": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-cen-he-cultivation-state": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-values"
+    ],
+    "fact:steppe-cen-he-learned-skill": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-cen-he-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-cen-he-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-cen-he-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "entity:steppe-yu-su": [
+      "steppe-holy-ding-early-custody",
+      "steppe-values"
+    ],
+    "fact:steppe-yu-su-cultivation-state": [
+      "steppe-holy-ding-early-custody",
+      "steppe-values"
+    ],
+    "fact:steppe-yu-su-learned-skill": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:steppe-yu-su-spiritual-root": [
+      "steppe-values"
+    ],
+    "entity:steppe-yu-su-pouch": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:steppe-yu-su-pouch-owner": [
+      "steppe-present-life",
+      "steppe-values"
+    ],
+    "fact:canon-mu-tianfeng-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-he-yue-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-yan-qiu-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-su-ran-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-a-luo-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-chi-ning-member": [
+      "steppe-present-life"
+    ],
+    "fact:canon-gu-shuangpu-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-cen-he-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-yu-su-member": [
+      "steppe-present-life"
+    ],
+    "fact:steppe-yan-qiu-teacher": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-tianfeng-current-stock": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-tianfeng-current-stock-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-tianfeng-current-stock-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-mu-hearth": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-mu-hearth-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-mu-hearth-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "entity:steppe-mu-practice-material": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-mu-practice-material-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-mu-practice-material-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "entity:steppe-jinyang-current-stock": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-jinyang-current-stock-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-jinyang-current-stock-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-jinyang-bell": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-jinyang-bell-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-jinyang-bell-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-baihuo-current-stock": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-baihuo-current-stock-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-baihuo-current-stock-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:steppe-gu-feed": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-gu-feed-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:steppe-gu-feed-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits",
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "entity:steppe-cen-feed-cargo": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-cen-feed-cargo-owner": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "fact:steppe-cen-feed-cargo-custodian": [
+      "steppe-tribe-current-branches",
+      "steppe-current-work-and-asset-limits"
+    ],
+    "entity:canon-tianlan-holy-ding": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:canon-tianlan-holy-ding-owner": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:canon-tianlan-holy-ding-custodian": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "entity:steppe-holy-vault-lock": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:steppe-holy-vault-lock-owner": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:steppe-holy-vault-lock-custodian": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "entity:canon-gu-doubletail-snake": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-gu-doubletail-snake-keeper": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-gu-doubletail-snake-owner": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-gu-doubletail-snake-level": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-gu-doubletail-snake-poison": [
+      "steppe-mu-and-gu-opening-life"
+    ],
+    "fact:canon-tianlan-holy-ding-capability": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "fact:canon-tianlan-holy-ding-unique": [
+      "steppe-holy-ding-early-custody"
+    ],
+    "law:steppe-ritual-and-animal-care": [
+      "steppe-holy-ding-early-custody",
+      "steppe-current-work-and-asset-limits"
     ]
   }
 }

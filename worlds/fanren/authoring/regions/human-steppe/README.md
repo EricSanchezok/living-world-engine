@@ -1,6 +1,6 @@
 # 慕兰与突兀草原：当前运行模块
 
-本区域完成的是有源据的地理和一组可行动生活网络，包含76个实体、12名可行动人物、77项断言和473个来源锚点。它不是全草原内容验收：919/919条词法候选已有明确处置，0条仍待审。
+本区域完成的是有源据的地理和一组可行动生活网络，包含76个实体、12名可行动人物、81项断言和473个来源锚点。它不是全草原内容验收：919/919条词法候选已有明确处置，0条仍待审。
 
 慕兰与天澜是同一草原的两种称名。开篇保留北部慕兰、南部突兀，通过已有九国黄土荒地与天水河—舜江路线接入世界。苍坤藏府复用唯一实体，仅调整父级，不公开隐藏坐标。
 
@@ -12,7 +12,7 @@
 
 本地校验通过模块schema、全部出处指纹、277项provenance、主体/库存/互识断言及二十年开灵周期边界。当前29模块临时验证组合可经compileAuthoredModule及buildWorldDefinition装配为3420实体、624行动主体；这项装配不重签其他地区审校，也不是实际模型游玩记录。根代理另作独立审读和真实游玩。
 
-剩余工作集中在重要法士与部落的T0断代、谷双蒲—东门图关系、天澜圣兽上界主体和圣鼎、圣幡具体施阵，以及剩余0候选逐条闭环。详见[draft-status.json](draft-status.json)。[review.json](review.json)的full只绑定当前module/claims的全部内容，不代表地区覆盖全部完成。
+剩余工作集中在重要法士与部落的T0断代、谷双蒲—东门图关系、天澜圣兽上界主体和圣鼎、圣幡具体施阵，以及独立来源审校的未抽取遗漏核对。详见[draft-status.json](draft-status.json)。[review.json](review.json)的full只绑定当前module/claims的全部内容，不代表地区覆盖全部完成。
 
 本轮86项精确来源复用及96项原文逐段审定见[candidate-review-2026-10-18-foundations-and-first-expedition.json](candidate-review-2026-10-18-foundations-and-first-expedition.json)。旧39锚点审阅和旧装配数据仍为历史记录；新源声明/候选指纹独立验证，不声称新增全章通读或真实游玩通过。
 
@@ -25,3 +25,7 @@
 草原后期入谷、朝贡车队、围捕信息差及两类降临逐条审定；本轮188条具体处置见 [candidate-review-2026-10-18-tianlan-journey-and-descent.json](candidate-review-2026-10-18-tianlan-journey-and-descent.json)。并非全区域或真实游玩验收。
 
 草原剩余后期身份、寄魂、谈判与跨界回忆候选全部逐条原文审定；本轮85条具体处置见 [candidate-review-2026-10-18-later-continuity-and-source-boundaries.json](candidate-review-2026-10-18-later-continuity-and-source-boundaries.json)。并非全区域或真实游玩验收。
+
+补齐穆氏/谷氏及三部落当期生活、圣鼎唯一保管关系，所有新增属性以原创/标定单独归档；本轮0条具体处置见 [candidate-review-2026-10-18-opening-households-and-sacred-custody.json](candidate-review-2026-10-18-opening-households-and-sacred-custody.json)。并非全区域或真实游玩验收。
+
+当前运行模块117实体、21主体；919词法候选已逐条处置。新增穆氏/谷氏早年生活、天风/金阳/拜火营地和圣鼎保管明确属于有据回溯加原创/标定；独立来源审校的遗漏与真实游玩仍须全域验收。
