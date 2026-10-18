@@ -12,7 +12,7 @@ import {
 } from "../script/world-loader";
 
 export const MAX_ARCHIVE_BYTES = 50 * 1024 * 1024;
-export const MAX_ENTRY_COUNT = 5_000;
+export const MAX_ENTRY_COUNT = 10_000;
 export const MAX_EXPANDED_BYTES = 100 * 1024 * 1024;
 
 export class WorldImportError extends Error {

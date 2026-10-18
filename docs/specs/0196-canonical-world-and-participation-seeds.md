@@ -20,6 +20,7 @@ Implement the user's explicitly approved 2026-10-17 Fanren plan: a traceable hum
 - Unknown spirit-root status conceals a pre-established fact. The rootless mundane Origin has no promised cultivation unlock. High-level Origins retain their abilities and resources.
 - The deterministic build uses reviewed authoring records; it does not invent missing canon. Future events depend on conditions and actions. Timers can wake actors but cannot enforce novel outcomes.
 - Fidelity qualification disables free scene expansion. Approximately 150 and 700 participants are stress tiers, not population caps; complete-world qualification remains separate.
+- The complete package retains one YAML file per entity. Its 5,164 authored entities require 5,168 archive entries, above the earlier 5,000-entry import ceiling. The generic import ceiling is 10,000 entries, checked before extraction; the independent 50 MiB compressed and 100 MiB expanded limits and all path, link, duplicate-name and single-world checks remain unchanged. This bounded capacity change is required by the approved full-world import, rather than removing content or introducing a second file format.
 
 ## Plan
 
