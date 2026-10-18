@@ -13,9 +13,9 @@
           "predicate": "cycle-state",
           "value": {
             "kind": "text",
-            "value": "共同开篇处于关闭段；本包以距上一轮约一百年、距下一轮约二百年为数值标定，不声称原著精确开篇年月。"
+            "value": "虚天殿处于关闭段，上一次开启已过约一百年；沿现有周期，距下一次开启约二百年。"
           },
-          "description": "共同开篇处于关闭段；本包以距上一轮约一百年、距下一轮约二百年为数值标定，不声称原著精确开篇年月。",
+          "description": "虚天殿处于关闭段，上一次开启已过约一百年；沿现有周期，距下一次开启约二百年。",
           "access": {
             "kind": "private"
           }
@@ -823,6 +823,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "void-garden-daylight",
+          "predicate": "daylight",
+          "value": {
+            "kind": "text",
+            "value": "day"
+          },
+          "description": "草原空间的天空明亮。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "void-garden-illumination",
+          "predicate": "illumination",
+          "value": {
+            "kind": "text",
+            "value": "当地保持明亮天空与草原景象，外海昼夜不能直接代替这里的光照。"
+          },
+          "description": "当地保持明亮天空与草原景象，外海昼夜不能直接代替这里的光照。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -834,7 +858,7 @@
       "name": "九曲小石山",
       "kind": "location",
       "placement": "void-garden",
-      "description": "草木之间有灵性灵参栖息的石山。",
+      "description": "寸草不生、灵气稀薄的小石山，与附近草木茂盛的大山不同。",
       "facts": [
         {
           "id": "void-ginseng-hill-route-void-garden",
@@ -8156,7 +8180,7 @@
       "name": "宁霜",
       "kind": "person",
       "placement": "void-baibi-swordhouse",
-      "description": "温夫人收留教剑的成年炼气弟子，当前身份为原创。",
+      "description": "温夫人收留并传授剑术的成年炼气弟子。",
       "facts": [
         {
           "id": "void-sword-pupil-cultivation-state",
@@ -8270,7 +8294,7 @@
         },
         "character": {
           "persona": {
-            "summary": "温夫人收留教剑的成年炼气弟子，当前身份为原创。",
+            "summary": "温夫人收留并传授剑术的成年炼气弟子。",
             "voice": "说话直，练习出错会懊恼，也敢表达想出门。"
           },
           "goals": [
@@ -8287,7 +8311,7 @@
             {
               "id": "self",
               "name": "宁霜",
-              "description": "温夫人收留教剑的成年炼气弟子，当前身份为原创。",
+              "description": "温夫人收留并传授剑术的成年炼气弟子。",
               "status": "observed"
             },
             {
@@ -12379,7 +12403,21 @@
       "kind": "plant",
       "placement": "void-ginseng-hill",
       "description": "灵参本体与能化动物的灵性是一体，不是可分别复制的两份。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "canon-nine-curve-ginseng-concealed-spirit-trace",
+          "predicate": "concealed-spirit-trace",
+          "value": {
+            "kind": "text",
+            "value": "本体藏在山石中并有清灵之气；足够强的神识可辨残留，不等普通远望就知准确位置。"
+          },
+          "description": "本体藏在山石中并有清灵之气；足够强的神识可辨残留，不等普通远望就知准确位置。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "在石山实际施展具足够神识强度的灵迹探查。"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -12422,7 +12460,7 @@
       "name": "龙首累积灵乳",
       "kind": "container",
       "placement": "void-spring",
-      "description": "万年凝聚装置的有限现存灵乳，当前按十二份一小口标定，不设无条件每日再生。",
+      "description": "龙首凝聚装置中积存的灵乳，取用会消耗现存液体。",
       "facts": [
         {
           "id": "void-ten-millennia-milk-remaining-doses",
@@ -12568,7 +12606,7 @@
       "name": "玉台古兵器1",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12579,7 +12617,7 @@
       "name": "玉台古兵器2",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12590,7 +12628,7 @@
       "name": "玉台古兵器3",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12601,7 +12639,7 @@
       "name": "玉台古兵器4",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12612,7 +12650,7 @@
       "name": "玉台古兵器5",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12623,7 +12661,7 @@
       "name": "玉台古兵器6",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12634,7 +12672,7 @@
       "name": "玉台古兵器7",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12645,7 +12683,7 @@
       "name": "玉台古兵器8",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12656,7 +12694,7 @@
       "name": "玉台古兵器9",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12667,7 +12705,7 @@
       "name": "玉台古兵器10",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12678,7 +12716,7 @@
       "name": "玉台古兵器11",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12689,7 +12727,7 @@
       "name": "玉台古兵器12",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12700,7 +12738,7 @@
       "name": "玉台古兵器13",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12711,7 +12749,7 @@
       "name": "玉台古兵器14",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12722,7 +12760,7 @@
       "name": "玉台古兵器15",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12733,7 +12771,7 @@
       "name": "玉台古兵器16",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12744,7 +12782,7 @@
       "name": "玉台古兵器17",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12755,7 +12793,7 @@
       "name": "玉台古兵器18",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12766,7 +12804,7 @@
       "name": "玉台古兵器19",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12777,7 +12815,7 @@
       "name": "玉台古兵器20",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12788,7 +12826,7 @@
       "name": "玉台古兵器21",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12799,7 +12837,7 @@
       "name": "玉台古兵器22",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12810,7 +12848,7 @@
       "name": "玉台古兵器23",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12821,7 +12859,7 @@
       "name": "玉台古兵器24",
       "kind": "item",
       "placement": "void-gallery-one",
-      "description": "古代戈戟类法器，每件尚在自身光罩内；具体数量为有限标定。",
+      "description": "古代戈戟类法器，尚在自身光罩内。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12839,9 +12877,9 @@
           "predicate": "condition",
           "value": {
             "kind": "text",
-            "value": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。"
+            "value": "机关保持完整，金色狼首与银色身躯尚未受损。"
           },
-          "description": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。",
+          "description": "机关保持完整，金色狼首与银色身躯尚未受损。",
           "access": {
             "kind": "private"
           }
@@ -12875,9 +12913,9 @@
           "predicate": "condition",
           "value": {
             "kind": "text",
-            "value": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。"
+            "value": "机关保持完整，尚未受损。"
           },
-          "description": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。",
+          "description": "机关保持完整，尚未受损。",
           "access": {
             "kind": "private"
           }
@@ -12911,9 +12949,9 @@
           "predicate": "condition",
           "value": {
             "kind": "text",
-            "value": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。"
+            "value": "机关保持完整，尚未受损。"
           },
-          "description": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。",
+          "description": "机关保持完整，尚未受损。",
           "access": {
             "kind": "private"
           }
@@ -12947,9 +12985,9 @@
           "predicate": "condition",
           "value": {
             "kind": "text",
-            "value": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。"
+            "value": "机关保持完整，尚未受损。"
           },
-          "description": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。",
+          "description": "机关保持完整，尚未受损。",
           "access": {
             "kind": "private"
           }
@@ -12983,9 +13021,9 @@
           "predicate": "condition",
           "value": {
             "kind": "text",
-            "value": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。"
+            "value": "机关保持完整，尚未受损。"
           },
-          "description": "完整；第1层为金狼首银身，其余层具体机关外形与强度按当前有限标定。",
+          "description": "机关保持完整，尚未受损。",
           "access": {
             "kind": "private"
           }
@@ -13012,7 +13050,7 @@
       "name": "鬼雾阴灵群",
       "kind": "animal-group",
       "placement": "void-mist",
-      "description": "阴灵并非可无限刷新的材料，精确数为标定。",
+      "description": "徘徊在鬼雾中的阴灵群。",
       "facts": [
         {
           "id": "void-ghosts-living-count",
@@ -13612,6 +13650,16 @@
       "id": "void-garment-and-relative-gates",
       "text": "遗骨与所披衣物分别移动，取衣不自动带走遗骨；辟火宝衣仅有与材质和炼制相符的防护，不能免疫所有火焰。殿门、厅端阵与试炼窗口须依实际古阵状态生效，不能把某次聚会等待的第四日写成所有开殿的固定第四日。",
       "severity": "hard"
+    },
+    {
+      "id": "void-ginseng-capture-conditions",
+      "text": "九曲灵参化身与本体是一命，受惊可遁山石；纯金捕捉手段及能限制当地土石遁行的有效阵法可构成捕获条件，仍须实际设置、引诱和行动。辨清灵之气取决于神识强度，不把元婴境界本身设为无例外资格。捕获后须对应封存，取得参不等已炼成丹。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-garden-local-light",
+      "text": "草原药地按本地空间照明呈现，不从外海昼夜推出此处日落；此标定只覆盖草原及其石山，不推广到鬼雾、黑殿或全部虚天房间。窗口用真实经过时间判定，不以明暗假替一天期限。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -13669,7 +13717,8 @@
     ],
     "entity:void-ginseng-hill": [
       "void-nine-curve-ginseng",
-      "void-current-life"
+      "void-current-life",
+      "void-garden-local-environment"
     ],
     "entity:void-ice": [
       "void-ice-fire-paths",
@@ -15665,6 +15714,23 @@
     "law:void-garment-and-relative-gates": [
       "void-relative-entry-clock",
       "void-yu-remains-and-robe"
+    ],
+    "fact:void-garden-daylight": [
+      "void-garden-local-environment"
+    ],
+    "fact:void-garden-illumination": [
+      "void-garden-local-environment",
+      "void-bounded-values"
+    ],
+    "fact:canon-nine-curve-ginseng-concealed-spirit-trace": [
+      "void-ginseng-detection-and-capture"
+    ],
+    "law:void-ginseng-capture-conditions": [
+      "void-ginseng-detection-and-capture"
+    ],
+    "law:void-garden-local-light": [
+      "void-garden-local-environment",
+      "void-bounded-values"
     ]
   },
   "periodicProperties": [

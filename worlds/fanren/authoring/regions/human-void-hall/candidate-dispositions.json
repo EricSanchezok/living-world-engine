@@ -3145,116 +3145,117 @@
       "candidateId": "batch-0066-object-0001",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "void-reunion-and-ghost-fight",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "当期丹初与战中法宝傀儡均真实后来所有，不给村童预置。",
       "evidence": [
         {
           "chapterId": "qq-22176579",
           "chapterSha256": "27f66655bb8bdec0594bee5e57ccd65bbba0a59dcd2f8469e5cb950e11d41b9a",
-          "start": 206,
-          "end": 217,
-          "anchorSha256": "e10ff2c11e0b088ea85eb9b1f6bd1b0e2b4f4ccdcbb08b4a369c6fbe3140401b"
+          "start": 204,
+          "end": 286,
+          "anchorSha256": "867f3c9d9b61bdb408cf1d9a2ad66e8a4115b68ed0b8fbb73b1badadfba1907d"
         },
         {
           "chapterId": "qq-22184918",
           "chapterSha256": "b68aaefc4dcdbd951935dfb6cd9b0f6153fc999a866ef07eff8ad656926a8d32",
-          "start": 1589,
-          "end": 1601,
-          "anchorSha256": "dc77768eb5b148d9b1c669e8d1a4763fc84c334baf420aa904aa0978020afa98"
+          "start": 1521,
+          "end": 1621,
+          "anchorSha256": "b58df061d8fd620679b93e3a2808b1ba0eeb8f3b161223170b85931c8a53050a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0002",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-reunion-and-ghost-fight"
+      ],
+      "reason": "石碑护己由同批22179386补证；李兄关切不证恋爱婚约，原两锚不足单独支持石碑。",
       "evidence": [
         {
           "chapterId": "qq-22184918",
           "chapterSha256": "b68aaefc4dcdbd951935dfb6cd9b0f6153fc999a866ef07eff8ad656926a8d32",
-          "start": 1847,
-          "end": 1856,
-          "anchorSha256": "75f70063d6df4236d62a73870d09f81cce6fc804e7302d9cc0f309385816a00f"
+          "start": 1794,
+          "end": 1857,
+          "anchorSha256": "73d9d2a22f21e027bf215f66e70b00cf635fb6b74e664ea24d11a35764fad75b"
         },
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 2128,
-          "end": 2136,
-          "anchorSha256": "b156fc171966958cde107c5e269bb460e6ac6bc844a0556964ac33a3e49a92f4"
+          "start": 2082,
+          "end": 2187,
+          "anchorSha256": "95754e5ec55d98129f680bba4073f3525ee2961e61a9e3c27622bde10020434a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0003",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-yuan-yao",
+        "void-reunion-and-ghost-fight"
+      ],
+      "reason": "先假阮后认元为同人；她误认旧韩炼气而韩自知筑基，不能合并双方认识。",
       "evidence": [
         {
           "chapterId": "qq-22187394",
           "chapterSha256": "56430264bdebc2a42009c942bc397dc6c805201fefd830e67a1ef1134c59ffca",
-          "start": 1862,
-          "end": 1876,
-          "anchorSha256": "422f76a4d905bded34a872b2897243258a376c6d57c4ea9240eab799213dae3a"
+          "start": 1844,
+          "end": 1897,
+          "anchorSha256": "28a94aeba88aaddffeb81c5760d265a082e457637f2961adfa28cd7d60b836f3"
         },
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 2452,
-          "end": 2465,
-          "anchorSha256": "dbce034896153170f8f54899fe3e8e63bd226671dcd94490022c5038ed469760"
+          "start": 2409,
+          "end": 2547,
+          "anchorSha256": "9653caae24a237fef1eeda54ee93daeef50c4dcba4310d02e1a8995bcec6d99a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0004",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xuan-gu",
+        "void-xuangu-ghost-ally",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "另男魂有独立意识和交易，不是玄骨第二声音分身。",
       "evidence": [
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 157,
-          "end": 171,
-          "anchorSha256": "f2fb426111b8857a4f82d842b8ccf78a657e56500dac2ee83d43372e909d18f5"
+          "start": 81,
+          "end": 184,
+          "anchorSha256": "5db764f7345f5791ede942be0a67cd8353c6753ada0ded95c395c570054cdf7f"
         },
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 362,
-          "end": 371,
-          "anchorSha256": "0893e28c94f53f9241d9cda3e8ccac4f68089402b7d53c259bb36655d73f4500"
+          "start": 293,
+          "end": 372,
+          "anchorSha256": "65cc8649c782e87537cb48380879ae5254cbbddfb056dcf859318d31183b1d85"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -3415,51 +3416,51 @@
       "candidateId": "batch-0066-object-0011",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-void-wu-chou",
+        "void-garden-local-environment"
+      ],
+      "reason": "极阴黑雾卷同行是此刻移动，不赋乌独立同等级遁术。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 1010,
-          "end": 1023,
-          "anchorSha256": "6561635bbe0644930e401782b5b2317eac4910322c90f19bdc00d024d3b74efc"
+          "start": 984,
+          "end": 1039,
+          "anchorSha256": "69669adb58db9ecad802bcfb4fd40de758860b43501c446c0d51ac788b4be83c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0012",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-li-ziling-companion",
+        "void-reunion-and-ghost-fight"
+      ],
+      "reason": "旧青衫男子可从连续场景和李兄称呼闭合，全名仍未证。",
       "evidence": [
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 2095,
-          "end": 2110,
-          "anchorSha256": "284cb90054dab62e3b6ed541e8d6664c8d62defe4fbc1f38e466368a05366efb"
+          "start": 2082,
+          "end": 2187,
+          "anchorSha256": "95754e5ec55d98129f680bba4073f3525ee2961e61a9e3c27622bde10020434a"
         },
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 2191,
-          "end": 2201,
-          "anchorSha256": "5fb728e1f5ec56b410e48817840032559ce68a6e66ba46c7f3317537b903e893"
+          "start": 2188,
+          "end": 2235,
+          "anchorSha256": "d638738eb5f3db76b336400d34eff0c9ec981a31355441b09aead9796c087dc9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -3518,66 +3519,67 @@
       "candidateId": "batch-0066-object-0021",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-shanxiao-reference",
+        "void-garden-local-environment"
+      ],
+      "reason": "蛮拟邀合对守树山魈但青拒，不记协作已达成或守兽已被杀。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 1152,
-          "end": 1163,
-          "anchorSha256": "4198540a212eb20bb033267bcf8c94d50ade80c8917a6bc96d6c8f9eac4ebc18"
+          "start": 1088,
+          "end": 1231,
+          "anchorSha256": "cc2a0f54bfe7f237631a7715e5207c02f114375999c7bbb7c5d9be57b4bd0815"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0022",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-chihu-bird-reference",
+        "void-garden-local-environment"
+      ],
+      "reason": "玄骨旧追灵禽时发现参，过去遭遇不等当前仍在场。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2114,
-          "end": 2121,
-          "anchorSha256": "cf213bf92b9cd3e8e6f5ecb41cdc061469fbdc7335b8baaee9403b189ba33005"
+          "start": 2075,
+          "end": 2299,
+          "anchorSha256": "1ef6d229f887f25d314ccaccba0260ed6856d7eda6fb15bbc24a070ce29dd791"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0033",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-pavilions",
+        "void-garden",
+        "void-garden-local-environment"
+      ],
+      "reason": "玉亭阵到草原及返路有真实窗口，不能将每关阵合成唯一可随时传送实体。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 1449,
-          "end": 1460,
-          "anchorSha256": "acdd58274ccfee74651d5fa4a8c0de6256c0309059ba76a45e8327816cfa000a"
+          "start": 1413,
+          "end": 1476,
+          "anchorSha256": "3722e761d83a322330d2d6df5713dd7489381b83f017453b5e3b3935ec9733c6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -3605,29 +3607,29 @@
       "candidateId": "batch-0066-object-0035",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-nine-curve-ginseng",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "同一本体和化身，感应敏锐会遁走，不作站定发奖物。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 761,
-          "end": 765,
-          "anchorSha256": "010ac8bd35bf85ccbe04b41df3a8518d964ba14cbb6b4f455b9e2e4eff0336c5"
+          "start": 665,
+          "end": 791,
+          "anchorSha256": "c0c0fcdb1231696b1f94aff00d0508ec3c98f0227e135a734ba8b04877399a1a"
         },
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2407,
-          "end": 2417,
-          "anchorSha256": "b62c3051f0f9801cb685f247c93ecf3a6deb2e263e924f5d44da5fe6e5bad70d"
+          "start": 2387,
+          "end": 2494,
+          "anchorSha256": "8e9aa611eea489fe3b05bd0bb4a306191cd89cff12591e847d8cab611ae33ba7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -3655,255 +3657,257 @@
       "candidateId": "batch-0066-object-0037",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-garden",
+        "void-garden-local-environment"
+      ],
+      "reason": "古药地含可寻灵药，需实际找到采集，不是通过关卡自动库存奖励。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 1572,
-          "end": 1580,
-          "anchorSha256": "cbe01aaf80340afab448df542de8276fffe0cc525d2d985b76d6300bf0a957ca"
+          "start": 1477,
+          "end": 1650,
+          "anchorSha256": "1391dfd8b2ee52e4a27740081e5bc06e42fabb89a80b443cc1f8199dc64c5154"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0038",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-void-hall",
+        "void-garden-local-environment"
+      ],
+      "reason": "同一古殿多区域，古设施既有不随韩到场才诞生。",
       "evidence": [
         {
           "chapterId": "qq-22184918",
           "chapterSha256": "b68aaefc4dcdbd951935dfb6cd9b0f6153fc999a866ef07eff8ad656926a8d32",
-          "start": 1645,
-          "end": 1655,
-          "anchorSha256": "a6ab55006d32e240ff4859fb739a4516bfdf17359485b1dace3a63651c6f3175"
+          "start": 1622,
+          "end": 1696,
+          "anchorSha256": "75c5d660c9899bc6da70649b69045065b20ad8a60e72eda55580564039261540"
         },
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 2500,
-          "end": 2510,
-          "anchorSha256": "2d045b51af0219a5fb558d1635e1f768aef5c3bce75c9738fc8d4d9347d09589"
+          "start": 2409,
+          "end": 2547,
+          "anchorSha256": "9653caae24a237fef1eeda54ee93daeef50c4dcba4310d02e1a8995bcec6d99a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0039",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-mist",
+        "void-garden-local-environment"
+      ],
+      "reason": "同雾区与可回返描述，仍依实际护法与通路不保证安全。",
       "evidence": [
         {
           "chapterId": "qq-22194700",
           "chapterSha256": "1e3b23ca15023cbe7fe8d347034cf64b393353181f967b4d75b362001bf06806",
-          "start": 21,
-          "end": 25,
-          "anchorSha256": "9bd71912bb5455114a136ba29f906080e0e5135e2c1ad9ccfaa692bda3d3127d"
+          "start": 0,
+          "end": 80,
+          "anchorSha256": "02435e76c23ed1f7e5f0f8ec25a2147d2f789e2b8a4f9bb1f3d304df41328460"
         },
         {
           "chapterId": "qq-22187394",
           "chapterSha256": "56430264bdebc2a42009c942bc397dc6c805201fefd830e67a1ef1134c59ffca",
-          "start": 2171,
-          "end": 2180,
-          "anchorSha256": "cd92f7850f1d0f08cfa4fa815b1b4a17eb3ee64df36eccd0e195d2d2a29ede66"
+          "start": 2156,
+          "end": 2210,
+          "anchorSha256": "4f9073702450ee99cf5c744097695478ecbd2bead10a0f7943c22db85891e6ba"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0040",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-pavilions",
+        "void-garden-local-environment"
+      ],
+      "reason": "七八亭二三十修为此轮观察，花园和草原药地不是同一个空间场景。",
       "evidence": [
         {
           "chapterId": "qq-22187394",
           "chapterSha256": "56430264bdebc2a42009c942bc397dc6c805201fefd830e67a1ef1134c59ffca",
-          "start": 1905,
-          "end": 1916,
-          "anchorSha256": "e9c2357a4f395a44ac01ed9729bab5c158633987dd561f46fac9947ba3c2c521"
+          "start": 1903,
+          "end": 1968,
+          "anchorSha256": "595145caf7e7a8cdd088eb3bdefb505f35966a73da97aad306747782889463f8"
         },
         {
           "chapterId": "qq-22187394",
           "chapterSha256": "56430264bdebc2a42009c942bc397dc6c805201fefd830e67a1ef1134c59ffca",
-          "start": 2082,
-          "end": 2087,
-          "anchorSha256": "aca13bcba5b57060791d666c03ec498fc9a45d149d1f2635c3464b8b958b383f"
+          "start": 2052,
+          "end": 2094,
+          "anchorSha256": "07e161f54fd78cfabe4f82bc33b0ecc09c74b858e53ad8ab9739f7e1e74504e8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0041",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-fire",
+        "void-garden-local-environment"
+      ],
+      "reason": "两极端路径属同二关，入口/终点阵依实路。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 1538,
-          "end": 1552,
-          "anchorSha256": "f350c07f49fe78ff9ca1273064d6baa66f335389b4df349ad77bbf83a8400030"
+          "start": 1477,
+          "end": 1650,
+          "anchorSha256": "1391dfd8b2ee52e4a27740081e5bc06e42fabb89a80b443cc1f8199dc64c5154"
         },
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 151,
-          "end": 158,
-          "anchorSha256": "b0077254e361fbf8d7455063ecd56236e04b1b6748347a794813311f4c8792e2"
+          "start": 0,
+          "end": 235,
+          "anchorSha256": "c154ff37fd4e4ef10ec3fc7bae69dd4d3e0df66a61cbe2e922beef67aab2fd67"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0042",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-garden-local-environment"
+      ],
+      "reason": "奇寒玄晶道与熔岩路分通路，非同处冷热随意混写。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 75,
-          "end": 85,
-          "anchorSha256": "0e34d530d127ae90c4620495dd4165067355f36b52ce55631b17ac7c81f68bd0"
+          "start": 0,
+          "end": 235,
+          "anchorSha256": "c154ff37fd4e4ef10ec3fc7bae69dd4d3e0df66a61cbe2e922beef67aab2fd67"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0043",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-fire",
+        "void-garden-local-environment"
+      ],
+      "reason": "炎热路径非火功自动免疫，实际防护另核。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 75,
-          "end": 85,
-          "anchorSha256": "0e34d530d127ae90c4620495dd4165067355f36b52ce55631b17ac7c81f68bd0"
+          "start": 0,
+          "end": 235,
+          "anchorSha256": "c154ff37fd4e4ef10ec3fc7bae69dd4d3e0df66a61cbe2e922beef67aab2fd67"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0044",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-fire",
+        "void-garden-local-environment"
+      ],
+      "reason": "禁制峡谷共同地形以两已有路承接，不再复制第三峡谷副本。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 20,
-          "end": 31,
-          "anchorSha256": "ca9d6b845e327b30bef9472c06e6adc968afc282b9c6162bb769183172b3065c"
+          "start": 0,
+          "end": 235,
+          "anchorSha256": "c154ff37fd4e4ef10ec3fc7bae69dd4d3e0df66a61cbe2e922beef67aab2fd67"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0045",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-garden",
+        "void-garden-local-environment"
+      ],
+      "reason": "草原真实所见，古修开辟为玄骨判断；不把后文看到等于T0不存在。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 2479,
-          "end": 2489,
-          "anchorSha256": "24293f1f7169288f6d1632c97171c661a60bb64ff824f5735dc5b06baca90be8"
+          "start": 2439,
+          "end": 2550,
+          "anchorSha256": "c269ecea82518b5242ac43fe90484af86d082b7f0befb67caa3f1d0e3f845d04"
         },
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 2186,
-          "end": 2191,
-          "anchorSha256": "a9a03e6217debd5a19842bff9d8fb5298c6ed681ef5c545998fa892cdb4580f4"
+          "start": 2184,
+          "end": 2233,
+          "anchorSha256": "1b7701a74ff0ff008d8999015dabde4c3aefc29a0aa1fb24e3db2b7c1a643208"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-object-0046",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-hill",
+        "void-garden-local-environment"
+      ],
+      "reason": "寸草不生石山与旁树林分开，现描述修正不再误写石山长草。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2554,
-          "end": 2564,
-          "anchorSha256": "f4f40ae8c4a1591f6638cf65233bc6859ac4c1f8e5a23694cd89a13b993bb69d"
+          "start": 2544,
+          "end": 2603,
+          "anchorSha256": "12473b7c9e625210270cf82bcd42cf7544fdd3b0f7615039d0a07af3f55520d7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -3975,29 +3979,21 @@
       "candidateId": "batch-0066-fact-0033",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "此轮以蛮与万领聚，非全魔道永久领袖职务。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 544,
-          "end": 550,
-          "anchorSha256": "398dae85ef8b1e99fbf68354b48f4d55a5cb9dce38d34e74684a4e7bfb7d7db3"
-        },
-        {
-          "chapterId": "qq-22203405",
-          "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 555,
-          "end": 567,
-          "anchorSha256": "704b2d7b4fd93abcba34cbbb7edd9e33e335209809cbc976057e180d8a5133f7"
+          "start": 501,
+          "end": 573,
+          "anchorSha256": "7af76691d96da47bde41be81e8bd0fe533f79c9ce41f1b57117e499171f506e6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4032,101 +4028,70 @@
       "candidateId": "batch-0066-fact-0043",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "灵气与天地是所见、创世来历为其推断，保两层。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 2479,
-          "end": 2489,
-          "anchorSha256": "24293f1f7169288f6d1632c97171c661a60bb64ff824f5735dc5b06baca90be8"
+          "start": 2439,
+          "end": 2550,
+          "anchorSha256": "c269ecea82518b5242ac43fe90484af86d082b7f0befb67caa3f1d0e3f845d04"
         },
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 2418,
-          "end": 2422,
-          "anchorSha256": "275e7da7fcde25d40830d0df1339e7a781022a0bf39fa25cd82a32457be9029e"
+          "start": 2290,
+          "end": 2438,
+          "anchorSha256": "4d4fb77a8413173367f9bcdae742921f5bf4e2990206b8761ba926c6e74fbd92"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-fact-0045",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "飞数百里是到谷前，谷内禁飞和走到尽头不能混成全程飞遁。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 20,
-          "end": 31,
-          "anchorSha256": "ca9d6b845e327b30bef9472c06e6adc968afc282b9c6162bb769183172b3065c"
-        },
-        {
-          "chapterId": "qq-22203405",
-          "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 78,
-          "end": 85,
-          "anchorSha256": "467691d22652ac854d57835faef7306a332e63e8bd02c4f319dc24798f7b2814"
-        },
-        {
-          "chapterId": "qq-22203405",
-          "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 127,
-          "end": 140,
-          "anchorSha256": "449b13934879b4d4dd268c562bb158806e76c84fa68e2ee1f2c141cfd1df4c13"
+          "start": 0,
+          "end": 235,
+          "anchorSha256": "c154ff37fd4e4ef10ec3fc7bae69dd4d3e0df66a61cbe2e922beef67aab2fd67"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0066-fact-0051",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "两次旧来及追鸟为自述，可回溯旧经历；灵参自然诞生不在古修预料只是估计。",
       "evidence": [
         {
           "chapterId": "qq-22203405",
           "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2082,
-          "end": 2088,
-          "anchorSha256": "7a6ffeba7e0464009214faef265945554ffafc3bcd4b3ef97d2aed9e455a22c7"
-        },
-        {
-          "chapterId": "qq-22203405",
-          "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2114,
-          "end": 2121,
-          "anchorSha256": "cf213bf92b9cd3e8e6f5ecb41cdc061469fbdc7335b8baaee9403b189ba33005"
-        },
-        {
-          "chapterId": "qq-22203405",
-          "chapterSha256": "6218a59dcc2671d365247db20e1a44dc73607e90544699e1fd3068101e4a98fb",
-          "start": 2225,
-          "end": 2231,
-          "anchorSha256": "15c0896b8ac83d818ae728d8e1ff7ea9f996d6a76882fcb024e0ed49a57aa0ec"
+          "start": 2075,
+          "end": 2299,
+          "anchorSha256": "1ef6d229f887f25d314ccaccba0260ed6856d7eda6fb15bbc24a070ce29dd791"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4161,22 +4126,21 @@
       "candidateId": "batch-0066-issue-0012",
       "batchId": "batch-0066",
       "reportHash": "9b4e3237000c64e32a29dd33b3d27b84c09d7e31437df8c09c94432e1b4a80ca",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "保古修开空间为个人解释，当前环境存在不因此否定。",
       "evidence": [
         {
           "chapterId": "qq-22197127",
           "chapterSha256": "92345ae1aec8d6897339ed6a4b898b545f1d196716fd7542702978febbf56204",
-          "start": 2479,
-          "end": 2489,
-          "anchorSha256": "24293f1f7169288f6d1632c97171c661a60bb64ff824f5735dc5b06baca90be8"
+          "start": 2439,
+          "end": 2550,
+          "anchorSha256": "c269ecea82518b5242ac43fe90484af86d082b7f0befb67caa3f1d0e3f845d04"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4289,72 +4253,74 @@
       "candidateId": "batch-0067-object-0004",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-soul-thread-net",
+        "void-ginseng-detection-and-capture",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "同特制网从金色变阴魂丝，不把任何金网都设必然陷阱。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 577,
-          "end": 587,
-          "anchorSha256": "f287d464d446bdfe4c94959d41d1b9fbe8c2ebcde238de2246b52a16ab057f63"
+          "start": 575,
+          "end": 610,
+          "anchorSha256": "1c76c7c2ec42a2a30094843867e128174ca0cdb1dfdd9eacf7098fb1993b65db"
         },
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 2586,
-          "end": 2599,
-          "anchorSha256": "8cede3185858a28f5aa14e041bc5c64e45660beac1c1a42bdf46eacceed77f98"
+          "start": 2572,
+          "end": 2686,
+          "anchorSha256": "596d83f1a3693500852f00b3e2f00055c6481168aa2cff320428d50cabb53379"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 27,
-          "end": 37,
-          "anchorSha256": "37dc8835c2af608ef08ca8262f48870cebfe3ba35302098942df7c6da1e2226d"
+          "start": 0,
+          "end": 42,
+          "anchorSha256": "226302e342856250ec500238e27c2a0ae92d0730544d6ec0451be5b6a1bd2b43"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0005",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-sixiang-flags",
+        "void-ginseng-detection-and-capture",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "四布阵旗外还有小探旗；此套被改并再反制，非所有同名阵都如此。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1060,
-          "end": 1070,
-          "anchorSha256": "5d32d913ba5db69ca0e1f52109a35d3cd9760b263426382ea28603be2b8b78db"
+          "start": 1016,
+          "end": 1114,
+          "anchorSha256": "728d8cc530a35ce44deb4d769fce33a8ef5fc7a9f5227012d0b18928c630f620"
         },
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1182,
-          "end": 1196,
-          "anchorSha256": "70e2062df556d60b28f2c56b653ca4bab3b3ef85df8545e01f9b4e4e31a74174"
+          "start": 1115,
+          "end": 1279,
+          "anchorSha256": "36503aa98300dce81dab47d6fe29e4529ddcc352936acb5157ef20c7fd56ffca"
         },
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 2372,
-          "end": 2385,
-          "anchorSha256": "87af8554b0823edf2d64b9e2aae67f5da932f2f20910b0983d11fd2a67a66760"
+          "start": 2325,
+          "end": 2403,
+          "anchorSha256": "80eeddff830bb9401b2ef10961afc902ac24c48abf1bd2fcee76570b7689526d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4459,101 +4425,100 @@
       "candidateId": "batch-0067-object-0009",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "吞丝/无形体有实证但鬼吼曾伤虫，不能无限制克所有鬼法。",
       "evidence": [
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 1220,
-          "end": 1230,
-          "anchorSha256": "2e8d3fb98f449ab48bb9f417646b2439cfc474ee7871a86ae4f7092fd55675c4"
+          "start": 1209,
+          "end": 1270,
+          "anchorSha256": "26b210b05ee049abb56ebafae25447e6e0e11c3926865a2f9f01166a359da683"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 740,
-          "end": 753,
-          "anchorSha256": "badab7686a865c7d1f1b3d15a282501cebe57342fd3c6cc80037f72333984857"
+          "start": 728,
+          "end": 789,
+          "anchorSha256": "577637c2db84da7cf6779e96dc232a6fda684aa5ea11683ee5c9384bd137dd8d"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 1005,
-          "end": 1019,
-          "anchorSha256": "7a91edc80770ef5f7817254f9d30be0813e0579af31559e760e917f817999328"
+          "start": 944,
+          "end": 1020,
+          "anchorSha256": "f0ed29df9175593cb0514bb92bf603d12afcb81e26b9cd941123a848a5d7ad1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0010",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "innerstar-bloodjade-species",
+        "void-spider-negotiation"
+      ],
+      "reason": "实兽磨盘白蛛与种类分析分开，最佳之一不等必定取鼎。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 1572,
-          "end": 1582,
-          "anchorSha256": "057e2b9f4bade94e933ce48da8b582c1ec6fce85db3b55217ef3e924f63b984f"
+          "start": 1520,
+          "end": 1600,
+          "anchorSha256": "64f572595f7a4b0254de2755a7083f406acc232a56914f04dca0b586a8d501aa"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1047,
-          "end": 1059,
-          "anchorSha256": "08da5f82591df2c75b0708426a819ef6b2b58729e1e5e060ddc48b01b1c8ea21"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 1019,
-          "end": 1033,
-          "anchorSha256": "18d46328091c775e5266c4bc76a25c34170f4a895c152d1d24628c4d6c7990ba"
+          "start": 991,
+          "end": 1034,
+          "anchorSha256": "0da09fcad7d97827048d0db75825372a7a517532e7cb6a429053bbcc5c03bf1a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0011",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-musk-lan-species",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "红角香与臭粪是同兽不同物质，效用分别。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1484,
-          "end": 1492,
-          "anchorSha256": "40fa6e05d9794dce885c26ca81cd2052acdaf0bbecf5b2f851a19c58cf99d13c"
+          "start": 1476,
+          "end": 1595,
+          "anchorSha256": "655667a44a39a3ea99ea4a628a2c781e320e2502ca69175331d1262d8601ab7b"
         },
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1695,
-          "end": 1707,
-          "anchorSha256": "a46296d387598fea12662f7fb738d19ca5593402c742d05b679460fca9d2e273"
+          "start": 1680,
+          "end": 1793,
+          "anchorSha256": "f7a9180f313ae9361063f7e00dde9058c06a74d397ba1a69eb87578b5ea67196"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4595,36 +4560,36 @@
       "candidateId": "batch-0067-object-0013",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-void-wu-chou",
+        "void-spider-negotiation"
+      ],
+      "reason": "祖孙称家祖与受令施压，几乎天生恶感只形容当前不是T0命定仇。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 537,
-          "end": 546,
-          "anchorSha256": "971af0bf317132b9aa475fadcc29834d05c6ffa759926a47a82b2331c93a1088"
+          "start": 487,
+          "end": 557,
+          "anchorSha256": "8dedb0dfa00b71d3a12ff81bd5ea0b0150d2d656f46d9afbf3959c0335c73ad5"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 25,
-          "end": 34,
-          "anchorSha256": "384bf870cf586a1702d16393d67528d052c12b2a11a3c45ed8cc3ff0e7bc2d87"
+          "start": 0,
+          "end": 81,
+          "anchorSha256": "cb77c821fb7cba6c8193542d48068c59590eb7ec198706299514b44ff13690dc"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2589,
-          "end": 2601,
-          "anchorSha256": "929c04cd3ce3e56927aaecd6eec14af35ac4794a7d924a9f05e0aa26aa353eb5"
+          "start": 2520,
+          "end": 2603,
+          "anchorSha256": "f89896a2fb9c6f7d40e476b940450f02dbd0c75e9fb5fe295db04d5982c89c0a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4666,58 +4631,59 @@
       "candidateId": "batch-0067-object-0015",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-man-huzi",
+        "void-spider-negotiation"
+      ],
+      "reason": "同蛮托天旧法，极阴忌惮为其判断不固定全域胜率。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1415,
-          "end": 1431,
-          "anchorSha256": "f7521c5cda0153250f9feef629876aa5aa5fefede1218ab589a52ddd854cd270"
+          "start": 1320,
+          "end": 1474,
+          "anchorSha256": "aaab12fa453fc8b34a001f29ea517931b21a6ec9af55310b03c363b2495b4927"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1793,
-          "end": 1805,
-          "anchorSha256": "715cbd5de983a48cc261f8b1a83f7746e252c298f96cd1e28610296e75f11519"
+          "start": 1762,
+          "end": 1896,
+          "anchorSha256": "d341dd25a955a39b2f2ca9d1703f8a3d993b8d490f0ffc5c3af525ee8d54e1e9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0016",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-wan-tianming",
+        "void-spider-negotiation",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "青易先提蚕、后万自己明说所有，按证据时点更新而非永久猜测。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1070,
-          "end": 1077,
-          "anchorSha256": "ed6995d73fed6723004e352746294162fffa112851fc830671797a98198ad1a3"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1735,
-          "end": 1744,
-          "anchorSha256": "cec801f76e3f7f5753df9a2e700b87768cf2f6e758cafad60d6466ca4e6a0da3"
+          "start": 1666,
+          "end": 1761,
+          "anchorSha256": "1211d903d74f6097c8c4ce62ab6236a8bae29d247f9cb1083c685ed878ad6a1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4759,29 +4725,29 @@
       "candidateId": "batch-0067-object-0018",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-jiyin-island",
+        "void-spider-negotiation"
+      ],
+      "reason": "乌施压借势同极阴岛，不给所有岛众听见此次私话。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2589,
-          "end": 2601,
-          "anchorSha256": "929c04cd3ce3e56927aaecd6eec14af35ac4794a7d924a9f05e0aa26aa353eb5"
+          "start": 2520,
+          "end": 2603,
+          "anchorSha256": "f89896a2fb9c6f7d40e476b940450f02dbd0c75e9fb5fe295db04d5982c89c0a"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 53,
-          "end": 65,
-          "anchorSha256": "cf799c9a81126cf938d02f9fc8aa7f1ec4361a36f99870639b298002f03f9102"
+          "start": 0,
+          "end": 81,
+          "anchorSha256": "cb77c821fb7cba6c8193542d48068c59590eb7ec198706299514b44ff13690dc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4810,131 +4776,132 @@
       "candidateId": "batch-0067-object-0020",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-void-hall",
+        "void-spider-negotiation"
+      ],
+      "reason": "同殿危险不能转自动强迫玩家入内。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2237,
-          "end": 2245,
-          "anchorSha256": "02cef91e3b9b08be33d1b812e92d9163c4828cad2856bfc02eaaff74a53b33e5"
+          "start": 2232,
+          "end": 2344,
+          "anchorSha256": "87be3eec0b6672b83dc59e495e32694021ed23e14b03932314a95f778b94a4b8"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2458,
-          "end": 2471,
-          "anchorSha256": "261190fb1ccbea04b1e9e0c6f4e87f5279eabf27afc3203dd2148603b06b84b5"
+          "start": 2409,
+          "end": 2492,
+          "anchorSha256": "702e24a5a205b4cb966f24bd28160399c048911be7548b3d7c36d7c1ae0bcc22"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0021",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-tower",
+        "void-spider-negotiation"
+      ],
+      "reason": "韩此前不想入内是意愿，后来可变；不是角色永不准入权限。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2256,
-          "end": 2265,
-          "anchorSha256": "5f569ccd6fd2d5de932e786cb8b3887a15a9791b27157d88e6fdbc1c9fa7d672"
+          "start": 2232,
+          "end": 2344,
+          "anchorSha256": "87be3eec0b6672b83dc59e495e32694021ed23e14b03932314a95f778b94a4b8"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2163,
-          "end": 2171,
-          "anchorSha256": "fc51bafaab9392c989dcd71b2eeed7c204e1f6b073656bbdf4ac8ad615004214"
+          "start": 2157,
+          "end": 2209,
+          "anchorSha256": "8bd08dc5dc59d6f19f587ec79dc8b2d696c478aa9ab30f1999e9070775d0172b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0023",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-xutian-ding",
+        "void-spider-negotiation"
+      ],
+      "reason": "同独一鼎，极阴独得计划不改当前所有/位置。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1047,
-          "end": 1057,
-          "anchorSha256": "52d96e0c82e15ea3fccbe4259583c79ebfd7f75757fa07056ac5349bcb5390cb"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1617,
-          "end": 1627,
-          "anchorSha256": "04c0d4c2ff478165ed1ccca7402807b72886114ae4521e14dbe65f860d1b5f56"
+          "start": 1513,
+          "end": 1665,
+          "anchorSha256": "1305bdd52fa80412b29ff1cd8ee3c785fe249cc28df0d446411c3373c31c71cb"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0024",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "innerstar-jiyin-fire-pythons",
+        "void-spider-negotiation"
+      ],
+      "reason": "同后来所携火蟒，不凭提及给T0新造灵兽队。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1065,
-          "end": 1077,
-          "anchorSha256": "92212682f53ab474bb3f21589c14bdef254d88e991dd868e5307a375705658db"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0025",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "innerstar-golden-silkworm",
+        "void-spider-negotiation",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "种类与万当次群体分，后自述补强拥有证据。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1070,
-          "end": 1077,
-          "anchorSha256": "ed6995d73fed6723004e352746294162fffa112851fc830671797a98198ad1a3"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -4969,22 +4936,22 @@
       "candidateId": "batch-0067-object-0027",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "innerstar-tuotian-method",
+        "void-spider-negotiation"
+      ],
+      "reason": "既有同功法指称，不因对手评语新建副本。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1793,
-          "end": 1805,
-          "anchorSha256": "715cbd5de983a48cc261f8b1a83f7746e252c298f96cd1e28610296e75f11519"
+          "start": 1762,
+          "end": 1896,
+          "anchorSha256": "d341dd25a955a39b2f2ca9d1703f8a3d993b8d490f0ffc5c3af525ee8d54e1e9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5012,22 +4979,21 @@
       "candidateId": "batch-0067-object-0029",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "两鬼合作搜灵真实找到本体，法名不等无条件全球寻物。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 65,
-          "end": 74,
-          "anchorSha256": "0da92f283e1bd2586eb6017106a34950eb192c9248c3bd68e2a61b246bb721c2"
+          "start": 58,
+          "end": 102,
+          "anchorSha256": "38a1cca71b3bcaf917551f74850126c19148315814f1eadef83dc3c0b855d234"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5062,117 +5028,108 @@
       "candidateId": "batch-0067-object-0031",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "innerstar-qingzhu-swords-reference",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "九只是本次锁定准备出剑，不是韩总共只有九剑。",
       "evidence": [
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 2712,
-          "end": 2719,
-          "anchorSha256": "aac8e03e7842d5a6253a606789654cdd2ebf65e50b33e36c1df666df3ac1da5b"
+          "start": 2699,
+          "end": 2728,
+          "anchorSha256": "4ea5ee2d17efd0ac74f13de4c1d1e719f999a5b79addc6b64f8ccaf40368f994"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0032",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-reunion-and-ghost-fight",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "此处数十出阵与此前百余不同调度，不能当总库存改变或凭战斗免费重生。",
       "evidence": [
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 2588,
-          "end": 2598,
-          "anchorSha256": "42aa9ef37c338827b7be6953e2957d3bc8dee59483b1726b1ae4e693ee735b18"
+          "start": 2574,
+          "end": 2644,
+          "anchorSha256": "4bb56499b37f225a01575a874ade29baf5e1b9ff61520581ec56a0bf26f8dca7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0033",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "innerstar-flower-basket",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "既得丑汉花篮用于防备，唯一实物不重复发放。",
       "evidence": [
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 1187,
-          "end": 1196,
-          "anchorSha256": "775c1567e663ee8c3206c5f9e945aa0b4e1a6e4fa6eeba1fe7cc53d69c198351"
+          "start": 1144,
+          "end": 1208,
+          "anchorSha256": "deb9eab697de601171f85217a86b599e5497d0a1944cefafd7dec3cc9b2d1599"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0034",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "杀蛛炼尸减实力是极阴所述备选代价，不是一般活宠自由转移功能。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2375,
-          "end": 2387,
-          "anchorSha256": "8af9ddc973127866912f0973f6ca71580e7c866df6e92f3f8c959da8b72dc99c"
-        },
-        {
-          "chapterId": "qq-22234915",
-          "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2402,
-          "end": 2409,
-          "anchorSha256": "2fb5d7e9a8083a4d186d62cec81aaec2aad7d5ced9907624763275d5a0d0cb07"
+          "start": 2249,
+          "end": 2521,
+          "anchorSha256": "14622f4b82b266c8a03a689adcfcea31fbbd396ac996f3c2c25c398373f4b387"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-object-0035",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "同旧妙音门冲突，极阴自称不迁怒与韩判断威慑分别。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 662,
-          "end": 673,
-          "anchorSha256": "18ede0fea561b29d8a263f3c3a5fca3cd9b2b77f5f388dc1537d986b0aa26785"
+          "start": 645,
+          "end": 722,
+          "anchorSha256": "1e2bfe8513163690dc3df76b190c83b07a6368c43e5507b4693cc75f89569cac"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5228,29 +5185,28 @@
       "candidateId": "batch-0067-fact-0003",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "丹初运大衍实际见气反证硬元婴资格，必要的是足够神识。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 329,
-          "end": 341,
-          "anchorSha256": "1ca325e11d96dc2943280ab07cdc6934e5e20baeb35fad298b9abf709903367b"
+          "start": 305,
+          "end": 345,
+          "anchorSha256": "a89486ce1d4a8f17d9fa2e24e701ebd9018984a57f262d92cfd4f56b2885106f"
         },
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 375,
-          "end": 387,
-          "anchorSha256": "3e27e14b9291e8f448cce5cab4607b577e14df949d645548f95a5da31385b470"
+          "start": 346,
+          "end": 404,
+          "anchorSha256": "ba56d12a512d92ba42b421dbe426d321b7aa5e11c5c6d70851cfdec3a6834e09"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5278,87 +5234,86 @@
       "candidateId": "batch-0067-fact-0005",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-soul-thread-net",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "同网确束真元但仍可声指虫/金雷自救，不一键取消所有能力。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 652,
-          "end": 666,
-          "anchorSha256": "f55ae09a2a07d5732be7f9a0af4bfae47bf296a796fa36f2261a67b2104d16a6"
+          "start": 611,
+          "end": 719,
+          "anchorSha256": "7567b5ceb3aa1b52635945b41b856cf7b7b348b1c19460a0d2ba4192034872da"
         },
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 2586,
-          "end": 2599,
-          "anchorSha256": "8cede3185858a28f5aa14e041bc5c64e45660beac1c1a42bdf46eacceed77f98"
+          "start": 2572,
+          "end": 2686,
+          "anchorSha256": "596d83f1a3693500852f00b3e2f00055c6481168aa2cff320428d50cabb53379"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 27,
-          "end": 37,
-          "anchorSha256": "37dc8835c2af608ef08ca8262f48870cebfe3ba35302098942df7c6da1e2226d"
+          "start": 0,
+          "end": 42,
+          "anchorSha256": "226302e342856250ec500238e27c2a0ae92d0730544d6ec0451be5b6a1bd2b43"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0006",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-sixiang-flags",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "玄骨用此阵、称只有此法为其知识，不能断言别的有效土阵绝不行。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1182,
-          "end": 1196,
-          "anchorSha256": "70e2062df556d60b28f2c56b653ca4bab3b3ef85df8545e01f9b4e4e31a74174"
+          "start": 1115,
+          "end": 1279,
+          "anchorSha256": "36503aa98300dce81dab47d6fe29e4529ddcc352936acb5157ef20c7fd56ffca"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0007",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "韩靠实际阵识辨四旗，玄骨判断精通非公开全套个人知识。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1060,
-          "end": 1070,
-          "anchorSha256": "5d32d913ba5db69ca0e1f52109a35d3cd9760b263426382ea28603be2b8b78db"
+          "start": 1016,
+          "end": 1114,
+          "anchorSha256": "728d8cc530a35ce44deb4d769fce33a8ef5fc7a9f5227012d0b18928c630f620"
         },
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1118,
-          "end": 1130,
-          "anchorSha256": "5f0eef1e39ef3035ed93bac06d2054579d9aae7089791d6ced322a044276da12"
+          "start": 1115,
+          "end": 1279,
+          "anchorSha256": "36503aa98300dce81dab47d6fe29e4529ddcc352936acb5157ef20c7fd56ffca"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5393,174 +5348,158 @@
       "candidateId": "batch-0067-fact-0009",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "此无肉身男魂被神雷与毁珠终结，具条件击杀不推广无成本杀所有鬼王。",
       "evidence": [
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 2125,
-          "end": 2134,
-          "anchorSha256": "180d57b77f0085f3c8e6dba2d6db4ec252ca5640b6db1c901a56de41d71edca3"
+          "start": 2115,
+          "end": 2201,
+          "anchorSha256": "085bafd3b34a46256d2bc9fd3d7f6683873bd9dae442ea86a0e18a4498f8e132"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 2448,
-          "end": 2458,
-          "anchorSha256": "87e3df3236f2ad834e4cb2a12e05ce7190b1f7cfae4b4dc2fa921e7eafd95f53"
+          "start": 2429,
+          "end": 2498,
+          "anchorSha256": "c79364bc1cc57d11ebf4af20bf728af8b2ae4f2dabf324a2003bb6a0ff0af745"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0010",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "虫咬法体和丝实效，仍保鬼吼受伤边界。",
       "evidence": [
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 1005,
-          "end": 1019,
-          "anchorSha256": "7a91edc80770ef5f7817254f9d30be0813e0579af31559e760e917f817999328"
+          "start": 944,
+          "end": 1020,
+          "anchorSha256": "f0ed29df9175593cb0514bb92bf603d12afcb81e26b9cd941123a848a5d7ad1d"
         },
         {
           "chapterId": "qq-22222156",
           "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
-          "start": 740,
-          "end": 753,
-          "anchorSha256": "badab7686a865c7d1f1b3d15a282501cebe57342fd3c6cc80037f72333984857"
+          "start": 728,
+          "end": 789,
+          "anchorSha256": "577637c2db84da7cf6779e96dc232a6fda684aa5ea11683ee5c9384bd137dd8d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0012",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-nine-curve-ginseng",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "半尺皱根银花与白兔同命，非两个可分别复制资源。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 2821,
-          "end": 2830,
-          "anchorSha256": "6cff2d356cbea7fee3bba2a56c946cc12de1212317406a0706dbd2a6c736a9f0"
+          "start": 2801,
+          "end": 2877,
+          "anchorSha256": "f462edd481cb755a7030c1f9e55d46d83ac6f01dbffbe935010f105b6bd47348"
         },
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 799,
-          "end": 805,
-          "anchorSha256": "8e7c9a0dc2b4a9d884e027a7b0bc36e8da833eeeac13954c7a363d38199ccd10"
+          "start": 775,
+          "end": 836,
+          "anchorSha256": "756be78a08d6a6071eda5daa59819df3a22f18445239c9cd9ada88fb798099b5"
         },
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 871,
-          "end": 884,
-          "anchorSha256": "1a44e1b3e09cb0c78022bf1f064031a5f13561c6f145c7e76dcf7ddf604bb5a0"
+          "start": 837,
+          "end": 919,
+          "anchorSha256": "1c2417c1e766870b3006bd8ff5cdfb60d9f7e5d5d119298e2155250275ee9303"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0013",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-detection-and-capture",
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "配方未给使凝婴药效未实现，玄骨借此谈判不等灵参毫无其他效用。",
       "evidence": [
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 1496,
-          "end": 1504,
-          "anchorSha256": "f0e349655cabe871aff226ac7e523ef0f5d06b2f0e52dd552e1cbf25c02a5d75"
-        },
-        {
-          "chapterId": "qq-22224159",
-          "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 1505,
-          "end": 1515,
-          "anchorSha256": "08772be7f651a6a35cb96427414ed4591b5489170389da79264ac04c33544422"
+          "start": 1483,
+          "end": 1544,
+          "anchorSha256": "bd3588c7a337d903bc5b1422801fbfebf4828534c201269b0215d50020c2cab9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0014",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-musk-dung-bait",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "臭粪诱化身有可行条件，不编每次必在相同秒数出现。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1502,
-          "end": 1514,
-          "anchorSha256": "1b0bf45d2e6d742c8692b4c79256218f5eef415c174f542c187ab43e5f940e98"
+          "start": 1476,
+          "end": 1595,
+          "anchorSha256": "655667a44a39a3ea99ea4a628a2c781e320e2502ca69175331d1262d8601ab7b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0015",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-musk-lan-species",
+        "void-ginseng-detection-and-capture"
+      ],
+      "reason": "角香安神是韩已知性质，当前区域不因此无中生兽。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1695,
-          "end": 1707,
-          "anchorSha256": "a46296d387598fea12662f7fb738d19ca5593402c742d05b679460fca9d2e273"
-        },
-        {
-          "chapterId": "qq-22212707",
-          "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1729,
-          "end": 1738,
-          "anchorSha256": "ddce6f61afb64aa6165e86056d9ebc52d3e54d070a24e358b0100c297f6e4963"
+          "start": 1680,
+          "end": 1793,
+          "anchorSha256": "f7a9180f313ae9361063f7e00dde9058c06a74d397ba1a69eb87578b5ea67196"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5595,58 +5534,49 @@
       "candidateId": "batch-0067-fact-0017",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "旧出卖经历解释此期疑虑，提前杀韩是本次决定非T0锁定仇。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1706,
-          "end": 1720,
-          "anchorSha256": "cab7cc20c963395c1d5b6eb24eaedddc6efba3e692fe7e66e37fac49b3427dda"
+          "start": 1606,
+          "end": 1748,
+          "anchorSha256": "5d812c71e423a4b7589cfe76c2b6901ab8983d0f070731604780299b605f7c62"
         },
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
-          "start": 1520,
-          "end": 1529,
-          "anchorSha256": "ffb10e25280ec7392fecc013bfc5130e69a4b8459182e3f5ec4a3d75fc394ce1"
+          "start": 1479,
+          "end": 1549,
+          "anchorSha256": "e5a19488f5e912c2406634225d5ad6f96ebd34a3ed4bd2ffc1aa9e0e63d4b289"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0019",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "一丝本命精魄不足完控资深鬼魂，控制有代价/能力反制。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1065,
-          "end": 1076,
-          "anchorSha256": "eb0d3ca190c986704938db537b713e9e7932bbc2ba1084da2b3b3598ac27f1ae"
-        },
-        {
-          "chapterId": "qq-22212707",
-          "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 1096,
-          "end": 1106,
-          "anchorSha256": "110f5ed2b37529c54b8080ec83eae57f6a38703ef7964b5905710c7c566c1716"
+          "start": 1037,
+          "end": 1161,
+          "anchorSha256": "2e60904a250a4eb50af89af579dd00d27f4bc43dc061cc3e7ba3e1a230d078e4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5674,29 +5604,28 @@
       "candidateId": "batch-0067-fact-0021",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "两人实际搜到巨石凹槽本体，不将一次成功泛成必定寻物。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 65,
-          "end": 74,
-          "anchorSha256": "0da92f283e1bd2586eb6017106a34950eb192c9248c3bd68e2a61b246bb721c2"
+          "start": 58,
+          "end": 102,
+          "anchorSha256": "38a1cca71b3bcaf917551f74850126c19148315814f1eadef83dc3c0b855d234"
         },
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 507,
-          "end": 516,
-          "anchorSha256": "4631c7c948f21f67af473e1dd669199a41de155d40a917e8e3f11146eebb9dde"
+          "start": 504,
+          "end": 572,
+          "anchorSha256": "a90125fe82873d19b9e51d820bfafd67f6143602f259cf6658d0e64ecc441b9d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5766,80 +5695,70 @@
       "candidateId": "batch-0067-fact-0024",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "奉命扮恶人确有叮嘱，也可自有真实态度。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 25,
-          "end": 34,
-          "anchorSha256": "384bf870cf586a1702d16393d67528d052c12b2a11a3c45ed8cc3ff0e7bc2d87"
+          "start": 0,
+          "end": 81,
+          "anchorSha256": "cb77c821fb7cba6c8193542d48068c59590eb7ec198706299514b44ff13690dc"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 105,
-          "end": 118,
-          "anchorSha256": "4cd31b65776b016b27c93fb19a2140352b4ab55441b687be73c0d3767f60d6bb"
+          "start": 82,
+          "end": 151,
+          "anchorSha256": "e4dcddcd203ad1deba8306829b2e2877466da229299818d886e79d1a6268edcd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0025",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "几乎天生是恶感形容，不推原著十岁时已认识或命定敌对。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 121,
-          "end": 133,
-          "anchorSha256": "ff5333d442ded758ab49f064edda10069f80a42e0c78f47bd32fe4547599ebc4"
+          "start": 82,
+          "end": 151,
+          "anchorSha256": "e4dcddcd203ad1deba8306829b2e2877466da229299818d886e79d1a6268edcd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0027",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "此威胁说杀蛛后炼尸且减修，未实际执行不可先改物种/库存。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2375,
-          "end": 2387,
-          "anchorSha256": "8af9ddc973127866912f0973f6ca71580e7c866df6e92f3f8c959da8b72dc99c"
-        },
-        {
-          "chapterId": "qq-22234915",
-          "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2402,
-          "end": 2409,
-          "anchorSha256": "2fb5d7e9a8083a4d186d62cec81aaec2aad7d5ced9907624763275d5a0d0cb07"
+          "start": 2249,
+          "end": 2521,
+          "anchorSha256": "14622f4b82b266c8a03a689adcfcea31fbbd396ac996f3c2c25c398373f4b387"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5874,109 +5793,98 @@
       "candidateId": "batch-0067-fact-0029",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "阵可引灼热但被韩改后复原，具体后来反制有证，不永久留未知手脚。",
       "evidence": [
         {
           "chapterId": "qq-22212707",
           "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
-          "start": 2092,
-          "end": 2102,
-          "anchorSha256": "ae08502ec123c4750ba2320c032587bee6634223598ae64f17ba265b71a95ae7"
+          "start": 2086,
+          "end": 2137,
+          "anchorSha256": "00c43febe75e28be15bab1373eaab1ead3c72d13b6eca426a1ac3cf35c27fcf6"
         },
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 2430,
-          "end": 2442,
-          "anchorSha256": "eb84ba5eef7c1e195d3172b24cb4e13a3f8915b3a72577450fc011e75a9ad3b6"
+          "start": 2425,
+          "end": 2457,
+          "anchorSha256": "de61976285e13b7e4aee7597c65de3f981ef374a14d9fe18a50362c989f84d86"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0030",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "青易转述前辈分析且称好像，成功率相对不变固定概率保证。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1047,
-          "end": 1059,
-          "anchorSha256": "08da5f82591df2c75b0708426a819ef6b2b58729e1e5e060ddc48b01b1c8ea21"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0031",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "韩威胁已有认主与自爆，极阴另有炼尸说法；不把话语写成所有认主关系永不可变。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 226,
-          "end": 234,
-          "anchorSha256": "db47ef4d8b3534c7e560bdcaf5f20215d3e87ed2630e49b30356babda2c96fdd"
-        },
-        {
-          "chapterId": "qq-22234915",
-          "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 272,
-          "end": 280,
-          "anchorSha256": "251ecc1f80b4d3ad6e097d74c7e3ccd4bce3c56784b5d1de3c31185fda1d228b"
+          "start": 152,
+          "end": 333,
+          "anchorSha256": "4fe82ab13ead17dfe3db933e6376e2ab3e347f8ddf095281989f780df339bbd3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0032",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "旁白确给极阴私谋，其他角色不能因作者知道就预知。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1617,
-          "end": 1627,
-          "anchorSha256": "04c0d4c2ff478165ed1ccca7402807b72886114ae4521e14dbe65f860d1b5f56"
+          "start": 1513,
+          "end": 1665,
+          "anchorSha256": "1305bdd52fa80412b29ff1cd8ee3c785fe249cc28df0d446411c3373c31c71cb"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1676,
-          "end": 1682,
-          "anchorSha256": "72dd01044a6ba2cd713777e9fec0510ffddfa907d2185d4b19dd36de746fb627"
+          "start": 1666,
+          "end": 1761,
+          "anchorSha256": "1211d903d74f6097c8c4ce62ab6236a8bae29d247f9cb1083c685ed878ad6a1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6011,174 +5919,155 @@
       "candidateId": "batch-0067-fact-0034",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "极阴本人体验与没信心，不等完整三境通用胜负表。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1793,
-          "end": 1805,
-          "anchorSha256": "715cbd5de983a48cc261f8b1a83f7746e252c298f96cd1e28610296e75f11519"
-        },
-        {
-          "chapterId": "qq-22234915",
-          "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1817,
-          "end": 1831,
-          "anchorSha256": "8f2226f8f8a989a6bb8ada7c7bea9b54403ffb489a0e670fc0e60dc58a9e88ba"
+          "start": 1762,
+          "end": 1896,
+          "anchorSha256": "d341dd25a955a39b2f2ca9d1703f8a3d993b8d490f0ffc5c3af525ee8d54e1e9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0035",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "青易提万蚕与极阴敌意分来源，万后来自述补所有权证据。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1070,
-          "end": 1077,
-          "anchorSha256": "ed6995d73fed6723004e352746294162fffa112851fc830671797a98198ad1a3"
+          "start": 1010,
+          "end": 1093,
+          "anchorSha256": "c64c8bc7b2bd17405ff6ab7445cb2c805851ad5d5a2b4bd63c28608cf056f652"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 1735,
-          "end": 1744,
-          "anchorSha256": "cec801f76e3f7f5753df9a2e700b87768cf2f6e758cafad60d6466ca4e6a0da3"
+          "start": 1666,
+          "end": 1761,
+          "anchorSha256": "1211d903d74f6097c8c4ce62ab6236a8bae29d247f9cb1083c685ed878ad6a1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0037",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "危险是此期韩判断且不想入，不作为引擎强制后退。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2237,
-          "end": 2245,
-          "anchorSha256": "02cef91e3b9b08be33d1b812e92d9163c4828cad2856bfc02eaaff74a53b33e5"
-        },
-        {
-          "chapterId": "qq-22230952",
-          "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2256,
-          "end": 2265,
-          "anchorSha256": "5f569ccd6fd2d5de932e786cb8b3887a15a9791b27157d88e6fdbc1c9fa7d672"
+          "start": 2232,
+          "end": 2344,
+          "anchorSha256": "87be3eec0b6672b83dc59e495e32694021ed23e14b03932314a95f778b94a4b8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0038",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "安然带进出的招揽未兑现；后承认看中蜘蛛，不白给安全护送。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2163,
-          "end": 2171,
-          "anchorSha256": "fc51bafaab9392c989dcd71b2eeed7c204e1f6b073656bbdf4ac8ad615004214"
+          "start": 2157,
+          "end": 2209,
+          "anchorSha256": "8bd08dc5dc59d6f19f587ec79dc8b2d696c478aa9ab30f1999e9070775d0172b"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2307,
-          "end": 2326,
-          "anchorSha256": "e7574784ef310a6024cceb65fa228514a2e629e8646633dbe06602b350883895"
+          "start": 2249,
+          "end": 2521,
+          "anchorSha256": "14622f4b82b266c8a03a689adcfcea31fbbd396ac996f3c2c25c398373f4b387"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0039",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "韩明确拒绝后续才被威逼选择，保留拒绝阶段不假称从头愿去。",
       "evidence": [
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2472,
-          "end": 2479,
-          "anchorSha256": "93dda3f01354282de8d6159f4f9317db78d426aed89b486d74541a9d55615e3b"
+          "start": 2409,
+          "end": 2492,
+          "anchorSha256": "702e24a5a205b4cb966f24bd28160399c048911be7548b3d7c36d7c1ae0bcc22"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 2685,
-          "end": 2693,
-          "anchorSha256": "3b0f7682907544de999593b158e7222abf70119b45595552ffb88133a137bb42"
+          "start": 2682,
+          "end": 2763,
+          "anchorSha256": "c4e5c791df7693c184dea1f1dc21f0343d97d87e46089dca8e9064173c78c6a9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0040",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-spider-negotiation"
+      ],
+      "reason": "私语内容只已约部分可见，决定让韩选不等已拜。",
       "evidence": [
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2167,
-          "end": 2174,
-          "anchorSha256": "c0ce1e55242d36164535dc792f0fb380d28755dc075569344ceddf006ec39489"
+          "start": 2164,
+          "end": 2211,
+          "anchorSha256": "6832ebde6f0452d2fd30f1f1cdcae9d217078036c308dba5c101ee8950d2b7b4"
         },
         {
           "chapterId": "qq-22234915",
           "chapterSha256": "810bfefc90ba6eb0c062cd6cd2341a504dec27fdd7fc5eeab17b35f8a31049fe",
-          "start": 2073,
-          "end": 2079,
-          "anchorSha256": "ce114cac4108d7a75b5cf8f75132d20be3e25de0d134b6217e77291a56b66c66"
+          "start": 2070,
+          "end": 2105,
+          "anchorSha256": "d56e15bdfa715e8aff703498ec630ebbfacb890cb29e2fb75bf4e672f2a505c9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6262,116 +6151,108 @@
       "candidateId": "batch-0067-fact-0044",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "兔归本体盒封是真实当次转移，T0不提前在韩库存。",
       "evidence": [
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 1297,
-          "end": 1304,
-          "anchorSha256": "e672c908b0653f1c4044d5f8a86d725715d451090a6b89c2b229af40e8903cab"
-        },
-        {
-          "chapterId": "qq-22224159",
-          "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 1321,
-          "end": 1328,
-          "anchorSha256": "fc07b1ceea028294a2da174d47b5d86dd69b10453fdb252a63c9c8b4a04f48ee"
+          "start": 1292,
+          "end": 1362,
+          "anchorSha256": "ed382bf1fd4d0aafa1d1b379ddc9710a77d5fb9d18d24bcac6fad48123a7c59f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0045",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement",
+        "void-spider-negotiation"
+      ],
+      "reason": "两袋放虫、一袋放一蛛，袋数不等虫总数量，另有蜘蛛不凭一句穷尽。",
       "evidence": [
         {
           "chapterId": "qq-22215572",
           "chapterSha256": "5d907e037c60dfc63fea7dbc7d03dbedede0e25e3a11b4b4ca0fa309f7944512",
-          "start": 1220,
-          "end": 1230,
-          "anchorSha256": "2e8d3fb98f449ab48bb9f417646b2439cfc474ee7871a86ae4f7092fd55675c4"
+          "start": 1209,
+          "end": 1270,
+          "anchorSha256": "26b210b05ee049abb56ebafae25447e6e0e11c3926865a2f9f01166a359da683"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 1572,
-          "end": 1582,
-          "anchorSha256": "057e2b9f4bade94e933ce48da8b582c1ec6fce85db3b55217ef3e924f63b984f"
+          "start": 1520,
+          "end": 1600,
+          "anchorSha256": "64f572595f7a4b0254de2755a7083f406acc232a56914f04dca0b586a8d501aa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-fact-0046",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-betrayal-and-settlement"
+      ],
+      "reason": "数十猿与九剑是本次投入，不是所有资源上限。",
       "evidence": [
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 2588,
-          "end": 2598,
-          "anchorSha256": "42aa9ef37c338827b7be6953e2957d3bc8dee59483b1726b1ae4e693ee735b18"
+          "start": 2574,
+          "end": 2644,
+          "anchorSha256": "4bb56499b37f225a01575a874ade29baf5e1b9ff61520581ec56a0bf26f8dca7"
         },
         {
           "chapterId": "qq-22224159",
           "chapterSha256": "f9d6db206716ec14df072b7065f554e16aaef05d8956075c827060fb811bfec9",
-          "start": 2712,
-          "end": 2719,
-          "anchorSha256": "aac8e03e7842d5a6253a606789654cdd2ebf65e50b33e36c1df666df3ac1da5b"
+          "start": 2699,
+          "end": 2728,
+          "anchorSha256": "4ea5ee2d17efd0ac74f13de4c1d1e719f999a5b79addc6b64f8ccaf40368f994"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0067-issue-0009",
       "batchId": "batch-0067",
       "reportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-ginseng-detection-and-capture",
+        "void-ginseng-betrayal-and-settlement",
+        "void-spider-negotiation"
+      ],
+      "reason": "后期所有和冲突不能前置，但古灵物机制可有据回溯，不一概把背景规则永久unknown。",
       "evidence": [
         {
           "chapterId": "qq-22205956",
           "chapterSha256": "24d6fe11aae45d72a73dc899e018536a0a278c04916998ddaa617e84d9189955",
           "start": 0,
-          "end": 15,
-          "anchorSha256": "8142135b2117cc0b7b20a003378276600c242ebb3bdb7b6183b38dd4e64184b8"
+          "end": 31,
+          "anchorSha256": "8dbf13c81f819a2022ae3638183c8c0561c0efcf6a9c9e3792ce93bc58cbb12d"
         },
         {
           "chapterId": "qq-22230952",
           "chapterSha256": "095d3089234e68f7fc2d023830a615804035e3b1d43bfa0104561b1ed78c0c90",
-          "start": 561,
-          "end": 574,
-          "anchorSha256": "28f1ba6335fc09d379a51b0897baa41714f42b9e39f404eaf025af10d5b8ec67"
+          "start": 558,
+          "end": 599,
+          "anchorSha256": "94575787d336d95202b98d46d581a98a449ed57b828717c5d056adf46cf9ff8e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6498,50 +6379,44 @@
       "candidateId": "batch-0068-object-0004",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-xuan-gu",
+        "void-nominal-apprenticeship-and-rings",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "隐匿和参方施压都是本轮，没见时不等已离场。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 589,
-          "end": 598,
-          "anchorSha256": "8b1b7b5997f52eb3655fd5f3982c51396a1e5c443d5f39fdbdf431264d938406"
+          "start": 504,
+          "end": 604,
+          "anchorSha256": "944b534cbadf84a7cf4bba792177117d728a03a7254547743eb61a21ad57df64"
         },
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 794,
-          "end": 803,
-          "anchorSha256": "73b6236f7fbea880b2d75e749a14ec0b8e68df6d736ca8d5ed39db76251520e5"
+          "start": 783,
+          "end": 852,
+          "anchorSha256": "56629964f900e6d79ff558f7b89514a2e512a8fe27962bd522ce3ac22250ff9d"
         },
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1230,
-          "end": 1236,
-          "anchorSha256": "d180615e75e2ae1175085b2e88146a92ef2f67d8c6679b3c60163738acaf484e"
+          "start": 1223,
+          "end": 1342,
+          "anchorSha256": "c6acc3c92d3703e17fcb48d0818c26d1fc2d57dc83e73366db508888ffd72443"
         },
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 604,
-          "end": 617,
-          "anchorSha256": "66afa8c4926691909f04bfa1acd0790eaff40a4290bb0edb8373148df369333d"
-        },
-        {
-          "chapterId": "qq-22238410",
-          "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 575,
-          "end": 583,
-          "anchorSha256": "b08008d5e6ac0325830e8b4553cf01eb6d90425097c516f67e2c67b20451542c"
+          "start": 602,
+          "end": 652,
+          "anchorSha256": "9f9c8227e74efa27a3a4b41fb85b34c2a05b4682d49613565a0f0d6232b69031"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6653,51 +6528,51 @@
       "candidateId": "batch-0068-object-0008",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-tian-wuzi",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "同道士已名，称门主不自动归万法弟子。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1645,
-          "end": 1658,
-          "anchorSha256": "31a7112cd48d0bc2d1c1db3eddcab47b4d71d3d5904ef80140a28823acc0d64d"
+          "start": 1582,
+          "end": 1659,
+          "anchorSha256": "6bce6e744d2804bd1d1093ef1c4d9f8f654a45bdf2c38cc65ec5ffdc00b67665"
         },
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2246,
-          "end": 2253,
-          "anchorSha256": "09cedd59dfacbd5260b7e9d2f8b9d70cc329849493670e87ea6e216afc638c70"
+          "start": 2173,
+          "end": 2257,
+          "anchorSha256": "86ccd84cf0f9607205ee5b2e69f9b85c2bdf5b44636815bead30165715947e60"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0009",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "innerstar-void-farmer-reference",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "同黑瘦农夫仍未名，不复制个体或凭同阵营当万门弟子。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1990,
-          "end": 1997,
-          "anchorSha256": "d5f3f1b28f94a9080dd088d64d6fdb32b47617fcfa2c27073a2c649dbe96c2b9"
+          "start": 1913,
+          "end": 2009,
+          "anchorSha256": "36fb7d49e64ea4bab9b6337391da3c55e3ab6f90467b7bdbbde7323247eb8896"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6806,22 +6681,21 @@
       "candidateId": "batch-0068-object-0021",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "正道是本期阵营合作者，不是一个有统一库存的法人门派。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 414,
-          "end": 425,
-          "anchorSha256": "e17ee1673c03b39274f09bbdfae9d386f5bbd908657862d44b2e42caac881967"
+          "start": 354,
+          "end": 434,
+          "anchorSha256": "1a68130d6211eb4243ec01f166f06bd0870589a37e7175c7d0e52a234ec34296"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6878,227 +6752,230 @@
       "candidateId": "batch-0068-object-0025",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-fire",
+        "void-garden-local-environment"
+      ],
+      "reason": "同巨山两路共同峡谷地形，未以另名再造平行空间。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 2199,
-          "end": 2210,
-          "anchorSha256": "47c0ca988c428e810cfa81f501bba22e7e2efff65bcb8cf50b4a6a86a9d3612e"
+          "start": 2146,
+          "end": 2211,
+          "anchorSha256": "3c62c829052eb6d574077dc1ec7b3140b7d1f73709f1ab6799596fd51b502d8e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0026",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-fire",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "禁飞需脚程与防护，行程几日不因坐骑/低等火功免去。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 1623,
-          "end": 1633,
-          "anchorSha256": "c6424ccbbaed36f1fdc3bb4b78a85027bc194a9fcf46326ca717cf4652c2ba28"
+          "start": 1549,
+          "end": 1661,
+          "anchorSha256": "25dba7bc0782730241a89dd222882fc20a990e2bb1210487510fb06cae056577"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0027",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-ice",
+        "void-garden-local-environment"
+      ],
+      "reason": "古文碑明名玄晶道，冷热路线对应明确。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2371,
-          "end": 2380,
-          "anchorSha256": "84f09e697b1c02a75f9259e94531beca0c80d3377fb8a1d08e9a004f608df9c8"
+          "start": 2342,
+          "end": 2397,
+          "anchorSha256": "1f7be6e55515f4b75df0f063a4418f25ef3e59d457ff37a65b61c83cd1677d8c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0028",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-fire",
+        "void-garden-local-environment"
+      ],
+      "reason": "熔岩路同火侧，内部不同地形后续实际空间承接。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2381,
-          "end": 2390,
-          "anchorSha256": "3a93e4317daae97bcaff1d2ac20f8e5189df61a425fa038682d899e77ef925d3"
+          "start": 2342,
+          "end": 2397,
+          "anchorSha256": "1f7be6e55515f4b75df0f063a4418f25ef3e59d457ff37a65b61c83cd1677d8c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0029",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-mist",
+        "void-buxu-intentions"
+      ],
+      "reason": "已过鬼雾与当前火路前后区分，非又在鬼雾说话。",
       "evidence": [
         {
           "chapterId": "qq-22257719",
           "chapterSha256": "f47bee70bc76be526b22e1612e5102d66002fa9daddef64b8e7bc3f16df75b0f",
-          "start": 196,
-          "end": 206,
-          "anchorSha256": "626d290e9e7f2ead8dacd69a581f0a9461338914498f2cca57870ae4d3590ec9"
+          "start": 190,
+          "end": 279,
+          "anchorSha256": "737ad9555a0f4e316076f39638371233f3c6b8ddaca0ed3f3209652788c1e5b5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0030",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-illusion",
+        "void-buxu-intentions"
+      ],
+      "reason": "后一关相对当前冰火道，没有候选所谓本批顺序矛盾。",
       "evidence": [
         {
           "chapterId": "qq-22257719",
           "chapterSha256": "f47bee70bc76be526b22e1612e5102d66002fa9daddef64b8e7bc3f16df75b0f",
-          "start": 206,
-          "end": 213,
-          "anchorSha256": "b3b31ce39d3e51f873dc76d0dd684660ce4d8b324cc7ef111ec418d5dba2b949"
+          "start": 190,
+          "end": 279,
+          "anchorSha256": "737ad9555a0f4e316076f39638371233f3c6b8ddaca0ed3f3209652788c1e5b5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0031",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-stone-hall",
+        "void-garden-and-exits",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "谷尽头出口与有限窗口依旧机制，约会数日不等已到达。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 485,
-          "end": 501,
-          "anchorSha256": "ef4a379e6de65c40a52352dfc0255938844b6aa4eb3bee07beb8d98263c3dd5e"
+          "start": 473,
+          "end": 522,
+          "anchorSha256": "3f984a847a2a8931aad151fec2a5e4812ba9e111833d283814223a12edc53850"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0035",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "innerstar-bloodjade-species",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "韩收起此蛛与因蛛获护具为此期交换，不生T0认主。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1933,
-          "end": 1943,
-          "anchorSha256": "f0eadf25e21e0955455e9bb023d3460f1d9e75bc1d468c707d94e5c9a2acbb20"
+          "start": 1889,
+          "end": 1957,
+          "anchorSha256": "d2318a57e6d3b4f4c5297ce2335fa1efdba9efc4c40d66d3df6da0414aad695d"
         },
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 258,
-          "end": 270,
-          "anchorSha256": "443b6a64ff59d9c5e8b0ef660756453104697cee00b4a3dbdc4ed175ff108e5a"
+          "start": 223,
+          "end": 295,
+          "anchorSha256": "9246a1c5eea5f8a6274253843fea7e7ed9bc07ad9ec343292722c9a0a0e20650"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0036",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "innerstar-jiyin-fire-pythons",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "后期一对火蟒既档，不让战争条件按目标自动赠。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2135,
-          "end": 2144,
-          "anchorSha256": "954f96d65312044a92546e242a6849ee721dc4ab8fd53f7a532d43dfabffa367"
+          "start": 2045,
+          "end": 2172,
+          "anchorSha256": "f8d9e69b03abb126aedde3c6c0480100236b87cb4a0d8eaaa8b89c6003757cb4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0037",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "innerstar-golden-silkworm",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "万自己确认有蚕，跟先前传言分阶段。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1589,
-          "end": 1599,
-          "anchorSha256": "8f1002fe5a3dc2d8995294ff5296c556ec45f61e162ebd3c9d4dceefd8168467"
+          "start": 1582,
+          "end": 1659,
+          "anchorSha256": "6bce6e744d2804bd1d1093ef1c4d9f8f654a45bdf2c38cc65ec5ffdc00b67665"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7169,160 +7046,153 @@
       "candidateId": "batch-0068-object-0048",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "innerstar-tuotian-method",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "魔功金鳞是运功效果，冰雪蟾丹助益为蛮自述非现场炼服已成。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 952,
-          "end": 964,
-          "anchorSha256": "43a48e483bfce393bd39c4f8573b296b5b7d773c39db40386b57687074397bf6"
+          "start": 940,
+          "end": 979,
+          "anchorSha256": "09620976f7ef80e83888eaa8b96b9e2a89e530ffd9c3aab0eed6251e477aeccf"
         },
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1057,
-          "end": 1066,
-          "anchorSha256": "2bf187f781abff3da240f79caf6e7cc307604d17c5287b6b3d5306884e407c94"
+          "start": 980,
+          "end": 1112,
+          "anchorSha256": "e38e19892b51aaa0eb81c658222e8cac3d5b5c1dd1760b3352dc8e66782aa0d3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0049",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xuanyin-jing",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "极阴抬本门至高法比较，非证实际自己已达至高。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1195,
-          "end": 1206,
-          "anchorSha256": "d114bbe7cc9b27f22dea9a30452a435fb020f0e9048bc8335a25bb08fe357a5b"
+          "start": 1179,
+          "end": 1244,
+          "anchorSha256": "e8d4990d8bb86009fe95615e003efdd1b3fd445d3dc6394101c0ecdbdceb1665"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0053",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-xuanyin-yin-ring",
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "玄阴是改名阴环，不是玄黄两仪；此真实授予后仍有阳克制。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1009,
-          "end": 1014,
-          "anchorSha256": "c595f2d193402a3653dd8bc2bf4f0f7a39b0fd01a93bfd52846fa3018a3fc7f7"
+          "start": 969,
+          "end": 1118,
+          "anchorSha256": "0b3ac44bc8e0943817dfafda2b0e0b8dd7d87e22a18bab239c5623228a36b697"
         },
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1253,
-          "end": 1266,
-          "anchorSha256": "be691ff7910ce8d7518348bb03a28f97ece95707261c482f13586d1f1736b32b"
-        },
-        {
-          "chapterId": "qq-22238410",
-          "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1288,
-          "end": 1293,
-          "anchorSha256": "8fa266a87c9670102c1ff6c68e2456af977a6424084da150605848e768c89dfc"
+          "start": 1223,
+          "end": 1342,
+          "anchorSha256": "c6acc3c92d3703e17fcb48d0818c26d1fc2d57dc83e73366db508888ffd72443"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0054",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-xuanyin-yang-ring",
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "同套阳环由玄骨说极阴持，不把别处阳环全合一。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1312,
-          "end": 1318,
-          "anchorSha256": "fb80e45fc1b28398c5e46b2230370baeeeb4aef900f5b41983a2ada10ee002b3"
+          "start": 1223,
+          "end": 1342,
+          "anchorSha256": "c6acc3c92d3703e17fcb48d0818c26d1fc2d57dc83e73366db508888ffd72443"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0055",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-baixi-pendant",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "真实给出者极阴；后文蛮的白犀佩是局部异文，按交付链不改物主。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2817,
-          "end": 2828,
-          "anchorSha256": "b3137d9118ef30fa30986469ca336f3faaa571fd615a5d45366f06d305e6dc4a"
+          "start": 2768,
+          "end": 2835,
+          "anchorSha256": "4c8ad5a0bfe922eeac4485745b2b3157f1da5c023410f8a9e7886866eb1e76d8"
         },
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2870,
-          "end": 2877,
-          "anchorSha256": "678532d02d4932d889f0b29528fb09cc7ff23212ba19c777bfc5b8764371540b"
+          "start": 2836,
+          "end": 2903,
+          "anchorSha256": "77256e52ad99e247141b4c8ece6d67e220b224428abaaa87ec42a9d710c46639"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-object-0056",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanbing-bead",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "寒鲤早年得珠是来源，暂借给韩不变永久所有。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 156,
-          "end": 173,
-          "anchorSha256": "4ad5bddb1eac97b6e18e2f18f10566336822cd4a63e3de27156a02e9f81b7026"
+          "start": 128,
+          "end": 222,
+          "anchorSha256": "5765e9d5677617cb8717db2bc3f178a3f843db3f4d30e6a24548a75a2a4eea37"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7372,22 +7242,21 @@
       "candidateId": "batch-0068-object-0067",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "万已寻天青花将催虫，计划舍虫代价不提前扣全群。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1685,
-          "end": 1698,
-          "anchorSha256": "fbd07049627098851faf8d8d01df2d18da1e3c580c43fde987539a6593e86005"
+          "start": 1660,
+          "end": 1762,
+          "anchorSha256": "dd22fef3d4a9ff90b3aee7c5fbb368be7a6547e7a029b4cb359c259fb364cfaa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7457,51 +7326,53 @@
       "candidateId": "batch-0068-fact-0002",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-void-bu-xu",
+        "innerstar-fenyuan-pill",
+        "void-buxu-intentions"
+      ],
+      "reason": "个人偶遇一颗古丹省年，不写成四级兽固定掉落。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 2832,
-          "end": 2841,
-          "anchorSha256": "312d75e68b69b7e20cc7dd3e54ff2da62897528ae4f46d97cde06e5fdf93b860"
+          "start": 2784,
+          "end": 2860,
+          "anchorSha256": "01417b21ce6420ce7293e9f139f90a6a945ccd100326ca73ce2beeb472d8d680"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0003",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-void-bu-xu",
+        "innerstar-fire-dragon-worm",
+        "void-buxu-intentions"
+      ],
+      "reason": "高价购虫且图鼎是当期投入，不证明已取鼎。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 2916,
-          "end": 2926,
-          "anchorSha256": "c211e57b0655c1cf2a70c0256cf90df0fbfd89499fb690ab96fd630705f2cb64"
+          "start": 2861,
+          "end": 2927,
+          "anchorSha256": "b664ba4b798d32a4b6e0a4d5de11dc65b53e8720f4527237f7058f7a13bcb44d"
         },
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 2939,
-          "end": 2945,
-          "anchorSha256": "5386ad6acfd66adea9f8682af1ecbcd328f3dcbe7c14643bf10733e293d0f04f"
+          "start": 2928,
+          "end": 3002,
+          "anchorSha256": "d38ce9ad4f3497549494af1e683d5715b4daea1abe375ea0e84fff97017a3887"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7529,22 +7400,21 @@
       "candidateId": "batch-0068-fact-0007",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-reunion-and-ghost-fight"
+      ],
+      "reason": "此时韩元二人丹初清楚，未前置开篇。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 2613,
-          "end": 2628,
-          "anchorSha256": "e807cef3a986edd38c62592406d7a93526d705762030663a39c757a349bf6be9"
+          "start": 2532,
+          "end": 2659,
+          "anchorSha256": "e51a1232223d850724c1554c41c7cbd9d72b3194b7effa23a9dbe34fc57532e8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7614,197 +7484,184 @@
       "candidateId": "batch-0068-fact-0016",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "收蛛实际动作与韩解释护具动机不同层，其他人未必知其所想。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1933,
-          "end": 1943,
-          "anchorSha256": "f0eadf25e21e0955455e9bb023d3460f1d9e75bc1d468c707d94e5c9a2acbb20"
+          "start": 1889,
+          "end": 1957,
+          "anchorSha256": "d2318a57e6d3b4f4c5297ce2335fa1efdba9efc4c40d66d3df6da0414aad695d"
         },
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 258,
-          "end": 270,
-          "anchorSha256": "443b6a64ff59d9c5e8b0ef660756453104697cee00b4a3dbdc4ed175ff108e5a"
+          "start": 223,
+          "end": 295,
+          "anchorSha256": "9246a1c5eea5f8a6274253843fea7e7ed9bc07ad9ec343292722c9a0a0e20650"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0018",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "未见玄骨引韩疑，随后本人传音证隐匿附近，不把未见当缺席。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 794,
-          "end": 803,
-          "anchorSha256": "73b6236f7fbea880b2d75e749a14ec0b8e68df6d736ca8d5ed39db76251520e5"
-        },
-        {
-          "chapterId": "qq-22255268",
-          "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 820,
-          "end": 834,
-          "anchorSha256": "90da8d12a03e05435fbb2affbeba8f413f16aaf794a546eee95a7688c4eefa66"
+          "start": 783,
+          "end": 852,
+          "anchorSha256": "56629964f900e6d79ff558f7b89514a2e512a8fe27962bd522ce3ac22250ff9d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0019",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "参方要挟使其顺从表面拜师，非自然忠诚归属。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 549,
-          "end": 569,
-          "anchorSha256": "fa3d582f7a98c5630fd1240cb165af3340c240702fef58f920249ca71e4dba1b"
+          "start": 504,
+          "end": 604,
+          "anchorSha256": "944b534cbadf84a7cf4bba792177117d728a03a7254547743eb61a21ad57df64"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0021",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "只记名、正式礼待回岛，不能直接升级亲传全权。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 977,
-          "end": 991,
-          "anchorSha256": "4c0af0d27640561ee9b983a6d9ad538220c645dfe63d29e8a7be2d20b1204ac6"
+          "start": 969,
+          "end": 1118,
+          "anchorSha256": "0b3ac44bc8e0943817dfafda2b0e0b8dd7d87e22a18bab239c5623228a36b697"
         },
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 2275,
-          "end": 2283,
-          "anchorSha256": "2941622aae76d89df5321a51733ec30458ae00d0a3fd9e702631e5a2d3fdd7f0"
+          "start": 2272,
+          "end": 2341,
+          "anchorSha256": "e1bb8fabf61d3c801bd35160c5fce247786e37fcf714f6141962f307e3357ed6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0022",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "信物兼宝物实际交付；人人一阴环非证明总共两只。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1009,
-          "end": 1014,
-          "anchorSha256": "c595f2d193402a3653dd8bc2bf4f0f7a39b0fd01a93bfd52846fa3018a3fc7f7"
+          "start": 969,
+          "end": 1118,
+          "anchorSha256": "0b3ac44bc8e0943817dfafda2b0e0b8dd7d87e22a18bab239c5623228a36b697"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0023",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "本轮讨价时联手态势，不永久绑定共同行动。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1484,
-          "end": 1498,
-          "anchorSha256": "eca3e05e7cfd2375c8f9f45387f35d368508e61160144911a98cc83ed7f13a3e"
+          "start": 1476,
+          "end": 1530,
+          "anchorSha256": "7174703523058c5e55fff1b52689d1fcff0fdd6febc5faadb790c1d9f739233f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0024",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "future-void-wu-chou",
+        "canon-ji-yin",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "祖父由场景明确极阴，不将蛮设亲属。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1258,
-          "end": 1273,
-          "anchorSha256": "ea4f26be74680a845f50ae94f917dde696222a4194c5e2517cfcf3e2e63f1de3"
+          "start": 1245,
+          "end": 1321,
+          "anchorSha256": "7ad088864f787f30327aa2fc76e10a8d2a9e4d7be152a48e4a27215bcc29998d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0025",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "极阴招徒宣传权势资源，不是已核全岛无限公款自由取。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 291,
-          "end": 300,
-          "anchorSha256": "174cdb82bab91cfccd61c11e306c0958418273a75f5948b083227a3100cfcf32"
+          "start": 181,
+          "end": 479,
+          "anchorSha256": "bae085e17730ff93cfa8aeeb5dd0f603b044f00296dc93104bf353c0846f2e6f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7832,197 +7689,189 @@
       "candidateId": "batch-0068-fact-0027",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "贬青易的孤家无财为竞争话术，不能抹其实际资产/雇工。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 212,
-          "end": 221,
-          "anchorSha256": "ae786c3ce5fe497de6807317470ef8781bdc512f554962a794415e7c3c55ee39"
+          "start": 181,
+          "end": 479,
+          "anchorSha256": "bae085e17730ff93cfa8aeeb5dd0f603b044f00296dc93104bf353c0846f2e6f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0028",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "许抓紫灵是拟胁迫，尚未发生也未获本人同意，不建立既成关系。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 420,
-          "end": 429,
-          "anchorSha256": "c725baccfa5e8827f5dc336ae97e8a668277170a1d1b596e1c642d4e72ab1e49"
+          "start": 181,
+          "end": 479,
+          "anchorSha256": "bae085e17730ff93cfa8aeeb5dd0f603b044f00296dc93104bf353c0846f2e6f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0029",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "乌前辈称呼与回应是策略选择，非无条件忠诚证明。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 952,
-          "end": 966,
-          "anchorSha256": "1aa22d3dc56fdbccf0c5e2f796c4cb89a9107c0edc46644d9a02d46c629ed9a5"
+          "start": 937,
+          "end": 968,
+          "anchorSha256": "36673c83abab4e38d4f298a21588a3a401fb7b7d8dfe6c80c4939e0576501a72"
         },
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 926,
-          "end": 932,
-          "anchorSha256": "66c5f8136290c2f83b094e4f1fbbf6bb2882c04145ea3bf561661d6cd65d87d6"
+          "start": 891,
+          "end": 936,
+          "anchorSha256": "49f041cd651351c7581b8cf8000f250a462b6d509365e7d27cbc08cccba4d762"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0030",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "表面恭谨与私心防备分离，不共享玩家/NPC隐藏计划。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1454,
-          "end": 1467,
-          "anchorSha256": "6be4aec7a0e01e8cb417698146b58b30940108ab911642b9c5c77d0a6a94d0d0"
+          "start": 1429,
+          "end": 1481,
+          "anchorSha256": "e4afebe4df559013802ea755587249f6329bf9fde5a6af42e6e0b50641e54d63"
         },
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 1360,
-          "end": 1374,
-          "anchorSha256": "ec3fb701761674fc15926f85e9c61ea0a35534a891829c7dcdbbdea489b51824"
+          "start": 1343,
+          "end": 1428,
+          "anchorSha256": "de6fe87019cc21e7882e2935a67e010c34d600916daf43bf28fec2758c30b830"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0031",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "先前独占谋后改五份约，未得实物不能当场入账。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1319,
-          "end": 1326,
-          "anchorSha256": "0e632a995ceaa8bde67cd0b5742f03b0e8d4e10e289aeadbf81d3452236e6899"
+          "start": 1297,
+          "end": 1355,
+          "anchorSha256": "5ed7742ffb180799c91a35a42830df8a7fd10859698f8193248f588717590b5b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0032",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "极阴借韩灵兽的重要性讨价，非韩在场就自动取鼎成功。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 52,
-          "end": 70,
-          "anchorSha256": "a335930c429d7410e458b4f51d81caad5a98d2a78332f42fa7aaa6ef9fe3a618"
+          "start": 0,
+          "end": 93,
+          "anchorSha256": "2feb62826184dd05995d8ee2325c2f7e3856f62270aa28b4bd43dcdb4b2c6a30"
         },
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1070,
-          "end": 1077,
-          "anchorSha256": "b477e647091a8866b283ee4264d1129ac7043066cc45e40917825b2af34f9bc3"
+          "start": 1048,
+          "end": 1118,
+          "anchorSha256": "b09b63c4a178f5a175df56de081b9a6065856d8816e07044cb4bd904c0fac4f0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0033",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "三四分是万评估不是内核固定成功率；舍蚕为明确成本。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1728,
-          "end": 1741,
-          "anchorSha256": "ec75d1e83fafb19c080e08ac33716432afb8996f5e730b6c36a06f69755f6d19"
+          "start": 1660,
+          "end": 1762,
+          "anchorSha256": "dd22fef3d4a9ff90b3aee7c5fbb368be7a6547e7a029b4cb359c259fb364cfaa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0034",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "阻魔取鼎为此次策略，不是正道无论玩家改变都必围杀。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2119,
-          "end": 2131,
-          "anchorSha256": "8002363d86d0e7652ea171fe5b7199f47aa9ff0ed19ad5e37c0ed5f4a77f876e"
+          "start": 2045,
+          "end": 2172,
+          "anchorSha256": "f8d9e69b03abb126aedde3c6c0480100236b87cb4a0d8eaaa8b89c6003757cb4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8050,66 +7899,63 @@
       "candidateId": "batch-0068-fact-0036",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "万猜双圣也欲宝，不凭此给他们发同一任务。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1847,
-          "end": 1859,
-          "anchorSha256": "c0a691a36877381c23787e7c161ee80baf1d1a0f862a9c0c6384e5e77d5516f4"
+          "start": 1833,
+          "end": 1912,
+          "anchorSha256": "18a299ca48948aed0f8263031f4742ce4b84ef53cd5033417623761acfa3d8e4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0037",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "青易恭维若精进可战，未给真实已达战力。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1647,
-          "end": 1659,
-          "anchorSha256": "77f2083b1aeb40f62e2683b8de4aa634c81fc0762762cd32c55e95b544e75554"
+          "start": 1615,
+          "end": 1682,
+          "anchorSha256": "4e1db9f2f53f0bd2d5d2d9733f81b224ff47a632afea4ac467fe66c13ea6d45a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0038",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "万概括魔修是人物立场，不全局锁死心性。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2064,
-          "end": 2075,
-          "anchorSha256": "dc72dd655dbb8a4981e29652d3dbced44e0c545cfe0afd5be36a364eb9b9a9d8"
+          "start": 2045,
+          "end": 2172,
+          "anchorSha256": "f8d9e69b03abb126aedde3c6c0480100236b87cb4a0d8eaaa8b89c6003757cb4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8137,58 +7983,49 @@
       "candidateId": "batch-0068-fact-0040",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-nominal-apprenticeship-and-rings"
+      ],
+      "reason": "韩未在候谷群见紫灵故推她不闯，不是已经观察她安全归家。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 370,
-          "end": 378,
-          "anchorSha256": "cd81abaf7f7b02bd555e70e478d0718079f3d8ad67c0cfec7fc7d569b2445915"
+          "start": 181,
+          "end": 479,
+          "anchorSha256": "bae085e17730ff93cfa8aeeb5dd0f603b044f00296dc93104bf353c0846f2e6f"
         },
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 378,
-          "end": 384,
-          "anchorSha256": "c7723f87c548711dd69c351d1a5448cc7e803e981fc415732c8ac162daba8084"
-        },
-        {
-          "chapterId": "qq-22238410",
-          "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 2491,
-          "end": 2500,
-          "anchorSha256": "f12002f86a9b97a79a9222e7cf065a3f39775e3ea7d4eeb66f072abfa5f26ac1"
+          "start": 2485,
+          "end": 2531,
+          "anchorSha256": "7bce8e7902134d91bc043e5bd8d562584f10a0ddebe81ed557f48e5a52a06c5e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0041",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "范围仅草原此处观察期间似无昼夜，本包回溯稳定明亮不推广全殿。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 492,
-          "end": 504,
-          "anchorSha256": "d65a471f4e99248c75529bc023a51ef09c749adb471d2905f7a2950ba862e75b"
+          "start": 488,
+          "end": 544,
+          "anchorSha256": "5e5beb52baa1a886181fa8114b9c41571e9efbf6395617e01fd569da49f1a2b1"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8237,110 +8074,106 @@
       "candidateId": "batch-0068-fact-0044",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "adopted",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "巨山天然大裂谷与门阵两侧共存，不将裂谷都说机关临时造。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 2199,
-          "end": 2210,
-          "anchorSha256": "47c0ca988c428e810cfa81f501bba22e7e2efff65bcb8cf50b4a6a86a9d3612e"
+          "start": 2146,
+          "end": 2211,
+          "anchorSha256": "3c62c829052eb6d574077dc1ec7b3140b7d1f73709f1ab6799596fd51b502d8e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0045",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-garden-local-environment"
+      ],
+      "reason": "三十余等者属此次现场人数，非常驻或全部世界修士数。",
       "evidence": [
         {
           "chapterId": "qq-22238410",
           "chapterSha256": "9b5449acf6d8d017f529ad959323a4c76cfa15698ef7bd9536080a8816b93b50",
-          "start": 2291,
-          "end": 2302,
-          "anchorSha256": "35041d4d6c433e6d5f6d72fcf657ce0ab97f5b5435adccbceeaf3af5bd6b7fea"
+          "start": 2275,
+          "end": 2327,
+          "anchorSha256": "ba4637969feae536ba1a5d0586791a70e372cbbc86d14a19296489d1f7643465"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0053",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "数日后出口见面的约定，尚未完成行程。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 485,
-          "end": 501,
-          "anchorSha256": "ef4a379e6de65c40a52352dfc0255938844b6aa4eb3bee07beb8d98263c3dd5e"
+          "start": 473,
+          "end": 522,
+          "anchorSha256": "3f984a847a2a8931aad151fec2a5e4812ba9e111833d283814223a12edc53850"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0067",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "鳞片仿佛不可毁为外观感受，不是不可破坏属性。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1057,
-          "end": 1066,
-          "anchorSha256": "2bf187f781abff3da240f79caf6e7cc307604d17c5287b6b3d5306884e407c94"
+          "start": 980,
+          "end": 1112,
+          "anchorSha256": "e38e19892b51aaa0eb81c658222e8cac3d5b5c1dd1760b3352dc8e66782aa0d3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0069",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-hanbing-bead",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "暂借护韩为取鼎利益，依然有能力条件不是绝对不死保证。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 177,
-          "end": 183,
-          "anchorSha256": "52ef15457129ad0ca2f7b8d922e1ba9867955dd4a38a7f97223f0b9111a06bb8"
+          "start": 128,
+          "end": 222,
+          "anchorSha256": "5765e9d5677617cb8717db2bc3f178a3f843db3f4d30e6a24548a75a2a4eea37"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8368,22 +8201,21 @@
       "candidateId": "batch-0068-fact-0071",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "极阴说本法至高可比托天，未自证现修至高。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 1195,
-          "end": 1206,
-          "anchorSha256": "d114bbe7cc9b27f22dea9a30452a435fb020f0e9048bc8335a25bb08fe357a5b"
+          "start": 1179,
+          "end": 1244,
+          "anchorSha256": "e8d4990d8bb86009fe95615e003efdd1b3fd445d3dc6394101c0ecdbdceb1665"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8446,51 +8278,49 @@
       "candidateId": "batch-0068-fact-0077",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "虫配花是有实际代价计划，后续成功失败需实际裁定。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1589,
-          "end": 1599,
-          "anchorSha256": "8f1002fe5a3dc2d8995294ff5296c556ec45f61e162ebd3c9d4dceefd8168467"
+          "start": 1582,
+          "end": 1659,
+          "anchorSha256": "6bce6e744d2804bd1d1093ef1c4d9f8f654a45bdf2c38cc65ec5ffdc00b67665"
         },
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1718,
-          "end": 1725,
-          "anchorSha256": "2c818a538c058b63f66b6f5229aa5a4c74c88cb6af101f9cd7300f1bbe708c89"
+          "start": 1660,
+          "end": 1762,
+          "anchorSha256": "dd22fef3d4a9ff90b3aee7c5fbb368be7a6547e7a029b4cb359c259fb364cfaa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0078",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "天悟已知前人无人取到为所知历史，不推出永不可取。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 1623,
-          "end": 1632,
-          "anchorSha256": "20f994ffedb64e6e546c20f5b23621d2c8ff660061e7ea6fb9afcc42a376ca8a"
+          "start": 1582,
+          "end": 1659,
+          "anchorSha256": "6bce6e744d2804bd1d1093ef1c4d9f8f654a45bdf2c38cc65ec5ffdc00b67665"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8518,22 +8348,21 @@
       "candidateId": "batch-0068-fact-0080",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "万认为敌方火蟒可能取宝，不建立已成功事件。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2135,
-          "end": 2144,
-          "anchorSha256": "954f96d65312044a92546e242a6849ee721dc4ab8fd53f7a532d43dfabffa367"
+          "start": 2045,
+          "end": 2172,
+          "anchorSha256": "f8d9e69b03abb126aedde3c6c0480100236b87cb4a0d8eaaa8b89c6003757cb4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8569,102 +8398,99 @@
       "candidateId": "batch-0068-fact-0082",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "缺蛮焦虑、到场安心是此阵容评估，不固定永久阵营强弱。",
       "evidence": [
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 407,
-          "end": 425,
-          "anchorSha256": "b3147bced89296c6d77db40bdc3cfe2946271535d4000c83117d186f5d8b744b"
+          "start": 354,
+          "end": 434,
+          "anchorSha256": "1a68130d6211eb4243ec01f166f06bd0870589a37e7175c7d0e52a234ec34296"
         },
         {
           "chapterId": "qq-22246499",
           "chapterSha256": "73755c223448171db7abffa29ff59aa62cddffabf7f76b6c4dda41c240447da4",
-          "start": 716,
-          "end": 729,
-          "anchorSha256": "a6f35c478c7e0b0d62edcb1d1d1c06408df058bbecee7429c978f6d94354b7d9"
+          "start": 700,
+          "end": 742,
+          "anchorSha256": "ca18f685c54761c4494c16e1b3da817e308b4d045a0306069ae25884eed1c870"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0084",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-baixi-pendant",
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "蓝佩实际由极阴交出、蛮认宝，保明确交付所有权链。",
       "evidence": [
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2817,
-          "end": 2828,
-          "anchorSha256": "b3137d9118ef30fa30986469ca336f3faaa571fd615a5d45366f06d305e6dc4a"
+          "start": 2768,
+          "end": 2835,
+          "anchorSha256": "4c8ad5a0bfe922eeac4485745b2b3157f1da5c023410f8a9e7886866eb1e76d8"
         },
         {
           "chapterId": "qq-22249132",
           "chapterSha256": "7d2ae36c79ba7c49fa3b9778347cceb422b9a5f5bc12574c6427ce36e15d046d",
-          "start": 2864,
-          "end": 2878,
-          "anchorSha256": "9faf7ff13e2de098b9b77c725f7df5e9463d23967ad0d0090d540aeebbd219d1"
+          "start": 2836,
+          "end": 2903,
+          "anchorSha256": "77256e52ad99e247141b4c8ece6d67e220b224428abaaa87ec42a9d710c46639"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0085",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "later-only",
+      "targetIds": [
+        "void-bargain-and-borrowed-protection"
+      ],
+      "reason": "提议借珠之后确有蛮递珠，区分提案与落实；珠最终仍暂借。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 71,
-          "end": 80,
-          "anchorSha256": "793e32bd179bee84597a2cb9168f2fbaee5924b9920137f6fe6ced7dd5bb6d8e"
+          "start": 0,
+          "end": 127,
+          "anchorSha256": "efbb42e14403ac57d72a2274fc8e34076ad005d27039da2c5a033d398c18e89f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0068-fact-0086",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-buxu-intentions"
+      ],
+      "reason": "同前厅黄脸中年连续指称，不和古今别的黄脸修士合人。",
       "evidence": [
         {
           "chapterId": "qq-22264153",
           "chapterSha256": "4d091700c3ab44b1ce8237bfef2addb3afc2a064d824372bb00cfe5edbd49a89",
-          "start": 39,
-          "end": 52,
-          "anchorSha256": "097d0ab2adbb54f846feb21247a8a0faf03254f7cb67d39a4bdc6891c2229ee4"
+          "start": 0,
+          "end": 58,
+          "anchorSha256": "b8b2c70fd11840207324dd1892eef292b69f6d5f15e6a8d2776d15e362591be5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8692,22 +8518,21 @@
       "candidateId": "batch-0068-issue-0008",
       "batchId": "batch-0068",
       "reportHash": "1fe55d513163442461002ad59722f1fec5b14ffac0a3faf48a89b58de1552f77",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "本条尚无可直接复用的严格编辑裁定。已有提取或独立来源审校不等于开篇语义准入；若有旧编辑分类，其原文件另存并待绑定出处和目标。",
+      "disposition": "corrected",
+      "targetIds": [
+        "void-buxu-intentions"
+      ],
+      "reason": "卜绪想象得到补天丹必助突破不是保证；后文实鼎开宝另有确证，非永久无实体。",
       "evidence": [
         {
           "chapterId": "qq-22255268",
           "chapterSha256": "cc1006f135592a9ce061ab9092f6980583e30f5c405e69252b13497aa01b99fa",
-          "start": 2975,
-          "end": 2982,
-          "anchorSha256": "c22f19520629e503c6100f8dbbb62b4d3f90e0fffc0c3e56585af2fbc20bf2b0"
+          "start": 2928,
+          "end": 3002,
+          "anchorSha256": "d38ce9ad4f3497549494af1e683d5715b4daea1abe375ea0e84fff97017a3887"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "仍需本条编辑判断或对已有分类补齐严格证据绑定；不是要求新增同名人物。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
