@@ -181,3 +181,17 @@
 | tiannan-tiansha-cracked-tile-a | 护院阵裂纹片甲 | item | tiannan-tiansha-courtyard-ward |
 | tiannan-tiansha-cracked-tile-b | 护院阵裂纹片乙 | item | tiannan-tiansha-courtyard-ward |
 | tiannan-qianhuan-unsealed-letter | 缺印的询价信 | item | tiannan-qianhuan-outer-court |
+| tiannan-tianxing-talisman-shop | 天星坊制符店 | location | tiannan-tianxing-market |
+| tiannan-tianxing-beast-court | 天星坊灵兽院 | location | tiannan-tianxing-market |
+| original-tiannan-xie-wenquan | 谢文泉 | person / Agent | tiannan-tianxing-talisman-shop |
+| original-tiannan-liang-shouping | 梁守平 | person / Agent | tiannan-tianxing-beast-court |
+| tiannan-talisman-business | 天星坊符业商号 | organization | tiannan-tianxing-talisman-shop |
+| tiannan-talisman-business-stock | 天星坊符业商号货料柜 | item | tiannan-tianxing-talisman-shop |
+| original-tiannan-xie-wenquan-tools | 天星坊符业商号工具 | item | tiannan-tianxing-talisman-shop |
+| tiannan-talisman-business-ledger | 天星坊符业商号账簿 | item | tiannan-tianxing-talisman-shop |
+| tiannan-beast-business | 天星坊兽业商号 | organization | tiannan-tianxing-beast-court |
+| tiannan-beast-business-stock | 天星坊兽业商号货料柜 | item | tiannan-tianxing-beast-court |
+| original-tiannan-liang-shouping-tools | 天星坊兽业商号工具 | item | tiannan-tianxing-beast-court |
+| tiannan-beast-business-ledger | 天星坊兽业商号账簿 | item | tiannan-tianxing-beast-court |
+| tiannan-sale-earth-badger | 土獾 | creature | tiannan-tianxing-beast-court |
+| tiannan-sale-rock-lizard | 岩蜥 | creature | tiannan-tianxing-beast-court |

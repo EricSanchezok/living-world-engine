@@ -10278,6 +10278,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "tiannan-tianxing-market-route-to-tiannan-tianxing-talisman-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-tianxing-talisman-shop"
+          },
+          "description": "从坊市街道到店门说明来意，取货或入内院另经主人同意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-tianxing-market-route-to-tiannan-tianxing-beast-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-tianxing-beast-court"
+          },
+          "description": "从坊市街道到店门说明来意，取货或入内院另经主人同意。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -10734,6 +10758,18 @@
               "name": "天星街口小摊位",
               "description": "需要安排下一期的小摊位。",
               "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-xie-wenquan",
+              "name": "谢文泉",
+              "description": "自己曾核过这家店的经营登记；店家自行负责货物、交割与争议，不是自己的雇员。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-liang-shouping",
+              "name": "梁守平",
+              "description": "自己曾核过这家店的经营登记；店家自行负责货物、交割与争议，不是自己的雇员。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -10801,6 +10837,18 @@
               "local_entity_id": "known-tiannan-market-entry-stall",
               "canonical_entity_ids": [
                 "tiannan-market-entry-stall"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-xie-wenquan",
+              "canonical_entity_ids": [
+                "original-tiannan-xie-wenquan"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-liang-shouping",
+              "canonical_entity_ids": [
+                "original-tiannan-liang-shouping"
               ]
             }
           ],
@@ -15301,6 +15349,1128 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "tiannan-tianxing-talisman-shop",
+      "name": "天星坊制符店",
+      "kind": "location",
+      "placement": "tiannan-tianxing-market",
+      "description": "临街接受低阶符箓订制的铺面，柜后是制符案与材料架。",
+      "facts": [
+        {
+          "id": "tiannan-tianxing-talisman-shop-route-to-tiannan-tianxing-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-tianxing-market"
+          },
+          "description": "店门通向坊市街道；笼舍和制符案后须取得店家许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-tianxing-talisman-shop-operated-by",
+          "predicate": "operated-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-talisman-business"
+          },
+          "description": "该商号在此经营，店物不可直接视作个人随身财物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-tianxing-talisman-shop-service-terms",
+          "predicate": "service-terms",
+          "value": {
+            "kind": "text",
+            "value": "现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。"
+          },
+          "description": "现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-tianxing-beast-court",
+      "name": "天星坊灵兽院",
+      "kind": "location",
+      "placement": "tiannan-tianxing-market",
+      "description": "临街接待处连着围栏内院，待售妖兽关在各自笼舍中。",
+      "facts": [
+        {
+          "id": "tiannan-tianxing-beast-court-route-to-tiannan-tianxing-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-tianxing-market"
+          },
+          "description": "店门通向坊市街道；笼舍和制符案后须取得店家许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-tianxing-beast-court-operated-by",
+          "predicate": "operated-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "该商号在此经营，店物不可直接视作个人随身财物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "original-tiannan-xie-wenquan",
+      "name": "谢文泉",
+      "kind": "person",
+      "placement": "tiannan-tianxing-talisman-shop",
+      "description": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。",
+      "facts": [
+        {
+          "id": "original-tiannan-xie-wenquan-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气十一层"
+          },
+          "description": "炼气十一层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-xie-wenquan"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "木、火、土三灵根"
+          },
+          "description": "木、火、土三灵根",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-xie-wenquan"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。"
+          },
+          "description": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-xie-wenquan"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-works-for",
+          "predicate": "works-for",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-talisman-business"
+          },
+          "description": "负责本店接待、交接与账务。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-tiannan-xie-wenquan-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-tiannan-xie-wenquan-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-xie-wenquan-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 24
+        }
+      ],
+      "agent": {
+        "id": "original-tiannan-xie-wenquan",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。",
+            "voice": "先问客人要防什么，再解释材料和工时；说到画坏的符会坦然认账。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查柜后的纸料是否受潮，整理明日可承接的订制数目。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "谢文泉",
+              "description": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "天星坊制符店",
+              "description": "自己经营与任事的店铺。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-talisman-business",
+              "name": "天星坊符业商号",
+              "description": "自己经营并承担账务责任的商号。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-talisman-business-stock",
+              "name": "天星坊符业商号货料柜",
+              "description": "自己经手的货款和材料，知道最近一次清点，交易后仍须更新。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-xie-wenquan-tools",
+              "name": "天星坊符业商号工具",
+              "description": "自己日常使用的工具。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-talisman-business-ledger",
+              "name": "天星坊符业商号账簿",
+              "description": "自己保管的原账簿，尚未收取今晚的新订单。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-gu-nan",
+              "name": "顾楠",
+              "description": "负责坊市登记的顾楠，自己曾向其办理经营登记；对方不替本店承诺货物质量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-liang-shouping",
+              "name": "梁守平",
+              "description": "邻店经营者，曾互相借用搬货小车，当前没有未清债务。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-tiannan-xie-wenquan"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "tiannan-tianxing-talisman-shop"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-talisman-business",
+              "canonical_entity_ids": [
+                "tiannan-talisman-business"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-talisman-business-stock",
+              "canonical_entity_ids": [
+                "tiannan-talisman-business-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-xie-wenquan-tools",
+              "canonical_entity_ids": [
+                "original-tiannan-xie-wenquan-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-talisman-business-ledger",
+              "canonical_entity_ids": [
+                "tiannan-talisman-business-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-gu-nan",
+              "canonical_entity_ids": [
+                "original-tiannan-gu-nan"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-liang-shouping",
+              "canonical_entity_ids": [
+                "original-tiannan-liang-shouping"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的验灵、修学、经营与日常交接经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气十一层"
+              },
+              "description": "炼气十一层",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "木、火、土三灵根"
+              },
+              "description": "木、火、土三灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。"
+              },
+              "description": "能辨低阶符纸丹砂，掌握普通护身符绘制与基础御物术；高阶符箓须另找相应符师。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检查柜后的纸料是否受潮，整理明日可承接的订制数目。"
+              },
+              "description": "检查柜后的纸料是否受潮，整理明日可承接的订制数目。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "service-terms",
+              "subjectId": "self",
+              "predicate": "service-terms",
+              "value": {
+                "kind": "text",
+                "value": "现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。"
+              },
+              "description": "现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "original-tiannan-liang-shouping",
+      "name": "梁守平",
+      "kind": "person",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。",
+      "facts": [
+        {
+          "id": "original-tiannan-liang-shouping-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气十二层"
+          },
+          "description": "炼气十二层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-liang-shouping"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-liang-shouping-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "金、木、土三灵根"
+          },
+          "description": "金、木、土三灵根",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-liang-shouping"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-liang-shouping-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。"
+          },
+          "description": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-tiannan-liang-shouping"
+            ]
+          }
+        },
+        {
+          "id": "original-tiannan-liang-shouping-works-for",
+          "predicate": "works-for",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "负责本店接待、交接与账务。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-tiannan-liang-shouping-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-tiannan-liang-shouping-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-tiannan-liang-shouping-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-liang-shouping-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-tiannan-liang-shouping-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-liang-shouping-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "original-tiannan-liang-shouping-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 24
+        }
+      ],
+      "agent": {
+        "id": "original-tiannan-liang-shouping",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。",
+            "voice": "讲话慢，先让人离笼门远些；愿演示兽性，遇夸大护院效果的要求会摇头。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "清理岩蜥笼里的旧垫草，观察它今夜进食的情况。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "梁守平",
+              "description": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "天星坊灵兽院",
+              "description": "自己经营与任事的店铺。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-beast-business",
+              "name": "天星坊兽业商号",
+              "description": "自己经营并承担账务责任的商号。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-beast-business-stock",
+              "name": "天星坊兽业商号货料柜",
+              "description": "自己经手的货款和材料，知道最近一次清点，交易后仍须更新。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-liang-shouping-tools",
+              "name": "天星坊兽业商号工具",
+              "description": "自己日常使用的工具。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-beast-business-ledger",
+              "name": "天星坊兽业商号账簿",
+              "description": "自己保管的原账簿，尚未收取今晚的新订单。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-gu-nan",
+              "name": "顾楠",
+              "description": "负责坊市登记的顾楠，自己曾向其办理经营登记；对方不替本店承诺货物质量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-sale-earth-badger",
+              "name": "土獾",
+              "description": "自己长期喂养的土獾，知道其品阶、训练程度和每次交易需交接。",
+              "status": "observed"
+            },
+            {
+              "id": "known-tiannan-sale-rock-lizard",
+              "name": "岩蜥",
+              "description": "自己长期喂养的岩蜥，知道其品阶、训练程度和每次交易需交接。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-tiannan-xie-wenquan",
+              "name": "谢文泉",
+              "description": "邻店符师，曾互相借用搬货小车，当前没有未清债务。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-tiannan-liang-shouping"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "tiannan-tianxing-beast-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-beast-business",
+              "canonical_entity_ids": [
+                "tiannan-beast-business"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-beast-business-stock",
+              "canonical_entity_ids": [
+                "tiannan-beast-business-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-liang-shouping-tools",
+              "canonical_entity_ids": [
+                "original-tiannan-liang-shouping-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-beast-business-ledger",
+              "canonical_entity_ids": [
+                "tiannan-beast-business-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-gu-nan",
+              "canonical_entity_ids": [
+                "original-tiannan-gu-nan"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-sale-earth-badger",
+              "canonical_entity_ids": [
+                "tiannan-sale-earth-badger"
+              ]
+            },
+            {
+              "local_entity_id": "known-tiannan-sale-rock-lizard",
+              "canonical_entity_ids": [
+                "tiannan-sale-rock-lizard"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-tiannan-xie-wenquan",
+              "canonical_entity_ids": [
+                "original-tiannan-xie-wenquan"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的验灵、修学、经营与日常交接经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气十二层"
+              },
+              "description": "炼气十二层",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、木、土三灵根"
+              },
+              "description": "金、木、土三灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。"
+              },
+              "description": "熟悉两只在售一级妖兽的喂养、笼具与短距声令训练，能辨轻伤和应激；不能因此驯服任意野生高阶兽。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "清理岩蜥笼里的旧垫草，观察它今夜进食的情况。"
+              },
+              "description": "清理岩蜥笼里的旧垫草，观察它今夜进食的情况。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "sale-terms",
+              "subjectId": "self",
+              "predicate": "sale-terms",
+              "value": {
+                "kind": "text",
+                "value": "当前土獾报价35、岩蜥90低阶灵石；只有这两只待售兽。需演示声令并让新照看者适应，再核对付款和交接；不保证妖兽永远服从。每日每只一份饲料，今晚已经喂过，柜中余14份。"
+              },
+              "description": "当前土獾报价35、岩蜥90低阶灵石；只有这两只待售兽。需演示声令并让新照看者适应，再核对付款和交接；不保证妖兽永远服从。每日每只一份饲料，今晚已经喂过，柜中余14份。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiannan-talisman-business",
+      "name": "天星坊符业商号",
+      "kind": "organization",
+      "placement": "tiannan-tianxing-talisman-shop",
+      "description": "单独记账的店业，货款和店物与经手人的随身财物分开。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-talisman-business-stock",
+      "name": "天星坊符业商号货料柜",
+      "kind": "item",
+      "placement": "tiannan-tianxing-talisman-shop",
+      "description": "店业货款与材料，收支需记在店簿中。",
+      "facts": [
+        {
+          "id": "tiannan-talisman-business-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-talisman-business"
+          },
+          "description": "货款与材料归商号。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-talisman-business-stock-kept-by",
+          "predicate": "kept-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-tiannan-xie-wenquan"
+          },
+          "description": "负责实物保管和记账，个人随身钱另计。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 200
+        },
+        {
+          "definition_id": "yue-blank-paper",
+          "amount": 30
+        },
+        {
+          "definition_id": "yue-cinnabar-use",
+          "amount": 30
+        },
+        {
+          "definition_id": "tiannan-protection-talisman",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "original-tiannan-xie-wenquan-tools",
+      "name": "天星坊符业商号工具",
+      "kind": "item",
+      "placement": "tiannan-tianxing-talisman-shop",
+      "description": "制符笔、研砂碟与平整案板。",
+      "facts": [
+        {
+          "id": "original-tiannan-xie-wenquan-tools-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-talisman-business"
+          },
+          "description": "工具属于店业。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-talisman-business-ledger",
+      "name": "天星坊符业商号账簿",
+      "kind": "item",
+      "placement": "tiannan-tianxing-talisman-shop",
+      "description": "已记录当前柜中存量，今晚尚无新订制、交兽或欠款。",
+      "facts": [
+        {
+          "id": "tiannan-talisman-business-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-talisman-business"
+          },
+          "description": "记录属于店业，查看须经负责人同意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-beast-business",
+      "name": "天星坊兽业商号",
+      "kind": "organization",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "单独记账的店业，货款和店物与经手人的随身财物分开。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-beast-business-stock",
+      "name": "天星坊兽业商号货料柜",
+      "kind": "item",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "店业货款与材料，收支需记在店簿中。",
+      "facts": [
+        {
+          "id": "tiannan-beast-business-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "货款与材料归商号。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-beast-business-stock-kept-by",
+          "predicate": "kept-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-tiannan-liang-shouping"
+          },
+          "description": "负责实物保管和记账，个人随身钱另计。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 200
+        },
+        {
+          "definition_id": "grain",
+          "amount": 14
+        }
+      ]
+    },
+    {
+      "id": "original-tiannan-liang-shouping-tools",
+      "name": "天星坊兽业商号工具",
+      "kind": "item",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "可开合运输笼、清扫杆和两只食盆。",
+      "facts": [
+        {
+          "id": "original-tiannan-liang-shouping-tools-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "工具属于店业。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-beast-business-ledger",
+      "name": "天星坊兽业商号账簿",
+      "kind": "item",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "已记录当前柜中存量，今晚尚无新订制、交兽或欠款。",
+      "facts": [
+        {
+          "id": "tiannan-beast-business-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "记录属于店业，查看须经负责人同意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-sale-earth-badger",
+      "name": "土獾",
+      "kind": "creature",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "可掘普通松土，嗅找近处食物；不能无视岩壁或防护禁制。",
+      "facts": [
+        {
+          "id": "tiannan-sale-earth-badger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "当前属于兽业商号，实际付款交接才转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-earth-badger-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "一级下阶"
+          },
+          "description": "一级下阶",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-earth-badger-training-state",
+          "predicate": "training-state",
+          "value": {
+            "kind": "text",
+            "value": "熟悉梁守平的短距声令和喂食，陌生人需在其看护下适应；受伤或惊吓仍可能不听从。"
+          },
+          "description": "驯养不抹去活兽反应。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-earth-badger-daily-care",
+          "predicate": "daily-care",
+          "value": {
+            "kind": "text",
+            "value": "每日需一份合用饲料与清水，另需清理笼舍；当前已吃过今日饲料。"
+          },
+          "description": "持续饲养会消耗真实食粮，今晚不重复扣已吃的一份。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-earth-badger-sale-price",
+          "predicate": "sale-price",
+          "value": {
+            "kind": "text",
+            "value": "35低阶灵石，含一次现场声令演示与交接；未出售前不能随意带走。"
+          },
+          "description": "报价须双方同意并实际交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "tiannan-sale-earth-badger-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "tiannan-sale-rock-lizard",
+      "name": "岩蜥",
+      "kind": "creature",
+      "placement": "tiannan-tianxing-beast-court",
+      "description": "鳞甲能抵一般轻兵器，受惊会冲撞；不能据此免疫修士法器。",
+      "facts": [
+        {
+          "id": "tiannan-sale-rock-lizard-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "tiannan-beast-business"
+          },
+          "description": "当前属于兽业商号，实际付款交接才转移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-rock-lizard-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "一级上阶"
+          },
+          "description": "一级上阶",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-rock-lizard-training-state",
+          "predicate": "training-state",
+          "value": {
+            "kind": "text",
+            "value": "熟悉梁守平的短距声令和喂食，陌生人需在其看护下适应；受伤或惊吓仍可能不听从。"
+          },
+          "description": "驯养不抹去活兽反应。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-rock-lizard-daily-care",
+          "predicate": "daily-care",
+          "value": {
+            "kind": "text",
+            "value": "每日需一份合用饲料与清水，另需清理笼舍；当前已吃过今日饲料。"
+          },
+          "description": "持续饲养会消耗真实食粮，今晚不重复扣已吃的一份。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "tiannan-sale-rock-lizard-sale-price",
+          "predicate": "sale-price",
+          "value": {
+            "kind": "text",
+            "value": "90低阶灵石，含一次现场声令演示与交接；未出售前不能随意带走。"
+          },
+          "description": "报价须双方同意并实际交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "tiannan-sale-rock-lizard-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -15387,6 +16557,11 @@
       "id": "tiannan-institutional-and-individual",
       "text": "正魔、宗派和家族称名表示组织与传承，不预先决定每一成员的道德或对玩家的态度。抢夺、救助、结盟和拒绝均须由具体人物在认知与能力范围内行动。",
       "severity": "soft"
+    },
+    {
+      "id": "tiannan-tianxing-orders-and-beast-care",
+      "text": "天星制符店的材料报价、工费、交期、失败责任须先约定并留下真实账目。尝试绘符会消耗实际符纸与丹砂，成符才增加相应库存；失败赔款从商号已有灵石支出，资金不足须协商或形成经确认的债务，不能凭空补钱。灵兽成交须交付款项、所有权和照料责任，训练需实际适应，喂养消耗饲料与时间，驯养不保证绝对服从。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -16892,7 +18067,8 @@
     ],
     "entity:original-tiannan-gu-nan": [
       "tiannan-expanded-opening-life",
-      "tiannan-fixed-opening-roots"
+      "tiannan-fixed-opening-roots",
+      "tiannan-two-shops-opening-resources"
     ],
     "fact:original-tiannan-gu-nan-cultivation-state": [
       "tiannan-expanded-opening-life"
@@ -17503,6 +18679,198 @@
     ],
     "fact:tiannan-qianhuan-unsealed-letter-keeper": [
       "tiannan-expanded-opening-life"
+    ],
+    "entity:tiannan-tianxing-talisman-shop": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-talisman-shop-route-to-tiannan-tianxing-market": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-market-route-to-tiannan-tianxing-talisman-shop": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-tianxing-beast-court": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-beast-court-route-to-tiannan-tianxing-market": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-market-route-to-tiannan-tianxing-beast-court": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:original-tiannan-xie-wenquan": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-xie-wenquan-cultivation-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-xie-wenquan-spiritual-root": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-xie-wenquan-learned-skill": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:original-tiannan-liang-shouping": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-liang-shouping-cultivation-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-liang-shouping-spiritual-root": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-liang-shouping-learned-skill": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-talisman-business": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-talisman-shop-operated-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-xie-wenquan-works-for": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-talisman-business-stock": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-talisman-business-stock-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-talisman-business-stock-kept-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:original-tiannan-xie-wenquan-tools": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-xie-wenquan-tools-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-talisman-business-ledger": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-talisman-business-ledger-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-beast-business": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-beast-court-operated-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-liang-shouping-works-for": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-beast-business-stock": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-beast-business-stock-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-beast-business-stock-kept-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:original-tiannan-liang-shouping-tools": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:original-tiannan-liang-shouping-tools-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-beast-business-ledger": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-beast-business-ledger-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-tianxing-talisman-shop-service-terms": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-sale-earth-badger": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-earth-badger-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-earth-badger-cultivation-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-earth-badger-training-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-earth-badger-daily-care": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-earth-badger-sale-price": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "entity:tiannan-sale-rock-lizard": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-rock-lizard-owned-by": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-rock-lizard-cultivation-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-rock-lizard-training-state": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-rock-lizard-daily-care": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "fact:tiannan-sale-rock-lizard-sale-price": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
+    ],
+    "law:tiannan-tianxing-orders-and-beast-care": [
+      "tiannan-tianxing-talisman-and-beast-shops",
+      "tiannan-two-shops-opening-resources"
     ]
   }
 }

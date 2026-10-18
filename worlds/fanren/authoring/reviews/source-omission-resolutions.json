@@ -6,7 +6,7 @@
   "total": 2834,
   "completed": 770,
   "pending": 2064,
-  "recordsHash": "0350d6c7f940afbda7bfad59a06ffc729f80bfae5f0f960a0ab26b684b396cd0",
+  "recordsHash": "09404a23115057fc9e1ffbf97da60ac566735b0755b9cdd29c7bc8487cb0dce2",
   "anchorCount": 1116,
   "readScope": "逐条阅读审校遗漏、所引完整原段与已有地区审定目标；歧义另读相邻段。记录保留原描述供纠错追踪，事实以 disposition 和 statement 为准。证据重叠不自动批准。",
   "limitations": [
@@ -40,20 +40,6 @@
       "id": "batch-0030:omission:0",
       "ordinal": 191,
       "subject": "传送阵",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
-    },
-    {
-      "id": "batch-0031:omission:0",
-      "ordinal": 197,
-      "subject": "制符店铺",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
-    },
-    {
-      "id": "batch-0031:omission:1",
-      "ordinal": 198,
-      "subject": "灵兽院",
       "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
       "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
     },
@@ -6232,7 +6218,7 @@
       "subject": "制符店铺",
       "sourceDescription": "坊市内接受灵符订制的店铺，失败只返还与材料相等的灵石（事实0032提及但未作为对象收录）。",
       "disposition": "opening-source-supplement",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
+      "statement": "天星宗坊市制符店接受订制，失败按材料价值赔灵石；不同于炼器双倍赔偿。已建常设店、原创经营者与独立公库，工料和赔款都从真实库存结算；不前置韩立订购。",
       "status": "source-semantics-resolved",
       "validAtOpening": true,
       "openingReason": "已存制度、关系或历史另循指定地区声明，不将后来行为与信息自动前置。",
@@ -6252,8 +6238,14 @@
           "anchorSha256": "035e3a60e8ea7ec229a70579167e0642464e0b6f2649ebff20fc83003d077633"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
+      "targetIds": [
+        "tiannan-tianxing-talisman-and-beast-shops",
+        "tiannan-two-shops-opening-resources",
+        "tiannan-tianxing-talisman-shop",
+        "original-tiannan-xie-wenquan",
+        "tiannan-talisman-business"
+      ],
+      "runtimeDisposition": "authored-and-strict-assembly-passed"
     },
     {
       "id": "batch-0031:omission:1",
@@ -6267,7 +6259,7 @@
       "subject": "灵兽院",
       "sourceDescription": "坊市内专门出售驯养妖兽的店铺，有一级上阶妖兽（事实0033提及但未作为对象收录）。",
       "disposition": "opening-source-supplement",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
+      "statement": "灵兽院经营驯养妖兽，原文明见一级上阶货品；已建常设店、原创经营者及两只独立妖兽与有限饲料，买卖需实际交接和新主适应，不前置韩立交兽。",
       "status": "source-semantics-resolved",
       "validAtOpening": true,
       "openingReason": "已存制度、关系或历史另循指定地区声明，不将后来行为与信息自动前置。",
@@ -6280,8 +6272,14 @@
           "anchorSha256": "7bdc10de7b19254e388fdca05f6d3d95dc365fa8a241ded07bb4134490dee7bb"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
+      "targetIds": [
+        "tiannan-tianxing-talisman-and-beast-shops",
+        "tiannan-two-shops-opening-resources",
+        "tiannan-tianxing-beast-court",
+        "original-tiannan-liang-shouping",
+        "tiannan-beast-business"
+      ],
+      "runtimeDisposition": "authored-and-strict-assembly-passed"
     },
     {
       "id": "batch-0031:omission:2",
