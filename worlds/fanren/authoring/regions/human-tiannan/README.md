@@ -13,3 +13,5 @@
 返天南、云梦宗门、招收入门及药园捕狐152条逐项阅读处置；本轮152条具体处置见 [candidate-review-2026-10-18-luoyun-entry.json](candidate-review-2026-10-18-luoyun-entry.json)。并非全区域或真实游玩验收。
 
 捕狐后续、宗内选拔与三宗试剑126条逐项处置；本轮126条具体处置见 [candidate-review-2026-10-18-competition.json](candidate-review-2026-10-18-competition.json)。并非全区域或真实游玩验收。
+
+灵树禁地、结婴入宗与元武寿宴前段173条逐项复读处置；本轮173条具体处置见 [candidate-review-2026-10-18-tree-nascent.json](candidate-review-2026-10-18-tree-nascent.json)。并非全区域或真实游玩验收。
