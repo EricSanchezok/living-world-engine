@@ -24,6 +24,1576 @@
       "quantities": [],
       "ratings": [],
       "shared_activity_resources": []
+    },
+    {
+      "id": "far-wulong-fog-sea",
+      "name": "五龙海雾海",
+      "kind": "location",
+      "placement": "human-wulong-sea",
+      "description": "海雾弥漫的广大海域；水面之下与雾中远处不能仅凭海域名称看清。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-wulong-fog-island",
+      "name": "雾中无名岛",
+      "kind": "location",
+      "placement": "far-wulong-fog-sea",
+      "description": "雾海中的小岛，岛岸与附近海面是不同位置。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-luwan",
+      "name": "芦湾泊地",
+      "kind": "location",
+      "placement": "human-wulong-sea",
+      "description": "五龙海一处近岸泊地，渔舟在湾内避风。",
+      "facts": [
+        {
+          "id": "far-luwan-route-far-luwan-workshop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-luwan-workshop"
+          },
+          "description": "沿泊地岸边小路步行可达，按实际行程耗时。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "far-luwan-route-far-luwan-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-luwan-shop"
+          },
+          "description": "沿泊地岸边小路步行可达，按实际行程耗时。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-luwan-workshop",
+      "name": "芦湾舟棚",
+      "kind": "location",
+      "placement": "far-luwan",
+      "description": "堆放旧木料、桨与修舟工具的岸边舟棚。",
+      "facts": [
+        {
+          "id": "far-luwan-workshop-route-far-luwan",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-luwan"
+          },
+          "description": "沿泊地岸边小路步行可达，按实际行程耗时。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-luwan-shop",
+      "name": "芦湾小铺",
+      "kind": "location",
+      "placement": "far-luwan",
+      "description": "湾岸出售日用品并收普通药材的小铺。",
+      "facts": [
+        {
+          "id": "far-luwan-shop-route-far-luwan",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-luwan"
+          },
+          "description": "沿泊地岸边小路步行可达，按实际行程耗时。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-tiansha-landing",
+      "name": "天沙南岸渡口",
+      "kind": "location",
+      "placement": "human-tiansha",
+      "description": "天沙一处供近岸小船停泊的渡口。",
+      "facts": [
+        {
+          "id": "far-tiansha-landing-route-far-tiansha-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-tiansha-store"
+          },
+          "description": "渡口石阶与药栈相连，须实际步行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-tiansha-store",
+      "name": "渡口药栈",
+      "kind": "location",
+      "placement": "far-tiansha-landing",
+      "description": "替邻村收晒普通草药的药栈。",
+      "facts": [
+        {
+          "id": "far-tiansha-store-route-far-tiansha-landing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-tiansha-landing"
+          },
+          "description": "渡口石阶与药栈相连，须实际步行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-zhao-chuan",
+      "name": "赵川",
+      "kind": "person",
+      "placement": "far-luwan-workshop",
+      "description": "年过四十的舟匠，修的是近岸木舟，熟悉船板接缝和桨架。",
+      "facts": [
+        {
+          "id": "far-zhao-chuan-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "42岁。"
+          },
+          "description": "42岁。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-chuan"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-chuan-cultivation",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "未修仙的凡人。"
+          },
+          "description": "未修仙的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-chuan"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-chuan-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-chuan"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-chuan-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "木舟修补、选木和打绳结。"
+          },
+          "description": "木舟修补、选木和打绳结。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-chuan"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-chuan-sibling-far-zhao-zhi",
+          "predicate": "sibling",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-zhi"
+          },
+          "description": "开篇前已经相识的家人。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "far-zhao-chuan-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "far-zhao-chuan-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "far-zhao-chuan-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "far-zhao-chuan-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "far-zhao-chuan-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "far-zhao-chuan-influence",
+          "definition_id": "influence",
+          "value": 0
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 95
+        }
+      ],
+      "agent": {
+        "id": "far-zhao-chuan",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "年过四十的舟匠，修的是近岸木舟，熟悉船板接缝和桨架。",
+            "voice": "按亲历和手头物件说明情况，遇到不熟悉的海路会说明不知道。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "修好自家的漏水船板，再与妹妹商量明日是否运货。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "赵川",
+              "description": "年过四十的舟匠，修的是近岸木舟，熟悉船板接缝和桨架。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "芦湾舟棚",
+              "description": "堆放旧木料、桨与修舟工具的岸边舟棚。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-luwan",
+              "name": "芦湾泊地",
+              "description": "五龙海一处近岸泊地，渔舟在湾内避风。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-luwan-shop",
+              "name": "芦湾小铺",
+              "description": "湾岸出售日用品并收普通药材的小铺。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-zhi",
+              "name": "赵芷",
+              "description": "赵川的妹妹，经营湾岸小铺，收药时习惯逐包检查霉斑。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-boat",
+              "name": "赵家近岸木舟",
+              "description": "船板一处渗水，修补并验漏后才能放心载货。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-tools",
+              "name": "舟匠工具包",
+              "description": "旧木槌、木楔和手锯。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-stock",
+              "name": "赵家待验药包",
+              "description": "收来的两包普通草药，其中一包边角受潮。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-grain",
+              "name": "赵家米粮",
+              "description": "赵家日用口粮，需照顾两人的生活。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "far-zhao-chuan"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "far-luwan-workshop"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-luwan",
+              "canonical_entity_ids": [
+                "far-luwan"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-luwan-shop",
+              "canonical_entity_ids": [
+                "far-luwan-shop"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-zhi",
+              "canonical_entity_ids": [
+                "far-zhao-zhi"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-boat",
+              "canonical_entity_ids": [
+                "far-zhao-boat"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-tools",
+              "canonical_entity_ids": [
+                "far-zhao-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-stock",
+              "canonical_entity_ids": [
+                "far-zhao-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-grain",
+              "canonical_entity_ids": [
+                "far-zhao-grain"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "开篇前日常生活、劳作与明确往来的记忆。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-skill",
+              "subjectId": "self",
+              "predicate": "own-skill",
+              "value": {
+                "kind": "text",
+                "value": "木舟修补、选木和打绳结。"
+              },
+              "description": "木舟修补、选木和打绳结。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "修好自家的漏水船板，再与妹妹商量明日是否运货。"
+              },
+              "description": "修好自家的漏水船板，再与妹妹商量明日是否运货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己未修仙，没有修士的法力。"
+              },
+              "description": "自己未修仙，没有修士的法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "far-zhao-zhi",
+      "name": "赵芷",
+      "kind": "person",
+      "placement": "far-luwan-shop",
+      "description": "赵川的妹妹，经营湾岸小铺，收药时习惯逐包检查霉斑。",
+      "facts": [
+        {
+          "id": "far-zhao-zhi-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "35岁。"
+          },
+          "description": "35岁。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-zhi"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-zhi-cultivation",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "未修仙的凡人。"
+          },
+          "description": "未修仙的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-zhi"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-zhi-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-zhi"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-zhi-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通药材晾晒、验货和记账。"
+          },
+          "description": "普通药材晾晒、验货和记账。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-zhao-zhi"
+            ]
+          }
+        },
+        {
+          "id": "far-zhao-zhi-sibling-far-zhao-chuan",
+          "predicate": "sibling",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-chuan"
+          },
+          "description": "开篇前已经相识的家人。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "far-zhao-zhi-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "far-zhao-zhi-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "far-zhao-zhi-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "far-zhao-zhi-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "far-zhao-zhi-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "far-zhao-zhi-influence",
+          "definition_id": "influence",
+          "value": 0
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 120
+        }
+      ],
+      "agent": {
+        "id": "far-zhao-zhi",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "赵川的妹妹，经营湾岸小铺，收药时习惯逐包检查霉斑。",
+            "voice": "按亲历和手头物件说明情况，遇到不熟悉的海路会说明不知道。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "验完今日收来的两包药材，留足家用再商定运往邻湾的货。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "赵芷",
+              "description": "赵川的妹妹，经营湾岸小铺，收药时习惯逐包检查霉斑。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "芦湾小铺",
+              "description": "湾岸出售日用品并收普通药材的小铺。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-luwan",
+              "name": "芦湾泊地",
+              "description": "五龙海一处近岸泊地，渔舟在湾内避风。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-luwan-workshop",
+              "name": "芦湾舟棚",
+              "description": "堆放旧木料、桨与修舟工具的岸边舟棚。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-chuan",
+              "name": "赵川",
+              "description": "年过四十的舟匠，修的是近岸木舟，熟悉船板接缝和桨架。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-boat",
+              "name": "赵家近岸木舟",
+              "description": "船板一处渗水，修补并验漏后才能放心载货。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-tools",
+              "name": "舟匠工具包",
+              "description": "旧木槌、木楔和手锯。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-stock",
+              "name": "赵家待验药包",
+              "description": "收来的两包普通草药，其中一包边角受潮。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-zhao-grain",
+              "name": "赵家米粮",
+              "description": "赵家日用口粮，需照顾两人的生活。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "far-zhao-zhi"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "far-luwan-shop"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-luwan",
+              "canonical_entity_ids": [
+                "far-luwan"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-luwan-workshop",
+              "canonical_entity_ids": [
+                "far-luwan-workshop"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-chuan",
+              "canonical_entity_ids": [
+                "far-zhao-chuan"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-boat",
+              "canonical_entity_ids": [
+                "far-zhao-boat"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-tools",
+              "canonical_entity_ids": [
+                "far-zhao-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-stock",
+              "canonical_entity_ids": [
+                "far-zhao-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-zhao-grain",
+              "canonical_entity_ids": [
+                "far-zhao-grain"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "开篇前日常生活、劳作与明确往来的记忆。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-skill",
+              "subjectId": "self",
+              "predicate": "own-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通药材晾晒、验货和记账。"
+              },
+              "description": "普通药材晾晒、验货和记账。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "验完今日收来的两包药材，留足家用再商定运往邻湾的货。"
+              },
+              "description": "验完今日收来的两包药材，留足家用再商定运往邻湾的货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己未修仙，没有修士的法力。"
+              },
+              "description": "自己未修仙，没有修士的法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "far-lin-du",
+      "name": "林渡",
+      "kind": "person",
+      "placement": "far-tiansha-landing",
+      "description": "天沙南岸摆渡人，只接熟悉近岸水路的活计。",
+      "facts": [
+        {
+          "id": "far-lin-du-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "38岁。"
+          },
+          "description": "38岁。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-lin-du"
+            ]
+          }
+        },
+        {
+          "id": "far-lin-du-cultivation",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "未修仙的凡人。"
+          },
+          "description": "未修仙的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-lin-du"
+            ]
+          }
+        },
+        {
+          "id": "far-lin-du-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-lin-du"
+            ]
+          }
+        },
+        {
+          "id": "far-lin-du-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "近岸操舟、辨潮和短途带路。"
+          },
+          "description": "近岸操舟、辨潮和短途带路。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-lin-du"
+            ]
+          }
+        },
+        {
+          "id": "far-lin-du-long-term-customer-far-he-sui",
+          "predicate": "long-term-customer",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-he-sui"
+          },
+          "description": "多年药材运送往来。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "far-lin-du-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "far-lin-du-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "far-lin-du-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "far-lin-du-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "far-lin-du-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "far-lin-du-influence",
+          "definition_id": "influence",
+          "value": 0
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 80
+        }
+      ],
+      "agent": {
+        "id": "far-lin-du",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天沙南岸摆渡人，只接熟悉近岸水路的活计。",
+            "voice": "按亲历和手头物件说明情况，遇到不熟悉的海路会说明不知道。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查渡船的船板接缝，等药栈确认是否有货要送。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "林渡",
+              "description": "天沙南岸摆渡人，只接熟悉近岸水路的活计。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "天沙南岸渡口",
+              "description": "天沙一处供近岸小船停泊的渡口。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-tiansha-store",
+              "name": "渡口药栈",
+              "description": "替邻村收晒普通草药的药栈。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-he-sui",
+              "name": "何穗",
+              "description": "渡口药栈的掌柜，与林渡有多年运送药材的往来。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-lin-boat",
+              "name": "林渡的渡船",
+              "description": "适合近岸摆渡的小船，不是横越未知大洋的远航船。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-he-stock",
+              "name": "药栈待验药包",
+              "description": "四包普通草药，交付前需要分拣验收。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-he-grain",
+              "name": "药栈家用米粮",
+              "description": "留作日常生活的粮食。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "far-lin-du"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "far-tiansha-landing"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-tiansha-store",
+              "canonical_entity_ids": [
+                "far-tiansha-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-he-sui",
+              "canonical_entity_ids": [
+                "far-he-sui"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-lin-boat",
+              "canonical_entity_ids": [
+                "far-lin-boat"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-he-stock",
+              "canonical_entity_ids": [
+                "far-he-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-he-grain",
+              "canonical_entity_ids": [
+                "far-he-grain"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "开篇前日常生活、劳作与明确往来的记忆。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-skill",
+              "subjectId": "self",
+              "predicate": "own-skill",
+              "value": {
+                "kind": "text",
+                "value": "近岸操舟、辨潮和短途带路。"
+              },
+              "description": "近岸操舟、辨潮和短途带路。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检查渡船的船板接缝，等药栈确认是否有货要送。"
+              },
+              "description": "检查渡船的船板接缝，等药栈确认是否有货要送。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己未修仙，没有修士的法力。"
+              },
+              "description": "自己未修仙，没有修士的法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "far-he-sui",
+      "name": "何穗",
+      "kind": "person",
+      "placement": "far-tiansha-store",
+      "description": "渡口药栈的掌柜，与林渡有多年运送药材的往来。",
+      "facts": [
+        {
+          "id": "far-he-sui-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "46岁。"
+          },
+          "description": "46岁。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-he-sui"
+            ]
+          }
+        },
+        {
+          "id": "far-he-sui-cultivation",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "未修仙的凡人。"
+          },
+          "description": "未修仙的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-he-sui"
+            ]
+          }
+        },
+        {
+          "id": "far-he-sui-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-he-sui"
+            ]
+          }
+        },
+        {
+          "id": "far-he-sui-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通药材验收和日常经营。"
+          },
+          "description": "普通药材验收和日常经营。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "far-he-sui"
+            ]
+          }
+        },
+        {
+          "id": "far-he-sui-long-term-customer-far-lin-du",
+          "predicate": "long-term-customer",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-lin-du"
+          },
+          "description": "多年药材运送往来。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "far-he-sui-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "far-he-sui-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "far-he-sui-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "far-he-sui-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "far-he-sui-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "far-he-sui-influence",
+          "definition_id": "influence",
+          "value": 0
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 110
+        }
+      ],
+      "agent": {
+        "id": "far-he-sui",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "渡口药栈的掌柜，与林渡有多年运送药材的往来。",
+            "voice": "按亲历和手头物件说明情况，遇到不熟悉的海路会说明不知道。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把受潮与干燥药材分开；未验收前不允诺交货。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "何穗",
+              "description": "渡口药栈的掌柜，与林渡有多年运送药材的往来。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "渡口药栈",
+              "description": "替邻村收晒普通草药的药栈。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-tiansha-landing",
+              "name": "天沙南岸渡口",
+              "description": "天沙一处供近岸小船停泊的渡口。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-lin-du",
+              "name": "林渡",
+              "description": "天沙南岸摆渡人，只接熟悉近岸水路的活计。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-lin-boat",
+              "name": "林渡的渡船",
+              "description": "适合近岸摆渡的小船，不是横越未知大洋的远航船。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-he-stock",
+              "name": "药栈待验药包",
+              "description": "四包普通草药，交付前需要分拣验收。",
+              "status": "observed"
+            },
+            {
+              "id": "known-far-he-grain",
+              "name": "药栈家用米粮",
+              "description": "留作日常生活的粮食。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "far-he-sui"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "far-tiansha-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-tiansha-landing",
+              "canonical_entity_ids": [
+                "far-tiansha-landing"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-lin-du",
+              "canonical_entity_ids": [
+                "far-lin-du"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-lin-boat",
+              "canonical_entity_ids": [
+                "far-lin-boat"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-he-stock",
+              "canonical_entity_ids": [
+                "far-he-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-far-he-grain",
+              "canonical_entity_ids": [
+                "far-he-grain"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "开篇前日常生活、劳作与明确往来的记忆。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-skill",
+              "subjectId": "self",
+              "predicate": "own-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通药材验收和日常经营。"
+              },
+              "description": "普通药材验收和日常经营。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把受潮与干燥药材分开；未验收前不允诺交货。"
+              },
+              "description": "把受潮与干燥药材分开；未验收前不允诺交货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己未修仙，没有修士的法力。"
+              },
+              "description": "自己未修仙，没有修士的法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "far-zhao-boat",
+      "name": "赵家近岸木舟",
+      "kind": "item",
+      "placement": "far-luwan",
+      "description": "船板一处渗水，修补并验漏后才能放心载货。",
+      "facts": [
+        {
+          "id": "far-zhao-boat-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-chuan"
+          },
+          "description": "由赵川所有。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "far-zhao-boat-hull",
+          "predicate": "hull-condition",
+          "value": {
+            "kind": "text",
+            "value": "船板接缝渗水"
+          },
+          "description": "一处船板接缝渗水。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-zhao-tools",
+      "name": "舟匠工具包",
+      "kind": "item",
+      "placement": "far-zhao-chuan",
+      "description": "旧木槌、木楔和手锯。",
+      "facts": [
+        {
+          "id": "far-zhao-tools-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-chuan"
+          },
+          "description": "由赵川所有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-zhao-stock",
+      "name": "赵家待验药包",
+      "kind": "item",
+      "placement": "far-luwan-shop",
+      "description": "收来的两包普通草药，其中一包边角受潮。",
+      "facts": [
+        {
+          "id": "far-zhao-stock-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-zhi"
+          },
+          "description": "由赵芷所有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "far-zhao-grain",
+      "name": "赵家米粮",
+      "kind": "item",
+      "placement": "far-luwan-shop",
+      "description": "赵家日用口粮，需照顾两人的生活。",
+      "facts": [
+        {
+          "id": "far-zhao-grain-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-zhao-zhi"
+          },
+          "description": "由赵芷所有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "far-lin-boat",
+      "name": "林渡的渡船",
+      "kind": "item",
+      "placement": "far-tiansha-landing",
+      "description": "适合近岸摆渡的小船，不是横越未知大洋的远航船。",
+      "facts": [
+        {
+          "id": "far-lin-boat-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-lin-du"
+          },
+          "description": "由林渡所有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "far-he-stock",
+      "name": "药栈待验药包",
+      "kind": "item",
+      "placement": "far-tiansha-store",
+      "description": "四包普通草药，交付前需要分拣验收。",
+      "facts": [
+        {
+          "id": "far-he-stock-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-he-sui"
+          },
+          "description": "由何穗所有。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "far-he-stock-condition",
+          "predicate": "goods-condition",
+          "value": {
+            "kind": "text",
+            "value": "一包边角受潮，其余药包尚待逐包验收。"
+          },
+          "description": "药包中有一包边角受潮，尚未完成逐包验收。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "far-he-grain",
+      "name": "药栈家用米粮",
+      "kind": "item",
+      "placement": "far-tiansha-store",
+      "description": "留作日常生活的粮食。",
+      "facts": [
+        {
+          "id": "far-he-grain-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "far-he-sui"
+          },
+          "description": "由何穗所有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 10
+        }
+      ]
     }
   ],
   "existingEntityFacts": [],
@@ -50,6 +1620,173 @@
     "law:far-seas-route-evidence": [
       "far-two-regions",
       "far-future-node"
+    ],
+    "entity:far-wulong-fog-sea": [
+      "far-fog-geography"
+    ],
+    "entity:far-wulong-fog-island": [
+      "far-fog-geography"
+    ],
+    "entity:far-luwan": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-luwan-workshop": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-luwan-shop": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-tiansha-landing": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-tiansha-store": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-luwan-workshop-route-far-luwan": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-luwan-route-far-luwan-workshop": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-luwan-shop-route-far-luwan": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-luwan-route-far-luwan-shop": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-tiansha-landing-route-far-tiansha-store": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-tiansha-store-route-far-tiansha-landing": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-chuan": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-chuan-age": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-chuan-cultivation": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-chuan-root": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-chuan-skill": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-zhi": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-zhi-age": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-zhi-cultivation": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-zhi-root": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-zhi-skill": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-lin-du": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-lin-du-age": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-lin-du-cultivation": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-lin-du-root": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-lin-du-skill": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-he-sui": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-sui-age": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-sui-cultivation": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-sui-root": [
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-sui-skill": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-zhao-chuan-sibling-far-zhao-zhi": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-zhao-zhi-sibling-far-zhao-chuan": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-lin-du-long-term-customer-far-he-sui": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-he-sui-long-term-customer-far-lin-du": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-boat": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-zhao-boat-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-zhao-boat-hull": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-tools": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-zhao-tools-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-stock": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-stock-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-zhao-grain": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-zhao-grain-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-lin-boat": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-lin-boat-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-he-stock": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-stock-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "entity:far-he-grain": [
+      "far-opening-original-livelihood",
+      "far-opening-original-resources"
+    ],
+    "fact:far-he-grain-owner": [
+      "far-opening-original-livelihood"
+    ],
+    "fact:far-he-stock-condition": [
+      "far-opening-original-livelihood"
     ]
   }
 }

@@ -3,15 +3,18 @@
   "moduleId": "human-far-seas",
   "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
   "status": "editorial-dispositions-not-release-approval",
-  "reviewer": "integration_review/explicit-incomplete-checkpoint/2026-10-17",
+  "reviewer": "integration_review/direct-source-scenes-and-identity-second-pass/2026-10-18",
   "records": [
     {
       "candidateId": "batch-0087-object-0004",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "future-yinming-bao-huanzi",
+        "far-bao-identity"
+      ],
+      "reason": "原文自报五龙海抱还子；沿用阴冥同一身份。后期相识不能唯一确定T0生年、所在或已入阴冥。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -22,8 +25,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "原文自报五龙海抱还子；沿用阴冥同一身份。后期相识不能唯一确定T0生年、所在或已入阴冥。"
       },
       "destinationModule": null
     },
@@ -31,11 +34,12 @@
       "candidateId": "batch-0087-object-0013",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "corrected",
+      "disposition": "adopted",
       "targetIds": [
-        "human-wulong-sea"
+        "human-wulong-sea",
+        "far-two-regions"
       ],
-      "reason": "只采用五龙海地理身份；古符制作另存带来源的传统，不前置抱还子所在。",
+      "reason": "五龙海作为独立地理保留；并未把来客或当期门派状态前置。",
       "evidence": [
         {
           "chapterId": "qq-22885680",
@@ -52,11 +56,12 @@
       "candidateId": "batch-0087-object-0014",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "corrected",
+      "disposition": "adopted",
       "targetIds": [
-        "human-tiansha"
+        "human-tiansha",
+        "far-two-regions"
       ],
-      "reason": "采用天沙大陆地理身份，不前置后来被吸入者。",
+      "reason": "天沙沿海的地理身份与五龙海、乱星海分开；阴冥来客不是跨海航线。",
       "evidence": [
         {
           "chapterId": "qq-22885680",
@@ -73,9 +78,12 @@
       "candidateId": "batch-0087-object-0057",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-talisman-tradition",
+        "far-ancient-talismans"
+      ],
+      "reason": "采用抱还子所述的古符传统；其他地域失传只是其估计，不立普遍禁令或生成T0成品。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -85,19 +93,19 @@
           "anchorSha256": "e0998da4df9a3ec09d7631f77d0eed53286bfe2e9f45860ca27a9502a1ef7a52"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-fact-0003",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "associated-yinming",
+        "far-two-regions"
+      ],
+      "reason": "大长老以外来者跨海域与数年相通的经验解释怪雾；罗睺腹中与阴司交界当时都是猜测，不把几年的叙述设成精确T0开门定时器。",
       "evidence": [
         {
           "chapterId": "qq-22885680",
@@ -107,19 +115,19 @@
           "anchorSha256": "681091a40fecd253501eb4fbd38be2991e998eb261bb8f5c64c10aa506fa8d03"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-fact-0014",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-talisman-tradition",
+        "far-ancient-talismans"
+      ],
+      "reason": "原文明确有估计语气；保留地区传统，工匠、秘方与现货须另有载体。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -129,19 +137,20 @@
           "anchorSha256": "e0998da4df9a3ec09d7631f77d0eed53286bfe2e9f45860ca27a9502a1ef7a52"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-fact-0047",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-wulong-sea",
+        "human-tiansha",
+        "far-two-regions"
+      ],
+      "reason": "来源不同海域可证明地名区别，不能证明T0相应来客已在村中或已知全部航线。",
       "evidence": [
         {
           "chapterId": "qq-22885680",
@@ -151,19 +160,19 @@
           "anchorSha256": "681091a40fecd253501eb4fbd38be2991e998eb261bb8f5c64c10aa506fa8d03"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-fact-0048",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "future-yinming-bao-huanzi",
+        "far-bao-identity"
+      ],
+      "reason": "自报出身有据；未载年龄，不能把后期出场当成T0尚未出生，也不硬定T0居处。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -174,8 +183,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "自报出身有据；未载年龄，不能把后期出场当成T0尚未出生，也不硬定T0居处。"
       },
       "destinationModule": null
     },
@@ -183,9 +192,12 @@
       "candidateId": "batch-0087-fact-0049",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "future-yinming-eldest"
+      ],
+      "reason": "韩立回忆刚听过的地名发生于阴冥相遇后；不得成为山村少年开篇记忆。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -195,19 +207,20 @@
           "anchorSha256": "4f49048d202ea959b767d332faa17fd8c0ea2e775ccedb9da3d14b4f1743ff43"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-issue-0002",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-yinming-bao-huanzi",
+        "future-yinming-eldest",
+        "far-bao-identity"
+      ],
+      "reason": "胖老者自称来自大晋湾南州，石台长须者自报五龙海抱还子；两个身份分开。",
       "evidence": [
         {
           "chapterId": "qq-22885680",
@@ -217,19 +230,19 @@
           "anchorSha256": "b7e15217fce796a020a690bab20c1317c51839172f68b98039bcf1c0a60760c9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0087-issue-0012",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-talisman-tradition",
+        "far-ancient-talismans"
+      ],
+      "reason": "“估计”限制其他地方失传的断言，不能用自傲说法删掉其他地域的可能传承。",
       "evidence": [
         {
           "chapterId": "qq-22894719",
@@ -239,10 +252,7 @@
           "anchorSha256": "e0998da4df9a3ec09d7631f77d0eed53286bfe2e9f45860ca27a9502a1ef7a52"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -251,9 +261,10 @@
       "reportHash": "484467c1fff6e066e12e13f40f6d31bba5b724fcdf2039b1e8dd5a8724f6b28a",
       "disposition": "corrected",
       "targetIds": [
+        "future-yinming-bao-huanzi",
         "far-bao-identity"
       ],
-      "reason": "五龙海是抱还子的出身，不是另一人物姓名；索引引用associated-yinming的唯一人物。",
+      "reason": "所谓自称五龙海修士承接昨日石台相谈者，实为抱还子；不是新人物五龙海。",
       "evidence": [
         {
           "chapterId": "qq-22924841",
@@ -270,9 +281,13 @@
       "candidateId": "batch-0088-fact-0007",
       "batchId": "batch-0088",
       "reportHash": "484467c1fff6e066e12e13f40f6d31bba5b724fcdf2039b1e8dd5a8724f6b28a",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-yinming-bao-huanzi",
+        "future-yinming-yun",
+        "future-yinming-jin"
+      ],
+      "reason": "主体纠正为抱还子与云、金；夺村提议是后期计划，T0不建立该结盟或必然政变。",
       "evidence": [
         {
           "chapterId": "qq-22924841",
@@ -282,19 +297,19 @@
           "anchorSha256": "6f2e4cfd16fb8687c70a1f34f77273b3f49e7e772333bf0cb2cfb2fbb83959af"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0088-fact-0008",
       "batchId": "batch-0088",
       "reportHash": "484467c1fff6e066e12e13f40f6d31bba5b724fcdf2039b1e8dd5a8724f6b28a",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "future-yinming-bao-huanzi"
+      ],
+      "reason": "韩立拒绝夺权与梅凝共进退属于后期具体选择，不强制未来照做。",
       "evidence": [
         {
           "chapterId": "qq-22926582",
@@ -304,10 +319,7 @@
           "anchorSha256": "18d8696628d196c850ce8adbbcd2d84d5afd16932958c5ea00f79e0fedb74a10"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -316,9 +328,10 @@
       "reportHash": "484467c1fff6e066e12e13f40f6d31bba5b724fcdf2039b1e8dd5a8724f6b28a",
       "disposition": "corrected",
       "targetIds": [
+        "future-yinming-bao-huanzi",
         "far-bao-identity"
       ],
-      "reason": "纠正抽取把地名当人名；qq22924841上下文与qq22894719自报姓名可对齐。",
+      "reason": "姓名在前章已明示为抱还子；本批孤立自称不是未名人物的证据。",
       "evidence": [
         {
           "chapterId": "qq-22924841",
@@ -335,9 +348,13 @@
       "candidateId": "batch-0088-issue-0011",
       "batchId": "batch-0088",
       "reportHash": "484467c1fff6e066e12e13f40f6d31bba5b724fcdf2039b1e8dd5a8724f6b28a",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "future-yinming-eldest",
+        "future-yinming-bao-huanzi",
+        "future-yinming-jin"
+      ],
+      "reason": "村名和部分人物全名仍未给；“五龙海宗门”不能由地名推出具体门派。保持独立索引和未定姓名，不合并匿名者。",
       "evidence": [
         {
           "chapterId": "qq-22926582",
@@ -348,8 +365,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "村名和部分人物全名仍未给；“五龙海宗门”不能由地名推出具体门派。保持独立索引和未定姓名，不合并匿名者。"
       },
       "destinationModule": null
     },
@@ -357,9 +374,12 @@
       "candidateId": "batch-0114-object-0031",
       "batchId": "batch-0114",
       "reportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiansha",
+        "far-two-regions"
+      ],
+      "reason": "地理存在另由阴冥来源及后期亲至交叉确认；韩立猜测有庚精不等于证实产矿。",
       "evidence": [
         {
           "chapterId": "qq-23989785",
@@ -369,19 +389,19 @@
           "anchorSha256": "05a1c561c02a1900568eab4ffd4a9ce418ec38f6f5d46e754288103d40cabb04"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0114-fact-0004",
       "batchId": "batch-0114",
       "reportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "human-tiansha"
+      ],
+      "reason": "该句是后期韩立求庚精时的考虑；不生成天沙庚精矿床或给T0少年寻宝计划。",
       "evidence": [
         {
           "chapterId": "qq-23989785",
@@ -391,19 +411,19 @@
           "anchorSha256": "05a1c561c02a1900568eab4ffd4a9ce418ec38f6f5d46e754288103d40cabb04"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0114-issue-0014",
       "batchId": "batch-0114",
       "reportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiansha",
+        "far-tiansha-island"
+      ],
+      "reason": "地区存在可由后文亲至与巨岛说明确认；坐标和庚精储量仍未由此证明。",
       "evidence": [
         {
           "chapterId": "qq-23989785",
@@ -413,19 +433,19 @@
           "anchorSha256": "05a1c561c02a1900568eab4ffd4a9ce418ec38f6f5d46e754288103d40cabb04"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0171-object-0015",
       "batchId": "batch-0171",
       "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-bai-lu",
+        "far-bai-lu-temporal"
+      ],
+      "reason": "上古已修炼大成有据，坐化由冰凤后期转述；不把死讯提前。T0精确境界、居所和资源没有直证。",
       "evidence": [
         {
           "chapterId": "qq-26617604",
@@ -436,8 +456,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "上古已修炼大成有据，坐化由冰凤后期转述；不把死讯提前。T0精确境界、居所和资源没有直证。"
       },
       "destinationModule": null
     },
@@ -445,9 +465,12 @@
       "candidateId": "batch-0171-object-0029",
       "batchId": "batch-0171",
       "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-wulong-sea",
+        "far-two-regions"
+      ],
+      "reason": "五龙海地名复用；消息来自该地不能确定白鹿具体洞府。",
       "evidence": [
         {
           "chapterId": "qq-26617604",
@@ -457,19 +480,19 @@
           "anchorSha256": "d7e5d6490001faa7c321bde877b1ca82f09bd79f5b23543b2d836c5f93782f14"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0171-fact-0029",
       "batchId": "batch-0171",
       "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-bai-lu",
+        "far-bai-lu-temporal"
+      ],
+      "reason": "拆开上古修成和后期死讯；原文未在此句明说所用封印秘术，不能从邻人经历移植其具体功法。",
       "evidence": [
         {
           "chapterId": "qq-26617604",
@@ -479,19 +502,20 @@
           "anchorSha256": "d6a1d18b0ed89f870f24ddc262cef7f5712392c6794be59b48a6458e11cda630"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0001",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li",
+        "far-han-second-soul-puppet",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "后期真正韩立与第二元婴操纵的人形傀儡分开；qq-27742669引号中先出屋者是傀儡。化神、灵宝和宗门职位不前置。",
       "evidence": [
         {
           "chapterId": "qq-27734013",
@@ -501,19 +525,19 @@
           "anchorSha256": "1e5de57710b074267015034b2dd50c7f1fc5b792bb34f42889e26dda5b5b79a8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0013",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-han-frost-centipedes",
+        "north-reference-frost-centipedes"
+      ],
+      "reason": "此处是韩立后来饲养的四翅阶段个体群，不与冰凤所养两条合并，也不将该阶段当物种恒定外形。",
       "evidence": [
         {
           "chapterId": "qq-27727778",
@@ -523,19 +547,19 @@
           "anchorSha256": "ec1cad01a4c917aa8f4cda0aa6b33dd009a41d7d5e2e6488944d0b1b70aad043"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0036",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-huiyang-dose",
+        "north-huiyang-recipe"
+      ],
+      "reason": "田琴儿所服具体回阳水在后期；仅关联已登记传承，不复制韩立未来的一瓶库存。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -545,19 +569,19 @@
           "anchorSha256": "f11b1040278e3b0991b06db25dd37a6eb6c701b68cb99a08b46b474670554f9c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0037",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-xinxiang",
+        "far-later-trade-goods"
+      ],
+      "reason": "药性有据，但这炉成品、配方持有者和T0发明时间未定；不预发给碧仙子或原创商户。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -568,8 +592,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "药性有据，但这炉成品、配方持有者和T0发明时间未定；不预发给碧仙子或原创商户。"
       },
       "destinationModule": null
     },
@@ -577,9 +601,12 @@
       "candidateId": "batch-0198-object-0038",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-huajiao",
+        "far-later-trade-goods"
+      ],
+      "reason": "化蛟用途来自当场对话；T0配方与成品未定，亦无保证所有蛇蟒服后都必成蛟的依据。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -590,8 +617,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "化蛟用途来自当场对话；T0配方与成品未定，亦无保证所有蛇蟒服后都必成蛟的依据。"
       },
       "destinationModule": null
     },
@@ -599,9 +626,12 @@
       "candidateId": "batch-0198-object-0039",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-trade-thunder-whale",
+        "far-later-trade-goods"
+      ],
+      "reason": "区分雷鲸兽物种和被猎杀个体；珍稀不代表每次航行都会遭遇，不能由材料生成活兽。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -611,19 +641,19 @@
           "anchorSha256": "36907b9065ea908f86a371f963009763df4952fdbb8e40a62629cd879942e810"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0040",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-trade-thunder-core-fan",
+        "far-trade-thunder-core-han"
+      ],
+      "reason": "范孙七级妖丹与韩立六级妖丹是两件材料；品质与等级均不合并，T0不生成这两份库存。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -633,19 +663,18 @@
           "anchorSha256": "4da4d01d134d600790efcedf1ba8e609b0eeda840f2dd4760b1c5d9c9eb246ab"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0041",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-wind-python"
+      ],
+      "reason": "范某后期持有的具体灵兽，取得和出生时间未定，不让T0资产倒灌。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -656,8 +685,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "范某后期持有的具体灵兽，取得和出生时间未定，不让T0资产倒灌。"
       },
       "destinationModule": null
     },
@@ -665,9 +694,11 @@
       "candidateId": "batch-0198-object-0042",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-green-snake"
+      ],
+      "reason": "阚某后期所养个体，未载取得时间；化蛟需求不是T0已服药成功。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -678,8 +709,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "阚某后期所养个体，未载取得时间；化蛟需求不是T0已服药成功。"
       },
       "destinationModule": null
     },
@@ -687,9 +718,12 @@
       "candidateId": "batch-0198-object-0050",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-later-node",
+        "far-future-node"
+      ],
+      "reason": "后期才由线索找到并稳定的节点，T0是否已存在及是否可用未定，不设当前入口或守卫。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -700,8 +734,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "后期才由线索找到并稳定的节点，T0是否已存在及是否可用未定，不设当前入口或守卫。"
       },
       "destinationModule": null
     },
@@ -709,9 +743,12 @@
       "candidateId": "batch-0198-object-0051",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-wulong-sea",
+        "far-later-trade-people"
+      ],
+      "reason": "保留长期地理，剥离后期交换会和“如今无化神”的当期评价，不能给T0整海修为上限。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -721,19 +758,19 @@
           "anchorSha256": "a28287d054d4a5901b4ef985b8422c8b2f7bc07382fb60322f36cbdae61d8f36"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0052",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "adopted",
+      "targetIds": [
+        "far-wulong-fog-sea",
+        "far-fog-geography"
+      ],
+      "reason": "雾海按持续自然海域回溯；具体节点稳定性、封印和驻守不随地理回溯。",
       "evidence": [
         {
           "chapterId": "qq-27756684",
@@ -743,19 +780,20 @@
           "anchorSha256": "72c620cfc9f48a8e63fc6562607595a16759b50d75d8f64fd74b7ea665554d5e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0053",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-dajin",
+        "human-wulong-sea",
+        "far-future-node"
+      ],
+      "reason": "大晋复用现有大陆身份；化神老怪后期掌握的传送路线不成为T0公众坐标。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -765,19 +803,19 @@
           "anchorSha256": "172e4e05f1d8507c7ddb6c0a898ac25c2b60bfbfc1fd20951bb8f7035c8205f4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0058",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiang-zhili",
+        "far-future-node"
+      ],
+      "reason": "向之礼复用大晋唯一身份；封印、值守、入节点及灯灭都是后期。灯灭也不独立证明死亡。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -787,19 +825,19 @@
           "anchorSha256": "6b8e24ed39698ac50711fe1f356a4e038812f26716e472a0c4090ddda3773456"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0067",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-outerstar-tian-qiner",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "田琴儿后期师承、结丹后期与阵法造诣不前置；沿用外星海人物索引。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -809,19 +847,19 @@
           "anchorSha256": "a89dc58811ad6119e238fb114a5396707799739627ea2bdf12e4879406395c71"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0068",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-bi",
+        "far-later-trade-people"
+      ],
+      "reason": "二百多年前获指点相对于韩立化神到访，不是相对T0；不足反推出开篇已成年或已与向之礼相识。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -832,8 +870,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "二百多年前获指点相对于韩立化神到访，不是相对T0；不足反推出开篇已成年或已与向之礼相识。"
       },
       "destinationModule": null
     },
@@ -841,9 +879,12 @@
       "candidateId": "batch-0198-object-0069",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-kan",
+        "far-later-trade-people"
+      ],
+      "reason": "后期元婴、药术和灵蛇不能自动转为T0状态；个体保留索引，生年和当时修为未定。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -854,8 +895,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "后期元婴、药术和灵蛇不能自动转为T0状态；个体保留索引，生年和当时修为未定。"
       },
       "destinationModule": null
     },
@@ -863,9 +904,12 @@
       "candidateId": "batch-0198-object-0070",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-fan",
+        "far-later-trade-people"
+      ],
+      "reason": "后期范姓修士与阴冥范力、别区范姓人物不凭姓合并；T0生年及修为未定。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -876,8 +920,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "后期范姓修士与阴冥范力、别区范姓人物不凭姓合并；T0生年及修为未定。"
       },
       "destinationModule": null
     },
@@ -885,9 +929,12 @@
       "candidateId": "batch-0198-object-0071",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-sun",
+        "far-later-trade-people"
+      ],
+      "reason": "与范某合作猎兽是后期行为，T0是否相识未定；不合并别处同姓修士。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -898,8 +945,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "与范某合作猎兽是后期行为，T0是否相识未定；不合并别处同姓修士。"
       },
       "destinationModule": null
     },
@@ -907,9 +954,12 @@
       "candidateId": "batch-0198-object-0072",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-trade-scholar",
+        "far-later-trade-people"
+      ],
+      "reason": "同一场蓝袍儒生自称君某而被叫赵道友；保留单人称谓异文，不虚构两个修士或静默定姓。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -920,8 +970,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "同一场蓝袍儒生自称君某而被叫赵道友；保留单人称谓异文，不虚构两个修士或静默定姓。"
       },
       "destinationModule": null
     },
@@ -929,9 +979,12 @@
       "candidateId": "batch-0198-object-0073",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bingfeng",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "下章明说这只冰凤，复用北域冰凤；不将她在后期节点的化神修为和到访前置。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -941,19 +994,19 @@
           "anchorSha256": "7541fe9508d67bbd1a4c129694fff1a78daff4643de5f9092f9eacccf6e3e1a8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0084",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-han-mingqing-eye",
+        "canon-han-li"
+      ],
+      "reason": "目术为韩立后来修成的能力，不赋予原著开篇韩立或所有玩家。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -963,19 +1016,19 @@
           "anchorSha256": "537d72754ea630dbd5a93fbdecb2a9010a8702d221db3d4a76e64f44070dd7e3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0085",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-trade-sea-chart",
+        "far-later-trade-goods"
+      ],
+      "reason": "玉简海图是后期碧仙子递交的具体物，不用交换结果给T0预生成可用航线。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -985,19 +1038,19 @@
           "anchorSha256": "29cf3b7526f55dd507e9fa7f2067eb1fd32baaa57488e53b9774487292d4e9f5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0086",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-later-node",
+        "far-future-node"
+      ],
+      "reason": "特殊封印由向之礼等后期布置，不能当作天然节点固有属性。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -1007,19 +1060,19 @@
           "anchorSha256": "bcd5502eae944159f8d4b79ee425c9e6aa110c0f9e0c4d3abb0b339bad44b29b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0090",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-xiang-three-disciples",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "三名结丹修士奉向师祖命令守候发生于后期；T0不预置师承与守卫关系。",
       "evidence": [
         {
           "chapterId": "qq-27756684",
@@ -1029,19 +1082,19 @@
           "anchorSha256": "10369617e4c75226ad4a7484bb32f8685cd06c2fe62b9b9eddf1080e10d25dc7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-object-0091",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-han-four-followers",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "来自韩立后来岛屿的四人于田琴儿到达时接管，开篇无此隶属和任务。",
       "evidence": [
         {
           "chapterId": "qq-27759955",
@@ -1051,19 +1104,20 @@
           "anchorSha256": "f969c517d64538513b5e7deffd7c7c605a018cc3d1ece0cd38bf2b43f28511ab"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0063",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-wulong-sea",
+        "human-dajin",
+        "far-future-node"
+      ],
+      "reason": "节点所在海域与已知大晋传送路线区分；韩立后来须往大晋传送不等于T0有公众通道。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -1073,19 +1127,19 @@
           "anchorSha256": "a28287d054d4a5901b4ef985b8422c8b2f7bc07382fb60322f36cbdae61d8f36"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0064",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-later-exchange-islet",
+        "far-later-trade-people"
+      ],
+      "reason": "此五人交换会是后期场景，不将其排入T0或未来必触发事件。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -1095,19 +1149,19 @@
           "anchorSha256": "fb59cbc270efb42fe5443982efb6b41015eae5c825e77cf1bd257eabce176668"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0065",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-trade-xinxiang",
+        "far-later-trade-goods"
+      ],
+      "reason": "药效称谓和碧仙子携大半成品分开；后期成品所有权不能自动回溯。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -1117,19 +1171,19 @@
           "anchorSha256": "1e3635792054767072ec2c120e374831324690a4448d58d20ff477e6cec2713a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0066",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-trade-huajiao",
+        "far-later-trade-goods"
+      ],
+      "reason": "两人需求与拒绝交换属于当场态度；保留化蛟用途而不设无条件成功或固定交易。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -1139,19 +1193,19 @@
           "anchorSha256": "97823b2d178ed5ba66ade13c9c827f4e80b1ec15e6685fc8eac80249c8252c5c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0067",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-trade-thunder-core-fan",
+        "far-later-trade-goods"
+      ],
+      "reason": "韩立解释的是长时间耗损妖力对该次妖丹的品质影响；不是所有死兽立即空丹，也不改变妖丹等级。",
       "evidence": [
         {
           "chapterId": "qq-27756684",
@@ -1161,19 +1215,19 @@
           "anchorSha256": "228063dc351813310be6db4ef087f051412c723885a64ecff581ddce4295da25"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0068",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "far-han-mingqing-eye"
+      ],
+      "reason": "后期穿透交换会幻阵的行动不进入T0经历。",
       "evidence": [
         {
           "chapterId": "qq-27746420",
@@ -1183,19 +1237,19 @@
           "anchorSha256": "537d72754ea630dbd5a93fbdecb2a9010a8702d221db3d4a76e64f44070dd7e3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0198-fact-0069",
       "batchId": "batch-0198",
       "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "human-wulong-sea",
+        "far-later-trade-people"
+      ],
+      "reason": "碧仙子对“如今”无化神的介绍仅适用后期当时；不能反推出白鹿开篇已死或全海永久无化神。",
       "evidence": [
         {
           "chapterId": "qq-27756684",
@@ -1205,19 +1259,19 @@
           "anchorSha256": "972fae5d2e010bc733e2d586b2f2ae625c6b112f4e40ca79aed130522b8087fc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0005",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-tianlan-descended-fragment",
+        "far-later-visitors-and-soul"
+      ],
+      "reason": "童子为天澜降临分身，复用草原索引；虚天鼎拘禁、玉书参悟和留天沙寻同类属于后期。",
       "evidence": [
         {
           "chapterId": "qq-27767314",
@@ -1227,19 +1281,19 @@
           "anchorSha256": "35eb9b5af02c087261b817bff99997c95425e4aed6227d99a1d9c3c11469ef62"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0011",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-tiansha-thick-brow",
+        "far-tiansha-eagle-eye"
+      ],
+      "reason": "两位不同老者分别索引，文中只集体给一初期一中期，不把境界任意配给外貌，也不前置到T0。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1250,8 +1304,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "两位不同老者分别索引，文中只集体给一初期一中期，不把境界任意配给外貌，也不前置到T0。"
       },
       "destinationModule": null
     },
@@ -1259,9 +1313,12 @@
       "candidateId": "batch-0199-object-0012",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-tiansha-sect",
+        "far-tiansha-treasure-boundary"
+      ],
+      "reason": "拥有镇宗宝及祖师夺宝说明传承但无明确始建年，T0组织状态未定；不与大晋匿名门派合并。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1272,8 +1329,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "拥有镇宗宝及祖师夺宝说明传承但无明确始建年，T0组织状态未定；不与大晋匿名门派合并。"
       },
       "destinationModule": null
     },
@@ -1281,9 +1338,12 @@
       "candidateId": "batch-0199-object-0018",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-later-node",
+        "far-future-node"
+      ],
+      "reason": "复用同一个后期空间节点，临近崩溃及黑洞入口是当次时点，不能写作T0通行条件。",
       "evidence": [
         {
           "chapterId": "qq-27767314",
@@ -1294,8 +1354,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "复用同一个后期空间节点，临近崩溃及黑洞入口是当次时点，不能写作T0通行条件。"
       },
       "destinationModule": null
     },
@@ -1303,9 +1363,12 @@
       "candidateId": "batch-0199-object-0019",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-wulong-sea",
+        "far-two-regions"
+      ],
+      "reason": "五龙海地理复用；韩立两年后返回不创建第二地名实体。",
       "evidence": [
         {
           "chapterId": "qq-27779712",
@@ -1315,19 +1378,19 @@
           "anchorSha256": "e44b5861c42eb06d1f51795c780eabc78e5a4b70c566b384a1526b176de11594"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0020",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "adopted",
+      "targetIds": [
+        "far-wulong-fog-sea",
+        "far-fog-geography"
+      ],
+      "reason": "同一雾海复用，地理存在与节点启闭分开。",
       "evidence": [
         {
           "chapterId": "qq-27767314",
@@ -1337,19 +1400,19 @@
           "anchorSha256": "1fe6fff4cea43e4e454a1b6061b1c8edceef4b32f547163d8e5ca40a90d1bd94"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0021",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-wulong-fog-island",
+        "far-fog-geography"
+      ],
+      "reason": "只回溯天然岛屿；韩立占据、阁楼、门下与解封场面不前置。",
       "evidence": [
         {
           "chapterId": "qq-27767314",
@@ -1359,19 +1422,19 @@
           "anchorSha256": "028d61637a7130f88903b1ae5527f1e9def7f948b61263a2bbbd058b3ee324fb"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0022",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiansha",
+        "far-tiansha-island"
+      ],
+      "reason": "巨岛地貌采用；修仙基础比较是韩立当期评价，不设T0全域资源和能力上限。",
       "evidence": [
         {
           "chapterId": "qq-27779712",
@@ -1381,19 +1444,19 @@
           "anchorSha256": "5e2c61063ea76d89e8e9ac47654f243e384ff70f0750afcab28ab22fd437b735"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-object-0037",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-jinshuo-ring",
+        "far-tiansha-treasure-boundary"
+      ],
+      "reason": "金烁环唯一身份保留；祖师夺宝时间不详，T0所有权未定，不放入韩立或任意原创居民库存。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1404,8 +1467,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "金烁环唯一身份保留；祖师夺宝时间不详，T0所有权未定，不放入韩立或任意原创居民库存。"
       },
       "destinationModule": null
     },
@@ -1413,11 +1476,12 @@
       "candidateId": "batch-0199-fact-0006",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "corrected",
+      "disposition": "adopted",
       "targetIds": [
+        "human-tiansha",
         "far-tiansha-island"
       ],
-      "reason": "采用可持续地理轮廓；原文为韩立说法，不把其他社会评价一并确认为T0客观上限。",
+      "reason": "后期亲至确认天沙为巨岛，采用持续地理回溯。",
       "evidence": [
         {
           "chapterId": "qq-27779712",
@@ -1434,9 +1498,12 @@
       "candidateId": "batch-0199-fact-0007",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "human-tiansha",
+        "far-tiansha-island"
+      ],
+      "reason": "原文是韩立对当期修仙基础的相对评价；不作为T0客观量化上限。",
       "evidence": [
         {
           "chapterId": "qq-27779712",
@@ -1446,19 +1513,19 @@
           "anchorSha256": "7f15ec1adfa7b0127052c6bd11118dad94f2dfc65fb9d242002d14eef9987f21"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-fact-0063",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "far-jinshuo-ring",
+        "far-tiansha-treasure-boundary"
+      ],
+      "reason": "鹰眼老者说祖师从别派抢来，但未载年代；仅保留所有权历史线索，不强定发生于开篇之前。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1469,8 +1536,8 @@
         }
       ],
       "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
+        "kind": "source-underdetermined",
+        "boundary": "鹰眼老者说祖师从别派抢来，但未载年代；仅保留所有权历史线索，不强定发生于开篇之前。"
       },
       "destinationModule": null
     },
@@ -1478,9 +1545,12 @@
       "candidateId": "batch-0199-fact-0064",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-tiansha-sect",
+        "canon-han-li"
+      ],
+      "reason": "畏惧追查是韩立后期夺宝后的反应，不能成为T0该派态度。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1490,19 +1560,19 @@
           "anchorSha256": "f80c38b11ecb049b54814274aeef877fb7a2662995991e5dc38008090e497303"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-fact-0065",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "far-tiansha-thick-brow",
+        "far-tiansha-eagle-eye"
+      ],
+      "reason": "一初期一中期与追讨失败均属于后期现场，不倒填二人在T0的修为或受伤。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1512,19 +1582,19 @@
           "anchorSha256": "005caa8d40a058001ff26466c21a17b07d120d368ccefb5f1acb598f200921c6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-fact-0069",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "far-wulong-fog-island"
+      ],
+      "reason": "两年后回岛和十几名在场修士是后期场景，不预置T0来客。",
       "evidence": [
         {
           "chapterId": "qq-27779712",
@@ -1534,19 +1604,19 @@
           "anchorSha256": "e44b5861c42eb06d1f51795c780eabc78e5a4b70c566b384a1526b176de11594"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0199-issue-0004",
       "batchId": "batch-0199",
       "reportHash": "06024438fa86373d5d5063d8e5caf21b03386a7f7151d053de0b029f101d895f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "仅列入精确待审队列；尚未逐条完成来源、身份与开篇时间的最终裁决，不能以机器提取代替。",
+      "disposition": "corrected",
+      "targetIds": [
+        "far-tiansha-sect",
+        "far-tiansha-treasure-boundary"
+      ],
+      "reason": "天沙金烁环宗门与大晋记载六丁天甲符门派来源不同，匿名不是同一性证据。",
       "evidence": [
         {
           "chapterId": "qq-27776188",
@@ -1556,10 +1626,7 @@
           "anchorSha256": "e8c1471588636f9c1336292454e02851f7a5386cea32b0c83b996f3f99123df0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "尚需编辑核对原文上下文及跨区同实体；本条不得据此进入运行状态。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     }
   ]
