@@ -10529,6 +10529,30 @@
             "kind": "discoverable",
             "condition": "取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。"
           }
+        },
+        {
+          "id": "dajin-feng-estate-route-dajin-du-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-du-house"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-estate-route-dajin-feng-tenant-field",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-tenant-field"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -10565,11 +10589,36 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dajin-feng-store-keeper",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-feng-shoujian"
+          },
+          "description": "保管人可按职责取用登记，公库不是私人行囊。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 24
+        },
+        {
+          "definition_id": "copper",
+          "amount": 900
+        },
+        {
+          "definition_id": "maintenance-material",
+          "amount": 6
+        }
+      ]
     },
     {
       "id": "dajin-feng-vault-door",
@@ -10776,6 +10825,21 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dajin-feng-vault-key-keeper",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-feng-shoujian"
+          },
+          "description": "只有获授权者可以领用钥匙。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-shoujian"
+            ]
+          }
         }
       ],
       "meters": [],
@@ -10859,6 +10923,2050 @@
       "placement": "human-dajin",
       "description": "大晋的一处崖地称名；地域之外没有据此推定居民身份。",
       "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-shuangjun",
+      "name": "霜郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "北部的寒冷大郡，常有风雪；凡俗聚落稀疏，小修仙家族和散修利用分散灵脉。",
+      "facts": [
+        {
+          "id": "dajin-shuangjun-environment",
+          "predicate": "environment",
+          "value": {
+            "kind": "text",
+            "value": "寒冷、寒药与少量较弱灵脉；进入和采集需要相应能力及实际找到资源。"
+          },
+          "description": "环境有利寒功不意味着人人都必须修寒法。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-du-house",
+      "name": "杜家住屋",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "田边两间朴素住屋，院内晾着农具；粮箱与屋舍属于住户。",
+      "facts": [
+        {
+          "id": "dajin-du-house-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-du-cheng"
+          },
+          "description": "住屋是杜家的实际家产。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-du-house-route-dajin-feng-estate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-estate"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-du-house-route-dajin-feng-tenant-field",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-tenant-field"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-tenant-field",
+      "name": "冯家租田",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "由杜诚一家承租耕作的族田，田产权、收成和应付租额分别结算。",
+      "facts": [
+        {
+          "id": "dajin-feng-tenant-field-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "田地为族产。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-tenant-field-tenant",
+          "predicate": "tenant",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-du-cheng"
+          },
+          "description": "杜诚当前承租。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-tenant-field-route-dajin-du-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-du-house"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-tenant-field-route-dajin-feng-estate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-estate"
+          },
+          "description": "沿当地田间路往来，要实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-du-grain",
+      "name": "杜家粮箱",
+      "kind": "item",
+      "placement": "dajin-du-house",
+      "description": "已收存的粮食，交租与自用都从箱中实际取走。",
+      "facts": [
+        {
+          "id": "dajin-du-grain-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-du-cheng"
+          },
+          "description": "粮食是杜家的收成，租额未支付前仍在箱内。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 16
+        }
+      ]
+    },
+    {
+      "id": "original-dajin-feng-shoujian",
+      "name": "冯守简",
+      "kind": "person",
+      "placement": "dajin-feng-store",
+      "description": "冯家当期保管人，做事仔细，珍惜传承，也会考虑族侄与佃户的实际难处。",
+      "facts": [
+        {
+          "id": "original-dajin-feng-shoujian-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气八层"
+          },
+          "description": "炼气八层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-shoujian"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-shoujian-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "四灵根，已按家传功法修炼。"
+          },
+          "description": "四灵根，已按家传功法修炼。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-shoujian"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-shoujian-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "识字账务、基础御物、家族保管禁制及密窟传送阵的正确五槽操作；法力和材料有限。"
+          },
+          "description": "识字账务、基础御物、家族保管禁制及密窟传送阵的正确五槽操作；法力和材料有限。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-shoujian"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-shoujian-age",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 58
+          },
+          "description": "当前年龄。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-feng-shoujian-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "家族成员兼保管职责。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-feng-shoujian-nephew",
+          "predicate": "clan-nephew",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-feng-he"
+          },
+          "description": "冯禾为自己的族侄。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-dajin-feng-shoujian-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-dajin-feng-shoujian-mana",
+          "definition_id": "mana",
+          "current": 55
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-dajin-feng-shoujian-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-shoujian-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-shoujian-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-feng-shoujian-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-shoujian-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 110
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 4
+        }
+      ],
+      "agent": {
+        "id": "original-dajin-feng-shoujian",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "冯家当期保管人，做事仔细，珍惜传承，也会考虑族侄与佃户的实际难处。",
+            "voice": "依自己的经历、财物和关系讲话；对未知的来客先核实来意。"
+          },
+          "goals": [
+            {
+              "id": "daily-work",
+              "description": "明晨与冯禾核对公库，再核实杜诚交租能否分期。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "冯守简",
+              "description": "冯家当期保管人，做事仔细，珍惜传承，也会考虑族侄与佃户的实际难处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-feng-he",
+              "name": "冯禾",
+              "description": "冯家年轻跑腿记账人，熟悉镇中人情，想把差事办好后留出练功时间。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-du-cheng",
+              "name": "杜诚",
+              "description": "种田的凡人，重视收成与守信，愿解释困难而不愿把家中口粮全部交空。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-clan",
+              "name": "宁中冯家",
+              "description": "有独立传承与族藏的修仙家族，公产不属于任意来客。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-estate",
+              "name": "冯家院落",
+              "description": "家族日常办事与保管族物的院地。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-store",
+              "name": "冯家保管室",
+              "description": "有禁制和交接记录的族物保管处，取物须授权。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-tenant-field",
+              "name": "冯家租田",
+              "description": "由杜诚一家承租耕作的族田，田产权、收成和应付租额分别结算。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-house",
+              "name": "杜家住屋",
+              "description": "田边两间朴素住屋，院内晾着农具；粮箱与屋舍属于住户。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-grain",
+              "name": "杜家粮箱",
+              "description": "已收存的粮食，交租与自用都从箱中实际取走。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-farm-tools",
+              "name": "杜家农具",
+              "description": "一把锄头与修补用木柄组成的普通农具套具，不是法器。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-vault-key",
+              "name": "密窟银钥",
+              "description": "银色法器钥匙，与特定石门孔洞及禁制配合使用。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-old-manual",
+              "name": "冯家佛门旧典",
+              "description": "族藏旧典保有伏虎功、转轮经、明王诀的传承记录；须实际读懂并具备修炼条件。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-estate-records",
+              "name": "冯家族产簿",
+              "description": "记录族产事务的文书；持有文书并不能绕过核验直接占有全部产业。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-vault",
+              "name": "冯家密窟",
+              "description": "温石砌成的隐秘厅室，藏物分架保管，另有一座传送阵。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-entry-array",
+              "name": "门后传送阵",
+              "description": "石门后十余丈处的小型传送阵，有七八个槽位，并非全部都应放入灵石。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-receiver-array",
+              "name": "密窟接收阵",
+              "description": "厅角的传送阵与门后阵相连，使用要确认禁制与供能。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-vault-door",
+              "name": "瀑布后石门",
+              "description": "石门右下留有小孔，表面禁制阻隔未经许可的进入。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-dajin-feng-shoujian"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-feng-he",
+              "canonical_entity_ids": [
+                "original-dajin-feng-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-du-cheng",
+              "canonical_entity_ids": [
+                "original-dajin-du-cheng"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-clan",
+              "canonical_entity_ids": [
+                "dajin-feng-clan"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-estate",
+              "canonical_entity_ids": [
+                "dajin-feng-estate"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-store",
+              "canonical_entity_ids": [
+                "dajin-feng-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-tenant-field",
+              "canonical_entity_ids": [
+                "dajin-feng-tenant-field"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-house",
+              "canonical_entity_ids": [
+                "dajin-du-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-grain",
+              "canonical_entity_ids": [
+                "dajin-du-grain"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-farm-tools",
+              "canonical_entity_ids": [
+                "dajin-du-farm-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-vault-key",
+              "canonical_entity_ids": [
+                "dajin-feng-vault-key"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-old-manual",
+              "canonical_entity_ids": [
+                "dajin-feng-old-manual"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-estate-records",
+              "canonical_entity_ids": [
+                "dajin-feng-estate-records"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-vault",
+              "canonical_entity_ids": [
+                "dajin-feng-vault"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-entry-array",
+              "canonical_entity_ids": [
+                "dajin-feng-entry-array"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-receiver-array",
+              "canonical_entity_ids": [
+                "dajin-feng-receiver-array"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-vault-door",
+              "canonical_entity_ids": [
+                "dajin-feng-vault-door"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、亲自交接的财物和相互认识。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-original-dajin-feng-shoujian-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气八层"
+              },
+              "description": "炼气八层",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "四灵根，已按家传功法修炼。"
+              },
+              "description": "四灵根，已按家传功法修炼。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "识字账务、基础御物、家族保管禁制及密窟传送阵的正确五槽操作；法力和材料有限。"
+              },
+              "description": "识字账务、基础御物、家族保管禁制及密窟传送阵的正确五槽操作；法力和材料有限。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "number",
+                "value": 58
+              },
+              "description": "当前年龄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-member",
+              "subjectId": "self",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员兼保管职责。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-nephew",
+              "subjectId": "self",
+              "predicate": "clan-nephew",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-feng-he"
+              },
+              "description": "冯禾为自己的族侄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-member",
+              "subjectId": "known-original-dajin-feng-he",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员，协助日常账目。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-uncle",
+              "subjectId": "known-original-dajin-feng-he",
+              "predicate": "clan-uncle",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "冯守简为自己的族叔。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-landlord",
+              "subjectId": "known-original-dajin-du-cheng",
+              "predicate": "rents-from",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "按实际租约耕作，不是冯家成员或私产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-rent-due",
+              "subjectId": "known-original-dajin-du-cheng",
+              "predicate": "rent-due",
+              "value": {
+                "kind": "text",
+                "value": "本轮尚欠冯家2份粮租，三日内核账交付；双方可另议展期，未交前不自动扣粮。"
+              },
+              "description": "实际租债，必须从杜家现粮向冯家交接。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-store-owner",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-store-keeper",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "managed-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "保管人可按职责取用登记，公库不是私人行囊。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-owner",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "田地为族产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-tenant",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "tenant",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "杜诚当前承租。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-house-owner",
+              "subjectId": "known-dajin-du-house",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "住屋是杜家的实际家产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-grain-owner",
+              "subjectId": "known-dajin-du-grain",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "粮食是杜家的收成，租额未支付前仍在箱内。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-farm-tools-owner",
+              "subjectId": "known-dajin-du-farm-tools",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "杜诚日常劳作器具。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-vault-key-owner",
+              "subjectId": "known-dajin-feng-vault-key",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "ownership-dajin-feng-vault-key",
+              "subjectId": "known-dajin-feng-vault-key",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "ownership-dajin-feng-old-manual",
+              "subjectId": "known-dajin-feng-old-manual",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "ownership-dajin-feng-estate-records",
+              "subjectId": "known-dajin-feng-estate-records",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "personal-current-stock",
+              "subjectId": "self",
+              "predicate": "personal-stock",
+              "value": {
+                "kind": "text",
+                "value": "110 copper、4 low-stone"
+              },
+              "description": "自己最近清点的个人现钱，与公库不同。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "store-account",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "current-stock",
+              "value": {
+                "kind": "text",
+                "value": "24低阶灵石、900铜钱、6份养护料；必须登记真实取用。"
+              },
+              "description": "本人刚清点的公库存量。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "original-dajin-feng-he",
+      "name": "冯禾",
+      "kind": "person",
+      "placement": "dajin-feng-estate",
+      "description": "冯家年轻跑腿记账人，熟悉镇中人情，想把差事办好后留出练功时间。",
+      "facts": [
+        {
+          "id": "original-dajin-feng-he-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气四层"
+          },
+          "description": "炼气四层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-he"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-he-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "四灵根，已学基础家传功法。"
+          },
+          "description": "四灵根，已学基础家传功法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-he"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-he-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "识字、核账、传讯与基础御物；知道保管室手续，不知道隐秘密窟的路线和阵诀。"
+          },
+          "description": "识字、核账、传讯与基础御物；知道保管室手续，不知道隐秘密窟的路线和阵诀。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-feng-he"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-feng-he-age",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 28
+          },
+          "description": "当前年龄。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-feng-he-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "家族成员，协助日常账目。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-feng-he-uncle",
+          "predicate": "clan-uncle",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-feng-shoujian"
+          },
+          "description": "冯守简为自己的族叔。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-dajin-feng-he-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-dajin-feng-he-mana",
+          "definition_id": "mana",
+          "current": 25
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-dajin-feng-he-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-he-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-he-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-feng-he-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "original-dajin-feng-he-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 70
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 2
+        }
+      ],
+      "agent": {
+        "id": "original-dajin-feng-he",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "冯家年轻跑腿记账人，熟悉镇中人情，想把差事办好后留出练功时间。",
+            "voice": "依自己的经历、财物和关系讲话；对未知的来客先核实来意。"
+          },
+          "goals": [
+            {
+              "id": "daily-work",
+              "description": "核对杜诚交租的数目，先把实情告诉守简，再决定是否外出采买。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "冯禾",
+              "description": "冯家年轻跑腿记账人，熟悉镇中人情，想把差事办好后留出练功时间。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-feng-shoujian",
+              "name": "冯守简",
+              "description": "冯家当期保管人，做事仔细，珍惜传承，也会考虑族侄与佃户的实际难处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-du-cheng",
+              "name": "杜诚",
+              "description": "种田的凡人，重视收成与守信，愿解释困难而不愿把家中口粮全部交空。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-clan",
+              "name": "宁中冯家",
+              "description": "有独立传承与族藏的修仙家族，公产不属于任意来客。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-estate",
+              "name": "冯家院落",
+              "description": "家族日常办事与保管族物的院地。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-store",
+              "name": "冯家保管室",
+              "description": "有禁制和交接记录的族物保管处，取物须授权。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-tenant-field",
+              "name": "冯家租田",
+              "description": "由杜诚一家承租耕作的族田，田产权、收成和应付租额分别结算。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-house",
+              "name": "杜家住屋",
+              "description": "田边两间朴素住屋，院内晾着农具；粮箱与屋舍属于住户。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-grain",
+              "name": "杜家粮箱",
+              "description": "已收存的粮食，交租与自用都从箱中实际取走。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-farm-tools",
+              "name": "杜家农具",
+              "description": "一把锄头与修补用木柄组成的普通农具套具，不是法器。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-estate-records",
+              "name": "冯家族产簿",
+              "description": "记录族产事务的文书；持有文书并不能绕过核验直接占有全部产业。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-dajin-feng-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-feng-shoujian",
+              "canonical_entity_ids": [
+                "original-dajin-feng-shoujian"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-du-cheng",
+              "canonical_entity_ids": [
+                "original-dajin-du-cheng"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-clan",
+              "canonical_entity_ids": [
+                "dajin-feng-clan"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-estate",
+              "canonical_entity_ids": [
+                "dajin-feng-estate"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-store",
+              "canonical_entity_ids": [
+                "dajin-feng-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-tenant-field",
+              "canonical_entity_ids": [
+                "dajin-feng-tenant-field"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-house",
+              "canonical_entity_ids": [
+                "dajin-du-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-grain",
+              "canonical_entity_ids": [
+                "dajin-du-grain"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-farm-tools",
+              "canonical_entity_ids": [
+                "dajin-du-farm-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-estate-records",
+              "canonical_entity_ids": [
+                "dajin-feng-estate-records"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、亲自交接的财物和相互认识。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-original-dajin-feng-shoujian-member",
+              "subjectId": "known-original-dajin-feng-shoujian",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员兼保管职责。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-nephew",
+              "subjectId": "known-original-dajin-feng-shoujian",
+              "predicate": "clan-nephew",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "冯禾为自己的族侄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气四层"
+              },
+              "description": "炼气四层",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "四灵根，已学基础家传功法。"
+              },
+              "description": "四灵根，已学基础家传功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "识字、核账、传讯与基础御物；知道保管室手续，不知道隐秘密窟的路线和阵诀。"
+              },
+              "description": "识字、核账、传讯与基础御物；知道保管室手续，不知道隐秘密窟的路线和阵诀。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "number",
+                "value": 28
+              },
+              "description": "当前年龄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-member",
+              "subjectId": "self",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员，协助日常账目。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-uncle",
+              "subjectId": "self",
+              "predicate": "clan-uncle",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-feng-shoujian"
+              },
+              "description": "冯守简为自己的族叔。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-landlord",
+              "subjectId": "known-original-dajin-du-cheng",
+              "predicate": "rents-from",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "按实际租约耕作，不是冯家成员或私产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-rent-due",
+              "subjectId": "known-original-dajin-du-cheng",
+              "predicate": "rent-due",
+              "value": {
+                "kind": "text",
+                "value": "本轮尚欠冯家2份粮租，三日内核账交付；双方可另议展期，未交前不自动扣粮。"
+              },
+              "description": "实际租债，必须从杜家现粮向冯家交接。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-store-owner",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "由冯家保管的族产，实际取用须家族许可。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-store-keeper",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "managed-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-feng-shoujian"
+              },
+              "description": "保管人可按职责取用登记，公库不是私人行囊。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-owner",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "田地为族产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-tenant",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "tenant",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "杜诚当前承租。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-house-owner",
+              "subjectId": "known-dajin-du-house",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "住屋是杜家的实际家产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-grain-owner",
+              "subjectId": "known-dajin-du-grain",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "粮食是杜家的收成，租额未支付前仍在箱内。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-farm-tools-owner",
+              "subjectId": "known-dajin-du-farm-tools",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-du-cheng"
+              },
+              "description": "杜诚日常劳作器具。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "personal-current-stock",
+              "subjectId": "self",
+              "predicate": "personal-stock",
+              "value": {
+                "kind": "text",
+                "value": "70 copper、2 low-stone"
+              },
+              "description": "自己最近清点的个人现钱，与公库不同。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "store-account",
+              "subjectId": "known-dajin-feng-store",
+              "predicate": "current-stock",
+              "value": {
+                "kind": "text",
+                "value": "最近账簿为24低阶灵石、900铜钱、6份养护料，交接前仍应与保管人复核。"
+              },
+              "description": "亲自参与的账务，非随时共享实时库存。",
+              "stance": "believed",
+              "confidence": 0.95,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "original-dajin-du-cheng",
+      "name": "杜诚",
+      "kind": "person",
+      "placement": "dajin-du-house",
+      "description": "种田的凡人，重视收成与守信，愿解释困难而不愿把家中口粮全部交空。",
+      "facts": [
+        {
+          "id": "original-dajin-du-cheng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-du-cheng"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-du-cheng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-du-cheng"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-du-cheng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "农作、修补农具和按约量粮；没有施法能力。"
+          },
+          "description": "农作、修补农具和按约量粮；没有施法能力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-du-cheng"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-du-cheng-age",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 41
+          },
+          "description": "当前年龄。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-du-cheng-landlord",
+          "predicate": "rents-from",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "按实际租约耕作，不是冯家成员或私产。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "original-dajin-du-cheng-rent-due",
+          "predicate": "rent-due",
+          "value": {
+            "kind": "text",
+            "value": "本轮尚欠冯家2份粮租，三日内核账交付；双方可另议展期，未交前不自动扣粮。"
+          },
+          "description": "实际租债，必须从杜家现粮向冯家交接。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-du-cheng",
+              "original-dajin-feng-shoujian",
+              "original-dajin-feng-he"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-dajin-du-cheng-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-dajin-du-cheng-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "original-dajin-du-cheng-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "original-dajin-du-cheng-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-du-cheng-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "original-dajin-du-cheng-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        }
+      ],
+      "agent": {
+        "id": "original-dajin-du-cheng",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "种田的凡人，重视收成与守信，愿解释困难而不愿把家中口粮全部交空。",
+            "voice": "依自己的经历、财物和关系讲话；对未知的来客先核实来意。"
+          },
+          "goals": [
+            {
+              "id": "daily-work",
+              "description": "从现存粮食中准备两份租粮，若需延后先向冯禾解释。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "杜诚",
+              "description": "种田的凡人，重视收成与守信，愿解释困难而不愿把家中口粮全部交空。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-feng-shoujian",
+              "name": "冯守简",
+              "description": "冯家当期保管人，做事仔细，珍惜传承，也会考虑族侄与佃户的实际难处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-feng-he",
+              "name": "冯禾",
+              "description": "冯家年轻跑腿记账人，熟悉镇中人情，想把差事办好后留出练功时间。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-clan",
+              "name": "宁中冯家",
+              "description": "有独立传承与族藏的修仙家族，公产不属于任意来客。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-estate",
+              "name": "冯家院落",
+              "description": "家族日常办事与保管族物的院地。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-feng-tenant-field",
+              "name": "冯家租田",
+              "description": "由杜诚一家承租耕作的族田，田产权、收成和应付租额分别结算。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-house",
+              "name": "杜家住屋",
+              "description": "田边两间朴素住屋，院内晾着农具；粮箱与屋舍属于住户。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-grain",
+              "name": "杜家粮箱",
+              "description": "已收存的粮食，交租与自用都从箱中实际取走。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-du-farm-tools",
+              "name": "杜家农具",
+              "description": "一把锄头与修补用木柄组成的普通农具套具，不是法器。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-dajin-du-cheng"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-feng-shoujian",
+              "canonical_entity_ids": [
+                "original-dajin-feng-shoujian"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-feng-he",
+              "canonical_entity_ids": [
+                "original-dajin-feng-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-clan",
+              "canonical_entity_ids": [
+                "dajin-feng-clan"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-estate",
+              "canonical_entity_ids": [
+                "dajin-feng-estate"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-feng-tenant-field",
+              "canonical_entity_ids": [
+                "dajin-feng-tenant-field"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-house",
+              "canonical_entity_ids": [
+                "dajin-du-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-grain",
+              "canonical_entity_ids": [
+                "dajin-du-grain"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-du-farm-tools",
+              "canonical_entity_ids": [
+                "dajin-du-farm-tools"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、亲自交接的财物和相互认识。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-original-dajin-feng-shoujian-member",
+              "subjectId": "known-original-dajin-feng-shoujian",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员兼保管职责。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-shoujian-nephew",
+              "subjectId": "known-original-dajin-feng-shoujian",
+              "predicate": "clan-nephew",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-feng-he"
+              },
+              "description": "冯禾为自己的族侄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-member",
+              "subjectId": "known-original-dajin-feng-he",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "家族成员，协助日常账目。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-feng-he-uncle",
+              "subjectId": "known-original-dajin-feng-he",
+              "predicate": "clan-uncle",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-original-dajin-feng-shoujian"
+              },
+              "description": "冯守简为自己的族叔。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "凡人"
+              },
+              "description": "凡人",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "无灵根。"
+              },
+              "description": "无灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "农作、修补农具和按约量粮；没有施法能力。"
+              },
+              "description": "农作、修补农具和按约量粮；没有施法能力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "number",
+                "value": 41
+              },
+              "description": "当前年龄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-landlord",
+              "subjectId": "self",
+              "predicate": "rents-from",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "按实际租约耕作，不是冯家成员或私产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-du-cheng-rent-due",
+              "subjectId": "self",
+              "predicate": "rent-due",
+              "value": {
+                "kind": "text",
+                "value": "本轮尚欠冯家2份粮租，三日内核账交付；双方可另议展期，未交前不自动扣粮。"
+              },
+              "description": "实际租债，必须从杜家现粮向冯家交接。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-owner",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-feng-clan"
+              },
+              "description": "田地为族产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-feng-tenant-field-tenant",
+              "subjectId": "known-dajin-feng-tenant-field",
+              "predicate": "tenant",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "杜诚当前承租。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-house-owner",
+              "subjectId": "known-dajin-du-house",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "住屋是杜家的实际家产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-grain-owner",
+              "subjectId": "known-dajin-du-grain",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "粮食是杜家的收成，租额未支付前仍在箱内。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-du-farm-tools-owner",
+              "subjectId": "known-dajin-du-farm-tools",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "杜诚日常劳作器具。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "personal-current-stock",
+              "subjectId": "self",
+              "predicate": "personal-stock",
+              "value": {
+                "kind": "text",
+                "value": "90 copper"
+              },
+              "description": "自己最近清点的个人现钱，与公库不同。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "stored-grain",
+              "subjectId": "known-dajin-du-grain",
+              "predicate": "current-stock",
+              "value": {
+                "kind": "text",
+                "value": "家中实存16份粮，其中应交2份本轮租粮。"
+              },
+              "description": "本人收存并清点的粮食。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-du-farm-tools",
+      "name": "杜家农具",
+      "kind": "item",
+      "placement": "dajin-du-house",
+      "description": "一把锄头与修补用木柄组成的普通农具套具，不是法器。",
+      "facts": [
+        {
+          "id": "dajin-du-farm-tools-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-du-cheng"
+          },
+          "description": "杜诚日常劳作器具。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -10979,6 +13087,11 @@
     {
       "id": "dajin-inherited-banner-control",
       "text": "阴罗传承幡可在取得催动法并实际炼化后被新持有人使用，不靠滴血认主锁定一生；控制器物不自动改变宗门归属、合法产权或他人的认知。修复仍需适合资源与过程。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-feng-asset-and-permission",
+      "text": "冯家公库、族田、密窟和私人钱粮各有所有者；管事或持钥者的保管权限不等于私人所有权。租债须从实际库存交接支付，困难可协商，不能自动生成钱粮。未知密窟路线和五槽操作须实际获得知识，亲属关系不自动共享秘密。",
       "severity": "hard"
     }
   ],
@@ -12651,6 +14764,130 @@
     ],
     "law:dajin-inherited-banner-control": [
       "dajin-banner-transferability"
+    ],
+    "entity:dajin-shuangjun": [
+      "dajin-cold-pill-and-shuangjun"
+    ],
+    "fact:dajin-shuangjun-environment": [
+      "dajin-cold-pill-and-shuangjun"
+    ],
+    "entity:dajin-du-house": [
+      "dajin-feng-current-household"
+    ],
+    "entity:dajin-feng-tenant-field": [
+      "dajin-feng-current-household"
+    ],
+    "entity:dajin-du-grain": [
+      "dajin-feng-current-household"
+    ],
+    "entity:original-dajin-feng-shoujian": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-cultivation-state": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-spiritual-root": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-learned-skill": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-age": [
+      "dajin-feng-current-household"
+    ],
+    "entity:original-dajin-feng-he": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-cultivation-state": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-spiritual-root": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-learned-skill": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-age": [
+      "dajin-feng-current-household"
+    ],
+    "entity:original-dajin-du-cheng": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-cultivation-state": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-spiritual-root": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-learned-skill": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-age": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-member": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-member": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-shoujian-nephew": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-feng-he-uncle": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-landlord": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-tenant-field-owner": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-tenant-field-tenant": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-du-house-owner": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-du-grain-owner": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-store-keeper": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-vault-key-keeper": [
+      "dajin-feng-current-household"
+    ],
+    "fact:original-dajin-du-cheng-rent-due": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-estate-route-dajin-du-house": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-du-house-route-dajin-feng-estate": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-du-house-route-dajin-feng-tenant-field": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-tenant-field-route-dajin-du-house": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-estate-route-dajin-feng-tenant-field": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-feng-tenant-field-route-dajin-feng-estate": [
+      "dajin-feng-current-household"
+    ],
+    "entity:dajin-du-farm-tools": [
+      "dajin-feng-current-household"
+    ],
+    "fact:dajin-du-farm-tools-owner": [
+      "dajin-feng-current-household"
+    ],
+    "law:dajin-feng-asset-and-permission": [
+      "dajin-feng-current-household",
+      "dajin-feng-lineage-and-vault"
     ]
   }
 }
