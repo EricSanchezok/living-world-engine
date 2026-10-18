@@ -3,12 +3,12 @@
   "reviewer": "source_completion/local-identity-review/2026-10-18",
   "status": "in-progress",
   "apiCalls": 0,
-  "count": 318,
+  "count": 352,
   "totalFindings": 918,
-  "pending": 600,
-  "anchorCount": 717,
+  "pending": 566,
+  "anchorCount": 849,
   "reusedAliasDecisions": 83,
-  "recordsHash": "fb6f9702633dc735a2b112b26ec7f497309f022c8ed07d1498e23885fedb4066",
+  "recordsHash": "0fe1b440867a61a15e7b95d3119fda1d8a9fcf694ca025d09d6adff64a42102b",
   "scope": "每条身份问题独立绑定原始finding。复用限同一批次、完全相同两端、相同来源与审校指纹、全部原段已被此前直读证据覆盖；其余逐条直读，不凭锚点重叠批准。",
   "limitations": [
     "有据推定、称谓、化身、对象类别与确定同一性分别记录。",
@@ -7932,6 +7932,1575 @@
           "start": 1485,
           "end": 2279,
           "anchorSha256": "29d706a3ca72cfc567a0da3f116c30148fafa58b5ab0a258fb46140baebf1b28"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0145:identity-unresolved:1",
+      "batchId": "batch-0145",
+      "left": "附身孔家老祖的邪魔",
+      "right": "古魔",
+      "sourceReportHash": "f48ee28c6fa36e3a683534a10b88600e948ac151758bb33c14e065e0550db26a",
+      "adjudicationReportHash": "94c985d4780e93481aa385e87b7db38d2fc8101aef3a3a3954f0d47a78967d15",
+      "findingHash": "ef03b69cbc8279425e6be9684c0bbe46b6ddca3c12eff66f13c86b40f86c92bc",
+      "disposition": "different-possession-chain-from-ancient-demon",
+      "statement": "孔祖被入驻的是尸王手下戈将军的操控链，参王会后即被灭；持韩两剑的古魔是坠魔谷独立分魂，另在晋京仍活动。邪魔是对附身者的泛称，不因此合并这两个有不同来历、主从、躯体和结局的主体。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25417482",
+          "chapterSha256": "a416840242cd8aa090ac484160ea720368b73883ed9eaca35b50c8140c9cf608",
+          "start": 1467,
+          "end": 1914,
+          "anchorSha256": "7a5a9263bb79243071ba8def3d376bdc50e19e7636e76f47934b7f171c5049b7"
+        },
+        {
+          "chapterId": "qq-25409140",
+          "chapterSha256": "49bbf697b65f8cfd36b7905ca552a10fe3795408157a6ed55b7dfdf08b28b4b3",
+          "start": 0,
+          "end": 485,
+          "anchorSha256": "6d6a9eb0f0123e919b553278ba06dbe60a255e15c1cd12e95fddc15f8bf5d502"
+        },
+        {
+          "chapterId": "qq-25203808",
+          "chapterSha256": "a2dd09053895a4086a69e93e337095309bb590db02fd910bb80015c61a1219b9",
+          "start": 604,
+          "end": 2326,
+          "anchorSha256": "3c5706244bbf8fb811131be16e315ce34949f52df156317cc1fa7aec170ada47"
+        },
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 1485,
+          "end": 2279,
+          "anchorSha256": "29d706a3ca72cfc567a0da3f116c30148fafa58b5ab0a258fb46140baebf1b28"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0146:identity-unresolved:0",
+      "batchId": "batch-0146",
+      "left": "batch-0146-object-0064",
+      "right": "batch-0146-object-0027",
+      "sourceReportHash": "9f336fe46d5c5c59a603717aed533751e653398018fbe84c5211dd0021c48b65",
+      "adjudicationReportHash": "9a9604556897824bf745ef86d7ae0a88d5cf3a305e425b761b8b98b9f1305ad9",
+      "findingHash": "d4643cd2f541e2a71d9c1b75689916b2ff66acb17fac49fad9917259fc125df4",
+      "disposition": "distinct-containers-and-deception-tools",
+      "statement": "竹筒是韩背上的长条包裹，被幻成刀骗过阴罗修士；所谓云宵珠是后来从储物袋另取、抛向索财者的圆球。取出位置、形状和先后动作明确不同，不能因都参与欺骗便合一件，也不把其口头珠名当可靠古宝品种证明。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25475691",
+          "chapterSha256": "610695d8330477c2f43b91fddf2a5baed88dc95aec086b6eb67b685266d9ea9e",
+          "start": 306,
+          "end": 745,
+          "anchorSha256": "551cd9901c735672e12584207b940c3fbdec1ed437c038567d52f7dafbeb2bac"
+        },
+        {
+          "chapterId": "qq-25475691",
+          "chapterSha256": "610695d8330477c2f43b91fddf2a5baed88dc95aec086b6eb67b685266d9ea9e",
+          "start": 1245,
+          "end": 1612,
+          "anchorSha256": "5181c300af3cb3bdcbb22b2d19e3ef32fc366c89cf98f75f5817ddcdc2aa2a48"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0147:identity-unresolved:0",
+      "batchId": "batch-0147",
+      "left": "叶家韩长老",
+      "right": "韩立",
+      "sourceReportHash": "38c33aa54ab5b3b5f6646dc184c529dcbf5c78cad0e83a04e7a30ffe9d6cf6f7",
+      "adjudicationReportHash": "6b2d2363ab70e658516df66e95a3a0b6b908db12c2f3e7aa1b2fe44d79c440db",
+      "findingHash": "4f714d6f46c924f0683aeded7f75e0added30840af6ac75b7d02f9e0793c93e0",
+      "disposition": "different-han-and-demon-explicit-simultaneous-scenes",
+      "statement": "韩炼雪晶珠与皇城韩长老出现被同时叙述，后者想杀同名仇人并持青竹剑自言主魂之仇，已证明两独立意识。葛和林未弄清不等作者事实未定；保持古魔分魂伪装与韩本体，禁止以同名重复生成韩本人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 410,
+          "end": 733,
+          "anchorSha256": "56a37a32bb6502075516808c2327167d478aab42366d99d699e5f44d152a5253"
+        },
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 1485,
+          "end": 2279,
+          "anchorSha256": "29d706a3ca72cfc567a0da3f116c30148fafa58b5ab0a258fb46140baebf1b28"
+        },
+        {
+          "chapterId": "qq-25525280",
+          "chapterSha256": "944c1a907e70e12148fe680ed5a8eee6693d362157940c3dea683d8e16fb3e41",
+          "start": 40,
+          "end": 484,
+          "anchorSha256": "55b67b457bf69588f816783e935df72caa09922c204ff8b4b52316e588bcb2be"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0147:identity-unresolved:1",
+      "batchId": "batch-0147",
+      "left": "叶长老",
+      "right": "叶家二长老",
+      "sourceReportHash": "38c33aa54ab5b3b5f6646dc184c529dcbf5c78cad0e83a04e7a30ffe9d6cf6f7",
+      "adjudicationReportHash": "6b2d2363ab70e658516df66e95a3a0b6b908db12c2f3e7aa1b2fe44d79c440db",
+      "findingHash": "0d708e87d4159ea061ab6445daf72e9598785099cc170c82a53c4be84ac8e345",
+      "disposition": "same-second-elder-local-command-reference",
+      "statement": "云逸说二长老决定让韩长老动手、叶长老要求不扰拍卖，返回即向方脸二长老汇报并由他重申同一任务。该次命令中的叶长老可回指二长老，不能把所有后文叶长老都全局锁此人；叶姓多名核心长老仍各自独立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 1105,
+          "end": 1568,
+          "anchorSha256": "e56271df60ab46062192d5e5789ada22e11dde30aa0619641c5a587ef6f2b6a7"
+        },
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 2520,
+          "end": 3129,
+          "anchorSha256": "a8d8bdb7a965c23a01701b792fdbfe2d19a0a583ebe288125915dd0cd36b2fe7"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0147:identity-unresolved:2",
+      "batchId": "batch-0147",
+      "left": "鬼罗宗",
+      "right": "阴罗宗",
+      "sourceReportHash": "38c33aa54ab5b3b5f6646dc184c529dcbf5c78cad0e83a04e7a30ffe9d6cf6f7",
+      "adjudicationReportHash": "6b2d2363ab70e658516df66e95a3a0b6b908db12c2f3e7aa1b2fe44d79c440db",
+      "findingHash": "f97b9656ed0188c6f0254ae2e3fb651e126a855292b4f985b1b9af03e75f548a",
+      "disposition": "same-sect-local-name-error",
+      "statement": "云逸递同一画像时先说鬼罗，韩问阴罗为何找人，云逸直接答不知道并继续阴罗集结情报。连续问答无改组织，鬼/阴为这段称名差异；鬼罗幡与阴罗宗关系仍为物品属派，不把旗名也归宗门实体。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 878,
+          "end": 1398,
+          "anchorSha256": "ea89a02885832308338f36cd200cf42857daf00c48a17ca264ad86d2a91412a1"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0147:identity-unresolved:3",
+      "batchId": "batch-0147",
+      "left": "漱灵斋",
+      "right": "漱斋",
+      "sourceReportHash": "38c33aa54ab5b3b5f6646dc184c529dcbf5c78cad0e83a04e7a30ffe9d6cf6f7",
+      "adjudicationReportHash": "6b2d2363ab70e658516df66e95a3a0b6b908db12c2f3e7aa1b2fe44d79c440db",
+      "findingHash": "88ccc70a972e136ab483dc50ed5142430a666a1e68624fbb201e5cdcdbbc4ba1",
+      "disposition": "same-shop-deictic-short-reference",
+      "statement": "富成带韩走向挂牌漱灵斋的小楼，紧接说这家漱斋的私人商号主人及临时传送阵，指示词和行走连续明确同一店。保留简称/漏字而不生第二斋；这个阵获例外许可且仅数月，不推广为所有店可自由设阵。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25513643",
+          "chapterSha256": "58889f9224845bb06f8e67bfc5901b6e0871634c846bf6f953059c4977e15cf7",
+          "start": 2029,
+          "end": 2509,
+          "anchorSha256": "7499086ff16e2a63567c5f110d60a7c7e8e5ab67286caeabca83667c7e1645d4"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0147:identity-unresolved:4",
+      "batchId": "batch-0147",
+      "left": "雪晶球",
+      "right": "雪晶珠",
+      "sourceReportHash": "38c33aa54ab5b3b5f6646dc184c529dcbf5c78cad0e83a04e7a30ffe9d6cf6f7",
+      "adjudicationReportHash": "6b2d2363ab70e658516df66e95a3a0b6b908db12c2f3e7aa1b2fe44d79c440db",
+      "findingHash": "6c3e13564ae2f526321eb2304637c57ab91c74badae07ac9fb0006110caba975",
+      "disposition": "same-reworked-orb-local-generic-name",
+      "statement": "韩在道观用一滴寒髓重炼雪晶珠，下一章连续留观直到拍卖日称修炼雪晶球。珠/球是同一器物的称法，不新造第二球；重炼是后期状态变化，不能把加寒髓效果倒灌开篇。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25488563",
+          "chapterSha256": "8c87b834f865327c0fa76f1b6579ec5b29518c95107d62cdab59b2153731bb72",
+          "start": 0,
+          "end": 349,
+          "anchorSha256": "27bfb83f7f081fbdbbfa16d42337ee5eff93b274ccad6936f840dbd975822829"
+        },
+        {
+          "chapterId": "qq-25499062",
+          "chapterSha256": "e1be5069bf10577d43d4a106c05c156c67def85cd183d5a1727a8aa340978e81",
+          "start": 540,
+          "end": 1013,
+          "anchorSha256": "008ea4a0c9e8bab496f9ca0fc1de879ef33f3286d7af026a539af048bcd98e03"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0148:identity-unresolved:0",
+      "batchId": "batch-0148",
+      "left": "叶姓主持修士（白霞中人影）",
+      "right": "叶家",
+      "sourceReportHash": "6edef532f0a03a95c7f928f80afd6d590ade95e6461dcc64ed93482e7a870281",
+      "adjudicationReportHash": "9e9814e85fdca8c40d3426955968eae5adb8220025268c1dbbdbda1ab1f44216",
+      "findingHash": "131888f9d7d2759c467440fd1e1c97efda392f1cc40a7b9627a2680c03a89ee4",
+      "disposition": "host-and-family-association-does-not-prove-blood-identity",
+      "statement": "主持者自称叶某、被叫叶老二，但卖平山印时皇族方脸二长老与云逸另入场，和主持交物同台，至少不能把主持与方脸二长老并人。主持为叶家宝物执行拍卖可确立合作关系，单姓与拍卖职责不足证明皇族血缘/核心职位；保留未明的具体归属，不与叶家整个组织等同。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25543942",
+          "chapterSha256": "bc7bb0a75de6c94b1d59722c43fdca9a346a329ef2409a87fa4472563cfd1a65",
+          "start": 744,
+          "end": 1190,
+          "anchorSha256": "e82f1e80ac0db207d6d8dacdf46f0ccdecbf8ea113e8f5948dc1f2ea974e6a5c"
+        },
+        {
+          "chapterId": "qq-25545583",
+          "chapterSha256": "d7ceaf005a65e7a8639d52a573253b5f647551b24e176612bc88b10239d803f0",
+          "start": 1033,
+          "end": 2374,
+          "anchorSha256": "a1cd251b717cc5a704b2a029e3d4f1a76e9d340eb95ea0df9d0f5ad39c4566bc"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0148:identity-unresolved:1",
+      "batchId": "batch-0148",
+      "left": "他派中年修士（鲁兄及同伴）",
+      "right": "金霞山、明阳谷掌门",
+      "sourceReportHash": "6edef532f0a03a95c7f928f80afd6d590ade95e6461dcc64ed93482e7a870281",
+      "adjudicationReportHash": "9e9814e85fdca8c40d3426955968eae5adb8220025268c1dbbdbda1ab1f44216",
+      "findingHash": "eff0dc9e596db7df1870c6ede1045f99fbbc773b51e6b273337eca36dee116e7",
+      "disposition": "visiting-heads-as-pair-individual-assignment-unknown",
+      "statement": "守门弟子说两家掌门来商议，殿内恰有两名外派中年，岳真因韩到访把原商议改期；后金霞常/明阳谢来拜又明确先前听两家掌门回报。可关联这两位是首日访客掌门组，但不能仅称鲁兄就定其具体是哪一派，也不能与后来常谢长老混同。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25568486",
+          "chapterSha256": "bf9ed0f499d7d57d071dcf4afccbf0c591ef8a08e0a77c565ebd46e736374257",
+          "start": 980,
+          "end": 1464,
+          "anchorSha256": "c14de3ca5b72eb95b9a395aadd2b0b40eca800d73314418d3bfc3eaace65bafc"
+        },
+        {
+          "chapterId": "qq-25568486",
+          "chapterSha256": "bf9ed0f499d7d57d071dcf4afccbf0c591ef8a08e0a77c565ebd46e736374257",
+          "start": 2869,
+          "end": 3156,
+          "anchorSha256": "661ec77ce5d23cec2904de3884f6c4afb5da244819a4409a67f3f8ea9b63ec60"
+        },
+        {
+          "chapterId": "qq-25591422",
+          "chapterSha256": "9ebbb492ab997a233a8c363bc59fb2feb86b8dd86e7a6af9a242d19d9e4e92a0",
+          "start": 1032,
+          "end": 1693,
+          "anchorSha256": "4cbdbe167ca4c7b3824235b3d3b8ec04e09447b473efb8a0fff6e3de34062006"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0149:identity-unresolved:0",
+      "batchId": "batch-0149",
+      "left": "红蛟",
+      "right": "赤火蛟",
+      "sourceReportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
+      "adjudicationReportHash": "ec3a4fe739a579f39fda9750e6f2777067498e245a508622e0c74cbe34dc6b95",
+      "findingHash": "5a419cd0fc20bb231baea5560787e035db3be0f5efcffb063af841ec5557b966",
+      "disposition": "red-dragon-later-confirmed-as-chihuo",
+      "statement": "常道友初仅知红蛟而不定种属，但随后韩面对其体形、鳞焰明说八级赤火蛟，旁白也直接称人形赤火蛟。后文实际接触已更新物种知识，不应继续全程未定；早期人物仍只知道坊市传闻，不提前共享该确认。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25591422",
+          "chapterSha256": "9ebbb492ab997a233a8c363bc59fb2feb86b8dd86e7a6af9a242d19d9e4e92a0",
+          "start": 2429,
+          "end": 2744,
+          "anchorSha256": "b1f04e33863d56ed43f9e93eece1688675e7c4e189f8d86a63154d01d15e2258"
+        },
+        {
+          "chapterId": "qq-25614276",
+          "chapterSha256": "8cb3116c22a9a47b7bdc08df8336e78d6313d14e9509130cd3856138089963ae",
+          "start": 1638,
+          "end": 1981,
+          "anchorSha256": "9841c4913005fbea4a49e4a326ab2c82599b4ab7bfc6374e9b3f6e980fd2fb1c"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0149:identity-unresolved:1",
+      "batchId": "batch-0149",
+      "left": "温姓老者、常姓修士、谢姓女修",
+      "right": "所称三名结丹期长老",
+      "sourceReportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
+      "adjudicationReportHash": "ec3a4fe739a579f39fda9750e6f2777067498e245a508622e0c74cbe34dc6b95",
+      "findingHash": "d1e8f444f6a889768f533ee23957b7e5160806e5fabcfc0e9b22912c4f8080ad",
+      "disposition": "three-elders-explicit-attendee-roster",
+      "statement": "常、谢作为两家结丹长老被温逐一引见；温姓老者三名结丹长老惊讶指在场该三人，门主岳真是后辈。称三名并不表示他们都属天符门，更不与此前两家掌门或韩这个元婴混作三人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25602410",
+          "chapterSha256": "ca312d21b6a757ffdc850b3356f64d8a784b71e68888a3388ade724b6a3d313e",
+          "start": 866,
+          "end": 1118,
+          "anchorSha256": "77ec0c4538739ee41acb0a073445663dded8d1fac2fd19d56a9ed39769b7c746"
+        },
+        {
+          "chapterId": "qq-25591422",
+          "chapterSha256": "9ebbb492ab997a233a8c363bc59fb2feb86b8dd86e7a6af9a242d19d9e4e92a0",
+          "start": 1182,
+          "end": 1537,
+          "anchorSha256": "2f8e01d618c7998bd4a8319e65457d42b75c3d43e193142c81461eab1c6123ba"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0149:identity-unresolved:2",
+      "batchId": "batch-0149",
+      "left": "云姓掌门",
+      "right": "现任天符门掌门",
+      "sourceReportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
+      "adjudicationReportHash": "ec3a4fe739a579f39fda9750e6f2777067498e245a508622e0c74cbe34dc6b95",
+      "findingHash": "c59dbac8d65abd4f40229d354827a69d1feddcbe238a81634786ee44a3a00c08",
+      "disposition": "different-successive-heads-explicit-office-custody",
+      "statement": "岳真当场被称掌门、执掌仅历代掌门可持灵符，又称云为师伯；云是失踪的前辈旧掌门。韩沿旧相识称贵掌门只是历史称谓，不足令云取代在任岳真，也不把掌门职位当恒定个人身份。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25579406",
+          "chapterSha256": "3ade60fdba0043545b98124aa014aeba5fa6d2a1ae968a1fa83576a2cb72efc3",
+          "start": 582,
+          "end": 892,
+          "anchorSha256": "2b1bafd99450ae48ba0e70c70fde9af418829907973064e9b4413247886e3266"
+        },
+        {
+          "chapterId": "qq-25602410",
+          "chapterSha256": "ca312d21b6a757ffdc850b3356f64d8a784b71e68888a3388ade724b6a3d313e",
+          "start": 545,
+          "end": 965,
+          "anchorSha256": "60615917fc412e52f6c7092f241cd9443712043d88120e41839f02402f1522c8"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0149:identity-unresolved:3",
+      "batchId": "batch-0149",
+      "left": "大衍神君",
+      "right": "大衍重",
+      "sourceReportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
+      "adjudicationReportHash": "ec3a4fe739a579f39fda9750e6f2777067498e245a508622e0c74cbe34dc6b95",
+      "findingHash": "4e254d5ef8570c4211d9b3902aebedd0f198474c9057781d6cbfb1ad9e9e3075",
+      "disposition": "local-text-corruption-same-dayan-speaker",
+      "statement": "韩向大衍前辈问探向之礼境界，回答先写大衍重，紧接同一说明又写大衍神君。重字为此处称名损坏，不是新名字/第二个声音，保留原字异常并归同一交谈者。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25581812",
+          "chapterSha256": "33da2958e944cff0a1f04438f161f3d1f5a6df673e62bc9d6e988e00ba277a60",
+          "start": 1367,
+          "end": 1690,
+          "anchorSha256": "44d79b643c38aec69d581e565b34048a1971a193f91572f28cf9801c3ea35060"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0150:identity-unresolved:0",
+      "batchId": "batch-0150",
+      "left": "batch-0150-object-0019",
+      "right": "batch-0150-object-0020",
+      "sourceReportHash": "f0449dcb0940c59601af1f4ee71b90ad8030d9a1725b4856556a27037339897c",
+      "adjudicationReportHash": "71cb6dfd90f7f42bc2e6594f9d15564462d9309e8d2c3c683997c0023ccb8040",
+      "findingHash": "b051b9877e6089a81152d0a27249ed19e10494c5bd545a4ddb3adc54458c2077",
+      "disposition": "planned-imitation-not-prototype-identity",
+      "statement": "大衍所设计韩将炼的是三焰扇，为七焰扇仿制品，之前威能比较已明确；苦竹岛说炼七焰扇是对原型方案的泛称。后文开始炼三焰不代表另起第二把，原型、图法、仿制成品及制作阶段分别记录。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25660434",
+          "chapterSha256": "bae545b8a9c4eb1f5c01c62354fa3ae6e7cfb588cf7d924dd83e9ad79a74e77c",
+          "start": 62,
+          "end": 419,
+          "anchorSha256": "c8f3236a521424c38f597aac5c0108e8592ba19f02f6bf2a12845f83884d614c"
+        },
+        {
+          "chapterId": "qq-25701036",
+          "chapterSha256": "6423fcb621311f64d059635ffc09b54fe77868ec68d0f90b8bceac47834b96b7",
+          "start": 1004,
+          "end": 1337,
+          "anchorSha256": "b52a62f5fef0936ca9c2ce85e4d90371e5b5ddbb157d3cbb54392fd6ab20aee7"
+        },
+        {
+          "chapterId": "qq-25545583",
+          "chapterSha256": "d7ceaf005a65e7a8639d52a573253b5f647551b24e176612bc88b10239d803f0",
+          "start": 2375,
+          "end": 3164,
+          "anchorSha256": "09e576ffb0a2a01024eeb19a086b078f5146dcb252398bc52aeca7f4ee2f27fa"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0151:identity-unresolved:0",
+      "batchId": "batch-0151",
+      "left": "银蛇山",
+      "right": "银蛟山",
+      "sourceReportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "adjudicationReportHash": "adf73c2f0f486847224d07f3945432e808f0a78067f3c7ac255524ce119286dd",
+      "findingHash": "c611ba6727d18a67cb6fb6726dcf2ee17943a01585d398e0febb8f851bcd0aeb",
+      "disposition": "same-volcanic-range-local-name-variant",
+      "statement": "韩赴银蛇山找火脉炼扇，数月后同火山区飞出称银蛟山，后接同一南疆行程，无迁到另一火山的叙事。限定蛇/蛟为本次连续地点异文，不扩为任意银字山同一，也不把数月炼成前置。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25758248",
+          "chapterSha256": "7bbe4795a584fd32eb014047b665694c2eb34f92b2e8a2b8a9d51f51dd1258db",
+          "start": 629,
+          "end": 986,
+          "anchorSha256": "2c7a1415d71242e46b25dd1c62f01da276fb392aefea141655b3313a8710d63c"
+        },
+        {
+          "chapterId": "qq-25765653",
+          "chapterSha256": "c0bbf4a30c24f122ab8a6aee75060bd00506fdf1ea26bbf97be014975f60a1ad",
+          "start": 2137,
+          "end": 2500,
+          "anchorSha256": "0105ad574d902e7553482435ede976adbedf4374ff4252b6010d40eacef5caeb"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0151:identity-unresolved:1",
+      "batchId": "batch-0151",
+      "left": "三弟",
+      "right": "三小子",
+      "sourceReportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "adjudicationReportHash": "adf73c2f0f486847224d07f3945432e808f0a78067f3c7ac255524ce119286dd",
+      "findingHash": "a6b230764effc64bceffbba0090929bbc85264059f38d997f1fe51dc82418afe",
+      "disposition": "same-third-clan-sibling-and-current-great-elder",
+      "statement": "七叔称二小子和三小子，方脸二长老称三弟；后面对全族直接说三弟身为大长老将到来，继承的是同一第三兄弟。排行三、职位大长老两维分开，不把他与死而复出的七叔或上一代大长老合并。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25765653",
+          "chapterSha256": "c0bbf4a30c24f122ab8a6aee75060bd00506fdf1ea26bbf97be014975f60a1ad",
+          "start": 0,
+          "end": 254,
+          "anchorSha256": "b0c02838fd8e087d691370a33eeb214bd991cbb6224678dda71aaba60903f9c1"
+        },
+        {
+          "chapterId": "qq-25758248",
+          "chapterSha256": "7bbe4795a584fd32eb014047b665694c2eb34f92b2e8a2b8a9d51f51dd1258db",
+          "start": 2430,
+          "end": 2776,
+          "anchorSha256": "882f7947972505599a65f6179faaaf4e67d7300974256a187b1de4c5847529b8"
+        },
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 2100,
+          "end": 3020,
+          "anchorSha256": "bf38118a8a1518e791c5dfab817ba1f655fca307095c528496ce63ae1543c8e3"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0151:identity-unresolved:2",
+      "batchId": "batch-0151",
+      "left": "恶火头陀击杀者",
+      "right": "韩立",
+      "sourceReportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "adjudicationReportHash": "adf73c2f0f486847224d07f3945432e808f0a78067f3c7ac255524ce119286dd",
+      "findingHash": "be0418bbcf569707f7da4feb35e545ef47fee2b8b74420e425a9de765ca8140d",
+      "disposition": "ancient-demon-is-actual-killer-han-denial-supported",
+      "statement": "实际战斗旁白明确古魔扑头陀、撕体、擒婴，韩在旁心惊。富成听闻把瞬杀归韩是错误消息，韩此处称另一人出手有直接原文支持，不能因他有隐藏实力便把否认当谎话。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25732506",
+          "chapterSha256": "b616afca8f4ca4eaaf5349b67047d444c1ad2b4c0eef61a1f7126b0705ec8c75",
+          "start": 366,
+          "end": 1045,
+          "anchorSha256": "c5bc0e8d7c94b00007475b02c28e140d0358e4744b45499f0441dfdfa9da8a92"
+        },
+        {
+          "chapterId": "qq-25560346",
+          "chapterSha256": "cb2c1d91120d1e04328e43985c4de592a0cdd96c6f6f9f632f8da1d147cb1e31",
+          "start": 389,
+          "end": 2536,
+          "anchorSha256": "f413f17633f312e52fd3425d8ecbdf22222a397cd3f90471d33157b96244f86c"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0151:identity-unresolved:3",
+      "batchId": "batch-0151",
+      "left": "寒髓",
+      "right": "小极宫镇宫之宝",
+      "sourceReportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "adjudicationReportHash": "adf73c2f0f486847224d07f3945432e808f0a78067f3c7ac255524ce119286dd",
+      "findingHash": "a6b817a9ca43e1f30d9a579315c87bb50713abcef85495097b0508393351faa5",
+      "disposition": "same-ice-essence-substance-title-not-unique-all-stock",
+      "statement": "韩看到冰玉，想到自己一瓶寒髓并接着想到小极宫不愿交出的镇宫之宝，指称明确寒髓。镇宫之宝是对此稀贵资源的地位称呼，不表明韩一瓶就是宫中全部存量或所有万年冰玉的唯一产物，更不把冰玉本体和髓液合为一件。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1942,
+          "end": 2519,
+          "anchorSha256": "7de9ad9ef856d7fef81e344d6489af81091bf7761b366218422e3e24a7913b83"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0152:identity-unresolved:0",
+      "batchId": "batch-0152",
+      "left": "韩立",
+      "right": "古魔",
+      "sourceReportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "adjudicationReportHash": "8ae73ac4b50e676d43c36742e5f368f9978656a68fe615f02ebea3b46b531748",
+      "findingHash": "16749f16616830103ddf9343abe8528e034459feb57a953b40ac5e5da595c35c",
+      "disposition": "different-han-and-disguised-demon-explicit-concurrent-location",
+      "statement": "原文一边韩随富入阴阳窟，同时叶队湖上出现容貌似韩的古魔并被叫韩长老。并行地点与明确古魔称呼已排除同一人格，不必等待角色自行识破；此魔沿分魂身份而非已灭主魂。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 1538,
+          "end": 2099,
+          "anchorSha256": "fe928a927d5fbf8cc79a8e7155a1622685df9e8084d7be57b0b0f323ede07b88"
+        },
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 3021,
+          "end": 3236,
+          "anchorSha256": "363b5bc946604fe87c8c7169f1a500b46cf13d33589948a5ff4edc1badd841aa"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0152:identity-unresolved:1",
+      "batchId": "batch-0152",
+      "left": "大头怪人",
+      "right": "七叔",
+      "sourceReportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "adjudicationReportHash": "8ae73ac4b50e676d43c36742e5f368f9978656a68fe615f02ebea3b46b531748",
+      "findingHash": "1d35970cfab9f557b7e0d2b2abdb75e363034f685a1d72b7f8aedad7d0abd3b4",
+      "disposition": "same-big-headed-seventh-uncle-explicit-prior-introduction",
+      "statement": "前文怪人露出奇大头颅，方脸当面问你真是七叔，怪人以二小子及三小子玉简答并获认可；后取宝队的大头怪人就是其连续出场。后文只说七叔助力不重列名字，不能因此再造一位怪人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 2501,
+          "end": 2900,
+          "anchorSha256": "8d9faa753eff56d092420b43f3211dabe5afeac1fbbcc4ac087f91487c1b0900"
+        },
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 2901,
+          "end": 3236,
+          "anchorSha256": "e89e0be9bb6a6e09955c6a15ecb5ae88266e2264ee0c304d5b8c2bf975b2aba7"
+        },
+        {
+          "chapterId": "qq-25758248",
+          "chapterSha256": "7bbe4795a584fd32eb014047b665694c2eb34f92b2e8a2b8a9d51f51dd1258db",
+          "start": 2301,
+          "end": 2881,
+          "anchorSha256": "c09e194e151e4fbfdb151477944506c53477a49bd8c2c375542e5a5a7406362e"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0152:identity-unresolved:2",
+      "batchId": "batch-0152",
+      "left": "黑袍老者",
+      "right": "葛长老",
+      "sourceReportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "adjudicationReportHash": "8ae73ac4b50e676d43c36742e5f368f9978656a68fe615f02ebea3b46b531748",
+      "findingHash": "19e62a270ec332fb9ae1a26175fadb99fcae6fc0b1a7be75bab83edc503d5ae7",
+      "disposition": "unnamed-reporting-nephew-not-ge-by-proximity",
+      "statement": "乾在黑袍师侄面前引用葛长老先前来信，黑袍只回应师侄照办，并未自称写信者。职辈与消息指示都不支持并成葛天豪；保留本次未名执行人，不因同宗同服饰复制葛的全部身份认知。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25792143",
+          "chapterSha256": "20b799baf48729717771e32a22822c929afeefceb84ac6d29725d497e8568ba5",
+          "start": 2850,
+          "end": 3396,
+          "anchorSha256": "a78cced1bbeb1b740293eb8c0e49192ae366200e7a8e94c6dbb04d9a2bb9c696"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0153:identity-unresolved:0",
+      "batchId": "batch-0153",
+      "left": "金色飞剑群",
+      "right": "青竹蜂云剑",
+      "sourceReportHash": "e6c4466edda57eaa41bf12f9538fc37b16212ae36f8161da8b124491624b4687",
+      "adjudicationReportHash": "70a3b20a18637eb4e1d5f93beabdfd4282494a907684866067abeaaf9e76c17e",
+      "findingHash": "c9448aeb6af9e0071a93a5d0d16121019de3963b098672377dd898ebf0252eb3",
+      "disposition": "same-han-sword-set-context-and-established-material",
+      "statement": "韩原有青竹蜂云剑以金雷竹为材、炼晶庚精加强而呈金光；此战取数十口小剑与后来遗憾缺剑不能成大庚剑阵是同一使用链。不是另得一套无名金剑；具体放出数十口不等全部七十二都在场，失两剑事实继续保留。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25827752",
+          "chapterSha256": "99953f2d00b7dc432a9f4f4cf7128b9f04b4844c162e025eca5488179bf66efa",
+          "start": 2653,
+          "end": 3052,
+          "anchorSha256": "e6ccf007f21d1f359b44dfad04e766ef0353c27f9bdca118b125d3af1115768f"
+        },
+        {
+          "chapterId": "qq-25842332",
+          "chapterSha256": "3418a2eb94de8e10e8d40191233dca2b5ef6d84c223c191dfda7e99393f2f987",
+          "start": 307,
+          "end": 644,
+          "anchorSha256": "45e0252b25e92a46fa759d116b873756c09976d83659b39d4a2a51ed2ef13d62"
+        },
+        {
+          "chapterId": "qq-25409140",
+          "chapterSha256": "49bbf697b65f8cfd36b7905ca552a10fe3795408157a6ed55b7dfdf08b28b4b3",
+          "start": 0,
+          "end": 602,
+          "anchorSha256": "7ac24b854d56657cb6c8b2ccf9f7aadb2818aece9c6bcd7377e1ab085f9c2022"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0154:identity-unresolved:0",
+      "batchId": "batch-0154",
+      "left": "batch-0154-object-0001",
+      "right": "batch-0154-object-0016",
+      "sourceReportHash": "1c79399227297e31f741cc7e80e49ca265b224268e4e0bfa2dc952c7595398cd",
+      "adjudicationReportHash": "1ce51f72d90349981e6eb8fc4cada52816e2fe27d9c26740eb53e7a4188c7280",
+      "findingHash": "f01b70313918093c73698fdc96f7ace646ad57e988bfc6c312adf7c18289a21d",
+      "disposition": "different-han-and-demon-confirmed-concurrent-scenes",
+      "statement": "旁白明写叶队韩长老是古魔所化，且叶队入地下同时韩本人困传送阵追银翅，两地两行动清楚。沿现有分魂资料，不因同姓或人形伪装合并成韩立，也不把主魂死亡抹去。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25872289",
+          "chapterSha256": "e6e56d26026166dfa939192a5617c15ca75f754600725e99b4e6e369d864ffc4",
+          "start": 210,
+          "end": 522,
+          "anchorSha256": "fe3822f5b5b1be24214069087ad34a70f04f83daa129fdaf88a8b40936146637"
+        },
+        {
+          "chapterId": "qq-25872289",
+          "chapterSha256": "e6e56d26026166dfa939192a5617c15ca75f754600725e99b4e6e369d864ffc4",
+          "start": 2149,
+          "end": 2469,
+          "anchorSha256": "9ebc57b58fd3151981bf888245b55c9e48ca5fe8558836b439874e5c2523e1b4"
+        },
+        {
+          "chapterId": "qq-25855118",
+          "chapterSha256": "220f94ad6d3e52a77f1a3b3b9de485ad607e758c8838141cfa83a063449a5d8c",
+          "start": 235,
+          "end": 493,
+          "anchorSha256": "caa6f4f627402af09635f771ee1c79e9ceb3e8259e69449b7f4b9eef0c8061cd"
+        },
+        {
+          "chapterId": "qq-25898216",
+          "chapterSha256": "f53851bcaeb9a03632ed952cb6f08926f99ca48ca417bd6c9b58fd3bd38c3b5f",
+          "start": 1676,
+          "end": 2349,
+          "anchorSha256": "2d02873a79414164fec1553dab7e5a0c098fd03957a4e8142386186fc525c82d"
+        },
+        {
+          "chapterId": "qq-25905022",
+          "chapterSha256": "ca6bc310239084e9f5772ab0f3cdfa9c578d3fd4c8fc48cd5392d8713c49d068",
+          "start": 0,
+          "end": 218,
+          "anchorSha256": "fdb64feff4ea1ad90bcc4d8abbc3ebbd6c0637ff7801809b10ec1cea35719b45"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 999,
+          "end": 1659,
+          "anchorSha256": "3ac251e415434f5ef1f347cbdc5d1c9f39db2a4adbdbc010e609e36724d57068"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 1889,
+          "end": 2650,
+          "anchorSha256": "4cdfb71d93040228a83959b99a5c71695c4c2e09d116a5804537a5af4d5e04f7"
+        },
+        {
+          "chapterId": "qq-25922743",
+          "chapterSha256": "071d555b2f2814ba7791cc624435da0b3d0374fcca9268ee764339313add558a",
+          "start": 638,
+          "end": 1219,
+          "anchorSha256": "91952ec4d5366c7b8570001cad39e1b694a67b7bf6b8f9588961213406e39c09"
+        },
+        {
+          "chapterId": "qq-25922743",
+          "chapterSha256": "071d555b2f2814ba7791cc624435da0b3d0374fcca9268ee764339313add558a",
+          "start": 2188,
+          "end": 2494,
+          "anchorSha256": "8e66273633a37a43b5ead5b96a89fd9bb024a505c5082ee3858589df5bea8092"
+        },
+        {
+          "chapterId": "qq-25929186",
+          "chapterSha256": "12230dd04476e3afa1e596a4071b4fea2a4fd60a4da4732215aed5cfa11fc12d",
+          "start": 0,
+          "end": 234,
+          "anchorSha256": "e5bb29c212db6fcd9faa24782b1f6fd6333f4cdf027e330cee7d9e85187dacca"
+        },
+        {
+          "chapterId": "qq-25929186",
+          "chapterSha256": "12230dd04476e3afa1e596a4071b4fea2a4fd60a4da4732215aed5cfa11fc12d",
+          "start": 1527,
+          "end": 1829,
+          "anchorSha256": "17bf7d9edb1afc70b099a7daf8bf082c7d820874ea9a01d4f8aab0f05174e3d6"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-identity-corrections-complete",
+          "claimHash": "08dbdb6779523b65abf228525e2f620a850deade6ecc138e0ead9426c17055c7",
+          "statement": "叶家大长老白袍儒生与大头七叔并排出现，明确两实体，后者血车感尸、黄剑驱夜叉。古魔化韩长老非韩立，花天奇非五魔白影的乾老魔；毒圣口中的元师弟即先前被银翅杀的元姓大汉，旁人尚不知死讯；不能保留提取报告的错误合并或永久待核。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0154:identity-unresolved:1",
+      "batchId": "batch-0154",
+      "left": "batch-0154-object-0018",
+      "right": "batch-0154-object-0019",
+      "sourceReportHash": "1c79399227297e31f741cc7e80e49ca265b224268e4e0bfa2dc952c7595398cd",
+      "adjudicationReportHash": "1ce51f72d90349981e6eb8fc4cada52816e2fe27d9c26740eb53e7a4188c7280",
+      "findingHash": "c41c2dda1cd6ce85428408718f619cfbf08e8f345abbd88a50ae4a6f13cf1866",
+      "disposition": "misattributed-source-object-qian-not-flower",
+      "statement": "提取对象先误把五白影大长老冠成毒圣；已审昆吾更正明确这是阴罗乾老魔五子同心魔，后另切蓝袍红巾的花天奇队伍。乾与花是不同宗派、不同主体，不能在错误组织标签之上再求同。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25898216",
+          "chapterSha256": "f53851bcaeb9a03632ed952cb6f08926f99ca48ca417bd6c9b58fd3bd38c3b5f",
+          "start": 1198,
+          "end": 1661,
+          "anchorSha256": "abf07576f6bc6329e33ef084a6cc7c47004b09456e8421b95cbc52273d41810b"
+        },
+        {
+          "chapterId": "qq-25898216",
+          "chapterSha256": "f53851bcaeb9a03632ed952cb6f08926f99ca48ca417bd6c9b58fd3bd38c3b5f",
+          "start": 1676,
+          "end": 3308,
+          "anchorSha256": "be5b6a3830a27aeebe2be7dd227c721c8af390b9ebacf7ec3e9f164fde292a6e"
+        },
+        {
+          "chapterId": "qq-25792143",
+          "chapterSha256": "20b799baf48729717771e32a22822c929afeefceb84ac6d29725d497e8568ba5",
+          "start": 869,
+          "end": 1321,
+          "anchorSha256": "e0ef6cf773d83a74ea7e719e878103e35eb6e97255532468bc7ed324d627f640"
+        },
+        {
+          "chapterId": "qq-25941274",
+          "chapterSha256": "097f29586434c65505ea34337c8ae51731277f960c13886c55fde9a645543dd0",
+          "start": 2421,
+          "end": 2909,
+          "anchorSha256": "0ed47ac1c4d3cee8266ed887273d927903f584d4d49d048513241ad5a8bdf1fc"
+        },
+        {
+          "chapterId": "qq-26115136",
+          "chapterSha256": "378633801b3ae9bc93666e385884f8c05f45a3c1324bc722b7c998fc4c2815f3",
+          "start": 2111,
+          "end": 2568,
+          "anchorSha256": "bab40d15112f448b5cdc13ae4b9e07bbb3909b6ba5feebf9b59a8efcf926c296"
+        },
+        {
+          "chapterId": "qq-26137379",
+          "chapterSha256": "696da89a77218e6dd7987367fd802aef85d6c7c3ebbf00995829b6fa444dd99d",
+          "start": 1537,
+          "end": 1968,
+          "anchorSha256": "fc87cd8e4cd4945c57086e5aed7e6516cc514a7d0564aaddb5ecefa08514f29b"
+        },
+        {
+          "chapterId": "qq-25872289",
+          "chapterSha256": "e6e56d26026166dfa939192a5617c15ca75f754600725e99b4e6e369d864ffc4",
+          "start": 1631,
+          "end": 2036,
+          "anchorSha256": "def24d4157c9ab8c7177227a711922fa924701ed4364ef1a4f64524c1cdff2fd"
+        },
+        {
+          "chapterId": "qq-25855118",
+          "chapterSha256": "220f94ad6d3e52a77f1a3b3b9de485ad607e758c8838141cfa83a063449a5d8c",
+          "start": 235,
+          "end": 493,
+          "anchorSha256": "caa6f4f627402af09635f771ee1c79e9ceb3e8259e69449b7f4b9eef0c8061cd"
+        },
+        {
+          "chapterId": "qq-25905022",
+          "chapterSha256": "ca6bc310239084e9f5772ab0f3cdfa9c578d3fd4c8fc48cd5392d8713c49d068",
+          "start": 0,
+          "end": 218,
+          "anchorSha256": "fdb64feff4ea1ad90bcc4d8abbc3ebbd6c0637ff7801809b10ec1cea35719b45"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 999,
+          "end": 1659,
+          "anchorSha256": "3ac251e415434f5ef1f347cbdc5d1c9f39db2a4adbdbc010e609e36724d57068"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 1889,
+          "end": 2650,
+          "anchorSha256": "4cdfb71d93040228a83959b99a5c71695c4c2e09d116a5804537a5af4d5e04f7"
+        },
+        {
+          "chapterId": "qq-25922743",
+          "chapterSha256": "071d555b2f2814ba7791cc624435da0b3d0374fcca9268ee764339313add558a",
+          "start": 638,
+          "end": 1219,
+          "anchorSha256": "91952ec4d5366c7b8570001cad39e1b694a67b7bf6b8f9588961213406e39c09"
+        },
+        {
+          "chapterId": "qq-25922743",
+          "chapterSha256": "071d555b2f2814ba7791cc624435da0b3d0374fcca9268ee764339313add558a",
+          "start": 2188,
+          "end": 2494,
+          "anchorSha256": "8e66273633a37a43b5ead5b96a89fd9bb024a505c5082ee3858589df5bea8092"
+        },
+        {
+          "chapterId": "qq-25929186",
+          "chapterSha256": "12230dd04476e3afa1e596a4071b4fea2a4fd60a4da4732215aed5cfa11fc12d",
+          "start": 0,
+          "end": 234,
+          "anchorSha256": "e5bb29c212db6fcd9faa24782b1f6fd6333f4cdf027e330cee7d9e85187dacca"
+        },
+        {
+          "chapterId": "qq-25929186",
+          "chapterSha256": "12230dd04476e3afa1e596a4071b4fea2a4fd60a4da4732215aed5cfa11fc12d",
+          "start": 1527,
+          "end": 1829,
+          "anchorSha256": "17bf7d9edb1afc70b099a7daf8bf082c7d820874ea9a01d4f8aab0f05174e3d6"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-qian-and-five-demons",
+          "claimHash": "7d29c32e32a78d4abae658cd784a6000df6461f9529c1ad46b17738f6b6da25c",
+          "statement": "乾老魔为阴罗大长老，自称宗某；五子同心魔五白影、五骨与五黑骷髅是同五子不同形态，可合体，非五个乾。逆情断天率性不等于无脑强制战斗；五子在其无力镇压时有反噬风险。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-dusheng-and-yinluo-not-conflated",
+          "claimHash": "d41488137ab68c3a7be95df42af3249c2890bd0a046ac6ae7359460a61f10e08",
+          "statement": "花是毒圣元中顶峰，门派五长老中的元暂失联；吴萧为乾老魔命令汇合的阴罗长老，不能按相邻段蓝袍红巾并入毒圣。另蓝袍无名首领和余师弟只按所在小组记录，不冒名为花或吴萧。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-identity-corrections-complete",
+          "claimHash": "08dbdb6779523b65abf228525e2f620a850deade6ecc138e0ead9426c17055c7",
+          "statement": "叶家大长老白袍儒生与大头七叔并排出现，明确两实体，后者血车感尸、黄剑驱夜叉。古魔化韩长老非韩立，花天奇非五魔白影的乾老魔；毒圣口中的元师弟即先前被银翅杀的元姓大汉，旁人尚不知死讯；不能保留提取报告的错误合并或永久待核。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0154:identity-unresolved:2",
+      "batchId": "batch-0154",
+      "left": "batch-0154-object-0005",
+      "right": "batch-0154-object-0022",
+      "sourceReportHash": "1c79399227297e31f741cc7e80e49ca265b224268e4e0bfa2dc952c7595398cd",
+      "adjudicationReportHash": "1ce51f72d90349981e6eb8fc4cada52816e2fe27d9c26740eb53e7a4188c7280",
+      "findingHash": "56e7f4103d170968d4015e0f94bf670d5baf282ea2d2c2425970bb6bd9a0097d",
+      "disposition": "same-yuan-confirmed-by-next-chapter-narrator",
+      "statement": "前面入窟元已被夜叉杀，毒圣仍说元师兄失联，下一章开头旁白直接指出他们口中元师弟早葬送夜叉。后文已确认同一人，角色不知死讯不是作者身份不定；T0不得提前执行死亡。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25876038",
+          "chapterSha256": "715a9656dc8064481a34695cc6134dac030ae9d4ba8fd7de236e87a56ec2a0d5",
+          "start": 920,
+          "end": 1234,
+          "anchorSha256": "e03c1c108309e9e8c4111aba13cfd8d8b37a17b3d42815eec49a48ccb7b10b01"
+        },
+        {
+          "chapterId": "qq-25898216",
+          "chapterSha256": "f53851bcaeb9a03632ed952cb6f08926f99ca48ca417bd6c9b58fd3bd38c3b5f",
+          "start": 2860,
+          "end": 3308,
+          "anchorSha256": "1f2dbee1faa6147c0be0d6898b133cec0076d4bac4558186ee9ce0ab503e164f"
+        },
+        {
+          "chapterId": "qq-25905022",
+          "chapterSha256": "ca6bc310239084e9f5772ab0f3cdfa9c578d3fd4c8fc48cd5392d8713c49d068",
+          "start": 0,
+          "end": 344,
+          "anchorSha256": "81e77223d7f34bfddb855fff8bfecdf91797c24f72cc650f092bd737ee34526e"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0154:identity-unresolved:3",
+      "batchId": "batch-0154",
+      "left": "batch-0154-object-0033",
+      "right": "batch-0154-object-0029",
+      "sourceReportHash": "1c79399227297e31f741cc7e80e49ca265b224268e4e0bfa2dc952c7595398cd",
+      "adjudicationReportHash": "1ce51f72d90349981e6eb8fc4cada52816e2fe27d9c26740eb53e7a4188c7280",
+      "findingHash": "82314aa0304bc6fe627a766e6f702c79b5628fa65add06e924af01f41200bdfb",
+      "disposition": "same-sealed-kunwu-mountain-parallel-location",
+      "statement": "叶家明确探昆吾的路线与韩等传送进的巨山由同章切镜连为山腰、山腹不同位置，后来昆吾碑及镇魔塔系统完整确认。巨山是未识名阶段描写，不是额外山体；韩当时未获地名仍保持认知边界。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25876038",
+          "chapterSha256": "715a9656dc8064481a34695cc6134dac030ae9d4ba8fd7de236e87a56ec2a0d5",
+          "start": 2743,
+          "end": 3035,
+          "anchorSha256": "ea39d8d1a6f94675cf193f83f6a971045c08b4ef0cec33bc7f6a69bbc2cd4e83"
+        },
+        {
+          "chapterId": "qq-25884865",
+          "chapterSha256": "0fdd094d2f37f8400f28cdcc1bddb862ce59ffd2623a6ed440d3f90b3bc41b39",
+          "start": 1537,
+          "end": 1888,
+          "anchorSha256": "d85ba8a6b786e75286c0724d1fba5e1669f741a90cab5d17a4f1c65b16e738c5"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 219,
+          "end": 979,
+          "anchorSha256": "44a5fb84d2b065b066ca230e65e4a9729149e3a5de53bfb91a871b76c4c676d0"
+        },
+        {
+          "chapterId": "qq-25910660",
+          "chapterSha256": "6b40f2b5d4235e92f20bf616596b4dfa4ae84fbecbe1d7c4b57fa650cd0f95c7",
+          "start": 1181,
+          "end": 1555,
+          "anchorSha256": "b35c4670233b5e1db6af5b77458684ee29256ed23f5cf8bbe251b0baef0f74be"
+        },
+        {
+          "chapterId": "qq-25908873",
+          "chapterSha256": "39adde8ab1ae875dd3fa6156bdf165c8a15fadbb249daf2e3cb6334a35c8a946",
+          "start": 1906,
+          "end": 3223,
+          "anchorSha256": "79da3fbfed28d7936abcc66efaf94ffbad0c9de589da91292c4bbd0716f7bf2a"
+        },
+        {
+          "chapterId": "qq-25922743",
+          "chapterSha256": "071d555b2f2814ba7791cc624435da0b3d0374fcca9268ee764339313add558a",
+          "start": 2889,
+          "end": 3226,
+          "anchorSha256": "6e2eeb8e563b0daee7eca22492282cc16be2a9324140d89118cac24ef4709ea9"
+        },
+        {
+          "chapterId": "qq-25966268",
+          "chapterSha256": "9f98377a5fd1b1b7b0dc000fc8998aab54baf5c01e1018626c5f87c33d200262",
+          "start": 1717,
+          "end": 2018,
+          "anchorSha256": "4a4f7c16cdc96454eaa5f863727611bcd8513a655f699f72098be403d25f7c3a"
+        },
+        {
+          "chapterId": "qq-25976113",
+          "chapterSha256": "02be95a2917a089d08ad112ea8c8424e385cddc564e251ed6b21b43867e7749f",
+          "start": 2978,
+          "end": 3250,
+          "anchorSha256": "153e0ff57be88d3a21812ad6300ec71f160c678d1cc639da0ed0109bc7f7e4c9"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-monument-and-ward-assets",
+          "claimHash": "805cf7248e6c2e4bcd0543ca673ed74c7b60d000ded3f8bc39004376d2c357cd",
+          "statement": "万修霞光接下当时攻击，不等无穷防御。昆吾碑内蓝晶碑不是水灵石，后确天晶碑唯一对象；土甲龙敏感引韩关注、韩说异宝和不知其用并存。碑重抗当前霞光与晶碑收走是具体后期动作，T0不提前送韩。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-knowledge-versus-source-ignorance",
+          "claimHash": "e4ec7033ea19a967e24ca6f37931ce3edcfe0bbb9757673409113ad88e0c779c",
+          "statement": "毒圣声名影响当地行为不等人人服从。韩最初异宝说有试探，后天晶碑确物性不可仅因早期无知否认；昆吾升灵界/沉黄泉是传闻而地下封印是实际。树妖后明木魁，顶封巨物后明狼身与分魂，不能一直不建身份也不提前泄给当事人。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0155:identity-unresolved:0",
+      "batchId": "batch-0155",
+      "left": "元师弟",
+      "right": "元道友",
+      "sourceReportHash": "baf5e0f474a5739ba17ea36d87c33c42592156fd0c8aebc36347c209d8bc9d79",
+      "adjudicationReportHash": "14e76605c0269b9c014f9914eaafa63e0611a6eb895e0e83271b2654231030c7",
+      "findingHash": "35860c25baaa3a4732ae60d047219bfd0108c89cde9cb466a7aba564071f4a7d",
+      "disposition": "same-yuan-explicit-narrator-identification",
+      "statement": "本条原引开头已经直接写毒圣口中的元师弟早葬送银翅夜叉，后炼丹者哀悼元道友，同一死亡桥接明述。原review说仅同姓无互指不成立，不需再保留双人可能。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25905022",
+          "chapterSha256": "ca6bc310239084e9f5772ab0f3cdfa9c578d3fd4c8fc48cd5392d8713c49d068",
+          "start": 0,
+          "end": 218,
+          "anchorSha256": "fdb64feff4ea1ad90bcc4d8abbc3ebbd6c0637ff7801809b10ec1cea35719b45"
+        },
+        {
+          "chapterId": "qq-25905022",
+          "chapterSha256": "ca6bc310239084e9f5772ab0f3cdfa9c578d3fd4c8fc48cd5392d8713c49d068",
+          "start": 1556,
+          "end": 1864,
+          "anchorSha256": "b9d20294a1747828504ae922f1f73dd6951d65245b093fafed0fc873929fff8a"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0155:identity-unresolved:1",
+      "batchId": "batch-0155",
+      "left": "白瑶怡",
+      "right": "北夜小极宫修士",
+      "sourceReportHash": "baf5e0f474a5739ba17ea36d87c33c42592156fd0c8aebc36347c209d8bc9d79",
+      "adjudicationReportHash": "14e76605c0269b9c014f9914eaafa63e0611a6eb895e0e83271b2654231030c7",
+      "findingHash": "485ab257ddd9c66e1133c588419510390755f51b83a5907e3c79cccca4709b2a",
+      "disposition": "bai-xiaojigong-membership-corroborated-later",
+      "statement": "乾当时依衣饰猜测不足独证，但后来小极宫白瑶怡与堂姐及师相的连续同门行动、宫规说明已被北域审定。成员身份已可确定；早期乾只拥有推断，不能把后文宫内秘密全部给他。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25932452",
+          "chapterSha256": "b578a220973e8925588a0f7941c84314d95685e652e2db061f6d4cfeb74d7caf",
+          "start": 2920,
+          "end": 3213,
+          "anchorSha256": "6b84f21e3d221ea09b5386dd1e35f8762617150137a9a6da5e06b5f9af1a357b"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 543,
+          "end": 1066,
+          "anchorSha256": "b0aea5d640851e62604a64f01f4b56ac9379312b5cdcaa7b938527e24b7d3611"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 2390,
+          "end": 3139,
+          "anchorSha256": "f5683dd9463f1f4900826895602d66c3bfa3faba76209e34f617989acf91c1ae"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 187,
+          "end": 559,
+          "anchorSha256": "938fcbef48a5314da9e3dd01942136022e530bd21488c0a47efd08147f1c414a"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 877,
+          "end": 1210,
+          "anchorSha256": "4003b48dd9e5bad9a4cbc926313fcc6df0c9b287146220c3291e95a911982def"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1259,
+          "end": 1525,
+          "anchorSha256": "ba1ae6f86002e347e8cf814c12099b0bbae8a67640a32038bc25ddebf4e52229"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2544,
+          "end": 3076,
+          "anchorSha256": "bc30a73326da37fcddcf1f961080a7fcd0653e0983cd0106b51f63be822c70cf"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 631,
+          "end": 1024,
+          "anchorSha256": "bdf6288eb121255c104924f19d5f3ac5b07205b254a4724673351ae3c0ede3e3"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-north/claims.json",
+          "claimId": "north-ice-treaty",
+          "claimHash": "a725dc5306be89d1b8263c7b217385078b29a4802e29df4718ce974dea4ca2cc",
+          "statement": "白瑶怡解释小极宫与冰海旧约限制高阶彼此侵害：小极宫修士不得随意击杀高阶妖兽，妖修高阶不得进入北冥岛百万里内，低阶另论。白瑶怡也说明时有高阶妖物违约闯入、宫中弟子死伤，表明边界并非物理墙；追责和报复需要真实见闻。",
+          "claimsHash": "fb7fbc437a2c6128750bf60d8388c9f9863d4104ccdf3b70c202495f08bc7860"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-north/claims.json",
+          "claimId": "north-north-cast-relations",
+          "claimHash": "ffddd4c7da5f5974c4f3129938f91fe62ebed032c04492d1b57997ffa74039d6",
+          "statement": "白梦馨为白瑶怡堂姐，族中二姐和七妹称呼不代表同父母；欧阳是使用黑色寒焰的青衫长老；1081提及黑水与凤离二焰，1086白梦馨自述凤离，连续对照将黑水对应欧阳，与任碧为两人。师相、白梦馨、欧阳的三寒焰属于不同持有人，后期韩立收走残焰不是T0库存。",
+          "claimsHash": "fb7fbc437a2c6128750bf60d8388c9f9863d4104ccdf3b70c202495f08bc7860"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0155:identity-unresolved:2",
+      "batchId": "batch-0155",
+      "left": "韩立",
+      "right": "天南修士",
+      "sourceReportHash": "baf5e0f474a5739ba17ea36d87c33c42592156fd0c8aebc36347c209d8bc9d79",
+      "adjudicationReportHash": "14e76605c0269b9c014f9914eaafa63e0611a6eb895e0e83271b2654231030c7",
+      "findingHash": "51d5caf84fc115df29ee91f16810d755b2cf833f4daef0119dec8726f49ec3f7",
+      "disposition": "han-tiannan-origin-established-not-qian-only-testimony",
+      "statement": "韩来自越国并历黄枫、落云与天南战争是既有连续主线；乾此处识破出身不是唯一来源。无需因单批只出现乾的话就永久否认地域归属，更不把天南修士标签合并成一个群体人格。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25932452",
+          "chapterSha256": "b578a220973e8925588a0f7941c84314d95685e652e2db061f6d4cfeb74d7caf",
+          "start": 2920,
+          "end": 3213,
+          "anchorSha256": "6b84f21e3d221ea09b5386dd1e35f8762617150137a9a6da5e06b5f9af1a357b"
+        },
+        {
+          "chapterId": "qq-23256881",
+          "chapterSha256": "35543876662dd5366aa485d8c2586e099df9952ef462062cb7d4109d64db0965",
+          "start": 1577,
+          "end": 2061,
+          "anchorSha256": "db50225d4674586329f9168998a03a89bfdddc7ce373057358557db81b2e0cd1"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0157:identity-unresolved:0",
+      "batchId": "batch-0157",
+      "left": "白玉广场石碑",
+      "right": "昆吾山石碑",
+      "sourceReportHash": "f8dc3c9131cef2294eea7d9d32a6fa2c286702216b9305ddaae19a53546cbbb7",
+      "adjudicationReportHash": "bae12f7f614964844ca77aa649f7279ed5e721711e1a4804cb608d8a2ccd53df",
+      "findingHash": "fb271a3117ce4271774257a6418578a5072d8e57ccd27db19368395dc38450d8",
+      "disposition": "different-wayfinding-and-mountain-gate-monuments",
+      "statement": "广场多块指路碑分别标殿堂道路，藏天晶的是山门昆吾巨碑，位置用途数量不同；蓝晶碑又是巨碑内藏的独立物。已审昆吾明确三层对象，不因都叫石碑就合并或复制一块天晶到每个路口。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25986945",
+          "chapterSha256": "a321a7d8333b5e14927caaefede5de814ae28e50c6a779d76de7f2c54635d09f",
+          "start": 478,
+          "end": 783,
+          "anchorSha256": "02d54c0a80b4ce72116781af31e803030d80bea33e5f98c8aecd66204f9625e7"
+        },
+        {
+          "chapterId": "qq-25986945",
+          "chapterSha256": "a321a7d8333b5e14927caaefede5de814ae28e50c6a779d76de7f2c54635d09f",
+          "start": 1263,
+          "end": 1558,
+          "anchorSha256": "bd1916d571d3c96a309e745d6c735e3529f7b39a6fc092692f1aeccd6f81a2f8"
+        },
+        {
+          "chapterId": "qq-25978439",
+          "chapterSha256": "7d80b71b6d9a289a4c5a46c7acb5747c6e51c8e48ee1b341f93bc684b2e94068",
+          "start": 0,
+          "end": 475,
+          "anchorSha256": "57a5571626f1573b29a172e6d63a1800998584275b1598c0be4462e7a6ed98c0"
+        },
+        {
+          "chapterId": "qq-25978439",
+          "chapterSha256": "7d80b71b6d9a289a4c5a46c7acb5747c6e51c8e48ee1b341f93bc684b2e94068",
+          "start": 2197,
+          "end": 2853,
+          "anchorSha256": "9a899498a7c45b54759c34492a1650e04af14191945bc02f0c15f1ee2ee49560"
+        },
+        {
+          "chapterId": "qq-26417609",
+          "chapterSha256": "cb5ba8310e78f0b4aa012058cf375deb7c51b3136192e7e00b50ddfeea3bdcfe",
+          "start": 145,
+          "end": 621,
+          "anchorSha256": "85477d282d530b1fd8a1d6f23691e6701660a035c724a592f38ca3333cea7baf"
+        },
+        {
+          "chapterId": "qq-26431671",
+          "chapterSha256": "d96c5c03108de899525cdc00211dd011f5731b093c262806f136eb8980e5b3b5",
+          "start": 1252,
+          "end": 1691,
+          "anchorSha256": "fbdc32a3e554bea7e78990de959540132b042605e88a63ae786bcf64ea4eaa1c"
+        },
+        {
+          "chapterId": "qq-26011031",
+          "chapterSha256": "3dcc2f0e04fb2e25b300db63d6d44c2adc77976b6511c2e4e355158a14fa48bd",
+          "start": 2330,
+          "end": 2667,
+          "anchorSha256": "fc9315ab5396ed23a7cc9528875fff3ca30b52b61a6ba6559d80cf6ac19faf57"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-crystal-backup",
+          "claimHash": "79a169721bf536096795be4abd7eda65f76e9ca606a8a7f8fd9d7160829d8722",
+          "statement": "天晶碑藏在昆吾山门的巨碑内，注灵变轻且有超上古文字；普通看碑者不自然识别。备用阵在地底完好休眠，需把真碑嵌备用叱灵软玉碑、持续注灵才能升柱吸魔封口。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-adjacent-prison-spaces",
+          "claimHash": "aae3e9996399a60b1614234178e59eb543b1ebe6e2b9cb5f313d0f7412d7a203",
+          "statement": "巨物仍有体表起伏不是死物，铜镜符链阵困狼身，八十一金甲石人祭坛的宫殿与巨物相邻。后第八层所见宫殿祭坛按连续镇魔塔地理对应，不能只凭相似外形乱把九座持刀祭坛和八十一合并，山门/广场指路石碑也不是同物。石亭探身五色孔雀仅凭这一外观不足以确认为后来徐持灵犀或另一对象，保留这段未明主体，不新增T0孔雀宠物。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0157:identity-unresolved:1",
+      "batchId": "batch-0157",
+      "left": "宫殿祭坛空间",
+      "right": "第八层宫殿",
+      "sourceReportHash": "f8dc3c9131cef2294eea7d9d32a6fa2c286702216b9305ddaae19a53546cbbb7",
+      "adjudicationReportHash": "bae12f7f614964844ca77aa649f7279ed5e721711e1a4804cb608d8a2ccd53df",
+      "findingHash": "e687084d046779fe03926123269e529c0b071986ff1055f5cd80613855e0f3c2",
+      "disposition": "same-eighth-layer-white-prison-distinct-from-ninth-altars",
+      "statement": "相邻空间宫殿及八十一持金刃石人坛，与花队经阵进入第八层白室的连续地理相符，沿昆吾已审定位同一囚室。不是靠宫殿形似任意合并；九层九座大刀坛仍独立，八层黑室也不并白室。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25978439",
+          "chapterSha256": "7d80b71b6d9a289a4c5a46c7acb5747c6e51c8e48ee1b341f93bc684b2e94068",
+          "start": 0,
+          "end": 603,
+          "anchorSha256": "6899b123d4b489c421e8fedba1906440775d35ee08783078088540c280319570"
+        },
+        {
+          "chapterId": "qq-25978439",
+          "chapterSha256": "7d80b71b6d9a289a4c5a46c7acb5747c6e51c8e48ee1b341f93bc684b2e94068",
+          "start": 2197,
+          "end": 2529,
+          "anchorSha256": "c462fe604a4151b318d23e12c7315e48e0193b603b33b5323db9c66177fc0839"
+        },
+        {
+          "chapterId": "qq-26011031",
+          "chapterSha256": "3dcc2f0e04fb2e25b300db63d6d44c2adc77976b6511c2e4e355158a14fa48bd",
+          "start": 1695,
+          "end": 2142,
+          "anchorSha256": "7b4043e5bad38133b6a26b01dae16aeb84eaf6e09fd415ca6cd1192d6572fb30"
+        },
+        {
+          "chapterId": "qq-26011031",
+          "chapterSha256": "3dcc2f0e04fb2e25b300db63d6d44c2adc77976b6511c2e4e355158a14fa48bd",
+          "start": 2330,
+          "end": 2667,
+          "anchorSha256": "fc9315ab5396ed23a7cc9528875fff3ca30b52b61a6ba6559d80cf6ac19faf57"
+        },
+        {
+          "chapterId": "qq-26008776",
+          "chapterSha256": "6cd2ac2b5e667cbbb8911a041661c41ccf1d2d80912b8933bb2d98bc7357f19d",
+          "start": 1090,
+          "end": 1686,
+          "anchorSha256": "ad134b76092d6782330f80479109a6913954ac88043ddae3dcf0d8b152d57f5c"
+        },
+        {
+          "chapterId": "qq-26201657",
+          "chapterSha256": "f0321bb0e345c692275d761812883bb4bc01506de8861f9889cc71fb67c1664d",
+          "start": 2506,
+          "end": 2967,
+          "anchorSha256": "43bf81dc354aa9a5f38c9e2ab278b85c542f705e7672e1b0b1905314a045ff50"
+        },
+        {
+          "chapterId": "qq-25986945",
+          "chapterSha256": "a321a7d8333b5e14927caaefede5de814ae28e50c6a779d76de7f2c54635d09f",
+          "start": 478,
+          "end": 783,
+          "anchorSha256": "02d54c0a80b4ce72116781af31e803030d80bea33e5f98c8aecd66204f9625e7"
+        },
+        {
+          "chapterId": "qq-25986945",
+          "chapterSha256": "a321a7d8333b5e14927caaefede5de814ae28e50c6a779d76de7f2c54635d09f",
+          "start": 1263,
+          "end": 1558,
+          "anchorSha256": "bd1916d571d3c96a309e745d6c735e3529f7b39a6fc092692f1aeccd6f81a2f8"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-inverted-tower",
+          "claimHash": "7274cb37cd590943f6349b88a2aca3eb425f7f0da04e518dc36dfc480cc372dc",
+          "statement": "镇魔塔向地下共九层；六层乌影蛇，七层鬼王及同源分身，七层黑白两阵通往第八层不同囚室。白室81金甲石人坛与地下9大刀坛不同；黑室千余铜镜、大周天星辰链与狼身。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-adjacent-prison-spaces",
+          "claimHash": "aae3e9996399a60b1614234178e59eb543b1ebe6e2b9cb5f313d0f7412d7a203",
+          "statement": "巨物仍有体表起伏不是死物，铜镜符链阵困狼身，八十一金甲石人祭坛的宫殿与巨物相邻。后第八层所见宫殿祭坛按连续镇魔塔地理对应，不能只凭相似外形乱把九座持刀祭坛和八十一合并，山门/广场指路石碑也不是同物。石亭探身五色孔雀仅凭这一外观不足以确认为后来徐持灵犀或另一对象，保留这段未明主体，不新增T0孔雀宠物。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0158:identity-unresolved:0",
+      "batchId": "batch-0158",
+      "left": "大头怪人（叶家）",
+      "right": "叶家老者所呼“七叔”",
+      "sourceReportHash": "e775885ec8a3aa2707e34212e708226a1ca7e5b7c69715c18917b628037c2d0e",
+      "adjudicationReportHash": "77fed9df7d0842c01983cb9e93af2e600c471e02ecbb4adaa5cf07a31744b112",
+      "findingHash": "46167b36a57054f6094a5315a6af91801da5e17298cc2e8d6cead1b4dd4f69b4",
+      "disposition": "same-seventh-uncle-explicit-address-not-rescue-duty",
+      "statement": "叶修对着大头怪人喊七叔，前文又曾当面确认七叔身份，身份关联明确。怪人袖手不救是这次选择，不否定亲属称谓；也不能因此把七叔与古魔合成一人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26053026",
+          "chapterSha256": "bbddf348e960cb470a90e5403661608fcd3acf2655c0abaf257703b891adaf01",
+          "start": 1035,
+          "end": 1387,
+          "anchorSha256": "8608801e2291950547521a3e80ca5d8bf0bdcdaf7295ca60a0e3d59831a2d793"
+        },
+        {
+          "chapterId": "qq-25758248",
+          "chapterSha256": "7bbe4795a584fd32eb014047b665694c2eb34f92b2e8a2b8a9d51f51dd1258db",
+          "start": 2301,
+          "end": 2881,
+          "anchorSha256": "c09e194e151e4fbfdb151477944506c53477a49bd8c2c375542e5a5a7406362e"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0158:identity-unresolved:1",
+      "batchId": "batch-0158",
+      "left": "翠绿木尺",
+      "right": "八灵尺/四象尺/天晶碑",
+      "sourceReportHash": "e775885ec8a3aa2707e34212e708226a1ca7e5b7c69715c18917b628037c2d0e",
+      "adjudicationReportHash": "77fed9df7d0842c01983cb9e93af2e600c471e02ecbb4adaa5cf07a31744b112",
+      "findingHash": "7aeaa5082a2a3157e9fe01d4bc43bb4f34ed978e34e8db62acd3c65a0d3e3d38",
+      "disposition": "green-ruler-is-baling-prototype-not-imitation-or-tablet",
+      "statement": "银匣上翠绿木尺沿白室镇压物连续线最终明为八灵尺，四象尺是木夫人另持仿品，天晶碑为山门隐藏宝。已审昆吾两镇压宝及四象仿品资料足以定位，不长期保留三物任选，也不把早期未识名化为角色全知。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26053026",
+          "chapterSha256": "bbddf348e960cb470a90e5403661608fcd3acf2655c0abaf257703b891adaf01",
+          "start": 2955,
+          "end": 3204,
+          "anchorSha256": "5f083620b17cf3c933c0a41c02ac02641489182ccd7d8f2a1a8a696e32f9cbd2"
+        },
+        {
+          "chapterId": "qq-26204995",
+          "chapterSha256": "df1353d23410cd4fd991b143ae360284191be0389da609386b616138a2061d5c",
+          "start": 2520,
+          "end": 2960,
+          "anchorSha256": "84177f9f89877f5c05ea5f49fd9b072e8009d8098fd9a618a4b0da89d04dd9bc"
+        },
+        {
+          "chapterId": "qq-26323024",
+          "chapterSha256": "833799c72ab7dc2c0f04e290430bd9bf99619faa7db8b233d6ddde8dd4c9c3a4",
+          "start": 0,
+          "end": 381,
+          "anchorSha256": "479c0345a1a89707acb3d24dd3251037db3a9c92d3ef7fdf96cd0ee8ce742718"
+        },
+        {
+          "chapterId": "qq-26436913",
+          "chapterSha256": "3fb673ecc941fc2ef4128cbfa7775ee9d022744c4bfcdcd1cd84cc7c51adcb00",
+          "start": 1069,
+          "end": 1494,
+          "anchorSha256": "588a442b18232554e4698083125eea8a539360506a13bc778332aac9c6eb44fa"
+        },
+        {
+          "chapterId": "qq-25976113",
+          "chapterSha256": "02be95a2917a089d08ad112ea8c8424e385cddc564e251ed6b21b43867e7749f",
+          "start": 1107,
+          "end": 1572,
+          "anchorSha256": "13a4831fde87c27d98ee65b68f41a0a1c2ac85fbdd1569a6ba36e1d0e4ebefef"
+        },
+        {
+          "chapterId": "qq-26011031",
+          "chapterSha256": "3dcc2f0e04fb2e25b300db63d6d44c2adc77976b6511c2e4e355158a14fa48bd",
+          "start": 258,
+          "end": 759,
+          "anchorSha256": "8eaedc8c07cd937427b94d55cecabc105d722265fbaa778e89b185da62bea302"
+        },
+        {
+          "chapterId": "qq-26011031",
+          "chapterSha256": "3dcc2f0e04fb2e25b300db63d6d44c2adc77976b6511c2e4e355158a14fa48bd",
+          "start": 971,
+          "end": 1554,
+          "anchorSha256": "877b588f892f39bd59ae129362718cb6be01035f11a23abede43d8a801d6ded1"
+        },
+        {
+          "chapterId": "qq-26097942",
+          "chapterSha256": "62d183101d4c24e51296b8bea12435cff165faa8d2c089926a7036d70076493c",
+          "start": 0,
+          "end": 454,
+          "anchorSha256": "8d2e0c6c93d524c0d8ee435e27846b1d439a1c4e782b813e2da7e2d799d12b68"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-two-suppressing-treasures",
+          "claimHash": "22423271acdf9ee835b6b397fc544daf3259081d6408cd2d23534efdb2390c3a",
+          "statement": "八灵尺为佛门通天灵宝，以银莲八兽影等制魔；黑风旗为空间灵宝。T0两物完好、各守封印，未被魔化。收取不等于修成通宝诀；空间吞攻仍有强弱和耗能。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-southern-sect-tools",
+          "claimHash": "1a9268ab424233ecad7d2d36e2bf281f7389efe3880854e94caee650fdff514c",
+          "statement": "四象尺是八灵尺仿品，木夫人属性不合，低阶强用可耗空并需养伤。须弥五行壁属须弥宗，毒圣后来借得不是永久所有；毒龙珠短时提力代价可能十年休养。日月梭近年才得，T0不在木夫人已持装备中。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0158:identity-unresolved:2",
+      "batchId": "batch-0158",
+      "left": "被封印者（“那人”）",
+      "right": "元刹圣祖化身（双首银狼）",
+      "sourceReportHash": "e775885ec8a3aa2707e34212e708226a1ca7e5b7c69715c18917b628037c2d0e",
+      "adjudicationReportHash": "77fed9df7d0842c01983cb9e93af2e600c471e02ecbb4adaa5cf07a31744b112",
+      "findingHash": "483b84cae8a0399dc10f53da1ed78a00f103f60bc7c58fa84ab1815050985e3e",
+      "disposition": "same-sealed-wolf-complex-distinct-soul-body-identities",
+      "statement": "木氏所知上界身份特殊的被封者，对应昆吾狼身与被元刹侵占的玲珑魂体复合历史。元刹分魂、珑梦、雪玲及唯一狼躯须分层；不能简单写那人就是元刹完整本尊，亦不能凭两处称谓再造另一个封印者。T0按已审融合状态而非后期分裂行动。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26041574",
+          "chapterSha256": "24d5b9569f81d4f9543282c6634ddf552b183ae3a6b2405724a13d4de59e3c23",
+          "start": 2302,
+          "end": 2738,
+          "anchorSha256": "7f4a513b866e63e8da9b52e21918b1fccea4f02521e25a87d467421e91569883"
+        },
+        {
+          "chapterId": "qq-26053026",
+          "chapterSha256": "bbddf348e960cb470a90e5403661608fcd3acf2655c0abaf257703b891adaf01",
+          "start": 2253,
+          "end": 2650,
+          "anchorSha256": "0c86cd3ee89eb68004ba9e702e632e2ef8d0ef2fa059f66910faeb1112d42537"
+        },
+        {
+          "chapterId": "qq-26062445",
+          "chapterSha256": "78c2eaab1c65b908309427367499b7b7e7ae1aa6273c139623667ee5d548ba06",
+          "start": 1060,
+          "end": 2840,
+          "anchorSha256": "5cad2a1e1c5cfe181d3bcbf16c45440b2d7c888ef3f1876c90c44e26a7fc959f"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 1579,
+          "end": 2102,
+          "anchorSha256": "39b2b6ce9c27eab7b9bc51e1c46e9af438ccf19f719e60c16fcf03fd2b813466"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 2165,
+          "end": 2808,
+          "anchorSha256": "3d30c1ebc3c30e8f23ff6babe03a2da244dcfcddd5715248d05be9c60f988718"
+        },
+        {
+          "chapterId": "qq-26399600",
+          "chapterSha256": "6c02a09e033f6882391e8e9e8cb6c59114221327de76773d542f845723fa8c62",
+          "start": 477,
+          "end": 973,
+          "anchorSha256": "d947167401318fd7ddc5dbabf41f62e20100b77af8082a49dc67ebacb00301f7"
+        },
+        {
+          "chapterId": "qq-26366801",
+          "chapterSha256": "6afefcc47b7405a2b83813febe798dcad68480747cca61c5fc944723745b2895",
+          "start": 2009,
+          "end": 2472,
+          "anchorSha256": "670109ea1f3ecc6a517b002295587b91eed39eacd4f4e73a0a793dce62b5bfde"
+        },
+        {
+          "chapterId": "qq-26094951",
+          "chapterSha256": "b50f3f5541e4455aa5f22843b28abc00e6e810b0a26532f7d026e588829451b1",
+          "start": 248,
+          "end": 582,
+          "anchorSha256": "f7103461d25b3a07f7ab5147aa912dfa7764634c9040b50af608e7deadd438f0"
+        },
+        {
+          "chapterId": "qq-26063998",
+          "chapterSha256": "c060857feb62e0c4dc6fd6debe4d69d559a0b64f86e399ab83028b12674a38de",
+          "start": 223,
+          "end": 747,
+          "anchorSha256": "c463f2c03d23ec44fd21f98839924cc9b077d6b30ebf10cb292b1eda42cc4968"
+        },
+        {
+          "chapterId": "qq-26063998",
+          "chapterSha256": "c060857feb62e0c4dc6fd6debe4d69d559a0b64f86e399ab83028b12674a38de",
+          "start": 1153,
+          "end": 1479,
+          "anchorSha256": "5d435e931663a802ac845081a742a0215c2d7a64965e011f06e3e9112029b2ad"
+        },
+        {
+          "chapterId": "qq-26073315",
+          "chapterSha256": "1936ce4abfcf9ac560c79370a8124c9924ee014207def49104ed14e98724bd1f",
+          "start": 700,
+          "end": 1051,
+          "anchorSha256": "0f54e691ddaf83bbc28222400482ce2b6645e8e9232aa7c5e378f3c757d5dd5a"
+        }
+      ],
+      "reusedEditorialClaims": [
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-one-body-one-current-mind",
+          "claimHash": "76c330da91f6e2a02f4f5fe8c26aabce286ca2ebde2537fe699d4dcce0987de3",
+          "statement": "T0元刹分魂与珑梦已融合万余年，以珑梦意识为主，共用唯一玲珑狼体；雪玲是分出的另魂，封在虚天鼎玉如意。后来神识消耗导致再分裂，不在T0生成两个同时行动的狼身主人。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-silver-wolf-history",
+          "claimHash": "6bdf23867631ead6be5cdb02e4162ee605d8e17da11df7c0e6eb4fa9b7c06d0e",
+          "statement": "玲珑为敖啸孙女、天奎配偶，化神后期第五次千年劫练术时分雪玲珑梦；共享噬血魂印，互损非无代价吞并。T0没有韩立器灵契、小瓶记忆或以后失忆恢复结果。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
+        },
+        {
+          "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+          "claimId": "kunwu-sealed-souls-history-and-current-separation",
+          "claimHash": "bc038ed1dc71f08be46a9615538e47c699881d93cff40bc87e7a07f1c5bda5bf",
+          "statement": "元刹只分魂夺虚弱降界银月狼体，雪玲逃、珑梦藏体反扑；封后第二魂另宫养灵与魔魂争后融合，新魂稳定万余年。后来囚向耗神才分裂，T0不能预置此后再分裂和召醒。昆吾三老/三子同组，留宫和整山封锁是既往历史而非每次开局重新发生。",
+          "claimsHash": "98635109b6474d99386553d5d95c982009b7717ce067c1c7af989fc49e060aee"
         }
       ],
       "runtimeClosure": "requires-regional-source-bound-disposition"
