@@ -1,33 +1,38 @@
 {
   "status": "source-and-schema-passed-not-full-world-acceptance",
-  "moduleHash": "68ab0b1eba3027e8b4e78c8689009bc73c0f621008c82b1b4bab073a58218f6a",
-  "claimsHash": "b2868eab4f2ef8459be7f5b9b1f12f6029b96fa87a3c3d949964aeefd50ef6d1",
-  "anchors": 28,
+  "moduleHash": "63c5f9c7f094a08a514809a8fa8822ebf670cfeed54d29623530f6af098e35fb",
+  "claimsHash": "65779728376dda297a393faa4a8782bbb70bfc8ba2295898bf73856f12e1b252",
+  "anchors": 127,
   "dispositions": {
     "moduleId": "global-candidate-closure",
-    "candidates": 150,
+    "candidates": 300,
     "counts": {
-      "adopted": 78,
-      "corrected": 31,
-      "history-only": 10,
-      "later-only": 19,
-      "bounded-uncertainty": 12,
+      "adopted": 134,
+      "corrected": 76,
+      "history-only": 11,
+      "later-only": 55,
+      "bounded-uncertainty": 24,
       "transferred": 0,
       "pending": 0
     },
-    "completed": 150,
+    "completed": 300,
     "unresolved": 0,
-    "boundedUncertainty": 12,
+    "boundedUncertainty": 24,
     "approvedForRuntime": false,
-    "reportHash": "27edd9c49c9786d8b90897bd7151991e4697655fb84202e6e060d089abe1a8bf"
+    "reportHash": "8bca63d7326e64cacbc132d9c27c21b26c3d711aac1b4caa606da70124053e8b"
   },
   "fullWorldAssembly": {
     "status": "assembly-passed-not-full-world-acceptance",
     "modules": 34,
-    "entities": 4967,
+    "entities": 4976,
     "agents": 811,
-    "sourceDetailModuleHash": "68ab0b1eba3027e8b4e78c8689009bc73c0f621008c82b1b4bab073a58218f6a",
-    "sourceDetailClaimsHash": "b2868eab4f2ef8459be7f5b9b1f12f6029b96fa87a3c3d949964aeefd50ef6d1",
+    "sourceDetailModuleHash": "4e839d4089e69d1ab41d92f5eadbd0d6d3a4dadc6997148b120903b8d3ed487f",
+    "sourceDetailClaimsHash": "65779728376dda297a393faa4a8782bbb70bfc8ba2295898bf73856f12e1b252",
     "apiCalls": 0
+  },
+  "rootReview": {
+    "scope": "all new claims, entities, facts and cognition; 33 key source anchors cross-read",
+    "entities": 4976,
+    "modelCalls": 0
   }
 }

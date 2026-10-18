@@ -1,6 +1,385 @@
 {
   "id": "global-source-detail",
-  "entities": [],
+  "entities": [
+    {
+      "id": "global-mo-juren-dragon-ring",
+      "name": "墨居仁的龙纹戒",
+      "kind": "item",
+      "placement": "canon-mo-juren",
+      "description": "一枚带龙纹的戒指。",
+      "facts": [
+        {
+          "id": "global-mo-juren-dragon-ring-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-juren"
+          },
+          "description": "本人保管的旧信物，持有不自动授权其他家产或暗舵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-juren-dragon-ring-use",
+          "predicate": "signal-use",
+          "value": {
+            "kind": "text",
+            "value": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。戒指不是自动读取任何暗信的法器。"
+          },
+          "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。戒指不是自动读取任何暗信的法器。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-yan-wife-dragon-ring",
+      "name": "严氏的龙纹戒",
+      "kind": "item",
+      "placement": "canon-mo-yan-wife",
+      "description": "一枚带龙纹的戒指。",
+      "facts": [
+        {
+          "id": "global-mo-yan-wife-dragon-ring-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-yan-wife"
+          },
+          "description": "本人保管的旧信物，持有不自动授权其他家产或暗舵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-yan-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-yan-wife-dragon-ring-use",
+          "predicate": "signal-use",
+          "value": {
+            "kind": "text",
+            "value": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。"
+          },
+          "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-yan-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-yan-wife-dragon-ring-powder",
+      "name": "白色现形药粉",
+      "kind": "item",
+      "placement": "global-mo-yan-wife-dragon-ring",
+      "description": "夹层中保存的一份干燥粉末。",
+      "facts": [
+        {
+          "id": "global-mo-yan-wife-dragon-ring-powder-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-yan-wife"
+          },
+          "description": "戒内一份药粉，用去后不会自然复原。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-yan-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-yan-wife-dragon-ring-powder-measure",
+          "predicate": "remaining-use",
+          "value": {
+            "kind": "text",
+            "value": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。"
+          },
+          "description": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-yan-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-li-wife-dragon-ring",
+      "name": "李氏的龙纹戒",
+      "kind": "item",
+      "placement": "canon-mo-li-wife",
+      "description": "一枚带龙纹的戒指。",
+      "facts": [
+        {
+          "id": "global-mo-li-wife-dragon-ring-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-li-wife"
+          },
+          "description": "本人保管的旧信物，持有不自动授权其他家产或暗舵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-li-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-li-wife-dragon-ring-use",
+          "predicate": "signal-use",
+          "value": {
+            "kind": "text",
+            "value": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。"
+          },
+          "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-li-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-li-wife-dragon-ring-powder",
+      "name": "红色现形药粉",
+      "kind": "item",
+      "placement": "global-mo-li-wife-dragon-ring",
+      "description": "夹层中保存的一份干燥粉末。",
+      "facts": [
+        {
+          "id": "global-mo-li-wife-dragon-ring-powder-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-li-wife"
+          },
+          "description": "戒内一份药粉，用去后不会自然复原。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-li-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-li-wife-dragon-ring-powder-measure",
+          "predicate": "remaining-use",
+          "value": {
+            "kind": "text",
+            "value": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。"
+          },
+          "description": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-li-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-liu-wife-dragon-ring",
+      "name": "刘氏的龙纹戒",
+      "kind": "item",
+      "placement": "canon-mo-liu-wife",
+      "description": "一枚带龙纹的戒指。",
+      "facts": [
+        {
+          "id": "global-mo-liu-wife-dragon-ring-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-liu-wife"
+          },
+          "description": "本人保管的旧信物，持有不自动授权其他家产或暗舵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-liu-wife-dragon-ring-use",
+          "predicate": "signal-use",
+          "value": {
+            "kind": "text",
+            "value": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。"
+          },
+          "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-liu-wife-dragon-ring-powder",
+      "name": "黄色现形药粉",
+      "kind": "item",
+      "placement": "global-mo-liu-wife-dragon-ring",
+      "description": "夹层中保存的一份干燥粉末。",
+      "facts": [
+        {
+          "id": "global-mo-liu-wife-dragon-ring-powder-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-liu-wife"
+          },
+          "description": "戒内一份药粉，用去后不会自然复原。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-liu-wife-dragon-ring-powder-measure",
+          "predicate": "remaining-use",
+          "value": {
+            "kind": "text",
+            "value": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。"
+          },
+          "description": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-wang-wife-dragon-ring",
+      "name": "王氏的龙纹戒",
+      "kind": "item",
+      "placement": "canon-mo-wang-wife",
+      "description": "一枚带龙纹的戒指。",
+      "facts": [
+        {
+          "id": "global-mo-wang-wife-dragon-ring-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-wang-wife"
+          },
+          "description": "本人保管的旧信物，持有不自动授权其他家产或暗舵。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-wang-wife-dragon-ring-use",
+          "predicate": "signal-use",
+          "value": {
+            "kind": "text",
+            "value": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。"
+          },
+          "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-mo-wang-wife-dragon-ring-powder",
+      "name": "黑色现形药粉",
+      "kind": "item",
+      "placement": "global-mo-wang-wife-dragon-ring",
+      "description": "夹层中保存的一份干燥粉末。",
+      "facts": [
+        {
+          "id": "global-mo-wang-wife-dragon-ring-powder-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-mo-wang-wife"
+          },
+          "description": "戒内一份药粉，用去后不会自然复原。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-mo-wang-wife-dragon-ring-powder-measure",
+          "predicate": "remaining-use",
+          "value": {
+            "kind": "text",
+            "value": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。"
+          },
+          "description": "一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    }
+  ],
   "existingEntityFacts": [
     {
       "entityId": "canon-mo-juren",
@@ -43,6 +422,36 @@
             "value": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。"
           },
           "description": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-canon-mo-juren-letter-knowledge",
+          "predicate": "private-correspondence",
+          "value": {
+            "kind": "text",
+            "value": "自己临走前已与家人约定明信/暗信传讯，知道龙纹验信与四妻各持一色药粉合调的办法。"
+          },
+          "description": "自己临走前已与家人约定明信/暗信传讯，知道龙纹验信与四妻各持一色药粉合调的办法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-mo-perfume-bird-remedies",
+          "predicate": "remedy-knowledge-extension",
+          "value": {
+            "kind": "text",
+            "value": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。"
+          },
+          "description": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -108,6 +517,161 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "yue-jiayuan-wharf",
+      "facts": [
+        {
+          "id": "global-detail-wharf-berthing",
+          "predicate": "berthing-conditions",
+          "value": {
+            "kind": "text",
+            "value": "这里是偏小的木板码头，普通大船不常来，繁忙季其他码头泊位不足时也可能靠泊。货物需有真实装卸人手和工具。"
+          },
+          "description": "这里是偏小的木板码头，普通大船不常来，繁忙季其他码头泊位不足时也可能靠泊。货物需有真实装卸人手和工具。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-detail-wharf-business-custom",
+          "predicate": "local-business-custom",
+          "value": {
+            "kind": "text",
+            "value": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。"
+          },
+          "description": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际接洽本地脚夫、船夫或旁观一次接单交接。"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-mo-liu-wife",
+      "facts": [
+        {
+          "id": "global-detail-liu-family-knowledge",
+          "predicate": "family-origin",
+          "value": {
+            "kind": "text",
+            "value": "自己是曲陵城长风门刘锋的妹妹；与墨府婚姻并不等于兄长所在门派由自己控制，兄长近况需要真实来信或探问。"
+          },
+          "description": "自己是曲陵城长风门刘锋的妹妹；与墨府婚姻并不等于兄长所在门派由自己控制，兄长近况需要真实来信或探问。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-canon-mo-liu-wife-letter-knowledge",
+          "predicate": "private-correspondence",
+          "value": {
+            "kind": "text",
+            "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。"
+          },
+          "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-liu-tianhu-skill",
+          "predicate": "learned-skill-extension",
+          "value": {
+            "kind": "text",
+            "value": "学过天狐大法的凡俗媚惑技巧，可影响注意与心神，强定力或有效抵御能恢复；不直接读心、永久控制或取得灵力。"
+          },
+          "description": "学过天狐大法的凡俗媚惑技巧，可影响注意与心神，强定力或有效抵御能恢复；不直接读心、永久控制或取得灵力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-liu-wife"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-mo-wang-wife",
+      "facts": [
+        {
+          "id": "global-detail-wang-private-administration",
+          "predicate": "delegated-authority",
+          "value": {
+            "kind": "text",
+            "value": "丈夫离家前把暗舵事务交给自己。会中与家中财产不等于个人财物；严氏代理大部会务，也不因此能越过自己掌握所有渠道。联络者只知道自己负责的线路与暗号，所收款项须真实收到才入账。"
+          },
+          "description": "丈夫离家前把暗舵事务交给自己。会中与家中财产不等于个人财物；严氏代理大部会务，也不因此能越过自己掌握所有渠道。联络者只知道自己负责的线路与暗号，所收款项须真实收到才入账。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-canon-mo-wang-wife-letter-knowledge",
+          "predicate": "private-correspondence",
+          "value": {
+            "kind": "text",
+            "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。"
+          },
+          "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-wang-wife"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-mo-yan-wife",
+      "facts": [
+        {
+          "id": "global-detail-canon-mo-yan-wife-letter-knowledge",
+          "predicate": "private-correspondence",
+          "value": {
+            "kind": "text",
+            "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。"
+          },
+          "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-yan-wife"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-mo-li-wife",
+      "facts": [
+        {
+          "id": "global-detail-canon-mo-li-wife-letter-knowledge",
+          "predicate": "private-correspondence",
+          "value": {
+            "kind": "text",
+            "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。"
+          },
+          "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-li-wife"
+            ]
+          }
+        }
+      ]
     }
   ],
   "placements": [],
@@ -116,8 +680,22 @@
     {
       "agent_id": "canon-mo-juren",
       "belief": {
-        "local_entities": [],
-        "bindings": [],
+        "local_entities": [
+          {
+            "id": "known-global-mo-juren-dragon-ring",
+            "name": "墨居仁的龙纹戒",
+            "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。戒指不是自动读取任何暗信的法器。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-global-mo-juren-dragon-ring",
+            "canonical_entity_ids": [
+              "global-mo-juren-dragon-ring"
+            ]
+          }
+        ],
         "evidence": [
           {
             "id": "global-source-detail-prior-training",
@@ -187,6 +765,36 @@
             "evidenceIds": [
               "global-source-detail-prior-training"
             ]
+          },
+          {
+            "id": "global-detail-canon-mo-juren-letter-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-canon-mo-juren-letter-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "自己临走前已与家人约定明信/暗信传讯，知道龙纹验信与四妻各持一色药粉合调的办法。"
+            },
+            "description": "自己临走前已与家人约定明信/暗信传讯，知道龙纹验信与四妻各持一色药粉合调的办法。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-mo-perfume-bird-remedies",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-perfume-bird-remedies",
+            "value": {
+              "kind": "text",
+              "value": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。"
+            },
+            "description": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
           }
         ]
       }
@@ -215,6 +823,320 @@
               "value": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。"
             },
             "description": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-sun-ergou",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-wharf-work-agreement",
+            "subjectId": "self",
+            "predicate": "global-detail-wharf-work-agreement",
+            "value": {
+              "kind": "text",
+              "value": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。"
+            },
+            "description": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-jiayuan-heixiong",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-wharf-work-agreement",
+            "subjectId": "self",
+            "predicate": "global-detail-wharf-work-agreement",
+            "value": {
+              "kind": "text",
+              "value": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。"
+            },
+            "description": "此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-mo-liu-wife",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "known-global-mo-liu-wife-dragon-ring",
+            "name": "刘氏的龙纹戒",
+            "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-global-mo-liu-wife-dragon-ring",
+            "canonical_entity_ids": [
+              "global-mo-liu-wife-dragon-ring"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-liu-family-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-liu-family-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "自己是曲陵城长风门刘锋的妹妹；与墨府婚姻并不等于兄长所在门派由自己控制，兄长近况需要真实来信或探问。"
+            },
+            "description": "自己是曲陵城长风门刘锋的妹妹；与墨府婚姻并不等于兄长所在门派由自己控制，兄长近况需要真实来信或探问。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-canon-mo-liu-wife-letter-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-canon-mo-liu-wife-letter-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。"
+            },
+            "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黄色现形药粉。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-liu-tianhu-skill",
+            "subjectId": "self",
+            "predicate": "global-detail-liu-tianhu-skill",
+            "value": {
+              "kind": "text",
+              "value": "学过天狐大法的凡俗媚惑技巧，可影响注意与心神，强定力或有效抵御能恢复；不直接读心、永久控制或取得灵力。"
+            },
+            "description": "学过天狐大法的凡俗媚惑技巧，可影响注意与心神，强定力或有效抵御能恢复；不直接读心、永久控制或取得灵力。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-mo-wang-wife",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "known-global-mo-wang-wife-dragon-ring",
+            "name": "王氏的龙纹戒",
+            "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-global-mo-wang-wife-dragon-ring",
+            "canonical_entity_ids": [
+              "global-mo-wang-wife-dragon-ring"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-wang-private-administration",
+            "subjectId": "self",
+            "predicate": "global-detail-wang-private-administration",
+            "value": {
+              "kind": "text",
+              "value": "丈夫离家前把暗舵事务交给自己。会中与家中财产不等于个人财物；严氏代理大部会务，也不因此能越过自己掌握所有渠道。联络者只知道自己负责的线路与暗号，所收款项须真实收到才入账。"
+            },
+            "description": "丈夫离家前把暗舵事务交给自己。会中与家中财产不等于个人财物；严氏代理大部会务，也不因此能越过自己掌握所有渠道。联络者只知道自己负责的线路与暗号，所收款项须真实收到才入账。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-canon-mo-wang-wife-letter-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-canon-mo-wang-wife-letter-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。"
+            },
+            "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份黑色现形药粉。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-mo-yan-wife",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "known-global-mo-yan-wife-dragon-ring",
+            "name": "严氏的龙纹戒",
+            "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-global-mo-yan-wife-dragon-ring",
+            "canonical_entity_ids": [
+              "global-mo-yan-wife-dragon-ring"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-yan-authority-boundary",
+            "subjectId": "self",
+            "predicate": "global-detail-yan-authority-boundary",
+            "value": {
+              "kind": "text",
+              "value": "自己受托主持大部会务，王氏掌握丈夫另行交付的暗舵；知道有这些秘密力量，不等于知道全部负责人、位置和当期账目。任何调取和交接需实际协商。"
+            },
+            "description": "自己受托主持大部会务，王氏掌握丈夫另行交付的暗舵；知道有这些秘密力量，不等于知道全部负责人、位置和当期账目。任何调取和交接需实际协商。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-canon-mo-yan-wife-letter-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-canon-mo-yan-wife-letter-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。"
+            },
+            "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-mo-li-wife",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "known-global-mo-li-wife-dragon-ring",
+            "name": "李氏的龙纹戒",
+            "description": "龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-global-mo-li-wife-dragon-ring",
+            "canonical_entity_ids": [
+              "global-mo-li-wife-dragon-ring"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-canon-mo-li-wife-letter-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-canon-mo-li-wife-letter-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。"
+            },
+            "description": "丈夫离家前已约定明暗信含义，暗信警讯需要核信物与内容，不能只因有人持戒就信其全部话。龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份红色现形药粉。",
             "stance": "believed",
             "confidence": 1,
             "evidenceIds": [
@@ -260,6 +1182,26 @@
       "id": "global-detail-control-spell-qualification",
       "text": "旧入门控物/驱物口诀要求相配的可驱对象及有效施法；普通家具刀剑和各种法器不能仅凭同一口诀自动驱使。新获得器物需要辨认并掌握对应驱法；此初学限制不构成禁止一切高阶搬运、御物或神通的普遍铁律。",
       "severity": "hard"
+    },
+    {
+      "id": "global-detail-letter-reagent-use",
+      "text": "四种现形粉须实际从各自容器取出，用真实水混合，再涂相应暗信并烘干；已消耗的粉不能再次使用，需有配方材料才能补制。只持戒/知信号不自动读出消息，更不能得到寄信者此后的真实状态。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-mortal-drug-and-charm-resistance",
+      "text": "凡俗魅惑与迷药依施术、吸入或摄入、剂量、体质、精神力和防护实际生效，不因名称或威吓就强制服从、倒地或死亡。千人醉可暂致乏力与内家真气失灵，确有预防手段；笑魂散有致死毒性但不能把对凡人的实例扩成无视一切修士防护。黄栗丸是鸟食药、萦香丸用于香与避蚊，均须有真实来源与有限用量。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-bell-delegated-use",
+      "text": "引魂钟在已确立血主并连结那具炼尸时，可由持钟者受托驱使；交付保管不自动改变血主。原血主仍活着时旁人不能只在钟上做手脚便夺得控制；作用仍受距离、遮蔽与真实器具状态限制。这项特殊方法不概括所有法宝，也不能据此把活人当炼尸控制。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-talisman-type-and-charge",
+      "text": "金刚符为金属性初级中阶防御符；飞天符为风属性初级上阶飞行符，灵力未散时可再次使用，耗尽不得凭名字自动续航。实际施符仍需会对应方法，防御和逃离不保证成功。基础地刺术属初级中阶，残本、完整五行咒书等是不同传本，持有一本不等掌握全部法术。具体摊位标价不成为全界永久价目。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -270,7 +1212,9 @@
       "global-detail-elephant-and-mo-martial",
       "global-detail-four-remedy-limits",
       "global-detail-mixed-poison-conditions",
-      "global-detail-seven-ghost-and-soul-cost"
+      "global-detail-seven-ghost-and-soul-cost",
+      "global-detail-mo-letter-convention",
+      "global-detail-liu-tianhu-and-mortal-drugs"
     ],
     "law:global-detail-mortal-herb-supply": [
       "global-detail-herb-economy-and-kinds"
@@ -310,6 +1254,154 @@
     ],
     "law:global-detail-control-spell-qualification": [
       "global-detail-control-spell-and-target"
+    ],
+    "fact:global-detail-wharf-berthing": [
+      "global-detail-jiayuan-wharf-conditions"
+    ],
+    "fact:global-detail-wharf-business-custom": [
+      "global-detail-jiayuan-wharf-conditions"
+    ],
+    "cognition:canon-sun-ergou": [
+      "global-detail-jiayuan-wharf-conditions"
+    ],
+    "cognition:canon-jiayuan-heixiong": [
+      "global-detail-jiayuan-wharf-conditions"
+    ],
+    "fact:global-detail-liu-family-knowledge": [
+      "global-detail-mo-family-and-private-administration"
+    ],
+    "cognition:canon-mo-liu-wife": [
+      "global-detail-mo-family-and-private-administration",
+      "global-detail-mo-letter-convention",
+      "global-detail-liu-tianhu-and-mortal-drugs"
+    ],
+    "fact:global-detail-wang-private-administration": [
+      "global-detail-mo-family-and-private-administration"
+    ],
+    "cognition:canon-mo-wang-wife": [
+      "global-detail-mo-family-and-private-administration",
+      "global-detail-mo-letter-convention"
+    ],
+    "cognition:canon-mo-yan-wife": [
+      "global-detail-mo-family-and-private-administration",
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-juren-dragon-ring": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-juren-dragon-ring-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-juren-dragon-ring-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-canon-mo-juren-letter-knowledge": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-yan-wife-dragon-ring": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-yan-wife-dragon-ring-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-yan-wife-dragon-ring-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-yan-wife-dragon-ring-powder": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-yan-wife-dragon-ring-powder-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-yan-wife-dragon-ring-powder-measure": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-canon-mo-yan-wife-letter-knowledge": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-li-wife-dragon-ring": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-li-wife-dragon-ring-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-li-wife-dragon-ring-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-li-wife-dragon-ring-powder": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-li-wife-dragon-ring-powder-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-li-wife-dragon-ring-powder-measure": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-canon-mo-li-wife-letter-knowledge": [
+      "global-detail-mo-letter-convention"
+    ],
+    "cognition:canon-mo-li-wife": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-liu-wife-dragon-ring": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-liu-wife-dragon-ring-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-liu-wife-dragon-ring-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-liu-wife-dragon-ring-powder": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-liu-wife-dragon-ring-powder-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-liu-wife-dragon-ring-powder-measure": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-canon-mo-liu-wife-letter-knowledge": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-wang-wife-dragon-ring": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-wang-wife-dragon-ring-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-wang-wife-dragon-ring-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "entity:global-mo-wang-wife-dragon-ring-powder": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-wang-wife-dragon-ring-powder-owner": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-mo-wang-wife-dragon-ring-powder-measure": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-canon-mo-wang-wife-letter-knowledge": [
+      "global-detail-mo-letter-convention"
+    ],
+    "law:global-detail-letter-reagent-use": [
+      "global-detail-mo-letter-convention"
+    ],
+    "fact:global-detail-liu-tianhu-skill": [
+      "global-detail-liu-tianhu-and-mortal-drugs"
+    ],
+    "fact:global-detail-mo-perfume-bird-remedies": [
+      "global-detail-liu-tianhu-and-mortal-drugs"
+    ],
+    "law:global-detail-mortal-drug-and-charm-resistance": [
+      "global-detail-liu-tianhu-and-mortal-drugs"
+    ],
+    "law:global-detail-bell-delegated-use": [
+      "global-detail-bell-custody-and-limits"
+    ],
+    "law:global-detail-talisman-type-and-charge": [
+      "global-detail-wan-family-and-talisman-types"
     ]
   }
 }
