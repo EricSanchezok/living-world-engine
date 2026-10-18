@@ -27,7 +27,7 @@ function save(name: string, value: unknown) {
   const destination = path.join(directory, `${name}.json`);
   writeFileSync(`${destination}.tmp`, `${JSON.stringify(value, null, 2)}\n`); renameSync(`${destination}.tmp`, destination);
 }
-for (const queue of result.queues) save(queue.moduleId, { formatVersion: result.formatVersion, inputHash: result.inputHash, ...queue });
+for (const queue of result.queues) save(queue.moduleId, { formatVersion: result.formatVersion, ...queue });
 save("unassigned", { inputHash: result.inputHash, status: "requires-editorial-routing", candidates: result.unassigned });
 save("status", { inputHash: result.inputHash, sourceBatchIds: result.sourceBatchIds,
   modules: result.queues.map(queue => ({ id: queue.moduleId, candidateCount: queue.candidates.length })),

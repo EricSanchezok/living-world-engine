@@ -30,7 +30,46 @@ describe("regional production queues", () => {
     f.report.objects[0]!.description = "只在东城";
     const after = routeRegionalCandidates([f.report], f.regions, [f.batch], () => f.source);
     expect(after.inputHash).not.toBe(before.inputHash);
+    expect(after.queues[0]!.inputHash).not.toBe(before.queues[0]!.inputHash);
+    expect(after.queues[1]!.inputHash).not.toBe(before.queues[1]!.inputHash);
     expect(after.queues[1]!.candidates).toEqual([]);
     expect(() => routeRegionalCandidates([f.report], f.regions, [f.batch], () => `错${f.source}`)).toThrow("source part drift");
+  });
+  it("retains a region's review fingerprint when unrelated regions are added or reordered", () => {
+    const f = fixture();
+    const before = routeRegionalCandidates([f.report], f.regions, [f.batch], () => f.source);
+    const after = routeRegionalCandidates([f.report], [
+      { id: "north", realm: "spirit", search_terms: ["北境"] }, ...f.regions.toReversed(),
+    ], [f.batch], () => f.source);
+    expect(after.inputHash).not.toBe(before.inputHash);
+    for (const queue of before.queues) {
+      expect(after.queues.find(item => item.moduleId === queue.moduleId)).toEqual(queue);
+    }
+  });
+  it("invalidates a region when its routing scope changes, even with the same matching candidates", () => {
+    const f = fixture();
+    const before = routeRegionalCandidates([f.report], f.regions, [f.batch], () => f.source);
+    const after = routeRegionalCandidates([f.report], [
+      { ...f.regions[0]!, search_terms: ["东城", "北境"] }, f.regions[1]!,
+    ], [f.batch], () => f.source);
+    expect(after.queues[0]!.candidates).toEqual(before.queues[0]!.candidates);
+    expect(after.queues[0]!.inputHash).not.toBe(before.queues[0]!.inputHash);
+    expect(after.queues[1]!.inputHash).toBe(before.queues[1]!.inputHash);
+  });
+  it("ignores a homonymous phrase without dropping a separate real match or unassigned evidence", () => {
+    const f = fixture();
+    f.report.objects[0]!.description = "修仙界的凡人后来飞升仙界";
+    f.report.objects[1]!.description = "修仙界的凡人";
+    const result = routeRegionalCandidates([f.report], [
+      { id: "external", realm: "shared", search_terms: ["仙界"], ignore_phrases: ["修仙界"] },
+    ], [f.batch], () => f.source);
+    expect(result.queues[0]!.candidates.map(item => item.id)).toEqual(["batch-0001-object-0"]);
+    expect(result.unassigned.map(item => item.id)).toEqual(["batch-0001-object-1"]);
+    expect(f.report.objects).toHaveLength(2);
+    const withoutExclusion = routeRegionalCandidates([f.report], [
+      { id: "external", realm: "shared", search_terms: ["仙界"] },
+    ], [f.batch], () => f.source);
+    expect(withoutExclusion.queues[0]!.candidates).toHaveLength(2);
+    expect(result.queues[0]!.inputHash).not.toBe(withoutExclusion.queues[0]!.inputHash);
   });
 });
