@@ -4103,9 +4103,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "普通搬运、家务与体力劳动；未修象甲功或长春功，不预先断言其灵根。"
+            "value": "普通搬运、家务与体力劳动；尚未受过修仙功法或专门炼体训练。"
           },
-          "description": "普通搬运、家务与体力劳动；未修象甲功或长春功，不预先断言其灵根。",
+          "description": "普通搬运、家务与体力劳动；尚未受过修仙功法或专门炼体训练。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -4121,6 +4121,18 @@
             "entityId": "local-zhang-tie-mother"
           },
           "description": "亲子关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-zhang-tie-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "金、水、土三灵根，不含木；尚未接受灵根检测。"
+          },
+          "description": "与生俱来的灵根资质，目前本人及家人尚不知情。",
           "access": {
             "kind": "private"
           }
@@ -4244,9 +4256,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "普通搬运、家务与体力劳动；未修象甲功或长春功，不预先断言其灵根。"
+                "value": "普通搬运、家务与体力劳动；尚未受过修仙功法或专门炼体训练。"
               },
-              "description": "普通搬运、家务与体力劳动；未修象甲功或长春功，不预先断言其灵根。",
+              "description": "普通搬运、家务与体力劳动；尚未受过修仙功法或专门炼体训练。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -15795,6 +15807,10 @@
     "law:local-cavern-physical-controls": [
       "local-sunset-old-cavern",
       "local-reviewed-opening-additions"
+    ],
+    "fact:canon-zhang-tie-spiritual-root": [
+      "local-zhangtie-root-backprojection",
+      "local-zhangtie-root-completion"
     ]
   }
 }

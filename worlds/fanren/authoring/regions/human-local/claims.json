@@ -6014,5 +6014,46 @@
       "local-original-implementation"
     ],
     "evidence": []
+  },
+  {
+    "id": "local-zhangtie-root-backprojection",
+    "statement": "曲魂的原身为张铁；后文叙述确认三灵根，韩从无法修长春功回想其缺木。灵根先于测试存在，T0张铁具有三属性且不含木，但本人及家人尚未检测得知。不据未来炼尸结果提前改变其身体或生死。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "作者从所列来源对照；开篇人物没有自动获得这项后来确认的知识。",
+    "openingReason": "后期明确描述的既有体质或物性可回溯；不预置后期持有、训练或知情。",
+    "status": "reviewed",
+    "dependencies": [
+      "local-future-body-exclusion"
+    ],
+    "evidence": [
+      {
+        "chapterId": "qq-21810803",
+        "chapterSha256": "66f0c2bc25cfc583110c505cf227dfeb36f1cab89cb444c36db86d0bfc84793f",
+        "start": 2189,
+        "end": 2284,
+        "anchorSha256": "de426596f765f2af2f95a8ed819b4f2cc7ca14675166daf25210a379a8870490"
+      },
+      {
+        "chapterId": "qq-21616259",
+        "chapterSha256": "5350ab460d5952f15a483183f8c2a0facd2746046f6a99064225068ef7cd3b7f",
+        "start": 1947,
+        "end": 2022,
+        "anchorSha256": "b30ac1d98a061722dc6a2f787818fc2047625b1754baeecd7fd995421bafd34a"
+      }
+    ]
+  },
+  {
+    "id": "local-zhangtie-root-completion",
+    "statement": "正文只明确三属性且缺木。为使开篇检测揭示固定状态，将其余三属性标为金、水、土，这是可辨的原创补足，不声称原著逐项列出。该配置在创建世界时确定，不随玩家检测要求重掷。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者从所列来源对照；开篇人物没有自动获得这项后来确认的知识。",
+    "openingReason": "在原文三属性且缺木的约束内补足未列出的具体属性，使状态与检测可一致执行。",
+    "status": "reviewed",
+    "dependencies": [
+      "local-zhangtie-root-backprojection"
+    ],
+    "evidence": []
   }
 ]
