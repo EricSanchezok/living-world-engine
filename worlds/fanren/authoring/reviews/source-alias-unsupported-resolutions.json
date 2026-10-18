@@ -1,0 +1,2399 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "source_completion/local-source-alias-review/2026-10-18",
+  "status": "all-61-unsupported-alias-findings-semantically-adjudicated",
+  "apiCalls": 0,
+  "readScope": "逐条读原候选、独立审校意见、所引原文完整段及邻段；对“未出现”争议另查同批原文实词并读完整命中段。每条最终文字复对所记切片，原始全文未进入tracked资料。",
+  "count": 61,
+  "anchorCount": 129,
+  "recordsHash": "8c5c6ee792984f98ced2704b4f6082f81d66ffd1ad55495c662f068a8b78595f",
+  "limitations": [
+    "仅关闭这61条来源别名争议；352条ambiguous别名及其他残项另行处理。",
+    "描述性标签可供作者索引，不伪装成原文逐字专名；缺单批称呼不证明全书从未出现。",
+    "同物绑定只在明确连续语境成立，不能用泛称跨全书自动合并。",
+    "不更改原提取、模型裁决或开篇状态；运行接入仍须具体地区证据。"
+  ],
+  "records": [
+    {
+      "id": "batch-0014:alias-unsupported:batch-0014-object-0004:aa24c388502b",
+      "batchId": "batch-0014",
+      "candidateId": "batch-0014-object-0004",
+      "alias": "四夫人",
+      "candidateLabel": "严夫人",
+      "sourceReportHash": "e2728d1b1dc3a4a239ebca6562afbddf07e5fab10ddc3f896580c5aa8ab44ee1",
+      "adjudicationReportHash": "fda36704986f43cb2248f6674f3aa9904048036e4ba1e25613c5d26d13f7ea3e",
+      "findingHash": "aa24c388502b7a91f92d1ec644c81b1b3a1e1f8a00e88cb81c8ffdd602f0bda5",
+      "candidateHash": "7411a47a256c010b9b94c4590dc2909e932c1b98f948eb11302e97dc517d474c",
+      "disposition": "same-referent",
+      "statement": "原章直接写严氏为‘这位四夫人’，审校漏看同章后段；保留同一严氏身份的称谓，不把后来韩立师母关系提前。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-20452373",
+          "chapterSha256": "97c2259b5d7505f81f0a7b8aed7414a228773f81f296a1e9a94677db0e176fe1",
+          "start": 698,
+          "end": 998,
+          "anchorSha256": "c7b9574c9a5d88200fcde28161fd7f548c84bf8607525e94b04bb4ccc5c40a20"
+        },
+        {
+          "chapterId": "qq-20478539",
+          "chapterSha256": "7622e3b441b7048c6f3dc36a53bc2811a4f7d2c813b55614f44e85a3381784c2",
+          "start": 1261,
+          "end": 1553,
+          "anchorSha256": "5402af155a83ce61baf724b89ce65f8fb1db00ab6a4bafe13b742f456e875423"
+        },
+        {
+          "chapterId": "qq-20483023",
+          "chapterSha256": "545830a8a98f031a91f228a9784561e87e458e5ba2fb2d503ad72ce0423d7330",
+          "start": 214,
+          "end": 324,
+          "anchorSha256": "8d45854c14d040cd37955047c843270d091d67f7aa609c5cfd4b2190ed5a476e"
+        },
+        {
+          "chapterId": "qq-20483023",
+          "chapterSha256": "545830a8a98f031a91f228a9784561e87e458e5ba2fb2d503ad72ce0423d7330",
+          "start": 1059,
+          "end": 1320,
+          "anchorSha256": "3f1fed9c2134c7b5c97f67a0698cb7c904ddf8ffa3d4db8a56d52af267a859da"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0014:alias-unsupported:batch-0014-object-0006:8a196d480c94",
+      "batchId": "batch-0014",
+      "candidateId": "batch-0014-object-0006",
+      "alias": "三小姐",
+      "candidateLabel": "墨彩环",
+      "sourceReportHash": "e2728d1b1dc3a4a239ebca6562afbddf07e5fab10ddc3f896580c5aa8ab44ee1",
+      "adjudicationReportHash": "fda36704986f43cb2248f6674f3aa9904048036e4ba1e25613c5d26d13f7ea3e",
+      "findingHash": "8a196d480c94c7a9bd5ff6d3b72a6d76f6a90f5e6c5bc9c9456008e0a2a05aff",
+      "candidateHash": "30c7e8b424a08e7023d271c83c1d11f5ff930dfb77687107f3af76d5a7062f5b",
+      "disposition": "descriptive-label",
+      "statement": "原句为‘墨三小姐’，三小姐只是省姓的作者检索简称，未据本批证明它是单独原文称名；不因此拆出第二个墨彩环。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-20473750",
+          "chapterSha256": "310530b4b5bb3341127f3585a7e8e463ede981f92f2d2ba93cfda5fe23e2cb95",
+          "start": 1411,
+          "end": 1713,
+          "anchorSha256": "0e64a1557f48ee4c8b98df615c6460cd18567ea6676e0eccfabfda01d11406ef"
+        },
+        {
+          "chapterId": "qq-20486271",
+          "chapterSha256": "9bbe0438db651de66da7e27a73783c79821d6c5f770f500f82068bbff62466d6",
+          "start": 1264,
+          "end": 1531,
+          "anchorSha256": "0b738b9c721223058357d45d6b2f593e60d80a9707b3e943eb600a4eebecdd3e"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0014:alias-unsupported:batch-0014-object-0039:7c2dcaa7e3b1",
+      "batchId": "batch-0014",
+      "candidateId": "batch-0014-object-0039",
+      "alias": "宝玉",
+      "candidateLabel": "暖阳宝玉",
+      "sourceReportHash": "e2728d1b1dc3a4a239ebca6562afbddf07e5fab10ddc3f896580c5aa8ab44ee1",
+      "adjudicationReportHash": "fda36704986f43cb2248f6674f3aa9904048036e4ba1e25613c5d26d13f7ea3e",
+      "findingHash": "7c2dcaa7e3b13d29143614f1acb8e75f8715cd455fd812d7b5e32f3b74cf030d",
+      "candidateHash": "de125e7271792840e2073505edbac044b7efeca6c223be67c1569c6c4bc0d59f",
+      "disposition": "same-referent",
+      "statement": "同批先写暖阳宝玉，后在同一取玉计划中简称‘那宝玉’，有直接连续指代；审校所说只出现全称不成立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-20452373",
+          "chapterSha256": "97c2259b5d7505f81f0a7b8aed7414a228773f81f296a1e9a94677db0e176fe1",
+          "start": 1722,
+          "end": 1893,
+          "anchorSha256": "160e574261fec302bc2497b984564aa4009f387200ca0fdb266901e30ff21b5c"
+        },
+        {
+          "chapterId": "qq-20483023",
+          "chapterSha256": "545830a8a98f031a91f228a9784561e87e458e5ba2fb2d503ad72ce0423d7330",
+          "start": 0,
+          "end": 324,
+          "anchorSha256": "08c846165964027925652a2a800c62f5b180579743bbc7170c0846b2d8a8a30c"
+        },
+        {
+          "chapterId": "qq-20467738",
+          "chapterSha256": "fb1ed4a5f55dd4ab572077eb1a01241210897afc9856d5ae9dc3aff3050260ba",
+          "start": 1260,
+          "end": 1481,
+          "anchorSha256": "f1cfa981e20b53d4c4b8618d899316af7704d2fb7d4d607e03eeb061749a70c1"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0015:alias-unsupported:batch-0015-object-0007:b770b8357b58",
+      "batchId": "batch-0015",
+      "candidateId": "batch-0015-object-0007",
+      "alias": "四夫人",
+      "candidateLabel": "严氏",
+      "sourceReportHash": "4f380226a823c15ac793eb2772e15a357af127a22854b880abcee4ade73ed905",
+      "adjudicationReportHash": "1e5d5fc28849eb889500c107dee9e98ffa867b2730ae5d01ffa94a77735d26a4",
+      "findingHash": "b770b8357b5882606eaa9b1bb2b786862a3e4ce3debd410ed6e4d4c6604411f8",
+      "candidateHash": "2228bd80b9b4503317fc1139a08c0968d440377dfbc764265416a6eab2f7e6dc",
+      "disposition": "same-referent",
+      "statement": "同批明写‘墨府里能做主的人还是四夫人严氏’，四夫人称谓有明确证据。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-20493049",
+          "chapterSha256": "396beb064070406148fb012fa3ed679f5e04d252c5baace6555dc6bccee5bf52",
+          "start": 0,
+          "end": 178,
+          "anchorSha256": "09b72e00daedb2756f9d6f23c18533758c7ef17e17bcffb404ec23ee78667a1f"
+        },
+        {
+          "chapterId": "qq-20499494",
+          "chapterSha256": "06698bb8a1aecdcb20e18fc4c3cc9e656078f449fc0fe04265b068eb8a9231bd",
+          "start": 235,
+          "end": 500,
+          "anchorSha256": "4e4cf3bef1f25b8b6197e9199c6a3981ef88b297b07bdfedc0e84964e0eda0e9"
+        },
+        {
+          "chapterId": "qq-20497467",
+          "chapterSha256": "ee53fc945dfa350667c394e8a0c7ad8e971bc5b9d0c4ace11630b87f9aab153c",
+          "start": 239,
+          "end": 295,
+          "anchorSha256": "6c678b46d8d9388ed7c4f6f99d0d1dc0377bbadf5f984bb08f48487e7054641e"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0022:alias-unsupported:batch-0022-object-0029:5e99f1f7cebd",
+      "batchId": "batch-0022",
+      "candidateId": "batch-0022-object-0029",
+      "alias": "风刃",
+      "candidateLabel": "风刃术",
+      "sourceReportHash": "1613992e395b9b74a017f854510b5ee9633faa78214c60cb9a6552264bf7f3c6",
+      "adjudicationReportHash": "2b28e0005dffbddd725388953d9088dfd84552fa441948c23e85723305bd792b",
+      "findingHash": "5e99f1f7cebdc5cd81281a7b4ca7f6e724f7d5ef3f9d94bb265ee6a17bce3243",
+      "candidateHash": "5551e1965d955b19ab44c8913786250ae4d66881bfa5e7d28870f982cd43a749",
+      "disposition": "related-not-alias",
+      "statement": "风刃是此次青蛟旗发出的攻击形态，风刃术是法术；不把法术和每道风刃实体视为同一物，也不凭速度比较建立所有风术永远快一半的规则。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-20762113",
+          "chapterSha256": "36bacfbb4abdc054e99a64aa2c3d683f064dd6139d81766d3153ad953a0a808f",
+          "start": 0,
+          "end": 338,
+          "anchorSha256": "247329128c193d610553f362138724b1c10ff5fa63ae8ad3660d3b86e763994e"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0030:alias-unsupported:batch-0030-object-0017:dc27087fa9b6",
+      "batchId": "batch-0030",
+      "candidateId": "batch-0030-object-0017",
+      "alias": "奇兽山",
+      "candidateLabel": "麒麟阁",
+      "sourceReportHash": "cc3fbbf90829eb9eff1987505a64620f8b5012a5526db015a7dae7c13fbc9515",
+      "adjudicationReportHash": "271cc64dbf0a25c3c7ed9164e6204e65611d6e9b0ee817a17a08e9065f2d4d66",
+      "findingHash": "dc27087fa9b6e66695cbae6c2d86f711d360e8345a5dcbfa7dfa4614e54d1763",
+      "candidateHash": "bf06444a06ef4ebb3f2a76f7eb6cf769d989cd8806a1bc3c2acc322ebfdd7bc3",
+      "disposition": "related-not-alias",
+      "statement": "奇兽山是麒麟阁所属整座小山，阁是放养驯兽机构/所在；空间归属不等于正式同名。下一章‘灵兽山’承接该山，不能与越国宗派灵兽山合并。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-21042293",
+          "chapterSha256": "168cfbab9796649c5e5c7a5f4a21dcb8a68c8308ff099c44886d6e93c69eb626",
+          "start": 2100,
+          "end": 2374,
+          "anchorSha256": "f282c2ce5a09f0b8290a7f03c83a52eee9b9725455a852e95e8287ec6200c843"
+        },
+        {
+          "chapterId": "qq-21042293",
+          "chapterSha256": "168cfbab9796649c5e5c7a5f4a21dcb8a68c8308ff099c44886d6e93c69eb626",
+          "start": 2509,
+          "end": 2849,
+          "anchorSha256": "82352a1879d06752976ee4853a1494656b15656e2eb09ddf8ebb60ca26b74847"
+        },
+        {
+          "chapterId": "qq-21046645",
+          "chapterSha256": "8b9b008fb20d0e5f8bb17a9542e332614cdde3f0b146ef6aa0a3ee579330a8dd",
+          "start": 0,
+          "end": 170,
+          "anchorSha256": "72d8f30be9f03b37f44c96926806fe017cc853da6b1827277cecbbbaf83c0db7"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0067:alias-unsupported:batch-0067-object-0030:a48db90469b8",
+      "batchId": "batch-0067",
+      "candidateId": "batch-0067-object-0030",
+      "alias": "无形法体",
+      "candidateLabel": "化形之术",
+      "sourceReportHash": "70fb3e415f0dffd4a5cbf1bfce2f6050ab0e43974d95cdc3725a9d583e6b38e5",
+      "adjudicationReportHash": "9718355c24d7983e7d448deeafc96aec968915ec8d00d79ce0d142f8c09f2ce1",
+      "findingHash": "a48db90469b80f0bb2439bcfbb26df2630c115b68a3e7fee8fdad79b56be4534",
+      "candidateHash": "2d57cc9ae37cfb686469258024545651fedda4927d1c721632cea1f8985489ea",
+      "disposition": "related-not-alias",
+      "statement": "鬼修的化形术与其可被噬金虫吞噬的无形法体分别是方法与存在形态，不作为同一对象别名。其元婴以下难察之说仍为自述、有实际遭袭反例。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-22212707",
+          "chapterSha256": "5f57f97b13eb58b5cd62fedf30d010fd921869c99ccccb4a8c840eeb1acc291f",
+          "start": 504,
+          "end": 754,
+          "anchorSha256": "b960321d49e9d31b5fc85bc9cbcf64ddfa7c56cb54525ac483c9faf8bae177b4"
+        },
+        {
+          "chapterId": "qq-22222156",
+          "chapterSha256": "d1bda9263fd03f2c48d5fa78f4396597b08032c8c720bef2e8fe046f7373e949",
+          "start": 562,
+          "end": 943,
+          "anchorSha256": "bde28f015bf7638a90a066daed8b500bac71cdb7be72594f60d928c9d65378ce"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-void-hall",
+          "dispositionReportHash": "209e637a06e852f3126b19c7134a7a007611e24cc010257460b482dd8fbc0b9e",
+          "targetIds": [
+            "shared-xuangu-ghost-pact-and-failed-coup"
+          ],
+          "disposition": "corrected"
+        },
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "shared-xuangu-ghost-pact-and-failed-coup"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0089:alias-unsupported:batch-0089-object-0040:d415147e5261",
+      "batchId": "batch-0089",
+      "candidateId": "batch-0089-object-0040",
+      "alias": "正道",
+      "candidateLabel": "正魔两道",
+      "sourceReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
+      "adjudicationReportHash": "244ab158305a7ef9b6625630ab55358fd8add4bf043da69071110501ec988093",
+      "findingHash": "d415147e5261d7c2319c6b52798166fb21f3076399d868e5d4cd66b85e208f11",
+      "candidateHash": "806ebb9e0455f57532906603ce6740ea660a955de6f955ff81e01930f31e386d",
+      "disposition": "related-not-alias",
+      "statement": "正道为正魔合称的一方，正道联盟与魔道六宗分别有主体，正魔不是新增统一组织。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-22975675",
+          "chapterSha256": "1f9801646d6695b3a0bb443078970775a75231f2945e2c12cdb9a4590eb1fda1",
+          "start": 1686,
+          "end": 2234,
+          "anchorSha256": "4596cb6a09e607f3927c4f5d7ecdb5124833cb8df389e2501e81c318b52c8570"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-tiannan",
+          "dispositionReportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+          "targetIds": [
+            "tiannan-six-demonic",
+            "tiannan-righteous-alliance",
+            "tiannan-four-alliance-later-balance"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0089:alias-unsupported:batch-0089-object-0040:fa9741443d25",
+      "batchId": "batch-0089",
+      "candidateId": "batch-0089-object-0040",
+      "alias": "魔道",
+      "candidateLabel": "正魔两道",
+      "sourceReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
+      "adjudicationReportHash": "244ab158305a7ef9b6625630ab55358fd8add4bf043da69071110501ec988093",
+      "findingHash": "fa9741443d2573955519cee1753582bf6d752ab009637af7d0a7dfab581969cc",
+      "candidateHash": "806ebb9e0455f57532906603ce6740ea660a955de6f955ff81e01930f31e386d",
+      "disposition": "related-not-alias",
+      "statement": "魔道为正魔合称的一方，不能将魔道与正道全体合并；后期四方平衡另有时间范围。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-22975675",
+          "chapterSha256": "1f9801646d6695b3a0bb443078970775a75231f2945e2c12cdb9a4590eb1fda1",
+          "start": 1686,
+          "end": 2234,
+          "anchorSha256": "4596cb6a09e607f3927c4f5d7ecdb5124833cb8df389e2501e81c318b52c8570"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-tiannan",
+          "dispositionReportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+          "targetIds": [
+            "tiannan-six-demonic",
+            "tiannan-righteous-alliance",
+            "tiannan-four-alliance-later-balance"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0091:alias-unsupported:batch-0091-object-0023:d6d69ea116f3",
+      "batchId": "batch-0091",
+      "candidateId": "batch-0091-object-0023",
+      "alias": "黑色玉盒",
+      "candidateLabel": "封印玉盒",
+      "sourceReportHash": "028f1af7ecc06681ec05712b7152d18bafdd4e7fba2de47e59cbb5fcace1f060",
+      "adjudicationReportHash": "46f6bd35ad8006e4e76f5cf4f5f364d158388b3d33d8fab40a133328b6793f46",
+      "findingHash": "d6d69ea116f32f853da786ab4303c1051a74e8315c28a3be429fa8d6782c2de2",
+      "candidateHash": "731d45742b3bcd2f920de003b236c9b80d5c1cdbdc5ce1795ef1931c53de5cfe",
+      "disposition": "wrong-attribute",
+      "statement": "这件封印玉盒明写古旧微黄，贴金符；不可给它附加黑色玉盒别名或与另装灵眼之玉的匣混为一物。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-23055130",
+          "chapterSha256": "002fa8aefb6c1e8c43da4276186818b75de4e33fbe587d498d3d92a45572576d",
+          "start": 2185,
+          "end": 2464,
+          "anchorSha256": "64867bbd8c2cb58816e97bb8dbb23c7f282e627397fcb059bff8dba4f61de91a"
+        },
+        {
+          "chapterId": "qq-23066972",
+          "chapterSha256": "29e7ab2a782d3c2ec6be5a3065d76147aed8593fd7ef4ca7a59a43f1e549ddbb",
+          "start": 510,
+          "end": 785,
+          "anchorSha256": "dce452aff199505018de2485c8017eaf041740f224f91e64c9d1b7a896815afd"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0094:alias-unsupported:batch-0094-object-0007:31dc843d1e5d",
+      "batchId": "batch-0094",
+      "candidateId": "batch-0094-object-0007",
+      "alias": "白凤仙子",
+      "candidateLabel": "白凤仙",
+      "sourceReportHash": "20ba2fd01be755d06c9b919a4967a37d226c18a12bfbeeeab67b9cb8404552c3",
+      "adjudicationReportHash": "d7f1eb3afc7dac4e0446b4f5324367f4273d73b3ebdd3beed43c5461818ab1f4",
+      "findingHash": "31dc843d1e5dfccdde44667a35730d68e53efdae6579137014c122187b187eb4",
+      "candidateHash": "2b1f8b061a03f1c4d6f34b2ba4ddd653332366130c5eb7dc3d8b16becd8b468d",
+      "disposition": "descriptive-label",
+      "statement": "同场白凤峰宋仙子又称白凤仙，连续指代同一宋玉；白凤仙子是作者拼合称呼，不作为已证逐字原名，不另造人物。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-23155729",
+          "chapterSha256": "7ed9c244e1d076d6d4892ccbd1656938eb9aae932b7496bacfa8cf360f920296",
+          "start": 862,
+          "end": 1181,
+          "anchorSha256": "bd40e167fcd9fd367adeda7a9aadaa2cc5e68bcb2ad56e78602d40bf6e4fd41f"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-tiannan",
+          "dispositionReportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+          "targetIds": [
+            "canon-song-yu",
+            "tiannan-contest-officers"
+          ],
+          "disposition": "corrected"
+        },
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "canon-song-yu",
+            "tiannan-contest-officers"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0101:alias-unsupported:batch-0101-object-0004:1f0b7a30c067",
+      "batchId": "batch-0101",
+      "candidateId": "batch-0101-object-0004",
+      "alias": "慕姑娘",
+      "candidateLabel": "慕沛灵",
+      "sourceReportHash": "835d9db5df14136c75a0c047814cfb9fe6187e762962e1a44921e21a49989c84",
+      "adjudicationReportHash": "25290d21c0f6d2433685dc10b85254a67e070159a3f2427f08ba3745b80543d9",
+      "findingHash": "1f0b7a30c067c8973a1ed1ef133f467a008474acb92ff9f0c8df84474e949955",
+      "candidateHash": "86c867b42c3ee7e49f247eeb0add89b006dbf9b7a820c82e5a955db6cdc52191",
+      "disposition": "same-referent",
+      "statement": "同一段既写幕姑娘又写慕姑娘，并点名慕沛灵；保留慕/幕源字差异，不拆身份。审校认为仅幕而无慕不成立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-23459326",
+          "chapterSha256": "71a7d1a09f6cc814a41eeb6c71eaed1b592cc2e4e693f6d196f4575d570de12d",
+          "start": 0,
+          "end": 156,
+          "anchorSha256": "34b150d34f11230b1c15e1999e462d76d0c6deb77936383845f04ea37b6c61d1"
+        },
+        {
+          "chapterId": "qq-23468108",
+          "chapterSha256": "83f6b66d49696118ed4064cb54c7d316edbf34932f0b8be181d6216f441f702e",
+          "start": 0,
+          "end": 254,
+          "anchorSha256": "8b19805882b13faee66c0285a79aeda7c4e3f132f515debdf0c79880c05a83b0"
+        },
+        {
+          "chapterId": "qq-23468108",
+          "chapterSha256": "83f6b66d49696118ed4064cb54c7d316edbf34932f0b8be181d6216f441f702e",
+          "start": 788,
+          "end": 1048,
+          "anchorSha256": "efda55c2e964d32a69222742bf8ecc08fc8f51b3de0fd0901114be874689bd0f"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-tiannan",
+          "dispositionReportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+          "targetIds": [
+            "canon-mu-peiling",
+            "tiannan-elder-age-and-motives"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0105:alias-unsupported:batch-0105-object-0017:a73cc2a4c871",
+      "batchId": "batch-0105",
+      "candidateId": "batch-0105-object-0017",
+      "alias": "石山",
+      "candidateLabel": "苍坤上人洞府",
+      "sourceReportHash": "73b2395bc985e7e57d44fcbd3768acb2a20283df5ba5ccdce77b4d00c2084114",
+      "adjudicationReportHash": "c5e96cd1ae07681674aa578b1598ee5e393a1c0ef457b0bf092244175d0a671b",
+      "findingHash": "a73cc2a4c87123ffa6dcb45e09d5e30be67be408d4d50235d30958e01a328955",
+      "candidateHash": "6fa78df28c86c9c1651f9f7e4586436f954f6ff6f1a066ae92c662c539929b11",
+      "disposition": "related-not-alias",
+      "statement": "灰白小石山是苍坤古府所藏山体，石山不等于洞府内部；苍穹字样在连续领路场景保留源称名异文，不另造古府。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-23610628",
+          "chapterSha256": "a166c6a2f2a434f7b297508f1a3904b788ad4a52b3d78fbf4971deed127a92f8",
+          "start": 2027,
+          "end": 2416,
+          "anchorSha256": "ab9a483406edfa0d68e8c0d97cfffef5dcf5d4bdba970fb715f652054b64f883"
+        },
+        {
+          "chapterId": "qq-23619630",
+          "chapterSha256": "d2b047f2db2bc56e3248548d9b4ab59b777049ede420c0f3bb68beb198039b0f",
+          "start": 187,
+          "end": 424,
+          "anchorSha256": "f8898dfe04e7b1abdebda1e790bb99215831ea23cf8214d699e6c9e377680d5e"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-steppe",
+          "dispositionReportHash": "5c89a25c02cfe25c7ae00ab02445f9ac89a4d683facc48878852714dd3f313fc",
+          "targetIds": [
+            "dv-cangkun-hidden-cave",
+            "steppe-cave-betrayal-and-persons"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0116:alias-unsupported:batch-0116-object-0094:5abebf83390a",
+      "batchId": "batch-0116",
+      "candidateId": "batch-0116-object-0094",
+      "alias": "赌战材料",
+      "candidateLabel": "赌斗材料",
+      "sourceReportHash": "d3ba1c3401a166a55e064eff149604d64e262ff493a847928c9f1d42c4e96892",
+      "adjudicationReportHash": "05caa86fb638ce1187e4b72841038b713cfbefb0e42d07c9a6ea20811cd17c0e",
+      "findingHash": "5abebf83390aa3cb7f2412ecc276fed50f419b470748a1b18a114a5de20bf128",
+      "candidateHash": "acd31b9a668e13e5b6f2793a2dec0d4b2b7d454042ea7dc82a339506640bbc46",
+      "disposition": "descriptive-label",
+      "statement": "赌战材料是这场赌斗材料的作者说明标签，不冒充逐字原名；实际两袋交换、四方凑料和珍稀程度均保留。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-24114872",
+          "chapterSha256": "8aa95772edb815ffb07bc079ef3be38cf271d0160671946f4d2a481aa1a412b8",
+          "start": 2380,
+          "end": 2767,
+          "anchorSha256": "1007307f00692d5729b5f12dc7f7518a80e27cb8d8cad3f34e7cf8d5f86b5947"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-tiannan",
+          "dispositionReportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+          "targetIds": [
+            "tiannan-war-wager-materials",
+            "tiannan-war-equipment-and-costs"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0122:alias-unsupported:batch-0122-object-0010:f7bb12c83b13",
+      "batchId": "batch-0122",
+      "candidateId": "batch-0122-object-0010",
+      "alias": "令狐老祖",
+      "candidateLabel": "令狐祖师",
+      "sourceReportHash": "9e86a89df78642d8f0205316d0c029c6249c3ec221c9a135f2de890097ca1ed7",
+      "adjudicationReportHash": "9cbdb05232fe5b89245f66902a12785a6fe80f120a1ce25cbdf1ec4a1574845e",
+      "findingHash": "f7bb12c83b13d88a3fe243b6654a9c6253888e49a9108e126ead787d3ace8f9f",
+      "candidateHash": "731e38e17f6d9254c9d0156b0a30cbb46e4e977b1ae14b69df70a72260afea54",
+      "disposition": "same-referent",
+      "statement": "陈巧天对答段明确先称令狐祖师，叙述紧接令狐老祖；审校漏读后半句，三种尊称在此指同一黄枫谷长者。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-24404166",
+          "chapterSha256": "fea10c9af9fae2931f8df6195a39f2a7512d4cf596eeeaa3d784c9a1c5a04946",
+          "start": 2398,
+          "end": 2814,
+          "anchorSha256": "035f1449e8c4ce1ec6f3824e964769d3492979b24467aae97453e9a77fdfbd38"
+        },
+        {
+          "chapterId": "qq-24407188",
+          "chapterSha256": "6907d250cb9642184ab84a1eb17f55d7e65d9162748d86cd10c0d06bde1aaf27",
+          "start": 589,
+          "end": 1040,
+          "anchorSha256": "a967b0759b810945fc8cf615483e669d943d953b8c9c7e4c131f51573f656fd4"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0125:alias-unsupported:batch-0125-object-0023:97604a894d67",
+      "batchId": "batch-0125",
+      "candidateId": "batch-0125-object-0023",
+      "alias": "熔岩湖洞穴",
+      "candidateLabel": "火蟾巢穴",
+      "sourceReportHash": "f4cd9eea616860edadae5cd8c9d316857e064c3a38aac2b716705b270e1bbb41",
+      "adjudicationReportHash": "0c093c9b221736605fc8d3b33dd02a50ced6087b989c285dad3e1427869e51c4",
+      "findingHash": "97604a894d679afb733dc000f602d08122a5edda2a2ef787cb0847c7b8175183",
+      "candidateHash": "5f935d0ae649d98c0cc5d196d50742d1599c2536b1af3846d3654f556fa7340b",
+      "disposition": "descriptive-label",
+      "statement": "熔岩湖洞穴只是有熔岩湖的火蟾巢窟说明标签，不另增专名地点；洞窟、内部湖与古骸台保持空间层次。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-24533470",
+          "chapterSha256": "c339aae944e093a38d5d0491272d0e50c6943d6bd9b936ae91267cf910ff4703",
+          "start": 1379,
+          "end": 1684,
+          "anchorSha256": "1a8a3ce0789e826c77eb8d097ed955967ead61a05ee61e003038a79dbcd4be97"
+        },
+        {
+          "chapterId": "qq-24541419",
+          "chapterSha256": "b711119d127ce00365c2d08f580443f50c0ee0afcab236d78c1767a3f4c9005a",
+          "start": 30,
+          "end": 394,
+          "anchorSha256": "b2263e1b28423b37ec1ee5ab2cae33a8e7f92069a0059fa2ee75404ef170ba3e"
+        },
+        {
+          "chapterId": "qq-24541419",
+          "chapterSha256": "b711119d127ce00365c2d08f580443f50c0ee0afcab236d78c1767a3f4c9005a",
+          "start": 395,
+          "end": 776,
+          "anchorSha256": "4ca46b4ad864e80ec307f9d507c0bc21c017e920e5df769006b853c8a9dbda43"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-devil-valley",
+          "dispositionReportHash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400",
+          "targetIds": [
+            "dv-lava-cave",
+            "dv-lava-platform"
+          ],
+          "disposition": "adopted"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0131:alias-unsupported:batch-0131-object-0028:d46e3c4be274",
+      "batchId": "batch-0131",
+      "candidateId": "batch-0131-object-0028",
+      "alias": "血色长剑",
+      "candidateLabel": "血魔剑",
+      "sourceReportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
+      "adjudicationReportHash": "74f3ef390401f89470f662097f4fa47b7d91ecca11d404f6db2387da49938398",
+      "findingHash": "d46e3c4be274faa2409a85cf9902fd4c053a51dbfbc43a7445be3d7dbb0ac2b7",
+      "candidateHash": "bcf2d776123439e578dd39c16fde530312bd2ed147b80e638a960f28054fa988",
+      "disposition": "unattested-label",
+      "statement": "所引文证血魔剑及其血色剑芒，不证‘血色长剑’为这件器物的原文固定称谓；不用此未证称呼合并魔魂自残制出的另剑或刀。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 514,
+          "end": 909,
+          "anchorSha256": "987944eb71fb0e33f8998b0d5668037e1756abd4e7eb16e6df21be55fad379ee"
+        },
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 1080,
+          "end": 1412,
+          "anchorSha256": "3f15a85eed5ba735673e92defa6adc9172065c7a507c4283f4366eb0dc7545da"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 2357,
+          "end": 2658,
+          "anchorSha256": "0f8a95e9b9207e5fdb5bc9ddb6fad936bfcffaa1bf11deac9da79a1ffc3ffa9c"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-demon",
+          "dispositionReportHash": "128f44bafd93864ee7efeb49e4ee618519954a11143d890fb36d4286403ec9a7",
+          "targetIds": [
+            "ad-blood-sword-cost-and-claims"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0132:alias-unsupported:batch-0132-object-0010:10d70b23b70e",
+      "batchId": "batch-0132",
+      "candidateId": "batch-0132-object-0010",
+      "alias": "大衍",
+      "candidateLabel": "大衍神君",
+      "sourceReportHash": "9189517951646ac1755796ff1a5a950a4f092913980ff69784d0824afc49d2f8",
+      "adjudicationReportHash": "64ad41f197ede41de60e1e99fd0af54b0dc0343cfd1b6779251f6eec1018338b",
+      "findingHash": "10d70b23b70e6595efbf4809b597e37e54901ba4201044698b743077a8227db3",
+      "candidateHash": "cf5a5f0e16f13ac10bcac8e2420cd8d709f66b9ec9dbe6951b82f6d92076374f",
+      "disposition": "descriptive-label",
+      "statement": "大衍是大衍神君全称的编辑简称，本批未单独称名；只作检索显示，不冒充原文名字，也不从后期半师半友推开篇认识韩立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-24865193",
+          "chapterSha256": "eab378b32051eb163aa98ce4bbc6ef27d8e5440c1d5b24bdc516b911d193c9b2",
+          "start": 2570,
+          "end": 2937,
+          "anchorSha256": "d0d93083518577b28aa7febcac05f40a9cb38e7289de05cfe4992acdd2ff789b"
+        },
+        {
+          "chapterId": "qq-24867123",
+          "chapterSha256": "d5b5c70e59d2952ae254a33c2165381f80c574f2f89dd3a994bed726e5964d27",
+          "start": 1082,
+          "end": 1469,
+          "anchorSha256": "0abc2a16cbbb1d1d6c0faeb73b06544c7281cc62aeadfb97a8e91a6ed3af7a40"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-demon",
+          "dispositionReportHash": "128f44bafd93864ee7efeb49e4ee618519954a11143d890fb36d4286403ec9a7",
+          "targetIds": [
+            "ad-dayan-later-mentorship"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0140:alias-unsupported:batch-0140-object-0017:ab13782fd610",
+      "batchId": "batch-0140",
+      "candidateId": "batch-0140-object-0017",
+      "alias": "拍卖师",
+      "candidateLabel": "蓝袍中年人",
+      "sourceReportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
+      "adjudicationReportHash": "a60f3f68da35a15b81cf02a623853e3dba883bcfc080f549c516c4d59f979b55",
+      "findingHash": "ab13782fd61078cdeeb6b56b3e1055f03260cfa165cd7a7bd1907ec3f76ea6e1",
+      "candidateHash": "4437238c178571c5caf003198bd39113d007d20add87c49399d85726c1fc89e9",
+      "disposition": "descriptive-label",
+      "statement": "蓝袍中年人实际主持成交与报价，拍卖师是可支持的职业说明，不是姓名；不因此与后面晋京不同主持人合并。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25212397",
+          "chapterSha256": "2e567d1942c9fb74077e940279b4e5b09770bffbcfb29481ab5edf60ab6b054e",
+          "start": 493,
+          "end": 796,
+          "anchorSha256": "43dee71df06e5433ff95d67a4c4361246f5a8202d46af7524ddb3f5420be8c24"
+        },
+        {
+          "chapterId": "qq-25212397",
+          "chapterSha256": "2e567d1942c9fb74077e940279b4e5b09770bffbcfb29481ab5edf60ab6b054e",
+          "start": 1949,
+          "end": 2190,
+          "anchorSha256": "61e94e7c6cf88c1132d7aba14da829559afceee5ed76088eae147aa5b85b271f"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-dajin",
+          "dispositionReportHash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2",
+          "targetIds": [
+            "dajin-auction-blue-host"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0142:alias-unsupported:batch-0142-object-0044:0a7b31a19e78",
+      "batchId": "batch-0142",
+      "candidateId": "batch-0142-object-0044",
+      "alias": "蓝晶神沙",
+      "candidateLabel": "蓝晶神砂",
+      "sourceReportHash": "adcb0f165be8cc56d695b8acebc05d122d8020f562f662ce8bda909d0f12fc3e",
+      "adjudicationReportHash": "184c9b875c01126a720de5776755afe9f915d2359e95509b9938ea859ade21bf",
+      "findingHash": "0a7b31a19e78b8da2445f708246d9b3a787f46f7acfe6698a38ced02fdfaedd8",
+      "candidateHash": "5e7d526b2ad441946dbcb5a745410c82db3e08c2c9143bae49847b65c372ca50",
+      "disposition": "source-name-variant",
+      "statement": "同章撤走段明确‘蓝晶神沙’，此前‘蓝晶神砂/蓝晶沙’指同一借来未用的物；保留沙砂源异文，审校未出现之说错误。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25274559",
+          "chapterSha256": "7e23541e5f51a226a35b319f0c109f8d5a7724b134758b7d57c6e4f24c629f9a",
+          "start": 349,
+          "end": 921,
+          "anchorSha256": "16e6206bae26a7a68b9b105c557150e276b86e01c4fc64439276b4e300338a94"
+        },
+        {
+          "chapterId": "qq-25274559",
+          "chapterSha256": "7e23541e5f51a226a35b319f0c109f8d5a7724b134758b7d57c6e4f24c629f9a",
+          "start": 922,
+          "end": 1227,
+          "anchorSha256": "b0ef747ed959d3734e84832aee729cdfc84eeef1d704b8b33ce5e9dfc85faaf6"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-inner-star",
+          "dispositionReportHash": "7f78d9f8d6e94f654ec373a00f35ec9133b0003ea6a2bb3c9f23e9ec67987b19",
+          "targetIds": [
+            "innerstar-borrowed-blue-sand",
+            "canon-tianshi-laolao",
+            "innerstar-later-dajin-comparisons"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0143:alias-unsupported:batch-0143-object-0030:14a3ee3cbd78",
+      "batchId": "batch-0143",
+      "candidateId": "batch-0143-object-0030",
+      "alias": "十大魔宗",
+      "candidateLabel": "黑阳宗",
+      "sourceReportHash": "7ec09e73f1e41b13deb0f47cf6acfd9175fde882ddc3635f8ee9a425c5aa0dbe",
+      "adjudicationReportHash": "c2713e37c6177b601c93ea12249cff0baf10390ce225c9269aaf72fc8e5affb7",
+      "findingHash": "14a3ee3cbd78d3d9c76f156669df446fa6063422a2145dbd67295be22ca9bab2",
+      "candidateHash": "65aa08012b3cf6da3a1287fa1d9ed0c4c098fd0ac5fdd327908d112e2b4a2b09",
+      "disposition": "related-not-alias",
+      "statement": "黑阳宗属于十大魔宗群体，不能把一个宗门与整个集合合并；灭族是严氏对牛天德的指控，不自动同罪到全宗。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25316964",
+          "chapterSha256": "6f6040b6238ada63a7aaddb4d26c6885fb53c607d1aef8a2e44b2c644c459d6a",
+          "start": 2108,
+          "end": 2695,
+          "anchorSha256": "d54e2e35c22830f346e5092098fdde947b360ba809c61fde201f709cbd85e879"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-dajin",
+          "dispositionReportHash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2",
+          "targetIds": [
+            "dajin-heiyang-sect",
+            "dajin-confucian-secret-techniques"
+          ],
+          "disposition": "adopted"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0149:alias-unsupported:batch-0149-object-0031:114ed1a97b5e",
+      "batchId": "batch-0149",
+      "candidateId": "batch-0149-object-0031",
+      "alias": "鬼雾",
+      "candidateLabel": "阴冥之地",
+      "sourceReportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
+      "adjudicationReportHash": "ec3a4fe739a579f39fda9750e6f2777067498e245a508622e0c74cbe34dc6b95",
+      "findingHash": "114ed1a97b5e3f1dd0bf21edb7fac93850133c572f31bfb2ecf41c3ede2f4dff",
+      "candidateHash": "1527da9ec1b7d24c78afc65c3043e868e309579d1f457f822653a148a316cddb",
+      "disposition": "related-not-alias",
+      "statement": "鬼雾是造成失踪并通往阴冥的现象，阴冥之地为所入空间；二者关联而非同一空间名字。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25579406",
+          "chapterSha256": "3ade60fdba0043545b98124aa014aeba5fa6d2a1ae968a1fa83576a2cb72efc3",
+          "start": 644,
+          "end": 1084,
+          "anchorSha256": "697027dfd2e1bc6e92d656769f4596002ffe3e60aea66b286a369fd74590e13e"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-yinming",
+          "dispositionReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+          "targetIds": [
+            "yinming-space-and-witness",
+            "yinming-opening-life"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0151:alias-unsupported:batch-0151-object-0049:6516be384ba9",
+      "batchId": "batch-0151",
+      "candidateId": "batch-0151-object-0049",
+      "alias": "圣兽",
+      "candidateLabel": "圣兽分身",
+      "sourceReportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "adjudicationReportHash": "adf73c2f0f486847224d07f3945432e808f0a78067f3c7ac255524ce119286dd",
+      "findingHash": "6516be384ba9a6e9537c065efcfd99b6b716f5874f333c85653bc381a34026c8",
+      "candidateHash": "cf4ac718ab3e37b20728a08b11cab2f3a36f59ae683b5feefb46d52a4c34a8e4",
+      "disposition": "related-not-alias",
+      "statement": "此段明确被禁的是圣兽分身而本体尚不知；用独立本体与人界降身身份，不允许‘圣兽’泛称导致本体也被禁或复制。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25765653",
+          "chapterSha256": "c0bbf4a30c24f122ab8a6aee75060bd00506fdf1ea26bbf97be014975f60a1ad",
+          "start": 1530,
+          "end": 1985,
+          "anchorSha256": "970482f35e7c3e7ddacb12e088926e494d66d69605267ce0213e3405f45a717e"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-dajin",
+          "dispositionReportHash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2",
+          "targetIds": [
+            "canon-tianlan-descended-fragment",
+            "canon-tianlan-beast"
+          ],
+          "disposition": "corrected"
+        },
+        {
+          "region": "human-steppe",
+          "dispositionReportHash": "5c89a25c02cfe25c7ae00ab02445f9ac89a4d683facc48878852714dd3f313fc",
+          "targetIds": [
+            "canon-tianlan-descended-fragment",
+            "canon-tianlan-beast"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0152:alias-unsupported:batch-0152-object-0040:7803352879a3",
+      "batchId": "batch-0152",
+      "candidateId": "batch-0152-object-0040",
+      "alias": "紫幽珠神光",
+      "candidateLabel": "紫幽神光",
+      "sourceReportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "adjudicationReportHash": "8ae73ac4b50e676d43c36742e5f368f9978656a68fe615f02ebea3b46b531748",
+      "findingHash": "7803352879a30a7760c97073d63099222cddfe982791bd1cb0a8a962b5cce914",
+      "candidateHash": "e9b5c64c82f2632ea12e68643644f26f9ea1a4f2b6efcb545856d6d0a4b800e9",
+      "disposition": "same-referent",
+      "statement": "同章后段直接写‘紫幽珠神光护体’，与前段紫幽神光临时加持是同一光护效果；珠与神光仍不同对象。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25769075",
+          "chapterSha256": "d7fa12157f3375549f0ce17de8772cfebf5e35ce30567a2768bbdf3a0cd93c29",
+          "start": 1114,
+          "end": 1424,
+          "anchorSha256": "2bb78d562be78ef17352199890a71b6ff646473340c1ae24881de59f779155f6"
+        },
+        {
+          "chapterId": "qq-25779142",
+          "chapterSha256": "dc115dcf9d55b23c5ba17aec280e4d0e8a008654b12ce77ff044e29ce2659341",
+          "start": 1124,
+          "end": 1615,
+          "anchorSha256": "59278a641a49ac8782d83167f933da14ab51dfe907cda169ebb97a091c7c1ec6"
+        },
+        {
+          "chapterId": "qq-25779142",
+          "chapterSha256": "dc115dcf9d55b23c5ba17aec280e4d0e8a008654b12ce77ff044e29ce2659341",
+          "start": 2401,
+          "end": 2610,
+          "anchorSha256": "77b9cf65675f43cbb622c8883c7781ad7c3942b7af937c29e20bfb57913623ae"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0153:alias-unsupported:batch-0153-object-0019:debccd71c09b",
+      "batchId": "batch-0153",
+      "candidateId": "batch-0153-object-0019",
+      "alias": "邪月幻境",
+      "candidateLabel": "邪月幻镜",
+      "sourceReportHash": "e6c4466edda57eaa41bf12f9538fc37b16212ae36f8161da8b124491624b4687",
+      "adjudicationReportHash": "70a3b20a18637eb4e1d5f93beabdfd4282494a907684866067abeaaf9e76c17e",
+      "findingHash": "debccd71c09b651f9cd8d3b671eee76f7a1d235634224da96ac5ca3fe5c4fa22",
+      "candidateHash": "07ad5b240279dbaaccfbe072290575bf1d6276d12f8cdb81126da67dcf1c29af",
+      "disposition": "source-name-variant",
+      "statement": "同一战中先手托/抛出‘邪月幻境’，后被针毁的又明说邪月幻镜，连续持物一致；保留镜/境源字混写，不另造一件幻境。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25827752",
+          "chapterSha256": "99953f2d00b7dc432a9f4f4cf7128b9f04b4844c162e025eca5488179bf66efa",
+          "start": 2571,
+          "end": 2870,
+          "anchorSha256": "6700b2569280a2bc6aa70d1dc11fe3132c5de1395306f8df92e501d3299300d4"
+        },
+        {
+          "chapterId": "qq-25838537",
+          "chapterSha256": "7b539a9fc059aeeb2b7fa80f39f0915971eb009593b214aae796fc9e9f1c691a",
+          "start": 2299,
+          "end": 2536,
+          "anchorSha256": "cc23ae2c403a9ab761d8dc4767295ad1bdcd90db8094ba97a912cfe3087bae42"
+        },
+        {
+          "chapterId": "qq-25842332",
+          "chapterSha256": "3418a2eb94de8e10e8d40191233dca2b5ef6d84c223c191dfda7e99393f2f987",
+          "start": 219,
+          "end": 258,
+          "anchorSha256": "4dfa6208dd2b6b0b8f46c687a6b9419968b89fc5500838be2c1943ab38fd6f8d"
+        },
+        {
+          "chapterId": "qq-25842332",
+          "chapterSha256": "3418a2eb94de8e10e8d40191233dca2b5ef6d84c223c191dfda7e99393f2f987",
+          "start": 2151,
+          "end": 2244,
+          "anchorSha256": "64c7ffa53aed66d2a2a2b5d6d41db3aa0c7916e1633b31c15c90b4602178a518"
+        },
+        {
+          "chapterId": "qq-25842332",
+          "chapterSha256": "3418a2eb94de8e10e8d40191233dca2b5ef6d84c223c191dfda7e99393f2f987",
+          "start": 2512,
+          "end": 2746,
+          "anchorSha256": "9a117e8faf8c18e589ac764b5d5259f35e6256f2e601602153e129e723450066"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0153:alias-unsupported:batch-0153-object-0030:67fe9310f512",
+      "batchId": "batch-0153",
+      "candidateId": "batch-0153-object-0030",
+      "alias": "银目幻术",
+      "candidateLabel": "银瞳幻术",
+      "sourceReportHash": "e6c4466edda57eaa41bf12f9538fc37b16212ae36f8161da8b124491624b4687",
+      "adjudicationReportHash": "70a3b20a18637eb4e1d5f93beabdfd4282494a907684866067abeaaf9e76c17e",
+      "findingHash": "67fe9310f5128ec91e505846707567a4049dea74d7e316503bce7f25e93cf135",
+      "candidateHash": "38cf4adc1802d1fcb87c5fdc7a5d9a2a8b56dea66f35100a9c27dccb753fec57",
+      "disposition": "descriptive-label",
+      "statement": "银目为施术器官描述，原明确术名银瞳幻术；银目幻术可作编辑说明而不增正式术名，更不能把目与幻术合成一物。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25818832",
+          "chapterSha256": "69fc381e744839dc90e7b23824b481f61042b50dcb9e744f3d67c4bbd9af3413",
+          "start": 3059,
+          "end": 3347,
+          "anchorSha256": "7fa9e0edd7ffe025806c331df2cfd736e3cb982db2102f8084e30b5513605214"
+        },
+        {
+          "chapterId": "qq-25827752",
+          "chapterSha256": "99953f2d00b7dc432a9f4f4cf7128b9f04b4844c162e025eca5488179bf66efa",
+          "start": 2571,
+          "end": 2870,
+          "anchorSha256": "6700b2569280a2bc6aa70d1dc11fe3132c5de1395306f8df92e501d3299300d4"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0157:alias-unsupported:batch-0157-object-0013:2e6c9a622837",
+      "batchId": "batch-0157",
+      "candidateId": "batch-0157-object-0013",
+      "alias": "富道友",
+      "candidateLabel": "富姓老者",
+      "sourceReportHash": "f8dc3c9131cef2294eea7d9d32a6fa2c286702216b9305ddaae19a53546cbbb7",
+      "adjudicationReportHash": "bae12f7f614964844ca77aa649f7279ed5e721711e1a4804cb608d8a2ccd53df",
+      "findingHash": "2e6c9a62283783707af5fe561451baf6ec00002f298a7a353ed5ffd653defa55",
+      "candidateHash": "05c42330b69a8f5e242ae02cf4f787f3ab844e08dcfb3dca68e8ffd94002b421",
+      "disposition": "descriptive-label",
+      "statement": "此批富某/富兄与九幽长老连续同人；富道友只作一般称谓检索，不冒充本批逐字称呼。主体仍复用富成，不能因尊称缺失拆人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-25986945",
+          "chapterSha256": "a321a7d8333b5e14927caaefede5de814ae28e50c6a779d76de7f2c54635d09f",
+          "start": 127,
+          "end": 451,
+          "anchorSha256": "c2dd3e453143457cc524910baea9e3e12641fac828ceeed8862fd46d692829fc"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-south-kunwu",
+          "dispositionReportHash": "c4373af8b173e2c1559acfa7daae63f0b1abc3e86c01f1d7fff4f385bc61536a",
+          "targetIds": [],
+          "disposition": "pending"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0168:alias-unsupported:batch-0168-object-0007:3c662c083495",
+      "batchId": "batch-0168",
+      "candidateId": "batch-0168-object-0007",
+      "alias": "谷道友",
+      "candidateLabel": "谷天启",
+      "sourceReportHash": "6e8b313f707dfbf5bdd7ac8b15632924d315dbf0c668532472192977d9eaed2a",
+      "adjudicationReportHash": "597eeca537d28a704439bd4b4b986afdfd950899ce7080ac36dc38d385b3bad8",
+      "findingHash": "3c662c08349570e9976f9d636b5f9d947fab7eccdd5742bedf8e9f3e04754c72",
+      "candidateHash": "c26e0fadb1c0eeee10d2a9d335ae99aec5e336dafe0a0c3c442704c17240c8ac",
+      "disposition": "different-referent",
+      "statement": "问火阳丹的中年领队后来自报谷天启，被他称谷道友的是服丹青年；青年回答谷兄，不可把两者合并或把青年丹药归给谷天启。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26483117",
+          "chapterSha256": "2a89f4ede8fa9ff51d4827cb2615f394d67b794ceec73f3d2c6d1985ae288a74",
+          "start": 1614,
+          "end": 2026,
+          "anchorSha256": "9963a434df335bb0119a0c9efc722dca1257a1d33610b8a675db4dd2a919a09a"
+        },
+        {
+          "chapterId": "qq-26483117",
+          "chapterSha256": "2a89f4ede8fa9ff51d4827cb2615f394d67b794ceec73f3d2c6d1985ae288a74",
+          "start": 2340,
+          "end": 2584,
+          "anchorSha256": "647714c96b0f4b72d88e2c3f436b6b7633b345888996cf366d282e59bd063947"
+        },
+        {
+          "chapterId": "qq-26483117",
+          "chapterSha256": "2a89f4ede8fa9ff51d4827cb2615f394d67b794ceec73f3d2c6d1985ae288a74",
+          "start": 2798,
+          "end": 3017,
+          "anchorSha256": "63fb71dabc047fc82df16803cb432b789b502ea86f208850f6a871981a83cdcb"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-north",
+          "dispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
+          "targetIds": [
+            "north-time-gu-tianqi",
+            "north-trial-young-time"
+          ],
+          "disposition": "bounded-uncertainty"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0173:alias-unsupported:batch-0173-object-0023:00f4956f4040",
+      "batchId": "batch-0173",
+      "candidateId": "batch-0173-object-0023",
+      "alias": "雷珠",
+      "candidateLabel": "乳黄色圆珠",
+      "sourceReportHash": "651d42874462dfc9de804c6207e847251cc61d659301e566239f646f130dd79b",
+      "adjudicationReportHash": "d4f933f6ac271e70e7bcb5d60506c916e499c59fdf6e1618ec3017c15af8448e",
+      "findingHash": "00f4956f40407a6170bad661d8892a3d8e0e86a3a99b4850b2ea220a07046cc9",
+      "candidateHash": "81051081d2f08c5dcee84dc6ade81557b2ffc5875f2fba150fcf2178e96918aa",
+      "disposition": "descriptive-label",
+      "statement": "雷珠是编辑按雷属性圆珠所作简称，原文此次为圆珠/雷球；不声称正式器名，且未彻底炼化与韩后强取不前置。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26687776",
+          "chapterSha256": "ef457d9d98b3f6e36c8669d71f593d127af7c2e5851ddef2f7a3e3bb2227ba1f",
+          "start": 375,
+          "end": 604,
+          "anchorSha256": "edd8999f772192e84b0f117473925ac5bfa30b69a02e587bf0da5300100a68b3"
+        },
+        {
+          "chapterId": "qq-26687776",
+          "chapterSha256": "ef457d9d98b3f6e36c8669d71f593d127af7c2e5851ddef2f7a3e3bb2227ba1f",
+          "start": 605,
+          "end": 904,
+          "anchorSha256": "05a7092b04ffed1f952c420c5e741f9bc4ee569f8deba4d780b76e22697d5c99"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-void-hall",
+          "dispositionReportHash": "209e637a06e852f3126b19c7134a7a007611e24cc010257460b482dd8fbc0b9e",
+          "targetIds": [
+            "void-northern-captures-and-counters"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0174:alias-unsupported:batch-0174-object-0014:cc42f9c25362",
+      "batchId": "batch-0174",
+      "candidateId": "batch-0174-object-0014",
+      "alias": "马脸妖兽",
+      "candidateLabel": "双角马脸妖兽",
+      "sourceReportHash": "9dbca2b1590262f93279135d0ac849f10cf9571565e0e9383f449701f5b6d90e",
+      "adjudicationReportHash": "1a376e8b374713ec20fbe8fa957ac4274777918332b3c337864d5074ab2da76c",
+      "findingHash": "cc42f9c253623f18d8300e79bf3859d4398038d9aa0e3814d9411c54643511cf",
+      "candidateHash": "d267d4d89ebf145c31c7d28d84516f43eb325a5d5624e0ea4d36fa9980c9b010",
+      "disposition": "descriptive-label",
+      "statement": "马脸双角是该不知名妖兽个体的可见特征，马脸妖兽为资料标签，不是已识别种族或另一只妖兽。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26738607",
+          "chapterSha256": "5bc2a99624e8565520a53d7af230286f047e853df3b9d3a7b30cb5722c38ebe2",
+          "start": 2870,
+          "end": 3328,
+          "anchorSha256": "214cbab1d0549f07545efdd6f077b6b0b57613f758a74a1f1bf26ffeb9bb8d7b"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-north",
+          "dispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
+          "targetIds": [
+            "north-reference-horse-faced-demon",
+            "north-additional-source-identities"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0174:alias-unsupported:batch-0174-object-0018:faa0105181cf",
+      "batchId": "batch-0174",
+      "candidateId": "batch-0174-object-0018",
+      "alias": "金丝剑阵",
+      "candidateLabel": "大庚剑阵",
+      "sourceReportHash": "9dbca2b1590262f93279135d0ac849f10cf9571565e0e9383f449701f5b6d90e",
+      "adjudicationReportHash": "1a376e8b374713ec20fbe8fa957ac4274777918332b3c337864d5074ab2da76c",
+      "findingHash": "faa0105181cfd1583f146e4bd952e515d68ba021e0a2501305e36b5bfffaf436",
+      "candidateHash": "bf89dd8a7e9684d6c39bdd0887d82da638315282ed30ff3e6a201c86ed2e1d0d",
+      "disposition": "descriptive-label",
+      "statement": "金丝剑阵描述这次半套大庚阵展开方式，不能当新正式阵名或把半套当完整套；原纵横人界还明示夸大。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26723505",
+          "chapterSha256": "f3196ed05c53768dee9f8fca37e0bc8b2e85364a841b0ba5f72912a7558d0677",
+          "start": 802,
+          "end": 1245,
+          "anchorSha256": "7a495c3e6708190257e2a6ad92bcac772900f09a7544e7a0127491ddc43fdc0c"
+        },
+        {
+          "chapterId": "qq-26723505",
+          "chapterSha256": "f3196ed05c53768dee9f8fca37e0bc8b2e85364a841b0ba5f72912a7558d0677",
+          "start": 2813,
+          "end": 3089,
+          "anchorSha256": "0c3fe705506694f6fa8b5ef0cd25c9effa86efb8caee276680b684e443820bfa"
+        },
+        {
+          "chapterId": "qq-26730843",
+          "chapterSha256": "65c3035f83942a7dddda85f159004eaae5e6f3424256dbb59570147e65cfec8c",
+          "start": 2087,
+          "end": 2439,
+          "anchorSha256": "735a57b4f9b26f0e102b102ffa178da4f3f15dd89003d0e92e7695f11bd57cff"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "shared-dageng-puppet-and-consumption"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0175:alias-unsupported:batch-0175-object-0063:d2273237bdbc",
+      "batchId": "batch-0175",
+      "candidateId": "batch-0175-object-0063",
+      "alias": "四翅霜蚣",
+      "candidateLabel": "六翼霜蚣",
+      "sourceReportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "adjudicationReportHash": "f9b8b812bbfcbf1e767574d48784eb6b158c1a049f4142b2a3f504cf3be4d4c1",
+      "findingHash": "d2273237bdbc766c79803a586bf169324dd7baa600822b58fc9621bc79de866e",
+      "candidateHash": "757c8bed501e9195bb4884d4f7f7973eb070c0e3e016811482620c89f46f9d3b",
+      "disposition": "descriptive-label",
+      "statement": "四翅是这两条六翼霜蚣的当前进化阶段，作者可描述四翅个体，但不另建四翅霜蚣物种或假称原文逐字术语。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26780296",
+          "chapterSha256": "fafa8ac415f035f6826a95f833ff7b92d338b618b5256d67bac47f235b0e2f46",
+          "start": 1124,
+          "end": 1465,
+          "anchorSha256": "449473dbfc4bde9325a11047dacf035e53171ed8d398e541c8d63a4553362199"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0175:alias-unsupported:batch-0175-object-0068:e70355307632",
+      "batchId": "batch-0175",
+      "candidateId": "batch-0175-object-0068",
+      "alias": "黑色盾牌",
+      "candidateLabel": "乌黑铁盾",
+      "sourceReportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "adjudicationReportHash": "f9b8b812bbfcbf1e767574d48784eb6b158c1a049f4142b2a3f504cf3be4d4c1",
+      "findingHash": "e70355307632f3284c72562c0fe6174c530abf4883b00a8db132baa189f17893",
+      "candidateHash": "8c0dee38da1ea8122c15750d289d86dece940725bf12b533dc2c09807872fc6f",
+      "disposition": "same-referent",
+      "statement": "同一原段由黝黑盾牌转称‘黑色盾牌’，之后乌色铁盾/乌盾连续为车分身同一盾，审校漏字。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26761969",
+          "chapterSha256": "257dba460d28e4771787e216bce9b9c04cb1bceeaed79a06864a5ac1c531cfad",
+          "start": 1136,
+          "end": 1411,
+          "anchorSha256": "2735379733961f188cda88d2ecd88e3978e6e132ccf96c89e99d7fb00545aba1"
+        },
+        {
+          "chapterId": "qq-26761969",
+          "chapterSha256": "257dba460d28e4771787e216bce9b9c04cb1bceeaed79a06864a5ac1c531cfad",
+          "start": 1730,
+          "end": 2007,
+          "anchorSha256": "82d88346d430e7b05c950ccabbf9c32cd09b901fc295917ad085e969f8839673"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "shared-wanyao-blade-and-space"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0178:alias-unsupported:batch-0178-object-0032:b5f125235490",
+      "batchId": "batch-0178",
+      "candidateId": "batch-0178-object-0032",
+      "alias": "金光令牌",
+      "candidateLabel": "客卿令牌",
+      "sourceReportHash": "37ea51d9e14c112b0723b5d67d7cb30358458d8e87b299b0b9be2f0a99d59ca0",
+      "adjudicationReportHash": "52fb0dabf3aca9f29a1637ed444c527b9efbc8947a87fec756ac45bb5e821dea",
+      "findingHash": "b5f125235490ad9bb0442cf330682439c2e325819ad04bf98788df0b65745a2c",
+      "candidateHash": "38eac742f2ace9880e7b3a5a0c7c60c2f25e0ba8771ea310b9d336ca4446833f",
+      "disposition": "descriptive-label",
+      "statement": "金光令牌是依外观的编辑标签，原名为客卿令牌；临时借用令牌不等正式客卿任命，也不把所调用资源变个人财产。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-26858237",
+          "chapterSha256": "ab6a191422b474aeb7fcdc3c055edc475b0fa2efd4136756d620f8e562a5fa71",
+          "start": 1073,
+          "end": 1539,
+          "anchorSha256": "75aa1024d1ce47fe5f9425c72aa5f362c05e4cce9e6ef1ee11da99dceff7ccb1"
+        },
+        {
+          "chapterId": "qq-26867334",
+          "chapterSha256": "23cd2bbca3fe9a57f3a5a3b7516a938f4d7cf175b597904f1452e9b688f1e551",
+          "start": 461,
+          "end": 800,
+          "anchorSha256": "396b5d2a540814554985572ef61ea625fa87336c13f1f20a17d7ac67e30e0281"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-inner-star",
+          "dispositionReportHash": "7f78d9f8d6e94f654ec373a00f35ec9133b0003ea6a2bb3c9f23e9ec67987b19",
+          "targetIds": [
+            "innerstar-wen-guest-token",
+            "innerstar-guest-token-and-penalty"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0196:alias-unsupported:batch-0196-object-0034:3f14a8c56056",
+      "batchId": "batch-0196",
+      "candidateId": "batch-0196-object-0034",
+      "alias": "小尺",
+      "candidateLabel": "绿色木尺",
+      "sourceReportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
+      "adjudicationReportHash": "f3cfd26013814598f6fa36cec3ed44abe78aac54b32c1f88482fa326555b5d32",
+      "findingHash": "3f14a8c5605600bedd6d8a55e3942208340ae025e3430089aa19f750d59006d8",
+      "candidateHash": "c2502e9439b48011dac7c42378c86f43c062e8090e05b74354a30ad6dad8e166",
+      "disposition": "same-referent",
+      "statement": "同章末明写‘莲心处的绿色小尺’，与前文木尺在莲心连续，‘小尺’可在本场指此尺，不能全域同短称合并别尺。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-27648726",
+          "chapterSha256": "9cc84636174501601bb4825de5b2ec722b63a17d2c09b9637de27348975f3636",
+          "start": 546,
+          "end": 802,
+          "anchorSha256": "1645e1830b49e27ddc5ee504d09d1d7efaabf3e44045ead0c36f585df0f9c0af"
+        },
+        {
+          "chapterId": "qq-27648726",
+          "chapterSha256": "9cc84636174501601bb4825de5b2ec722b63a17d2c09b9637de27348975f3636",
+          "start": 3287,
+          "end": 3314,
+          "anchorSha256": "8d287315e020ceb1b1a4e5c6ffee7640d73b8f973cd7d9c65fda0be227807d85"
+        },
+        {
+          "chapterId": "qq-27653210",
+          "chapterSha256": "af5471dba769de837bef18c3973054d142b51f0a9eb6b74b6eac1a78ae3813ce",
+          "start": 537,
+          "end": 767,
+          "anchorSha256": "07e0ec9e11d4ef8d27ef38b4e65873b275c093a25fe052e030b5e7e003b26bfb"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0198:alias-unsupported:batch-0198-object-0085:5abca65b2454",
+      "batchId": "batch-0198",
+      "candidateId": "batch-0198-object-0085",
+      "alias": "五龙海海图",
+      "candidateLabel": "海图",
+      "sourceReportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
+      "adjudicationReportHash": "9470c092abf03521dc01a36cc6bbb156c5689700a1ecae90dd3676793f37dec1",
+      "findingHash": "5abca65b24548ff07f97844bb9420a378860a661b1866d5e189ed0de1c02910d",
+      "candidateHash": "69832e5ed38d47fe7021c24be1eec74eae2f551d862a413a1b33a5ab217752de",
+      "disposition": "descriptive-label",
+      "statement": "此时所在五龙海，交易的是附近海图；五龙海海图只作来源说明，不扩为整个五龙海完备地图或T0已在韩手。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-27746420",
+          "chapterSha256": "68348d45fe832c1eeb3e577e87ae68b50fa9a35916622395b431abe716cc524b",
+          "start": 2581,
+          "end": 2895,
+          "anchorSha256": "3e379df54b8edf36bee67b1f2bfe750badf6eb8acd492e10c4a0f3d0bbdeb4e3"
+        },
+        {
+          "chapterId": "qq-27756684",
+          "chapterSha256": "3deb391a9353f04d4ca40551052ed541cbd4e2111413d5116b17ebaa8f871c07",
+          "start": 1055,
+          "end": 1351,
+          "anchorSha256": "f8f6340d498b7b63045e6fd2e7575a8c66392273bd9f07c958a8dce0cd1609d9"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "human-far-seas",
+          "dispositionReportHash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e",
+          "targetIds": [
+            "far-trade-sea-chart",
+            "far-later-trade-goods"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0213:alias-unsupported:batch-0213-object-0040:96289da9ffab",
+      "batchId": "batch-0213",
+      "candidateId": "batch-0213-object-0040",
+      "alias": "金道友",
+      "candidateLabel": "金胖子",
+      "sourceReportHash": "8fdf75caa2543d787cb975245e94077570b9c7d4a5ab43bb787bb1b46fb8f248",
+      "adjudicationReportHash": "99bcf29a74a97cb5bdd099e0863649af5e40f1507658eae6b277f4c4e4dc355a",
+      "findingHash": "96289da9ffab6e81c7b51175f0969f968bc07163819545547bda83e142433c2d",
+      "candidateHash": "65dcd4e3f53ac65aba748426139859470ee1cd373a33e854cd714600db46d3dd",
+      "disposition": "different-referent",
+      "statement": "鸣姓化身回应‘金道友’的对象是金色小人即金胖子祖父，不能挂在金胖子孙辈身份上；祖孙与各自化身保持区分。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-28503620",
+          "chapterSha256": "5580dd02ffa7480acccf9cb71fe4f1a89078c9ff4be1f2af8730e9fd1130611d",
+          "start": 1337,
+          "end": 1604,
+          "anchorSha256": "b1587d5bc59c322d91d07250383ad8a8380b2c3f12c144558e3f9c1f4014d06f"
+        },
+        {
+          "chapterId": "qq-28516743",
+          "chapterSha256": "ce292050d4ee60730bd0976e3e20f3319208b0c923077c341491de8ac85d5713",
+          "start": 2488,
+          "end": 2829,
+          "anchorSha256": "732570603195f14c2e58fbee3dfed8bcd78e08e5bb0c4189917cc02b9a6775bf"
+        },
+        {
+          "chapterId": "qq-28544468",
+          "chapterSha256": "b92a892cdbab896825b243c83f61aff287d7179cf15e6bf4d941db73da810b53",
+          "start": 48,
+          "end": 583,
+          "anchorSha256": "3e7d80205ae91fba0bb829435bf78c752aaf7da42aef8af2ec54311f6f42bd5f"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0221:alias-unsupported:batch-0221-object-0008:ab9264d70b97",
+      "batchId": "batch-0221",
+      "candidateId": "batch-0221-object-0008",
+      "alias": "柳道友",
+      "candidateLabel": "柳姓老者",
+      "sourceReportHash": "b32fcd6c959673ac90d832078f24354f7d4419853378790c41b82b4f7c1b03ab",
+      "adjudicationReportHash": "628a96d3d5b7dc0f2500573f9f3a52a44f427800aaa5449a4bbaa0635aa84939",
+      "findingHash": "ab9264d70b97bcb58b5ba71a6b58fd5d126928ec3d901bf8ba32f6425dae8cd1",
+      "candidateHash": "42926e8e3e2cbce27a522b69b59ed512ed86ee97f944b54835ddc3dddb7b910c",
+      "disposition": "descriptive-label",
+      "statement": "本场明确柳姓老者为飞灵殿旧识，已关联柳河道；柳道友仅一般编辑称谓，正文所见柳兄不支持新增独立人。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-28941547",
+          "chapterSha256": "bea9de86b5f2501630f79736855ab154d5bdfd809022db241a9cdacca804b799",
+          "start": 984,
+          "end": 1409,
+          "anchorSha256": "2a2728593a25e7d2b8e91b781d08e6287856e525371ae813df80195da8bc5c73"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-tianyuan",
+          "dispositionReportHash": "b49382f484cdba733c844136d9e068601f36905a91a404ead5c673e1c55d452f",
+          "targetIds": [
+            "future-tianyuan-liu-hedao",
+            "tianyuan-toad-hunt-archive"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0233:alias-unsupported:batch-0233-object-0037:81a33fe1c3c0",
+      "batchId": "batch-0233",
+      "candidateId": "batch-0233-object-0037",
+      "alias": "黄铃",
+      "candidateLabel": "黄色铃铛",
+      "sourceReportHash": "2703f947f8d52aefad1cd7005604e02658f61dea2bdf46150023c65551cfbb08",
+      "adjudicationReportHash": "7899b496e7d8c86b2d15ac3de8153063ba669b1971bb336e54047484cf2b7b91",
+      "findingHash": "81a33fe1c3c0c1c97257a5d1b7ab81128bfeb99ba57b9294df32d4ca40aa4a67",
+      "candidateHash": "9ff5adaaa3a1d964e915840322620ee49b943420ba900abbf0c1eaabd1107614",
+      "disposition": "descriptive-label",
+      "statement": "黄色铃铛与黄铃是外观缩写层次，保留同一召兽器物的描述性标签，不宣称‘黄铃’为原文正式名。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-29543885",
+          "chapterSha256": "109e9c43f22c040c11e83a8280e542515768351ec05a6c8210ae697a16056788",
+          "start": 1856,
+          "end": 2137,
+          "anchorSha256": "f8653136f4f5ba0833538820277a7202eedb98d2931b0c368cb4c547a4a075e8"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "shared-neural-influence-is-not-absolute"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0234:alias-unsupported:batch-0234-object-0031:b4142f7db3c7",
+      "batchId": "batch-0234",
+      "candidateId": "batch-0234-object-0031",
+      "alias": "祭雷术",
+      "candidateLabel": "辟邪神雷",
+      "sourceReportHash": "65c7ddea9f410bef5f0f6198ec8b323dffc369e9f245b19f72ba2671e0012020",
+      "adjudicationReportHash": "79e9686a42bfa5ff4a31fbc8e9675efdc5afac8571a975fea82191013e42dbb2",
+      "findingHash": "b4142f7db3c72a4b97a69e2822e21ab52a9ad4a17bc280513ae033ac441ca488",
+      "candidateHash": "c8cf5cc2fb09b8e06d68274a4f38189e9bc8f8cca7155ecc24e2aa468c606ea3",
+      "disposition": "related-not-alias",
+      "statement": "祭雷术是驱雷术的重要步骤，辟邪神雷是被操控的雷力；修炼操作与雷本身不可当同一名称。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-29575604",
+          "chapterSha256": "809ec61849288d2c7b6027ca74800e003dc2c0638434750ffd2a31ded9e22908",
+          "start": 694,
+          "end": 1034,
+          "anchorSha256": "1222e21a8192b0aebd4b771157da003517372474f3d3e4f24be18357ebc75b31"
+        },
+        {
+          "chapterId": "qq-29575604",
+          "chapterSha256": "809ec61849288d2c7b6027ca74800e003dc2c0638434750ffd2a31ded9e22908",
+          "start": 2492,
+          "end": 2887,
+          "anchorSha256": "ebc579bac2726e93f0459c3136e20001ab5af19edd474cc9327e7b96c6d1dd32"
+        },
+        {
+          "chapterId": "qq-29586114",
+          "chapterSha256": "8d98b595ad802d2da19876263e04c90204b88109e8b7db0e94bcc7d2415979a5",
+          "start": 0,
+          "end": 194,
+          "anchorSha256": "c4034720c9b483ec05fbcf1a096a8124cc4f8a1aa16a48eba90b821ce72323b5"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0234:alias-unsupported:batch-0234-object-0031:37db5de4c27e",
+      "batchId": "batch-0234",
+      "candidateId": "batch-0234-object-0031",
+      "alias": "驱雷术",
+      "candidateLabel": "辟邪神雷",
+      "sourceReportHash": "65c7ddea9f410bef5f0f6198ec8b323dffc369e9f245b19f72ba2671e0012020",
+      "adjudicationReportHash": "79e9686a42bfa5ff4a31fbc8e9675efdc5afac8571a975fea82191013e42dbb2",
+      "findingHash": "37db5de4c27e5b9a38d8c1b60808ef285eda0034c92526041299da42ed5a7e3e",
+      "candidateHash": "c8cf5cc2fb09b8e06d68274a4f38189e9bc8f8cca7155ecc24e2aa468c606ea3",
+      "disposition": "related-not-alias",
+      "statement": "驱雷术是操控辟邪神雷的方法体系，不是神雷本体；不把熟练度与反噬条件抹掉。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-29575604",
+          "chapterSha256": "809ec61849288d2c7b6027ca74800e003dc2c0638434750ffd2a31ded9e22908",
+          "start": 0,
+          "end": 228,
+          "anchorSha256": "2c8c01337fcfa381976c44dbeb79ac28aa8f781998844143f2cd61e02fd5ca18"
+        },
+        {
+          "chapterId": "qq-29575604",
+          "chapterSha256": "809ec61849288d2c7b6027ca74800e003dc2c0638434750ffd2a31ded9e22908",
+          "start": 809,
+          "end": 1161,
+          "anchorSha256": "0bacc2dff7deb8e6f3f3972917d45e356fe804d5974a428ff3f1338ab53aed82"
+        },
+        {
+          "chapterId": "qq-29575604",
+          "chapterSha256": "809ec61849288d2c7b6027ca74800e003dc2c0638434750ffd2a31ded9e22908",
+          "start": 2492,
+          "end": 2731,
+          "anchorSha256": "e83551436beca30e0c2fd5f5334d43f8af1858dd59efecaa19a69bf808f67552"
+        },
+        {
+          "chapterId": "qq-29586114",
+          "chapterSha256": "8d98b595ad802d2da19876263e04c90204b88109e8b7db0e94bcc7d2415979a5",
+          "start": 0,
+          "end": 339,
+          "anchorSha256": "fe990ba5eb4eb105b67286bba58568c810406a4cc82239f7ba5ee5e9c9cc7017"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0251:alias-unsupported:batch-0251-object-0059:f63fee0a2ce7",
+      "batchId": "batch-0251",
+      "candidateId": "batch-0251-object-0059",
+      "alias": "上族七阶",
+      "candidateLabel": "上族与圣族",
+      "sourceReportHash": "739c677833efb2a754730551fb87da5c6ba62d087e0eca49b86349152d1d5f96",
+      "adjudicationReportHash": "759c887132452da38d4108e33f387c84f00faf8e1f745a0d7fae369354acb423",
+      "findingHash": "f63fee0a2ce7e96e7455e219cc75882c254af487ec5eed4b785f8a0e17a42a29",
+      "candidateHash": "4feca55db5f468f0812b14fb5e05224a1099b930cfc8f170a6598eaeec38c4e2",
+      "disposition": "related-not-alias",
+      "statement": "上族七阶是体系的一档，上族与圣族是两个层级概念的合称，不将具体等级当整个体系同义词。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-30440197",
+          "chapterSha256": "b7d0d661c7bd72077b2b2c31edb8a1b3c2ffbd7af7e430eb7af10c4979a574d9",
+          "start": 1152,
+          "end": 1665,
+          "anchorSha256": "2447d66a460568be5bbdf70edee7b6ab890d2033019e380e11885a18a0561696"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0251:alias-unsupported:batch-0251-object-0059:8afc2ac35d02",
+      "batchId": "batch-0251",
+      "candidateId": "batch-0251-object-0059",
+      "alias": "上族顶阶",
+      "candidateLabel": "上族与圣族",
+      "sourceReportHash": "739c677833efb2a754730551fb87da5c6ba62d087e0eca49b86349152d1d5f96",
+      "adjudicationReportHash": "759c887132452da38d4108e33f387c84f00faf8e1f745a0d7fae369354acb423",
+      "findingHash": "8afc2ac35d027957c56a036445985b7120419016fb0b21d7472917575f55e21c",
+      "candidateHash": "4feca55db5f468f0812b14fb5e05224a1099b930cfc8f170a6598eaeec38c4e2",
+      "disposition": "related-not-alias",
+      "statement": "上族顶阶是具体阶位，和七阶、圣族存在高低区别；招揽时晋阶承诺不等实际已晋阶。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-30440197",
+          "chapterSha256": "b7d0d661c7bd72077b2b2c31edb8a1b3c2ffbd7af7e430eb7af10c4979a574d9",
+          "start": 1152,
+          "end": 1665,
+          "anchorSha256": "2447d66a460568be5bbdf70edee7b6ab890d2033019e380e11885a18a0561696"
+        },
+        {
+          "chapterId": "qq-30461628",
+          "chapterSha256": "6d2b393de4c9302ca25bddc5d03ccec458f190f8894483dfba8a0a099020d320",
+          "start": 1963,
+          "end": 2438,
+          "anchorSha256": "175caa0917b9d3c24ebe1493b08e10a525628c0a17c076fd1293812f30a1711a"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0251:alias-unsupported:batch-0251-object-0059:7776c246c928",
+      "batchId": "batch-0251",
+      "candidateId": "batch-0251-object-0059",
+      "alias": "圣族",
+      "candidateLabel": "上族与圣族",
+      "sourceReportHash": "739c677833efb2a754730551fb87da5c6ba62d087e0eca49b86349152d1d5f96",
+      "adjudicationReportHash": "759c887132452da38d4108e33f387c84f00faf8e1f745a0d7fae369354acb423",
+      "findingHash": "7776c246c928b337c2c48908b4787981c54c95fbed913c130899790ba7d8b3d7",
+      "candidateHash": "4feca55db5f468f0812b14fb5e05224a1099b930cfc8f170a6598eaeec38c4e2",
+      "disposition": "related-not-alias",
+      "statement": "圣族为该等级体系中的较高层，不是上族与圣族合称的别名，也不因此造统一种族。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-30440197",
+          "chapterSha256": "b7d0d661c7bd72077b2b2c31edb8a1b3c2ffbd7af7e430eb7af10c4979a574d9",
+          "start": 1152,
+          "end": 1665,
+          "anchorSha256": "2447d66a460568be5bbdf70edee7b6ab890d2033019e380e11885a18a0561696"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0274:alias-unsupported:batch-0274-object-0011:3b75e6f3c215",
+      "batchId": "batch-0274",
+      "candidateId": "batch-0274-object-0011",
+      "alias": "山岳巨猿幻化术",
+      "candidateLabel": "惊蛰诀",
+      "sourceReportHash": "fe1c7b0f21eb3c95e590dd7777dbebd6d316093568702134755a648c83858640",
+      "adjudicationReportHash": "b33061d850c6764822d34bc3cd043f97aa7b1a8eb13ef8d7029f5de086f018b0",
+      "findingHash": "3b75e6f3c21520109a8c9d0da3706d6a952b05492f0448c7e36f19478e824f74",
+      "candidateHash": "68c140e1f8cd569f117a92fbc6857f22845b15c44596606df6805cdfd0c989da",
+      "disposition": "related-not-alias",
+      "statement": "原明确惊蛰诀中的山岳巨猿幻化术，属于功法与其中一项变化，不是整部功法的别名。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-32029697",
+          "chapterSha256": "c9384ab95b77b3dd6436e01b00d4c4c2955cec96436b162c8e080c3f637b562e",
+          "start": 935,
+          "end": 1210,
+          "anchorSha256": "bc18560d6edc85cb52c40bec5ef27b367aec698441cdc08d4023d386a6211d0d"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0278:alias-unsupported:batch-0278-object-0028:c2ea457a6da0",
+      "batchId": "batch-0278",
+      "candidateId": "batch-0278-object-0028",
+      "alias": "此界",
+      "candidateLabel": "灵界",
+      "sourceReportHash": "7f57cbc2ad70895fc3b9c66e98d8d81580e2a88163a0b6eb5f38631ec547cf74",
+      "adjudicationReportHash": "68855fa15e5fbc19c56aafd233c6c040a23421f82cf653306e37a55d1cff0f0f",
+      "findingHash": "c2ea457a6da006ed86b240df47700d5f3bb7751b0e4e6bf5bf58483c00484104",
+      "candidateHash": "7e013926da9a4682ab2defffd00c1e1f9be9a918fe96ca3549439b6e8f76fd5b",
+      "disposition": "different-referent",
+      "statement": "‘这种逆天功法也只可能存在真仙界中，离开了此界’的此界承接真仙界；不作灵界通用别名，且韩对功法来源的判断保留认知边界。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-32332991",
+          "chapterSha256": "93bd2cc48ac25110cdccf5901d4932c47adc827cdcde7ece6e8d14e28407d30f",
+          "start": 0,
+          "end": 165,
+          "anchorSha256": "d04fde78a323661399f696788393eb582c0de2dd63533ecdaa1db912e88eadda"
+        },
+        {
+          "chapterId": "qq-32393078",
+          "chapterSha256": "6ca8d480ee0fe2a0710b633028c84938f2de064504042b0f230ba16f1f6c1324",
+          "start": 1066,
+          "end": 1378,
+          "anchorSha256": "301597c38e9e84896e2b60965fadca00947596846a24f248b9f3f789ce87973c"
+        },
+        {
+          "chapterId": "qq-32407986",
+          "chapterSha256": "4b89519984010855a036bd4742fc9d88774fb4fba3f5682d309667cccee644fd",
+          "start": 2601,
+          "end": 2964,
+          "anchorSha256": "543462701d05c156d42f13c5791375a606ad9f61f9df92f7b238efcb68fa700f"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0280:alias-unsupported:batch-0280-object-0026:4ca6b5605642",
+      "batchId": "batch-0280",
+      "candidateId": "batch-0280-object-0026",
+      "alias": "段道友",
+      "candidateLabel": "段天刃",
+      "sourceReportHash": "5b8ca499fd34dac9611e3e1531631691472654eab583786c205fde1e8398eaa0",
+      "adjudicationReportHash": "70f8493f5fceee6d70d6555c5def297bb117bce8272fd20b492b786040c3c6f4",
+      "findingHash": "4ca6b56056425776e267dc9575b12a582898b9c85c58523e934f21819fa331cb",
+      "candidateHash": "b89cd3e44d78b05dbad758c66f03bf1cd4f2573ad089124912ddb7efeaeb4841",
+      "disposition": "descriptive-label",
+      "statement": "段前辈/段某/段天刃在场身份明确；段道友仅惯常编辑称谓，不按缺逐字称呼拆出新段姓人，不由本次交易推T0认识韩立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-32576288",
+          "chapterSha256": "caf81666f346acf6ccc8e60c8702fc9939d35ef1b81792d6922dd50c935815cf",
+          "start": 828,
+          "end": 1249,
+          "anchorSha256": "ff0692492d2fa095e1a60b5d0cfe63c5518c6c3e5aa5bb16058944f852a5bb22"
+        },
+        {
+          "chapterId": "qq-32576288",
+          "chapterSha256": "caf81666f346acf6ccc8e60c8702fc9939d35ef1b81792d6922dd50c935815cf",
+          "start": 2845,
+          "end": 3102,
+          "anchorSha256": "f7f503e1f28d8cee9b327a1ea8ded3133d28f176c2bb724490cc8aae2149e127"
+        },
+        {
+          "chapterId": "qq-32592526",
+          "chapterSha256": "90e177aa8647031d60cfbc21a9242d1d4684890f602ae326f5c67810b7b4b459",
+          "start": 174,
+          "end": 534,
+          "anchorSha256": "7f78b94909a9418be8dfb4b6abf13e73a9dd30a89df00c994484b36bcd39bcbe"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-immortal",
+          "dispositionReportHash": "f61f241415a842a543b827c6e28a25fe757d46506847e292834f3224e0823269",
+          "targetIds": [
+            "canon-duan-tian-ren",
+            "thunder-cai-and-duan",
+            "immortal-later-herb-exchanges"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0297:alias-unsupported:batch-0297-object-0050:03fed685fbac",
+      "batchId": "batch-0297",
+      "candidateId": "batch-0297-object-0050",
+      "alias": "银色法阵",
+      "candidateLabel": "银色巨门",
+      "sourceReportHash": "a6610a8046b75fd9bc49b208903d1573da37dbea430ded8d2fbb052ad7c7aa7c",
+      "adjudicationReportHash": "69810ffba0eed66a8db186479242f8f7ca4eeb6a60dfafbf58c6b7512e494e00",
+      "findingHash": "03fed685fbacd97edd8cc8f6d7eeede12dab938432102a3ee699fcc76727a82e",
+      "candidateHash": "4808bcf063e42ef4d8f7d921b01c9e88b93e74384d92577713072257700fd6c2",
+      "disposition": "related-not-alias",
+      "statement": "银色法阵消去后露银色巨门，前者隐藏门的禁制，后者门体；两者有功能关系不是同物。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-33948410",
+          "chapterSha256": "5570ccb858eb8f97524916819162d6a9dadc132f357991f00aff81e7ec18d2fe",
+          "start": 0,
+          "end": 288,
+          "anchorSha256": "610a38eb1e046ce923f77004b964c201a9bec2922bf2b7c5deaac4f524ea605b"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-feiling",
+          "dispositionReportHash": "38f99eddf50a686735439f30b41a47f4d1db13bd1a2f313871c6f28c292cfc50",
+          "targetIds": [
+            "feiling-guard-and-gate"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0303:alias-unsupported:batch-0303-object-0043:53ea28e32f41",
+      "batchId": "batch-0303",
+      "candidateId": "batch-0303-object-0043",
+      "alias": "葫中剑",
+      "candidateLabel": "金色葫芦",
+      "sourceReportHash": "3b68147be2cfa4580d07d678e1ee7a7d37ec3d99c6a44236c0d257531a40e316",
+      "adjudicationReportHash": "7857cf04c0037543b9fcbd95f439c2972ace6ce4e54eecf526bc0fde863b306e",
+      "findingHash": "53ea28e32f41fe524a2e85dcd14ae0900237fbac07e0af2b93f1b36764fdf334",
+      "candidateHash": "90ececf37f1a59f74886b4c33e2df38719fa6080d9c4f1485e7b459d7c1b00f7",
+      "disposition": "related-not-alias",
+      "statement": "葫中剑是葫内原未完的剑组，金色葫芦为容纳/配套器物；后炼成五行剑不把金葫本体改写成剑，古物和后成品分期。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-34480491",
+          "chapterSha256": "b997f8cc6d445002eaf62c8e5031e0066f39e02f989bfff4706483b556eede61",
+          "start": 1752,
+          "end": 2273,
+          "anchorSha256": "f0de2b569556586e80cd6031a3fa44ec0ffb0c557aa8ae4071b6302c05d9faa5"
+        },
+        {
+          "chapterId": "qq-34480491",
+          "chapterSha256": "b997f8cc6d445002eaf62c8e5031e0066f39e02f989bfff4706483b556eede61",
+          "start": 2648,
+          "end": 2883,
+          "anchorSha256": "9c588c48c46ab7a716e8fc2e94873c15385713bd51bd9129e876c896ace41301"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-guanghan",
+          "dispositionReportHash": "fa7bed0bd112a69b5e8e90de83a95abc763b87e0e7ada01e508057aa2547016d",
+          "targetIds": [
+            "future-guanghan-visitor-equipment",
+            "future-guanghan-contracts",
+            "future-guanghan-return"
+          ],
+          "disposition": "later-only"
+        },
+        {
+          "region": "spirit-tianyuan",
+          "dispositionReportHash": "b49382f484cdba733c844136d9e068601f36905a91a404ead5c673e1c55d452f",
+          "targetIds": [
+            "tianyuan-late-gear-and-pursuit"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0306:alias-unsupported:batch-0306-object-0028:c71621ebd1c2",
+      "batchId": "batch-0306",
+      "candidateId": "batch-0306-object-0028",
+      "alias": "林道友",
+      "candidateLabel": "林鸾",
+      "sourceReportHash": "6be743e51858d16a969b0e1e93603f4bc41367a01a6b767f141dec83b7cc29b1",
+      "adjudicationReportHash": "c2e601ff704d085288eee9f8dc6092c815ee9eb35be69ce082575743de6f14d4",
+      "findingHash": "c71621ebd1c220efa4b133068f34238442aef371e2bc3eae8e0f78542a867ff6",
+      "candidateHash": "d2478405ec7beb4d8edf3678c3a07c7a842987d6c4078a1e0f54cc0e11bcfbc0",
+      "disposition": "descriptive-label",
+      "statement": "同场韩称林兄的是男修，称林鸾道友后女子自认林鸾；不能用泛称林道友无条件合并男女两个林姓人，女士资料用林鸾明确名。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-34904644",
+          "chapterSha256": "f3770819da88e06339f5d0ba5bd338d5adda7f8655f11072f635e0614a111ba7",
+          "start": 620,
+          "end": 888,
+          "anchorSha256": "e3022b43f4bbbeec36e56c3c1dcf557e13b6e59117299f9c9756929968b3a313"
+        },
+        {
+          "chapterId": "qq-34904644",
+          "chapterSha256": "f3770819da88e06339f5d0ba5bd338d5adda7f8655f11072f635e0614a111ba7",
+          "start": 1189,
+          "end": 1508,
+          "anchorSha256": "40221cd9ceac9eb2aee7cf7f5c3c2587817a5e15ce3e322357fff019a689b14c"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0311:alias-unsupported:batch-0311-object-0009:a262679188f1",
+      "batchId": "batch-0311",
+      "candidateId": "batch-0311-object-0009",
+      "alias": "人族修士",
+      "candidateLabel": "人族",
+      "sourceReportHash": "9bf052de745935a0cfdc62ab0a0779a23220a7e8c5e7c945e736f1257108a7b2",
+      "adjudicationReportHash": "fc57257f97295b0b76a1a5eb234b000df1ea5e49b913d4f047c45765612f5e95",
+      "findingHash": "a262679188f1b25141bdc60e6cb1467961510b0fb9f3a32af1e2d26d53e52ae1",
+      "candidateHash": "963cafd6543e0ec08cc8a8c5c613730eefd598aebb08142f48246793edcac251",
+      "disposition": "related-not-alias",
+      "statement": "人族修士在此是韩立个体的类别描述，人族是族群；不可把族群与韩立或全体修士群体当同一实体别名。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-35294560",
+          "chapterSha256": "8baf7d07b5008042daeedb09856a32e8a79e702a879dd794916217504c57c298",
+          "start": 896,
+          "end": 1244,
+          "anchorSha256": "a68d97e7402282287ddc1d6ab9f2df395458dd75559e837a35ce267a93f0dfed"
+        },
+        {
+          "chapterId": "qq-35309845",
+          "chapterSha256": "c4db264ddac0599bfd7ae04c0056bec4965f64c87ad7c6ebefcb53501a1465f8",
+          "start": 1828,
+          "end": 2126,
+          "anchorSha256": "45f7d8459f9e57919893335273c78472840b98c65c88a605eb1758f175c7207b"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "shared-foundations",
+          "dispositionReportHash": "d53d01b97a8d8b2401c5e7666264407a415862ea40aeb7a5753eb1d38946eaf5",
+          "targetIds": [
+            "shared-bloodlight-crossworld-power"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0335:alias-unsupported:batch-0335-object-0045:3db35c1e2fc9",
+      "batchId": "batch-0335",
+      "candidateId": "batch-0335-object-0045",
+      "alias": "化形兽尊",
+      "candidateLabel": "兽化之体",
+      "sourceReportHash": "a000bd873d9362a1daca5858e1d6caabb5345f21e47c3649a375fa03b2c5a8f3",
+      "adjudicationReportHash": "25289d4b833032024b0600b5a228906909cd062bcc0018cc4ebf6826413a09fc",
+      "findingHash": "3db35c1e2fc90e5b9a02202f916eb9d23704bf83f881982acefada97af87fd09",
+      "candidateHash": "f48c1723105e26b5d5928cdb65b22b9bf32590802be33d2c5cf491effda1d11b",
+      "disposition": "related-not-alias",
+      "statement": "兽化之体是变化状态，化形兽尊为魔兽修成的身份/来源；两者不是同一状态名称或种族主体。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-38782285",
+          "chapterSha256": "bdf7b50f4181625ad218dad3729ac0fc3fb8f322ddb62299139ea32f5a9a53de",
+          "start": 135,
+          "end": 789,
+          "anchorSha256": "ca1305f69ae819e1f8b42ae4eebae228eb9e0333157d00dbf9b929e7354954c6"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-demon",
+          "dispositionReportHash": "128f44bafd93864ee7efeb49e4ee618519954a11143d890fb36d4286403ec9a7",
+          "targetIds": [
+            "ad-later-party-secret-motives"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0337:alias-unsupported:batch-0337-object-0039:176e57959109",
+      "batchId": "batch-0337",
+      "candidateId": "batch-0337-object-0039",
+      "alias": "半儡之身",
+      "candidateLabel": "伪仙儡",
+      "sourceReportHash": "d32b19d95b8d8f590d174b6d8a719d6ee377bab0c949a5ac2c9e7910dc823b0c",
+      "adjudicationReportHash": "9765840a86065e7386141ce241e7a94a49fbe11c86a1aeff4e6f58dcb6e6169d",
+      "findingHash": "176e57959109b77ac4cf8650d4865a27fbc72463878fb1688a4e6ff84be1af83",
+      "candidateHash": "ca9b007050b8eacba392e464dcbc8f8ed076b56e96c459de7216747e05c2f65e",
+      "disposition": "different-referent",
+      "statement": "止水为受改伪仙儡形躯，半儡之身是千秋为操控而改炼自己的状态；两个主体和所载魔魂不可合并。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-39106978",
+          "chapterSha256": "9a79b14f08ac7ba4da0c164e750b85e8fbfbacaf704b2181c2e8f842e65043d4",
+          "start": 963,
+          "end": 1177,
+          "anchorSha256": "721143f77c00de7626a50ba45faafc1c0da677a123855ebf822cbf828a0bd873"
+        },
+        {
+          "chapterId": "qq-39106978",
+          "chapterSha256": "9a79b14f08ac7ba4da0c164e750b85e8fbfbacaf704b2181c2e8f842e65043d4",
+          "start": 1645,
+          "end": 2284,
+          "anchorSha256": "6394f32272d0dca26a44ac0444f957a05413efebffe599fa719becbf600d29ef"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "associated-demon",
+          "dispositionReportHash": "128f44bafd93864ee7efeb49e4ee618519954a11143d890fb36d4286403ec9a7",
+          "targetIds": [
+            "ad-zhishui-power-source-confirmed"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0343:alias-unsupported:batch-0343-object-0029:613a1d3880c6",
+      "batchId": "batch-0343",
+      "candidateId": "batch-0343-object-0029",
+      "alias": "异魔金所藏晶珠",
+      "candidateLabel": "异魔金",
+      "sourceReportHash": "3afb400b057302d60f5af7b4aca7655d04145ec8ab75ba59eeeac6e6f8c4cc85",
+      "adjudicationReportHash": "af8a4aa792db169d0fb744b8a7ea8938fd449c8f1cbd07d84e1a406b1186ae07",
+      "findingHash": "613a1d3880c66acdbfb4a91161ee657d288a7e387357427252f3fa69e04698e3",
+      "candidateHash": "56019d998f1c17c1272100a886dbcf841917ddd1b32ce84f0daa0f0506b55eb8",
+      "disposition": "related-not-alias",
+      "statement": "异魔金为藏晶珠的材料，所藏晶珠与其能量/残绿气有因果关系但非同一物；不得把载体全部写成已吸收能量。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-39833059",
+          "chapterSha256": "c11c23ea5145abc1b0cdf551cfffc1a3af815818b9ba724908e94039a6a9cdca",
+          "start": 1250,
+          "end": 1673,
+          "anchorSha256": "b849900e51264dc33ab6d9a387e12b22f6c26642aa506b55b010d6280ccae983"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0347:alias-unsupported:batch-0347-object-0014:5491d06fd9bd",
+      "batchId": "batch-0347",
+      "candidateId": "batch-0347-object-0014",
+      "alias": "木族领域",
+      "candidateLabel": "木族",
+      "sourceReportHash": "da5d6db6f6ae5ca3c1f72d923df9e5eb240869ec257e0cbfa5e023f7d6f0d23a",
+      "adjudicationReportHash": "514a2a6b3f84df903df2668c3b91b98565fa68eaa5f639f7cbd9c83751713d6d",
+      "findingHash": "5491d06fd9bd0100e7216ad37e72f905b334e7cc2b632e1fb5a253c208215adf",
+      "candidateHash": "eca1c326c84cfa4b15377ad9ac1093c229e9578139d25a9480e5aca2846238cd",
+      "disposition": "related-not-alias",
+      "statement": "木族领域指地理领地，木族指人群/族属；丢失领地不等全族消灭，地理与族群独立。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-40396388",
+          "chapterSha256": "7b03f29c3c4d6ec3126b59f18ef5fd1e51739b43f8c553c21cf7f45afb87ac84",
+          "start": 0,
+          "end": 317,
+          "anchorSha256": "ec7f57caa2387c0d1e1c9cf563aed366f6cc7c38c681fa8bcf51621669b793f0"
+        },
+        {
+          "chapterId": "qq-40396388",
+          "chapterSha256": "7b03f29c3c4d6ec3126b59f18ef5fd1e51739b43f8c553c21cf7f45afb87ac84",
+          "start": 1073,
+          "end": 1334,
+          "anchorSha256": "c71e4b84e80a1569c500f802dd82111510a6bda3ddc58a5299366b4f49267add"
+        },
+        {
+          "chapterId": "qq-40396388",
+          "chapterSha256": "7b03f29c3c4d6ec3126b59f18ef5fd1e51739b43f8c553c21cf7f45afb87ac84",
+          "start": 1921,
+          "end": 2236,
+          "anchorSha256": "6ee5773ade4c021f65aeec4a1f792200ba5cd42971ce2949e031a68ec2f4e2f7"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-fengyuan",
+          "dispositionReportHash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f",
+          "targetIds": [
+            "fengyuan-wood-people",
+            "fengyuan-wood-invasion-archive"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0369:alias-unsupported:batch-0369-object-0010:a46f495f394a",
+      "batchId": "batch-0369",
+      "candidateId": "batch-0369-object-0010",
+      "alias": "黑鳞道友",
+      "candidateLabel": "黑鳞",
+      "sourceReportHash": "562c258ecb68adcce1508e577d950b2fb33f23b6fd1f289c35bc9b51e97b98ef",
+      "adjudicationReportHash": "4fc167ea1835011acd123f532ceb1b6d2d91d3331d931169ef322017ab61fcda",
+      "findingHash": "a46f495f394af64aa76eec3aa9a236fdc327998c397f7a648cc1099cc3724b25",
+      "candidateHash": "cbf252976aa01a117d41936ee1585d19823707a3becd024b42d9d04f1175a284",
+      "disposition": "descriptive-label",
+      "statement": "本批黑鳞/黑鳞兄指向明确同伴，黑鳞道友为一般编辑尊称；不宣称本批逐字用过，黑麟源异写另保连续场景边界。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-43426487",
+          "chapterSha256": "1ce698ece34bee41dae4893cd0c10130b95ed848822aae54aba904c64c30f4cf",
+          "start": 1975,
+          "end": 2240,
+          "anchorSha256": "5dab9eefe3271ca2a6efecf625238073ce3a02b4e918f2bc240c37d4f57a784a"
+        },
+        {
+          "chapterId": "qq-43456266",
+          "chapterSha256": "11f93c36b2462c22aa7d2509656239bfbfd23ca57568e980a6067722efeaf636",
+          "start": 810,
+          "end": 1108,
+          "anchorSha256": "1141bb39829410c6bdfe73709414505ca2f837e0ef0db186b8b70060d9a6d258"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0377:alias-unsupported:batch-0377-object-0039:6e38d997cdad",
+      "batchId": "batch-0377",
+      "candidateId": "batch-0377-object-0039",
+      "alias": "香女",
+      "candidateLabel": "香女制度",
+      "sourceReportHash": "a6fdb47c96620416a383b3b2d5b1d3e05404d537504dacf4ffc022ea99c0c029",
+      "adjudicationReportHash": "364b72533a730b0dcae90c1465660e25ce021d347916b8a74e03f36e9488682c",
+      "findingHash": "6e38d997cdad8e4ac396c08acb875ac69cb2f01aa911a2b450e54931bd3c1468",
+      "candidateHash": "fd8868b02062dc2e7c673e24e636178b5ab8a1d12f6a9bc98f1c83df80ff4f35",
+      "disposition": "related-not-alias",
+      "statement": "香女为被培养役使的具体女子/群体，制度为商盟规则与习惯；不能把制度当女子实体或抹去个体意愿。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-44710597",
+          "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+          "start": 2640,
+          "end": 3257,
+          "anchorSha256": "bc8049f777b8eef2ac64e451450bbb1724c53df65cbf170d84b339bbe7137dbe"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-fengyuan",
+          "dispositionReportHash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f",
+          "targetIds": [
+            "seas-league-service-order"
+          ],
+          "disposition": "corrected"
+        },
+        {
+          "region": "spirit-seas",
+          "dispositionReportHash": "249f79b0d208034b5e9195c2900d8c30160dcfb0fca6330409c3528692449138",
+          "targetIds": [
+            "seas-league-service-order"
+          ],
+          "disposition": "corrected"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0380:alias-unsupported:batch-0380-object-0025:9d2e7a7aa9f3",
+      "batchId": "batch-0380",
+      "candidateId": "batch-0380-object-0025",
+      "alias": "血天大城",
+      "candidateLabel": "血鹤城",
+      "sourceReportHash": "b9bd862c2644332a8ca4e832b61f94f5d82cdf96a2ade6c2256749bc7f254f62",
+      "adjudicationReportHash": "c180657b11967039f38071780eaa5429a14f472895b1a031b30705a53da53d59",
+      "findingHash": "9d2e7a7aa9f3430aa496dd6aadd0c47b8587efe8fff7ce8b060daf44c45e24aa",
+      "candidateHash": "fac1c6c7e8ca31b1324449da47eb49d71e4644dbbfeb3f709c9e36a71c9c1bae",
+      "disposition": "related-not-alias",
+      "statement": "原句是‘血天大城中比较自由的一座’，血天大城为城市类别；血鹤城是其中一座，不与全部大城合并。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-45231312",
+          "chapterSha256": "eedca1fcf97d8a39a5df855f435bbc66c07a4f00e625cfa4468276f1ed47a5dc",
+          "start": 186,
+          "end": 411,
+          "anchorSha256": "f0bfa421ece106125cfb5448d42e3202b566fa2f9d2aaf3d3033629dcaa2575d"
+        },
+        {
+          "chapterId": "qq-45231312",
+          "chapterSha256": "eedca1fcf97d8a39a5df855f435bbc66c07a4f00e625cfa4468276f1ed47a5dc",
+          "start": 806,
+          "end": 1267,
+          "anchorSha256": "f87ca99efe139062bcd7bb8a9aee32a14b97c32e11fcd1d364102a9f95ea22f7"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-blood",
+          "dispositionReportHash": "008c8b48beb1a04021855ededce4c3faf4b32399bf0851223bea52c9325f4806",
+          "targetIds": [
+            "blood-crane-city"
+          ],
+          "disposition": "adopted"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0386:alias-unsupported:batch-0386-object-0012:9434ec3f4cba",
+      "batchId": "batch-0386",
+      "candidateId": "batch-0386-object-0012",
+      "alias": "阴司鬼王",
+      "candidateLabel": "阴司十王",
+      "sourceReportHash": "955561b241843e972b123b1adacea60b8b162adcc85f8158c60e492c65884cc3",
+      "adjudicationReportHash": "2ffb1c9b983b0d5e0596ff01c3c89f94aa8ffca70167eccb301ae8cbb0b4c3db",
+      "findingHash": "9434ec3f4cba7ca84e40a3cf1b2ddc9d708ec7842b4fda0fe0aa43118495c45a",
+      "candidateHash": "1481377478748d73906214b03e058932a68c6f031df1879e744064471fe65cfe",
+      "disposition": "related-not-alias",
+      "statement": "阴司十王为集合，阴司鬼王在对应战段指佛骨王等单个成员；只按场景绑定，不能把每次鬼王泛称合并为十王统一意识。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-46107735",
+          "chapterSha256": "a302735668f859bda51780f13a93f2cb3144e32200a275328377718f49b26d3f",
+          "start": 1656,
+          "end": 1934,
+          "anchorSha256": "7a638c3918cbd253bf402189d73313a64c573427eb98c71ed1df189b2fc6fef6"
+        },
+        {
+          "chapterId": "qq-46107735",
+          "chapterSha256": "a302735668f859bda51780f13a93f2cb3144e32200a275328377718f49b26d3f",
+          "start": 2177,
+          "end": 2461,
+          "anchorSha256": "906afd43c12ac2068c22a3527a85aed131a8faed3fd8ca6f72d8270fbbebbaef"
+        },
+        {
+          "chapterId": "qq-46148857",
+          "chapterSha256": "232a9c20ff3b0f59e8710dc6f3df59eb6dcece7ace7ebb106723156a59595c8f",
+          "start": 913,
+          "end": 1182,
+          "anchorSha256": "85ef96daef9a0c8546438f17379d4e5bd8a5434f1f5854023e3aa28bdbb362ca"
+        },
+        {
+          "chapterId": "qq-46148857",
+          "chapterSha256": "232a9c20ff3b0f59e8710dc6f3df59eb6dcece7ace7ebb106723156a59595c8f",
+          "start": 1272,
+          "end": 1561,
+          "anchorSha256": "b431ba1dbbd3729aeb8145f183a7c54cf2918403a202e571b3ee596265dda396"
+        },
+        {
+          "chapterId": "qq-46120610",
+          "chapterSha256": "ad42c8137c10f2ccc11be34319b882d9c5284203019d7bcbb9e4bf130520a1de",
+          "start": 355,
+          "end": 638,
+          "anchorSha256": "dbdb7bbf9c32b7c5862f0501bda805b2ad7f7a030c7db02b9e8fd798e7adfa95"
+        },
+        {
+          "chapterId": "qq-46120610",
+          "chapterSha256": "ad42c8137c10f2ccc11be34319b882d9c5284203019d7bcbb9e4bf130520a1de",
+          "start": 1730,
+          "end": 2060,
+          "anchorSha256": "b8115a73fbaad7bd08a367941bbf5cea2bac81dbaadc0daa677fa8ab48f6f442"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0390:alias-unsupported:batch-0390-object-0005:21b6d8d6c7b3",
+      "batchId": "batch-0390",
+      "candidateId": "batch-0390-object-0005",
+      "alias": "莫道友",
+      "candidateLabel": "莫简离",
+      "sourceReportHash": "cc0b01988ef415527d6786a3f1c72c4b3fc7330cbfdab7ca3e574ab455d985b2",
+      "adjudicationReportHash": "bbeff9619a0b04771ee612770ad9bb6036f206c1e52ecfcc2bef1efd52272177",
+      "findingHash": "21b6d8d6c7b3f1f00864b7a39cc6726e981254da02ce390bdbb9ad5fa59061ad",
+      "candidateHash": "23cba666a90620dfac56de4ee31bc2abc9accc0b48c219bca8ebe10512fe71c9",
+      "disposition": "descriptive-label",
+      "statement": "本批莫兄/莫某连续明确莫简离，莫道友作为编辑尊称而非本批逐字原名；不增加人物，也不提前已知抗仙与疏散计划。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-46657833",
+          "chapterSha256": "33d1c9a11684cc6d0364eb77896d73dac3168f138a6066d689e03bcb69adf440",
+          "start": 461,
+          "end": 803,
+          "anchorSha256": "02e0a10655a22f38628d256bb4bcd67edc39c83022aa21f858ba93874ee0609b"
+        },
+        {
+          "chapterId": "qq-46681138",
+          "chapterSha256": "870a5f2891a83c9ecf3ffb23b2168f4cc604627e29000c80af9f85c9613ab177",
+          "start": 1244,
+          "end": 1489,
+          "anchorSha256": "1abcda67c1d997f78d85c7de5561fdd24e1e4cdac987e6dba5e8dc1d783e028f"
+        }
+      ],
+      "regionalCandidateLinks": [
+        {
+          "region": "spirit-fengyuan",
+          "dispositionReportHash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f",
+          "targetIds": [
+            "canon-mo-jian-li",
+            "fengyuan-maliang-pursuit-archive"
+          ],
+          "disposition": "later-only"
+        }
+      ],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    },
+    {
+      "id": "batch-0392:alias-unsupported:batch-0392-object-0047:902b4e37feed",
+      "batchId": "batch-0392",
+      "candidateId": "batch-0392-object-0047",
+      "alias": "玄天残宝",
+      "candidateLabel": "玄天之宝",
+      "sourceReportHash": "b4ce88a9344675ad60575b9d6b5db90233359180ba4262bfdc4dcbf66f049b85",
+      "adjudicationReportHash": "6e071e73a4c2e4d9b4f1a3e445e1b5a85d1d6145cd4b001f5bff5d3ee39edb31",
+      "findingHash": "902b4e37feed8a30200fcdb8f268303dcb26714000de1ddd8033c64d7c3bfec2",
+      "candidateHash": "aed7b3d615a6b69735a06b3357bd3a207fcf9a417476d04cf2055819ada7d911",
+      "disposition": "related-not-alias",
+      "statement": "完整玄天宝物与可用于炼阵盘的玄天残宝有来源/材料关联，残宝不自动具有完整品阶威能，不能作为完全同义词。",
+      "status": "source-semantics-resolved",
+      "evidence": [
+        {
+          "chapterId": "qq-47103655",
+          "chapterSha256": "b08f040f95e9400fc7af97350e002cd7ff1ab4985359f6b45ade86c823b11491",
+          "start": 1566,
+          "end": 1842,
+          "anchorSha256": "62398d05fcfc4fced5504af7313221f94309f3354bb5480a965c286d4768f7e3"
+        },
+        {
+          "chapterId": "qq-46966989",
+          "chapterSha256": "8a689bf43d4fc67344c39f8c94e0809bc8498ac11b26acc32832b9bbef091b90",
+          "start": 1205,
+          "end": 1438,
+          "anchorSha256": "32c33bcf3d46338c9bfb83b7f6a1de990fd8948fa2456df2af798e9c8012ac45"
+        },
+        {
+          "chapterId": "qq-46987405",
+          "chapterSha256": "cddb30947e236796416bbf9b76906d003d9c6a1151841aa835bb080dde381874",
+          "start": 1561,
+          "end": 1951,
+          "anchorSha256": "36725c7266e8df4949b7f4f7e3a89e33b4a925e37801f7ed5b57d9798a7f4c3f"
+        }
+      ],
+      "regionalCandidateLinks": [],
+      "runtimeClosure": "requires-regional-source-bound-disposition"
+    }
+  ]
+}
