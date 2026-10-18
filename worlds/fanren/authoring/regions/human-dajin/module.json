@@ -10657,10 +10657,10 @@
     },
     {
       "id": "dajin-qianguang-temple",
-      "name": "千光寺旧址",
+      "name": "千光寺院址",
       "kind": "location",
       "placement": "dajin-guanning",
-      "description": "冯家先祖修学过的寺院旧址；建筑的通行与保管需实际确认。",
+      "description": "冯家先祖修学过的寺院院址；建筑的通行与保管需实际确认。",
       "facts": [
         {
           "id": "dajin-qianguang-temple-route-dajin-guanning",
@@ -10829,6 +10829,39 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-wannan",
+      "name": "湾南州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋的一处临海州域，沿岸与离岸小岛分布；岛屿方位尚须当地询访。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-sihai-academy",
+      "name": "四海真院",
+      "kind": "organization",
+      "placement": "human-dajin",
+      "description": "大晋修仙机构，具体宗址与当期门人名册未确定。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-bilin-cliff",
+      "name": "碧磷涯",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋的一处崖地称名；地域之外没有据此推定居民身份。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -10941,6 +10974,11 @@
     {
       "id": "dajin-buddhist-training-condition",
       "text": "明王诀须实际法诀、舍利等条件与修习，借煞气锻体有风险，不能只凭境界或得到书名自动学会；舍利形成不按固定境界保证。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-inherited-banner-control",
+      "text": "阴罗传承幡可在取得催动法并实际炼化后被新持有人使用，不靠滴血认主锁定一生；控制器物不自动改变宗门归属、合法产权或他人的认知。修复仍需适合资源与过程。",
       "severity": "hard"
     }
   ],
@@ -12601,6 +12639,18 @@
     ],
     "fact:dajin-feng-vault-route-dajin-feng-vault-door": [
       "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-wannan": [
+      "dajin-remote-origin-boundaries"
+    ],
+    "entity:dajin-sihai-academy": [
+      "dajin-remote-origin-boundaries"
+    ],
+    "entity:dajin-bilin-cliff": [
+      "dajin-bilin-locality"
+    ],
+    "law:dajin-inherited-banner-control": [
+      "dajin-banner-transferability"
     ]
   }
 }
