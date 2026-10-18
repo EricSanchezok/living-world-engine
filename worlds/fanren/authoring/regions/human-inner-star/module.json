@@ -974,6 +974,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-kuixing-island-route-innerstar-kuixing-harbor",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-harbor"
+          },
+          "description": "通往魁星港",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-kuixing-island-condition-innerstar-kuixing-harbor",
+          "predicate": "condition-innerstar-kuixing-harbor",
+          "value": {
+            "kind": "text",
+            "value": "从港口经岛上道路进入，检查和通行须按实际办理。"
+          },
+          "description": "从港口经岛上道路进入，检查和通行须按实际办理。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-kuixing-island-residency-terms",
+          "predicate": "residency-terms",
+          "value": {
+            "kind": "text",
+            "value": "外来修士可临居；有当地大户作保并登记后可永久居住、任职或参加本岛灵地比试。任职须履职，灵石供给与不任职者缴费分别结算。"
+          },
+          "description": "外来修士可临居；有当地大户作保并登记后可永久居住、任职或参加本岛灵地比试。任职须履职，灵石供给与不任职者缴费分别结算。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-kuixing-island-perimeter-array",
+          "predicate": "perimeter-array",
+          "value": {
+            "kind": "text",
+            "value": "本岛被大型禁制笼罩，进出须实际核查通路与当时管制；不能据此断言任意境界都绝对无法穿过。"
+          },
+          "description": "本岛被大型禁制笼罩，进出须实际核查通路与当时管制；不能据此断言任意境界都绝对无法穿过。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1190,30 +1238,6 @@
           "access": {
             "kind": "public"
           }
-        },
-        {
-          "id": "human-kuixing-city-route-innerstar-dengxian-hall",
-          "predicate": "route-to",
-          "value": {
-            "kind": "entity",
-            "entityId": "innerstar-dengxian-hall"
-          },
-          "description": "route-to",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
-          "id": "human-kuixing-city-condition-innerstar-dengxian-hall",
-          "predicate": "travel-condition",
-          "value": {
-            "kind": "text",
-            "value": "核验修士、登记可选灵地并办理岛内事务。"
-          },
-          "description": "核验修士、登记可选灵地并办理岛内事务。",
-          "access": {
-            "kind": "public"
-          }
         }
       ],
       "meters": [],
@@ -1358,6 +1382,42 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "innerstar-qingyun-mountain-route-innerstar-dengxian-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-dengxian-hall"
+          },
+          "description": "通往登仙阁",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-qingyun-mountain-condition-innerstar-dengxian-hall",
+          "predicate": "condition-innerstar-dengxian-hall",
+          "value": {
+            "kind": "text",
+            "value": "沿青云山中道路前往登仙阁办理岛内事务。"
+          },
+          "description": "沿青云山中道路前往登仙阁办理岛内事务。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-qingyun-mountain-land-selection",
+          "predicate": "land-selection",
+          "value": {
+            "kind": "text",
+            "value": "三主峰外有367小峰；36处优质峰十年一争。筑基可按登记选普通峰，炼气可申请洞谷。已有住用权与空地须查册，不凭修为自动占有他人洞府。"
+          },
+          "description": "三主峰外有367小峰；36处优质峰十年一争。筑基可按登记选普通峰，炼气可申请洞谷。已有住用权与空地须查册，不凭修为自动占有他人洞府。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1476,29 +1536,41 @@
       "id": "innerstar-dengxian-hall",
       "name": "登仙阁",
       "kind": "location",
-      "placement": "human-kuixing-city",
+      "placement": "innerstar-qingyun-mountain",
       "description": "核验修士、登记可选灵地并办理岛内事务。",
       "facts": [
         {
-          "id": "innerstar-dengxian-hall-route-human-kuixing-city",
+          "id": "innerstar-dengxian-hall-route-innerstar-qingyun-mountain",
           "predicate": "route-to",
           "value": {
             "kind": "entity",
-            "entityId": "human-kuixing-city"
+            "entityId": "innerstar-qingyun-mountain"
           },
-          "description": "route-to",
+          "description": "通往青云山",
           "access": {
             "kind": "public"
           }
         },
         {
-          "id": "innerstar-dengxian-hall-condition-human-kuixing-city",
-          "predicate": "travel-condition",
+          "id": "innerstar-dengxian-hall-condition-innerstar-qingyun-mountain",
+          "predicate": "condition-innerstar-qingyun-mountain",
           "value": {
             "kind": "text",
-            "value": "核验修士、登记可选灵地并办理岛内事务。"
+            "value": "沿青云山中道路前往登仙阁办理岛内事务。"
           },
-          "description": "核验修士、登记可选灵地并办理岛内事务。",
+          "description": "沿青云山中道路前往登仙阁办理岛内事务。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-dengxian-hall-registration-procedure",
+          "predicate": "registration-procedure",
+          "value": {
+            "kind": "text",
+            "value": "申请定居须验保人文书，记入金册并收回临时绿色玉牌，才换发蓝玉佩。选灵地须查占用登记和应负义务。"
+          },
+          "description": "申请定居须验保人文书，记入金册并收回临时绿色玉牌，才换发蓝玉佩。选灵地须查占用登记和应负义务。",
           "access": {
             "kind": "public"
           }
@@ -1559,6 +1631,18 @@
             "value": "数百居民以捕鱼和种植为生；村落人口不等同今日在场说话的人数。"
           },
           "description": "数百居民以捕鱼和种植为生；村落人口不等同今日在场说话的人数。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-xiaohuan-island-defense-finance",
+          "predicate": "defense-finance",
+          "value": {
+            "kind": "text",
+            "value": "当前没有承领全岛修炼地的修士，护阵经费由魁星岛务负担；村中自筹是独立补充。若有人合法承领，则需承担防护费用，可收居民有限灵石并免主岛年贡。"
+          },
+          "description": "当前没有承领全岛修炼地的修士，护阵经费由魁星岛务负担；村中自筹是独立补充。若有人合法承领，则需承担防护费用，可收居民有限灵石并免主岛年贡。",
           "access": {
             "kind": "public"
           }
@@ -6853,6 +6937,42 @@
               "name": "沈册的私用行囊",
               "description": "自己保管的生活或修炼用品，不包含所任机构的公产。",
               "status": "observed"
+            },
+            {
+              "id": "known-innerstar-kuixing-maintenance-fund",
+              "name": "魁星岛务维护库",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-kuixing-resident-ledger",
+              "name": "魁星定居金册",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-kuixing-land-map",
+              "name": "魁星灵地银册",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-kuixing-administration",
+              "name": "魁星岛务所",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-human-xiaohuan-island",
+              "name": "小寰岛",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-qingyun-mountain",
+              "name": "青云山",
+              "description": "办事中熟悉的地点、机构或所管公物。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6872,6 +6992,42 @@
               "local_entity_id": "known-innerstar-island-clerk-personal-pouch",
               "canonical_entity_ids": [
                 "innerstar-island-clerk-personal-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-kuixing-maintenance-fund",
+              "canonical_entity_ids": [
+                "innerstar-kuixing-maintenance-fund"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-kuixing-resident-ledger",
+              "canonical_entity_ids": [
+                "innerstar-kuixing-resident-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-kuixing-land-map",
+              "canonical_entity_ids": [
+                "innerstar-kuixing-land-map"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-kuixing-administration",
+              "canonical_entity_ids": [
+                "innerstar-kuixing-administration"
+              ]
+            },
+            {
+              "local_entity_id": "known-human-xiaohuan-island",
+              "canonical_entity_ids": [
+                "human-xiaohuan-island"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-qingyun-mountain",
+              "canonical_entity_ids": [
+                "innerstar-qingyun-mountain"
               ]
             }
           ],
@@ -6954,6 +7110,36 @@
                 "value": "此刻是当地夜间，之后昼夜按实际经过的时间变化。"
               },
               "description": "此刻是当地夜间，之后昼夜按实际经过的时间变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "approved-island-maintenance",
+              "subjectId": "self",
+              "predicate": "approved-island-maintenance",
+              "value": {
+                "kind": "text",
+                "value": "小寰护阵已经批准20低阶灵石，可从岛务维护库按实际支出拨付；应核工料和记账。"
+              },
+              "description": "小寰护阵已经批准20低阶灵石，可从岛务维护库按实际支出拨付；应核工料和记账。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-residence-procedure",
+              "subjectId": "self",
+              "predicate": "known-residence-procedure",
+              "value": {
+                "kind": "text",
+                "value": "查保书、记金册、收临时牌、发蓝佩后才完成定居，灵地以银册与实际占用共同核对。"
+              },
+              "description": "查保书、记金册、收临时牌、发蓝佩后才完成定居，灵地以银册与实际占用共同核对。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -7163,6 +7349,18 @@
               "name": "葛岚",
               "description": "负责维护的葛岚，尚未同意新的赊账安排。",
               "status": "observed"
+            },
+            {
+              "id": "known-innerstar-dengxian-hall",
+              "name": "登仙阁",
+              "description": "青云山的岛务登记处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-island-clerk",
+              "name": "沈册",
+              "description": "处理岛务文书的沈册。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -7200,6 +7398,18 @@
               "local_entity_id": "known-innerstar-array-keeper",
               "canonical_entity_ids": [
                 "innerstar-array-keeper"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-dengxian-hall",
+              "canonical_entity_ids": [
+                "innerstar-dengxian-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-island-clerk",
+              "canonical_entity_ids": [
+                "innerstar-island-clerk"
               ]
             }
           ],
@@ -7282,6 +7492,21 @@
                 "value": "此刻是当地夜间，之后昼夜按实际经过的时间变化。"
               },
               "description": "此刻是当地夜间，之后昼夜按实际经过的时间变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "maintenance-responsibility",
+              "subjectId": "self",
+              "predicate": "maintenance-responsibility",
+              "value": {
+                "kind": "text",
+                "value": "护阵日常费用由主岛负担，村里7块只是自筹补充；可向沈册核对拨款，并不因此把公库当自家库存。"
+              },
+              "description": "护阵日常费用由主岛负担，村里7块只是自筹补充；可向沈册核对拨款，并不因此把公库当自家库存。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -7821,6 +8046,18 @@
               "name": "罗潮",
               "description": "村中罗潮，知道他为护阵筹钱但不知每家的私账。",
               "status": "observed"
+            },
+            {
+              "id": "known-innerstar-dengxian-hall",
+              "name": "登仙阁",
+              "description": "青云山的岛务登记处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-island-clerk",
+              "name": "沈册",
+              "description": "处理岛务文书的沈册。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -7852,6 +8089,18 @@
               "local_entity_id": "known-innerstar-fishing-head",
               "canonical_entity_ids": [
                 "innerstar-fishing-head"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-dengxian-hall",
+              "canonical_entity_ids": [
+                "innerstar-dengxian-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-island-clerk",
+              "canonical_entity_ids": [
+                "innerstar-island-clerk"
               ]
             }
           ],
@@ -7949,6 +8198,21 @@
                 "value": "备用片本是自己留用，愿卖五块、工钱三；村里缺一块可谈，不接受凭空写成已经付清。"
               },
               "description": "备用片本是自己留用，愿卖五块、工钱三；村里缺一块可谈，不接受凭空写成已经付清。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "maintenance-responsibility",
+              "subjectId": "self",
+              "predicate": "maintenance-responsibility",
+              "value": {
+                "kind": "text",
+                "value": "护阵日常费用由主岛负担，村里7块只是自筹补充；可向沈册核对拨款，并不因此把公库当自家库存。"
+              },
+              "description": "护阵日常费用由主岛负担，村里7块只是自筹补充；可向沈册核对拨款，并不因此把公库当自家库存。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -10563,6 +10827,429 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-harbor",
+      "name": "魁星港",
+      "kind": "location",
+      "placement": "human-kuixing-island",
+      "description": "魁星岛海船停靠处，陌生修士须在港口登记。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-harbor-route-human-kuixing-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-kuixing-island"
+          },
+          "description": "通往魁星岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-harbor-condition-human-kuixing-island",
+          "predicate": "condition-human-kuixing-island",
+          "value": {
+            "kind": "text",
+            "value": "从港口经岛上道路进入，检查和通行须按实际办理。"
+          },
+          "description": "从港口经岛上道路进入，检查和通行须按实际办理。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-harbor-route-innerstar-kuixing-port-office",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-port-office"
+          },
+          "description": "通往魁星港登记石屋",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-harbor-condition-innerstar-kuixing-port-office",
+          "predicate": "condition-innerstar-kuixing-port-office",
+          "value": {
+            "kind": "text",
+            "value": "港口旁登记石屋，需经过门口实际进入。"
+          },
+          "description": "港口旁登记石屋，需经过门口实际进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-port-office",
+      "name": "魁星港登记石屋",
+      "kind": "location",
+      "placement": "innerstar-kuixing-harbor",
+      "description": "港口核验来客与登记临时玉牌的石屋。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-port-office-route-innerstar-kuixing-harbor",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-harbor"
+          },
+          "description": "通往魁星港",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-port-office-condition-innerstar-kuixing-harbor",
+          "predicate": "condition-innerstar-kuixing-harbor",
+          "value": {
+            "kind": "text",
+            "value": "港口旁登记石屋，需经过门口实际进入。"
+          },
+          "description": "港口旁登记石屋，需经过门口实际进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-administration",
+      "name": "魁星岛务所",
+      "kind": "social-group",
+      "placement": "innerstar-dengxian-hall",
+      "description": "负责岛内登记、灵地使用与公共支出；公款与办事员私财分开。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-guard",
+      "name": "魁星护卫队",
+      "kind": "social-group",
+      "placement": "human-dongshi-city",
+      "description": "维护岛务与海上秩序的修士组织；成员是否受商户聘请须另行协商。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-maintenance-fund",
+      "name": "魁星岛务维护库",
+      "kind": "container",
+      "placement": "innerstar-dengxian-hall",
+      "description": "有限的公共维护灵石，按用途支取并记账。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-maintenance-fund-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "属于岛务所的公用灵石。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-maintenance-fund-allocation",
+          "predicate": "allocation",
+          "value": {
+            "kind": "text",
+            "value": "已批准20低阶灵石用于小寰护阵维护；沈册可按实际工料从库中拨付，收款和用途应记账，未支付前不计作村款或匠人私款。"
+          },
+          "description": "已批准20低阶灵石用于小寰护阵维护；沈册可按实际工料从库中拨付，收款和用途应记账，未支付前不计作村款或匠人私款。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 160
+        }
+      ]
+    },
+    {
+      "id": "innerstar-kuixing-resident-ledger",
+      "name": "魁星定居金册",
+      "kind": "item",
+      "placement": "innerstar-dengxian-hall",
+      "description": "登记经过担保核验的定居者姓名，登记须真实办理。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-resident-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "魁星岛务所公物，使用不等于取得私有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-land-map",
+      "name": "魁星灵地银册",
+      "kind": "item",
+      "placement": "innerstar-dengxian-hall",
+      "description": "灵地地图：金光示已占用，白光示可申请；地图本身不授予用地权。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-land-map-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "魁星岛务所公物，使用不等于取得私有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-trade-register",
+      "name": "大岛行商资格册",
+      "kind": "item",
+      "placement": "human-dongshi-city",
+      "description": "记载十户行商资格和挑战结果；当前经营户姓名另依实际登记核定。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-trade-register-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "魁星岛务所公物，使用不等于取得私有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-spirit-disc",
+      "name": "东石城门灵盘",
+      "kind": "item",
+      "placement": "human-dongshi-city",
+      "description": "圆筒一端嵌玉盘，可供城门凡人查辨修士；不因此得知其完整身份、功法和库存。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-spirit-disc-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "魁星岛务所公物，使用不等于取得私有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-green-token-1",
+      "name": "临时绿色玉牌1",
+      "kind": "item",
+      "placement": "innerstar-kuixing-port-office",
+      "description": "尚未记名发出的岛务用品，须登记和实际交付。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-green-token-1-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "尚属岛务所。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-green-token-1-registration-rule",
+          "predicate": "registration-rule",
+          "value": {
+            "kind": "text",
+            "value": "临时记名入岛，遗失须补领；办理定居后交回。"
+          },
+          "description": "临时记名入岛，遗失须补领；办理定居后交回。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-green-token-2",
+      "name": "临时绿色玉牌2",
+      "kind": "item",
+      "placement": "innerstar-kuixing-port-office",
+      "description": "尚未记名发出的岛务用品，须登记和实际交付。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-green-token-2-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "尚属岛务所。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-green-token-2-registration-rule",
+          "predicate": "registration-rule",
+          "value": {
+            "kind": "text",
+            "value": "临时记名入岛，遗失须补领；办理定居后交回。"
+          },
+          "description": "临时记名入岛，遗失须补领；办理定居后交回。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-blue-token-1",
+      "name": "定居蓝色玉佩1",
+      "kind": "item",
+      "placement": "innerstar-dengxian-hall",
+      "description": "尚未记名发出的岛务用品，须登记和实际交付。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-blue-token-1-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "尚属岛务所。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-blue-token-1-registration-rule",
+          "predicate": "registration-rule",
+          "value": {
+            "kind": "text",
+            "value": "核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。"
+          },
+          "description": "核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-kuixing-blue-token-2",
+      "name": "定居蓝色玉佩2",
+      "kind": "item",
+      "placement": "innerstar-dengxian-hall",
+      "description": "尚未记名发出的岛务用品，须登记和实际交付。",
+      "facts": [
+        {
+          "id": "innerstar-kuixing-blue-token-2-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-kuixing-administration"
+          },
+          "description": "尚属岛务所。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-kuixing-blue-token-2-registration-rule",
+          "predicate": "registration-rule",
+          "value": {
+            "kind": "text",
+            "value": "核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。"
+          },
+          "description": "核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-ship-silver-tree",
+      "name": "青帆号银角树",
+      "kind": "plant",
+      "placement": "innerstar-sea-ship",
+      "description": "银光三角叶的小树，置于舱中改善气闷。",
+      "facts": [
+        {
+          "id": "innerstar-ship-silver-tree-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-shipowner"
+          },
+          "description": "顾汀购置的船舱树。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -10942,19 +11629,8 @@
       "innerstar-present-life"
     ],
     "entity:innerstar-dengxian-hall": [
-      "innerstar-kuixing-settlements"
-    ],
-    "fact:human-kuixing-city-route-innerstar-dengxian-hall": [
-      "innerstar-present-life"
-    ],
-    "fact:human-kuixing-city-condition-innerstar-dengxian-hall": [
-      "innerstar-present-life"
-    ],
-    "fact:innerstar-dengxian-hall-route-human-kuixing-city": [
-      "innerstar-present-life"
-    ],
-    "fact:innerstar-dengxian-hall-condition-human-kuixing-city": [
-      "innerstar-present-life"
+      "innerstar-kuixing-settlements",
+      "innerstar-kuixing-geography-details"
     ],
     "entity:human-xiaohuan-island": [
       "innerstar-xiaohuan"
@@ -12079,6 +12755,173 @@
     "fact:innerstar-sleeping-gold-insects-unowned": [
       "innerstar-ancient-sleeping-insects",
       "innerstar-bounded-values"
+    ],
+    "entity:innerstar-kuixing-harbor": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-port-office": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-administration": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-guard": [
+      "innerstar-kuixing-competition-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-maintenance-fund": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-maintenance-fund-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-maintenance-fund-allocation": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-resident-ledger": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-land-map": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-trade-register": [
+      "innerstar-kuixing-competition-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-spirit-disc": [
+      "innerstar-kuixing-settlements",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "entity:innerstar-kuixing-green-token-1": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-green-token-1-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-green-token-1-registration-rule": [
+      "innerstar-kuixing-entry-and-residence"
+    ],
+    "entity:innerstar-kuixing-green-token-2": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-green-token-2-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-green-token-2-registration-rule": [
+      "innerstar-kuixing-entry-and-residence"
+    ],
+    "entity:innerstar-kuixing-blue-token-1": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-blue-token-1-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-blue-token-1-registration-rule": [
+      "innerstar-kuixing-entry-and-residence"
+    ],
+    "entity:innerstar-kuixing-blue-token-2": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-blue-token-2-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-blue-token-2-registration-rule": [
+      "innerstar-kuixing-entry-and-residence"
+    ],
+    "entity:innerstar-ship-silver-tree": [
+      "innerstar-kuixing-transport-and-language",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-ship-silver-tree-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-dengxian-hall-route-innerstar-qingyun-mountain": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-dengxian-hall-condition-innerstar-qingyun-mountain": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-qingyun-mountain-route-innerstar-dengxian-hall": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-qingyun-mountain-condition-innerstar-dengxian-hall": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-harbor-route-human-kuixing-island": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-harbor-condition-human-kuixing-island": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:human-kuixing-island-route-innerstar-kuixing-harbor": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:human-kuixing-island-condition-innerstar-kuixing-harbor": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-harbor-route-innerstar-kuixing-port-office": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-harbor-condition-innerstar-kuixing-port-office": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-port-office-route-innerstar-kuixing-harbor": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-port-office-condition-innerstar-kuixing-harbor": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:human-kuixing-island-residency-terms": [
+      "innerstar-kuixing-entry-and-residence"
+    ],
+    "fact:innerstar-qingyun-mountain-land-selection": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-competition-details"
+    ],
+    "fact:human-xiaohuan-island-defense-finance": [
+      "innerstar-kuixing-geography-details",
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-dengxian-hall-registration-procedure": [
+      "innerstar-kuixing-entry-and-residence",
+      "innerstar-kuixing-geography-details"
+    ],
+    "fact:innerstar-kuixing-resident-ledger-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-land-map-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-trade-register-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:innerstar-kuixing-spirit-disc-owned-by": [
+      "innerstar-kuixing-current-implementation"
+    ],
+    "fact:human-kuixing-island-perimeter-array": [
+      "innerstar-kuixing-geography-details"
     ]
   },
   "periodicProperties": [
