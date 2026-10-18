@@ -1,0 +1,18 @@
+id: minghe-sword-manual
+kind: item
+name: 青元子剑诀手录
+description: 自己完善剑诀的手录，与散落人界的传承同源；学习需得许可并有实际练习。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-sword-manual-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

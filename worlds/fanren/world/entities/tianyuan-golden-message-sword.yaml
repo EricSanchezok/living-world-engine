@@ -1,0 +1,26 @@
+id: tianyuan-golden-message-sword
+kind: item
+name: 备勤金剑传书器
+description: 本期只循已登记的巡哨信标，耗操作者10法力及一枚低阶石携带一片实际玉简；送达前接收者不知道内容，受阻或损坏可失败。
+placement: tianyuan-council-clerk
+facts:
+  - id: tianyuan-golden-message-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-golden-message-sword-registered-recipient
+    predicate: registered-recipient
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-signal
+    description: registered-recipient
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

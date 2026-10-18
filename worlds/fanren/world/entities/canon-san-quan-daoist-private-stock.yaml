@@ -1,0 +1,22 @@
+id: canon-san-quan-daoist-private-stock
+kind: container
+name: 三全道人私用储备
+description: 当前有限材料与行路用石。
+placement: canon-san-quan-daoist
+facts:
+  - id: canon-san-quan-daoist-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-san-quan-daoist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

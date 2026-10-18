@@ -1,0 +1,18 @@
+id: spirit-guard-captain-equipment
+kind: item
+name: 岳照川的青纹长枪
+description: 化神修士惯用的枪形法宝，需本人法力驱动；夺来不等于掌握祭炼控制。
+placement: spirit-guard-captain
+facts:
+  - id: spirit-guard-captain-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-guard-captain
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: kunwu-poison-dragon-pearl
+kind: item
+name: 毒龙珠
+description: 需正确使用才短时提升，事后有严重修养代价，绝非无损升级。
+placement: south-du-sheng-ancestral
+facts:
+  - id: kunwu-poison-dragon-pearl-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-du-sheng-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

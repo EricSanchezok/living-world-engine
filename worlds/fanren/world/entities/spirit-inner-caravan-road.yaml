@@ -1,0 +1,123 @@
+id: spirit-inner-caravan-road
+kind: location
+name: 天元境商旅长路
+description: 连接各城驿站的长途道路，行程可能以月计；没有备粮、车畜或护卫不宜贸然赶路。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-inner-caravan-road-route-spirit-anyuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-gate
+    description: 连接各城驿站的长途道路，行程可能以月计；没有备粮、车畜或护卫不宜贸然赶路。
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-route-spirit-shengshan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-shengshan-market
+    description: 长途商道连接两城；路径存在不表示跨越无需时间和补给。
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-route-spirit-joint-checkpoint
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-joint-checkpoint
+    description: 沿实际商路或经许可的分段运输来到城关，需要相应行程与补给。
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-route-spirit-yuyang-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuyang-city
+    description: 三境初立时建起的古城，炼体学派与灵具作坊沿街相邻。
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: 靠近落日之墓的人族城池，炼体士、修士与凡人共同生活，和边界另一端的同名妖城相隔甚远。
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-route-to-spirit3-maple-city
+    predicate: route-to-spirit3-maple-city
+    value:
+      kind: entity
+      entityId: spirit3-maple-city
+    description: route-to-spirit3-maple-city
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-conditions-spirit3-maple-city
+    predicate: route-conditions-spirit3-maple-city
+    value:
+      kind: text
+      value: 循天元内境道路长途行进，需真实交通和补给。
+    description: 循天元内境道路长途行进，需真实交通和补给。
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-to-spirit3-tianma-waste
+    predicate: route-to-spirit3-tianma-waste
+    value:
+      kind: entity
+      entityId: spirit3-tianma-waste
+    description: route-to-spirit3-tianma-waste
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-conditions-spirit3-tianma-waste
+    predicate: route-conditions-spirit3-tianma-waste
+    value:
+      kind: text
+      value: 从天元侧边路长途进入，荒原无现成水粮，须携足补给；未核另一侧不能随意传送。
+    description: 从天元侧边路长途进入，荒原无现成水粮，须携足补给；未核另一侧不能随意传送。
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-to-spirit3-wanggui-peak
+    predicate: route-to-spirit3-wanggui-peak
+    value:
+      kind: entity
+      entityId: spirit3-wanggui-peak
+    description: route-to-spirit3-wanggui-peak
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-conditions-spirit3-wanggui-peak
+    predicate: route-conditions-spirit3-wanggui-peak
+    value:
+      kind: text
+      value: 沿实地山道长途往返岩台，山中没有固定补给站。
+    description: 沿实地山道长途往返岩台，山中没有固定补给站。
+    access:
+      kind: private
+  - id: spirit-inner-caravan-road-route-blood-xu-ancestral-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xu-ancestral-estate
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-inner-caravan-road-condition-blood-xu-ancestral-estate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循山路经村口通报入庄；祖庙不随外客通行开放。
+    description: 循山路经村口通报入庄；祖庙不随外客通行开放。
+    access:
+      kind: public
+  - id: blood-ice-cache-hidden-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-ice-cache
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 通过实际勘察、已验证旧线索或冰魄亲述辨认荒坡地下入口；仍须经过真实路程并处理门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

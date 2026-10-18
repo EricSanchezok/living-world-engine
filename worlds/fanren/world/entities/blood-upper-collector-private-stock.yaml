@@ -1,0 +1,22 @@
+id: blood-upper-collector-private-stock
+kind: container
+name: 上宗收供使私用石料
+description: 本人私用储备，公款另存，不能代偿组织已定支出。
+placement: blood-upper-collector
+facts:
+  - id: blood-upper-collector-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-upper-collector
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

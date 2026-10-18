@@ -1,0 +1,34 @@
+id: xlt-portal
+kind: item
+name: 休眠空间薄弱处
+description: 没有敞开通道的空间薄弱处，普通视野看不到另一边。
+placement: xlt-inner-thicket
+facts:
+  - id: xlt-portal-state
+    predicate: portal-state
+    value:
+      kind: text
+      value: 休眠，未打开；一侧在小灵天林下裂隙，另一侧当前在灰珊海岭，未来可随界面漂移。
+    description: 休眠，未打开；一侧在小灵天林下裂隙，另一侧当前在灰珊海岭，未来可随界面漂移。
+    access:
+      kind: private
+  - id: xlt-portal-other-end
+    predicate: connected-to
+    value:
+      kind: entity
+      entityId: xlt-outer-seamount
+    description: connected-to
+    access:
+      kind: private
+  - id: xlt-portal-passage
+    predicate: passage-condition
+    value:
+      kind: text
+      value: 找到位置后仍须实际空间手段稳住通道、供能和承受空间压力；携带他人增加负担，失败可能受伤或漂失，不能由入口名字直接跨界。
+    description: 找到位置后仍须实际空间手段稳住通道、供能和承受空间压力；携带他人增加负担，失败可能受伤或漂失，不能由入口名字直接跨界。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

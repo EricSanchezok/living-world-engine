@@ -1,0 +1,26 @@
+id: fengyuan-residence-wu-ling-lady
+kind: location
+name: 乌灵夫人静修居
+description: 独立院落设有试法空地和收藏静室，门前留一处可坐谈的石台。
+placement: fengyuan-guli-domain
+facts:
+  - id: fengyuan-residence-wu-ling-lady-route-to-fengyuan-guli-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-guli-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-residence-wu-ling-lady-route-conditions-fengyuan-guli-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

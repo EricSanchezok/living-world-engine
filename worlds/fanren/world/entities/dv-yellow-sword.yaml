@@ -1,0 +1,18 @@
+id: dv-yellow-sword
+kind: item
+name: 黄色古剑
+description: 一口完整古剑，可导元婴法力斩击；威力取决于使用者的施术能力。
+placement: dv-ancient-storage-bag
+facts:
+  - id: dv-yellow-sword-unclaimed
+    predicate: unclaimed
+    value:
+      kind: text
+      value: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    description: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,212 @@
+id: canon-abyss-zhu-king
+kind: person
+name: 朱姓妖王
+description: 地渊高阶妖修，喜欢研究不同层次的矿物和暗流。
+placement: feiling-zhu-hollow
+facts:
+  - id: canon-abyss-zhu-king-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-abyss-zhu-king
+  - id: canon-abyss-zhu-king-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体妖体、土法与地势勘察。
+    description: 合体妖体、土法与地势勘察。
+    access:
+      kind: agents
+      agentIds:
+        - canon-abyss-zhu-king
+  - id: canon-abyss-zhu-king-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 妖修法体，具体种属外人尚不能凭容貌确定。
+    description: 妖修法体，具体种属外人尚不能凭容貌确定。
+    access:
+      kind: agents
+      agentIds:
+        - canon-abyss-zhu-king
+  - id: canon-abyss-zhu-king-contact-canon-mu-qing
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: regional-acquaintance
+    access:
+      kind: private
+  - id: canon-abyss-zhu-king-contact-canon-di-xue
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: regional-acquaintance
+    access:
+      kind: private
+  - id: canon-abyss-zhu-king-contact-canon-liu-zu
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-liu-zu
+    description: regional-acquaintance
+    access:
+      kind: private
+  - id: canon-abyss-zhu-king-contact-canon-blue-ghost-woman
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-blue-ghost-woman
+    description: regional-acquaintance
+    access:
+      kind: private
+meters:
+  - id: canon-abyss-zhu-king-health
+    definition_id: health
+    current: 100
+  - id: canon-abyss-zhu-king-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-abyss-zhu-king-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-abyss-zhu-king-force
+    definition_id: force
+    value: 7
+  - id: canon-abyss-zhu-king-craft
+    definition_id: craft
+    value: 4
+  - id: canon-abyss-zhu-king-perception
+    definition_id: perception
+    value: 7
+  - id: canon-abyss-zhu-king-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-abyss-zhu-king
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地渊高阶妖修，喜欢研究不同层次的矿物和暗流。
+      voice: 说话谨慎，爱用见过的岩层举例，但遇新奇地貌也会冒险。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 寻找安全的深层观测地点，换取能稳住法体的灵材。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 朱姓妖王
+        description: 地渊高阶妖修，喜欢研究不同层次的矿物和暗流。
+        status: observed
+      - id: location
+        name: 朱姓妖王石府
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-feiling-zhu-private-stock
+        name: 朱姓妖王私用储备
+        description: 个人勘察和修行材料。
+        status: observed
+      - id: known-canon-mu-qing
+        name: 木青
+        description: 地渊高阶邻居，知道其居所大概方向，曾有材料交换。
+        status: observed
+      - id: known-canon-di-xue
+        name: 地血
+        description: 地渊高阶邻居，知道其居所大概方向，曾有材料交换。
+        status: observed
+      - id: known-canon-liu-zu
+        name: 六足
+        description: 地渊高阶邻居，知道其居所大概方向，曾有材料交换。
+        status: observed
+      - id: known-canon-blue-ghost-woman
+        name: 蓝鬼婆
+        description: 地渊高阶邻居，知道其居所大概方向，曾有材料交换。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体妖体、土法与地势勘察。
+        description: 合体妖体、土法与地势勘察。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 妖修法体，具体种属外人尚不能凭容貌确定。
+        description: 妖修法体，具体种属外人尚不能凭容貌确定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        description: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-abyss-zhu-king
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-zhu-hollow
+      - local_entity_id: known-feiling-zhu-private-stock
+        canonical_entity_ids:
+          - feiling-zhu-private-stock
+      - local_entity_id: known-canon-mu-qing
+        canonical_entity_ids:
+          - canon-mu-qing
+      - local_entity_id: known-canon-di-xue
+        canonical_entity_ids:
+          - canon-di-xue
+      - local_entity_id: known-canon-liu-zu
+        canonical_entity_ids:
+          - canon-liu-zu
+      - local_entity_id: known-canon-blue-ghost-woman
+        canonical_entity_ids:
+          - canon-blue-ghost-woman

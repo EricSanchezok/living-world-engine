@@ -1,0 +1,42 @@
+id: guanghan-mountain-chain
+kind: location
+name: 界内连山
+description: 连绵峰岭间有虫群和兽径，旧图不能担保今日安全。
+placement: guanghan-realm
+facts:
+  - id: guanghan-mountain-chain-route-guanghan-barren-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-barren-plain
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mountain-chain-condition-guanghan-barren-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-mountain-chain-route-guanghan-yellow-ruins
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-yellow-ruins
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mountain-chain-condition-guanghan-yellow-ruins
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

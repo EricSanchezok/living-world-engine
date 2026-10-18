@@ -1,0 +1,26 @@
+id: feiling-corrupt-forest
+kind: location
+name: 腐叶林
+description: 暗秽凝成的黑树围住一湾水潭，地面腐叶深厚，神识在林间尤其迟滞。
+placement: feiling-abyss-2
+facts:
+  - id: feiling-corrupt-forest-route-to-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-corrupt-forest-route-conditions-feiling-abyss-2
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 进林暗秽更浓，神识搜寻受限。
+    description: 进林暗秽更浓，神识搜寻受限。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

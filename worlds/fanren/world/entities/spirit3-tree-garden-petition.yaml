@@ -1,0 +1,26 @@
+id: spirit3-tree-garden-petition
+kind: item
+name: 枝台药圃呈文
+description: 颜木青请求用6份公料增设苗床；现有成药料与申请额分开，不会凭批准直接长药。
+placement: spirit3-tianling-hall
+facts:
+  - id: spirit3-tree-garden-petition-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianling-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-tree-garden-petition-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: spirit-tianling-gardener
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

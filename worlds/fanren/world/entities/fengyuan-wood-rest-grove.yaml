@@ -1,0 +1,26 @@
+id: fengyuan-wood-rest-grove
+kind: location
+name: 青枝修养林
+description: 供木族静养和观察树势的小林，灌溉沟渠连接外侧溪流。
+placement: fengyuan-wood-sanctuary
+facts:
+  - id: fengyuan-wood-rest-grove-route-fengyuan-wood-sanctuary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-wood-sanctuary
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-wood-rest-grove-condition-fengyuan-wood-sanctuary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 供木族静养和观察树势的小林，灌溉沟渠连接外侧溪流。
+    description: 供木族静养和观察树势的小林，灌溉沟渠连接外侧溪流。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

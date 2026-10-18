@@ -1,0 +1,22 @@
+id: dv-dayan-stock
+kind: container
+name: 密室旧灵石
+description: 仍存少量维持寄神用石，不能算千竹教公库。
+placement: dv-dayan-secret-room
+facts:
+  - id: dv-dayan-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-da-yan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 360
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

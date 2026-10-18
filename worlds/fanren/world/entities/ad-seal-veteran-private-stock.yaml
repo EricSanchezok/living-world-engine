@@ -1,0 +1,22 @@
+id: ad-seal-veteran-private-stock
+kind: container
+name: 石瘦的自用储备
+description: 本人财物，与机构公库和门人财产分开。
+placement: ad-seal-veteran
+facts:
+  - id: ad-seal-veteran-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-seal-veteran
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

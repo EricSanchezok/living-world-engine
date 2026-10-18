@@ -1,0 +1,34 @@
+id: dajin-bailu-academy
+kind: location
+name: 白露书院
+description: 建于千余年前的书院，竹林中分布红墙白楼，学业与修行都要经过实际学习。
+placement: dajin-huanyun
+facts:
+  - id: dajin-bailu-admission-policy
+    predicate: admission-policy
+    value:
+      kind: text
+      value: 已有师承不当然被拒；须查身份、资质和来历。不得仅凭声称清白自动入院，也不凭四灵根保证录取。
+    description: 适用于本院招生，不决定其他宗门标准。
+    access:
+      kind: public
+  - id: dajin-bailu-upper-study
+    predicate: education
+    value:
+      kind: text
+      value: 上院修行要求培养浩然之气，灵根与法力不能替代读书和相应训练。
+    description: 就读阶段须实际学习。
+    access:
+      kind: public
+  - id: dajin-bailu-academy-route-dajin-huanyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huanyun
+    description: 沿山道到书院门，门禁不会因到达就消失。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

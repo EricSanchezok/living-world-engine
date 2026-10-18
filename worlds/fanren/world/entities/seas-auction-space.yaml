@@ -1,0 +1,26 @@
+id: seas-auction-space
+kind: location
+name: 商盟拍卖洞天
+description: 有广场、石台、飞屋和警戒禁制，当前只受理小规模委托洽谈。
+placement: seas-auction-tower
+facts:
+  - id: seas-auction-space-route-seas-auction-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-auction-tower
+    description: route-to
+    access:
+      kind: public
+  - id: seas-auction-space-condition-seas-auction-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经塔内空间入口入场，须有效入场资格与当前安排；拍卖不保证任何物品一定出售。
+    description: 经塔内空间入口入场，须有效入场资格与当前安排；拍卖不保证任何物品一定出售。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

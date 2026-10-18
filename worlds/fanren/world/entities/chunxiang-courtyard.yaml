@@ -1,0 +1,18 @@
+id: chunxiang-courtyard
+kind: location
+name: 春香酒楼后院
+description: 酒楼的偏僻后院，带有供人住宿的厢房。
+placement: chunxiang-inn
+facts:
+  - id: chunxiang-courtyard-route-chunxiang-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: chunxiang-inn
+    description: 酒楼的偏僻后院，带有供人住宿的厢房。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

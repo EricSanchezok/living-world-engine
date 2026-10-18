@@ -1,0 +1,212 @@
+id: canon-lei-yuan
+kind: person
+name: 雷元
+description: 雷鸣分盟主事，瘦高银甲，做事分明，尊重有清楚分工的合作者。
+placement: seas-thunder-headquarters
+facts:
+  - id: canon-lei-yuan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-lei-yuan
+  - id: canon-lei-yuan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘雷法、法体防护与跨洲事务调度。
+    description: 大乘雷法、法体防护与跨洲事务调度。
+    access:
+      kind: agents
+      agentIds:
+        - canon-lei-yuan
+  - id: canon-lei-yuan-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-lei-yuan
+meters:
+  - id: canon-lei-yuan-health
+    definition_id: health
+    current: 100
+  - id: canon-lei-yuan-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-lei-yuan-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-lei-yuan-force
+    definition_id: force
+    value: 8
+  - id: canon-lei-yuan-craft
+    definition_id: craft
+    value: 7
+  - id: canon-lei-yuan-perception
+    definition_id: perception
+    value: 8
+  - id: canon-lei-yuan-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-lei-yuan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 雷鸣分盟主事，瘦高银甲，做事分明，尊重有清楚分工的合作者。
+      voice: 语调冷硬，很少附和恭维；职责确定后便不随意插手同僚具体安排。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 为本轮公开出行与盟内用阵安排运力，确保公私库存和批准手续分明。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 雷元
+        description: 雷鸣分盟主事，瘦高银甲，做事分明，尊重有清楚分工的合作者。
+        status: observed
+      - id: location
+        name: 雷鸣商盟总堂
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-lei-yuan-private-stock
+        name: 雷元的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-ming-zun
+        name: 明尊
+        description: 三陆分盟主事，彼此有真实公务往来。
+        status: observed
+      - id: known-canon-bi-ying
+        name: 碧影
+        description: 血天分盟的长期同僚，可通过商盟传讯联系但不知其未说出的私事。
+        status: observed
+      - id: known-seas-helian-league
+        name: 赫连商盟
+        description: 自己参与的三陆组织，有公产与议事约定。
+        status: observed
+      - id: known-seas-thunder-signal-wall
+        name: 商盟雷鸣传讯壁
+        description: 自己分盟实际讯端。
+        status: observed
+      - id: known-seas-thunder-relay-hall
+        name: 雷鸣商盟传送厅
+        description: 自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。
+        status: observed
+      - id: known-seas-thunder-array-core
+        name: 商盟雷鸣阵体
+        description: 连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。
+        status: observed
+      - id: known-seas-thunder-energy
+        name: 商盟雷鸣公用供能库
+        description: 自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘雷法、法体防护与跨洲事务调度。
+        description: 大乘雷法、法体防护与跨洲事务调度。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: signal-cost
+        subjectId: self
+        predicate: signal-cost
+        value:
+          kind: text
+          value: 跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。
+        description: 跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-lei-yuan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-thunder-headquarters
+      - local_entity_id: known-canon-lei-yuan-private-stock
+        canonical_entity_ids:
+          - canon-lei-yuan-private-stock
+      - local_entity_id: known-canon-ming-zun
+        canonical_entity_ids:
+          - canon-ming-zun
+      - local_entity_id: known-canon-bi-ying
+        canonical_entity_ids:
+          - canon-bi-ying
+      - local_entity_id: known-seas-helian-league
+        canonical_entity_ids:
+          - seas-helian-league
+      - local_entity_id: known-seas-thunder-signal-wall
+        canonical_entity_ids:
+          - seas-thunder-signal-wall
+      - local_entity_id: known-seas-thunder-relay-hall
+        canonical_entity_ids:
+          - seas-thunder-relay-hall
+      - local_entity_id: known-seas-thunder-array-core
+        canonical_entity_ids:
+          - seas-thunder-array-core
+      - local_entity_id: known-seas-thunder-energy
+        canonical_entity_ids:
+          - seas-thunder-energy

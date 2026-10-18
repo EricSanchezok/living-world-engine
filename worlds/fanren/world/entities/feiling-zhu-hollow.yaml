@@ -1,0 +1,26 @@
+id: feiling-zhu-hollow
+kind: location
+name: 朱姓妖王石府
+description: 石室中陈列着地层标本，主人习惯先查地质再派人深入。
+placement: feiling-abyss-4
+facts:
+  - id: feiling-zhu-hollow-route-feiling-abyss-4
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-4
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-zhu-hollow-condition-feiling-abyss-4
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石室中陈列着地层标本，主人习惯先查地质再派人深入。
+    description: 石室中陈列着地层标本，主人习惯先查地质再派人深入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

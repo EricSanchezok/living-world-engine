@@ -1,0 +1,27 @@
+id: yue-workyard-damaged-disc
+kind: item
+name: 待修引火盘
+description: 一件用于低阶炼制的器物，接点磨损，尚未修好。
+placement: yue-huangfeng-workyard
+facts:
+  - id: yue-workyard-damaged-disc-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-workyard-damaged-disc-fault
+    predicate: device-fault
+    value:
+      kind: text
+      value: 东侧接点磨损，基座尚完好。辨清后更换两份合适器材并用一小时校准可以恢复原有引火功能，不会提高成宝率到必成。
+    description: 东侧接点磨损，基座尚完好。辨清后更换两份合适器材并用一小时校准可以恢复原有引火功能，不会提高成宝率到必成。
+    access:
+      kind: discoverable
+      condition: 获准近看器盘接点，并具备低阶炼器或阵器修补知识。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

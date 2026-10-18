@@ -1,0 +1,18 @@
+id: xlt-night-marsh
+kind: location
+name: 夜眠毒沼
+description: 潮湿的沼泽中长着带毒植物，熟悉水道者仍须留意雾气和毒性。
+placement: xlt-realm
+facts:
+  - id: xlt-night-marsh-route-xlt-moon-terrain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-moon-terrain
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

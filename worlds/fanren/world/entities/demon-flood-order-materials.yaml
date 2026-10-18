@@ -1,0 +1,29 @@
+id: demon-flood-order-materials
+kind: item
+name: 水桨轴备料
+description: 水桨轴备料，交接痕迹清楚可辨。
+placement: demon-flood-craftsman
+facts:
+  - id: demon-flood-order-materials-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-flood-craftsman
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-flood-order-materials-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 已购五份炼制材料，仅供此次水桨轴制作；尚未消耗。
+    description: 已购五份炼制材料，仅供此次水桨轴制作；尚未消耗。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+ratings: []
+shared_activity_resources: []

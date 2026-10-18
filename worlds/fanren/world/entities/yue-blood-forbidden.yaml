@@ -1,0 +1,74 @@
+id: yue-blood-forbidden
+kind: location
+name: 血色禁地
+description: 古禁围起的险地，外墙以风刃阻行，内里灵药与妖兽皆真实存在。
+placement: human-yue
+facts:
+  - id: yue-blood-forbidden-route-yue-blood-outer-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-outer-slope
+    description: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-travel-yue-blood-outer-slope
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    description: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-route-yue-blood-herb-gully
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-herb-gully
+    description: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-travel-yue-blood-herb-gully
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    description: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-route-yue-blood-central-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-central-garden
+    description: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-travel-yue-blood-central-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    description: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-phase
+    predicate: opening-cycle-phase
+    value:
+      kind: text
+      value: 开篇时距下一次正常弱化四共同年；弱化持续五共同日。此为初始相位记录，之后以wind-seal-phase为准，弱化本身不开通道路。
+    description: 开篇时距下一次正常弱化四共同年；弱化持续五共同日。此为初始相位记录，之后以wind-seal-phase为准，弱化本身不开通道路。
+    access:
+      kind: public
+  - id: yue-blood-forbidden-route-yue-blood-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-one-sky
+    description: 从禁地外围找到通往中心区的险峰夹道，不能凭地点名称越过未知地形。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

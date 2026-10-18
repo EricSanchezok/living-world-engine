@@ -1,0 +1,22 @@
+id: outerstar-qiyuan-array-stock
+kind: container
+name: 传送维护用石与账册
+description: 公用维护库存，须按实消耗，收费与个人钱袋分开。
+placement: outerstar-qiyuan-array
+facts:
+  - id: outerstar-qiyuan-array-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-port-coalition
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 36
+  - definition_id: low-stone
+    amount: 2100
+ratings: []
+shared_activity_resources: []

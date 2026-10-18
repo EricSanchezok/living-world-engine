@@ -1,0 +1,26 @@
+id: global-true-toad-magnetic-mountain
+kind: location
+name: 灵磁石巨山
+description: 巨山中有向地下延伸的湿滑通道。
+placement: global-true-toad-lakes
+facts:
+  - id: global-magnetic-earth-escape
+    predicate: earth-escape-hazard
+    value:
+      kind: text
+      value: 山内灵磁矿会吸制遁入山石的带灵力存在，不施土遁时不因此自动被吸。
+    description: 山内灵磁矿会吸制遁入山石的带灵力存在，不施土遁时不因此自动被吸。
+    access:
+      kind: public
+  - id: global-true-toad-magnetic-mountain-route-global-true-toad-lakes
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-true-toad-lakes
+    description: 穿过湖区可抵巨山，地下路径狭滑。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

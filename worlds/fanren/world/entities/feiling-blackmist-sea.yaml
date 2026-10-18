@@ -1,0 +1,42 @@
+id: feiling-blackmist-sea
+kind: location
+name: 黑冥雾海
+description: 浓黑雾海侵蚀生灵血肉，深处另有禁空之力，远望看不到尽头。
+placement: feiling-heiming-peninsula
+facts:
+  - id: feiling-blackmist-sea-route-to-feiling-heiyin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-heiyin-mountains
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-blackmist-sea-route-conditions-feiling-heiyin-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 雾海侵蚀身魂，飞行会受禁空压制，缺防护不宜深入。
+    description: 雾海侵蚀身魂，飞行会受禁空压制，缺防护不宜深入。
+    access:
+      kind: private
+  - id: feiling-blackmist-sea-route-to-feiling-blackmist-bone-nest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-blackmist-bone-nest
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-blackmist-sea-route-conditions-feiling-blackmist-bone-nest
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 越近骨巢阴气越强，方位和退路须自己确认。
+    description: 越近骨巢阴气越强，方位和退路须自己确认。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

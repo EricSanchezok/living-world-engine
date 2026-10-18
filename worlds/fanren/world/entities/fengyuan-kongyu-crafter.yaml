@@ -1,0 +1,142 @@
+id: fengyuan-kongyu-crafter
+kind: person
+name: 环汀
+description: 负责修整储物小器的元婴空鱼工匠，看重能够亲手完成的交易。
+placement: fengyuan-shura-kongyu-village
+facts:
+  - id: fengyuan-kongyu-crafter-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: fengyuan-kongyu-crafter-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 空鱼空间纹识读、小匣修补与避火；只能维护现有小器，不能新造洞天宝。
+    description: 空鱼空间纹识读、小匣修补与避火；只能维护现有小器，不能新造洞天宝。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-kongyu-crafter-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-kongyu-crafter-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: fengyuan-kongyu-crafter-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: fengyuan-kongyu-crafter-force
+    definition_id: force
+    value: 4
+  - id: fengyuan-kongyu-crafter-craft
+    definition_id: craft
+    value: 2
+  - id: fengyuan-kongyu-crafter-perception
+    definition_id: perception
+    value: 4
+  - id: fengyuan-kongyu-crafter-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: fengyuan-kongyu-crafter
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 负责修整储物小器的元婴空鱼工匠，看重能够亲手完成的交易。
+      voice: 喜欢把成品递给人实际试；被问家族大事时会请对方去找流阙而不替他表态。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 等待送出的试作匣反馈，准备向来访者演示同一套空间工艺；希望交换手艺能比失去族人更有价值。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 环汀
+        description: 负责修整储物小器的元婴空鱼工匠，看重能够亲手完成的交易。
+        status: observed
+      - id: location
+        name: 乾火池下空鱼聚落
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-crafter-private-stock
+        name: 环汀私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-keeper
+        name: 流阙
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-courier
+        name: 岑足
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-trial-box
+        name: 空鱼试作小匣
+        description: 环汀用已有旧匣修好的演示器，可容下三件杯碗大小死物，不装活人；每次存取耗操作者2法力。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-craft-stock
+        name: 空鱼修器公料
+        description: 可再修三个同规格小匣的材料预算，每件实耗两份料、三中阶石，工匠也须工作一日本地时长。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 空鱼空间纹识读、小匣修补与避火；只能维护现有小器，不能新造洞天宝。
+        description: 空鱼空间纹识读、小匣修补与避火；只能维护现有小器，不能新造洞天宝。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-kongyu-crafter
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-shura-kongyu-village
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-crafter-private-stock
+        canonical_entity_ids:
+          - fengyuan-kongyu-crafter-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-keeper
+        canonical_entity_ids:
+          - fengyuan-kongyu-keeper
+      - local_entity_id: fengyuan-review-fengyuan-shura-courier
+        canonical_entity_ids:
+          - fengyuan-shura-courier
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-trial-box
+        canonical_entity_ids:
+          - fengyuan-kongyu-trial-box
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-craft-stock
+        canonical_entity_ids:
+          - fengyuan-kongyu-craft-stock

@@ -1,0 +1,26 @@
+id: red-water-peak
+kind: location
+name: 赤水峰
+description: 山中一峰，峰下有瀑布，附近可见练功空地。
+placement: caixia-mountain
+facts:
+  - id: red-water-peak-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 山中一峰，峰下有瀑布，附近可见练功空地。
+    access:
+      kind: public
+  - id: red-water-peak-route-valley-peak-path
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: source-qixuan-valley-peak-path
+    description: 一条山间小路连通谷地与山峰。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

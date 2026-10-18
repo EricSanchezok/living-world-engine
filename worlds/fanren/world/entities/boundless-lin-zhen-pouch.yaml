@@ -1,0 +1,20 @@
+id: boundless-lin-zhen-pouch
+kind: item
+name: 林贞的私用行囊
+description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+placement: boundless-lin-zhen
+facts:
+  - id: boundless-lin-zhen-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: boundless-lin-zhen
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+ratings: []
+shared_activity_resources: []

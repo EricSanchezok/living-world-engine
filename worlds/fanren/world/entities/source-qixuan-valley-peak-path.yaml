@@ -1,0 +1,26 @@
+id: source-qixuan-valley-peak-path
+kind: location
+name: 谷峰间山路
+description: 神手谷与赤水峰之间的山间小径，土石路面有低洼处，树下散着落叶。
+placement: caixia-mountain
+facts:
+  - id: source-qixuan-valley-peak-path-route-divine-hand-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: divine-hand-valley
+    description: 沿山间小路可到相邻地点。
+    access:
+      kind: public
+  - id: source-qixuan-valley-peak-path-route-red-water-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: red-water-peak
+    description: 沿山间小路可到相邻地点。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

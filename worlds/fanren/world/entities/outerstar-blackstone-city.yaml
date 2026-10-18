@@ -1,0 +1,130 @@
+id: outerstar-blackstone-city
+kind: location
+name: 黑石城
+description: 屋舍以黑石砌成，窄街通向数家交易场。行人和货物从城门入内。
+placement: human-qiyuan-island
+facts:
+  - id: outerstar-blackstone-city-route-human-qiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-qiyuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-human-qiyuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 屋舍以黑石砌成，窄街通向数家交易场。行人和货物从城门入内。
+    description: 屋舍以黑石砌成，窄街通向数家交易场。行人和货物从城门入内。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-qiyuan-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-qiyuan-array
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-qiyuan-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 传送石屋与城务处相邻，来者先核验防护和目的地。
+    description: 传送石屋与城务处相邻，来者先核验防护和目的地。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-mingzhu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-mingzhu
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-mingzhu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 鉴定、寄售与拍卖分在不同房间。
+    description: 鉴定、寄售与拍卖分在不同房间。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-cunjin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-cunjin
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-cunjin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按药材、骨角与矿料分柜陈列，缺货时可留下委托。
+    description: 按药材、骨角与矿料分柜陈列，缺货时可留下委托。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-lodging-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-lodging-office
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-lodging-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 凡人求职者暂住在相连石屋，登记册记下雇主与去处。
+    description: 凡人求职者暂住在相连石屋，登记册记下雇主与去处。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-map-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-map-shop
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-map-shop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 新旧海图摊在案上，图边注明绘制者和大概日期。
+    description: 新旧海图摊在案上，图边注明绘制者和大概日期。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-reef-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-reef-village
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-condition-outerstar-reef-village
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须用船或御器沿近岸海路往返，凡俗小船通常约半日；天气和负载会改变行程。
+    description: 须用船或御器沿近岸海路往返，凡俗小船通常约半日；天气和负载会改变行程。
+    access:
+      kind: public
+  - id: outerstar-blackstone-city-route-outerstar-blackstone-dock
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-dock
+    description: 沿城门通向海边的路步行；离城仍须留意守卫和海况。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

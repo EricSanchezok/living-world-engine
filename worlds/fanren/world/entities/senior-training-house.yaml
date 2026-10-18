@@ -1,0 +1,18 @@
+id: senior-training-house
+kind: location
+name: 前辈静修院
+description: 门中资深武者使用的清静院落，访客需先通报。
+placement: caixia-mountain
+facts:
+  - id: senior-training-house-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 门中资深武者使用的清静院落，访客需先通报。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

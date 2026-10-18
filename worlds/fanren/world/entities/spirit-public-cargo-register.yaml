@@ -1,0 +1,26 @@
+id: spirit-public-cargo-register
+kind: item
+name: 货场公开到货簿
+description: 记载交接地点、到货时刻和经手人；各商行私单不自动公开。
+placement: spirit-wharf
+facts:
+  - id: spirit-public-cargo-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yard-steward
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-public-cargo-register-inspection-policy
+    predicate: inspection-policy
+    value:
+      kind: text
+      value: 可查本人货单与取得授权的记录，须实际出示关系凭据并翻查对应页；未送入货场的交易和私下口头承诺不在簿中。
+    description: 可查本人货单与取得授权的记录，须实际出示关系凭据并翻查对应页；未送入货场的交易和私下口头承诺不在簿中。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

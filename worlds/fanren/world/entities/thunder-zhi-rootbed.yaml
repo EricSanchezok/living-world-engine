@@ -1,0 +1,18 @@
+id: thunder-zhi-rootbed
+kind: item
+name: 芝仙藏根地
+description: 芝仙亲自养护的隐蔽根床，不是无主药材或无限再生采集点。
+placement: thunder-herb-hidden-grove
+facts:
+  - id: thunder-zhi-rootbed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-zhi-xian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

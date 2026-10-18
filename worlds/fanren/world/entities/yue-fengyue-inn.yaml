@@ -1,0 +1,50 @@
+id: yue-fengyue-inn
+kind: location
+name: 风悦客栈
+description: 堡东南近墙的客栈，来客入住需核姓名与空房。
+placement: yue-yanling-fort
+facts:
+  - id: yue-fengyue-inn-route-yue-yanling-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yanling-fort
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+  - id: yue-fengyue-inn-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-fengyue-inn-route-yue-fengyue-room-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fengyue-room-1
+    description: 客栈内通道通向房门，关闭的房门需要对应钥匙开启。
+    access:
+      kind: public
+  - id: yue-fengyue-inn-route-yue-fengyue-room-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fengyue-room-2
+    description: 客栈内通道通向房门，关闭的房门需要对应钥匙开启。
+    access:
+      kind: public
+  - id: yue-fengyue-inn-price
+    predicate: service-price
+    value:
+      kind: text
+      value: 每间每日二十文，食物另计；实际出租与收款须由掌柜办理。
+    description: 每间每日二十文，食物另计；实际出租与收款须由掌柜办理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

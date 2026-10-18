@@ -1,0 +1,135 @@
+id: fengyuan-greenlimb-speaker
+kind: person
+name: 弥颈
+description: 隐谷的外语讲述者，想用少量贸易换取更可靠的谷外消息。
+placement: fengyuan-greenlimb-refuge
+facts:
+  - id: fengyuan-greenlimb-speaker-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: private
+  - id: fengyuan-greenlimb-speaker-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 绿肢法体、外语交涉、谷口辨路和短程遁行。
+    description: 绿肢法体、外语交涉、谷口辨路和短程遁行。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-greenlimb-speaker-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-greenlimb-speaker-mana
+    definition_id: mana
+    current: 900
+quantities: []
+ratings:
+  - id: fengyuan-greenlimb-speaker-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: fengyuan-greenlimb-speaker-force
+    definition_id: force
+    value: 5
+  - id: fengyuan-greenlimb-speaker-craft
+    definition_id: craft
+    value: 3
+  - id: fengyuan-greenlimb-speaker-perception
+    definition_id: perception
+    value: 5
+  - id: fengyuan-greenlimb-speaker-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: fengyuan-greenlimb-speaker
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 隐谷的外语讲述者，想用少量贸易换取更可靠的谷外消息。
+      voice: 会先确认对方说的词意，遇到夸大报价会安静地等对方自己收回。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 陪曲枝议定可交换的花屑数量，决定是否接受一次谷外会面。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 弥颈
+        description: 隐谷的外语讲述者，想用少量贸易换取更可靠的谷外消息。
+        status: observed
+      - id: location
+        name: 绿肢隐谷
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-greenlimb-speaker-private-stock
+        name: 弥颈私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-greenlimb-gardener
+        name: 曲枝
+        description: 多年共同照顾这处隐谷，花圃和交易分工需彼此商议。
+        status: observed
+      - id: fengyuan-review-fengyuan-greenlimb-shed-petals
+        name: 自然落下的晶花屑
+        description: 本群共有四份花屑，可商议交换。
+        status: observed
+      - id: fengyuan-review-fengyuan-greenlimb-flower
+        name: 圣晶之花
+        description: 知道这株花的养护位置，关系本群利益。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 绿肢法体、外语交涉、谷口辨路和短程遁行。
+        description: 绿肢法体、外语交涉、谷口辨路和短程遁行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-greenlimb-speaker
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-greenlimb-refuge
+      - local_entity_id: fengyuan-review-fengyuan-greenlimb-speaker-private-stock
+        canonical_entity_ids:
+          - fengyuan-greenlimb-speaker-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-greenlimb-gardener
+        canonical_entity_ids:
+          - fengyuan-greenlimb-gardener
+      - local_entity_id: fengyuan-review-fengyuan-greenlimb-shed-petals
+        canonical_entity_ids:
+          - fengyuan-greenlimb-shed-petals
+      - local_entity_id: fengyuan-review-fengyuan-greenlimb-flower
+        canonical_entity_ids:
+          - fengyuan-greenlimb-flower

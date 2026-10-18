@@ -1,0 +1,46 @@
+id: dv-garden-contact
+kind: location
+name: 内谷孤峰侧隙
+description: 一处狭窄山隙，空间波动与别处不同，当前存在通向药园残骸的薄弱对应；肉眼看不见门户。
+placement: human-devil-valley
+facts:
+  - id: dv-garden-contact-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 在现场感应到对应弱点并有足够空间知识验证；角色不得由全书视角知道这条路。
+  - id: dv-garden-contact-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 正常内谷山路勘察到山隙；空间对应尚闭合，抵达不等于进入残园。
+    description: 正常内谷山路勘察到山隙；空间对应尚闭合，抵达不等于进入残园。
+    access:
+      kind: discoverable
+      condition: 在现场感应到对应弱点并有足够空间知识验证；角色不得由全书视角知道这条路。
+  - id: dv-garden-contact-route-associated-lingmiao-remnant
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: associated-lingmiao-remnant
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 在现场感应到对应弱点并有足够空间知识验证；角色不得由全书视角知道这条路。
+  - id: dv-garden-contact-condition-associated-lingmiao-remnant
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两处薄弱点目前闭合；须精细探测、相容的破界力量及持续供能才可能打开短暂窗口。至少需要两位元婴修士各持续投入100法力量，或经实际验证的相当能力。空间错位会改变落点并造成危险。
+    description: 两处薄弱点目前闭合；须精细探测、相容的破界力量及持续供能才可能打开短暂窗口。至少需要两位元婴修士各持续投入100法力量，或经实际验证的相当能力。空间错位会改变落点并造成危险。
+    access:
+      kind: discoverable
+      condition: 在现场感应到对应弱点并有足够空间知识验证；角色不得由全书视角知道这条路。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

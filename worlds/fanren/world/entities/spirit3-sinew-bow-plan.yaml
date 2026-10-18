@@ -1,0 +1,18 @@
+id: spirit3-sinew-bow-plan
+kind: item
+name: 试制筋弓图
+description: 用一条地蛟筋与2份工料制一把普通筋弓；先试弹性再施工，工艺失败会损耗材料，无法由弓弦自动获得法器效果。
+placement: spirit-device-smith
+facts:
+  - id: spirit3-sinew-bow-plan-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

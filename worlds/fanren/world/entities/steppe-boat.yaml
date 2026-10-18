@@ -1,0 +1,18 @@
+id: steppe-boat
+kind: item
+name: 河伯的平底木舟
+description: 可运至多四名成人或300斤货，近岸摆渡靠橹和绳；主流长途航行超出此舟现有能力。
+placement: steppe-tianshui-tributary
+facts:
+  - id: steppe-boat-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-he-bo
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

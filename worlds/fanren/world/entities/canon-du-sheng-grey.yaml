@@ -1,0 +1,162 @@
+id: canon-du-sheng-grey
+kind: person
+name: 毒圣灰发长老
+description: 门中灰发长老，尚未前往昆吾。
+placement: south-du-sheng-court
+facts:
+  - id: canon-du-sheng-grey-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-grey
+  - id: canon-du-sheng-grey-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期防护、驭虫和门内资源协调。
+    description: 元婴初期防护、驭虫和门内资源协调。
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-grey
+  - id: canon-du-sheng-grey-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-grey
+  - id: canon-du-sheng-grey-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-du-sheng-grey-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: south-du-sheng-sect
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: canon-du-sheng-grey-health
+    definition_id: health
+    current: 100
+  - id: canon-du-sheng-grey-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-du-sheng-grey-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-du-sheng-grey-force
+    definition_id: force
+    value: 5
+  - id: canon-du-sheng-grey-craft
+    definition_id: craft
+    value: 4
+  - id: canon-du-sheng-grey-perception
+    definition_id: perception
+    value: 4
+  - id: canon-du-sheng-grey-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-du-sheng-grey
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 门中灰发长老，尚未前往昆吾。
+      voice: 习惯叹一声再说，担心同门缺员时会建议等人齐。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 了解虫棚损耗是否影响接下来门内用量。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 毒圣灰发长老
+        description: 门中灰发长老，尚未前往昆吾。
+        status: observed
+      - id: location
+        name: 毒圣门山门
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-du-sheng-grey-personal-stock
+        name: 毒圣灰发长老的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-south-du-sheng-sect
+        name: 毒圣门
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期防护、驭虫和门内资源协调。
+        description: 元婴初期防护、驭虫和门内资源协调。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-du-sheng-grey
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-du-sheng-court
+      - local_entity_id: known-canon-du-sheng-grey-personal-stock
+        canonical_entity_ids:
+          - canon-du-sheng-grey-personal-stock
+      - local_entity_id: known-south-du-sheng-sect
+        canonical_entity_ids:
+          - south-du-sheng-sect

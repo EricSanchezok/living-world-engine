@@ -1,0 +1,18 @@
+id: void-fire-beasts
+kind: animal-group
+name: 熔岩炎灵兽群
+description: 在炎热地带栖息，不随机凭空补怪。
+placement: void-fire
+facts:
+  - id: void-fire-beasts-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 8
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

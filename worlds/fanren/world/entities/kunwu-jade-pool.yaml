@@ -1,0 +1,26 @@
+id: kunwu-jade-pool
+kind: location
+name: 勾玉潭
+description: 潭水与封禁围绕古径，名字不代表水中可无限取玉。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-jade-pool-route-kunwu-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-square
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-jade-pool-condition-kunwu-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: yinming-storm-ice
+kind: location
+name: 暴风冰坡
+description: 千丈以上阴风加剧，冰面滑且有冻毙前人遗迹。
+placement: associated-yinming
+facts:
+  - id: yinming-storm-ice-route-yinming-storm-foot
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-storm-foot
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-storm-ice-condition-yinming-storm-foot
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+  - id: yinming-storm-ice-route-yinming-storm-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-storm-mist
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-storm-ice-condition-yinming-storm-mist
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: thunder-jiaochi-scan-fuel
+kind: container
+name: 研武院试验用石
+description: 本轮只批准三次所需用石，再试须另筹。
+placement: thunder-jiaochi-research
+facts:
+  - id: thunder-jiaochi-scan-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: tianyuan-yitian-cracked
+kind: item
+name: 开裂护腕
+description: 外壳一条可见裂纹、芯纹完好，用一份工料和20法力可尝试补壳，成功与否需试验。
+placement: tianyuan-yitian-crafter
+facts:
+  - id: tianyuan-yitian-cracked-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-crafter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

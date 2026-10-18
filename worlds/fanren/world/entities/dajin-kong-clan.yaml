@@ -1,0 +1,18 @@
+id: dajin-kong-clan
+kind: organization
+name: 关宁孔家
+description: 关宁修仙世家，有本族职责和对外往来。
+placement: dajin-guanning
+facts:
+  - id: dajin-kong-lineage
+    predicate: lineage
+    value:
+      kind: entity
+      entityId: dajin-tiansheng-sect
+    description: 具有宗门传承联系，不意味着双方库存共有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

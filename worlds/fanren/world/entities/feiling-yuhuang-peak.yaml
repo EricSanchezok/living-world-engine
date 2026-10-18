@@ -1,0 +1,202 @@
+id: feiling-yuhuang-peak
+kind: location
+name: 玉皇顶
+description: 联席长老会议事与各族接待所在的高峰。
+placement: feiling-territory
+facts:
+  - id: feiling-yuhuang-peak-route-feiling-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-territory
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-territory
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 联席长老会议事与各族接待所在的高峰。
+    description: 联席长老会议事与各族接待所在的高峰。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-arena
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-arena
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-arena
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有防护光罩的切磋场，场外另受禁止随意动手的规矩约束。
+    description: 有防护光罩的切磋场，场外另受禁止随意动手的规矩约束。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-guest-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-guest-house
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-guest-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接待不同族支的客人，住宿记录由值事保管。
+    description: 接待不同族支的客人，住宿记录由值事保管。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-tianpeng-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-tianpeng-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天鹏支系生活的区域，族内有不同家庭和职业。
+    description: 天鹏支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-chirong-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chirong-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-chirong-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 赤融支系生活的区域，族内有不同家庭和职业。
+    description: 赤融支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-wuguang-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-wuguang-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-wuguang-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 五光支系生活的区域，族内有不同家庭和职业。
+    description: 五光支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-qiyue-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-qiyue-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-qiyue-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 七越支系生活的区域，族内有不同家庭和职业。
+    description: 七越支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-jiaozhu-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-jiaozhu-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-jiaozhu-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 角鹫支系生活的区域，族内有不同家庭和职业。
+    description: 角鹫支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-baiyu-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-baiyu-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-baiyu-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 白玉支系生活的区域，族内有不同家庭和职业。
+    description: 白玉支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-duya-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-duya-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-duya-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 渡鸦支系生活的区域，族内有不同家庭和职业。
+    description: 渡鸦支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-yuelong-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuelong-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-yuelong-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 来访须经门外通传的高阶修士洞府。
+    description: 来访须经门外通传的高阶修士洞府。
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-route-feiling-abyss-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-wall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuhuang-peak-condition-feiling-abyss-wall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 高墙和符纹玉柱守住地渊入口，守军在附近圆楼驻扎。
+    description: 高墙和符纹玉柱守住地渊入口，守军在附近圆楼驻扎。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

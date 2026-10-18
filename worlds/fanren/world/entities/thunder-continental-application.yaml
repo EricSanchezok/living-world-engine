@@ -1,0 +1,18 @@
+id: thunder-continental-application
+kind: item
+name: 跨洲申请簿
+description: 申请须说明旅客、载物、所需接应与资源来源；获准前没有单凭境界自动生效的许可。
+placement: thunder-fujiao-warden
+facts:
+  - id: thunder-continental-application-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

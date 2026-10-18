@@ -1,0 +1,197 @@
+id: north-zhao-ning
+kind: person
+name: 赵凝
+description: 小极宫当值修士，查验来历但不把陌生人一律当敌人。
+placement: north-gate-room
+facts:
+  - id: north-zhao-ning-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - north-zhao-ning
+  - id: north-zhao-ning-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基寒属性法术和门房禁制辨识。
+    description: 筑基寒属性法术和门房禁制辨识。
+    access:
+      kind: agents
+      agentIds:
+        - north-zhao-ning
+  - id: north-zhao-ning-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - north-zhao-ning
+  - id: north-zhao-ning-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 宫中职员，有具体岗位，无法凭职位随意处置祖传珍物。
+    access:
+      kind: public
+meters:
+  - id: north-zhao-ning-health
+    definition_id: health
+    current: 100
+  - id: north-zhao-ning-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 35
+ratings:
+  - id: north-zhao-ning-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: north-zhao-ning-force
+    definition_id: force
+    value: 2
+  - id: north-zhao-ning-craft
+    definition_id: craft
+    value: 1
+  - id: north-zhao-ning-perception
+    definition_id: perception
+    value: 2
+  - id: north-zhao-ning-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: north-zhao-ning
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 小极宫当值修士，查验来历但不把陌生人一律当敌人。
+      voice: 按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把一封封口受潮的来信交给合适接收者。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 赵凝
+        description: 小极宫当值修士，查验来历但不把陌生人一律当敌人。
+        status: observed
+      - id: location
+        name: 冰城门房
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-north-zhao-ning-pouch
+        name: 赵凝的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-north-xiaoji-palace
+        name: 北夜小极宫
+        description: 宫中职员，有具体岗位，无法凭职位随意处置祖传珍物。
+        status: observed
+      - id: known-north-su-yuan
+        name: 苏沅
+        description: 可核对物资交接的库务同门。
+        status: observed
+      - id: known-north-zhaoning-life-tablet
+        name: 赵凝本命牌
+        description: 自己留在公库的命牌，只与自己绑定。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基寒属性法术和门房禁制辨识。
+        description: 筑基寒属性法术和门房禁制辨识。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把一封封口受潮的来信交给合适接收者。
+        description: 把一封封口受潮的来信交给合适接收者。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - north-zhao-ning
+      - local_entity_id: location
+        canonical_entity_ids:
+          - north-gate-room
+      - local_entity_id: known-north-zhao-ning-pouch
+        canonical_entity_ids:
+          - north-zhao-ning-pouch
+      - local_entity_id: known-north-xiaoji-palace
+        canonical_entity_ids:
+          - north-xiaoji-palace
+      - local_entity_id: known-north-su-yuan
+        canonical_entity_ids:
+          - north-su-yuan
+      - local_entity_id: known-north-zhaoning-life-tablet
+        canonical_entity_ids:
+          - north-zhaoning-life-tablet

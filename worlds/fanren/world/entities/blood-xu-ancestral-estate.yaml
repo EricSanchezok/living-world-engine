@@ -1,0 +1,50 @@
+id: blood-xu-ancestral-estate
+kind: location
+name: 冰魄许氏祖居
+description: 天元境山间的许氏祖居，家族保存一位失踪先祖留下的法器和传承。
+placement: spirit-tianyuan-domain
+facts:
+  - id: blood-xu-ancestral-estate-route-spirit-inner-caravan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: route-to
+    access:
+      kind: public
+  - id: blood-xu-ancestral-estate-condition-spirit-inner-caravan-road
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循山路经村口通报入庄；祖庙不随外客通行开放。
+    description: 循山路经村口通报入庄；祖庙不随外客通行开放。
+    access:
+      kind: public
+  - id: blood-xu-ancestral-estate-route-blood-xu-ancestral-chamber
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xu-ancestral-chamber
+    description: route-to
+    access:
+      kind: public
+  - id: blood-xu-ancestral-estate-condition-blood-xu-ancestral-chamber
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 族中管理者核对申请并共同开封，强闯会触动禁制及家族反应。
+    description: 族中管理者核对申请并共同开封，强闯会触动禁制及家族反应。
+    access:
+      kind: public
+  - id: blood-xu-estate-route-to-copper-hills
+    predicate: route-to-copper-hills
+    value:
+      kind: entity
+      entityId: spirit3-xu-copper-hills
+    description: 经家族准许的出入口往返矿丘；须先打开护阵通路，不把目见山峰作为实际坐标。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

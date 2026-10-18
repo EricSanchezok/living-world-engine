@@ -1,0 +1,42 @@
+id: blood-ice-array
+kind: location
+name: 天鼎冰川阵区
+description: 蓝雪幻化冰雀与冰巨人，源阵未破可借雪重构。
+placement: blood-tianding-palace
+facts:
+  - id: blood-ice-array-route-blood-earth-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-earth-array
+    description: route-to
+    access:
+      kind: public
+  - id: blood-ice-array-condition-blood-earth-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-ice-array-route-blood-core-stela
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-core-stela
+    description: route-to
+    access:
+      kind: public
+  - id: blood-ice-array-condition-blood-core-stela
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

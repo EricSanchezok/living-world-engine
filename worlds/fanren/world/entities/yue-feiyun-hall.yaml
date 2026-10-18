@@ -1,0 +1,26 @@
+id: yue-feiyun-hall
+kind: location
+name: 飞云阁
+description: 燕氏议事和接待来使的楼阁，内堂须族内管事同意方可入。
+placement: yue-yanling-fort
+facts:
+  - id: yue-feiyun-hall-route-yue-yanling-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yanling-fort
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+  - id: yue-feiyun-hall-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

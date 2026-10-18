@@ -1,0 +1,42 @@
+id: human-wanzhang-sea
+kind: location
+name: 万丈海
+description: 狻猊王族经营多代的深海海域，巡游兽群与人类猎队各有活动。
+placement: human-outer-star-sea
+facts:
+  - id: human-wanzhang-sea-route-outerstar-sea-abyss
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-sea-abyss
+    description: route-to
+    access:
+      kind: public
+  - id: human-wanzhang-sea-condition-outerstar-sea-abyss
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+  - id: human-wanzhang-sea-route-outerstar-suanni-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-suanni-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-wanzhang-sea-condition-outerstar-suanni-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海沟内的石殿守着祖传器物，外厅接待各支海兽。
+    description: 海沟内的石殿守着祖传器物，外厅接待各支海兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

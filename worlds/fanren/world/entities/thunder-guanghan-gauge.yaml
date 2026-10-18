@@ -1,0 +1,30 @@
+id: thunder-guanghan-gauge
+kind: item
+name: 广寒仪
+description: 用于观察广寒有关征兆的仪器，当前静默，没有新一轮临近的可核信号。
+placement: thunder-tongling-hall
+facts:
+  - id: thunder-guanghan-gauge-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-guanghan-gauge-current-signal
+    predicate: current-signal
+    value:
+      kind: text
+      value: 静默；不支持消息贩子所说已经测得新一轮将开的断言。
+    description: 静默；不支持消息贩子所说已经测得新一轮将开的断言。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qian-ji-zi
+        - canon-wangu-ma-elder
+        - canon-wangu-huang-elder
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

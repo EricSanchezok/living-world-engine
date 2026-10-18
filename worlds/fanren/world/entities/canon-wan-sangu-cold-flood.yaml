@@ -1,0 +1,34 @@
+id: canon-wan-sangu-cold-flood
+kind: animal
+name: 万三姑的寒蛟
+description: 长期饲养的寒蛟，尚未借给万天明取鼎。
+placement: void-wanfa-spiritpool
+facts:
+  - id: canon-wan-sangu-cold-flood-kept-by
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: canon-wan-sangu
+    description: kept-by
+    access:
+      kind: private
+  - id: canon-wan-sangu-cold-flood-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 对元婴初期能构成威胁的高阶灵兽；精确妖级未直证，不赋予无敌属性。
+    description: 对元婴初期能构成威胁的高阶灵兽；精确妖级未直证，不赋予无敌属性。
+    access:
+      kind: private
+  - id: canon-wan-sangu-cold-flood-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 当前身体无新病，刚换饲料较苦而少食；需观察或检验才能得知。
+    description: 当前身体无新病，刚换饲料较苦而少食；需观察或检验才能得知。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

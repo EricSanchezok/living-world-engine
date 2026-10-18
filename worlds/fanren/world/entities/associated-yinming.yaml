@@ -1,0 +1,34 @@
+id: associated-yinming
+kind: location
+name: 阴冥之地
+description: 阴云下的独立空间，散布村庄、荒漠与黑色山岩，没有太阳升落。
+placement: canon-human-luohou
+facts:
+  - id: associated-yinming-daylight
+    predicate: daylight
+    value:
+      kind: text
+      value: constant-cloud-light
+    description: constant-cloud-light
+    access:
+      kind: public
+  - id: associated-yinming-illumination
+    predicate: illumination
+    value:
+      kind: text
+      value: 蓝色雷电与阴云透光，天幕没有昼夜明暗周期；居民按自己的日常计时休息。
+    description: 蓝色雷电与阴云透光，天幕没有昼夜明暗周期；居民按自己的日常计时休息。
+    access:
+      kind: public
+  - id: associated-yinming-ambient-restriction
+    predicate: ambient-restriction
+    value:
+      kind: text
+      value: 通常灵力和神识外放被绝灵之气压制；肉身、内力、实物和有据特殊机制分别判断。
+    description: 通常灵力和神识外放被绝灵之气压制；肉身、内力、实物和有据特殊机制分别判断。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

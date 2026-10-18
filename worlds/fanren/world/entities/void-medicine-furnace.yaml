@@ -1,0 +1,18 @@
+id: void-medicine-furnace
+kind: item
+name: 药房小鼎
+description: 鼎腹裂缝尚未修补，修复需四份完好材料与两时辰合作。
+placement: void-wanfa-court
+facts:
+  - id: void-medicine-furnace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanfa-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

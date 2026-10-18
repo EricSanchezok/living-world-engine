@@ -1,0 +1,177 @@
+id: canon-chaos-one-eye-giant
+kind: creature
+name: 混沌谷独目巨人
+description: 半身埋在地下的受创独目巨人，此刻沉睡，呼吸极缓。
+placement: global-chaos-valley
+facts:
+  - id: canon-chaos-one-eye-giant-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚初期
+    description: 炼虚初期
+    access:
+      kind: agents
+      agentIds:
+        - canon-chaos-one-eye-giant
+  - id: canon-chaos-one-eye-giant-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。
+    description: 古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。
+    access:
+      kind: discoverable
+      condition: 适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。
+  - id: canon-chaos-one-eye-giant-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。
+    description: 强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。
+    access:
+      kind: agents
+      agentIds:
+        - canon-chaos-one-eye-giant
+  - id: global-giant-sleep
+    predicate: current-condition
+    value:
+      kind: text
+      value: 受伤沉睡、半身埋地。
+    description: 受伤沉睡、半身埋地。
+    access:
+      kind: private
+meters:
+  - id: canon-chaos-one-eye-giant-health
+    definition_id: health
+    current: 52
+  - id: canon-chaos-one-eye-giant-mana
+    definition_id: mana
+    current: 540
+quantities:
+  - definition_id: low-stone
+    amount: 40
+ratings:
+  - id: canon-chaos-one-eye-giant-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: canon-chaos-one-eye-giant-force
+    definition_id: force
+    value: 6
+  - id: canon-chaos-one-eye-giant-craft
+    definition_id: craft
+    value: 4
+  - id: canon-chaos-one-eye-giant-perception
+    definition_id: perception
+    value: 6
+  - id: canon-chaos-one-eye-giant-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-chaos-one-eye-giant
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 半身埋在地下的受创独目巨人，此刻沉睡，呼吸极缓。
+      voice: 按自己确知的经历和职责说话，未知的事情会承认不知。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 保持沉睡恢复；遇到足以惊醒的实际冲击后依所感应的环境行动。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 混沌谷独目巨人
+        description: 强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。
+        status: observed
+      - id: location
+        name: 混沌谷
+        description: 自己所在及日常使用的地方。
+        status: observed
+      - id: eye
+        name: 炙光潭
+        description: 自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。
+        status: observed
+      - id: staff
+        name: 青灵砂石棒
+        description: 自己的沉重石棒就在身旁，举用需要自己醒来并有力量。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人生活、修行和实际职责交接所得。
+        sourceId: null
+        step: 0
+    claims:
+      - id: self-knowledge
+        subjectId: self
+        predicate: known-condition
+        value:
+          kind: text
+          value: 强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。
+        description: 强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: location-knowledge
+        subjectId: location
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己所在及日常使用的地方。
+        description: 自己所在及日常使用的地方。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: eye-knowledge
+        subjectId: eye
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。
+        description: 自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: staff-knowledge
+        subjectId: staff
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己的沉重石棒就在身旁，举用需要自己醒来并有力量。
+        description: 自己的沉重石棒就在身旁，举用需要自己醒来并有力量。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-chaos-one-eye-giant
+      - local_entity_id: location
+        canonical_entity_ids:
+          - global-chaos-valley
+      - local_entity_id: eye
+        canonical_entity_ids:
+          - global-zhiguang-pool
+      - local_entity_id: staff
+        canonical_entity_ids:
+          - global-giant-qingling-staff

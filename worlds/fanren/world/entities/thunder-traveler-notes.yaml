@@ -1,0 +1,18 @@
+id: thunder-traveler-notes
+kind: item
+name: 弦预沿路水源记
+description: 已经走过路段以实线记录，未走的北路只有待查空栏；可拿去誊录而非自动补成完整地图。
+placement: thunder-xinmei-traveler
+facts:
+  - id: thunder-traveler-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-xinmei-traveler
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

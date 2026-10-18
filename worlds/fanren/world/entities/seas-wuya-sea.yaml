@@ -1,0 +1,67 @@
+id: seas-wuya-sea
+kind: location
+name: 无涯海
+description: 风元的广大海域，沿岸、深海与跨界虚空不是同一路径。
+placement: fengyuan-continent
+facts:
+  - id: seas-wuya-sea-route-spirit-human-demon-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: route-to
+    access:
+      kind: public
+  - id: seas-wuya-sea-condition-spirit-human-demon-territory
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿内陆到海岸的远程道路，时间随路线和能力计算。
+    description: 沿内陆到海岸的远程道路，时间随路线和能力计算。
+    access:
+      kind: public
+  - id: seas-wuya-sea-route-feiling-chimo-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chimo-sea
+    description: route-to
+    access:
+      kind: public
+  - id: seas-wuya-sea-condition-feiling-chimo-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长期沿岸与外海航行，须真实航路，不等于一步跨洲。
+    description: 长期沿岸与外海航行，须真实航路，不等于一步跨洲。
+    access:
+      kind: public
+  - id: seas-wuya-sea-route-seas-between-continents
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-between-continents
+    description: route-to
+    access:
+      kind: public
+  - id: seas-wuya-sea-condition-seas-between-continents
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从近岸驶向远洋，需要持续防护与补给；短程小舟不能仅凭意愿抵达异大陆。
+    description: 从近岸驶向远洋，需要持续防护与补给；短程小舟不能仅凭意愿抵达异大陆。
+    access:
+      kind: public
+  - id: seas-wuya-sea-root-detail-wuya-magnetism
+    predicate: root-detail-wuya-magnetism
+    value:
+      kind: text
+      value: 部分岛下有天然两仪磁脉，可据其布阵；磁脉完整、阵具和供能共同决定护府效果。
+    description: 部分岛下有天然两仪磁脉，可据其布阵；磁脉完整、阵具和供能共同决定护府效果。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

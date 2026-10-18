@@ -1,0 +1,26 @@
+id: blood-bone-ancestral-hall
+kind: location
+name: 血骨门祖师堂
+description: 石殿中祖师画像分列两壁，中央黄风图封龛须长老共同启封。
+placement: blood-bone-domain
+facts:
+  - id: blood-bone-ancestral-hall-review-route-blood-bone-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-bone-retreat
+    description: review-route-blood-bone-retreat
+    access:
+      kind: public
+  - id: blood-bone-ancestral-hall-review-route-condition-blood-bone-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

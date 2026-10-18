@@ -1,0 +1,32 @@
+id: innerstar-palace-treasury
+kind: container
+name: 星宫外院周转库
+description: 本期外院周转储备，账目与双圣个人储物袋分开。
+placement: innerstar-saint-palace
+facts:
+  - id: innerstar-palace-treasury-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-palace-treasury-authority
+    predicate: authority
+    value:
+      kind: text
+      value: 轮值人员可按已经签发的任务领用；超过一百低阶灵石或任何高阶资源的调拨须内宫授权，违规挪取会留下实际缺口。
+    description: 轮值人员可按已经签发的任务领用；超过一百低阶灵石或任何高阶资源的调拨须内宫授权，违规挪取会留下实际缺口。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 4000
+  - definition_id: mid-stone
+    amount: 300
+  - definition_id: craft-material
+    amount: 60
+ratings: []
+shared_activity_resources: []

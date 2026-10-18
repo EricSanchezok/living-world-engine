@@ -1,0 +1,26 @@
+id: canon-yuanci-mountain
+kind: item
+name: 元磁山
+description: 双圣用于修炼元磁神光的同一座奇山；对五行之力的影响须依真实祭炼、距离和磁力状态判断。
+placement: innerstar-magnetic-cavern
+facts:
+  - id: canon-yuanci-mountain-controlled-by-canon-ling-xiaofeng
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: canon-ling-xiaofeng
+    description: 双圣共同掌控修炼重地；不因一人移步而复制奇山。
+    access:
+      kind: private
+  - id: canon-yuanci-mountain-controlled-by-canon-wen-qing
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: canon-wen-qing
+    description: 双圣共同掌控修炼重地；不因一人移步而复制奇山。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

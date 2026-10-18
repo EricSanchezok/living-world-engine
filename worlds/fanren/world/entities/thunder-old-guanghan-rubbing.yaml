@@ -1,0 +1,27 @@
+id: thunder-old-guanghan-rubbing
+kind: item
+name: 旧广寒纪事拓本
+description: 记旧次广寒经历的拓本，边角磨损，实际并非新一轮令牌现世通告。
+placement: thunder-rumor-seller
+facts:
+  - id: thunder-old-guanghan-rubbing-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-rumor-seller
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-old-guanghan-rubbing-actual-date
+    predicate: actual-date
+    value:
+      kind: text
+      value: 旧纪年拓本，版边留有与天旭阁存底相同的旧印缺口。
+    description: 旧纪年拓本，版边留有与天旭阁存底相同的旧印缺口。
+    access:
+      kind: discoverable
+      condition: 认真查看版边并与存底对照，或请懂旧印者查验。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

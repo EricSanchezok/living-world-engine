@@ -1,0 +1,34 @@
+id: yue-market-yinfeng
+kind: location
+name: 引风斋
+description: 符纸符箓铺，成符与材料各有库存。
+placement: yue-huangfeng-market
+facts:
+  - id: yue-market-yinfeng-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-market-yinfeng-property-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-yinfeng-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-yinfeng-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: blood-lihuo-tribute-stock
+kind: container
+name: 离火宗年供备款
+description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+placement: blood-lihuo-office
+facts:
+  - id: blood-lihuo-tribute-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 18
+  - definition_id: herb-packet
+    amount: 6
+ratings: []
+shared_activity_resources: []

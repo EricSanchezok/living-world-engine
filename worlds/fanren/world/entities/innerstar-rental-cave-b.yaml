@@ -1,0 +1,51 @@
+id: innerstar-rental-cave-b
+kind: location
+name: 临风洞
+description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+placement: innerstar-holy-mountain
+facts:
+  - id: innerstar-rental-cave-b-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-rental-cave-b-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+  - id: innerstar-rental-cave-b-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: public
+  - id: innerstar-rental-cave-b-lease-terms
+    predicate: lease-terms
+    value:
+      kind: text
+      value: 百年住用权费用1800低阶灵石，承租前可获准查看。授予的是这一洞府住用权，不是圣山所有权。
+    description: 百年住用权费用1800低阶灵石，承租前可获准查看。授予的是这一洞府住用权，不是圣山所有权。
+    access:
+      kind: public
+  - id: innerstar-rental-cave-b-water-fault
+    predicate: water-fault
+    value:
+      kind: text
+      value: 引水槽入口被落石压歪，天花石缝滴水并沿地沟流出；洞壁本身没有被水冲空。
+    description: 引水槽入口被落石压歪，天花石缝滴水并沿地沟流出；洞壁本身没有被水冲空。
+    access:
+      kind: discoverable
+      condition: 实际检查引水槽和洞顶，能辨识结构者可判断。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

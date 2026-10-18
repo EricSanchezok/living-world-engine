@@ -1,0 +1,18 @@
+id: dajin-leiyin-library
+kind: location
+name: 雷音功法阁
+description: 保存锻体和佛门法术典籍，查阅与传授须按师承和许可。
+placement: dajin-leiyin-court
+facts:
+  - id: dajin-leiyin-library-route-dajin-leiyin-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-leiyin-court
+    description: 入藏典处须获得宗门许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,31 @@
+id: spirit3-qing-wolf-pack
+kind: social-group
+name: 翡翠草原小狼群
+description: 十八头青狼在远离商路的草地觅食，能攀抓但当前未集结攻城。
+placement: spirit-anyuan-grassland
+facts:
+  - id: spirit3-qing-wolf-pack-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 死亡扣实存；分离个体或小群必须转出相应数量并保留伤势。群体恢复不能复活已死成员，繁衍需真实过程。
+    description: 死亡扣实存；分离个体或小群必须转出相应数量并保留伤势。群体恢复不能复活已死成员，繁衍需真实过程。
+    access:
+      kind: private
+  - id: spirit3-qing-wolf-pack-behavior-boundary
+    predicate: behavior-boundary
+    value:
+      kind: text
+      value: 受饥饿、领地、刺激、真实驱使与伤势影响；当前这些小群没有攻城集结。
+    description: 受饥饿、领地、刺激、真实驱使与伤势影响；当前这些小群没有攻城集结。
+    access:
+      kind: private
+meters:
+  - id: spirit3-qing-wolf-pack-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: spirit3-wolf-count
+    amount: 18
+ratings: []
+shared_activity_resources: []

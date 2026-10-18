@@ -1,0 +1,27 @@
+id: spirit-sunset-border
+kind: location
+name: 落日之墓人族入口
+description: 通向广大边界山川的入口，穿越远处森林、湖泊与荒原仍需要漫长行程和真实防护。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-sunset-border-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: 通向广大边界山川的入口，穿越远处森林、湖泊与荒原仍需要漫长行程和真实防护。
+    access:
+      kind: public
+  - id: spirit-sunset-border-route-global-chaos-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-chaos-valley
+    description: 深入落日之墓方可抵谷，途中有真实兽类和迷雾危险。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

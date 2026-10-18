@@ -1,0 +1,18 @@
+id: thunder-jiaochi-target
+kind: item
+name: 试验引气铜片
+description: 已记录气息的铜片，可由参加者实际藏到附近后试测。
+placement: thunder-jiaochi-research
+facts:
+  - id: thunder-jiaochi-target-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

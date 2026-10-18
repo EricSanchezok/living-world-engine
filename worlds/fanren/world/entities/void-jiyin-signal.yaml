@@ -1,0 +1,18 @@
+id: void-jiyin-signal
+kind: item
+name: 极阴配对盘
+description: 只能接对应守墓盘实际传讯。
+placement: canon-ji-yin
+facts:
+  - id: void-jiyin-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ji-yin
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

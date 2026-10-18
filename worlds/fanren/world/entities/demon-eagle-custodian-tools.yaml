@@ -1,0 +1,22 @@
+id: demon-eagle-custodian-tools
+kind: container
+name: 玄北衡的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-eagle-custodian
+facts:
+  - id: demon-eagle-custodian-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-eagle-custodian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

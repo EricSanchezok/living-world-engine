@@ -1,0 +1,18 @@
+id: north-liucui-sect
+kind: organization
+name: 柳翠派
+description: 与小极宫有外门分支关系的传承，弟子并不因此共享内宫秘密。
+placement: north-liucui-seat
+facts:
+  - id: north-liucui-sect-branch
+    predicate: branch-of
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 外门隶属关系，不等于私产归一或所有人共享知识。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

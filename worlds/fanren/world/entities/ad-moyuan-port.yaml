@@ -1,0 +1,58 @@
+id: ad-moyuan-port
+kind: location
+name: 魔源海岸渡口
+description: 一处小型岸港，为获准出海的旅人和船只准备补给。
+placement: associated-demon-realm
+facts:
+  - id: ad-moyuan-port-route-ad-huanxiao-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-huanxiao-desert
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-port-condition-ad-huanxiao-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-moyuan-port-route-ad-lanpu-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-lanpu-city
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-port-condition-ad-lanpu-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-moyuan-port-route-ad-moyuan-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-moyuan-sea
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-port-condition-ad-moyuan-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

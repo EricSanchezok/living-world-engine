@@ -1,0 +1,18 @@
+id: yinming-wall-guide-tools
+kind: item
+name: 北徊的个人器具
+description: 下山路、攀援、寒伤预防与强弓。所需的有限工具，不包含无限兽晶。
+placement: yinming-wall-guide
+facts:
+  - id: yinming-wall-guide-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-wall-guide
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

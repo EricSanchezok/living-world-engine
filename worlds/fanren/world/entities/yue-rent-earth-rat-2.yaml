@@ -1,0 +1,29 @@
+id: yue-rent-earth-rat-2
+kind: creature
+name: 待租土鼠2
+description: 一级土属灵兽，能在适宜土石中掘洞，不能穿透完整的防护禁制。
+placement: yue-qilin-beast-pens
+facts:
+  - id: yue-rent-earth-rat-2-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权与保管、借用分别处理。
+    access:
+      kind: public
+  - id: yue-rent-earth-rat-2-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 受训听从陶冬的引导，交给借用人前须有实际交接和适应。
+    description: 受训听从陶冬的引导，交给借用人前须有实际交接和适应。
+    access:
+      kind: public
+meters:
+  - id: yue-rent-earth-rat-2-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

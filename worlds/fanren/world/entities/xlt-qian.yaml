@@ -1,0 +1,167 @@
+id: xlt-qian
+kind: person
+name: 钳泽
+description: 巨螂护路者把族中采食地界记得很清楚。
+placement: xlt-mantis-plain
+facts:
+  - id: xlt-qian-cultivation
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - xlt-qian
+  - id: xlt-qian-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 护道、近战、群虫气息辨识
+    description: 护道、近战、群虫气息辨识
+    access:
+      kind: agents
+      agentIds:
+        - xlt-qian
+  - id: xlt-qian-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    description: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-qian
+  - id: xlt-qian-member-of-xlt-mantis-people
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: xlt-mantis-people
+    description: member-of
+    access:
+      kind: public
+  - id: xlt-qian-known-colleague-xlt-pei
+    predicate: known-colleague
+    value:
+      kind: entity
+      entityId: xlt-pei
+    description: known-colleague
+    access:
+      kind: public
+meters:
+  - id: xlt-qian-health
+    definition_id: health
+    current: 100
+  - id: xlt-qian-mana
+    definition_id: mana
+    current: 900
+quantities:
+  - definition_id: low-stone
+    amount: 250
+ratings:
+  - id: xlt-qian-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: xlt-qian-force
+    definition_id: force
+    value: 5
+  - id: xlt-qian-craft
+    definition_id: craft
+    value: 5
+  - id: xlt-qian-perception
+    definition_id: perception
+    value: 5
+  - id: xlt-qian-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: xlt-qian
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 巨螂护路者把族中采食地界记得很清楚。
+      voice: 用自己的经历说话，先回应眼前具体事情，不复述世界百科。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 向茶队说明绕开育虫地的路，谈定护送报酬。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 钳泽
+        description: 巨螂护路者把族中采食地界记得很清楚。
+        status: observed
+      - id: location
+        name: 巨螂荒原
+        description: 自己当前所处之地。
+        status: observed
+      - id: known-xlt-mantis-people
+        name: 巨螂族
+        description: 自己所属的群体，但不因此知道其他成员的全部活动。
+        status: observed
+      - id: known-xlt-pei
+        name: 裴霁
+        description: 了解过本族育虫地界的人族护路人。
+        status: observed
+      - id: known-xlt-range-disc-b
+        name: 西坡测距盘
+        description: 借给钳泽辨另一侧路，和东坡盘是两件实物。
+        status: observed
+      - id: known-xlt-qian-tool
+        name: 钳泽的护路甲
+        description: 护路甲可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+        status: observed
+    evidence:
+      - id: own-life
+        kind: observation
+        description: 本人的修行、职业与日常往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skills
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 护道、近战、群虫气息辨识
+        description: 护道、近战、群虫气息辨识
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - own-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - xlt-qian
+      - local_entity_id: location
+        canonical_entity_ids:
+          - xlt-mantis-plain
+      - local_entity_id: known-xlt-mantis-people
+        canonical_entity_ids:
+          - xlt-mantis-people
+      - local_entity_id: known-xlt-pei
+        canonical_entity_ids:
+          - xlt-pei
+      - local_entity_id: known-xlt-range-disc-b
+        canonical_entity_ids:
+          - xlt-range-disc-b
+      - local_entity_id: known-xlt-qian-tool
+        canonical_entity_ids:
+          - xlt-qian-tool

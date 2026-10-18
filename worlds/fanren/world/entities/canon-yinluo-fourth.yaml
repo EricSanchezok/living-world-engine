@@ -1,0 +1,169 @@
+id: canon-yinluo-fourth
+kind: person
+name: 阴罗第四长老
+description: 阴罗第四长老。
+placement: south-yinluo-inner
+facts:
+  - id: canon-yinluo-fourth-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-fourth
+  - id: canon-yinluo-fourth-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期幡阵与护身术。
+    description: 元婴初期幡阵与护身术。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-fourth
+  - id: canon-yinluo-fourth-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 金、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 金、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-fourth
+  - id: canon-yinluo-fourth-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-yinluo-fourth-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: canon-yinluo-fourth-health
+    definition_id: health
+    current: 100
+  - id: canon-yinluo-fourth-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-yinluo-fourth-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-yinluo-fourth-force
+    definition_id: force
+    value: 5
+  - id: canon-yinluo-fourth-craft
+    definition_id: craft
+    value: 4
+  - id: canon-yinluo-fourth-perception
+    definition_id: perception
+    value: 4
+  - id: canon-yinluo-fourth-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-yinluo-fourth
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 阴罗第四长老。
+      voice: 讲究同门次序，对外人谨慎而不肯轻易交底。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成本次修炼，安排下一轮幡阵维护。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 阴罗第四长老
+        description: 阴罗第四长老。
+        status: observed
+      - id: location
+        name: 阴罗宗内山
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-yinluo-fourth-personal-stock
+        name: 阴罗第四长老的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-dajin-yinluo-sect
+        name: 阴罗宗
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+      - id: known-kunwu-yinluo-banner-5
+        name: 阴罗幡5
+        description: 自己当前受托持有的那面幡。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期幡阵与护身术。
+        description: 元婴初期幡阵与护身术。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 金、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 金、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yinluo-fourth
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-yinluo-inner
+      - local_entity_id: known-canon-yinluo-fourth-personal-stock
+        canonical_entity_ids:
+          - canon-yinluo-fourth-personal-stock
+      - local_entity_id: known-dajin-yinluo-sect
+        canonical_entity_ids:
+          - dajin-yinluo-sect
+      - local_entity_id: known-kunwu-yinluo-banner-5
+        canonical_entity_ids:
+          - kunwu-yinluo-banner-5

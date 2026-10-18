@@ -1,0 +1,26 @@
+id: void-entry
+kind: location
+name: 白玉门廊
+description: 高廊壁面限制神识，入口处有封殿光罩。
+placement: human-void-hall
+facts:
+  - id: void-entry-route-void-assembly
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-assembly
+    description: route-to
+    access:
+      kind: public
+  - id: void-entry-condition-void-assembly
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

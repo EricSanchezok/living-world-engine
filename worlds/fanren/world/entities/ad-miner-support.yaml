@@ -1,0 +1,20 @@
+id: ad-miner-support
+kind: container
+name: 矿道支护料
+description: 修完这一段支架实际耗2份，余料留矿方；此项不等同继续开矿。
+placement: ad-bloodlight-mine
+facts:
+  - id: ad-miner-support-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-market
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

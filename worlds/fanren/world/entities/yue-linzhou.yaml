@@ -1,0 +1,26 @@
+id: yue-linzhou
+kind: location
+name: 蔺州
+description: 面积人口居中的州域，城镇与山路相连。
+placement: human-yue
+facts:
+  - id: yue-linzhou-route-yue-qingliang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qingliang
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-linzhou-travel-yue-qingliang
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

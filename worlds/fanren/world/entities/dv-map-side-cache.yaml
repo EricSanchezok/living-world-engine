@@ -1,0 +1,26 @@
+id: dv-map-side-cache
+kind: location
+name: 旧坛侧库
+description: 一间被落石遮住门框的古侧库；入口露一角阵纹，独立于青袍古图所指祭坛。
+placement: dv-inner
+facts:
+  - id: dv-map-side-cache-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-map-side-cache-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须现场辨认露出的门框阵纹、勘察安全路并移开真实落石；青袍古图不直接指向此处。
+    description: 须现场辨认露出的门框阵纹、勘察安全路并移开真实落石；青袍古图不直接指向此处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

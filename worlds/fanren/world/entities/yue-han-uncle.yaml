@@ -1,0 +1,209 @@
+id: yue-han-uncle
+kind: person
+name: 菡祺
+description: 菡云芝的叔父，做低阶笔具为生，愿耐心教孩子。
+placement: yue-han-craft-cottage
+facts:
+  - id: yue-han-uncle-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-han-uncle
+  - id: yue-han-uncle-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼气六层、低阶笔具整理和基础御物。
+    description: 炼气六层、低阶笔具整理和基础御物。
+    access:
+      kind: agents
+      agentIds:
+        - yue-han-uncle
+  - id: yue-han-uncle-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金木火三属性灵根
+    description: 金木火三属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: yue-han-uncle-family-canon-han-yunzhi
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: canon-han-yunzhi
+    description: 叔父与侄女，平日一起整理笔具。
+    access:
+      kind: public
+meters:
+  - id: yue-han-uncle-health
+    definition_id: health
+    current: 100
+  - id: yue-han-uncle-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-han-uncle-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-han-uncle-force
+    definition_id: force
+    value: 1
+  - id: yue-han-uncle-craft
+    definition_id: craft
+    value: 1
+  - id: yue-han-uncle-perception
+    definition_id: perception
+    value: 1
+  - id: yue-han-uncle-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-han-uncle
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 菡云芝的叔父，做低阶笔具为生，愿耐心教孩子。
+      voice: 讲道理时会拿眼前的事举例，遇孩子急躁便先放慢动作。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 挑出可用的笔毛，教云芝辨认而非让她乱试灵力。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 菡祺
+        description: 菡云芝的叔父，做低阶笔具为生，愿耐心教孩子。
+        status: observed
+      - id: location
+        name: 菡家小院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-han-uncle-pouch
+        name: 菡祺的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-han-yunzhi
+        name: 菡云芝
+        description: 叔父与侄女，平日一起整理笔具。
+        status: observed
+      - id: known-yue-han-pen-material
+        name: 菡祺笔具材料
+        description: 可供整理低阶笔具的毛料与笔杆，当前四份。
+        status: observed
+      - id: known-canon-jinzhu-brush
+        name: 家传金竺笔
+        description: 自己日常接触并认识的事物。
+        status: observed
+      - id: known-yue-han-household
+        name: 菡家家产
+        description: 自己日常接触并认识的事物。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼气六层、低阶笔具整理和基础御物。
+        description: 炼气六层、低阶笔具整理和基础御物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 挑出可用的笔毛，教云芝辨认而非让她乱试灵力。
+        description: 挑出可用的笔毛，教云芝辨认而非让她乱试灵力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-work-property
+        subjectId: self
+        predicate: current-responsibility
+        value:
+          kind: text
+          value: 我在小院保管家传金竺笔，这是家产而非私卖之物；目前没有出售或交换约定。
+        description: 我在小院保管家传金竺笔，这是家产而非私卖之物；目前没有出售或交换约定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是金木火三属性灵根。
+        description: 自己曾经验灵，知道自身是金木火三属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-han-uncle
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-han-craft-cottage
+      - local_entity_id: known-yue-han-uncle-pouch
+        canonical_entity_ids:
+          - yue-han-uncle-pouch
+      - local_entity_id: known-canon-han-yunzhi
+        canonical_entity_ids:
+          - canon-han-yunzhi
+      - local_entity_id: known-yue-han-pen-material
+        canonical_entity_ids:
+          - yue-han-pen-material
+      - local_entity_id: known-canon-jinzhu-brush
+        canonical_entity_ids:
+          - canon-jinzhu-brush
+      - local_entity_id: known-yue-han-household
+        canonical_entity_ids:
+          - yue-han-household

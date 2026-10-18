@@ -1,0 +1,18 @@
+id: north-huiyang-recipe
+kind: item
+name: 回阳真水传承卷
+description: 宫内秘传药方的既有载体，阅览受限；未获得太阳精火与全部所需辅材时不能炼成。
+placement: north-stockroom
+facts:
+  - id: north-huiyang-recipe-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

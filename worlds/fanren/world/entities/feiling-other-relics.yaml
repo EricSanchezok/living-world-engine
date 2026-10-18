@@ -1,0 +1,20 @@
+id: feiling-other-relics
+kind: container
+name: 其他旧代舍利匣
+description: 九粒独立封存的旧代舍利，均无红云舍利中的秘传，取用须逐粒出库。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-other-relics-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-old-relic
+    amount: 9
+ratings: []
+shared_activity_resources: []

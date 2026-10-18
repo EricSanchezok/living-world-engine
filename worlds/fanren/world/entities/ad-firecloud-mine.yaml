@@ -1,0 +1,26 @@
+id: ad-firecloud-mine
+kind: location
+name: 火云矿
+description: 沙丘中的旧矿脉，目前由白家经营。
+placement: associated-demon-realm
+facts:
+  - id: ad-firecloud-mine-route-to-ad-yinchuan-oasis
+    predicate: route-to-ad-yinchuan-oasis
+    value:
+      kind: entity
+      entityId: ad-yinchuan-oasis
+    description: 同行修士约半日的路程可作参考；实际行旅依个人能力、补给与道路状况决定，凡人未必能走得一样快。
+    access:
+      kind: public
+  - id: ad-firecloud-mine-route-to-ad-firecloud-passage
+    predicate: route-to-ad-firecloud-passage
+    value:
+      kind: entity
+      entityId: ad-firecloud-passage
+    description: 经正式口通行，须有矿方许可、耐热准备并核实当日支护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

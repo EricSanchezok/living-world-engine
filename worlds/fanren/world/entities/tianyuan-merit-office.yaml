@@ -1,0 +1,26 @@
+id: tianyuan-merit-office
+kind: location
+name: 论功阁
+description: 功绩卷、核定印和讲席名册分柜存放；先核实履职再记功，领取讲道令后记下所对应场次。
+placement: tianyuan-city
+facts:
+  - id: tianyuan-merit-office-route-to-spirit-lecture-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-lecture-court
+    description: route-to-spirit-lecture-court
+    access:
+      kind: private
+  - id: tianyuan-merit-office-route-conditions-spirit-lecture-court
+    predicate: route-conditions-spirit-lecture-court
+    value:
+      kind: text
+      value: 城内步行至天广听法院；听讲仍须当期令牌、讲师确实到场，不使人自动领悟。
+    description: 城内步行至天广听法院；听讲仍须当期令牌、讲师确实到场，不使人自动领悟。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

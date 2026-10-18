@@ -1,0 +1,18 @@
+id: blood-sponsor-offers
+kind: item
+name: 栾砚两种护送邀约
+description: 拟聘两项：一为把申请封信送血鹤城守城府取得收件回执，一为护六份灵材到萧冥山居取得到货签记；每项四十低阶石，接约后两个本地日内完成。只保证送达，不保证收件人批准申请或购买灵材；可商议、拒绝或分别接取。
+placement: blood-sponsor
+facts:
+  - id: blood-sponsor-offers-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

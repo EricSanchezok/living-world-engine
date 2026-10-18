@@ -1,0 +1,26 @@
+id: fengyuan-jiaoyuan-canyon
+kind: location
+name: 蛟渊大峡谷
+description: 深峡、崖洞和水脉构成蛟类居地。外来者没有天然通行权，绕行仍须承受实际路程。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-jiaoyuan-canyon-route-to-fengyuan-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-one-sky
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-jiaoyuan-canyon-route-conditions-fengyuan-one-sky
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    description: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tianyuan-near-watch-array
+kind: item
+name: 近界现用观测阵
+description: 本期只记录巡哨附近二十里内超过现用门限的空间扰动，保留最近一次方向与时间；每次记录耗阵中1枚中阶石，藏匿、范围外和细弱波动可能漏记，不含目击画面。
+placement: tianyuan-patrol-post
+facts:
+  - id: tianyuan-near-watch-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-near-watch-array-latest-record
+    predicate: latest-record
+    value:
+      kind: text
+      value: 当前没有登记异常；方既明的青辉目击尚未证明为可记录空间扰动。
+    description: 当前没有登记异常；方既明的青辉目击尚未证明为可记录空间扰动。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

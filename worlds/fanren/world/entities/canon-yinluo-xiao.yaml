@@ -1,0 +1,199 @@
+id: canon-yinluo-xiao
+kind: person
+name: 阴罗萧长老
+description: 阴罗宗长老，持本宗传承幡的一面。
+placement: south-yinluo-inner
+facts:
+  - id: canon-yinluo-xiao-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-xiao
+  - id: canon-yinluo-xiao-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期防护、幡术、外务调查。
+    description: 元婴初期防护、幡术、外务调查。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-xiao
+  - id: canon-yinluo-xiao-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、火、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 木、火、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-xiao
+  - id: canon-yinluo-xiao-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-yinluo-xiao-sect-elder-under-canon-qian-laomo
+    predicate: sect-elder-under
+    value:
+      kind: entity
+      entityId: canon-qian-laomo
+    description: sect-elder-under
+    access:
+      kind: private
+  - id: canon-yinluo-xiao-sect-colleague-canon-yinluo-wu
+    predicate: sect-colleague
+    value:
+      kind: entity
+      entityId: canon-yinluo-wu
+    description: sect-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-xiao-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: canon-yinluo-xiao-health
+    definition_id: health
+    current: 100
+  - id: canon-yinluo-xiao-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-yinluo-xiao-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-yinluo-xiao-force
+    definition_id: force
+    value: 5
+  - id: canon-yinluo-xiao-craft
+    definition_id: craft
+    value: 4
+  - id: canon-yinluo-xiao-perception
+    definition_id: perception
+    value: 4
+  - id: canon-yinluo-xiao-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-yinluo-xiao
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 阴罗宗长老，持本宗传承幡的一面。
+      voice: 说话短，先问地点和时限，不因一个传闻就报作事实。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与吴长老商量轮值人手，保留自己的闭关时段。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 阴罗萧长老
+        description: 阴罗宗长老，持本宗传承幡的一面。
+        status: observed
+      - id: location
+        name: 阴罗宗内山
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-yinluo-xiao-personal-stock
+        name: 阴罗萧长老的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-canon-qian-laomo
+        name: 乾老魔
+        description: 阴罗同门各有自身利益与所知消息。
+        status: observed
+      - id: known-canon-yinluo-wu
+        name: 阴罗吴长老
+        description: 已认识的阴罗同门。
+        status: observed
+      - id: known-dajin-yinluo-sect
+        name: 阴罗宗
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+      - id: known-kunwu-yinluo-banner-3
+        name: 阴罗幡3
+        description: 自己当前受托持有的那面幡。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期防护、幡术、外务调查。
+        description: 元婴初期防护、幡术、外务调查。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、火、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 木、火、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yinluo-xiao
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-yinluo-inner
+      - local_entity_id: known-canon-yinluo-xiao-personal-stock
+        canonical_entity_ids:
+          - canon-yinluo-xiao-personal-stock
+      - local_entity_id: known-canon-qian-laomo
+        canonical_entity_ids:
+          - canon-qian-laomo
+      - local_entity_id: known-canon-yinluo-wu
+        canonical_entity_ids:
+          - canon-yinluo-wu
+      - local_entity_id: known-dajin-yinluo-sect
+        canonical_entity_ids:
+          - dajin-yinluo-sect
+      - local_entity_id: known-kunwu-yinluo-banner-3
+        canonical_entity_ids:
+          - kunwu-yinluo-banner-3

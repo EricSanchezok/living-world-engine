@@ -1,0 +1,26 @@
+id: global-fu-dressing-4
+kind: item
+name: 医舍净布药包4
+description: 一份净布和普通外伤药。
+placement: global-fu-clinic
+facts:
+  - id: global-fu-dressing-4-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-fu-family
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-fu-dressing-4-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 一份用于对应小创的清创包扎，用后消耗；不治一切重伤。
+    description: 一份用于对应小创的清创包扎，用后消耗；不治一切重伤。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: canon-huaxian-shimei-personal-stock
+kind: container
+name: 化仙秀丽女修的私用行囊
+description: 个人修行、行旅储备，与宗门或族产不同。
+placement: canon-huaxian-shimei
+facts:
+  - id: canon-huaxian-shimei-personal-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huaxian-shimei
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+  - definition_id: mid-stone
+    amount: 4
+  - definition_id: grain
+    amount: 5
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: local-doctor-luo-purse
+kind: container
+name: 罗大夫私囊
+description: 本人的劳动所得；不得与门派账混为一笔。
+placement: local-doctor-luo
+facts:
+  - id: local-doctor-luo-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: local-doctor-luo
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 90
+  - definition_id: silver
+    amount: 2
+ratings: []
+shared_activity_resources: []

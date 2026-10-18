@@ -1,0 +1,18 @@
+id: tianyuan-trade-white-pendant
+kind: item
+name: 太玄现用白霞佩
+description: 一块可反复领还的实物佩；激活耗使用者3法力，殿内遮容并受当前阵限制，不防任意更高阶灵目。须领用登记，离殿关闭后归还。
+placement: tianyuan-market-steward
+facts:
+  - id: tianyuan-trade-white-pendant-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-auction-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

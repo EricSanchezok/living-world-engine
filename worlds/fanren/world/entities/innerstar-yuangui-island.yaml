@@ -1,0 +1,18 @@
+id: innerstar-yuangui-island
+kind: location
+name: 元龟岛
+description: 内海的一座岛屿，周边有可泊小舟的避风礁岸。
+placement: human-inner-star-sea
+facts:
+  - id: innerstar-yuangui-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 须海船或御器渡海，并核海况与补给，非陆路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

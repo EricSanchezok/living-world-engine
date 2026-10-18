@@ -1,0 +1,66 @@
+id: seas-moke-approach
+kind: location
+name: 摩柯界附近接引虚空
+description: 靠近摩柯界的界间行路区域，仍需跨界能力和真实接引坐标；不等于摩柯全境已开放。
+placement: seas-dragon-island
+facts:
+  - id: seas-moke-approach-route-seas-island-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-gate
+    description: route-to
+    access:
+      kind: public
+  - id: seas-moke-approach-condition-seas-island-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需真实坐标和跨界耐力、岛方接引或已核验凭证；虚空行旅需实际耗时，不是普通御风捷径。
+    description: 需真实坐标和跨界耐力、岛方接引或已核验凭证；虚空行旅需实际耗时，不是普通御风捷径。
+    access:
+      kind: public
+  - id: seas-moke-approach-route-seas-between-continents
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-between-continents
+    description: route-to
+    access:
+      kind: public
+  - id: seas-moke-approach-condition-seas-between-continents
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此为跨界可能路线索引，须取得真实界面坐标、破界手段与虚空护持；普通海行不能直接变成破界。
+    description: 此为跨界可能路线索引，须取得真实界面坐标、破界手段与虚空护持；普通海行不能直接变成破界。
+    access:
+      kind: public
+  - id: seas-moke-approach-space-relation
+    predicate: space-relation
+    value:
+      kind: text
+      value: 龙岛外的接引虚空，目录归龙岛路网，未越过验帖殿即不算进入龙岛。
+    description: 龙岛外的接引虚空，目录归龙岛路网，未越过验帖殿即不算进入龙岛。
+    access:
+      kind: private
+  - id: seas-moke-approach-route-ad-moke-rift-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-moke-rift-valley
+    description: route-to
+    access:
+      kind: public
+  - id: seas-moke-approach-condition-ad-moke-rift-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须已获得摩柯附近坐标和破界手段，保护同行者并实际消耗法力；普通海船不能沿海面驶入界间虚空。
+    description: 须已获得摩柯附近坐标和破界手段，保护同行者并实际消耗法力；普通海船不能沿海面驶入界间虚空。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

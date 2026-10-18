@@ -1,0 +1,26 @@
+id: seas-fantian-yang
+kind: item
+name: 翻天旗阳旗
+description: 与另一杆合一才具完整玄天威能的真实部件，当前藏于旧处。
+placement: seas-flag-cache-yang
+facts:
+  - id: seas-fantian-yang-matching-component
+    predicate: matching-component
+    value:
+      kind: entity
+      entityId: seas-fantian-yin
+    description: matching-component
+    access:
+      kind: private
+  - id: seas-fantian-yang-single-component-limit
+    predicate: single-component-limit
+    value:
+      kind: text
+      value: 单杆可用通天灵宝层次力量，不能声称具完整玄天之威。
+    description: 单杆可用通天灵宝层次力量，不能声称具完整玄天之威。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

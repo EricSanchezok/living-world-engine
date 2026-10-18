@@ -1,0 +1,219 @@
+id: original-tiannan-wu-bai
+kind: person
+name: 吴柏
+description: 能经营食宿、照料车马和辨识货物封签。
+placement: tiannan-jinma-inn
+facts:
+  - id: original-tiannan-wu-bai-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-wu-bai
+  - id: original-tiannan-wu-bai-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根
+    description: 无灵根；已检测并为本人所知。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-wu-bai
+  - id: original-tiannan-wu-bai-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 能经营食宿、照料车马和辨识货物封签。
+    description: 能经营食宿、照料车马和辨识货物封签。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-wu-bai
+  - id: original-tiannan-wu-bai-knows-original-tiannan-meng-pan
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-meng-pan
+    description: 本次旧刀寄修的保管人与物主，价格还在协商。
+    access:
+      kind: public
+  - id: original-tiannan-wu-bai-knows-original-tiannan-su-qin
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-su-qin
+    description: 来往客人偶需渡江，知道她会先看水情。
+    access:
+      kind: public
+  - id: original-tiannan-wu-bai-knows-original-tiannan-chen-que
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-chen-que
+    description: 曾交易小批药材并寄宿，打听车夫仍需对方答复。
+    access:
+      kind: public
+meters:
+  - id: original-tiannan-wu-bai-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: silver
+    amount: 26
+ratings:
+  - id: original-tiannan-wu-bai-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: original-tiannan-wu-bai-force
+    definition_id: force
+    value: 0
+  - id: original-tiannan-wu-bai-craft
+    definition_id: craft
+    value: 1
+  - id: original-tiannan-wu-bai-perception
+    definition_id: perception
+    value: 1
+  - id: original-tiannan-wu-bai-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: original-tiannan-wu-bai
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 能经营食宿、照料车马和辨识货物封签。
+      voice: 熟悉商旅口吻，先问几人几夜再谈价。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 两间空客房可接住客，另有旧车轮需修，须保留伙食周转钱。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 吴柏
+        description: 能经营食宿、照料车马和辨识货物封签。 两间空客房可接住客，另有旧车轮需修，须保留伙食周转钱。
+        status: observed
+      - id: location
+        name: 金马归路客栈
+        description: 自己当前任事的地方。
+        status: observed
+      - id: known-original-tiannan-wu-bai-pouch
+        name: 吴柏的日用行囊
+        description: 自己的日用物品。
+        status: observed
+      - id: known-tiannan-jinma-inn-stock
+        name: 归路客栈周转库
+        description: 自己负责核数的库存，所有权属于吴柏。
+        status: observed
+      - id: known-tiannan-jinma-repair-blade
+        name: 吴柏寄修的旧短刀
+        description: 自己的旧刀已送孟磐，未同意无限修费。
+        status: observed
+      - id: known-original-tiannan-meng-pan
+        name: 孟磐
+        description: 本次旧刀寄修的保管人与物主，价格还在协商。
+        status: observed
+      - id: known-original-tiannan-su-qin
+        name: 苏沁
+        description: 来往客人偶需渡江，知道她会先看水情。
+        status: observed
+      - id: known-original-tiannan-chen-que
+        name: 陈阙
+        description: 曾交易小批药材并寄宿，打听车夫仍需对方答复。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己亲历的检测、学艺与任事。
+        sourceId: null
+        step: 0
+    claims:
+      - id: own-rank
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 凡人
+        description: 凡人
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 无灵根，早年检测已知。
+        description: 无灵根，早年检测已知。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 能经营食宿、照料车马和辨识货物封签。
+        description: 能经营食宿、照料车马和辨识货物封签。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 两间空客房可接住客，另有旧车轮需修，须保留伙食周转钱。
+        description: 两间空客房可接住客，另有旧车轮需修，须保留伙食周转钱。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - original-tiannan-wu-bai
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tiannan-jinma-inn
+      - local_entity_id: known-original-tiannan-wu-bai-pouch
+        canonical_entity_ids:
+          - original-tiannan-wu-bai-pouch
+      - local_entity_id: known-tiannan-jinma-inn-stock
+        canonical_entity_ids:
+          - tiannan-jinma-inn-stock
+      - local_entity_id: known-tiannan-jinma-repair-blade
+        canonical_entity_ids:
+          - tiannan-jinma-repair-blade
+      - local_entity_id: known-original-tiannan-meng-pan
+        canonical_entity_ids:
+          - original-tiannan-meng-pan
+      - local_entity_id: known-original-tiannan-su-qin
+        canonical_entity_ids:
+          - original-tiannan-su-qin
+      - local_entity_id: known-original-tiannan-chen-que
+        canonical_entity_ids:
+          - original-tiannan-chen-que

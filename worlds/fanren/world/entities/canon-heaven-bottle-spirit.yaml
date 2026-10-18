@@ -1,0 +1,148 @@
+id: canon-heaven-bottle-spirit
+kind: creature
+name: 掌天瓶瓶灵
+description: 黄色非实体瓶灵，隐藏在池底深处，与失散躯壳为同一宝物的分离灵性部分。
+placement: ad-wash-pool
+facts:
+  - id: canon-heaven-bottle-spirit-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 掌天瓶分离的灵性主体，隐遁与灵性能力相当于大乘层级；它不是普通修士，也不具第二个完整瓶身。
+    description: 掌天瓶分离的灵性主体，隐遁与灵性能力相当于大乘层级；它不是普通修士，也不具第二个完整瓶身。
+    access:
+      kind: agents
+      agentIds:
+        - canon-heaven-bottle-spirit
+  - id: canon-heaven-bottle-spirit-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 瓶灵遁行、隐匿和灵水相关能力；回归需真实相遇与双方作用，不能从愿望复制躯壳。
+    description: 瓶灵遁行、隐匿和灵水相关能力；回归需真实相遇与双方作用，不能从愿望复制躯壳。
+    access:
+      kind: agents
+      agentIds:
+        - canon-heaven-bottle-spirit
+  - id: canon-heaven-bottle-spirit-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - canon-heaven-bottle-spirit
+  - id: canon-heaven-bottle-spirit-body-status
+    predicate: body-status
+    value:
+      kind: text
+      value: 非实体灵性形态，和另一界的真实瓶躯分离；并非第二完整掌天瓶。
+    description: 非实体灵性形态，和另一界的真实瓶躯分离；并非第二完整掌天瓶。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-spirit-pool-replenishment
+    predicate: pool-replenishment
+    value:
+      kind: text
+      value: 补充特殊能量需要瓶灵的实际作用和灵气来源，普通人物无法随意复制或转移它们。
+    description: 补充特殊能量需要瓶灵的实际作用和灵气来源，普通人物无法随意复制或转移它们。
+    access:
+      kind: private
+meters:
+  - id: canon-heaven-bottle-spirit-health
+    definition_id: health
+    current: 100
+  - id: canon-heaven-bottle-spirit-mana
+    definition_id: mana
+    current: 1760
+quantities: []
+ratings:
+  - id: canon-heaven-bottle-spirit-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-heaven-bottle-spirit-force
+    definition_id: force
+    value: 8
+  - id: canon-heaven-bottle-spirit-craft
+    definition_id: craft
+    value: 7
+  - id: canon-heaven-bottle-spirit-perception
+    definition_id: perception
+    value: 8
+  - id: canon-heaven-bottle-spirit-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-heaven-bottle-spirit
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 黄色非实体瓶灵，隐藏在池底深处，与失散躯壳为同一宝物的分离灵性部分。
+      voice: 以眼神、光纹和简短意念表达好恶，对熟悉气息强烈反应，对命令常沉默。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 隐藏自己，保留自主性，感应真正躯壳但不主动告知陌生人。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 掌天瓶瓶灵
+        description: 黄色非实体瓶灵，隐藏在池底深处，与失散躯壳为同一宝物的分离灵性部分。
+        status: observed
+      - id: location
+        name: 池底隐蔽灵域
+        description: 自己藏身的池底深处，不等于已经看到人界失散躯壳的坐标。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 瓶灵遁行、隐匿和灵水相关能力；回归需真实相遇与双方作用，不能从愿望复制躯壳。
+        description: 瓶灵遁行、隐匿和灵水相关能力；回归需真实相遇与双方作用，不能从愿望复制躯壳。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-heaven-bottle-spirit
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-wash-pool

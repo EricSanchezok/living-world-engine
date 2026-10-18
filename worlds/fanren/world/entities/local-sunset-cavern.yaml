@@ -1,0 +1,26 @@
+id: local-sunset-cavern
+kind: location
+name: 落日峰石乳洞
+description: 山腹巨大天然石乳洞，后经古人布置土木机关；当前须通过守护入口进入。
+placement: sunset-peak
+facts:
+  - id: local-sunset-cavern-route-qixuan-main-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-main-hall
+    description: 主殿后封闭通道，须实际得准或采取可行手段进入。
+    access:
+      kind: private
+  - id: local-sunset-cavern-route-local-cavern-control
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-cavern-control
+    description: 沿实际窄道进入操作室，锁钥与守卫不因知道地名消失。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

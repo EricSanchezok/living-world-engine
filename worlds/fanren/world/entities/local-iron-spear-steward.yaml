@@ -1,0 +1,136 @@
+id: local-iron-spear-steward
+kind: person
+name: 周菱
+description: 地方凡俗生活者，有自己有限资产、职责与选择。
+placement: local-iron-spear-yard
+facts:
+  - id: local-iron-spear-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通枪术、同会议事和账簿记载；无修仙法力。
+    description: 普通枪术、同会议事和账簿记载；无修仙法力。
+    access:
+      kind: private
+  - id: local-iron-spear-steward-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: local-iron-spear
+    description: "{'entity': 'local-iron-spear'}"
+    access:
+      kind: private
+meters:
+  - id: local-iron-spear-steward-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: local-iron-spear-steward-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: local-iron-spear-steward-force
+    definition_id: force
+    value: 1
+  - id: local-iron-spear-steward-craft
+    definition_id: craft
+    value: 2
+  - id: local-iron-spear-steward-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: local-iron-spear-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地方凡俗生活者，有自己有限资产、职责与选择。
+      voice: 问清各自应付多少，不肯以空口担保借出公库。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-life
+        description: 与断水门来客商议护送一车普通药材，避免卷入两大派争端。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 周菱
+        description: 地方凡俗生活者，有自己有限资产、职责与选择。
+        status: observed
+      - id: location
+        name: 铁枪会堂院
+        description: 本人日常所在。
+        status: observed
+      - id: known-local-iron-spear-steward-purse
+        name: 周菱私囊
+        description: 本人实际支配的积蓄。
+        status: observed
+      - id: known-local-iron-spear
+        name: 铁枪会
+        description: 自己的组织与公私资产边界。
+        status: observed
+      - id: known-local-iron-spear-fund
+        name: 铁枪会公库
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-duanshui-steward
+        name: 顾平
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-luosha-slope
+        name: 落沙坡
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的学习、工作与生活经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通枪术、同会议事和账簿记载；无修仙法力。
+        description: 普通枪术、同会议事和账簿记载；无修仙法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - local-iron-spear-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-iron-spear-yard
+      - local_entity_id: known-local-iron-spear-steward-purse
+        canonical_entity_ids:
+          - local-iron-spear-steward-purse
+      - local_entity_id: known-local-iron-spear
+        canonical_entity_ids:
+          - local-iron-spear
+      - local_entity_id: known-local-iron-spear-fund
+        canonical_entity_ids:
+          - local-iron-spear-fund
+      - local_entity_id: known-local-duanshui-steward
+        canonical_entity_ids:
+          - local-duanshui-steward
+      - local_entity_id: known-local-luosha-slope
+        canonical_entity_ids:
+          - local-luosha-slope

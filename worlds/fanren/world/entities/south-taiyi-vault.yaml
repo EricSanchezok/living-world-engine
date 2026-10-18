@@ -1,0 +1,26 @@
+id: south-taiyi-vault
+kind: location
+name: 太一门器符库
+description: 古剑与符匣由宗门看守，使用须实际领出。
+placement: dajin-taiyi-court
+facts:
+  - id: south-taiyi-vault-route-dajin-taiyi-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-taiyi-court
+    description: route-to
+    access:
+      kind: public
+  - id: south-taiyi-vault-condition-dajin-taiyi-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

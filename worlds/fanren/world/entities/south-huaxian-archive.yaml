@@ -1,0 +1,26 @@
+id: south-huaxian-archive
+kind: location
+name: 化仙旧典房
+description: 积年宗门训文与古阵记录分册收藏，须有权限与古文知识才能读懂。
+placement: south-huaxian-court
+facts:
+  - id: south-huaxian-archive-route-south-huaxian-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-huaxian-court
+    description: route-to
+    access:
+      kind: public
+  - id: south-huaxian-archive-condition-south-huaxian-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

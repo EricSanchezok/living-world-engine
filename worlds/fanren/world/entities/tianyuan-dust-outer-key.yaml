@@ -1,0 +1,27 @@
+id: tianyuan-dust-outer-key
+kind: item
+name: 丹房外锁钥匙
+description: 丹房外锁钥匙，交接痕迹清楚可辨。
+placement: tianyuan-dust-keeper
+facts:
+  - id: tianyuan-dust-outer-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-dust-outer-key-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 对应丹药房外锁，由吕慎保管；不解开箱内封印，也不授予丹药私用权。
+    description: 对应丹药房外锁，由吕慎保管；不解开箱内封印，也不授予丹药私用权。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

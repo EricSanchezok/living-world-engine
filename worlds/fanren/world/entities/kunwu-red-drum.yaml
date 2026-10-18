@@ -1,0 +1,18 @@
+id: kunwu-red-drum
+kind: item
+name: 赤鸣鼓
+description: 灵宝仿制火鼓，连续催动耗大量法力，火光与声响真实影响附近。
+placement: canon-qimiao-zhenren
+facts:
+  - id: kunwu-red-drum-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qimiao-zhenren
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: void-ant-refining-crystal
+kind: item
+name: 蚁后腹内炼晶
+description: 蚁后长期吞矿凝成的有限一块，当前未暴露或炼入任何法宝。
+placement: void-iron-ants
+facts:
+  - id: void-ant-refining-crystal-usable-state
+    predicate: usable-state
+    value:
+      kind: text
+      value: 须实际取得、鉴别并持续成功炼制；中途失败可能毁材。
+    description: 须实际取得、鉴别并持续成功炼制；中途失败可能毁材。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,55 @@
+id: blood-ruyi-bird-flock
+kind: creature-group
+name: 如意血鸠群
+description: 当前六头受训血鸠栖于灵禽栏，逐头计入群体；可驱赶侦察但会受伤或离散，非无限召唤。
+placement: blood-ruyi-residence
+facts:
+  - id: blood-ruyi-bird-flock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-ruyi-bird-flock-maintenance
+    predicate: maintenance
+    value:
+      kind: text
+      value: 每个本地日实耗一份所属饲料；匮乏先影响健康与听令，不能凭法术无限生食。
+    description: 每个本地日实耗一份所属饲料；匮乏先影响健康与听令，不能凭法术无限生食。
+    access:
+      kind: private
+  - id: blood-ruyi-bird-flock-feed-stock
+    predicate: feed-stock
+    value:
+      kind: entity
+      entityId: blood-ruyi-bird-feed
+    description: feed-stock
+    access:
+      kind: private
+  - id: blood-ruyi-bird-flock-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 成员数以本群数量账为准。个体死亡须扣一；受伤或分离个体需建立具伤势的实际子群或个体并转移对应数量，原群同步减少。群体健康为未分离成员的整体状态，不能以一个治愈动作复活或复制已损失成员。
+    description: 成员数以本群数量账为准。个体死亡须扣一；受伤或分离个体需建立具伤势的实际子群或个体并转移对应数量，原群同步减少。群体健康为未分离成员的整体状态，不能以一个治愈动作复活或复制已损失成员。
+    access:
+      kind: private
+  - id: blood-ruyi-bird-flock-breeding-boundary
+    predicate: breeding-boundary
+    value:
+      kind: text
+      value: 繁衍须有真实配对、卵与孵育过程；现有成年成员数量不会按一条描述自动增长。
+    description: 繁衍须有真实配对、卵与孵育过程；现有成年成员数量不会按一条描述自动增长。
+    access:
+      kind: private
+meters:
+  - id: blood-ruyi-bird-flock-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: blood-dove-count
+    amount: 6
+ratings: []
+shared_activity_resources: []

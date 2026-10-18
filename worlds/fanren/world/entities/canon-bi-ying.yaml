@@ -1,0 +1,307 @@
+id: canon-bi-ying
+kind: person
+name: 碧影
+description: 血天分盟负责人，重盟中资源与自身修行，能变装亲自观察。
+placement: blood-league-headquarters
+facts:
+  - id: canon-bi-ying-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-bi-ying
+  - id: canon-bi-ying-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘法力、隐匿改容、组织调度与天机宝物长期祭炼。
+    description: 大乘法力、隐匿改容、组织调度与天机宝物长期祭炼。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bi-ying
+  - id: canon-bi-ying-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: canon-bi-ying-current-office
+    predicate: current-office
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: current-office
+    access:
+      kind: public
+  - id: canon-bi-ying-league-colleague
+    predicate: league-colleague
+    value:
+      kind: entity
+      entityId: canon-wen-xin-feng
+    description: league-colleague
+    access:
+      kind: private
+  - id: canon-bi-ying-commissions
+    predicate: commissions
+    value:
+      kind: entity
+      entityId: blood-road-surveyor
+    description: commissions
+    access:
+      kind: private
+meters:
+  - id: canon-bi-ying-health
+    definition_id: health
+    current: 100
+  - id: canon-bi-ying-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-bi-ying-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-bi-ying-force
+    definition_id: force
+    value: 8
+  - id: canon-bi-ying-craft
+    definition_id: craft
+    value: 6
+  - id: canon-bi-ying-perception
+    definition_id: perception
+    value: 8
+  - id: canon-bi-ying-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-bi-ying
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血天分盟负责人，重盟中资源与自身修行，能变装亲自观察。
+      voice: 常以轻笑缓和气氛，关键处直接问对方要什么；独处时会直言自己的风险。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否支持一项公开路线调查，兼顾商盟信誉与费用。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 碧影
+        description: 血天分盟负责人，重盟中资源与自身修行，能变装亲自观察。
+        status: observed
+      - id: location
+        name: 血天分盟总堂
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-canon-bi-ying-resources
+        name: 碧影的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-wen-xin-feng
+        name: 文心凤
+        description: 两者在商盟事务中长期往来，不共享私人心念。
+        status: observed
+      - id: known-blood-road-surveyor
+        name: 岑舟
+        description: 已有探路委托，提交资料后按有限预算结算。
+        status: observed
+      - id: known-blood-biying-omen
+        name: 碧影祭炼圆盘
+        description: 长期精血祭炼的预兆宝物，当前完好无裂纹；预兆不能替代事件的真实原因。
+        status: observed
+      - id: review-canon-blood-xue-sha
+        name: 血煞
+        description: 已有真实往来的同阶修士，知道其公开身份，不知道对方私藏和心中打算。
+        status: observed
+      - id: review-blood-xuesha-invitation
+        name: 碧影协助询函
+        description: 碧影希望请血煞协助核验一份血道旧谱；仅提拟酬十高阶灵石，未签约，尚待血煞答复具体工作范围。
+        status: observed
+      - id: review-blood-league-invitation-fund
+        name: 旧谱核验预算
+        description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+        status: observed
+      - id: review-blood-yuangang-manual
+        name: 元罡罩金文典籍
+        description: 以天地元气形成防御的金文秘术；具阅读和修炼条件才可研习，阅过篇名不等于学成。
+        status: observed
+      - id: review-blood-archive-permission-register
+        name: 藏经许可簿
+        description: 借阅需碧影或合法授权者签定范围，复制须材料和工时；当前只向获准者开放指定篇目。
+        status: observed
+      - id: review-blood-biying-blood-treatise
+        name: 商盟血道旧谱
+        description: 旧谱第三页记血罡铁的矿纹观察，第五页记血蛊离血后的形态，夹页记血鸠饲料封存；夹页误抄了相邻页的虫体说明，原编目与页内材料名称可供核对。该本仅是材料识读札，不载完整修炼法诀。
+        status: observed
+      - id: review-blood-archive-key
+        name: 藏经柜钥符
+        description: 由碧影保管的本阁秘柜钥符；仅能开启相符柜门，借阅许可另须签定范围。
+        status: observed
+      - id: seas-known-ming
+        name: 明尊
+        description: 风元分盟长期同僚，可经盟内传讯往来。
+        status: observed
+      - id: seas-known-lei
+        name: 雷元
+        description: 雷鸣分盟主事，已有公务合作。
+        status: observed
+      - id: seas-known-blood-signal
+        name: 血天分盟传讯壁
+        description: 自己分盟的配对传讯壁，联络须双方投入本人法力。
+        status: observed
+      - id: seas-known-blood-relay-hall
+        name: 血天商盟传送厅
+        description: 自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。
+        status: observed
+      - id: seas-known-blood-array-core
+        name: 商盟血天阵体
+        description: 自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。
+        status: observed
+      - id: seas-known-blood-energy
+        name: 商盟血天公用供能库
+        description: 自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: seas-past-league-work
+        kind: observation
+        description: 三陆盟中已有公务交往。
+        sourceId: null
+        step: 0
+      - id: seas-review-transit
+        kind: observation
+        description: 自己主管的血天端常规操作记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘法力、隐匿改容、组织调度与天机宝物长期祭炼。
+        description: 大乘法力、隐匿改容、组织调度与天机宝物长期祭炼。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: seas-known-ming-oath
+        subjectId: seas-known-ming
+        predicate: existing-oath
+        value:
+          kind: text
+          value: 明尊曾说自己发誓此生不踏血天，已在过去交往中知悉。
+        description: 既有交往中知道的誓约，不知道未说出的原因。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - seas-past-league-work
+      - id: seas-review-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 本端发出或接收一次后一般百年内不能再用，当前已静置足期；尚无已验证提前再开的办法。
+        description: 自己主管的当前阵体使用条件。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - seas-review-transit
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-bi-ying
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-league-headquarters
+      - local_entity_id: known-canon-bi-ying-resources
+        canonical_entity_ids:
+          - canon-bi-ying-resources
+      - local_entity_id: known-canon-wen-xin-feng
+        canonical_entity_ids:
+          - canon-wen-xin-feng
+      - local_entity_id: known-blood-road-surveyor
+        canonical_entity_ids:
+          - blood-road-surveyor
+      - local_entity_id: known-blood-biying-omen
+        canonical_entity_ids:
+          - blood-biying-omen
+      - local_entity_id: review-canon-blood-xue-sha
+        canonical_entity_ids:
+          - canon-blood-xue-sha
+      - local_entity_id: review-blood-xuesha-invitation
+        canonical_entity_ids:
+          - blood-xuesha-invitation
+      - local_entity_id: review-blood-league-invitation-fund
+        canonical_entity_ids:
+          - blood-league-invitation-fund
+      - local_entity_id: review-blood-yuangang-manual
+        canonical_entity_ids:
+          - blood-yuangang-manual
+      - local_entity_id: review-blood-archive-permission-register
+        canonical_entity_ids:
+          - blood-archive-permission-register
+      - local_entity_id: review-blood-biying-blood-treatise
+        canonical_entity_ids:
+          - blood-biying-blood-treatise
+      - local_entity_id: review-blood-archive-key
+        canonical_entity_ids:
+          - blood-archive-key
+      - local_entity_id: seas-known-ming
+        canonical_entity_ids:
+          - canon-ming-zun
+      - local_entity_id: seas-known-lei
+        canonical_entity_ids:
+          - canon-lei-yuan
+      - local_entity_id: seas-known-blood-signal
+        canonical_entity_ids:
+          - seas-blood-signal-wall
+      - local_entity_id: seas-known-blood-relay-hall
+        canonical_entity_ids:
+          - seas-blood-relay-hall
+      - local_entity_id: seas-known-blood-array-core
+        canonical_entity_ids:
+          - seas-blood-array-core
+      - local_entity_id: seas-known-blood-energy
+        canonical_entity_ids:
+          - seas-blood-energy

@@ -1,0 +1,189 @@
+id: innerstar-miaoyin-head
+kind: person
+name: 晏夫人
+description: 妙音门当前主持者，善于结交，也会利用别人对美貌和温柔的轻视。
+placement: innerstar-miaoyin-house
+facts:
+  - id: innerstar-miaoyin-head-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-miaoyin-head
+  - id: innerstar-miaoyin-head-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹法力、音律、幻术与商议。
+    description: 结丹法力、音律、幻术与商议。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-miaoyin-head
+  - id: innerstar-miaoyin-head-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木土灵根，已经检测。
+    description: 木土灵根，已经检测。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-miaoyin-head
+  - id: innerstar-miaoyin-head-teaches
+    predicate: teaches
+    value:
+      kind: entity
+      entityId: innerstar-miaoyin-trader
+    description: teaches
+    access:
+      kind: private
+meters:
+  - id: innerstar-miaoyin-head-health
+    definition_id: health
+    current: 100
+  - id: innerstar-miaoyin-head-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: innerstar-miaoyin-head-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: innerstar-miaoyin-head-force
+    definition_id: force
+    value: 3
+  - id: innerstar-miaoyin-head-craft
+    definition_id: craft
+    value: 3
+  - id: innerstar-miaoyin-head-perception
+    definition_id: perception
+    value: 3
+  - id: innerstar-miaoyin-head-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: innerstar-miaoyin-head
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 妙音门当前主持者，善于结交，也会利用别人对美貌和温柔的轻视。
+      voice: 亲切中带试探，笑时不急着给答案，谈定后要求各方守约。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 谈成下一笔海贸，保留门人选择客卿与合作的余地。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 晏夫人
+        description: 妙音门当前主持者，善于结交，也会利用别人对美貌和温柔的轻视。
+        status: observed
+      - id: location
+        name: 妙音门海贸馆
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-innerstar-miaoyin-head-personal-pouch
+        name: 晏夫人的私用行囊
+        description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+        status: observed
+      - id: known-innerstar-miaoyin-trader
+        name: 晏寻音
+        description: 本门师徒，弟子可以对交易提出疑问。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹法力、音律、幻术与商议。
+        description: 结丹法力、音律、幻术与商议。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 谈成下一笔海贸，保留门人选择客卿与合作的余地。
+        description: 谈成下一笔海贸，保留门人选择客卿与合作的余地。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己已经结丹。
+        description: 自己已经结丹。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木土灵根，已经检测。
+        description: 木土灵根，已经检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        description: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-miaoyin-head
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-miaoyin-house
+      - local_entity_id: known-innerstar-miaoyin-head-personal-pouch
+        canonical_entity_ids:
+          - innerstar-miaoyin-head-personal-pouch
+      - local_entity_id: known-innerstar-miaoyin-trader
+        canonical_entity_ids:
+          - innerstar-miaoyin-trader

@@ -1,0 +1,28 @@
+id: void-wanfa-old-stock
+kind: container
+name: 阵屋可检旧料
+description: 有两份旧阵材，可检验后决定能否补足。
+placement: void-wanfa-court
+facts:
+  - id: void-wanfa-old-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanfa-sect
+    description: owned-by
+    access:
+      kind: private
+  - id: void-wanfa-old-stock-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 一份完好，一份腐蚀不可安全用；不能把两份都当新料。
+    description: 一份完好，一份腐蚀不可安全用；不能把两份都当新料。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

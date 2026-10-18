@@ -1,0 +1,26 @@
+id: blood-qingjiao-palace
+kind: location
+name: 青蛟殿海域
+description: 青色岩柱围成水下殿域，流线标出访客可走通道；来使等候主人接见。
+placement: blood-offshore-sea
+facts:
+  - id: blood-qingjiao-palace-review-route-blood-tuyao-refuge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tuyao-refuge
+    description: review-route-blood-tuyao-refuge
+    access:
+      kind: public
+  - id: blood-qingjiao-palace-review-route-condition-blood-tuyao-refuge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

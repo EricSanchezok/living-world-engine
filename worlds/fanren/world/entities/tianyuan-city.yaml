@@ -1,0 +1,34 @@
+id: tianyuan-city
+kind: location
+name: 天渊城
+description: 人妖两族通往蛮荒的驻守与贸易之城，由长老会统合重要城务，城区中各有住处、军务和市肆。
+placement: spirit-realm
+facts:
+  - id: tianyuan-city-route-listening-spring
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: listening-spring
+    description: 居所可经正常道路进入城市生活区。
+    access:
+      kind: public
+  - id: tianyuan-city-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 塔楼间分布店铺、住处与办事院落，公开街路不通入他人的洞府禁制。
+    access:
+      kind: public
+  - id: tianyuan-city-local-day-seconds
+    predicate: local-day-seconds
+    value:
+      kind: number
+      value: 345600
+    description: 本地一昼夜在共同计时中的长度。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: innerstar-longxing-inn
+kind: location
+name: 隆兴客栈
+description: 一二层供凡人住宿，三层供暂留修士；各间租用分别协商。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-longxing-inn-route-innerstar-qinghe-teahouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-qinghe-teahouse
+    description: 两店沿城内街道可往返，需实际步行。
+    access:
+      kind: public
+  - id: innerstar-longxing-inn-route-innerstar-longxing-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-longxing-room
+    description: 沿楼梯进入二层，须经店家安排。
+    access:
+      kind: public
+  - id: innerstar-longxing-inn-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-tea-keeper
+    description: 叶岑经营管理，租借或出售须实际协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

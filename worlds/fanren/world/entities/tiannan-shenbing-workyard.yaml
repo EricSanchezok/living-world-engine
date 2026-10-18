@@ -1,0 +1,26 @@
+id: tiannan-shenbing-workyard
+kind: location
+name: 神兵接修外院
+description: 接收普通法器检修的外院，炉房和库存不向陌生人开放。
+placement: human-yuanwu
+facts:
+  - id: tiannan-shenbing-workyard-route-human-yuanwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yuanwu
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+  - id: tiannan-shenbing-workyard-institution
+    predicate: operated-by
+    value:
+      kind: entity
+      entityId: tiannan-shenbing-sect
+    description: 场所由本门经营，雇员只按职责保管公物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

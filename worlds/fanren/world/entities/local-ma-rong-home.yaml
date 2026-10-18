@@ -1,0 +1,18 @@
+id: local-ma-rong-home
+kind: location
+name: 马荣家中
+description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+placement: peer-market-town
+facts:
+  - id: local-ma-rong-home-route-peer-market-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: peer-market-town
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

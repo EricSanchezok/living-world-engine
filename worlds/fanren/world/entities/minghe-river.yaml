@@ -1,0 +1,42 @@
+id: minghe-river
+kind: location
+name: 冥河阴水
+description: 水面看似安静，水下有针鱼与阴气，破水能力与护身不可互相替代。
+placement: minghe-space
+facts:
+  - id: minghe-river-route-minghe-entry-bank
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-entry-bank
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-river-condition-minghe-entry-bank
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 水面看似安静，水下有针鱼与阴气，破水能力与护身不可互相替代。
+    description: 水面看似安静，水下有针鱼与阴气，破水能力与护身不可互相替代。
+    access:
+      kind: public
+  - id: minghe-river-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-river-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过阴水和护障后的陆地，远处连着枯林与山脉。
+    description: 穿过阴水和护障后的陆地，远处连着枯林与山脉。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

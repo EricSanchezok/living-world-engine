@@ -1,0 +1,18 @@
+id: innerstar-current-tianhuo
+kind: item
+name: 玉环现存天火液
+description: 一小瓶炙热赤液；实际分量只够一次常规冲关用量，不能重复服用不减存量。
+placement: innerstar-yuhuan-house
+facts:
+  - id: innerstar-current-tianhuo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-liulian-group
+    description: 由六连殿所有；实际交付才改变归属。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

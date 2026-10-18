@@ -1,0 +1,42 @@
+id: demon-seventh-town
+kind: location
+name: 苇汀集
+description: 潮湿湖泽间的聚落，各支居民共同议定捕捞、灵地和舟路。城门或码头按当日记录核验来客。
+placement: demon-seventh-territory
+facts:
+  - id: demon-seventh-town-route-demon-seventh-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-seventh-court
+    description: route-to
+    access:
+      kind: public
+  - id: demon-seventh-town-condition-demon-seventh-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-seventh-town-route-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: route-to
+    access:
+      kind: public
+  - id: demon-seventh-town-condition-spirit-demon-ward-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    description: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

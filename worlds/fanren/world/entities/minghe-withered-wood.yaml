@@ -1,0 +1,74 @@
+id: minghe-withered-wood
+kind: location
+name: 枯木林
+description: 白骨生物在林地阴气中活动，离开此地会迅速衰败。
+placement: minghe-space
+facts:
+  - id: minghe-withered-wood-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-withered-wood-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 白骨生物在林地阴气中活动，离开此地会迅速衰败。
+    description: 白骨生物在林地阴气中活动，离开此地会迅速衰败。
+    access:
+      kind: public
+  - id: minghe-withered-wood-route-minghe-yingu-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-yingu-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-withered-wood-condition-minghe-yingu-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阴气深重的山脉，神池殿藏于深处。
+    description: 阴气深重的山脉，神池殿藏于深处。
+    access:
+      kind: public
+  - id: minghe-withered-wood-route-to-minghe-blue-fog
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-blue-fog
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-withered-wood-route-conditions-minghe-blue-fog
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。
+    description: 洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。
+    access:
+      kind: private
+  - id: minghe-withered-wood-route-to-minghe-black-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-black-lake
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-withered-wood-route-conditions-minghe-black-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。
+    description: 林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,39 @@
+id: minghe-immature-gold-insects
+kind: creature-group
+name: 虚灵未成熟噬金虫群
+description: 一群尚未成熟的噬金虫，饲养消耗与生长需要真实时间和材料。
+placement: minghe-xuling-insectarium
+facts:
+  - id: minghe-immature-gold-insects-maturity
+    predicate: maturity
+    value:
+      kind: text
+      value: 尚未成熟，无法以成年群体威能使用。
+    description: 尚未成熟，无法以成年群体威能使用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-xu-ling
+        - minghe-xuling-feeder
+  - id: minghe-immature-gold-insects-bonded-to
+    predicate: bonded-to
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: bonded-to
+    access:
+      kind: private
+  - id: minghe-immature-gold-insects-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    description: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 120
+ratings: []
+shared_activity_resources: []

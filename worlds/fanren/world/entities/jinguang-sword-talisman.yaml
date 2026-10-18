@@ -1,0 +1,28 @@
+id: jinguang-sword-talisman
+kind: item
+name: 小剑符宝
+description: 带出秦家的小剑符宝，使用消耗其有限威能。
+placement: canon-jinguang-shangren
+facts:
+  - id: jinguang-sword-talisman-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jinguang-shangren
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: jinguang-sword-talisman-power-limit
+    predicate: usage-rule
+    value:
+      kind: text
+      value: 当前留有六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。
+    description: 当前留有六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-sword-talisman-power
+    amount: 6
+ratings: []
+shared_activity_resources: []

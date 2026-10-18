@@ -1,0 +1,18 @@
+id: south-herb-notes
+kind: item
+name: 辨药小册
+description: 阮青禾手写的普通药草笔记，少数叶形有手绘，未藏万能仙方。
+placement: south-market-clinic
+facts:
+  - id: south-herb-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

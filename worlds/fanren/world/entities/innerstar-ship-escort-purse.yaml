@@ -1,0 +1,20 @@
+id: innerstar-ship-escort-purse
+kind: container
+name: 护航约定款
+description: 约定付常冼的本次护航款，已经预付十低阶灵石，余款三十在到港后支付。
+placement: innerstar-sea-ship
+facts:
+  - id: innerstar-ship-escort-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

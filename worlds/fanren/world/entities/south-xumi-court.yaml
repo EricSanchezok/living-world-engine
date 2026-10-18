@@ -1,0 +1,26 @@
+id: south-xumi-court
+kind: location
+name: 须弥宗山居
+description: 本宗阵壁与公库分藏，访客需先递话。
+placement: human-south-kunwu
+facts:
+  - id: south-xumi-court-route-human-south-kunwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-south-kunwu
+    description: route-to
+    access:
+      kind: public
+  - id: south-xumi-court-condition-human-south-kunwu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山路通外院，阵库另行保护。
+    description: 山路通外院，阵库另行保护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

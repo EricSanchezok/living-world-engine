@@ -1,0 +1,30 @@
+id: minghe-stabilizer-samples
+kind: container
+name: 稳身灵物甲乙样材
+description: 分装五份当地样材，甲三份乙两份；用途在缓慢滋养肉身，须先诊察适应性。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-stabilizer-samples-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-stabilizer-samples-bounded-use
+    predicate: bounded-use
+    value:
+      kind: text
+      value: 每次试用一种先取一份并记反应；持续疗程须重新诊察与补充材料，当前五份不够多年疗程。不能凭使用此样材恢复已散失的精魂。
+    description: 每次试用一种先取一份并记反应；持续疗程须重新诊察与补充材料，当前五份不够多年疗程。不能凭使用此样材恢复已散失的精魂。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: minghe-stabilizer-a
+    amount: 3
+  - definition_id: minghe-stabilizer-b
+    amount: 2
+ratings: []
+shared_activity_resources: []

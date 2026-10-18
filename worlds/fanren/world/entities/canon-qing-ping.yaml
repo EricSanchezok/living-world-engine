@@ -1,0 +1,161 @@
+id: canon-qing-ping
+kind: person
+name: 清平道人
+description: 拥有天鼎一脉传承的道人，外表温和，常把自己的利益包在商议中。
+placement: blood-qingping-cave
+facts:
+  - id: canon-qing-ping-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-qing-ping
+  - id: canon-qing-ping-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘法力、木法、部分银蝌文与古阵辨识。
+    description: 大乘法力、木法、部分银蝌文与古阵辨识。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qing-ping
+  - id: canon-qing-ping-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: canon-qing-ping-old-acquaintance
+    predicate: old-acquaintance
+    value:
+      kind: entity
+      entityId: canon-wan-hua
+    description: old-acquaintance
+    access:
+      kind: private
+meters:
+  - id: canon-qing-ping-health
+    definition_id: health
+    current: 100
+  - id: canon-qing-ping-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-qing-ping-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-qing-ping-force
+    definition_id: force
+    value: 8
+  - id: canon-qing-ping-craft
+    definition_id: craft
+    value: 6
+  - id: canon-qing-ping-perception
+    definition_id: perception
+    value: 8
+  - id: canon-qing-ping-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-qing-ping
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 拥有天鼎一脉传承的道人，外表温和，常把自己的利益包在商议中。
+      voice: 语气和气、句子周全，谈分成时却步步紧逼；被逼到实处会停下来重新算计。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对残传中的一处路径，争取合作而不交出整份家传。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 清平道人
+        description: 拥有天鼎一脉传承的道人，外表温和，常把自己的利益包在商议中。
+        status: observed
+      - id: location
+        name: 清平道人居所
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-canon-qing-ping-resources
+        name: 清平道人的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-wan-hua
+        name: 万花夫人
+        description: 相识的同阶修士，可以商量合作但尚未形成探宫协议。
+        status: observed
+      - id: known-blood-qingping-archive
+        name: 清平道统残传
+        description: 天鼎一脉路线和部分银蝌文知识；只是旧路线，不保证所有禁制仍未改变。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘法力、木法、部分银蝌文与古阵辨识。
+        description: 大乘法力、木法、部分银蝌文与古阵辨识。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-qing-ping
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-qingping-cave
+      - local_entity_id: known-canon-qing-ping-resources
+        canonical_entity_ids:
+          - canon-qing-ping-resources
+      - local_entity_id: known-canon-wan-hua
+        canonical_entity_ids:
+          - canon-wan-hua
+      - local_entity_id: known-blood-qingping-archive
+        canonical_entity_ids:
+          - blood-qingping-archive

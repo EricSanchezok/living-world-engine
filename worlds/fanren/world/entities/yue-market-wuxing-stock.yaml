@@ -1,0 +1,38 @@
+id: yue-market-wuxing-stock
+kind: item
+name: 五行书店货柜
+description: 店藏五行基础吐纳入门、基础御物与火弹术讲义，可按份抄录；每份三低阶灵石并耗一份纸材，不包含完整高阶传承。
+placement: yue-market-wuxing
+facts:
+  - id: yue-market-wuxing-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-wuxing-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-wuxing-stock-terms
+    predicate: sale-terms
+    value:
+      kind: text
+      value: 店藏五行基础吐纳入门、基础御物与火弹术讲义，可按份抄录；每份三低阶灵石并耗一份纸材，不包含完整高阶传承。
+    description: 店藏五行基础吐纳入门、基础御物与火弹术讲义，可按份抄录；每份三低阶灵石并耗一份纸材，不包含完整高阶传承。
+    access:
+      kind: public
+  - id: yue-market-wuxing-stock-authorize
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    description: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: low-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

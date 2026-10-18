@@ -1,0 +1,18 @@
+id: yue-hongfu-personal-ribbon
+kind: item
+name: 红拂护身绫
+description: 当前护身法宝，擅护持与收束，非无限控制人物心志的器物。
+placement: canon-hongfu
+facts:
+  - id: yue-hongfu-personal-ribbon-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-hongfu
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

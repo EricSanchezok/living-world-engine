@@ -1,0 +1,34 @@
+id: local-luosha-slope
+kind: location
+name: 落沙坡
+description: 两派边界地带，可行旅，不预设必然和谈或伏击。
+placement: jingzhou
+facts:
+  - id: local-luosha-slope-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 沿普通边界驿道步行或骑行，不能略过补给。
+    access:
+      kind: public
+  - id: local-luosha-slope-route-wild-wolf-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wild-wolf-headquarters
+    description: 经野狼管辖路段，依实际通行和路况。
+    access:
+      kind: public
+  - id: local-luosha-slope-route-local-duanshui-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-duanshui-yard
+    description: 经地方山路，入堂仍须许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

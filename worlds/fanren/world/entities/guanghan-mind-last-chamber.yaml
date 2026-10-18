@@ -1,0 +1,26 @@
+id: guanghan-mind-last-chamber
+kind: location
+name: 炼神末篇石窟
+description: 分岔通道深处的广阔石窟，银光罩遮护末篇文字。
+placement: guanghan-mind-cave
+facts:
+  - id: guanghan-mind-last-chamber-route-guanghan-mind-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-cave
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-last-chamber-condition-guanghan-mind-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

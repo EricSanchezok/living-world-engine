@@ -1,0 +1,22 @@
+id: void-wanfa-smith-kit
+kind: container
+name: 柏均的随身器具
+description: 筑基阵器修补与材料检验。所需的个人日常器具。
+placement: void-wanfa-smith
+facts:
+  - id: void-wanfa-smith-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-wanfa-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

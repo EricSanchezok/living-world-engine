@@ -1,0 +1,26 @@
+id: thunder-fireyang-port
+kind: location
+name: 火阳天然港
+description: 避风小湾内泊舟，岸边数座石屋旁立百丈石柱，柱顶小木屋可望近海。
+placement: thunder-firecloud-island
+facts:
+  - id: thunder-fireyang-port-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fireyang-settlement
+    description: 沿岸坡道通向住区。
+    access:
+      kind: private
+  - id: thunder-fireyang-port-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-fireyang-community
+    description: 港口归火阳支族共有。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

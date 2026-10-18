@@ -1,0 +1,26 @@
+id: feiling-lore-clerk-private-stock
+kind: container
+name: 竹翎私用储备
+description: 本人可支配的有限储备，与族库和受托物分开。
+placement: feiling-lore-clerk
+facts:
+  - id: feiling-lore-clerk-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-lore-clerk
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 2
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 6
+  - definition_id: low-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

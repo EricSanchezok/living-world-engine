@@ -1,0 +1,18 @@
+id: outerstar-young-sword
+kind: item
+name: 林岚随身飞剑
+description: 一柄完好低阶法器，御剑与法宝不可混同。
+placement: outerstar-hunter-youth
+facts:
+  - id: outerstar-young-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-hunter-youth
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

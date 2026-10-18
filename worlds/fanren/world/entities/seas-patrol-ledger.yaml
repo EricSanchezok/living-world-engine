@@ -1,0 +1,27 @@
+id: seas-patrol-ledger
+kind: item
+name: 巡哨查验簿
+description: 写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。
+placement: seas-patrol-post
+facts:
+  - id: seas-patrol-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-patrol-ledger-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 柯衡负责接引登记，严照负责外围查验。外客提交“盟”字令牌时要查真伪与登记，尚无人获本轮拍卖入场许可；员工自己的职务通行不能转卖成客卿资格。
+    description: 柯衡负责接引登记，严照负责外围查验。外客提交“盟”字令牌时要查真伪与登记，尚无人获本轮拍卖入场许可；员工自己的职务通行不能转卖成客卿资格。
+    access:
+      kind: discoverable
+      condition: 获准实际翻阅登记簿或由登记人员说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

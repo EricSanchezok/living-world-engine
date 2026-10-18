@@ -1,0 +1,20 @@
+id: innerstar-healer-medicine
+kind: container
+name: 陶芸药铺成药
+description: 六包普通外伤药，不提升修为；每包售价二十铜钱。
+placement: innerstar-mortal-street
+facts:
+  - id: innerstar-healer-medicine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 6
+ratings: []
+shared_activity_resources: []

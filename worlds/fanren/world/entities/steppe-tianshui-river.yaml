@@ -1,0 +1,58 @@
+id: steppe-tianshui-river
+kind: location
+name: 天水河
+description: 草原南部的大河，主流与支汊穿过漫长牧区，一端与大晋舜江相通；涉水、潜行和行舟各有条件。
+placement: steppe-tuwu-south
+facts:
+  - id: steppe-tianshui-river-route-steppe-tuwu-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tuwu-south
+    description: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    access:
+      kind: public
+  - id: steppe-tianshui-river-travel-steppe-tuwu-south
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    description: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    access:
+      kind: public
+  - id: steppe-tianshui-river-route-steppe-tianshui-tributary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianshui-tributary
+    description: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    access:
+      kind: public
+  - id: steppe-tianshui-river-travel-steppe-tianshui-tributary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    description: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    access:
+      kind: public
+  - id: steppe-tianshui-river-route-dajin-shun-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-shun-river
+    description: 沿连通的主河道持续行舟或遁行可入大晋舜江；需真实行程、避开险流和检查。两河相连不代表从任意支汊一步抵达。
+    access:
+      kind: public
+  - id: steppe-tianshui-river-travel-dajin-shun-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿连通的主河道持续行舟或遁行可入大晋舜江；需真实行程、避开险流和检查。两河相连不代表从任意支汊一步抵达。
+    description: 沿连通的主河道持续行舟或遁行可入大晋舜江；需真实行程、避开险流和检查。两河相连不代表从任意支汊一步抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

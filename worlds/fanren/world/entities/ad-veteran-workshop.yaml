@@ -1,0 +1,61 @@
+id: ad-veteran-workshop
+kind: location
+name: 石瘦刻甲小屋
+description: 石瘦在平原边缘的自住小屋，兼作刻甲工间，当前外出轮守。
+placement: associated-demon-realm
+facts:
+  - id: ad-veteran-workshop-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-seal-veteran
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-veteran-workshop-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-veteran-workshop-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循本地道路抵达小屋，进入屋内须本人允许。
+    description: 循本地道路抵达小屋，进入屋内须本人允许。
+    access:
+      kind: public
+  - id: ad-veteran-workshop-root-detail-mutant-demon-insects
+    predicate: root-detail-mutant-demon-insects
+    value:
+      kind: text
+      value: 部分变异魔虫毒液可污中阶以下法器和特定禁制，虫数毒量有限，不赋全族毁尽一切宝物的能力。
+    description: 部分变异魔虫毒液可污中阶以下法器和特定禁制，虫数毒量有限，不赋全族毁尽一切宝物的能力。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-veteran-workshop-root-detail-bloodcorrosion-flame
+    predicate: root-detail-bloodcorrosion-flame
+    value:
+      kind: text
+      value: 蚀血魔焰难驱但有对应器物和法门防护，伤害依接触、强弱与防护，不能一概沾触必死。
+    description: 蚀血魔焰难驱但有对应器物和法门防护，伤害依接触、强弱与防护，不能一概沾触必死。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-veteran-workshop-root-detail-qianji-force
+    predicate: root-detail-qianji-force
+    value:
+      kind: text
+      value: 牵机大法借卸力量需相应修习与承受能力，称其逆天是评价，不保证化解任何攻击。
+    description: 牵机大法借卸力量需相应修习与承受能力，称其逆天是评价，不保证化解任何攻击。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

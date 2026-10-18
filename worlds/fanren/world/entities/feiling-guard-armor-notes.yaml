@@ -1,0 +1,26 @@
+id: feiling-guard-armor-notes
+kind: item
+name: 守军凝甲入门图
+description: 金峰向新守卫解释煞气运行的基础图，不含石长老秘传全部内容。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-guard-armor-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-guard-armor-notes-teaching-boundary
+    predicate: teaching-boundary
+    value:
+      kind: text
+      value: 旁听可记住运功次序；实际凝甲需要足够已有煞气与控法练习，金峰可当面纠正。
+    description: 旁听可记住运功次序；实际凝甲需要足够已有煞气与控法练习，金峰可当面纠正。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

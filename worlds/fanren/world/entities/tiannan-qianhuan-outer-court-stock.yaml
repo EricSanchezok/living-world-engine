@@ -1,0 +1,30 @@
+id: tiannan-qianhuan-outer-court-stock
+kind: item
+name: 千幻外务院周转库
+description: 有限库存，有单独账目；保管人只可按已约定用途支用。
+placement: tiannan-qianhuan-outer-court
+facts:
+  - id: tiannan-qianhuan-outer-court-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qianhuan-sect
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-qianhuan-outer-court-stock-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-lin-qiao
+    description: 实际保管人；保管不等于归个人所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 70
+  - definition_id: craft-material
+    amount: 14
+ratings: []
+shared_activity_resources: []

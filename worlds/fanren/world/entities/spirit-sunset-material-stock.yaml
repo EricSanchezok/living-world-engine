@@ -1,0 +1,24 @@
+id: spirit-sunset-material-stock
+kind: container
+name: 落日材料铺现料
+description: 已核过成色的普通灵具材料，按实际成交数量交付。
+placement: spirit-sunset-human-market
+facts:
+  - id: spirit-sunset-material-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-material-dealer
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 18
+  - definition_id: joining-wire
+    amount: 10
+  - definition_id: grain
+    amount: 7
+ratings: []
+shared_activity_resources: []

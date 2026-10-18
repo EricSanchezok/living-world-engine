@@ -1,0 +1,26 @@
+id: far-luwan
+kind: location
+name: 芦湾泊地
+description: 五龙海一处近岸泊地，渔舟在湾内避风。
+placement: human-wulong-sea
+facts:
+  - id: far-luwan-route-far-luwan-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: far-luwan-workshop
+    description: 沿泊地岸边小路步行可达，按实际行程耗时。
+    access:
+      kind: public
+  - id: far-luwan-route-far-luwan-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: far-luwan-shop
+    description: 沿泊地岸边小路步行可达，按实际行程耗时。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

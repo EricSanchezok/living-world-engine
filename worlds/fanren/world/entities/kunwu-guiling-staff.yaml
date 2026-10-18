@@ -1,0 +1,26 @@
+id: kunwu-guiling-staff
+kind: item
+name: 圭灵五金棍
+description: 地下五金万年炼就，可化银斧，附独角白虎器灵；变化不增加第二件武器。
+placement: canon-gui-ling
+facts:
+  - id: kunwu-guiling-staff-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-gui-ling
+    description: owned-by
+    access:
+      kind: private
+  - id: kunwu-guiling-staff-spirit-capability
+    predicate: spirit-capability
+    value:
+      kind: text
+      value: 白虎虚影可化黄气，须器主催动；不是会独立取走主人财物的人。
+    description: 白虎虚影可化黄气，须器主催动；不是会独立取走主人财物的人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

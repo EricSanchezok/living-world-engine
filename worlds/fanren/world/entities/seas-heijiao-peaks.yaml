@@ -1,0 +1,58 @@
+id: seas-heijiao-peaks
+kind: location
+name: 黑焦峰
+description: 三座黑峰呈品字布列，周围有硫磺热风与禁地巡逻。
+placement: feiling-chirong-mountains
+facts:
+  - id: seas-heijiao-peaks-route-feiling-chirong-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chirong-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: seas-heijiao-peaks-condition-feiling-chirong-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山中高温和禁地盘查需实际应对，外客需信物或得到准许。
+    description: 山中高温和禁地盘查需实际应对，外客需信物或得到准许。
+    access:
+      kind: public
+  - id: seas-heijiao-peaks-route-seas-xuantian-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-xuantian-gate
+    description: route-to
+    access:
+      kind: public
+  - id: seas-heijiao-peaks-condition-seas-xuantian-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁区前止飞舟，验资格后由接引进入光门。
+    description: 禁区前止飞舟，验资格后由接引进入光门。
+    access:
+      kind: public
+  - id: seas-heijiao-peaks-reviewed-route-seas-patrol-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-patrol-post
+    description: reviewed-route-seas-patrol-post
+    access:
+      kind: public
+  - id: seas-heijiao-peaks-reviewed-condition-seas-patrol-post
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    description: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

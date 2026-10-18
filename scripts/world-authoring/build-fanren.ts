@@ -8,12 +8,14 @@ import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { parseWorldArchive } from "../../src/server/world-import";
 import { assembleRegionalModules } from "./regional-composition";
 import { contentHash } from "../../src/engine/models/model-audit";
+import { assertFullSourceClosure } from "./source-closure-files";
 
 const root = path.resolve("worlds/fanren/authoring");
 const json = (file: string) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
 const target = process.argv[2];
 if (target !== "sample" && target !== "full") throw new Error("usage: npx tsx scripts/world-authoring/build-fanren.ts sample|full");
 const integrity = json("sources/integrity-findings.json");
+const sourceClosureReceipt = target === "full" ? assertFullSourceClosure({ root }) : null;
 if (target === "full") {
   assertFullCoverage(json("coverage/world.json"), readFileSync(path.join(root, "coverage/chapters.jsonl"), "utf8").trim().split("\n").map(line => JSON.parse(line)),
     integrity.findings.filter((finding: { severity: string; status: string }) => finding.severity === "blocking" && finding.status !== "resolved").length);
@@ -60,7 +62,7 @@ try {
 const artifacts = path.resolve(".livingworld-cache/fanren-artifacts");
 mkdirSync(artifacts, { recursive: true });
 writeFileSync(path.join(artifacts, `${name}.zip`), archive);
-writeFileSync(path.join(root, "reviews", `${name}-build.json`), `${JSON.stringify({ ...receipt,
+writeFileSync(path.join(root, "reviews", `${name}-build.json`), `${JSON.stringify({ ...receipt, sourceClosureReceipt,
   worldHash: definition.contentHash, regionalReceipts: authored.receipts, files: Object.fromEntries([...files].map(([file, contents]) => [file, contentHash(contents)])),
   entities: Object.keys(definition.initialState.truth.entities).length, agents: Object.keys(definition.initialState.agents).length,
   originIds: definition.participation?.origins.map(origin => origin.id), archiveImportValidated: true,

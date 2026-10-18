@@ -1,0 +1,26 @@
+id: tianyuan-holding-gourd
+kind: item
+name: 备勤临时收押葫芦
+description: 现用器只容一位已完全失去抵抗的非真灵对象；本期额定至化神，操作者耗30法力封入，须保持封签完好。能否制服对象先行判定，不能越阶强吸；内封者仍有真实生命与后续照料需求。
+placement: tianyuan-patrol-chief
+facts:
+  - id: tianyuan-holding-gourd-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-holding-gourd-occupied
+    predicate: occupied
+    value:
+      kind: text
+      value: 当前空置；收押和释放须同步改变真实容纳状态。
+    description: 当前空置；收押和释放须同步改变真实容纳状态。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

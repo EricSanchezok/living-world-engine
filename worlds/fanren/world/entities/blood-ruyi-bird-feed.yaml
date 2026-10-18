@@ -1,0 +1,20 @@
+id: blood-ruyi-bird-feed
+kind: container
+name: 血鸠当用饲料
+description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+placement: blood-ruyi-residence
+facts:
+  - id: blood-ruyi-bird-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: blood-bird-feed
+    amount: 12
+ratings: []
+shared_activity_resources: []

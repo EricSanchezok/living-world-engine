@@ -1,0 +1,26 @@
+id: yue-qin-accounts
+kind: location
+name: 秦家账房
+description: 公账、采购单和结算凭据分别存放。
+placement: yue-qin-estate
+facts:
+  - id: yue-qin-accounts-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-accounts-route-yue-qin-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-estate
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

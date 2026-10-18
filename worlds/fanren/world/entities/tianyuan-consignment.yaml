@@ -1,0 +1,34 @@
+id: tianyuan-consignment
+kind: item
+name: 寒纹晶片寄售契
+description: 棘葭保留所有权，贺简仅代售，最低报价6枚中阶石，成交佣金1枚中阶石；也可由棘葭本人接受等值教学交换，未经她同意不能替她答应。
+placement: tianyuan-market-steward
+facts:
+  - id: tianyuan-consignment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-market-demon-clerk
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-consignment-principal
+    predicate: principal
+    value:
+      kind: entity
+      entityId: tianyuan-market-demon-clerk
+    description: principal
+    access:
+      kind: private
+  - id: tianyuan-consignment-agent
+    predicate: agent
+    value:
+      kind: entity
+      entityId: tianyuan-market-steward
+    description: agent
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

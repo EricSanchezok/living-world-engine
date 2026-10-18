@@ -1,0 +1,18 @@
+id: yinming-carpenter-pupil-tools
+kind: item
+name: 石苗的个人器具
+description: 常见木工、搬运、门轴润滑与固定。所需的有限工具，不包含无限兽晶。
+placement: yinming-carpenter-pupil
+facts:
+  - id: yinming-carpenter-pupil-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-carpenter-pupil
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

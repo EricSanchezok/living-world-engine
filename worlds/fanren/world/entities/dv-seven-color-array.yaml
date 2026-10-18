@@ -1,0 +1,34 @@
+id: dv-seven-color-array
+kind: location
+name: 七色霞禁乱石地
+description: 乱石间看似可自由行走，进入边界后七色霞光封路；强击会启动反击。
+placement: dv-outer
+facts:
+  - id: dv-seven-color-array-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-seven-color-array-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    description: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    access:
+      kind: public
+  - id: dv-seven-color-array-activation
+    predicate: activation
+    value:
+      kind: text
+      value: 初始困锁；攻击霞禁会促使火云反击。辨阵者可以研究边界、供能和阵纹，不能按“未先攻击”断定无杀伤性。
+    description: 初始困锁；攻击霞禁会促使火云反击。辨阵者可以研究边界、供能和阵纹，不能按“未先攻击”断定无杀伤性。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

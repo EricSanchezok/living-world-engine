@@ -1,0 +1,18 @@
+id: yue-nishang-silk
+kind: item
+name: 霓裳练法绸带
+description: 普通防护法器，适合练习与接引辅助。
+placement: canon-nishang
+facts:
+  - id: yue-nishang-silk-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nishang
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

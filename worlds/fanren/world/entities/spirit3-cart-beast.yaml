@@ -1,0 +1,21 @@
+id: spirit3-cart-beast
+kind: animal
+name: 曹砚的灰背驮兽
+description: 温顺灰背驮兽，识得曹砚的喂食和牵引动作，会疲劳、受伤与受惊。
+placement: spirit3-anyuan-cart-shed
+facts:
+  - id: spirit3-cart-beast-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-cart-driver
+    description: owned-by
+    access:
+      kind: private
+meters:
+  - id: spirit3-cart-beast-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: canon-ye-second-personal-stock
+kind: container
+name: 叶家方脸修士的私用行囊
+description: 个人修行、行旅储备，与宗门或族产不同。
+placement: canon-ye-second
+facts:
+  - id: canon-ye-second-personal-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ye-second
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+  - definition_id: mid-stone
+    amount: 4
+  - definition_id: grain
+    amount: 5
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: dajin-tianji-backyard
+kind: location
+name: 天机阁后院
+description: 禁制后的院地设一座传送阵，进入须得到商号许可并有实际可用灵石。
+placement: dajin-tianji-shop
+facts:
+  - id: dajin-tianji-backyard-route-dajin-tianji-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-shop
+    description: 穿过商号禁制须有许可。
+    access:
+      kind: public
+  - id: dajin-tianji-backyard-teleport-dajin-tianji-fixed-space
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-fixed-space
+    description: 固定传送阵相连；需阵法完好、供能和通行许可，不能徒步跨越空间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

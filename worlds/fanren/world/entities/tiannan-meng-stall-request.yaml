@@ -1,0 +1,36 @@
+id: tiannan-meng-stall-request
+kind: item
+name: 孟磐的换位申请
+description: 已送到登记亭的书面申请，尚不是生效租约。
+placement: tiannan-tianxing-register
+facts:
+  - id: tiannan-meng-stall-request-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-shenbing-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-meng-stall-request-applicant
+    predicate: submitted-by
+    value:
+      kind: entity
+      entityId: original-tiannan-meng-pan
+    description: 该修士提出申请。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-meng-stall-request-content
+    predicate: document-content
+    value:
+      kind: text
+      value: 希望下期十日用街口小位展示修好法器，愿讨论分日使用但尚未同意别人的方案。
+    description: 希望下期十日用街口小位展示修好法器，愿讨论分日使用但尚未同意别人的方案。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

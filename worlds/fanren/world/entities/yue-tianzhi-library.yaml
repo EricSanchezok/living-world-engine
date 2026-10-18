@@ -1,0 +1,18 @@
+id: yue-tianzhi-library
+kind: location
+name: 天知阁
+description: 供门内修士查阅旧典和基础阵法书的阁楼。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-tianzhi-library-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 沿门内道路进阁，来客须在柜台登记，阅本不得擅自带出。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

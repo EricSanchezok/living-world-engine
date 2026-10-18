@@ -1,0 +1,26 @@
+id: feiling-broken-tongs
+kind: item
+name: 赤陶的隔热夹
+description: 夹口轴钉磨损，交给弟弟检查，尚未修好。
+placement: feiling-miner-brother
+facts:
+  - id: feiling-broken-tongs-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-miner
+    description: 所有权归属。
+    access:
+      kind: private
+  - id: feiling-broken-tongs-repair-need
+    predicate: repair-need
+    value:
+      kind: text
+      value: 检查轴钉后可用一份实际修补材料、锻接手艺及1800秒更换；修好只恢复夹取温热矿料的能力，不能徒手夹取任何高温熔岩。
+    description: 检查轴钉后可用一份实际修补材料、锻接手艺及1800秒更换；修好只恢复夹取温热矿料的能力，不能徒手夹取任何高温熔岩。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

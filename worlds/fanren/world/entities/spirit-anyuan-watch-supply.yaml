@@ -1,0 +1,20 @@
+id: spirit-anyuan-watch-supply
+kind: container
+name: 安远守备轮值口粮
+description: 本班守卫所用口粮，受管事授权支配。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit-anyuan-watch-supply-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 80
+ratings: []
+shared_activity_resources: []

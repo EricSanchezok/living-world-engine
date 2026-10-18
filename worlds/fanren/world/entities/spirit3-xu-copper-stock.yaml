@@ -1,0 +1,20 @@
+id: spirit3-xu-copper-stock
+kind: container
+name: 许氏已采精铜
+description: 八份已经采出和初炼的精铜，不等于整条矿脉储量。
+placement: spirit3-xu-mine
+facts:
+  - id: spirit3-xu-copper-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: spirit3-refined-copper
+    amount: 8
+ratings: []
+shared_activity_resources: []

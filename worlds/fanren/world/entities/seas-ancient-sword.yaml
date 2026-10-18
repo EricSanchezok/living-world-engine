@@ -1,0 +1,18 @@
+id: seas-ancient-sword
+kind: item
+name: 青蛟冲月剑
+description: 青色长剑封在剑匣中，剑身有蛟形纹与月精炼养痕迹；是冲月老人旧炼三剑之一，当前没有出售委托。
+placement: seas-archive
+facts:
+  - id: seas-ancient-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

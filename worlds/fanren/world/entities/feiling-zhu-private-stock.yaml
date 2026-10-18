@@ -1,0 +1,22 @@
+id: feiling-zhu-private-stock
+kind: container
+name: 朱姓妖王私用储备
+description: 个人勘察和修行材料。
+placement: canon-abyss-zhu-king
+facts:
+  - id: feiling-zhu-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-abyss-zhu-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

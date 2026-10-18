@@ -1,0 +1,26 @@
+id: spirit3-maple-array-hall
+kind: location
+name: 枫林传送殿
+description: 大厅保有长程传送阵台，使用要验目的端回函与真实供能。
+placement: spirit3-maple-city
+facts:
+  - id: spirit3-maple-array-hall-route-to-spirit3-maple-city
+    predicate: route-to-spirit3-maple-city
+    value:
+      kind: entity
+      entityId: spirit3-maple-city
+    description: route-to-spirit3-maple-city
+    access:
+      kind: private
+  - id: spirit3-maple-array-hall-route-conditions-spirit3-maple-city
+    predicate: route-conditions-spirit3-maple-city
+    value:
+      kind: text
+      value: 步行到传送殿外；进阵须获准。
+    description: 步行到传送殿外；进阵须获准。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-guimian-domain
+kind: location
+name: 鬼面族地
+description: 鬼面族居住的山地与聚落；外客须沿已知通路接洽，边界并非无人土地。
+placement: feiling-territory
+facts:
+  - id: feiling-guimian-domain-route-feiling-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-territory
+    description: 长程族域通路
+    access:
+      kind: public
+  - id: feiling-guimian-domain-condition-guimian
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往鬼面族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    description: 前往鬼面族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

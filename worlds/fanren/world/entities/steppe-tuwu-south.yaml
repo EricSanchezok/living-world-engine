@@ -1,0 +1,90 @@
+id: steppe-tuwu-south
+kind: location
+name: 南部突兀草场
+description: 河流支脉沿岸聚集帐幕和放牧道路，部落依附不同圣殿组织供奉与学习。
+placement: human-mulan-steppe
+facts:
+  - id: steppe-tuwu-south-route-human-mulan-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-mulan-steppe
+    description: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-travel-human-mulan-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    description: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-route-steppe-central-marches
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-central-marches
+    description: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-travel-steppe-central-marches
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    description: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-route-steppe-shiwan-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-shiwan-camp
+    description: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-travel-steppe-shiwan-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    description: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-route-steppe-tianlan-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianlan-school
+    description: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-travel-steppe-tianlan-school
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    description: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-route-steppe-tianshui-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianshui-river
+    description: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    access:
+      kind: public
+  - id: steppe-tuwu-south-travel-steppe-tianshui-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    description: 沿南部牧道到河岸需携带饮水和行装；不可直接以地图名称抵达任意河段。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: canon-wheel-yaksha-king-supplies
+kind: container
+name: 转轮王的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-wheel-yaksha-king
+facts:
+  - id: canon-wheel-yaksha-king-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wheel-yaksha-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

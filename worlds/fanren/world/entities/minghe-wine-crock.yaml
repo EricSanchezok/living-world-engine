@@ -1,0 +1,29 @@
+id: minghe-wine-crock
+kind: item
+name: 尚未成熟的灵酒缸
+description: 一缸尚在酿制中的灵酒，距可用仍需五十年，不是眼下待客成酒。
+placement: minghe-wine-cellar
+facts:
+  - id: minghe-wine-crock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-wine-crock-earliest-maturation-seconds
+    predicate: earliest-maturation-seconds
+    value:
+      kind: number
+      value: 1576800000
+    description: earliest-maturation-seconds
+    access:
+      kind: agents
+      agentIds:
+        - canon-jin-yan-hou
+        - minghe-jinyan-steward
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

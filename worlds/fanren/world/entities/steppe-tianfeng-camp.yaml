@@ -1,0 +1,58 @@
+id: steppe-tianfeng-camp
+kind: location
+name: 天风部低岗营地
+description: 风从低岗两侧穿过，羊皮帐围着避风土墙；车轴、药材和干草各自堆在棚下。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-tianfeng-camp-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-tianfeng-camp-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-tianfeng-camp-route-steppe-tianfeng-hearth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-hearth
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianfeng-camp-travel-steppe-tianfeng-hearth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianfeng-camp-route-steppe-tianfeng-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-store
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianfeng-camp-travel-steppe-tianfeng-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

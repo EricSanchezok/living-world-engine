@@ -1,0 +1,27 @@
+id: spirit-capital-cargo-one
+kind: item
+name: 天元来货甲箱
+description: 天元来货甲箱，纸面或封装仍保持交接时的样子。
+placement: spirit-wharf
+facts:
+  - id: spirit-capital-cargo-one-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-shengshan-factor
+    description: 归杜观所有。
+    access:
+      kind: private
+  - id: spirit-capital-cargo-one-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 封装普通金属灵材料，杜观交托邵谨暂存。外封朱线完整，需开箱才能核实具体成色；未售出。
+    description: 封装普通金属灵材料，杜观交托邵谨暂存。外封朱线完整，需开箱才能核实具体成色；未售出。
+    access:
+      kind: discoverable
+      condition: 获得持有人许可后实际查看；封缄内容须拆封或由已读者主动告知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

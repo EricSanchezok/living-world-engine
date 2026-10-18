@@ -1,0 +1,18 @@
+id: dv-altar-qilin-4
+kind: item
+name: 祭坛麒麟柱4
+description: 铭纹青石柱顶有麒麟像，四柱的灵力导流组成开启遮蔽的机构；单独敲坏不等于安全开门。
+placement: dv-white-altar
+facts:
+  - id: dv-altar-qilin-4-activation-cost
+    predicate: activation-cost
+    value:
+      kind: text
+      value: 四柱必须协调供法；每柱需施术者持续投入50法力量并保持十分钟，期间中断会失稳。
+    description: 四柱必须协调供法；每柱需施术者持续投入50法力量并保持十分钟，期间中断会失稳。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

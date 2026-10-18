@@ -1,0 +1,69 @@
+id: ad-huanye-city
+kind: location
+name: 幻夜城
+description: 通向幻啸沙漠的地方城池，驯兽和行路产业由实际家庭经营。
+placement: associated-demon-realm
+facts:
+  - id: ad-huanye-city-route-ad-western-wastes
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-western-wastes
+    description: route-to
+    access:
+      kind: public
+  - id: ad-huanye-city-condition-ad-western-wastes
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-huanye-city-route-ad-huanxiao-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-huanxiao-desert
+    description: route-to
+    access:
+      kind: public
+  - id: ad-huanye-city-condition-ad-huanxiao-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-huanye-city-root-detail-huanye-services
+    predicate: root-detail-huanye-services
+    value:
+      kind: text
+      value: 魔馆、万奴塔、客卿楼和圣灵院有不同服务与产权，传阵隔绝阵须供能。拘禁或交易不会自动抹去有意识者的意愿。
+    description: 魔馆、万奴塔、客卿楼和圣灵院有不同服务与产权，传阵隔绝阵须供能。拘禁或交易不会自动抹去有意识者的意愿。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-huanye-city-root-detail-demon-lizards
+    predicate: root-detail-demon-lizards
+    value:
+      kind: text
+      value: 运输魔蜥是有限饲养的族产，调动需权限与饲料；八足及同段六足异写不生成两批兽。
+    description: 运输魔蜥是有限饲养的族产，调动需权限与饲料；八足及同段六足异写不生成两批兽。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-huanye-city-root-detail-huanye-vault
+    predicate: root-detail-huanye-vault
+    value:
+      kind: text
+      value: 白家各库层需各自权限、紫佩解阵和守卫供能，族库与私库分开；金鲸珠所显鲸影不另成活兽。
+    description: 白家各库层需各自权限、紫佩解阵和守卫供能，族库与私库分开；金鲸珠所显鲸影不另成活兽。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

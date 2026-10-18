@@ -1,0 +1,66 @@
+id: spirit-yuque-hall
+kind: location
+name: 玉阙阁
+description: 管理灵地居用手续的阁楼，申请者需核对身份、当前可用地块与租约。
+placement: tianyuan-city
+facts:
+  - id: spirit-yuque-hall-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 管理灵地居用手续的阁楼，申请者需核对身份、当前可用地块与租约。
+    access:
+      kind: public
+  - id: spirit-yuque-hall-route-spirit-yuque-upper
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-upper
+    description: 处理较高阶修士灵地事务的房间，有地图和独立文书柜。
+    access:
+      kind: public
+  - id: spirit-yuque-hall-route-spirit-cuilong-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-cuilong-mountain
+    description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+    access:
+      kind: public
+  - id: spirit-yuque-hall-route-spirit-tianyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyun-mountain
+    description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+    access:
+      kind: public
+  - id: spirit-yuque-hall-route-spirit-qionglai-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-qionglai-mountain
+    description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-yuque-hall-route-to-tianyuan-guangwu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-guangwu-hall
+    description: route-to-tianyuan-guangwu-hall
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-yuque-hall-route-conditions-tianyuan-guangwu-hall
+    predicate: route-conditions-tianyuan-guangwu-hall
+    value:
+      kind: text
+      value: 城内经过公共道路前往广武候场廊；正式开启比斗禁制须登记并有监督者在场。
+    description: 城内经过公共道路前往广武候场廊；正式开启比斗禁制须登记并有监督者在场。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

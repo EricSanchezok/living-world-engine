@@ -1,0 +1,20 @@
+id: ad-qiling-guard-core
+kind: creature
+name: 泣灵守殿傀儡
+description: 一具大型魔晶守卫，能依禁制迎敌，以先天冻光和本殿火源护持；不是泣灵本人活体。
+placement: ad-qiling-firehall
+facts:
+  - id: ad-qiling-guard-core-current-capability
+    predicate: current-capability
+    value:
+      kind: text
+      value: 按已刻禁制保护此殿；现存魔石供能，每次大规模冻光实际耗10魔石，局部修复另耗一份火晶和时间；不能从被击中自动补回全部消耗。
+    description: 按已刻禁制保护此殿；现存魔石供能，每次大规模冻光实际耗10魔石，局部修复另耗一份火晶和时间；不能从被击中自动补回全部消耗。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

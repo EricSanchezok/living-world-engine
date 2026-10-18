@@ -1,0 +1,234 @@
+id: canon-li-huayuan-wife
+kind: person
+name: 李夫人
+description: 李化元的道侣，主持洞府接待，有自己的判断。
+placement: yue-greenwave-cave
+facts:
+  - id: canon-li-huayuan-wife-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-huayuan-wife
+  - id: canon-li-huayuan-wife-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基法力、洞府管理与通常御物。
+    description: 筑基法力、洞府管理与通常御物。
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-huayuan-wife
+  - id: canon-li-huayuan-wife-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 水木两属性灵根
+    description: 水木两属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-li-huayuan-wife-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 自己长期所属门派，公产与私人库存不同。
+    access:
+      kind: public
+  - id: canon-li-huayuan-wife-spouse
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: canon-li-huayuan
+    description: 已相处多年的道侣，各有意见与私物。
+    access:
+      kind: public
+meters:
+  - id: canon-li-huayuan-wife-health
+    definition_id: health
+    current: 100
+  - id: canon-li-huayuan-wife-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 70
+ratings:
+  - id: canon-li-huayuan-wife-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: canon-li-huayuan-wife-force
+    definition_id: force
+    value: 2
+  - id: canon-li-huayuan-wife-craft
+    definition_id: craft
+    value: 1
+  - id: canon-li-huayuan-wife-perception
+    definition_id: perception
+    value: 2
+  - id: canon-li-huayuan-wife-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-li-huayuan-wife
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 李化元的道侣，主持洞府接待，有自己的判断。
+      voice: 待客温和，遇含糊托付会追问具体来意，不替夫君随口应允。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与夫君商量药市之行，把洞府日常安排妥当。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 李夫人
+        description: 李化元的道侣，主持洞府接待，有自己的判断。
+        status: observed
+      - id: location
+        name: 绿波洞
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-li-huayuan-wife-pouch
+        name: 李夫人的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-huangfeng-sect
+        name: 黄枫谷
+        description: 自己长期所属门派，公产与私人库存不同。
+        status: observed
+      - id: known-canon-li-huayuan
+        name: 李化元
+        description: 已相处多年的道侣，各有意见与私物。
+        status: observed
+      - id: known-yue-greenwave-true-yang
+        name: 真阳诀传本
+        description: 家中受封护的真阳诀传本，需亲手解封后方可借阅。
+        status: observed
+      - id: known-yue-greenwave-guiyuan
+        name: 归元功册
+        description: 家中受封护的归元功册，需亲手解封后方可借阅。
+        status: observed
+      - id: known-yue-greenwave-huanling
+        name: 幻灵诀册
+        description: 家中受封护的幻灵诀册，需亲手解封后方可借阅。
+        status: observed
+      - id: known-yue-greenwave-practice-notes
+        name: 练功笔记
+        description: 家中受封护的练功笔记，需亲手解封后方可借阅。
+        status: observed
+      - id: known-yue-greenwave-barrier-notes
+        name: 小禁制笔记
+        description: 家中受封护的小禁制笔记，需亲手解封后方可借阅。
+        status: observed
+      - id: known-yue-greenwave-library
+        name: 绿波藏书室
+        description: 自家藏书室，可解门禁；借阅范围由自己与配偶商定。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基法力、洞府管理与通常御物。
+        description: 筑基法力、洞府管理与通常御物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 与夫君商量药市之行，把洞府日常安排妥当。
+        description: 与夫君商量药市之行，把洞府日常安排妥当。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是水木两属性灵根。
+        description: 自己曾经验灵，知道自身是水木两属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-li-huayuan-wife
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-greenwave-cave
+      - local_entity_id: known-canon-li-huayuan-wife-pouch
+        canonical_entity_ids:
+          - canon-li-huayuan-wife-pouch
+      - local_entity_id: known-huangfeng-sect
+        canonical_entity_ids:
+          - huangfeng-sect
+      - local_entity_id: known-canon-li-huayuan
+        canonical_entity_ids:
+          - canon-li-huayuan
+      - local_entity_id: known-yue-greenwave-true-yang
+        canonical_entity_ids:
+          - yue-greenwave-true-yang
+      - local_entity_id: known-yue-greenwave-guiyuan
+        canonical_entity_ids:
+          - yue-greenwave-guiyuan
+      - local_entity_id: known-yue-greenwave-huanling
+        canonical_entity_ids:
+          - yue-greenwave-huanling
+      - local_entity_id: known-yue-greenwave-practice-notes
+        canonical_entity_ids:
+          - yue-greenwave-practice-notes
+      - local_entity_id: known-yue-greenwave-barrier-notes
+        canonical_entity_ids:
+          - yue-greenwave-barrier-notes
+      - local_entity_id: known-yue-greenwave-library
+        canonical_entity_ids:
+          - yue-greenwave-library

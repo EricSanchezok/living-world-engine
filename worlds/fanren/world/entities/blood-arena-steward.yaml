@@ -1,0 +1,182 @@
+id: blood-arena-steward
+kind: person
+name: 闻棘
+description: 竞技场执事，力求契约与实战边界一致，亦要让场地营运。
+placement: blood-arena
+facts:
+  - id: blood-arena-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - blood-arena-steward
+  - id: blood-arena-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴修行、场地护阵与契约记载。
+    description: 元婴修行、场地护阵与契约记载。
+    access:
+      kind: agents
+      agentIds:
+        - blood-arena-steward
+  - id: blood-arena-steward-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: blood-arena-steward-reports-to
+    predicate: reports-to
+    value:
+      kind: entity
+      entityId: blood-crane-warden
+    description: reports-to
+    access:
+      kind: private
+meters:
+  - id: blood-arena-steward-health
+    definition_id: health
+    current: 100
+  - id: blood-arena-steward-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-arena-steward-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: blood-arena-steward-force
+    definition_id: force
+    value: 4
+  - id: blood-arena-steward-craft
+    definition_id: craft
+    value: 4
+  - id: blood-arena-steward-perception
+    definition_id: perception
+    value: 4
+  - id: blood-arena-steward-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: blood-arena-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 竞技场执事，力求契约与实战边界一致，亦要让场地营运。
+      voice: 说规程利落，双方争吵时会指向纸面；空闲时爱谈过往精彩技法。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 确认新约斗的护阵、终止信号和赔偿条款。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 闻棘
+        description: 竞技场执事，力求契约与实战边界一致，亦要让场地营运。
+        status: observed
+      - id: location
+        name: 血鹤城较技场
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-arena-steward-resources
+        name: 闻棘的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-blood-crane-warden
+        name: 周如晦
+        description: 竞技场执事向守城者报告场内重大事故。
+        status: observed
+      - id: known-blood-arena-proposal
+        name: 平鹭与桑铸斗技草约
+        description: 双方拟定点到为止、可随时认输；公开挑衅者无权把此草约改成生死斗。
+        status: observed
+      - id: known-blood-arena-signal
+        name: 较技场止斗铃
+        description: 由执事使用，表示已经约定的终止信号；声音不是物理上强制双方服从。
+        status: observed
+      - id: known-blood-sponsor-offers
+        name: 栾砚两种护送邀约
+        description: 已讨论的草拟条件，仍可商议或拒绝。
+        status: observed
+      - id: known-blood-arena-fuel
+        name: 竞技场维护用石
+        description: 本次护阵可用库存，须实际耗用。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴修行、场地护阵与契约记载。
+        description: 元婴修行、场地护阵与契约记载。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-arena-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-arena
+      - local_entity_id: known-blood-arena-steward-resources
+        canonical_entity_ids:
+          - blood-arena-steward-resources
+      - local_entity_id: known-blood-crane-warden
+        canonical_entity_ids:
+          - blood-crane-warden
+      - local_entity_id: known-blood-arena-proposal
+        canonical_entity_ids:
+          - blood-arena-proposal
+      - local_entity_id: known-blood-arena-signal
+        canonical_entity_ids:
+          - blood-arena-signal
+      - local_entity_id: known-blood-sponsor-offers
+        canonical_entity_ids:
+          - blood-sponsor-offers
+      - local_entity_id: known-blood-arena-fuel
+        canonical_entity_ids:
+          - blood-arena-fuel

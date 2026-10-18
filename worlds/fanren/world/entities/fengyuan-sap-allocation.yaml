@@ -1,0 +1,26 @@
+id: fengyuan-sap-allocation
+kind: item
+name: 今季树汁用途议案
+description: 槐叙拟把六瓶中的四瓶留给幼株、两瓶做酒；木岑请求调一瓶给边地幼枝护理，尚未获允。
+placement: fengyuan-tree-warden
+facts:
+  - id: fengyuan-sap-allocation-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-sap-allocation-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: fengyuan-tree-warden
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: innerstar-cave-clerk-personal-pouch
+kind: container
+name: 苏砚的私用行囊
+description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+placement: innerstar-cave-clerk
+facts:
+  - id: innerstar-cave-clerk-personal-pouch-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-cave-clerk
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 4
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

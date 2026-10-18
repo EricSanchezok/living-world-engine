@@ -1,0 +1,18 @@
+id: ad-kuyes-forest
+kind: location
+name: 枯叶森林
+description: 向南绕行所经旧森林，林木与兽迹需要实地查看。
+placement: associated-demon-realm
+facts:
+  - id: ad-kuyes-forest-route-to-ad-bloodcrow-city
+    predicate: route-to-ad-bloodcrow-city
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

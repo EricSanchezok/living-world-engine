@@ -1,0 +1,42 @@
+id: seas-patrol-post
+kind: location
+name: 黑焦巡哨
+description: 黑焦峰山道旁的高岩台，台沿系着鹰架和示警铃，登记石案上压着巡线图。
+placement: seas-heijiao-peaks
+facts:
+  - id: seas-patrol-post-reviewed-route-seas-heijiao-peaks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-heijiao-peaks
+    description: reviewed-route-seas-heijiao-peaks
+    access:
+      kind: public
+  - id: seas-patrol-post-reviewed-condition-seas-heijiao-peaks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    description: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    access:
+      kind: public
+  - id: seas-patrol-post-reviewed-route-seas-xuantian-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-xuantian-gate
+    description: reviewed-route-seas-xuantian-gate
+    access:
+      kind: public
+  - id: seas-patrol-post-reviewed-condition-seas-xuantian-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    description: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

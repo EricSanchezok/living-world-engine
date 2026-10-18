@@ -1,0 +1,74 @@
+id: demon-phoenix-palace
+kind: location
+name: 黑凤宫
+description: 玄黑石檐沿山而建，前庭接见来使，侧道通向炎域；进内院需经当值者许可。
+placement: demon-phoenix-territory
+facts:
+  - id: demon-phoenix-palace-route-to-demon-phoenix-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-town
+    description: route-to-demon-phoenix-town
+    access:
+      kind: public
+  - id: demon-phoenix-palace-condition-demon-phoenix-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。
+    description: 城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。
+    access:
+      kind: public
+  - id: demon-phoenix-palace-route-to-demon-phoenix-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-court
+    description: route-to-demon-phoenix-court
+    access:
+      kind: public
+  - id: demon-phoenix-palace-condition-demon-phoenix-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前庭与议事处相通；接见时按守门安排进入。
+    description: 前庭与议事处相通；接见时按守门安排进入。
+    access:
+      kind: public
+  - id: demon-phoenix-palace-route-to-demon-phoenix-palace-flame-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-palace-flame-domain
+    description: route-to-demon-phoenix-palace-flame-domain
+    access:
+      kind: public
+  - id: demon-phoenix-palace-condition-demon-phoenix-palace-flame-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。
+    description: 火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。
+    access:
+      kind: public
+  - id: demon-phoenix-palace-route-to-demon-phoenix-inner-sanctuary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-inner-sanctuary
+    description: route-to-demon-phoenix-inner-sanctuary
+    access:
+      kind: public
+  - id: demon-phoenix-palace-condition-demon-phoenix-inner-sanctuary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。
+    description: 秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

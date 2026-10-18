@@ -1,0 +1,26 @@
+id: tianyuan-transport-hall
+kind: location
+name: 天渊军用阵务厅
+description: 塔壁内部的一间高台阵务厅，出入登记案与封锁栏分处两侧；旁侧备勤院已有本期使用的配对阵。
+placement: spirit-guard-tower
+facts:
+  - id: tianyuan-transport-hall-route-to-tianyuan-guard-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-guard-yard
+    description: route-to-tianyuan-guard-yard
+    access:
+      kind: private
+  - id: tianyuan-transport-hall-route-conditions-tianyuan-guard-yard
+    predicate: route-conditions-tianyuan-guard-yard
+    value:
+      kind: text
+      value: 军用通廊到备勤院，需当值或访客许可，步行本身不耗传送灵石。
+    description: 军用通廊到备勤院，需当值或访客许可，步行本身不耗传送灵石。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

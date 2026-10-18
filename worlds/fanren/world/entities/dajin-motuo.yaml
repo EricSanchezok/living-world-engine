@@ -1,0 +1,42 @@
+id: dajin-motuo
+kind: location
+name: 魔陀山
+description: 山顶魔宫有禁制隔绝外界冰雪。
+placement: dajin-wuyue
+facts:
+  - id: dajin-motuo-route-dajin-wuyue
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-wuyue
+    description: 险山与魔宫禁制，须具备到达手段并获准。
+    access:
+      kind: public
+  - id: dajin-motuo-travel-dajin-wuyue
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 险山与魔宫禁制，须具备到达手段并获准。
+    description: 险山与魔宫禁制，须具备到达手段并获准。
+    access:
+      kind: public
+  - id: dajin-motuo-route-south-tianmo-vault
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-tianmo-vault
+    description: route-to
+    access:
+      kind: public
+  - id: dajin-motuo-condition-south-tianmo-vault
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

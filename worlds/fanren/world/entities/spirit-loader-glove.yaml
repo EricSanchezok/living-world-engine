@@ -1,0 +1,44 @@
+id: spirit-loader-glove
+kind: item
+name: 提吊灵具驱动手套
+description: 供人牵动提吊架的驱动手套，嵌石槽为空，侧面有关闭卡扣。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-loader-glove-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-loader-glove-paired-with
+    predicate: paired-with
+    value:
+      kind: entity
+      entityId: spirit-training-lift
+    description: 须配对后由实际操作者使用。
+    access:
+      kind: public
+  - id: spirit-loader-glove-operation
+    predicate: operation
+    value:
+      kind: text
+      value: 关闭卡扣后才能装卸低阶灵石；将自己获准使用的一枚实石转入手套石槽，佩戴并按三步手势与提吊架配对。每次完整升降耗尽这一枚低阶灵石，必须扣除手套真实库存；停在半途的本次灵石也会耗尽。不能把装入、启动或耗尽叙述成免费。
+    description: 关闭卡扣后才能装卸低阶灵石；将自己获准使用的一枚实石转入手套石槽，佩戴并按三步手势与提吊架配对。每次完整升降耗尽这一枚低阶灵石，必须扣除手套真实库存；停在半途的本次灵石也会耗尽。不能把装入、启动或耗尽叙述成免费。
+    access:
+      kind: discoverable
+      condition: 实际拿到手套说明、阅读或由唐简现场教会并观察操作。
+  - id: spirit-loader-glove-empty-slot
+    predicate: empty-slot
+    value:
+      kind: text
+      value: 石槽为空，没有预装可用灵石。
+    description: 石槽为空，没有预装可用灵石。
+    access:
+      kind: discoverable
+      condition: 经许可实际检查手套石槽。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

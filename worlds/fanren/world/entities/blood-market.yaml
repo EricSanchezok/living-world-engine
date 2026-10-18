@@ -1,0 +1,74 @@
+id: blood-market
+kind: location
+name: 血鹤城交易广场
+description: 铺面与临时摊位围出的交易广场。外沿留有停放货车的空处，栾砚的轻车停在那里；买卖声中也有人谈论下一场公开较技。
+placement: blood-crane-city
+facts:
+  - id: blood-market-route-blood-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-gate
+    description: route-to
+    access:
+      kind: public
+  - id: blood-market-condition-blood-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-market-route-blood-arena
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-arena
+    description: route-to
+    access:
+      kind: public
+  - id: blood-market-condition-blood-arena
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-market-route-blood-city-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-city-office
+    description: route-to
+    access:
+      kind: public
+  - id: blood-market-condition-blood-city-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-market-route-blood-league-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-league-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: blood-market-condition-blood-league-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

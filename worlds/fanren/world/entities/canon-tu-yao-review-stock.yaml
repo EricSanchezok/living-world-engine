@@ -1,0 +1,22 @@
+id: canon-tu-yao-review-stock
+kind: container
+name: 涂咬自用储备
+description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+placement: canon-tu-yao
+facts:
+  - id: canon-tu-yao-review-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tu-yao
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

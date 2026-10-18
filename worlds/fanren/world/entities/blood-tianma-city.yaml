@@ -1,0 +1,42 @@
+id: blood-tianma-city
+kind: location
+name: 天马城
+description: 落潮草原上的商贸城池。探路者在这里补给、交换沿途水位和兽群消息，消息新旧会直接影响商队选择的道路。
+placement: blood-luochao-steppe
+facts:
+  - id: blood-tianma-city-route-blood-luochao-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-luochao-steppe
+    description: route-to
+    access:
+      kind: public
+  - id: blood-tianma-city-condition-blood-luochao-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-tianma-city-route-blood-tianma-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tianma-office
+    description: route-to
+    access:
+      kind: public
+  - id: blood-tianma-city-condition-blood-tianma-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

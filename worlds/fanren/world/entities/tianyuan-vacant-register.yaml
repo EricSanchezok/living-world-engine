@@ -1,0 +1,34 @@
+id: tianyuan-vacant-register
+kind: item
+name: 两处空洞登记页
+description: 两处空洞的范围、维护与费用写明，尚未授予任何来客。
+placement: spirit-yuque-hall
+facts:
+  - id: tianyuan-vacant-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-vacant-register-plot-tianyuan-vacant-cave-a
+    predicate: vacant-cave
+    value:
+      kind: entity
+      entityId: tianyuan-vacant-cave-a
+    description: vacant-cave
+    access:
+      kind: public
+  - id: tianyuan-vacant-register-plot-tianyuan-vacant-cave-b
+    predicate: vacant-cave
+    value:
+      kind: entity
+      entityId: tianyuan-vacant-cave-b
+    description: vacant-cave
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

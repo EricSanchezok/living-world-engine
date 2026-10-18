@@ -1,0 +1,26 @@
+id: steppe-tianfeng-store
+kind: location
+name: 天风当期共库
+description: 粮袋和练法材料按领用人记账，私人的丹药另收。
+placement: steppe-tianfeng-camp
+facts:
+  - id: steppe-tianfeng-store-route-steppe-tianfeng-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-camp
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianfeng-store-travel-steppe-tianfeng-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

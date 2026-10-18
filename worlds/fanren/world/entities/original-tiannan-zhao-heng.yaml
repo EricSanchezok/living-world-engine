@@ -1,0 +1,221 @@
+id: original-tiannan-zhao-heng
+kind: person
+name: 赵衡
+description: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+placement: tiannan-tiansha-outer-court
+facts:
+  - id: original-tiannan-zhao-heng-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基初期
+    description: 筑基初期
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-zhao-heng
+  - id: original-tiannan-zhao-heng-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、水、土三灵根
+    description: 金、水、土三灵根；已检测并为本人所知。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-zhao-heng
+  - id: original-tiannan-zhao-heng-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+    description: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-zhao-heng
+  - id: original-tiannan-zhao-heng-membership
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: tiansha-sect
+    description: 目前为该组织办事，个人财产与公产分离。
+    access:
+      kind: public
+  - id: original-tiannan-zhao-heng-knows-original-tiannan-gu-nan
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-gu-nan
+    description: 曾有普通器材往来，彼此知姓名和职责。
+    access:
+      kind: public
+meters:
+  - id: original-tiannan-zhao-heng-health
+    definition_id: health
+    current: 100
+  - id: original-tiannan-zhao-heng-mana
+    definition_id: mana
+    current: 160
+quantities:
+  - definition_id: low-stone
+    amount: 28
+ratings:
+  - id: original-tiannan-zhao-heng-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: original-tiannan-zhao-heng-force
+    definition_id: force
+    value: 2
+  - id: original-tiannan-zhao-heng-craft
+    definition_id: craft
+    value: 1
+  - id: original-tiannan-zhao-heng-perception
+    definition_id: perception
+    value: 1
+  - id: original-tiannan-zhao-heng-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: original-tiannan-zhao-heng
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+      voice: 说话简短，先分紧急修补与可以延后的开支。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 需要补换两块护院阵片，想先核价再动用公库。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 赵衡
+        description: 筑基初期修士，熟悉基础护院阵与宗门入院登记。 需要补换两块护院阵片，想先核价再动用公库。
+        status: observed
+      - id: location
+        name: 天煞外务院
+        description: 自己当前任事的地方。
+        status: observed
+      - id: known-original-tiannan-zhao-heng-pouch
+        name: 赵衡的日用行囊
+        description: 自己的日用物品。
+        status: observed
+      - id: known-tiannan-tiansha-outer-court-stock
+        name: 天煞外务院周转库
+        description: 自己负责核数的库存，所有权属于天煞宗。
+        status: observed
+      - id: known-tiansha-sect
+        name: 天煞宗
+        description: 自己需要向该所有者交代出入账。
+        status: observed
+      - id: known-original-tiannan-gu-nan
+        name: 顾楠
+        description: 此前普通器材往来的熟人，只知道其经营和交付习惯。
+        status: observed
+      - id: known-tiannan-tiansha-courtyard-ward
+        name: 天煞外院护院阵
+        description: 自己值守的护院阵，两片损坏造成警示迟滞。
+        status: observed
+      - id: known-tiannan-tiansha-cracked-tile-a
+        name: 护院阵裂纹片甲
+        description: 检查时看见裂纹的旧阵片。
+        status: observed
+      - id: known-tiannan-tiansha-cracked-tile-b
+        name: 护院阵裂纹片乙
+        description: 检查时看见裂纹的旧阵片。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己亲历的检测、学艺与任事。
+        sourceId: null
+        step: 0
+    claims:
+      - id: own-rank
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 筑基初期
+        description: 筑基初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、水、土三灵根，早年检测已知。
+        description: 金、水、土三灵根，早年检测已知。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+        description: 筑基初期修士，熟悉基础护院阵与宗门入院登记。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 需要补换两块护院阵片，想先核价再动用公库。
+        description: 需要补换两块护院阵片，想先核价再动用公库。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - original-tiannan-zhao-heng
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tiannan-tiansha-outer-court
+      - local_entity_id: known-original-tiannan-zhao-heng-pouch
+        canonical_entity_ids:
+          - original-tiannan-zhao-heng-pouch
+      - local_entity_id: known-tiannan-tiansha-outer-court-stock
+        canonical_entity_ids:
+          - tiannan-tiansha-outer-court-stock
+      - local_entity_id: known-tiansha-sect
+        canonical_entity_ids:
+          - tiansha-sect
+      - local_entity_id: known-original-tiannan-gu-nan
+        canonical_entity_ids:
+          - original-tiannan-gu-nan
+      - local_entity_id: known-tiannan-tiansha-courtyard-ward
+        canonical_entity_ids:
+          - tiannan-tiansha-courtyard-ward
+      - local_entity_id: known-tiannan-tiansha-cracked-tile-a
+        canonical_entity_ids:
+          - tiannan-tiansha-cracked-tile-a
+      - local_entity_id: known-tiannan-tiansha-cracked-tile-b
+        canonical_entity_ids:
+          - tiannan-tiansha-cracked-tile-b

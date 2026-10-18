@@ -1,0 +1,53 @@
+id: tiannan-sale-earth-badger
+kind: creature
+name: 土獾
+description: 可掘普通松土，嗅找近处食物；不能无视岩壁或防护禁制。
+placement: tiannan-tianxing-beast-court
+facts:
+  - id: tiannan-sale-earth-badger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-beast-business
+    description: 当前属于兽业商号，实际付款交接才转移。
+    access:
+      kind: public
+  - id: tiannan-sale-earth-badger-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 一级下阶
+    description: 一级下阶
+    access:
+      kind: public
+  - id: tiannan-sale-earth-badger-training-state
+    predicate: training-state
+    value:
+      kind: text
+      value: 熟悉梁守平的短距声令和喂食，陌生人需在其看护下适应；受伤或惊吓仍可能不听从。
+    description: 驯养不抹去活兽反应。
+    access:
+      kind: public
+  - id: tiannan-sale-earth-badger-daily-care
+    predicate: daily-care
+    value:
+      kind: text
+      value: 每日需一份合用饲料与清水，另需清理笼舍；当前已吃过今日饲料。
+    description: 持续饲养会消耗真实食粮，今晚不重复扣已吃的一份。
+    access:
+      kind: public
+  - id: tiannan-sale-earth-badger-sale-price
+    predicate: sale-price
+    value:
+      kind: text
+      value: 35低阶灵石，含一次现场声令演示与交接；未出售前不能随意带走。
+    description: 报价须双方同意并实际交付。
+    access:
+      kind: public
+meters:
+  - id: tiannan-sale-earth-badger-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

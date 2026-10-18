@@ -1,0 +1,58 @@
+id: seas-fengyuan-array-core
+kind: item
+name: 商盟风元阵体
+description: 连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。
+placement: seas-fengyuan-relay-hall
+facts:
+  - id: seas-fengyuan-array-core-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-fengyuan-array-core-next-available-time
+    predicate: next-available-time
+    value:
+      kind: number
+      value: 0
+    description: next-available-time
+    access:
+      kind: private
+  - id: seas-fengyuan-array-core-last-transfer
+    predicate: last-transfer
+    value:
+      kind: text
+      value: 本端当前已完成养护，可受理申请；没有未执行的强制出发命令。
+    description: 本端当前已完成养护，可受理申请；没有未执行的强制出发命令。
+    access:
+      kind: private
+  - id: seas-fengyuan-array-core-operating-authority
+    predicate: operating-authority
+    value:
+      kind: entity
+      entityId: seas-array-tutor
+    description: operating-authority
+    access:
+      kind: private
+  - id: seas-fengyuan-array-core-departure-accounting
+    predicate: departure-accounting
+    value:
+      kind: text
+      value: 出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。
+    description: 出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。
+    access:
+      kind: private
+  - id: seas-fengyuan-array-core-routine-interval-seconds
+    predicate: routine-interval-seconds
+    value:
+      kind: number
+      value: 3153600000
+    description: routine-interval-seconds
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

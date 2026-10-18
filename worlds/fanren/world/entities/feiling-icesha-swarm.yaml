@@ -1,0 +1,20 @@
+id: feiling-icesha-swarm
+kind: creature-group
+name: 冰煞群
+description: 十二只在这片黑冰附近活动的低阶冰煞。
+placement: feiling-icesha-glacier
+facts:
+  - id: feiling-icesha-swarm-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-creature-count
+    amount: 12
+ratings: []
+shared_activity_resources: []

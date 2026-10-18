@@ -1,0 +1,66 @@
+id: innerstar-star-hall
+kind: location
+name: 星空殿
+description: 圣山第五十层的白石大殿，各阵前石碑标示目的地，由星宫阵吏轮值。
+placement: innerstar-holy-mountain
+facts:
+  - id: innerstar-star-hall-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-star-hall-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 位于圣山五十层附近，传送阵由星宫轮值者看守。
+    description: 位于圣山五十层附近，传送阵由星宫轮值者看守。
+    access:
+      kind: public
+  - id: innerstar-star-hall-transit-cost
+    predicate: transit-cost
+    value:
+      kind: text
+      value: 此处一次至多七人、总价700低阶灵石；可协商分摊，供能另由星宫公库实耗三块中阶石，必须核各人保护与目的地阵状态。
+    description: 此处一次至多七人、总价700低阶灵石；可协商分摊，供能另由星宫公库实耗三块中阶石，必须核各人保护与目的地阵状态。
+    access:
+      kind: public
+  - id: innerstar-star-hall-route-outerstar-ningcui-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-ningcui-array
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-star-hall-condition-outerstar-ningcui-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    description: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    access:
+      kind: public
+  - id: innerstar-star-hall-route-outerstar-qiyuan-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-qiyuan-array
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-star-hall-condition-outerstar-qiyuan-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    description: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

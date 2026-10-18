@@ -1,0 +1,18 @@
+id: tianyuan-transit-blank
+kind: item
+name: 本期出境空白通行牌
+description: 一块尚未填写姓名与目的地的通行牌，须有实际申请、查验和登记才可交付生效；空牌不能证明持有人获准出境。
+placement: tianyuan-law-investigator
+facts:
+  - id: tianyuan-transit-blank-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

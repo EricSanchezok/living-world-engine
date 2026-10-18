@@ -1,0 +1,18 @@
+id: kunwu-mitian-bracelet
+kind: item
+name: 弥天镯
+description: 叶家护身仿宝，施展耗精血，未在未来黑风中损毁。
+placement: south-ye-archive
+facts:
+  - id: kunwu-mitian-bracelet-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-ye-family
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

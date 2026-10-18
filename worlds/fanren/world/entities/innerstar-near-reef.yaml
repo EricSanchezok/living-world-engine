@@ -1,0 +1,26 @@
+id: innerstar-near-reef
+kind: location
+name: 港外近礁
+description: 离港可到的礁区，潮沟深浅不同；绕行与近探各有耗时。
+placement: human-tianxing-island
+facts:
+  - id: innerstar-near-reef-route-innerstar-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-harbor
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-near-reef-condition-innerstar-harbor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 离港可到的礁区，潮沟深浅不同；绕行与近探各有耗时。
+    description: 离港可到的礁区，潮沟深浅不同；绕行与近探各有耗时。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

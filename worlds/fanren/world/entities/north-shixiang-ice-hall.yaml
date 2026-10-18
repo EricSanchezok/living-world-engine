@@ -1,0 +1,26 @@
+id: north-shixiang-ice-hall
+kind: location
+name: 师相玄冰厅
+description: 深入地下的寒冷大厅，通体以万年玄冰砌成；是师相的受限居所，不等于虚灵殿或玄玉洞。
+placement: north-hanli-realm
+facts:
+  - id: north-shixiang-ice-hall-route-north-hanli-realm
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-hanli-realm
+    description: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    access:
+      kind: public
+  - id: north-shixiang-ice-hall-travel-north-hanli-realm
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    description: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

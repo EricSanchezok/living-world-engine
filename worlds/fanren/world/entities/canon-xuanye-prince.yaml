@@ -1,0 +1,214 @@
+id: canon-xuanye-prince
+kind: creature
+name: 炫烨王儿
+description: 仍难完全收敛尸气的王儿，情绪急躁而依赖父母教导。
+placement: global-xuanye-main-room
+facts:
+  - id: canon-xuanye-prince-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - canon-xuanye-prince
+  - id: canon-xuanye-prince-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 尸道阴属根基，固定尸躯。
+    description: 尸道阴属根基，固定尸躯。
+    access:
+      kind: discoverable
+      condition: 适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。
+  - id: canon-xuanye-prince-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。
+    description: 冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。
+    access:
+      kind: agents
+      agentIds:
+        - canon-xuanye-prince
+  - id: canon-xuanye-prince-child-of-canon-xuanye-king
+    predicate: child-of
+    value:
+      kind: entity
+      entityId: canon-xuanye-king
+    description: 双方在墓中长期相处的亲属关系。
+    access:
+      kind: private
+  - id: canon-xuanye-prince-child-of-canon-xuanye-consort
+    predicate: child-of
+    value:
+      kind: entity
+      entityId: canon-xuanye-consort
+    description: 双方在墓中长期相处的亲属关系。
+    access:
+      kind: private
+  - id: canon-xuanye-prince-bound-to-tomb
+    predicate: soul-binding
+    value:
+      kind: text
+      value: 元神与三棺墓室相联，未有已完成的离魂解脱法。
+    description: 元神与三棺墓室相联，未有已完成的离魂解脱法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-xuanye-prince
+        - canon-xuanye-king
+meters:
+  - id: canon-xuanye-prince-health
+    definition_id: health
+    current: 100
+  - id: canon-xuanye-prince-mana
+    definition_id: mana
+    current: 280
+quantities:
+  - definition_id: low-stone
+    amount: 40
+ratings:
+  - id: canon-xuanye-prince-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: canon-xuanye-prince-force
+    definition_id: force
+    value: 3
+  - id: canon-xuanye-prince-craft
+    definition_id: craft
+    value: 4
+  - id: canon-xuanye-prince-perception
+    definition_id: perception
+    value: 3
+  - id: canon-xuanye-prince-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-xuanye-prince
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 仍难完全收敛尸气的王儿，情绪急躁而依赖父母教导。
+      voice: 按自己确知的经历和职责说话，未知的事情会承认不知。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 在棺内修炼，听父母讲解如何稳住尸气。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 炫烨王儿
+        description: 冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。
+        status: observed
+      - id: location
+        name: 三棺墓室
+        description: 自己所在及日常使用的地方。
+        status: observed
+      - id: known-canon-xuanye-king
+        name: 炫烨王
+        description: 自己的父亲，共同居于此墓。
+        status: observed
+      - id: known-canon-xuanye-consort
+        name: 炫烨王妃
+        description: 自己的母亲，共同居于此墓。
+        status: observed
+      - id: manual
+        name: 冥河天尸诀旧册
+        description: 墓中修炼所据旧册，自己只掌握与现有修炼相应部分。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人生活、修行和实际职责交接所得。
+        sourceId: null
+        step: 0
+    claims:
+      - id: self-knowledge
+        subjectId: self
+        predicate: known-condition
+        value:
+          kind: text
+          value: 冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。
+        description: 冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: location-knowledge
+        subjectId: location
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己所在及日常使用的地方。
+        description: 自己所在及日常使用的地方。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-canon-xuanye-king-knowledge
+        subjectId: known-canon-xuanye-king
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己的父亲，共同居于此墓。
+        description: 自己的父亲，共同居于此墓。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-canon-xuanye-consort-knowledge
+        subjectId: known-canon-xuanye-consort
+        predicate: known-condition
+        value:
+          kind: text
+          value: 自己的母亲，共同居于此墓。
+        description: 自己的母亲，共同居于此墓。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: manual-knowledge
+        subjectId: manual
+        predicate: known-condition
+        value:
+          kind: text
+          value: 墓中修炼所据旧册，自己只掌握与现有修炼相应部分。
+        description: 墓中修炼所据旧册，自己只掌握与现有修炼相应部分。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-xuanye-prince
+      - local_entity_id: location
+        canonical_entity_ids:
+          - global-xuanye-main-room
+      - local_entity_id: known-canon-xuanye-king
+        canonical_entity_ids:
+          - canon-xuanye-king
+      - local_entity_id: known-canon-xuanye-consort
+        canonical_entity_ids:
+          - canon-xuanye-consort
+      - local_entity_id: manual
+        canonical_entity_ids:
+          - global-xuanye-corpse-manual

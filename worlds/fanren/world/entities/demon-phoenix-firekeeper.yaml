@@ -1,0 +1,268 @@
+id: demon-phoenix-firekeeper
+kind: person
+name: 筱砚
+description: 黑凤支系修士，负责火脉取用排程。
+placement: demon-phoenix-town
+facts:
+  - id: demon-phoenix-firekeeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - demon-phoenix-firekeeper
+  - id: demon-phoenix-firekeeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。
+    description: 控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。
+    access:
+      kind: agents
+      agentIds:
+        - demon-phoenix-firekeeper
+  - id: demon-phoenix-firekeeper-cultivation-path
+    predicate: cultivation-path
+    value:
+      kind: text
+      value: 妖族血脉修行，法体、法力与已学手段分别起作用。
+    description: 妖族血脉修行，法体、法力与已学手段分别起作用。
+    access:
+      kind: agents
+      agentIds:
+        - demon-phoenix-firekeeper
+  - id: demon-phoenix-firekeeper-community-duty
+    predicate: community-duty
+    value:
+      kind: entity
+      entityId: demon-phoenix-community
+    description: community-duty
+    access:
+      kind: private
+  - id: demon-phoenix-firekeeper-reports-to
+    predicate: reports-to
+    value:
+      kind: entity
+      entityId: canon-black-phoenix-king
+    description: reports-to
+    access:
+      kind: private
+  - id: demon-phoenix-firekeeper-black-flame-accumulation
+    predicate: black-flame-accumulation
+    value:
+      kind: text
+      value: 已修成本命黑焰，但可凝黑炎丹的特殊积累尚不足；至少还需四百年修炼积累，此间耗损会延后，不能靠换身刷新。
+    description: 已修成本命黑焰，但可凝黑炎丹的特殊积累尚不足；至少还需四百年修炼积累，此间耗损会延后，不能靠换身刷新。
+    access:
+      kind: agents
+      agentIds:
+        - demon-phoenix-firekeeper
+meters:
+  - id: demon-phoenix-firekeeper-health
+    definition_id: health
+    current: 100
+  - id: demon-phoenix-firekeeper-mana
+    definition_id: mana
+    current: 1100
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: demon-phoenix-firekeeper-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: demon-phoenix-firekeeper-force
+    definition_id: force
+    value: 5
+  - id: demon-phoenix-firekeeper-craft
+    definition_id: craft
+    value: 4
+  - id: demon-phoenix-firekeeper-perception
+    definition_id: perception
+    value: 5
+  - id: demon-phoenix-firekeeper-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: demon-phoenix-firekeeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 黑凤支系修士，负责火脉取用排程。
+      voice: 说话快，常拿炉温与火色作比；一听人说火脉不重要就忍不住认真解释。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 筱砚
+        description: 黑凤支系修士，负责火脉取用排程。
+        status: observed
+      - id: location
+        name: 墨羽城
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-demon-phoenix-town
+        name: 墨羽城
+        description: 常住并任职的聚落。
+        status: observed
+      - id: known-demon-phoenix-firekeeper-tools
+        name: 筱砚的随身工具
+        description: 维护工作所用工具与材料。
+        status: observed
+      - id: known-canon-black-phoenix-king
+        name: 筱馆
+        description: 本地长期公务往来，各自只知道已报告的事务。
+        status: observed
+      - id: resource-demon-phoenix-lava-ground
+        name: 黑凤熔岩养虫地
+        description: 赤黑岩池上层层热浪滚动，沿池设窄石台观察火虫，落脚区与禁采区以岩标分开。
+        status: observed
+      - id: resource-demon-phoenix-silk-stock
+        name: 三根晶炎丝
+        description: 三根火红细丝分置隔热细管，管口记录了对应岩槽与采集日期。
+        status: observed
+      - id: resource-demon-phoenix-fireworm-record
+        name: 火虫观察簿
+        description: 岩槽编号、吐丝记录与护育禁采安排逐页写在石纸上。
+        status: observed
+      - id: resource-demon-phoenix-silk-wristguard-method
+        name: 晶丝护腕工序册
+        description: 筱砚自用工序册，写着如何将晶炎丝嵌入低阶火脉作业护腕。
+        status: observed
+      - id: resource-demon-phoenix-silk-purchase-proposal
+        name: 黑凤王的购丝意向
+        description: 署筱馆名的一页短笺，请筱砚代表公库提出回复。
+        status: observed
+      - id: resource-demon-phoenix-palace-flame-domain
+        name: 黑凤宫炎域
+        description: 隔热石廊尽头是一片由禁制分开的火室，静修者可依承受能力选用；值守记录记载各室火势与启闭。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。
+        sourceId: null
+        step: 0
+      - id: resource-review-prior-life
+        kind: observation
+        description: 自己在开篇前实际参与的资源保管、制备与书面协商。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。
+        description: 控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己以妖族血脉与所学功法修行。
+        description: 自己以妖族血脉与所学功法修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: work-purpose
+        subjectId: self
+        predicate: work-purpose
+        value:
+          kind: text
+          value: 决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。
+        description: 决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 记得入场时此地已入夜。
+        description: 开篇时的夜色记忆。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+      - id: resource-current-arrangement
+        subjectId: self
+        predicate: known-resources
+        value:
+          kind: text
+          value: 决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。
+            公库有三根完整丝，已采丝的三只虫不能再产。我已学护腕工序；自己的凝丹积累尚远不足，不以本命火冒充已有丹药。
+        description: 决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。
+          公库有三根完整丝，已采丝的三只虫不能再产。我已学护腕工序；自己的凝丹积累尚远不足，不以本命火冒充已有丹药。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - resource-review-prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - demon-phoenix-firekeeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - demon-phoenix-town
+      - local_entity_id: known-demon-phoenix-town
+        canonical_entity_ids:
+          - demon-phoenix-town
+      - local_entity_id: known-demon-phoenix-firekeeper-tools
+        canonical_entity_ids:
+          - demon-phoenix-firekeeper-tools
+      - local_entity_id: known-canon-black-phoenix-king
+        canonical_entity_ids:
+          - canon-black-phoenix-king
+      - local_entity_id: resource-demon-phoenix-lava-ground
+        canonical_entity_ids:
+          - demon-phoenix-lava-ground
+      - local_entity_id: resource-demon-phoenix-silk-stock
+        canonical_entity_ids:
+          - demon-phoenix-silk-stock
+      - local_entity_id: resource-demon-phoenix-fireworm-record
+        canonical_entity_ids:
+          - demon-phoenix-fireworm-record
+      - local_entity_id: resource-demon-phoenix-silk-wristguard-method
+        canonical_entity_ids:
+          - demon-phoenix-silk-wristguard-method
+      - local_entity_id: resource-demon-phoenix-silk-purchase-proposal
+        canonical_entity_ids:
+          - demon-phoenix-silk-purchase-proposal
+      - local_entity_id: resource-demon-phoenix-palace-flame-domain
+        canonical_entity_ids:
+          - demon-phoenix-palace-flame-domain

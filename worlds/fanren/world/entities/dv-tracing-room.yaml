@@ -1,0 +1,26 @@
+id: dv-tracing-room
+kind: location
+name: 问山庐拓图房
+description: 木台上铺着摹图纸与刻有山形的石片；屋后浅沟引水洗笔，不与坠魔谷地底空间相通。
+placement: dv-foothill-lodge
+facts:
+  - id: dv-tracing-room-route-dv-foothill-lodge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-foothill-lodge
+    description: route-to
+    access:
+      kind: public
+  - id: dv-tracing-room-condition-dv-foothill-lodge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 庐内短途移动，工作台资料仍需主人许可。
+    description: 庐内短途移动，工作台资料仍需主人许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

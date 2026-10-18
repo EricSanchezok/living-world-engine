@@ -1,0 +1,34 @@
+id: yinming-storm-summit
+kind: location
+name: 暴风山巅
+description: 接近天幕的山巅，出口当前未开。
+placement: associated-yinming
+facts:
+  - id: yinming-storm-summit-route-yinming-storm-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-storm-mist
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-storm-summit-condition-yinming-storm-mist
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+  - id: yinming-storm-summit-outward-aperture
+    predicate: outward-aperture
+    value:
+      kind: text
+      value: 当前没有可通行裂缝。裂缝与外界位置随罗睺实际活动与空间条件变化；知道出口传闻不等于已有出口。
+    description: 当前没有可通行裂缝。裂缝与外界位置随罗睺实际活动与空间条件变化；知道出口传闻不等于已有出口。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

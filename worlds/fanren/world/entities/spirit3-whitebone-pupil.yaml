@@ -1,0 +1,184 @@
+id: spirit3-whitebone-pupil
+kind: person
+name: 应朔
+description: 元婴弟子，想把伤身较重的一段练法后移，愿以自己的记录接受师长检验。
+placement: spirit3-whitebone-mountain
+facts:
+  - id: spirit3-whitebone-pupil-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: spirit3-whitebone-pupil-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴护体与飞遁、基础骨盾祭炼、记录练法耗料。
+    description: 元婴护体与飞遁、基础骨盾祭炼、记录练法耗料。
+    access:
+      kind: private
+  - id: spirit3-whitebone-pupil-student-of
+    predicate: student-of
+    value:
+      kind: entity
+      entityId: canon-wan-gu-zhenren
+    description: student-of
+    access:
+      kind: private
+  - id: spirit3-whitebone-pupil-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 火、土、木三属性灵根
+    description: 火、土、木三属性灵根
+    access:
+      kind: discoverable
+      condition: 有合适手段并实际检测本人的灵根；旁人不能由职务或衣饰读出。
+meters:
+  - id: spirit3-whitebone-pupil-health
+    definition_id: health
+    current: 100
+  - id: spirit3-whitebone-pupil-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: spirit3-whitebone-pupil-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: spirit3-whitebone-pupil-force
+    definition_id: force
+    value: 4
+  - id: spirit3-whitebone-pupil-craft
+    definition_id: craft
+    value: 3
+  - id: spirit3-whitebone-pupil-perception
+    definition_id: perception
+    value: 4
+  - id: spirit3-whitebone-pupil-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: spirit3-whitebone-pupil
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 元婴弟子，想把伤身较重的一段练法后移，愿以自己的记录接受师长检验。
+      voice: 会把身体感觉与用料一项项说清，紧张时仍坚持讲完不同意见。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 向万骨提交既有三次练习记录，争取一次有师长在场的验证。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 应朔
+        description: 元婴弟子，想把伤身较重的一段练法后移，愿以自己的记录接受师长检验。
+        status: observed
+      - id: location
+        name: 白骨门山地
+        description: 当前生活或办事之地，开篇已入夜。
+        status: observed
+      - id: review-spirit3-whitebone-pupil-private-stock
+        name: 应朔私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-canon-wan-gu-zhenren
+        name: 万骨真人
+        description: 自己的师长和宗门创立者，须凭记录提出改法。
+        status: observed
+      - id: review-spirit3-whitebone-sect
+        name: 白骨门
+        description: 万骨真人创立的玄武宗门，功法、宗库与门人各有保管和责任。
+        status: observed
+      - id: review-spirit3-whitebone-manual
+        name: 白骨入门手录
+        description: 讲述灵兽遗骨选材、骨盾祭炼和练法中止条件；缺材料或神识掌握不应跳步。
+        status: observed
+      - id: review-spirit3-whitebone-experiment
+        name: 应朔练法记录
+        description: 三次既有小试各耗1份工料，第二次胸闷提前中止；建议下次把最后一步延后，尚未证明改法更好。
+        status: observed
+      - id: review-spirit3-whitebone-public-stock
+        name: 白骨门教习公库
+        description: 用于门内教习的有限石料，需有具体门务批准。
+        status: observed
+      - id: review-spirit3-pupil-bone-shield
+        name: 应朔试制骨盾
+        description: 试制骨盾，操纵需8法力，仅适合当前已学基础防护。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴护体与飞遁、基础骨盾祭炼、记录练法耗料。
+        description: 元婴护体与飞遁、基础骨盾祭炼、记录练法耗料。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root
+        subjectId: self
+        predicate: known-spiritual-root
+        value:
+          kind: text
+          value: 火、土、木三属性灵根，是本人已有检测结果。
+        description: 本人接受过检测并知道结果。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - spirit3-whitebone-pupil
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit3-whitebone-mountain
+      - local_entity_id: review-spirit3-whitebone-pupil-private-stock
+        canonical_entity_ids:
+          - spirit3-whitebone-pupil-private-stock
+      - local_entity_id: review-canon-wan-gu-zhenren
+        canonical_entity_ids:
+          - canon-wan-gu-zhenren
+      - local_entity_id: review-spirit3-whitebone-sect
+        canonical_entity_ids:
+          - spirit3-whitebone-sect
+      - local_entity_id: review-spirit3-whitebone-manual
+        canonical_entity_ids:
+          - spirit3-whitebone-manual
+      - local_entity_id: review-spirit3-whitebone-experiment
+        canonical_entity_ids:
+          - spirit3-whitebone-experiment
+      - local_entity_id: review-spirit3-whitebone-public-stock
+        canonical_entity_ids:
+          - spirit3-whitebone-public-stock
+      - local_entity_id: review-spirit3-pupil-bone-shield
+        canonical_entity_ids:
+          - spirit3-pupil-bone-shield

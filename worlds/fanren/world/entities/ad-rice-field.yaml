@@ -1,0 +1,26 @@
+id: ad-rice-field
+kind: location
+name: 沈黍血牙米田
+description: 小片适配血牙米的田地，有一成熟粒、两株未熟苗，全部数量登记。
+placement: ad-lanpu-lake
+facts:
+  - id: ad-rice-field-route-ad-lanpu-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-lanpu-lake
+    description: route-to
+    access:
+      kind: public
+  - id: ad-rice-field-condition-ad-lanpu-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿田埂到小田，进栽植地须主人许可，不能踏坏幼苗。
+    description: 沿田埂到小田，进栽植地须主人许可，不能踏坏幼苗。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

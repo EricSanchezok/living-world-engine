@@ -1,0 +1,18 @@
+id: dajin-jinjiang
+kind: location
+name: 金江郡
+description: 晋京附近的郡域，道路与城外交通连接，进入京畿仍须遵守当地通行规矩。
+placement: human-dajin
+facts:
+  - id: dajin-jinjiang-route-jinjing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjing
+    description: 郡域与京畿相邻，行程按道路、载具和速度实际计算。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

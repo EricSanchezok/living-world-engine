@@ -1,0 +1,18 @@
+id: void-iron-ants
+kind: animal-group
+name: 铁火蚁群
+description: 栖息在黑色矿砂之间的铁火蚁群。
+placement: void-black-sand
+facts:
+  - id: void-iron-ants-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 24000
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

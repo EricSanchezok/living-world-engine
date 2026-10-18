@@ -1,0 +1,74 @@
+id: north-entry-market
+kind: location
+name: 北冥岛入口坊市
+description: 半岛连陆入口的坊市；定元牌发行与担保需查真实账簿。
+placement: human-beiming-island
+facts:
+  - id: north-entry-market-route-human-beiming-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-beiming-island
+    description: 可从内陆一侧到达，严寒仍须防护。
+    access:
+      kind: public
+  - id: north-entry-market-travel-human-beiming-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可从内陆一侧到达，严寒仍须防护。
+    description: 可从内陆一侧到达，严寒仍须防护。
+    access:
+      kind: public
+  - id: north-entry-market-route-north-shenlou-zone
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-shenlou-zone
+    description: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    access:
+      kind: public
+  - id: north-entry-market-travel-north-shenlou-zone
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    description: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    access:
+      kind: public
+  - id: north-entry-market-route-north-liucui-seat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-liucui-seat
+    description: 外围道路与引路，仍须防寒和准入。
+    access:
+      kind: public
+  - id: north-entry-market-travel-north-liucui-seat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外围道路与引路，仍须防寒和准入。
+    description: 外围道路与引路，仍须防寒和准入。
+    access:
+      kind: public
+  - id: north-entry-market-route-north-mojiu-lodge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-mojiu-lodge
+    description: 需得知住处并通报，主人可不接待。
+    access:
+      kind: public
+  - id: north-entry-market-travel-north-mojiu-lodge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需得知住处并通报，主人可不接待。
+    description: 需得知住处并通报，主人可不接待。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

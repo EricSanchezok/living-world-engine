@@ -1,0 +1,191 @@
+id: yue-chen-aunt
+kind: person
+name: 陈芙
+description: 陈巧倩的族姑，重视晚辈亲手办事的本领。
+placement: yue-chen-courtyard
+facts:
+  - id: yue-chen-aunt-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - yue-chen-aunt
+  - id: yue-chen-aunt-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基初期法力、御器与家族晚辈指导。
+    description: 筑基初期法力、御器与家族晚辈指导。
+    access:
+      kind: agents
+      agentIds:
+        - yue-chen-aunt
+  - id: yue-chen-aunt-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木火土三属性灵根
+    description: 木火土三属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: yue-chen-aunt-family-canon-chen-qiaoqian
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: canon-chen-qiaoqian
+    description: 同族长辈与晚辈，正商量一次送信差事。
+    access:
+      kind: public
+meters:
+  - id: yue-chen-aunt-health
+    definition_id: health
+    current: 100
+  - id: yue-chen-aunt-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-chen-aunt-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: yue-chen-aunt-force
+    definition_id: force
+    value: 2
+  - id: yue-chen-aunt-craft
+    definition_id: craft
+    value: 1
+  - id: yue-chen-aunt-perception
+    definition_id: perception
+    value: 2
+  - id: yue-chen-aunt-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-chen-aunt
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 陈巧倩的族姑，重视晚辈亲手办事的本领。
+      voice: 讲道理时会拿眼前的事举例，遇孩子急躁便先放慢动作。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 看巧倩御器是否稳当，再决定是否让她独自去外院送信。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陈芙
+        description: 陈巧倩的族姑，重视晚辈亲手办事的本领。
+        status: observed
+      - id: location
+        name: 陈氏修行小院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-chen-aunt-pouch
+        name: 陈芙的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-chen-qiaoqian
+        name: 陈巧倩
+        description: 同族长辈与晚辈，正商量一次送信差事。
+        status: observed
+      - id: known-yue-chen-courier-letter
+        name: 陈芙的外院请教信
+        description: 一封尚未送出的信，向黄枫王接引请教外院借阅手续，尚无答复。
+        status: observed
+      - id: known-canon-huangfeng-wang-guide
+        name: 王接引
+        description: 此前有过接引往来，准备向他问借阅手续。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基初期法力、御器与家族晚辈指导。
+        description: 筑基初期法力、御器与家族晚辈指导。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 看巧倩御器是否稳当，再决定是否让她独自去外院送信。
+        description: 看巧倩御器是否稳当，再决定是否让她独自去外院送信。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是木火土三属性灵根。
+        description: 自己曾经验灵，知道自身是木火土三属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-chen-aunt
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-chen-courtyard
+      - local_entity_id: known-yue-chen-aunt-pouch
+        canonical_entity_ids:
+          - yue-chen-aunt-pouch
+      - local_entity_id: known-canon-chen-qiaoqian
+        canonical_entity_ids:
+          - canon-chen-qiaoqian
+      - local_entity_id: known-yue-chen-courier-letter
+        canonical_entity_ids:
+          - yue-chen-courier-letter
+      - local_entity_id: known-canon-huangfeng-wang-guide
+        canonical_entity_ids:
+          - canon-huangfeng-wang-guide

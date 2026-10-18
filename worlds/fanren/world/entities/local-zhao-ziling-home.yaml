@@ -1,0 +1,18 @@
+id: local-zhao-ziling-home
+kind: location
+name: 赵家住处
+description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+placement: peer-market-town
+facts:
+  - id: local-zhao-ziling-home-route-peer-market-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: peer-market-town
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

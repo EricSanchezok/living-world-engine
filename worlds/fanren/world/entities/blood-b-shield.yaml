@@ -1,0 +1,18 @@
+id: blood-b-shield
+kind: item
+name: 桑铸重盾
+description: 亲自练熟的重盾，承受能力有限。
+placement: blood-contestant-b
+facts:
+  - id: blood-b-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-contestant-b
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

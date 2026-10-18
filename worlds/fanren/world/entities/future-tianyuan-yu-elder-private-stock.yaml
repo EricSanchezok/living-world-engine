@@ -1,0 +1,24 @@
+id: future-tianyuan-yu-elder-private-stock
+kind: container
+name: 余姓老修士私用储备
+description: 个人储备与机构公物分开。
+placement: future-tianyuan-yu-elder
+facts:
+  - id: future-tianyuan-yu-elder-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-tianyuan-yu-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: low-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

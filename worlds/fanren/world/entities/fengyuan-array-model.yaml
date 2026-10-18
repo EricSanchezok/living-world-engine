@@ -1,0 +1,18 @@
+id: fengyuan-array-model
+kind: item
+name: 枝络试阵模型
+description: 当前已组起的十二节木架模型，输入20法力与一枚中阶石后可观察枝路亮暗；过载会烧坏模型。
+placement: fengyuan-old-array-study
+facts:
+  - id: fengyuan-array-model-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

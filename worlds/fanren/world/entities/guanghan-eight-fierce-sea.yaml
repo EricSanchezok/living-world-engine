@@ -1,0 +1,26 @@
+id: guanghan-eight-fierce-sea
+kind: location
+name: 八凶海
+description: 邻近森林的危险海域，水下生灵与险流阻碍随意穿行。
+placement: guanghan-realm
+facts:
+  - id: guanghan-eight-fierce-sea-route-guanghan-dark-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-dark-forest
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-eight-fierce-sea-condition-guanghan-dark-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须在界内实际沿地形行进，消耗时间和补给；地图名称不是瞬移指令，飞越有生灵与天气风险。
+    description: 须在界内实际沿地形行进，消耗时间和补给；地图名称不是瞬移指令，飞越有生灵与天气风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: kunwu-white-receiver
+kind: item
+name: 魂匣宫回阵
+description: 与七层白阵对应，路径不通另一囚室。
+placement: kunwu-tower-white
+facts:
+  - id: kunwu-white-receiver-paired-array
+    predicate: paired-array
+    value:
+      kind: entity
+      entityId: kunwu-white-array
+    description: paired-array
+    access:
+      kind: private
+  - id: kunwu-white-receiver-activation-rule
+    predicate: activation-rule
+    value:
+      kind: text
+      value: 阵体完整、空间未被封锁，注入有效灵力并支付本阵十刻储能，一次最多4人；物品随乘员移动不复制。
+    description: 阵体完整、空间未被封锁，注入有效灵力并支付本阵十刻储能，一次最多4人；物品随乘员移动不复制。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: kunwu-array-charge
+    amount: 300
+ratings: []
+shared_activity_resources: []

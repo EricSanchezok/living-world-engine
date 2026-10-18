@@ -1,0 +1,58 @@
+id: xlt-border-pass
+kind: location
+name: 折岚隘口
+description: 山道在此收窄，是数族商旅可以协商同行的歇脚处。
+placement: xlt-realm
+facts:
+  - id: xlt-border-pass-route-xlt-human-land
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-human-land
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-border-pass-route-xlt-green-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-green-sea
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-border-pass-route-xlt-sacred-grove
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-sacred-grove
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-border-pass-route-xlt-wind-volcano
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-wind-volcano
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-border-pass-route-xlt-mantis-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-mantis-plain
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-border-pass-route-xlt-moon-terrain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-moon-terrain
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

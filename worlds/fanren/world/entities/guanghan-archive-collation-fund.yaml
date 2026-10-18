@@ -1,0 +1,20 @@
+id: guanghan-archive-collation-fund
+kind: container
+name: 旧档校对酬金
+description: 获准用于本轮校对的十二中阶灵石，须提交可复核差异才结算。
+placement: guanghan-archive-room
+facts:
+  - id: guanghan-archive-collation-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

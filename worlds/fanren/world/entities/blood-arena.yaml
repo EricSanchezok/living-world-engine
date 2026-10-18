@@ -1,0 +1,26 @@
+id: blood-arena
+kind: location
+name: 血鹤城较技场
+description: 可供双方公开斗技的场地，护阵将交手区域与旁观席隔开。执事须检查供能和双方约定，止斗铃放在他能及时取用的位置。
+placement: blood-crane-city
+facts:
+  - id: blood-arena-route-blood-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-market
+    description: route-to
+    access:
+      kind: public
+  - id: blood-arena-condition-blood-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

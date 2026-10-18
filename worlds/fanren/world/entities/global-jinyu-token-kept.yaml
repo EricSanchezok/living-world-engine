@@ -1,0 +1,26 @@
+id: global-jinyu-token-kept
+kind: item
+name: 许静澄留宗灵心佩
+description: 寄存宗门的一枚配对灵心佩。
+placement: global-jinyu-court
+facts:
+  - id: global-jinyu-token-kept-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-jinyu-xujingcheng
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-jinyu-token-kept-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。
+    description: 与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

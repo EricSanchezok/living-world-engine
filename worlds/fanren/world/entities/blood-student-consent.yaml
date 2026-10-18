@@ -1,0 +1,18 @@
+id: blood-student-consent
+kind: item
+name: 幻景试演告知页
+description: 观看自愿，可说停或离开；演出内容是灯见创作，未经确认的山路不能作真地图。
+placement: blood-huanxin-hall
+facts:
+  - id: blood-student-consent-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-huanxin-student
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

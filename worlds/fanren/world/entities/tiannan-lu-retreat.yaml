@@ -1,0 +1,26 @@
+id: tiannan-lu-retreat
+kind: location
+name: 吕洛水亭
+description: 水亭与练功池，水势可供千浪诀练习，仍需本人引动法力。
+placement: tiannan-luoyun-mountain
+facts:
+  - id: tiannan-lu-retreat-route-tiannan-luoyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-luoyun-mountain
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-lu-retreat-travel-tiannan-luoyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

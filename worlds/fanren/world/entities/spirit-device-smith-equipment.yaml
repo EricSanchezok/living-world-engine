@@ -1,0 +1,18 @@
+id: spirit-device-smith-equipment
+kind: item
+name: 唐简的小火炉
+description: 修造低阶金属灵具用炉，需实际供热与材料，不能无中生有炼成成品。
+placement: spirit-device-smith
+facts:
+  - id: spirit-device-smith-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

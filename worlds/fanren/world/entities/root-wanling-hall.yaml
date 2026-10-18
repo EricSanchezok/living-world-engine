@@ -1,0 +1,37 @@
+id: root-wanling-hall
+kind: location
+name: 万灵殿
+description: 山壁开凿的议事殿，供各家代表商谈。
+placement: root-wanling-valley
+facts:
+  - id: root-wanling-hall-route-to-root-wanling-valley
+    predicate: route-to-root-wanling-valley
+    value:
+      kind: entity
+      entityId: root-wanling-valley
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-hall-travel-condition-root-wanling-valley
+    predicate: travel-condition-root-wanling-valley
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-hall-root-detail-true-spirit-families
+    predicate: root-detail-true-spirit-families
+    value:
+      kind: text
+      value: 谷、叶、陇、丰、林、劳各有族产与成员。谷黎吼、叶天凤、陇真龙血脉不混，血脉不保证高阶；旧交旧怨可影响选择，仍可协商改变。
+    description: 谷、叶、陇、丰、林、劳各有族产与成员。谷黎吼、叶天凤、陇真龙血脉不混，血脉不保证高阶；旧交旧怨可影响选择，仍可协商改变。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

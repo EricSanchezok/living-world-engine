@@ -1,0 +1,74 @@
+id: north-ice-city
+kind: location
+name: 小极宫冰城
+description: 整冰城墙围合的驻地，城门与内宫各有通行界限。
+placement: human-beiming-island
+facts:
+  - id: north-ice-city-route-north-snow-station
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-snow-station
+    description: 沿雪路接近冰城，守门者会核对来意。
+    access:
+      kind: public
+  - id: north-ice-city-travel-north-snow-station
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿雪路接近冰城，守门者会核对来意。
+    description: 沿雪路接近冰城，守门者会核对来意。
+    access:
+      kind: public
+  - id: north-ice-city-route-north-gate-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-gate-room
+    description: 门房只是外层值守，不等于进入秘境。
+    access:
+      kind: public
+  - id: north-ice-city-travel-north-gate-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门房只是外层值守，不等于进入秘境。
+    description: 门房只是外层值守，不等于进入秘境。
+    access:
+      kind: public
+  - id: north-ice-city-route-north-inner-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    access:
+      kind: public
+  - id: north-ice-city-travel-north-inner-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    description: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    access:
+      kind: public
+  - id: north-ice-city-route-north-shenlou-zone
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-shenlou-zone
+    description: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    access:
+      kind: public
+  - id: north-ice-city-travel-north-shenlou-zone
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    description: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

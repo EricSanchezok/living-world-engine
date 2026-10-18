@@ -1,0 +1,58 @@
+id: void-spring
+kind: location
+name: 灵泉宝室
+description: 大型灵泉与龙首石雕在静室里，南接守卫，北接养魂木禁室。
+placement: void-tower-two
+facts:
+  - id: void-spring-route-void-tower-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-two
+    description: route-to
+    access:
+      kind: public
+  - id: void-spring-condition-void-tower-two
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-spring-route-void-soulwood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-soulwood
+    description: route-to
+    access:
+      kind: public
+  - id: void-spring-condition-void-soulwood
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-spring-route-void-hidden-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-hidden-array
+    description: route-to
+    access:
+      kind: public
+  - id: void-spring-condition-void-hidden-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

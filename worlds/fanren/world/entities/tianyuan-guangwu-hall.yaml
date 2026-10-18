@@ -1,0 +1,26 @@
+id: tianyuan-guangwu-hall
+kind: location
+name: 广武殿
+description: 围栏下是带禁制的露天争斗场，旁边有候场廊与书面认输、延期记录。
+placement: tianyuan-city
+facts:
+  - id: tianyuan-guangwu-hall-route-to-spirit-yuque-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-hall
+    description: route-to-spirit-yuque-hall
+    access:
+      kind: private
+  - id: tianyuan-guangwu-hall-route-conditions-spirit-yuque-hall
+    predicate: route-conditions-spirit-yuque-hall
+    value:
+      kind: text
+      value: 城内经过公共道路前往广武候场廊；正式开启比斗禁制须登记并有监督者在场。
+    description: 城内经过公共道路前往广武候场廊；正式开启比斗禁制须登记并有监督者在场。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

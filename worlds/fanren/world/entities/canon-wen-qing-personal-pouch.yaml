@@ -1,0 +1,22 @@
+id: canon-wen-qing-personal-pouch
+kind: container
+name: 温青的私用行囊
+description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+placement: canon-wen-qing
+facts:
+  - id: canon-wen-qing-personal-pouch-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wen-qing
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 4
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

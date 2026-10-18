@@ -1,0 +1,42 @@
+id: guanghan-screen-space
+kind: location
+name: 屏中须弥洞天
+description: 屏风连接的空间，深处高台有古老星阵。
+placement: guanghan-purple-palace
+facts:
+  - id: guanghan-screen-space-route-guanghan-purple-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-purple-palace
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-screen-space-condition-guanghan-purple-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 识别并以真实空间手段打开屏风通路；无法靠普通收纳术取走已被旧主炼化的屏风。
+    description: 识别并以真实空间手段打开屏风通路；无法靠普通收纳术取走已被旧主炼化的屏风。
+    access:
+      kind: public
+  - id: guanghan-screen-space-route-guanghan-star-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-star-platform
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-screen-space-condition-guanghan-star-platform
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须经过古阵空间，观看星图有幻术牵引；黑门自修复禁制仍完整，蛮力与克制手段依实际强度裁定。
+    description: 须经过古阵空间，观看星图有幻术牵引；黑门自修复禁制仍完整，蛮力与克制手段依实际强度裁定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: ad-old-sea-map
+kind: item
+name: 鹿珩海道旧图
+description: 旧图两处墨色不同，包含魔猿礁外轮廓但内海转向未可靠核验。
+placement: ad-information-client
+facts:
+  - id: ad-old-sea-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-information-client
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

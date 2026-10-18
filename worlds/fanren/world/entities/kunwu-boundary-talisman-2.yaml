@@ -1,0 +1,18 @@
+id: kunwu-boundary-talisman-2
+kind: item
+name: 破界符2
+description: 每张蕴含一次符力，须配适当宝物与专门秘术；使用后消耗。
+placement: kunwu-boundary-talismans
+facts:
+  - id: kunwu-boundary-talisman-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-taiyi-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

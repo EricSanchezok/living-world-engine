@@ -1,0 +1,42 @@
+id: feiling-chirong-domain
+kind: location
+name: 赤融族地
+description: 赤融支系生活的区域，族内有不同家庭和职业。
+placement: feiling-territory
+facts:
+  - id: feiling-chirong-domain-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chirong-domain-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 赤融支系生活的区域，族内有不同家庭和职业。
+    description: 赤融支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-chirong-domain-route-feiling-chirong-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chirong-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chirong-domain-condition-feiling-chirong-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长途商路连接飞灵赤融族地与风元赤融山脉，须跨越大片地域、备路图和物资；不是族地内部的短程通道。具体行程按实际速度、路线与条件判断。
+    description: 长途商路连接飞灵赤融族地与风元赤融山脉，须跨越大片地域、备路图和物资；不是族地内部的短程通道。具体行程按实际速度、路线与条件判断。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

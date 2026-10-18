@@ -1,0 +1,18 @@
+id: qixuan-outer-blade-hall
+kind: location
+name: 外刃堂堂院
+description: 门内机构使用的院舍，访客须先通报。
+placement: caixia-mountain
+facts:
+  - id: qixuan-outer-blade-hall-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

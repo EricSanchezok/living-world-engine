@@ -1,0 +1,51 @@
+id: ad-seal-outer-post
+kind: location
+name: 始印外围守院
+description: 当下守卫处理少量逸出子虫与轮换，并未围困各界大乘。
+placement: associated-demon-realm
+facts:
+  - id: ad-seal-outer-post-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-seal-outer-post-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-seal-outer-post-route-ad-original-seal
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-original-seal
+    description: route-to
+    access:
+      kind: public
+  - id: ad-seal-outer-post-condition-ad-original-seal
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-seal-outer-post-root-detail-external-world-contacts
+    predicate: root-detail-external-world-contacts
+    value:
+      kind: text
+      value: 邻界来往需实际通道、联络与条件，援助者只能知道真实收到的信息；跨界名称不等可随意传送到任意界域。
+    description: 邻界来往需实际通道、联络与条件，援助者只能知道真实收到的信息；跨界名称不等可随意传送到任意界域。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

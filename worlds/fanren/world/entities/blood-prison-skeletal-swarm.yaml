@@ -1,0 +1,29 @@
+id: blood-prison-skeletal-swarm
+kind: creature-group
+name: 血狱血灵骷髅群
+description: 近血狱入口活动的血色飞颅，以血箭和侵染袭击闯入者；与骨蝶各有形态，未被后来访客清灭。
+placement: blood-blood-prison
+facts:
+  - id: blood-prison-skeletal-swarm-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 1600
+    description: individual-count
+    access:
+      kind: private
+  - id: blood-prison-skeletal-swarm-reaction
+    predicate: reaction
+    value:
+      kind: text
+      value: 闯入活动范围会招来集群攻击；数量随真正消灭而减少，侵染须击中与突破目标防护。源内相克七色霞光要有真实已学手段，不靠报招式名清场。
+    description: 闯入活动范围会招来集群攻击；数量随真正消灭而减少，侵染须击中与突破目标防护。源内相克七色霞光要有真实已学手段，不靠报招式名清场。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings:
+  - id: blood-prison-skeletal-swarm-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

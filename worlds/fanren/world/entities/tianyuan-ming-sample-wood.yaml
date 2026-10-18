@@ -1,0 +1,18 @@
+id: tianyuan-ming-sample-wood
+kind: item
+name: 魂音木纹试片
+description: 一块已干燥的木纹工料，与金纹试片共振不同；既有痕迹可复验，不能据两个样本认出所有陌生修士。
+placement: tianyuan-ming-workshop
+facts:
+  - id: tianyuan-ming-sample-wood-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ming-oldmaster
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

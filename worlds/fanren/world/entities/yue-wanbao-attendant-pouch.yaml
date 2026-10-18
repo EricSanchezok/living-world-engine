@@ -1,0 +1,20 @@
+id: yue-wanbao-attendant-pouch
+kind: item
+name: 陆青的日用包
+description: 普通备用衣物与自己的口粮。
+placement: yue-wanbao-attendant
+facts:
+  - id: yue-wanbao-attendant-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-wanbao-attendant
+    description: 实际所有人；保管、搬运和使用许可另行确认。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 2
+ratings: []
+shared_activity_resources: []

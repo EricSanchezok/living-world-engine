@@ -1,0 +1,19 @@
+id: root-library-office
+kind: organization
+name: 天书阁管书处
+description: 负责本期借读、抄录和收入的管书处。
+placement: root-tianti-shuge
+facts:
+  - id: root-library-office-current-offer
+    predicate: current-offer
+    value:
+      kind: text
+      value: 上述三份普通抄本各可付二十低阶灵石在外堂阅读半日，不包含内阁秘术权限；若提出修补缺页，可以另议。此为当前普通阅览服务，不改变内阁巨额换学制度。
+    description: 上述三份普通抄本各可付二十低阶灵石在外堂阅读半日，不包含内阁秘术权限；若提出修补缺页，可以另议。此为当前普通阅览服务，不改变内阁巨额换学制度。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

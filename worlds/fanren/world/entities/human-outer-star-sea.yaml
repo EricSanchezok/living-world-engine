@@ -1,0 +1,74 @@
+id: human-outer-star-sea
+kind: location
+name: 外星海
+description: 又称妖海，离开已知补给点后，航图、食物、法力与风险都需重新估算。
+placement: human-luanxing-sea
+facts:
+  - id: human-outer-star-sea-route-outerstar-reef-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-reef-village
+    description: route-to
+    access:
+      kind: public
+  - id: human-outer-star-sea-condition-outerstar-reef-village
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 奇渊近邻小岛上的渔村，沿岸木屋晒着网具。
+    description: 奇渊近邻小岛上的渔村，沿岸木屋晒着网具。
+    access:
+      kind: public
+  - id: human-outer-star-sea-route-outerstar-small-mine
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-small-mine
+    description: route-to
+    access:
+      kind: public
+  - id: human-outer-star-sea-condition-outerstar-small-mine
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 村外岛岭间的浅层小矿，现只开两条短巷。
+    description: 村外岛岭间的浅层小矿，现只开两条短巷。
+    access:
+      kind: public
+  - id: human-outer-star-sea-route-outerstar-jinflood-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-jinflood-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-outer-star-sea-condition-outerstar-jinflood-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海底洞府以蛟族纹饰辨认门户，外来访客先在石台等待。
+    description: 海底洞府以蛟族纹饰辨认门户，外来访客先在石台等待。
+    access:
+      kind: public
+  - id: human-outer-star-sea-route-outerstar-shuangfeng-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-shuangfeng-island
+    description: 须辨海路并用真实船或修行能力渡海；岛名不替代航行时间和补给。
+    access:
+      kind: public
+  - id: human-outer-star-sea-route-outerstar-nanli-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-nanli-island
+    description: 须辨海路并用真实船或修行能力渡海；岛名不替代航行时间和补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

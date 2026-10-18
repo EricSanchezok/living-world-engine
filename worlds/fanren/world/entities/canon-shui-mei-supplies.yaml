@@ -1,0 +1,22 @@
+id: canon-shui-mei-supplies
+kind: container
+name: 水魅的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-shui-mei
+facts:
+  - id: canon-shui-mei-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-shui-mei
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

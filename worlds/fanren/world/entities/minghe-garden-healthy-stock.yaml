@@ -1,0 +1,20 @@
+id: minghe-garden-healthy-stock
+kind: container
+name: 翎墨另存健康虫粮
+description: 一包已晾存合格虫粮，可以交出一部分订单但不足三包。
+placement: minghe-young-gardener
+facts:
+  - id: minghe-garden-healthy-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-young-gardener
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 1
+ratings: []
+shared_activity_resources: []

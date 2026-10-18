@@ -1,0 +1,26 @@
+id: yue-huangfeng-workyard
+kind: location
+name: 黄枫器坊院
+description: 弟子检修法器、记录材料与工钱的小院。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-huangfeng-workyard-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-workyard-travel-yue-huangfeng-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

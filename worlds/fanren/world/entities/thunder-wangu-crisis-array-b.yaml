@@ -1,0 +1,18 @@
+id: thunder-wangu-crisis-array-b
+kind: item
+name: 万古危急阵外台
+description: 阵台当前完整，灵槽无自生能源，通行需族内授权与两端可用。
+placement: thunder-wangu-crisis-exit
+facts:
+  - id: thunder-wangu-crisis-array-b-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

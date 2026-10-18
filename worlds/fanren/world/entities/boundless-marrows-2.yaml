@@ -1,0 +1,18 @@
+id: boundless-marrows-2
+kind: item
+name: 深藏魔髓钻2
+description: 深藏祭台地下的幽黑晶体，未开采，须先真实探明与接近。
+placement: boundless-altar
+facts:
+  - id: boundless-marrows-2-buried
+    predicate: physical-state
+    value:
+      kind: text
+      value: 埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。
+    description: 埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

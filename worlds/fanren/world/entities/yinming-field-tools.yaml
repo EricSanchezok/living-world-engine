@@ -1,0 +1,18 @@
+id: yinming-field-tools
+kind: item
+name: 清渠工具
+description: 一把骨锹与一根撬杆，可轮流使用。
+placement: yinming-village-field
+facts:
+  - id: yinming-field-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-field
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

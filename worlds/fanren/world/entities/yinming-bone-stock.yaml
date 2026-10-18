@@ -1,0 +1,20 @@
+id: yinming-bone-stock
+kind: container
+name: 待制坚骨
+description: 已检可用的坚骨，还未做成兵刃。
+placement: yinming-main-workshop
+facts:
+  - id: yinming-bone-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: yin-bone
+    amount: 16
+ratings: []
+shared_activity_resources: []

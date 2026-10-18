@@ -1,0 +1,176 @@
+id: ad-qingyi-su
+kind: person
+name: 苏翎
+description: 青翼族成年巡山者，已在族里服役多年。
+placement: ad-xunxiang-village
+facts:
+  - id: ad-qingyi-su-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: private
+  - id: ad-qingyi-su-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神飞遁、山林痕迹辨别、普通族阵操作。
+    description: 化神飞遁、山林痕迹辨别、普通族阵操作。
+    access:
+      kind: private
+  - id: ad-qingyi-su-relation-ad-qingyi-qian
+    predicate: relation-ad-qingyi-qian
+    value:
+      kind: entity
+      entityId: ad-qingyi-qian
+    description: 经常借还器具的族内工作往来。
+    access:
+      kind: private
+  - id: ad-qingyi-su-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: ad-qingyi-clan
+    description: member-of
+    access:
+      kind: public
+meters:
+  - id: ad-qingyi-su-health
+    definition_id: health
+    current: 100
+  - id: ad-qingyi-su-mana
+    definition_id: mana
+    current: 900
+quantities: []
+ratings:
+  - id: ad-qingyi-su-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: ad-qingyi-su-force
+    definition_id: force
+    value: 5
+  - id: ad-qingyi-su-craft
+    definition_id: craft
+    value: 5
+  - id: ad-qingyi-su-perception
+    definition_id: perception
+    value: 5
+  - id: ad-qingyi-su-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: ad-qingyi-su
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 青翼族成年巡山者，已在族里服役多年。
+      voice: 先问有没有人受伤，对空泛传闻保持谨慎。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与阁吏确认一件工具借出未归是误记还是延误。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 苏翎
+        description: 青翼族成年巡山者，已在族里服役多年。
+        status: observed
+      - id: location
+        name: 熏香寨
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-qingyi-su-purse
+        name: 苏翎私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-qingyi-qian
+        name: 钱珂
+        description: 经常借还器具的族内工作往来。
+        status: observed
+      - id: known-ad-qingyi-clan
+        name: 铁沙青翼族
+        description: 自身所属族群，有公私资产边界。
+        status: observed
+      - id: known-ad-qingyi-measuring-tool
+        name: 公用测矿器
+        description: 测地层回波的低阶器物，有一处松动需一份修补料和实际调校；不会直接报出所有地下宝物。
+        status: observed
+      - id: known-ad-tool-return-slip
+        name: 测矿器借用簿
+        description: 苏翎借一件测矿器，约明日傍晚归还；钱珂误把今天写为到期，实物回条仍在苏翎手。
+        status: observed
+      - id: known-canon-ling-yuan-avatar
+        name: 凌源铁沙岭化身
+        description: 留守化身与当地巡山者，可由实际报告更新情况。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神飞遁、山林痕迹辨别、普通族阵操作。
+        description: 化神飞遁、山林痕迹辨别、普通族阵操作。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: return-date
+        subjectId: self
+        predicate: return-date
+        value:
+          kind: text
+          value: 回条约明日傍晚归还，不认为今天逾期；愿出示并修好松动处。
+        description: 回条约明日傍晚归还，不认为今天逾期；愿出示并修好松动处。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-qingyi-su
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-xunxiang-village
+      - local_entity_id: known-ad-qingyi-su-purse
+        canonical_entity_ids:
+          - ad-qingyi-su-purse
+      - local_entity_id: known-ad-qingyi-qian
+        canonical_entity_ids:
+          - ad-qingyi-qian
+      - local_entity_id: known-ad-qingyi-clan
+        canonical_entity_ids:
+          - ad-qingyi-clan
+      - local_entity_id: known-ad-qingyi-measuring-tool
+        canonical_entity_ids:
+          - ad-qingyi-measuring-tool
+      - local_entity_id: known-ad-tool-return-slip
+        canonical_entity_ids:
+          - ad-tool-return-slip
+      - local_entity_id: known-canon-ling-yuan-avatar
+        canonical_entity_ids:
+          - canon-ling-yuan-avatar

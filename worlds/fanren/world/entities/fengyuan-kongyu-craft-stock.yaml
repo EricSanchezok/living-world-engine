@@ -1,0 +1,22 @@
+id: fengyuan-kongyu-craft-stock
+kind: container
+name: 空鱼修器公料
+description: 可再修三个同规格小匣的材料预算，每件实耗两份料、三中阶石，工匠也须工作一日本地时长。
+placement: fengyuan-shura-kongyu-village
+facts:
+  - id: fengyuan-kongyu-craft-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: mid-stone
+    amount: 10
+ratings: []
+shared_activity_resources: []

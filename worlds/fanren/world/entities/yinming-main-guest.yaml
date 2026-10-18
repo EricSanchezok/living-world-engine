@@ -1,0 +1,26 @@
+id: yinming-main-guest
+kind: location
+name: 新来者石屋
+description: 两间各有一床，可按来人意愿分配。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-guest-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-guest-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两间各有一床，可按来人意愿分配。
+    description: 两间各有一床，可按来人意愿分配。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

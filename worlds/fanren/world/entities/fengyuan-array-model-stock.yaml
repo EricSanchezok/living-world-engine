@@ -1,0 +1,22 @@
+id: fengyuan-array-model-stock
+kind: container
+name: 阵学模型料
+description: 每次低功率枝络试验耗两份工料、一枚中阶石；无法由模型直接生成大型战阵。
+placement: fengyuan-old-array-study
+facts:
+  - id: fengyuan-array-model-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: mid-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

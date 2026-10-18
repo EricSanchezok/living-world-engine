@@ -1,0 +1,26 @@
+id: dv-xueyan-original-body
+kind: container
+name: 血焰古魔原躯
+description: 三十余丈的两头四臂古魔肉身，漆黑鳞甲与独角仍在；无独立执行人格，须魂体及解封条件才能行动。
+placement: dv-red-crystal
+facts:
+  - id: dv-xueyan-original-body-occupancy
+    predicate: occupancy
+    value:
+      kind: text
+      value: 当前没有主魂或分魂占据；单一躯体不能同时被两魂各自完整使用。
+    description: 当前没有主魂或分魂占据；单一躯体不能同时被两魂各自完整使用。
+    access:
+      kind: private
+  - id: dv-xueyan-original-body-release-cost
+    predicate: release-cost
+    value:
+      kind: text
+      value: 古禁仍束缚原躯。强行解体重组虽有脱封可能，但会损伤原躯元气和修为，不能按无损取物处理；解除外封也不保证体内残留禁制同时消失。
+    description: 古禁仍束缚原躯。强行解体重组虽有脱封可能，但会损伤原躯元气和修为，不能按无损取物处理；解除外封也不保证体内残留禁制同时消失。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

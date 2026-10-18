@@ -1,0 +1,23 @@
+id: xlt-gang-tree
+kind: creature
+name: 太玄罡木
+description: 缓慢生长的黑金灵木，完整树体与圃中已收断枝分开。
+placement: xlt-sacred-grove
+facts:
+  - id: xlt-gang-tree-custody
+    predicate: custody
+    value:
+      kind: text
+      value: 由绮蕊实际照护，秦照、苍枝与弦霜参与共护约定；任一人不能独自出售整树。
+    description: 由绮蕊实际照护，秦照、苍枝与弦霜参与共护约定；任一人不能独自出售整树。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-qi
+        - xlt-qin
+        - xlt-cang
+        - xlt-shuang
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

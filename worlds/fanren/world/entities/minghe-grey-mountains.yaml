@@ -1,0 +1,26 @@
+id: minghe-grey-mountains
+kind: location
+name: 灰白山脉
+description: 灰白石脊起伏，山顶空旷，几处旧空间裂隙只有在特定波动时才可辨认。
+placement: minghe-space
+facts:
+  - id: minghe-grey-mountains-route-to-minghe-qingyuan-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-cave
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-grey-mountains-route-conditions-minghe-qingyuan-cave
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。
+    description: 洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

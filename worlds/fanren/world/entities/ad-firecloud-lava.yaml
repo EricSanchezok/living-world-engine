@@ -1,0 +1,18 @@
+id: ad-firecloud-lava
+kind: location
+name: 地下熔岩湖
+description: 深处熔岩与极品火云石区，异常波动会限制神念探查；普通矿工不能靠听过地名忽略火害。
+placement: ad-firecloud-passage
+facts:
+  - id: ad-firecloud-lava-route-to-ad-firecloud-passage
+    predicate: route-to-ad-firecloud-passage
+    value:
+      kind: entity
+      entityId: ad-firecloud-passage
+    description: 沿地下裂道逐段探查；高热、岩壁和深层神念阻碍不能由普通步行省略。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

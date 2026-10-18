@@ -1,0 +1,18 @@
+id: thunder-huang-dan-furnace
+kind: item
+name: 皇长老丹炉
+description: 个人用于丹术研究的真实丹炉，当前未炼成新丹。
+placement: canon-wangu-huang-elder
+facts:
+  - id: thunder-huang-dan-furnace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wangu-huang-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

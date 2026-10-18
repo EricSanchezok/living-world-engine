@@ -1,0 +1,27 @@
+id: canon-jinzhu-brush
+kind: item
+name: 金竺笔
+description: 笔尖到笔杆泛着淡黄光的金黄色符笔。
+placement: yue-han-craft-cottage
+facts:
+  - id: jinzhu-brush-material-history
+    predicate: craft-material
+    value:
+      kind: text
+      value: 家传记载：笔尖用二级金睛猿颈毛，杆由金精与乌铁合制，曾经筑基修士文武火祭炼；适于制符但不保证绘制成功。
+    description: 家传记载：笔尖用二级金睛猿颈毛，杆由金精与乌铁合制，曾经筑基修士文武火祭炼；适于制符但不保证绘制成功。
+    access:
+      kind: discoverable
+      condition: 获得菡家保管人的可靠说明，或有相应制器知识并实际检查材料。
+  - id: jinzhu-brush-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: yue-han-household
+    description: 菡家共同家产，菡祺当前保管，尚无出售约定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

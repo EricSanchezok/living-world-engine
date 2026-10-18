@@ -1,0 +1,26 @@
+id: dajin-river-wharf
+kind: location
+name: 渡水埠
+description: 江埠，船工在棚下检验系缆和装卸账册。
+placement: dajin-shun-river
+facts:
+  - id: dajin-river-wharf-route-dajin-shun-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-shun-river
+    description: 靠岸需减速系缆，卸货须实际搬运。
+    access:
+      kind: public
+  - id: dajin-river-wharf-travel-dajin-shun-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 靠岸需减速系缆，卸货须实际搬运。
+    description: 靠岸需减速系缆，卸货须实际搬运。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

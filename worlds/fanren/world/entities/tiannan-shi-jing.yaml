@@ -1,0 +1,220 @@
+id: tiannan-shi-jing
+kind: person
+name: 石璟
+description: 御灵看护修士，更信动物的食欲和姿态，不喜欢只凭名册判断。
+placement: tiannan-yuling-court
+facts:
+  - id: tiannan-shi-jing-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-shi-jing
+  - id: tiannan-shi-jing-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基法力、基础御兽与兽伤处理。
+    description: 筑基法力、基础御兽与兽伤处理。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-shi-jing
+  - id: tiannan-shi-jing-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木、水、土三灵根
+    description: 木、水、土三灵根。先天资质已固定，不能随求学意愿或检测结果变化。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-shi-jing
+  - id: tiannan-shi-jing-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yuling-sect
+    description: 当前所属机构及承担的实事；个人财物仍归自己。
+    access:
+      kind: public
+  - id: tiannan-shi-jing-root-assessment
+    predicate: root-assessment
+    value:
+      kind: text
+      value: 早年入门时已经检测过，本人知道自己的灵根属性；未授权的人不自动获知。
+    description: 检测是揭示既定资质，不负责生成新灵根。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-shi-jing
+meters:
+  - id: tiannan-shi-jing-health
+    definition_id: health
+    current: 100
+  - id: tiannan-shi-jing-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 48
+ratings:
+  - id: tiannan-shi-jing-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: tiannan-shi-jing-force
+    definition_id: force
+    value: 2
+  - id: tiannan-shi-jing-craft
+    definition_id: craft
+    value: 1
+  - id: tiannan-shi-jing-perception
+    definition_id: perception
+    value: 2
+  - id: tiannan-shi-jing-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: tiannan-shi-jing
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 御灵看护修士，更信动物的食欲和姿态，不喜欢只凭名册判断。
+      voice: 常把话说成可验证的征兆，提到幼兽会放低声音。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 驯熟新接手的幼兽，考虑继续养护还是公开报价转售。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 石璟
+        description: 御灵看护修士，更信动物的食欲和姿态，不喜欢只凭名册判断。
+        status: observed
+      - id: location
+        name: 御灵宗山门内院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-tiannan-shi-jing-pouch
+        name: 石璟的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yuling-sect
+        name: 御灵宗
+        description: 当前所属机构及承担的实事；个人财物仍归自己。
+        status: observed
+      - id: known-tiannan-beast-feed
+        name: 石璟的兽粮
+        description: 幼兽当前可食干粮，按喂食实际扣减。
+        status: observed
+      - id: known-tiannan-yuling-young-beast
+        name: 灰鬃幼兽
+        description: 自己新接手幼兽，需要真正相处和观察才能进一步驯熟。
+        status: observed
+      - id: known-yuling-sect-current-stock
+        name: 御灵山门当期库
+        description: 本期由自己核数保管的公库，属于御灵宗。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基法力、基础御兽与兽伤处理。
+        description: 筑基法力、基础御兽与兽伤处理。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 驯熟新接手的幼兽，考虑继续养护还是公开报价转售。
+        description: 驯熟新接手的幼兽，考虑继续养护还是公开报价转售。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 早年检测与多年修学使自己知道具有木、水、土三灵根；修为仍须依功法资源和实际修炼。
+        description: 早年检测与多年修学使自己知道具有木、水、土三灵根；修为仍须依功法资源和实际修炼。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: public-stock-duty
+        subjectId: self
+        predicate: custody-duty
+        value:
+          kind: text
+          value: 自己应登记公库出入并说明公务用途；保管不赋私人所有权。
+        description: 自己应登记公库出入并说明公务用途；保管不赋私人所有权。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - tiannan-shi-jing
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tiannan-yuling-court
+      - local_entity_id: known-tiannan-shi-jing-pouch
+        canonical_entity_ids:
+          - tiannan-shi-jing-pouch
+      - local_entity_id: known-yuling-sect
+        canonical_entity_ids:
+          - yuling-sect
+      - local_entity_id: known-tiannan-beast-feed
+        canonical_entity_ids:
+          - tiannan-beast-feed
+      - local_entity_id: known-tiannan-yuling-young-beast
+        canonical_entity_ids:
+          - tiannan-yuling-young-beast
+      - local_entity_id: known-yuling-sect-current-stock
+        canonical_entity_ids:
+          - yuling-sect-current-stock

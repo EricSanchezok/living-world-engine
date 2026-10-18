@@ -1,0 +1,32 @@
+id: yue-yan-clan-stock
+kind: item
+name: 燕家公共库
+description: 族务公库，老祖有决策责任，不因此变为他的随身私产。
+placement: yue-yanling-fort
+facts:
+  - id: yue-yan-clan-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-yan-clan-stock-communal
+    predicate: asset-kind
+    value:
+      kind: text
+      value: 燕家族产，支付族人事务需说明用途并记录；个人灵石和族库不同。
+    description: 燕家族产，支付族人事务需说明用途并记录；个人灵石和族库不同。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 240
+  - definition_id: craft-material
+    amount: 16
+  - definition_id: grain
+    amount: 60
+ratings: []
+shared_activity_resources: []

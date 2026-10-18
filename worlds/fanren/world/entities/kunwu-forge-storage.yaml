@@ -1,0 +1,26 @@
+id: kunwu-forge-storage
+kind: location
+name: 铸灵空库
+description: 桌架木箱积尘，无可领取材料，三枚普通炼器玉简另有独立载体。
+placement: kunwu-forge
+facts:
+  - id: kunwu-forge-storage-route-kunwu-forge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-forge
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-forge-storage-condition-kunwu-forge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 通过主屏障后可检查旧库，箱中并无材料。
+    description: 通过主屏障后可检查旧库，箱中并无材料。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

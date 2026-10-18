@@ -1,0 +1,26 @@
+id: steppe-tianfeng-hearth
+kind: location
+name: 穆氏炼火石屋
+description: 石屋外墙留着熏痕，内有浅炉与干燥药架；热量须由实际燃料或操作者法力产生。
+placement: steppe-tianfeng-camp
+facts:
+  - id: steppe-tianfeng-hearth-route-steppe-tianfeng-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-camp
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianfeng-hearth-travel-steppe-tianfeng-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

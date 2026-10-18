@@ -1,0 +1,26 @@
+id: yue-greenwave-huanling
+kind: item
+name: 幻灵诀册
+description: 载基础幻影法诀，投映分身能惑眼但没有独立肉身、财物或意识。
+placement: yue-greenwave-library
+facts:
+  - id: yue-greenwave-huanling-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-li-huayuan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-greenwave-huanling-seal
+    predicate: access-condition
+    value:
+      kind: text
+      value: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    description: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

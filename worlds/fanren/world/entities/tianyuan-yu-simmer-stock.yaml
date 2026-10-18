@@ -1,0 +1,22 @@
+id: tianyuan-yu-simmer-stock
+kind: container
+name: 余氏试药材料
+description: 当前只够按小方尝试两炉，失败也要扣除已耗材料；未有成品药液。
+placement: future-tianyuan-yu-elder
+facts:
+  - id: tianyuan-yu-simmer-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-tianyuan-yu-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+  - definition_id: mid-stone
+    amount: 2
+ratings: []
+shared_activity_resources: []

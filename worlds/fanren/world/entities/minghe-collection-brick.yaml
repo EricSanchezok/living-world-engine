@@ -1,0 +1,26 @@
+id: minghe-collection-brick
+kind: item
+name: 集乳淬晶砖
+description: 嵌在神池底下的晶砖与灵脉紧合，砖纹中封着现有凝乳；缺专门符不能随手倒出。
+placement: minghe-milk-pool
+facts:
+  - id: minghe-collection-brick-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-collection-brick-extraction-condition
+    predicate: extraction-condition
+    value:
+      kind: text
+      value: 取出砖内已有神乳，需取乳密符、掌握符法的合格操作者及神池实际接触。成功耗尽该符，从砖内神乳实体扣除一份并向接乳容器增加等量；若整份移动已有神乳实体，则保持原数量而不能另加一份。无符可尝试十余年体内真火分炼，持续法力与条件均须成立。
+    description: 取出砖内已有神乳，需取乳密符、掌握符法的合格操作者及神池实际接触。成功耗尽该符，从砖内神乳实体扣除一份并向接乳容器增加等量；若整份移动已有神乳实体，则保持原数量而不能另加一份。无符可尝试十余年体内真火分炼，持续法力与条件均须成立。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

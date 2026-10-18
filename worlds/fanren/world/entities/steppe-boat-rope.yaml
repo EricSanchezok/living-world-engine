@@ -1,0 +1,18 @@
+id: steppe-boat-rope
+kind: item
+name: 河伯的系舟绳
+description: 可把舟系在岸桩，不能将整段河流封住。
+placement: steppe-boat
+facts:
+  - id: steppe-boat-rope-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-he-bo
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: tianyuan-patrol-signal-stones
+kind: container
+name: 巡察信号用石
+description: 只供本哨传讯。
+placement: tianyuan-patrol-post
+facts:
+  - id: tianyuan-patrol-signal-stones-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

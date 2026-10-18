@@ -1,0 +1,22 @@
+id: canon-ling-king-supplies
+kind: container
+name: 灵王的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-ling-king
+facts:
+  - id: canon-ling-king-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ling-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,167 @@
+id: void-sword-pupil
+kind: person
+name: 宁霜
+description: 温夫人收留并传授剑术的成年炼气弟子。
+placement: void-baibi-swordhouse
+facts:
+  - id: void-sword-pupil-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - void-sword-pupil
+  - id: void-sword-pupil-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 基础剑术与炼气，尚不会鸾凤剑诀全部。
+    description: 基础剑术与炼气，尚不会鸾凤剑诀全部。
+    access:
+      kind: agents
+      agentIds:
+        - void-sword-pupil
+  - id: void-sword-pupil-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - void-sword-pupil
+  - id: void-sword-pupil-learns-from
+    predicate: learns-from
+    value:
+      kind: entity
+      entityId: canon-wen-furen
+    description: learns-from
+    access:
+      kind: private
+meters:
+  - id: void-sword-pupil-health
+    definition_id: health
+    current: 100
+  - id: void-sword-pupil-mana
+    definition_id: mana
+    current: 220
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: void-sword-pupil-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: void-sword-pupil-force
+    definition_id: force
+    value: 1
+  - id: void-sword-pupil-craft
+    definition_id: craft
+    value: 3
+  - id: void-sword-pupil-perception
+    definition_id: perception
+    value: 1
+  - id: void-sword-pupil-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: void-sword-pupil
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 温夫人收留并传授剑术的成年炼气弟子。
+      voice: 说话直，练习出错会懊恼，也敢表达想出门。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 练好新教的步法，问清是否可自己下山办事。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 宁霜
+        description: 温夫人收留并传授剑术的成年炼气弟子。
+        status: observed
+      - id: location
+        name: 白壁剑舍
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-void-sword-pupil-kit
+        name: 宁霜的随身器具
+        description: 基础剑术与炼气，尚不会鸾凤剑诀全部。所需的个人日常器具。
+        status: observed
+      - id: known-canon-wen-furen
+        name: 白壁山温夫人
+        description: 新近开始习剑的师徒，能力随训练而形成。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 基础剑术与炼气，尚不会鸾凤剑诀全部。
+        description: 基础剑术与炼气，尚不会鸾凤剑诀全部。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间，后续按实际天时行动。
+        description: 当地此时为夜间，后续按实际天时行动。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - void-sword-pupil
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-baibi-swordhouse
+      - local_entity_id: known-void-sword-pupil-kit
+        canonical_entity_ids:
+          - void-sword-pupil-kit
+      - local_entity_id: known-canon-wen-furen
+        canonical_entity_ids:
+          - canon-wen-furen

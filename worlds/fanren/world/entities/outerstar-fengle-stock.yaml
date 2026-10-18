@@ -1,0 +1,26 @@
+id: outerstar-fengle-stock
+kind: container
+name: 丰乐铺补给
+description: 组织当期库存，掌柜可按约交易。
+placement: outerstar-fengle-shop
+facts:
+  - id: outerstar-fengle-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengle-trade-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 40
+  - definition_id: herb-packet
+    amount: 10
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: low-stone
+    amount: 200
+ratings: []
+shared_activity_resources: []

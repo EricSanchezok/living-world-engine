@@ -1,0 +1,22 @@
+id: blood-survey-kit
+kind: container
+name: 岑舟探路器具
+description: 地图玉片、测距工具和有限补给。
+placement: blood-road-surveyor
+facts:
+  - id: blood-survey-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-road-surveyor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

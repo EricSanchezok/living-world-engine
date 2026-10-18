@@ -1,0 +1,76 @@
+id: thunder-fujiao-city
+kind: location
+name: 伏蛟城
+description: 联盟重城，有对外商埠与受严格保护的传送密殿。
+placement: thunder-tianyun
+facts:
+  - id: thunder-fujiao-city-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-fujiao-city-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-fujiao-city-route-thunder-fujiao-secret-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fujiao-secret-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-fujiao-city-condition-thunder-fujiao-secret-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 超级传送阵所在，申请和实际启阵是两回事。
+    description: 超级传送阵所在，申请和实际启阵是两回事。
+    access:
+      kind: public
+  - id: thunder-fujiao-city-route-thunder-weng-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-weng-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-fujiao-city-condition-thunder-weng-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 使者核验来函后可递交，是否接见由主人自行决定。
+    description: 使者核验来函后可递交，是否接见由主人自行决定。
+    access:
+      kind: public
+  - id: thunder-fujiao-city-route-to-root-qingjiao-peak
+    predicate: route-to-root-qingjiao-peak
+    value:
+      kind: entity
+      entityId: root-qingjiao-peak
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-fujiao-city-travel-condition-root-qingjiao-peak
+    predicate: travel-condition-root-qingjiao-peak
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: yue-market-restaurant
+kind: location
+name: 坊市酒楼
+description: 修士与商旅歇脚用餐的店堂，有灶房与普通食粮。
+placement: yue-huangfeng-market
+facts:
+  - id: yue-market-restaurant-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 沿坊市街面进入酒楼或返回街上，柜后与库房仍须店家许可。
+    access:
+      kind: public
+  - id: yue-market-restaurant-property-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-restaurant-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-restaurant-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

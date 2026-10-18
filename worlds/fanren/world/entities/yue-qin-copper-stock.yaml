@@ -1,0 +1,28 @@
+id: yue-qin-copper-stock
+kind: item
+name: 秦家铜料垛
+description: 已验收的普通铜料，出库必须称分登记。
+placement: yue-qin-warehouse
+facts:
+  - id: yue-qin-copper-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-copper-stock-withdrawal
+    predicate: resource-authority
+    value:
+      kind: text
+      value: 二爷可依已核商单向实际收货者交货，交割减少现存铜料；不能仅凭一句安排视为已运达。
+    description: 二爷可依已核商单向实际收货者交货，交割减少现存铜料；不能仅凭一句安排视为已运达。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-copper-stock
+    amount: 80
+ratings: []
+shared_activity_resources: []

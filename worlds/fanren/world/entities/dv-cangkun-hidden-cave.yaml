@@ -1,0 +1,26 @@
+id: dv-cangkun-hidden-cave
+kind: location
+name: 苍坤旧藏府
+description: 慕兰草原边缘约百里的一处隐蔽藏府，太妙神禁仍护着石室与玉矶阁；确切坐标只由遗留线索揭示。父级待草原区域合并时改唯一草原实体。
+placement: human-mulan-steppe
+facts:
+  - id: dv-cangkun-hidden-cave-route-dv-yuji-pavilion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-yuji-pavilion
+    description: route-to
+    access:
+      kind: public
+  - id: dv-cangkun-hidden-cave-condition-dv-yuji-pavilion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须通过仍在的太妙神禁及内层机关。
+    description: 须通过仍在的太妙神禁及内层机关。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

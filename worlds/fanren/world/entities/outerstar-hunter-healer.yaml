@@ -1,0 +1,196 @@
+id: outerstar-hunter-healer
+kind: person
+name: 闻雨
+description: 筑基药师，愿意随队，却担心未试过的海况。
+placement: outerstar-team-yard
+facts:
+  - id: outerstar-hunter-healer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-hunter-healer
+  - id: outerstar-hunter-healer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 外伤救治、辨药和基础水盾。
+    description: 外伤救治、辨药和基础水盾。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-hunter-healer
+  - id: outerstar-hunter-healer-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-hunter-healer
+  - id: outerstar-hunter-healer-team-with-outerstar-leader
+    predicate: team-with
+    value:
+      kind: entity
+      entityId: outerstar-leader
+    description: team-with
+    access:
+      kind: private
+  - id: outerstar-hunter-healer-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: outerstar-hunting-party
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: outerstar-hunter-healer-health
+    definition_id: health
+    current: 100
+  - id: outerstar-hunter-healer-mana
+    definition_id: mana
+    current: 440
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: outerstar-hunter-healer-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: outerstar-hunter-healer-force
+    definition_id: force
+    value: 2
+  - id: outerstar-hunter-healer-craft
+    definition_id: craft
+    value: 2
+  - id: outerstar-hunter-healer-perception
+    definition_id: perception
+    value: 2
+  - id: outerstar-hunter-healer-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: outerstar-hunter-healer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 筑基药师，愿意随队，却担心未试过的海况。
+      voice: 先问伤者哪里痛，争论时坚持让人说出退路。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 备好药并争取提前约定退路。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 闻雨
+        description: 筑基药师，愿意随队，却担心未试过的海况。
+        status: observed
+      - id: location
+        name: 凝翠出海院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-outerstar-hunter-healer-provisions
+        name: 闻雨的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-leader
+        name: 沈泊
+        description: 出海合作，知道对方要求保留退路。
+        status: observed
+      - id: known-outerstar-array-hunter
+        name: 陆芩
+        description: 已在出海院相识并听过自我介绍，尚未掌握对方所有能力。
+        status: observed
+      - id: known-outerstar-hunter-youth
+        name: 林岚
+        description: 已在出海院相识并听过自我介绍，尚未掌握对方所有能力。
+        status: observed
+      - id: known-outerstar-healer-kit
+        name: 闻雨药箱
+        description: 个人配好的止血护伤材料，不能治疗所有妖毒。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 外伤救治、辨药和基础水盾。
+        description: 外伤救治、辨药和基础水盾。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - outerstar-hunter-healer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-team-yard
+      - local_entity_id: known-outerstar-hunter-healer-provisions
+        canonical_entity_ids:
+          - outerstar-hunter-healer-provisions
+      - local_entity_id: known-outerstar-leader
+        canonical_entity_ids:
+          - outerstar-leader
+      - local_entity_id: known-outerstar-array-hunter
+        canonical_entity_ids:
+          - outerstar-array-hunter
+      - local_entity_id: known-outerstar-hunter-youth
+        canonical_entity_ids:
+          - outerstar-hunter-youth
+      - local_entity_id: known-outerstar-healer-kit
+        canonical_entity_ids:
+          - outerstar-healer-kit

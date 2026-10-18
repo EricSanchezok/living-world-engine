@@ -1,0 +1,18 @@
+id: outerstar-flood-scroll
+kind: item
+name: 澜牙巡水记录
+description: 昨日近海船迹记录，只述亲见两船，没有幼兽被杀证据。
+placement: outerstar-flood-courier
+facts:
+  - id: outerstar-flood-scroll-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-flood-courier
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

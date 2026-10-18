@@ -1,0 +1,26 @@
+id: innerstar-haiyuan-coast
+kind: location
+name: 海猿近岸
+description: 海猿潜水捕鱼的浅深水交界海岸。
+placement: human-haiyuan-island
+facts:
+  - id: innerstar-haiyuan-coast-route-human-haiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-haiyuan-island
+    description: 通往海猿岛
+    access:
+      kind: public
+  - id: innerstar-haiyuan-coast-travel-human-haiyuan-island
+    predicate: travel-human-haiyuan-island
+    value:
+      kind: text
+      value: 沿岸路到水边，入水须水性或避水手段。
+    description: 沿岸路到水边，入水须水性或避水手段。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: boundless-wei-guide
+kind: item
+name: 卫乔行旅笔记
+description: 自己走过的沿岸陆路补给点、上次买绳用量和与同行约定的出发地点。
+placement: boundless-wei-qiao
+facts:
+  - id: boundless-wei-guide-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: boundless-wei-qiao
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

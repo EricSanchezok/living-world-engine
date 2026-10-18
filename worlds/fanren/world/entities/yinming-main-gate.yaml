@@ -1,0 +1,34 @@
+id: yinming-main-gate
+kind: location
+name: 大村木门
+description: 门轴需要维护，守门人按风况值班。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-gate-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-gate-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门轴需要维护，守门人按风况值班。
+    description: 门轴需要维护，守门人按风况值班。
+    access:
+      kind: public
+  - id: yinming-main-gate-hinge-condition
+    predicate: hinge-condition
+    value:
+      kind: text
+      value: 门轴承托松动，轴本身无裂；加固需两份材料与熟悉木工者两小时，换轴方案代价更高。
+    description: 门轴承托松动，轴本身无裂；加固需两份材料与熟悉木工者两小时，换轴方案代价更高。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

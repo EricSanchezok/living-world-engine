@@ -1,0 +1,34 @@
+id: tianyuan-nantian-edge
+kind: location
+name: 南天之尽
+description: 灰雾笼罩的边缘山脉与护族禁制相接，岩谷间有古兽出没；山内观察与越过护阵是不同危险。
+placement: spirit-human-demon-territory
+facts:
+  - id: tianyuan-nantian-edge-route-to-spirit-human-demon-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: route-to-spirit-human-demon-territory
+    access:
+      kind: private
+  - id: tianyuan-nantian-edge-route-conditions-spirit-human-demon-territory
+    predicate: route-conditions-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 从两族内部道路长途到灰雾山缘；到达山缘不等于穿过护族大阵，需实际路线与补给。
+    description: 从两族内部道路长途到灰雾山缘；到达山缘不等于穿过护族大阵，需实际路线与补给。
+    access:
+      kind: private
+  - id: tianyuan-nantian-edge-outer-crossing-condition
+    predicate: outer-crossing-condition
+    value:
+      kind: text
+      value: 正常护族阵域仍在发挥作用；本处没有开放的徒步出境口。若要穿越须先找到并满足实际破阵或有效通行手段，不能以推测阵力会变化作为当前条件。
+    description: 正常护族阵域仍在发挥作用；本处没有开放的徒步出境口。若要穿越须先找到并满足实际破阵或有效通行手段，不能以推测阵力会变化作为当前条件。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

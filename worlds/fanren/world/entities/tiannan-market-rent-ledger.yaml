@@ -1,0 +1,36 @@
+id: tiannan-market-rent-ledger
+kind: item
+name: 顾楠保管的摊租登记册
+description: 记着旧租与新申请的登记册。
+placement: tiannan-tianxing-register
+facts:
+  - id: tiannan-market-rent-ledger-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-market-rent-ledger-records
+    predicate: document-content
+    value:
+      kind: text
+      value: 孟磐与姚蘅分别已租普通临街位，本期尚余两共同日；两人都申请下一期十日改用街口小位。公示每期占用费十二低阶灵石，均未缴这次新租款；需谈妥时段、签字和实际收款。
+    description: 只是本次报价，不是所有坊市永久价格。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-market-rent-ledger-custody
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-gu-nan
+    description: 顾楠负责核验登记。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

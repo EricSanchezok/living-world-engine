@@ -1,0 +1,35 @@
+id: void-jiyin-court
+kind: location
+name: 极阴岛内院
+description: 岛主修炼与接近门人的所在。
+placement: human-jiyin-island
+facts:
+  - id: void-jiyin-court-route-void-jiyin-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-jiyin-port
+    description: route-to
+    access:
+      kind: public
+  - id: void-jiyin-court-condition-void-jiyin-port
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+  - id: void-jiyin-court-root-future-condition-jiyin-layout
+    predicate: root-future-condition-jiyin-layout
+    value:
+      kind: text
+      value: 石峰上有五层阴楼，楼下石阶通往地下石室。旧禁阵限制强闯及神识探查，能力仍依供能、完好程度和来者手段，不能只报地名绕过。
+    description: 石峰上有五层阴楼，楼下石阶通往地下石室。旧禁阵限制强闯及神识探查，能力仍依供能、完好程度和来者手段，不能只报地名绕过。
+    access:
+      kind: discoverable
+      condition: 实际查验当地设施或获准阅读并理解相关传承记录；不因身在此地自动知道。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

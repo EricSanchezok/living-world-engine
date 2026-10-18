@@ -1,0 +1,26 @@
+id: north-library
+kind: location
+name: 小极宫藏经阁
+description: 七层按类别藏书的经阁，结界与值守限制进入。
+placement: north-inner-palace
+facts:
+  - id: north-library-route-north-inner-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: 需获得具体阅读许可，跨层由值守按类别开结界。
+    access:
+      kind: public
+  - id: north-library-travel-north-inner-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需获得具体阅读许可，跨层由值守按类别开结界。
+    description: 需获得具体阅读许可，跨层由值守按类别开结界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: blood-sponsor-pay
+kind: container
+name: 护送报酬预算
+description: 两项拟约每项四十低阶灵石，共八十，未支出。
+placement: blood-sponsor
+facts:
+  - id: blood-sponsor-pay-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings: []
+shared_activity_resources: []

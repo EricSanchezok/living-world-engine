@@ -1,0 +1,18 @@
+id: feiling-dixue-yellow-bell
+kind: item
+name: 杶龟引路铃
+description: 黄色小铃用于召唤训练过的杶龟，摇铃不会自动创造坐骑或打开全部宫门。
+placement: canon-di-xue
+facts:
+  - id: feiling-dixue-yellow-bell-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

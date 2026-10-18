@@ -1,0 +1,58 @@
+id: demon-sunset-city
+kind: location
+name: 落日城（妖族）
+description: 妖族侧的边境城池，与人族同名城隔着广大边界地带。
+placement: spirit-human-demon-territory
+facts:
+  - id: demon-sunset-city-route-demon-fox-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-fox-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-sunset-city-condition-demon-fox-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 妖族侧的边境城池，与人族同名城隔着广大边界地带。
+    description: 妖族侧的边境城池，与人族同名城隔着广大边界地带。
+    access:
+      kind: public
+  - id: demon-sunset-city-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: route-to
+    access:
+      kind: public
+  - id: demon-sunset-city-condition-spirit-sunset-human-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿越落日之墓边界需引路、补给与风险评估，方向相同不意味着近在咫尺。
+    description: 穿越落日之墓边界需引路、补给与风险评估，方向相同不意味着近在咫尺。
+    access:
+      kind: public
+  - id: tianyuan-review-demon-sunset-city-route-to-tianyuan-huan-residence
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-huan-residence
+    description: route-to-tianyuan-huan-residence
+    access:
+      kind: private
+  - id: tianyuan-review-demon-sunset-city-route-conditions-tianyuan-huan-residence
+    predicate: route-conditions-tianyuan-huan-residence
+    value:
+      kind: text
+      value: 妖族落日城内沿石坡到客院，入内需居者许可。
+    description: 妖族落日城内沿石坡到客院，入内需居者许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

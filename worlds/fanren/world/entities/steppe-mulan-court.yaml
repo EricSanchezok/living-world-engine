@@ -1,0 +1,42 @@
+id: steppe-mulan-court
+kind: location
+name: 慕兰教习石院
+description: 青石围住一块演法空地，地上画着多次重描的五行阵位，北屋供教师讨论法诀。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-mulan-court-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    access:
+      kind: public
+  - id: steppe-mulan-court-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    description: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    access:
+      kind: public
+  - id: steppe-mulan-court-route-steppe-lamp-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-lamp-room
+    description: 祭室不对普通访客开放，需掌灯者许可或实际解除门禁。
+    access:
+      kind: public
+  - id: steppe-mulan-court-travel-steppe-lamp-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 祭室不对普通访客开放，需掌灯者许可或实际解除门禁。
+    description: 祭室不对普通访客开放，需掌灯者许可或实际解除门禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

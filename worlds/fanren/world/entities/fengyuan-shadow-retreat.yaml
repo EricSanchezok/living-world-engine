@@ -1,0 +1,26 @@
+id: fengyuan-shadow-retreat
+kind: location
+name: 紫影居所
+description: 高阶影族独处的洞窟，借助光影遮蔽出入口。
+placement: fengyuan-shadow-domain
+facts:
+  - id: fengyuan-shadow-retreat-route-fengyuan-shadow-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-town
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shadow-retreat-condition-fengyuan-shadow-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 高阶影族独处的洞窟，借助光影遮蔽出入口。
+    description: 高阶影族独处的洞窟，借助光影遮蔽出入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

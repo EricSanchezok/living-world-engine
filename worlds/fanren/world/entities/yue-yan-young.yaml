@@ -1,0 +1,174 @@
+id: yue-yan-young
+kind: person
+name: 燕瑾
+description: 燕家炼气晚辈，负责引路，也想多些修炼时间。
+placement: yue-yanling-fort
+facts:
+  - id: yue-yan-young-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-young
+  - id: yue-yan-young-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼气法力、轻身和本堡路线。
+    description: 炼气法力、轻身和本堡路线。
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-young
+  - id: yue-yan-young-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根，已经检验。
+    description: 木水两属性灵根，已经检验。
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-young
+  - id: yue-yan-young-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 自己所属家族，职责和个人份额需分别说明。
+    access:
+      kind: public
+meters:
+  - id: yue-yan-young-health
+    definition_id: health
+    current: 100
+  - id: yue-yan-young-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-yan-young-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-yan-young-force
+    definition_id: force
+    value: 1
+  - id: yue-yan-young-craft
+    definition_id: craft
+    value: 1
+  - id: yue-yan-young-perception
+    definition_id: perception
+    value: 1
+  - id: yue-yan-young-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-yan-young
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 燕家炼气晚辈，负责引路，也想多些修炼时间。
+      voice: 先客气请求，碰到不讲理的安排会小声据理力争。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与玄夜商量替班，腾出明日练功时段。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 燕瑾
+        description: 燕家炼气晚辈，负责引路，也想多些修炼时间。
+        status: observed
+      - id: location
+        name: 燕翎堡
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-yan-young-pouch
+        name: 燕瑾的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-yan-xuanye
+        name: 玄夜
+        description: 族中日常值班往来，尚未批准替班。
+        status: observed
+      - id: known-yue-yan-clan
+        name: 燕氏家族
+        description: 自己所属家族，职责和个人份额需分别说明。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼气法力、轻身和本堡路线。
+        description: 炼气法力、轻身和本堡路线。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 与玄夜商量替班，腾出明日练功时段。
+        description: 与玄夜商量替班，腾出明日练功时段。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-yan-young
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-yanling-fort
+      - local_entity_id: known-yue-yan-young-pouch
+        canonical_entity_ids:
+          - yue-yan-young-pouch
+      - local_entity_id: known-canon-yan-xuanye
+        canonical_entity_ids:
+          - canon-yan-xuanye
+      - local_entity_id: known-yue-yan-clan
+        canonical_entity_ids:
+          - yue-yan-clan

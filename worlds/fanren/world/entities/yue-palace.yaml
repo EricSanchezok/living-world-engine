@@ -1,0 +1,18 @@
+id: yue-palace
+kind: location
+name: 越国皇宫
+description: 皇城中的宫苑，内宫及办事处分别有人守门。
+placement: yue-yuejing-north
+facts:
+  - id: yue-palace-route-yue-yuejing-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-north
+    description: 至宫门核验皇室或官署许可；无许可不得擅入，守卫可拦阻。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

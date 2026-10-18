@@ -1,0 +1,18 @@
+id: ad-tianmang-valley
+kind: location
+name: 天芒谷
+description: 有修士修行与传承的山谷，其旧人脉不等于所有来客可借用城权。
+placement: associated-demon-realm
+facts:
+  - id: ad-tianmang-valley-route-to-ad-kuji-city
+    predicate: route-to-ad-kuji-city
+    value:
+      kind: entity
+      entityId: ad-kuji-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

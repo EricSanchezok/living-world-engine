@@ -1,0 +1,58 @@
+id: fengyuan-fuli-marsh
+kind: location
+name: 浮黎沼泽
+description: 湿地密布，毒沼与可行岸线交错。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-fuli-marsh-route-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-fuli-marsh-condition-spirit-wilderness-fringe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 湿地密布，毒沼与可行岸线交错。
+    description: 湿地密布，毒沼与可行岸线交错。
+    access:
+      kind: public
+  - id: fengyuan-fuli-marsh-route-fengyuan-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-one-sky
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-fuli-marsh-condition-fengyuan-one-sky
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 狭长通行地带，离开主路需重新核对地势。
+    description: 狭长通行地带，离开主路需重新核对地势。
+    access:
+      kind: public
+  - id: fengyuan-fuli-marsh-route-fengyuan-shadow-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-town
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-fuli-marsh-condition-fengyuan-shadow-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 影族交游与交换器物的聚落，路面设置不同明暗的标记。
+    description: 影族交游与交换器物的聚落，路面设置不同明暗的标记。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

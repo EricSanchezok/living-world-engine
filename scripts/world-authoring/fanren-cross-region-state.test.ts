@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { stringify } from "yaml";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { projectAgentPerspective } from "../../src/engine/cognition/agent-perspective";
 import { quantityId } from "../../src/engine/runtime/runtime-id";
 import { applyTransitionProposal, replaySimulationState } from "../../src/engine/runtime/transaction";
@@ -28,13 +28,17 @@ function archive() {
 }
 
 describe("Fanren reviewed regional state through ZIP import and identity entry", () => {
+  let worldArchive: Buffer;
+  // Reuse only immutable input bytes; each case still imports into its own fresh database.
+  beforeAll(() => { worldArchive = archive(); }, 60_000);
+
   it.each(["spirit-merchant", "spirit-array-master"])("preserves social knowledge, real property and conditional passages for %s", async originId => {
     const fixture = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question, "none")])));
     await fixture.registry.capture();
     const directory = mkdtempSync(path.join(tmpdir(), "fanren-cross-region-"));
     const database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false });
     try {
-      const imported = database.importWorld(archive(), fixture.catalog);
+      const imported = database.importWorld(Buffer.from(worldArchive), fixture.catalog);
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: fixture.gateway });
       const created = await host.createInstance({ worldId: imported.id, start: { kind: "origin", originId,
         displayName: "远舟", appearance: "", motivation: "先过好眼前的生活。" } });
@@ -127,7 +131,7 @@ describe("Fanren reviewed regional state through ZIP import and identity entry",
       expect(replaySimulationState(state)).toEqual(state);
       expect(fixture.transport).not.toHaveBeenCalled();
     } finally { database.close(); rmSync(directory, { recursive: true, force: true }); }
-  });
+  }, 60_000);
 
   it("keeps the unique magnetic mountain and derives its exceptional month from the actual clock", async () => {
     const fixture = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question, "none")])));
@@ -135,7 +139,7 @@ describe("Fanren reviewed regional state through ZIP import and identity entry",
     const directory = mkdtempSync(path.join(tmpdir(), "fanren-magnetic-cycle-"));
     const database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false });
     try {
-      const imported = database.importWorld(archive(), fixture.catalog);
+      const imported = database.importWorld(Buffer.from(worldArchive), fixture.catalog);
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: fixture.gateway });
       const created = await host.createInstance({ worldId: imported.id, start: { kind: "origin", originId: "spirit-merchant", displayName: "舟客", appearance: "", motivation: "做生意。" } });
       const state = database.readInstance(created.summary.id).document.state;
@@ -153,5 +157,5 @@ describe("Fanren reviewed regional state through ZIP import and identity entry",
       expect(forestNight.truth.facts["spirit-realm-daylight"]!.value).toEqual({ kind: "text", value: "day" });
       expect(fixture.transport).not.toHaveBeenCalled();
     } finally { database.close(); rmSync(directory, { recursive: true, force: true }); }
-  });
+  }, 60_000);
 });

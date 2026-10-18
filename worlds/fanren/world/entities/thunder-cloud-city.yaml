@@ -1,0 +1,250 @@
+id: thunder-cloud-city
+kind: location
+name: 云城
+description: 城体长期悬于空中，四门受核验，允许区域以外不得恣意斗法。
+placement: thunder-tianyun
+facts:
+  - id: thunder-cloud-city-route-thunder-hengshui-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-hengshui-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-hengshui-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-fujiao-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fujiao-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-fujiao-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-cloud-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-gate
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-cloud-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 核验实际身份和携带物的入城处，普通访客可以询问居停手续。
+    description: 核验实际身份和携带物的入城处，普通访客可以询问居停手续。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-tianxu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianxu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-tianxu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古对外接洽处，接引、访客与传承申请有各自记录。
+    description: 万古对外接洽处，接引、访客与传承申请有各自记录。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-baying-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-baying-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-baying-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 八座汇聚灵脉的高峰，山中洞府按具体契约租赁。
+    description: 八座汇聚灵脉的高峰，山中洞府按具体契约租赁。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-chunxiang-winehall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-chunxiang-winehall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-chunxiang-winehall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 晶族彩流罂的酿酒与会客处，入阁不等于获准取走珍酒。
+    description: 晶族彩流罂的酿酒与会客处，入阁不等于获准取走珍酒。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-yunyi-auction
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-yunyi-auction
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-yunyi-auction
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有扩展空间的正式拍卖场，展品和竞价由真实清单决定。
+    description: 有扩展空间的正式拍卖场，展品和竞价由真实清单决定。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-yunxiang-auction
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-yunxiang-auction
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-yunxiang-auction
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 另一处交易场，不与云意拍卖场混为一处。
+    description: 另一处交易场，不与云意拍卖场混为一处。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-public-debate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-public-debate
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-public-debate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可申请举行技艺演示与论辩的广场，观众自愿来去。
+    description: 可申请举行技艺演示与论辩的广场，观众自愿来去。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-jing-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jing-workshop
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-jing-workshop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 精细灵纹与工艺研究之处，正在征询一名学徒。
+    description: 精细灵纹与工艺研究之处，正在征询一名学徒。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-news-teahouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-news-teahouse
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-news-teahouse
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旅客交换消息的茶舍，消息真假仍需查证。
+    description: 旅客交换消息的茶舍，消息真假仍需查证。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-thunder-mojin-cloud-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-cloud-sea
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-thunder-mojin-cloud-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封锁魔金山脉的阵区，准许窗口与身份由守阵者核验。
+    description: 封锁魔金山脉的阵区，准许窗口与身份由守阵者核验。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-to-thunder-northern-ice-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-northern-ice-domain
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-cloud-city-route-conditions-thunder-northern-ice-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。
+    description: 跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。
+    access:
+      kind: private
+  - id: thunder-cloud-city-route-guanghan-ink-study
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-ink-study
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-guanghan-ink-study
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两位文字研究者租用的静室，桌上分开放着摹本与自己的注释。
+    description: 两位文字研究者租用的静室，桌上分开放着摹本与自己的注释。
+    access:
+      kind: public
+  - id: thunder-cloud-city-route-seas-thunder-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-thunder-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-city-condition-seas-thunder-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 云城内正常往来，商盟内室须接引。
+    description: 云城内正常往来，商盟内室须接引。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

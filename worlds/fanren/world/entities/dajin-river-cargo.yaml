@@ -1,0 +1,20 @@
+id: dajin-river-cargo
+kind: item
+name: 药材托运箱
+description: 货物归贺容，温乔只是运输；账面十八箱，当前可点验十六箱，其余是原始单据误记还是漏装须调查。
+placement: dajin-river-wharf
+facts:
+  - id: dajin-river-cargo-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-he-rong
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-crate
+    amount: 16
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: tianyuan-scout-disc
+kind: item
+name: 方既明领用异灵盘
+description: 耗5法力查前方两里内显露的异族气息，仅示大致方向；隐藏神通、地形干扰及远距皆可漏检，不显示姓名和敌意。
+placement: tianyuan-patrol-scout
+facts:
+  - id: tianyuan-scout-disc-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

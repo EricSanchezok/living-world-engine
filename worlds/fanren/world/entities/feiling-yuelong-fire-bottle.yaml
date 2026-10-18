@@ -1,0 +1,18 @@
+id: feiling-yuelong-fire-bottle
+kind: item
+name: 封焰细颈瓶
+description: 封着一份灰白灵焰，启封与用焰要由主人控制，瓶破不等于灵焰无限再生。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-fire-bottle-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

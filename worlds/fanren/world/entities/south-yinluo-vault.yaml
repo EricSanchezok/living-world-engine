@@ -1,0 +1,26 @@
+id: south-yinluo-vault
+kind: location
+name: 阴罗宗器库
+description: 幡套由实际持有者分存，此处保有宗门账册与维护材料。
+placement: south-yinluo-inner
+facts:
+  - id: south-yinluo-vault-route-south-yinluo-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yinluo-inner
+    description: route-to
+    access:
+      kind: public
+  - id: south-yinluo-vault-condition-south-yinluo-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

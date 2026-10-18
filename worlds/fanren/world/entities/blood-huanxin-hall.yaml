@@ -1,0 +1,26 @@
+id: blood-huanxin-hall
+kind: location
+name: 幻心门客堂
+description: 幻心门会见来客、考察弟子功课的客堂。灯见把试演幻镜安置在堂中，观看者可以坐近看细节，也能退到门外避开幻景。
+placement: blood-north-domain
+facts:
+  - id: blood-huanxin-hall-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-huanxin-hall-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

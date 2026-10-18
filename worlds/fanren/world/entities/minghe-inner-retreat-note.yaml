@@ -1,0 +1,18 @@
+id: minghe-inner-retreat-note
+kind: item
+name: 槐宁撤回复核单
+description: 本轮交接后返回外院，检查气息与修为状态；不能凭继续戴护符申请无限期停留。
+placement: minghe-inner-keeper
+facts:
+  - id: minghe-inner-retreat-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: ad-tianki-retreat
+kind: location
+name: 天泣鹤颜山居
+description: 两同门各有独立静室与共有议事处。
+placement: associated-demon-realm
+facts:
+  - id: ad-tianki-retreat-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-tianki-retreat-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -34,19 +34,17 @@
 
 ## 交付状态
 
-[本地收尾验收](reviews/bounded-closing-review.md)汇总当前地区草稿、新版运行时的九种身份初始化、限额真实游玩和完整世界的剩余门禁；[剩余清单](coverage/local-completion-gaps.json)保留尚未审定的具体类型与数量。该记录不将地区草稿或阶段试玩升级为全域验收。
+人界、灵界及限定关联空间的内容已完成统一制作与来源审定。35 个制作模块包含 5,164 个实体、846 个可行动人物，提供八种原创出身和唯一韩立身份。正式运行目标为[《凡人修仙传》世界包](../world/)。原著未明的开篇位置、资产和人员配置仍按回溯或原创标记；后期人物不会因进入索引就全部成为开篇存活角色。
 
-通用出身初始化与既有人物入口已经落地。[九种身份设计](origins.yaml)包含背景、资产权属、具体人物、秘密与开场选择。[开篇编写样本](../samples/opening/README.md)提供九个可导入入口，均通过实际宿主初始化、认知隔离、财产检查与回放测试；它是阶段产物，不是两界完整世界。正文全篇校勘、全域展开、各身份完整玩法以及三个规模档位的验证仍未完成。
+全书 2,451 个正文单位、398 批输入的当前状态见[来源封账](coverage/source-closure.json)与[章节母表](coverage/chapters.jsonl)。[全局候选清单](reviews/global-candidate-manifest.json)和地区处置合计覆盖 53,818 条候选；8,370 项来源疑点逐条保留处置依据。逐批来源复核、编辑对候选的直接审定和针对性原文回读分开记录，不宣称根代理重新逐字读过整部小说。早期批次日志与[本地阶段验收](reviews/bounded-closing-review.md)保留当时边界，当前制作状态以封账和[世界覆盖表](coverage/world.json)为准。
 
-[首轮真实游玩记录](validation/initial-live-runs.json)检查持久化状态而非模型自报。样本入口、家庭认知与资产隔离通过静态及宿主测试；[后续复测](validation/followup-live-runs.json)已验证韩立自由移动和施术者法力扣除，并修复重复上下文传输；[复合动作复测](validation/compound-action-retest.json)又验证了目标库存清点、向指定对象报告、御物结束状态与法力消耗；其他玩法和规模验证仍未完成。
+九种身份的背景、资产权属、具体人物、秘密与开场选择见[出身设计](origins.yaml)。[开篇编写样本](../samples/opening/README.md)是保留的历史阶段产物；新世界使用完整运行包，不再以样本名称作为正式入口。完整包的导入、出身初始化和实际游玩验收另行记录；内容审定通过本身不等于允许合并。
 
-[新增六入口实测](validation/nine-origin-first-runs.json)验证了无灵根身份施法失败、私财资助不动族库、合作提议不改变族产、筑基与炼虚实际御物。筑基与旁支各有一次初始叙事被拒绝，随后修复通过，终态无降级呈现。[富商付款复测](validation/merchant-payment-retest.json)验证“五两”按五两守恒转移，商号资金未动；该轮首段叙事仍使用了保底呈现。这些单项结果不代表各身份的全部生活与修炼玩法已经通过。
+已有实测作为具体行为的证据复用：[首轮](validation/initial-live-runs.json)、[自由移动和法力消耗](validation/followup-live-runs.json)、[盘货报告与御物](validation/compound-action-retest.json)、[六个新增入口](validation/nine-origin-first-runs.json)、[富商付款](validation/merchant-payment-retest.json)、[灵根检测与阵片调查](validation/discovery-live-runs.json)。这些记录保留各自世界版本、失败、修复和保底呈现情况，不改写成最终版本全部玩法通过。
 
-[检测与调查实测](validation/discovery-live-runs.json)验证样本 v0.3.0：普通目测不泄露灵根；原创修士实际验灵、消耗法力后获知既有属性，再用对话报告给玩家；炼虚阵师检查阵片只发现已写入的结构。验灵轮仍有一段叙事使用保底呈现。检测手艺和原创器物的检查条件明确标为原创补写，不能冒充原著指定方法。
+[150 人与 700 人规模试验](validation/population-probes.json)各完成一次真实自治推进，分别有 150 / 700 人决策、143 / 693 人实际行动。试验主要清点已有财物，关系事实存在但没有覆盖长期、高冲突的复杂社会演化。本轮不重复已通过试验；完整包的新验收须单列加载人数与实际参与人数，不能把 846 个可行动人物写成 846 人都已实际行动。
 
-[150 人与 700 人规模试验](validation/population-probes.json)均完成一次真实自治推进，分别有 150 / 700 人决策、143 / 693 人实际行动。新增居民是试验用原创人物；任务主要是清点自己的财物，关系事实保留但未进行复杂关系冲突。长期演化、高冲突场景、九入口在大规模中的运行及完整两界人口仍未验证。两轮实际调用量、token、耗时、Ledger 完整性和限制均写入记录，未取得的费用保持未知。
-
-[实现检查记录](validation/implementation-checks.json)记录整套仓库检查、局部样本验证、此前超时及完整构建的预期拒绝。测试通过不改变全域资料仍待制作的状态。
+历史[实现检查记录](validation/implementation-checks.json)保持原本的样本验证及预期拒绝边界。最终构建重新计算来源、候选、引用和区域签审；保存的完成布尔值不能独立放行。
 
 ## 抽取与构建工具
 
@@ -57,8 +55,8 @@
 [样本事实](claims/opening-sample.json)只对选定事实作开篇审核，不能据此把整章标为复核完毕。[样本模块](modules/opening-sample.json)存完整运行合同；[审定记录](reviews/opening-sample.json)绑定模块与事实指纹。构建先检查依赖、开篇时间、原文定位与审批指纹，再执行世界格式校验及 ZIP 导入回读。构建过程不调用模型，也不填补未知。
 
 ```sh
-npx tsx scripts/world-authoring/build-fanren.ts sample
-npm run world:validate -- worlds/fanren/samples/opening/world
+npx tsx scripts/world-authoring/build-fanren.ts full
+npm run world:validate -- worlds/fanren/world
 npx tsx scripts/world-authoring/play-fanren-sample.ts herbal-apprentice
 npx tsx scripts/world-authoring/play-fanren-sample.ts merchant-root
 npx tsx scripts/world-authoring/scale-fanren-sample.ts 150

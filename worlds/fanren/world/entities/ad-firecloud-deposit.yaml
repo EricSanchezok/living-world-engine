@@ -1,0 +1,20 @@
+id: ad-firecloud-deposit
+kind: container
+name: 火云石在矿原料
+description: 已勘明的矿段中有24份可用晶质，仍须耐热开采并搬运出矿体。
+placement: ad-firecloud-lava
+facts:
+  - id: ad-firecloud-deposit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bai-family
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 24
+ratings: []
+shared_activity_resources: []

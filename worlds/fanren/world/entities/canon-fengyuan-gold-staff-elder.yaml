@@ -1,0 +1,128 @@
+id: canon-fengyuan-gold-staff-elder
+kind: person
+name: 金杖老翁
+description: 研究古代异界来客记载的长寿修士，拄杖时动作慢，谈到旧书却精神很好。
+placement: fengyuan-residence-fengyuan-gold-staff-elder
+facts:
+  - id: canon-fengyuan-gold-staff-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-fengyuan-gold-staff-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘护体、杖法与典籍考证；历史见闻不能预知新来者实力。
+    description: 大乘护体、杖法与典籍考证；历史见闻不能预知新来者实力。
+    access:
+      kind: private
+meters:
+  - id: canon-fengyuan-gold-staff-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-fengyuan-gold-staff-elder-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-fengyuan-gold-staff-elder-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-fengyuan-gold-staff-elder-force
+    definition_id: force
+    value: 8
+  - id: canon-fengyuan-gold-staff-elder-craft
+    definition_id: craft
+    value: 6
+  - id: canon-fengyuan-gold-staff-elder-perception
+    definition_id: perception
+    value: 8
+  - id: canon-fengyuan-gold-staff-elder-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-fengyuan-gold-staff-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 研究古代异界来客记载的长寿修士，拄杖时动作慢，谈到旧书却精神很好。
+      voice: 常以书上记载开头，别人指出新反例时会追问出处；语气温和但坚持有凭据。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把两份相互不合的旧记抄在一起，邀道姑评点各自可靠的部分。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 金杖老翁
+        description: 研究古代异界来客记载的长寿修士，拄杖时动作慢，谈到旧书却精神很好。
+        status: observed
+      - id: location
+        name: 金杖老翁静修居
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-canon-fengyuan-gold-staff-elder-private-stock
+        name: 金杖老翁私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-canon-fengyuan-yellow-robed-nun
+        name: 黄袍道姑
+        description: 曾有实际交往的旧识，知道对方擅长之事，不知道尚未告知的当前私事。
+        status: observed
+      - id: fengyuan-review-fengyuan-old-record-letter
+        name: 金杖老翁的考辨来函
+        description: 已寄出的信，尚不知对方会如何答。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘护体、杖法与典籍考证；历史见闻不能预知新来者实力。
+        description: 大乘护体、杖法与典籍考证；历史见闻不能预知新来者实力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-fengyuan-gold-staff-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-residence-fengyuan-gold-staff-elder
+      - local_entity_id: fengyuan-review-canon-fengyuan-gold-staff-elder-private-stock
+        canonical_entity_ids:
+          - canon-fengyuan-gold-staff-elder-private-stock
+      - local_entity_id: fengyuan-review-canon-fengyuan-yellow-robed-nun
+        canonical_entity_ids:
+          - canon-fengyuan-yellow-robed-nun
+      - local_entity_id: fengyuan-review-fengyuan-old-record-letter
+        canonical_entity_ids:
+          - fengyuan-old-record-letter

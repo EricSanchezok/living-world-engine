@@ -1,0 +1,26 @@
+id: wanyao-workshop
+kind: location
+name: 外谷修器处
+description: 器物交换和维修处，不强制把来者作为猎物。
+placement: wanyao-gate
+facts:
+  - id: wanyao-workshop-route-wanyao-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-gate
+    description: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    access:
+      kind: public
+  - id: wanyao-workshop-travel-wanyao-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    description: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

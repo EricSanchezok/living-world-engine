@@ -1,0 +1,26 @@
+id: thunder-jing-restricted-craft
+kind: item
+name: 晶院密传药札
+description: 封柜药札记晶族成药传承，外院学徒的试学邀请不含接触此札的许可。
+placement: thunder-jing-workshop
+facts:
+  - id: thunder-jing-restricted-craft-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jing-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-jing-restricted-craft-access-condition
+    predicate: access-condition
+    value:
+      kind: text
+      value: 须持有保管者许可并具备相关炼丹能力才可查阅和理解；现札不凭一句描述自动生成灵药材料或保证炼成万妙丹。
+    description: 须持有保管者许可并具备相关炼丹能力才可查阅和理解；现札不凭一句描述自动生成灵药材料或保证炼成万妙丹。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

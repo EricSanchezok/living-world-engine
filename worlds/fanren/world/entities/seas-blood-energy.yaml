@@ -1,0 +1,20 @@
+id: seas-blood-energy
+kind: container
+name: 商盟血天公用供能库
+description: 本端跨洲供能库存；申请人付费不等于库存瞬间增加。
+placement: seas-blood-relay-hall
+facts:
+  - id: seas-blood-energy-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: top-stone
+    amount: 48
+ratings: []
+shared_activity_resources: []

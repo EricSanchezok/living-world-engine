@@ -1,0 +1,46 @@
+id: feiling-chungui
+kind: creature
+name: 杶龟兽
+description: 三首火龟能承人渡岩浆，受地血铃令与投喂训练。
+placement: feiling-bloodflame-lake
+facts:
+  - id: feiling-chungui-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-chungui-instruction-boundary
+    predicate: instruction-boundary
+    value:
+      kind: text
+      value: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    description: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    access:
+      kind: private
+  - id: feiling-chungui-finite-fire
+    predicate: finite-fire
+    value:
+      kind: text
+      value: 依赖自身法力催三色火焰；渡湖随所载重量与距离消耗体力，受伤可中止。每次主动喷焰至少消耗10法力，须真实进食与休息恢复。
+    description: 承载、喷焰和受伤都受真实身体状态限制。
+    access:
+      kind: private
+meters:
+  - id: feiling-chungui-health
+    definition_id: health
+    current: 100
+  - id: feiling-chungui-mana
+    definition_id: mana
+    current: 540
+quantities: []
+ratings:
+  - id: feiling-chungui-force
+    definition_id: force
+    value: 5
+  - id: feiling-chungui-perception
+    definition_id: perception
+    value: 4
+shared_activity_resources: []

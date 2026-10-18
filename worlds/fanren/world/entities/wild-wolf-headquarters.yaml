@@ -1,0 +1,26 @@
+id: wild-wolf-headquarters
+kind: location
+name: 野狼帮地方总坛
+description: 野狼帮处理帮务和核算收入的总坛，陌生访客会受盘问。
+placement: jingzhou
+facts:
+  - id: wild-wolf-headquarters-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 野狼帮处理帮务和核算收入的总坛，陌生访客会受盘问。
+    access:
+      kind: public
+  - id: wild-wolf-headquarters-route-local-luosha-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-luosha-slope
+    description: 经野狼管辖路段，依实际通行和路况。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

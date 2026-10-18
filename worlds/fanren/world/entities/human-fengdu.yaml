@@ -1,0 +1,42 @@
+id: human-fengdu
+kind: location
+name: 风都国
+description: 正道诸宗所在的大国，正道盟组织协调不等于所有成员意见一致。
+placement: human-tiannan
+facts:
+  - id: human-fengdu-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-fengdu-travel-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-fengdu-route-tiannan-taizhen-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-taizhen-court
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-fengdu-travel-tiannan-taizhen-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

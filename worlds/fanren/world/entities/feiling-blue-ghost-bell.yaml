@@ -1,0 +1,26 @@
+id: feiling-blue-ghost-bell
+kind: item
+name: 鬼婆残钟
+description: 陈旧残缺的小钟，催动可发黑色光波，威力取决于施法与残损情况。
+placement: canon-blue-ghost-woman
+facts:
+  - id: feiling-blue-ghost-bell-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blue-ghost-woman
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-blue-ghost-bell-operating-cost
+    predicate: operating-cost
+    value:
+      kind: text
+      value: 每次有意催动至少消耗持有施术者15法力；持续作用随强度追加耗用，器物本身不会无限供能。
+    description: 每次有意催动至少消耗持有施术者15法力；持续作用随强度追加耗用，器物本身不会无限供能。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

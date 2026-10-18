@@ -1,0 +1,18 @@
+id: kunwu-evil-moon-mirror
+kind: item
+name: 邪月幻镜
+description: 从旧探索者得来的镜宝，增强银瞳幻术；不能凭幻象改变真实库存。
+placement: canon-silver-wing-yaksha
+facts:
+  - id: kunwu-evil-moon-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-silver-wing-yaksha
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

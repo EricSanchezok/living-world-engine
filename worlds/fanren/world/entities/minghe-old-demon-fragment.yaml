@@ -1,0 +1,18 @@
+id: minghe-old-demon-fragment
+kind: item
+name: 古魔残器
+description: 一件尚未化形的古魔残器，附有腐蚀性气息，贸然祭炼会有风险。
+placement: minghe-demon-tomb
+facts:
+  - id: minghe-old-demon-fragment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

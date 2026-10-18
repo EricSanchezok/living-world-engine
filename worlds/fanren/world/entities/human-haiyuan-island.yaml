@@ -1,0 +1,58 @@
+id: human-haiyuan-island
+kind: location
+name: 海猿岛
+description: 偏远中型海岛，低阶灵脉和海猿贸易吸引低阶修士，未设岛主。
+placement: human-inner-star-sea
+facts:
+  - id: human-haiyuan-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 通往内星海
+    access:
+      kind: public
+  - id: human-haiyuan-island-travel-human-inner-star-sea
+    predicate: travel-human-inner-star-sea
+    value:
+      kind: text
+      value: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    description: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    access:
+      kind: public
+  - id: human-haiyuan-island-route-innerstar-haiyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-market
+    description: 通往海猿收购埠
+    access:
+      kind: public
+  - id: human-haiyuan-island-travel-innerstar-haiyuan-market
+    predicate: travel-innerstar-haiyuan-market
+    value:
+      kind: text
+      value: 岛上道路可步行；海猿出没处在近海，不是柜台无限生货。
+    description: 岛上道路可步行；海猿出没处在近海，不是柜台无限生货。
+    access:
+      kind: public
+  - id: human-haiyuan-island-route-innerstar-haiyuan-coast
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-coast
+    description: 通往海猿近岸
+    access:
+      kind: public
+  - id: human-haiyuan-island-travel-innerstar-haiyuan-coast
+    predicate: travel-innerstar-haiyuan-coast
+    value:
+      kind: text
+      value: 沿岸路到水边，入水须水性或避水手段。
+    description: 沿岸路到水边，入水须水性或避水手段。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

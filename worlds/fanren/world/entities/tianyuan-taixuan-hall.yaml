@@ -1,0 +1,58 @@
+id: tianyuan-taixuan-hall
+kind: location
+name: 太玄殿
+description: 两边入廊连接人妖街区，厅中设交换案；进入先领本族佩幡，阵法只按实际力量和禁制范围限制法力。
+placement: spirit-tianyuan-market
+facts:
+  - id: tianyuan-taixuan-hall-route-to-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: route-to-spirit-tianyuan-market
+    access:
+      kind: private
+  - id: tianyuan-taixuan-hall-route-conditions-spirit-tianyuan-market
+    predicate: route-conditions-spirit-tianyuan-market
+    value:
+      kind: text
+      value: 人族侧入口步行，查领遮光佩并缴已公开费用；拒领可留门外谈。
+    description: 人族侧入口步行，查领遮光佩并缴已公开费用；拒领可留门外谈。
+    access:
+      kind: private
+  - id: tianyuan-taixuan-hall-route-to-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: route-to-spirit-demon-ward-gate
+    access:
+      kind: private
+  - id: tianyuan-taixuan-hall-route-conditions-spirit-demon-ward-gate
+    predicate: route-conditions-spirit-demon-ward-gate
+    value:
+      kind: text
+      value: 妖族侧廊步行，经本期查验领黑幡；不绕过城市外墙传送要求。
+    description: 妖族侧廊步行，经本期查验领黑幡；不绕过城市外墙传送要求。
+    access:
+      kind: private
+  - id: tianyuan-taixuan-hall-route-to-tianyuan-auction-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-auction-hall
+    description: route-to-tianyuan-auction-hall
+    access:
+      kind: private
+  - id: tianyuan-taixuan-hall-route-conditions-tianyuan-auction-hall
+    predicate: route-conditions-tianyuan-auction-hall
+    value:
+      kind: text
+      value: 走指定偏廊，正式拍卖要报名并按现行许可入场；小阵送到已开启的对应石屋，实际耗用阵库灵石。
+    description: 走指定偏廊，正式拍卖要报名并按现行许可入场；小阵送到已开启的对应石屋，实际耗用阵库灵石。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

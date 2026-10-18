@@ -1,0 +1,20 @@
+id: ad-client-budget
+kind: container
+name: 鹿珩调查预算
+description: 预留500魔石，不足当前600的卜算报价，可先查档或另谈。
+placement: ad-information-client
+facts:
+  - id: ad-client-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-information-client
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 500
+ratings: []
+shared_activity_resources: []

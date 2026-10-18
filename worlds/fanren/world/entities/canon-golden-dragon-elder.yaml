@@ -1,0 +1,232 @@
+id: canon-golden-dragon-elder
+kind: person
+name: 金龙大长老
+description: 真龙族长者，威仪沉稳，重族中声誉与长期交换关系。
+placement: seas-golden-boat
+facts:
+  - id: canon-golden-dragon-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-golden-dragon-elder
+  - id: canon-golden-dragon-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 强大真龙法体、真麟留影、独有仿制术和族中事务。
+    description: 强大真龙法体、真麟留影、独有仿制术和族中事务。
+    access:
+      kind: agents
+      agentIds:
+        - canon-golden-dragon-elder
+  - id: canon-golden-dragon-elder-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-golden-dragon-elder
+meters:
+  - id: canon-golden-dragon-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-golden-dragon-elder-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-golden-dragon-elder-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-golden-dragon-elder-force
+    definition_id: force
+    value: 8
+  - id: canon-golden-dragon-elder-craft
+    definition_id: craft
+    value: 7
+  - id: canon-golden-dragon-elder-perception
+    definition_id: perception
+    value: 8
+  - id: canon-golden-dragon-elder-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-golden-dragon-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 真龙族长者，威仪沉稳，重族中声誉与长期交换关系。
+      voice: 不怒自威，议价时直说有限次数与真正用途，遇坦诚查验者并不动怒。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否开放一片渡劫留影给有潜力的来客观摩，以及交换何种有用研究。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 金龙大长老
+        description: 真龙族长者，威仪沉稳，重族中声誉与长期交换关系。
+        status: observed
+      - id: location
+        name: 金长老长舟
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-golden-dragon-elder-private-stock
+        name: 金龙大长老的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-fan-pao-zi
+        name: 樊咆子
+        description: 长期相识的本族长者与族人，知道对方行事习惯。
+        status: observed
+      - id: known-canon-tian-feier
+        name: 田飞儿
+        description: 族中往来与接引事务。
+        status: observed
+      - id: known-seas-dragon-memory-1
+        name: 渡劫真麟留影1
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-2
+        name: 渡劫真麟留影2
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-3
+        name: 渡劫真麟留影3
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-4
+        name: 渡劫真麟留影4
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-5
+        name: 渡劫真麟留影5
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-6
+        name: 渡劫真麟留影6
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-dragon-memory-7
+        name: 渡劫真麟留影7
+        description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+        status: observed
+      - id: known-seas-golden-sang-vial
+        name: 金长老金桑液
+        description: 一瓶万年金桑液，具体炼丹用途需要对应配方与其他材料，不保证渡劫。
+        status: observed
+      - id: known-seas-fruit-tree
+        name: 广灵道果树
+        description: 族中实际果树与成熟状态，今未宣布新一届大会。
+        status: observed
+      - id: known-seas-dragon-crafts-visitor
+        name: 桑络
+        description: 樊咆子曾介绍其工艺与请求，尚未答应留影交换。
+        status: observed
+      - id: known-seas-fruit-custodian
+        name: 木循
+        description: 果园日常报告与长期职务往来，掌园者可提出自己意见。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 强大真龙法体、真麟留影、独有仿制术和族中事务。
+        description: 强大真龙法体、真麟留影、独有仿制术和族中事务。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-golden-dragon-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-golden-boat
+      - local_entity_id: known-canon-golden-dragon-elder-private-stock
+        canonical_entity_ids:
+          - canon-golden-dragon-elder-private-stock
+      - local_entity_id: known-canon-fan-pao-zi
+        canonical_entity_ids:
+          - canon-fan-pao-zi
+      - local_entity_id: known-canon-tian-feier
+        canonical_entity_ids:
+          - canon-tian-feier
+      - local_entity_id: known-seas-dragon-memory-1
+        canonical_entity_ids:
+          - seas-dragon-memory-1
+      - local_entity_id: known-seas-dragon-memory-2
+        canonical_entity_ids:
+          - seas-dragon-memory-2
+      - local_entity_id: known-seas-dragon-memory-3
+        canonical_entity_ids:
+          - seas-dragon-memory-3
+      - local_entity_id: known-seas-dragon-memory-4
+        canonical_entity_ids:
+          - seas-dragon-memory-4
+      - local_entity_id: known-seas-dragon-memory-5
+        canonical_entity_ids:
+          - seas-dragon-memory-5
+      - local_entity_id: known-seas-dragon-memory-6
+        canonical_entity_ids:
+          - seas-dragon-memory-6
+      - local_entity_id: known-seas-dragon-memory-7
+        canonical_entity_ids:
+          - seas-dragon-memory-7
+      - local_entity_id: known-seas-golden-sang-vial
+        canonical_entity_ids:
+          - seas-golden-sang-vial
+      - local_entity_id: known-seas-fruit-tree
+        canonical_entity_ids:
+          - seas-fruit-tree
+      - local_entity_id: known-seas-dragon-crafts-visitor
+        canonical_entity_ids:
+          - seas-dragon-crafts-visitor
+      - local_entity_id: known-seas-fruit-custodian
+        canonical_entity_ids:
+          - seas-fruit-custodian

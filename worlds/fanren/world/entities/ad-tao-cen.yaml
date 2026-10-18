@@ -1,0 +1,187 @@
+id: ad-tao-cen
+kind: person
+name: 陶岑
+description: 独立修器者，凭手艺接工，不归采购人所有。
+placement: ad-bloodcrow-market
+facts:
+  - id: ad-tao-cen-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: ad-tao-cen-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴魔火、低阶器物修补与夹杂矿辨别。
+    description: 元婴魔火、低阶器物修补与夹杂矿辨别。
+    access:
+      kind: private
+  - id: ad-tao-cen-relation-ad-lu-yan
+    predicate: relation-ad-lu-yan
+    value:
+      kind: entity
+      entityId: ad-lu-yan
+    description: 长期验货委托与器修往来，各自议价。
+    access:
+      kind: private
+  - id: ad-tao-cen-relation-ad-jing-lu
+    predicate: relation-ad-jing-lu
+    value:
+      kind: entity
+      entityId: ad-jing-lu
+    description: 已有器物托运合作，货物须完好交接。
+    access:
+      kind: private
+  - id: ad-tao-cen-relation-ad-fang-qiu
+    predicate: relation-ad-fang-qiu
+    value:
+      kind: entity
+      entityId: ad-fang-qiu
+    description: 通过景鹭往来交换低阶器修材料。
+    access:
+      kind: private
+meters:
+  - id: ad-tao-cen-health
+    definition_id: health
+    current: 100
+  - id: ad-tao-cen-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: ad-tao-cen-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: ad-tao-cen-force
+    definition_id: force
+    value: 4
+  - id: ad-tao-cen-craft
+    definition_id: craft
+    value: 4
+  - id: ad-tao-cen-perception
+    definition_id: perception
+    value: 4
+  - id: ad-tao-cen-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: ad-tao-cen
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 独立修器者，凭手艺接工，不归采购人所有。
+      voice: 谈工钱直白，解释工艺愿给人看残件。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成已有两件修理，再决定是否承接货场复验。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陶岑
+        description: 独立修器者，凭手艺接工，不归采购人所有。
+        status: observed
+      - id: location
+        name: 血鸦城外货场
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-tao-cen-purse
+        name: 陶岑私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-lu-yan
+        name: 卢砚
+        description: 长期验货委托与器修往来，各自议价。
+        status: observed
+      - id: known-ad-jing-lu
+        name: 景鹭
+        description: 已有器物托运合作，货物须完好交接。
+        status: observed
+      - id: known-ad-fang-qiu
+        name: 方秋
+        description: 通过景鹭往来交换低阶器修材料。
+        status: observed
+      - id: known-ad-tao-material
+        name: 陶岑修补料
+        description: 每修一件现有低阶破甲耗1份材料，使用相容魔火与时间。
+        status: observed
+      - id: known-ad-tao-damaged-armor-1
+        name: 待修低阶魔甲1
+        description: 护甲裂纹需修补，当前防护有限；不等于已修好。
+        status: observed
+      - id: known-ad-tao-damaged-armor-2
+        name: 待修低阶魔甲2
+        description: 护甲裂纹需修补，当前防护有限；不等于已修好。
+        status: observed
+      - id: known-ad-mineral-load
+        name: 待验血光晶矿料
+        description: 20份已采矿料，夹杂空隙，只有16份可用晶质；复验不凭空增加材料。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴魔火、低阶器物修补与夹杂矿辨别。
+        description: 元婴魔火、低阶器物修补与夹杂矿辨别。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-tao-cen
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-bloodcrow-market
+      - local_entity_id: known-ad-tao-cen-purse
+        canonical_entity_ids:
+          - ad-tao-cen-purse
+      - local_entity_id: known-ad-lu-yan
+        canonical_entity_ids:
+          - ad-lu-yan
+      - local_entity_id: known-ad-jing-lu
+        canonical_entity_ids:
+          - ad-jing-lu
+      - local_entity_id: known-ad-fang-qiu
+        canonical_entity_ids:
+          - ad-fang-qiu
+      - local_entity_id: known-ad-tao-material
+        canonical_entity_ids:
+          - ad-tao-material
+      - local_entity_id: known-ad-tao-damaged-armor-1
+        canonical_entity_ids:
+          - ad-tao-damaged-armor-1
+      - local_entity_id: known-ad-tao-damaged-armor-2
+        canonical_entity_ids:
+          - ad-tao-damaged-armor-2
+      - local_entity_id: known-ad-mineral-load
+        canonical_entity_ids:
+          - ad-mineral-load

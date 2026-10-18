@@ -1,0 +1,26 @@
+id: steppe-jinyang-store
+kind: location
+name: 金阳轮值公库
+description: 布册记录井绳、口粮与修士值守费用，开锁不等于财产归个人。
+placement: steppe-jinyang-camp
+facts:
+  - id: steppe-jinyang-store-route-steppe-jinyang-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-jinyang-camp
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-jinyang-store-travel-steppe-jinyang-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

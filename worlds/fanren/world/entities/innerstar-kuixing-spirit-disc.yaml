@@ -1,0 +1,18 @@
+id: innerstar-kuixing-spirit-disc
+kind: item
+name: 东石城门灵盘
+description: 圆筒一端嵌玉盘，可供城门凡人查辨修士；不因此得知其完整身份、功法和库存。
+placement: human-dongshi-city
+facts:
+  - id: innerstar-kuixing-spirit-disc-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 魁星岛务所公物，使用不等于取得私有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

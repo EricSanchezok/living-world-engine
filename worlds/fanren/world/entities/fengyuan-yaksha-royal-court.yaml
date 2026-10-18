@@ -1,0 +1,26 @@
+id: fengyuan-yaksha-royal-court
+kind: location
+name: 双崖议场
+description: 两处夜叉领地议定边界与取用的石台，争执可以带来真实冲突。
+placement: fengyuan-yaksha-domain
+facts:
+  - id: fengyuan-yaksha-royal-court-route-fengyuan-yaksha-crag-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-crag-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-yaksha-royal-court-condition-fengyuan-yaksha-crag-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两处夜叉领地议定边界与取用的石台，争执可以带来真实冲突。
+    description: 两处夜叉领地议定边界与取用的石台，争执可以带来真实冲突。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

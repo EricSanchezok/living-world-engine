@@ -1,0 +1,26 @@
+id: yinming-village-ridge
+kind: location
+name: 灰岭村
+description: 低岭内的小村，常与邻村交换骨材。
+placement: yinming-stones
+facts:
+  - id: yinming-village-ridge-route-yinming-stones
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-stones
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-ridge-condition-yinming-stones
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

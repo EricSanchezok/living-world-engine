@@ -1,0 +1,50 @@
+id: divine-hand-valley
+kind: location
+name: 神手谷
+description: 一条山路通入的药谷，访者通常因病伤求医；不是任何人都获准进入私室。
+placement: caixia-mountain
+facts:
+  - id: divine-hand-valley-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 一条山路通入的药谷，访者通常因病伤求医；不是任何人都获准进入私室。
+    access:
+      kind: public
+  - id: divine-hand-valley-route-divine-hand-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: divine-hand-garden
+    description: 谷左药园种着常用药草，采摘、晾晒和炮制须由医者安排。
+    access:
+      kind: public
+  - id: divine-hand-valley-route-mo-residence
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: mo-residence
+    description: 墨大夫行医和读书的住所，有案台与书架；私室物品不自动向访客公开。
+    access:
+      kind: public
+  - id: divine-hand-valley-route-qixuan-kitchen
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-kitchen
+    description: 给弟子供应饭食的厨房；饭时忙碌，取用粮食须经厨役安排。
+    access:
+      kind: public
+  - id: divine-hand-valley-route-valley-peak-path
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: source-qixuan-valley-peak-path
+    description: 一条山间小路连通谷地与山峰。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

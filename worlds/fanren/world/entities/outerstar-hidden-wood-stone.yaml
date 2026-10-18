@@ -1,0 +1,20 @@
+id: outerstar-hidden-wood-stone
+kind: container
+name: 岩层中木属性极品灵石
+description: 埋于深层矿体的一块极品灵石，未开采且无人知坐标。
+placement: outerstar-future-biling
+facts:
+  - id: outerstar-hidden-wood-stone-buried
+    predicate: buried
+    value:
+      kind: text
+      value: 须实际勘查、开掘并排除地层危险，不能远取或自动标到人物地图。
+    description: 须实际勘查、开掘并排除地层危险，不能远取或自动标到人物地图。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: top-stone
+    amount: 1
+ratings: []
+shared_activity_resources: []

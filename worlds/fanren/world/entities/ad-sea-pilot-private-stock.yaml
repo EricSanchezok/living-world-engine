@@ -1,0 +1,22 @@
+id: ad-sea-pilot-private-stock
+kind: container
+name: 沐舟的自用储备
+description: 本人财物，与机构公库和门人财产分开。
+placement: ad-sea-pilot
+facts:
+  - id: ad-sea-pilot-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-sea-pilot
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

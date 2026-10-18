@@ -1,0 +1,42 @@
+id: innerstar-kuixing-harbor
+kind: location
+name: 魁星港
+description: 魁星岛海船停靠处，陌生修士须在港口登记。
+placement: human-kuixing-island
+facts:
+  - id: innerstar-kuixing-harbor-route-human-kuixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-island
+    description: 通往魁星岛
+    access:
+      kind: public
+  - id: innerstar-kuixing-harbor-condition-human-kuixing-island
+    predicate: condition-human-kuixing-island
+    value:
+      kind: text
+      value: 从港口经岛上道路进入，检查和通行须按实际办理。
+    description: 从港口经岛上道路进入，检查和通行须按实际办理。
+    access:
+      kind: public
+  - id: innerstar-kuixing-harbor-route-innerstar-kuixing-port-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-port-office
+    description: 通往魁星港登记石屋
+    access:
+      kind: public
+  - id: innerstar-kuixing-harbor-condition-innerstar-kuixing-port-office
+    predicate: condition-innerstar-kuixing-port-office
+    value:
+      kind: text
+      value: 港口旁登记石屋，需经过门口实际进入。
+    description: 港口旁登记石屋，需经过门口实际进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

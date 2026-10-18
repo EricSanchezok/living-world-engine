@@ -1,0 +1,26 @@
+id: feiling-library
+kind: location
+name: 天知阁
+description: 收藏族史、地理和物产典籍的书楼。低层阅册可登记借阅，旧秘卷另行封存。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-library-route-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-library-condition-feiling-tianpeng-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按借阅权限收藏族内历史和常用手艺，秘传不摆在公开架上。
+    description: 按借阅权限收藏族内历史和常用手艺，秘传不摆在公开架上。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

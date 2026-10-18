@@ -1,0 +1,134 @@
+id: kunwu-corpse-wolf
+kind: corpse-spirit
+name: 绿毛尸狼
+description: 居暖玉沙洞的旧尸狼，三丈绿毛躯，可秘法变人形但只有一具身躯。
+placement: south-yin-warm
+facts:
+  - id: kunwu-corpse-wolf-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-corpse-wolf
+  - id: kunwu-corpse-wolf-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 尸火、巨力与形体变化，攻击耗自身尸气。
+    description: 尸火、巨力与形体变化，攻击耗自身尸气。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-corpse-wolf
+  - id: kunwu-corpse-wolf-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-corpse-wolf
+meters:
+  - id: kunwu-corpse-wolf-health
+    definition_id: health
+    current: 100
+  - id: kunwu-corpse-wolf-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: kunwu-corpse-qi
+    amount: 90
+ratings:
+  - id: kunwu-corpse-wolf-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: kunwu-corpse-wolf-force
+    definition_id: force
+    value: 4
+  - id: kunwu-corpse-wolf-craft
+    definition_id: craft
+    value: 4
+  - id: kunwu-corpse-wolf-perception
+    definition_id: perception
+    value: 3
+  - id: kunwu-corpse-wolf-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: kunwu-corpse-wolf
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 居暖玉沙洞的旧尸狼，三丈绿毛躯，可秘法变人形但只有一具身躯。
+      voice: 以嘶吼、气味和压迫动作表达，不主动讲全套宝物说明。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 守住栖地，在未受扰动时静伏。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 绿毛尸狼
+        description: 居暖玉沙洞的旧尸狼，三丈绿毛躯，可秘法变人形但只有一具身躯。
+        status: observed
+      - id: location
+        name: 暖玉沙洞
+        description: 自己当前所在之处。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 尸火、巨力与形体变化，攻击耗自身尸气。
+        description: 尸火、巨力与形体变化，攻击耗自身尸气。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - kunwu-corpse-wolf
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-yin-warm

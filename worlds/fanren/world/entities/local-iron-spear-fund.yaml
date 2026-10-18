@@ -1,0 +1,22 @@
+id: local-iron-spear-fund
+kind: container
+name: 铁枪会公库
+description: 有限现有资源；经授权用途支用与个人所得分开。
+placement: local-iron-spear-yard
+facts:
+  - id: local-iron-spear-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: local-iron-spear
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 18
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

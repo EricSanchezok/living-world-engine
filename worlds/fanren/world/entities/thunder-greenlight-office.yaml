@@ -1,0 +1,58 @@
+id: thunder-greenlight-office
+kind: location
+name: 绿光留守府
+description: 负责旧阵、商路和城防的驻守机构。
+placement: thunder-greenlight-city
+facts:
+  - id: thunder-greenlight-office-route-thunder-greenlight-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-office-condition-thunder-greenlight-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 负责旧阵、商路和城防的驻守机构。
+    description: 负责旧阵、商路和城防的驻守机构。
+    access:
+      kind: public
+  - id: thunder-greenlight-office-route-to-thunder-wangu-crisis-entry
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wangu-crisis-entry
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-greenlight-office-travel-condition-thunder-wangu-crisis-entry
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。
+    description: 元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。
+    access:
+      kind: private
+  - id: thunder-greenlight-office-route-to-root-greenlight-statue-room
+    predicate: route-to-root-greenlight-statue-room
+    value:
+      kind: entity
+      entityId: root-greenlight-statue-room
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: thunder-greenlight-office-travel-condition-root-greenlight-statue-room
+    predicate: travel-condition-root-greenlight-statue-room
+    value:
+      kind: text
+      value: 可由楼中实际行走至一层；发现和开启神像内台需实际勘察、许可或突破看守。
+    description: 可由楼中实际行走至一层；发现和开启神像内台需实际勘察、许可或突破看守。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

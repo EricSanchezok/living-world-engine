@@ -1,0 +1,20 @@
+id: canon-bingfeng-pouch
+kind: item
+name: 冰凤的私用行囊
+description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+placement: canon-bingfeng
+facts:
+  - id: canon-bingfeng-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bingfeng
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 2
+ratings: []
+shared_activity_resources: []

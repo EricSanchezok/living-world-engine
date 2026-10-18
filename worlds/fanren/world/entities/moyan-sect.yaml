@@ -1,0 +1,26 @@
+id: moyan-sect
+kind: organization
+name: 魔焰门
+description: 魔焰门的宗门或联盟共同体，职分、成员与公产分开；与陌生人交涉须由实际掌事者决定。
+placement: human-tianluo
+facts:
+  - id: moyan-sect-alliance
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: tiannan-six-demonic
+    description: member-of
+    access:
+      kind: public
+  - id: moyan-sect-public-service
+    predicate: public-service-at
+    value:
+      kind: entity
+      entityId: tiannan-moyan-outer-court
+    description: 此处办理普通物资和来客交接；职员无权代表全宗承诺战争或处分秘宝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

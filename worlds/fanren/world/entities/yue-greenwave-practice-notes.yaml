@@ -1,0 +1,26 @@
+id: yue-greenwave-practice-notes
+kind: item
+name: 练功笔记
+description: 记录经脉运气顺序和停功休息的常见检查，不包含任意陌生功法的完整诀窍。
+placement: yue-greenwave-library
+facts:
+  - id: yue-greenwave-practice-notes-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-li-huayuan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-greenwave-practice-notes-seal
+    predicate: access-condition
+    value:
+      kind: text
+      value: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    description: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

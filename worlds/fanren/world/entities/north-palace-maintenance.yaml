@@ -1,0 +1,26 @@
+id: north-palace-maintenance
+kind: item
+name: 小极宫维护储备
+description: 可登记领用的普通材料，不含长老私人物品或自动无限生成的玄玉。
+placement: north-stockroom
+facts:
+  - id: north-palace-maintenance-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: maintenance-material
+    amount: 36
+  - definition_id: lamp-oil
+    amount: 14
+  - definition_id: grain
+    amount: 70
+  - definition_id: low-stone
+    amount: 200
+ratings: []
+shared_activity_resources: []

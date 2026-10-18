@@ -1,0 +1,184 @@
+id: innerstar-nanming-fan
+kind: person
+name: 樊若泉
+description: 成年炼气后期药铺经营者，会辨普通药材和算账。
+placement: innerstar-nanming-herbshop
+facts:
+  - id: innerstar-nanming-fan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水土三灵根，已亲自验过。
+    description: 木水土三灵根，已亲自验过。
+    access:
+      kind: discoverable
+      condition: 取得本人同意后，用有依据的验根方法实际检测。
+  - id: innerstar-nanming-fan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 成年炼气后期药铺经营者，会辨普通药材和算账。
+    description: 成年炼气后期药铺经营者，会辨普通药材和算账。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-nanming-fan
+  - id: innerstar-nanming-fan-employs
+    predicate: employs
+    value:
+      kind: entity
+      entityId: innerstar-nanming-tao
+    description: 雇陶泊帮忙装卸、分拣，陶泊不是可随意转让的财物。
+    access:
+      kind: public
+meters:
+  - id: innerstar-nanming-fan-health
+    definition_id: health
+    current: 100
+  - id: innerstar-nanming-fan-mana
+    definition_id: mana
+    current: 40
+quantities:
+  - definition_id: copper
+    amount: 28
+ratings:
+  - id: innerstar-nanming-fan-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: innerstar-nanming-fan-force
+    definition_id: force
+    value: 1
+  - id: innerstar-nanming-fan-craft
+    definition_id: craft
+    value: 1
+  - id: innerstar-nanming-fan-perception
+    definition_id: perception
+    value: 1
+  - id: innerstar-nanming-fan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-nanming-fan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 成年炼气后期药铺经营者，会辨普通药材和算账。
+      voice: 事情说清楚，知道多少说多少。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 今日先查两包受潮外纸里的药材，再决定换包还是退给供货人；检查有结果便登记收口，等待实际订单。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 樊若泉
+        description: 成年炼气后期药铺经营者，会辨普通药材和算账。
+        status: observed
+      - id: known-innerstar-nanming-herbshop
+        name: 若泉药铺
+        description: 经营普通药材的小铺，柜后侧门通分拣间。
+        status: observed
+      - id: known-innerstar-nanming-sorting
+        name: 药铺分拣间
+        description: 窄木架和干燥案台，药材与包纸放在各自匣内。
+        status: observed
+      - id: known-innerstar-nanming-cash
+        name: 若泉药铺经营款
+        description: 药铺收支所用钱匣。
+        status: observed
+      - id: known-innerstar-nanming-herbs
+        name: 待售普通药材匣
+        description: 包扎好的普通药材，表层两包纸边微潮，须开包才见内部药材。
+        status: observed
+      - id: known-innerstar-nanming-paper
+        name: 干包纸匣
+        description: 供分拣换包的四份干净纸料。
+        status: observed
+      - id: known-innerstar-nanming-market
+        name: 南明坊市
+        description: 港口附近的小城坊市，有材料铺和转售货物的商人。
+        status: observed
+      - id: known-innerstar-nanming-tao
+        name: 陶泊
+        description: 成年凡人帮手，会搬运、分拣普通药材和包扎。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 在药铺工作及亲自查看外包装的经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: work
+        subjectId: self
+        predicate: work
+        value:
+          kind: text
+          value: 药铺共有24包待售药材、4份干纸料；最外两包纸边微潮，尚未拆看内部，不能先认定药坏或药好。
+        description: 药铺共有24包待售药材、4份干纸料；最外两包纸边微潮，尚未拆看内部，不能先认定药坏或药好。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: accounts
+        subjectId: self
+        predicate: accounts
+        value:
+          kind: text
+          value: 樊若泉管理药铺，陶泊受雇做分拣；经营匣的钱与各自钱袋分开。
+        description: 樊若泉管理药铺，陶泊受雇做分拣；经营匣的钱与各自钱袋分开。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: personal-ability
+        subjectId: self
+        predicate: personal-ability
+        value:
+          kind: text
+          value: 成年炼气后期药铺经营者，会辨普通药材和算账。 本人已测木水土三灵根。
+        description: 成年炼气后期药铺经营者，会辨普通药材和算账。 本人已测木水土三灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-nanming-fan
+      - local_entity_id: known-innerstar-nanming-herbshop
+        canonical_entity_ids:
+          - innerstar-nanming-herbshop
+      - local_entity_id: known-innerstar-nanming-sorting
+        canonical_entity_ids:
+          - innerstar-nanming-sorting
+      - local_entity_id: known-innerstar-nanming-cash
+        canonical_entity_ids:
+          - innerstar-nanming-cash
+      - local_entity_id: known-innerstar-nanming-herbs
+        canonical_entity_ids:
+          - innerstar-nanming-herbs
+      - local_entity_id: known-innerstar-nanming-paper
+        canonical_entity_ids:
+          - innerstar-nanming-paper
+      - local_entity_id: known-innerstar-nanming-market
+        canonical_entity_ids:
+          - innerstar-nanming-market
+      - local_entity_id: known-innerstar-nanming-tao
+        canonical_entity_ids:
+          - innerstar-nanming-tao

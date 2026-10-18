@@ -1,0 +1,42 @@
+id: dv-natural-tunnel
+kind: location
+name: 湖底天然隧道
+description: 湖底深处的粗糙天然通道弯行数里后上升，没有关押痕迹。
+placement: dv-subsurface-lava-basin
+facts:
+  - id: dv-natural-tunnel-route-dv-subsurface-lava-basin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-subsurface-lava-basin
+    description: route-to
+    access:
+      kind: public
+  - id: dv-natural-tunnel-condition-dv-subsurface-lava-basin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入须承受深层熔岩的热压、找到隐蔽入口并穿过蓝色隔岩光幕；需要相应防护。
+    description: 进入须承受深层熔岩的热压、找到隐蔽入口并穿过蓝色隔岩光幕；需要相应防护。
+    access:
+      kind: public
+  - id: dv-natural-tunnel-route-dv-natural-grotto
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-natural-grotto
+    description: route-to
+    access:
+      kind: public
+  - id: dv-natural-tunnel-condition-dv-natural-grotto
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然隧道前行数里再爬升，检查地形与热气；不需跨界珠。
+    description: 沿天然隧道前行数里再爬升，检查地形与热气；不需跨界珠。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

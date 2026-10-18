@@ -1,0 +1,34 @@
+id: spirit-training-lift
+kind: item
+name: 提吊架演示件
+description: 小型提吊架与手套配合，能提升一只标准封装灵材箱到半人高。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-training-lift-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-training-lift-paired-with
+    predicate: paired-with
+    value:
+      kind: entity
+      entityId: spirit-loader-glove
+    description: 须配对后由实际操作者使用。
+    access:
+      kind: public
+  - id: spirit-training-lift-performance
+    predicate: performance
+    value:
+      kind: text
+      value: 平稳抬升一只标准灵材箱至半人高并落回，耗时60秒；不能凭此飞行、提起整栋楼或替代货物封签检查。损坏、超载、无配对或无实石则不能完成额定动作。
+    description: 平稳抬升一只标准灵材箱至半人高并落回，耗时60秒；不能凭此飞行、提起整栋楼或替代货物封签检查。损坏、超载、无配对或无实石则不能完成额定动作。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: human-shayun
+kind: location
+name: 刹云国
+description: 天南的小国，修炼资源和国土规模小于元武、越国。
+placement: human-tiannan
+facts:
+  - id: human-shayun-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 接入天南小国间商路，具体入境手续由当地值守核验，过境仍耗时。
+    access:
+      kind: public
+  - id: human-shayun-route-tiannan-shayun-courtyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-shayun-courtyard
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

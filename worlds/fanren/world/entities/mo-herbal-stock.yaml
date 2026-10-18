@@ -1,0 +1,44 @@
+id: mo-herbal-stock
+kind: container
+name: 神手谷常用药材
+description: 储放在此的现有物资，取用需经持有人授权。
+placement: divine-hand-garden
+facts:
+  - id: mo-herbal-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-juren
+    description: 物资属于记载主体。
+    access:
+      kind: private
+  - id: mo-herbal-stock-prepared-wound-powder-allocation
+    predicate: material-allocation
+    value:
+      kind: text
+      value: 六十包现存普通药材中有两包已制成外伤药粉，其余五十八包尚未制为该药。制成的两包也计入同一herb-packet库存；每次取用需同时减少相应库存和已制药包数。
+    description: 已制成与未制成药材共用有限总库存。
+    access:
+      kind: private
+  - id: mo-herbal-stock-prepared-wound-powder-count
+    predicate: prepared-wound-powder-packets
+    value:
+      kind: number
+      value: 2
+    description: 其中已制成外伤药粉的包数，已包含在总药材库存中。
+    access:
+      kind: private
+  - id: mo-herbal-stock-wound-powder-use
+    predicate: use-rule
+    value:
+      kind: text
+      value: 外敷普通伤口、瘀肿可止血缓痛，仍依伤势清理与恢复；不因此治愈阴魂咒等无关伤病。
+    description: 外伤药粉的适用范围。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 60
+ratings: []
+shared_activity_resources: []

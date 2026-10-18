@@ -1,0 +1,22 @@
+id: blood-xuehen-array-keeper-review-stock
+kind: container
+name: 桑符自用储备
+description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+placement: blood-xuehen-array-keeper
+facts:
+  - id: blood-xuehen-array-keeper-review-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xuehen-array-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: void-hook-spirits
+kind: animal-group
+name: 勾魂飞灵群
+description: 不同于普通阴灵的群体，当前蛰伏。
+placement: void-mist
+facts:
+  - id: void-hook-spirits-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 36
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

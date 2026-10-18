@@ -1,0 +1,26 @@
+id: feiling-guest-house
+kind: location
+name: 玉皇顶接待阁
+description: 接待不同族支的客人，住宿记录由值事保管。
+placement: feiling-yuhuang-peak
+facts:
+  - id: feiling-guest-house-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-guest-house-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接待不同族支的客人，住宿记录由值事保管。
+    description: 接待不同族支的客人，住宿记录由值事保管。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

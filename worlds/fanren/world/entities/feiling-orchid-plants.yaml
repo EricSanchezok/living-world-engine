@@ -1,0 +1,20 @@
+id: feiling-orchid-plants
+kind: container
+name: 可采毒兰
+description: 采集者管理的八份可用毒兰，护花蜂和毒雾仍需应对。
+placement: feiling-orchid-marsh
+facts:
+  - id: feiling-orchid-plants-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-gatherer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-orchid-dose
+    amount: 8
+ratings: []
+shared_activity_resources: []

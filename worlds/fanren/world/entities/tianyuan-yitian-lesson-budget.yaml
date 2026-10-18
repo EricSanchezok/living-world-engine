@@ -1,0 +1,20 @@
+id: tianyuan-yitian-lesson-budget
+kind: container
+name: 倚天讲席公款
+description: 本笔讲席最多八枚，未成交之前仍属机构。
+placement: tianyuan-yitian-city-reference
+facts:
+  - id: tianyuan-yitian-lesson-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-stewardship
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

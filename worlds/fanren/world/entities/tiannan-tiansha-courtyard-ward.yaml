@@ -1,0 +1,36 @@
+id: tiannan-tiansha-courtyard-ward
+kind: item
+name: 天煞外院护院阵
+description: 只能在院墙范围发出有人越界的微光警示，不具远距离全知或自动杀伤。
+placement: tiannan-tiansha-outer-court
+facts:
+  - id: tiannan-tiansha-courtyard-ward-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiansha-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-tiansha-courtyard-ward-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 两块阵片出现裂纹，警示有时延迟；补换须停阵、取下旧片并重新校接，不能靠一句维修完成。
+    description: 阵片损坏尚未更换。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-tiansha-courtyard-ward-custodian
+    predicate: operated-by
+    value:
+      kind: entity
+      entityId: original-tiannan-zhao-heng
+    description: 赵衡可检查并依公库额度委托维修。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

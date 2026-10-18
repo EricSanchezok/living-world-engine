@@ -1,0 +1,42 @@
+id: kunwu-tower-five
+kind: location
+name: 镇魔塔五层
+description: 到六层前的分隔平台，隔墙限制感知。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-tower-five-route-kunwu-tower-four
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-four
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-five-condition-kunwu-tower-four
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+  - id: kunwu-tower-five-route-kunwu-tower-six
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-six
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-five-condition-kunwu-tower-six
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

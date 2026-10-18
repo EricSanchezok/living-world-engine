@@ -1,0 +1,22 @@
+id: thunder-apprentice-personal-kit
+kind: container
+name: 岑音的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: thunder-apprentice
+facts:
+  - id: thunder-apprentice-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 5
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

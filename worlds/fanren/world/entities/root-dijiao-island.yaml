@@ -1,0 +1,46 @@
+id: root-dijiao-island
+kind: location
+name: 地蛟岛
+description: 血燃与黑鳞所居岛地，远海路线须向实际来过者打听。
+placement: spirit-realm
+facts:
+  - id: root-dijiao-island-route-to-spirit-realm
+    predicate: route-to-spirit-realm
+    value:
+      kind: entity
+      entityId: spirit-realm
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-dijiao-island-travel-condition-spirit-realm
+    predicate: travel-condition-spirit-realm
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-dijiao-island-root-detail-dijiao-brothers
+    predicate: root-detail-dijiao-brothers
+    value:
+      kind: text
+      value: 血燃与黑鳞是独立的兄弟，血脉与资源各自持有；黑麟称写不另造一人，岛上往来须实际通信。
+    description: 血燃与黑鳞是独立的兄弟，血脉与资源各自持有；黑麟称写不另造一人，岛上往来须实际通信。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-dijiao-island-root-detail-spider-bloodlines
+    predicate: root-detail-spider-bloodlines
+    value:
+      kind: text
+      value: 血焰六首蛛、黑甲天龙蛛、千目邪蛛血脉各异，近支可在条件内感应蛛类，不等持有者肉身已成完整真灵。
+    description: 血焰六首蛛、黑甲天龙蛛、千目邪蛛血脉各异，近支可在条件内感应蛛类，不等持有者肉身已成完整真灵。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

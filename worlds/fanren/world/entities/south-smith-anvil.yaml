@@ -1,0 +1,18 @@
+id: south-smith-anvil
+kind: item
+name: 炉匠锻台
+description: 真实锻台和夹持工具，使用需技能与炉火。
+placement: south-forge-hut
+facts:
+  - id: south-smith-anvil-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

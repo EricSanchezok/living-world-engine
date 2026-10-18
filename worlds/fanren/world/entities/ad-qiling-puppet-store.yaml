@@ -1,0 +1,18 @@
+id: ad-qiling-puppet-store
+kind: location
+name: 泣灵傀儡库
+description: 火殿后保存魔晶傀儡的仓室，古控制结构与主宝分开，收走不等于已经能驱动。
+placement: ad-qiling-firehall
+facts:
+  - id: ad-qiling-puppet-store-route-to-ad-qiling-firehall
+    predicate: route-to-ad-qiling-firehall
+    value:
+      kind: entity
+      entityId: ad-qiling-firehall
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

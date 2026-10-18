@@ -1,0 +1,26 @@
+id: seas-seven-orifice-wall
+kind: item
+name: 七窍心音传讯壁
+description: 仅与已登记分盟讯端双向联络的传讯壁，需双方值守应答、持续投入本人法力和装置辅助供能。
+placement: seas-meeting-hall
+facts:
+  - id: seas-seven-orifice-wall-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-seven-orifice-wall-operation-cost
+    predicate: operation-cost
+    value:
+      kind: text
+      value: 每900共同秒双方各耗200实际法力；两端各耗一枚中阶石作本装置辅助供能，法力或供能不足即不能继续。未通话试启亦按实际耗用记账，不凭空返还。
+    description: 每900共同秒双方各耗200实际法力；两端各耗一枚中阶石作本装置辅助供能，法力或供能不足即不能继续。未通话试启亦按实际耗用记账，不凭空返还。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: outerstar-qiyuan-array
+kind: location
+name: 奇渊传送石屋
+description: 传送石屋与城务处相邻，来者先核验防护和目的地。
+placement: outerstar-blackstone-city
+facts:
+  - id: outerstar-qiyuan-array-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-qiyuan-array-condition-outerstar-blackstone-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 传送石屋与城务处相邻，来者先核验防护和目的地。
+    description: 传送石屋与城务处相邻，来者先核验防护和目的地。
+    access:
+      kind: public
+  - id: outerstar-qiyuan-array-transit-offer
+    predicate: transit-offer
+    value:
+      kind: text
+      value: 当前单趟收费七百低阶灵石，至多七人共摊；每位旅客须有可用护符。启阵另实耗守阵库中三块中阶灵石，此耗用为游戏标定。
+    description: 当前单趟收费七百低阶灵石，至多七人共摊；每位旅客须有可用护符。启阵另实耗守阵库中三块中阶灵石，此耗用为游戏标定。
+    access:
+      kind: public
+  - id: outerstar-qiyuan-array-route-innerstar-star-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-star-hall
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-qiyuan-array-condition-innerstar-star-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    description: 经星空殿对应阵口传送，须有可用两端阵、守阵协作、每人护身符与约定收费；单趟至多七人，不能把普通遁术当跨海传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

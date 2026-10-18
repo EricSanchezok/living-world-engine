@@ -1,0 +1,46 @@
+id: canon-tianlan-holy-ding
+kind: item
+name: 传承圣鼎
+description: 古法仿制的传承器物，低石台上封存；未启动，鼎内没有已降临的兽形实体。
+placement: steppe-holy-ding-vault
+facts:
+  - id: canon-tianlan-holy-ding-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianlan-temple-network
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-tianlan-holy-ding-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-yu-su
+    description: custodian
+    access:
+      kind: public
+  - id: canon-tianlan-holy-ding-capability
+    predicate: capability
+    value:
+      kind: text
+      value: 可按正确祭仪承载媒介、力量和分神塑形；须操作者实际会法、有法力、祭品与相应跨界条件，不从一句召请凭空生圣兽。
+    description: 可按正确祭仪承载媒介、力量和分神塑形；须操作者实际会法、有法力、祭品与相应跨界条件，不从一句召请凭空生圣兽。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-yu-su
+  - id: canon-tianlan-holy-ding-unique
+    predicate: unique-identity
+    value:
+      kind: text
+      value: 此物是圣殿传承仿鼎，不是虚天鼎真体；移动或交接沿同一器物，不生成副本。
+    description: 此物是圣殿传承仿鼎，不是虚天鼎真体；移动或交接沿同一器物，不生成副本。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-yu-su
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

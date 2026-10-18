@@ -1,0 +1,42 @@
+id: feiling-bloodflame-lake
+kind: location
+name: 血焰熔岩湖
+description: 熔岩湖中浮着血红宫殿，顶上血晶垂丝成网；浮空硬闯会触动守禁。
+placement: feiling-bloodflame-mountain
+facts:
+  - id: feiling-bloodflame-lake-route-to-feiling-bloodflame-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-mountain
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-lake-route-conditions-feiling-bloodflame-mountain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿行山内旧道，避开熔岩喷口和傀儡岗。
+    description: 穿行山内旧道，避开熔岩喷口和傀儡岗。
+    access:
+      kind: private
+  - id: feiling-bloodflame-lake-route-to-feiling-bloodflame-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-palace
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-lake-route-conditions-feiling-bloodflame-palace
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经地血准许由杶龟载入且禁网让行；没有许可强闯须承受血晶禁网。
+    description: 经地血准许由杶龟载入且禁网让行；没有许可强闯须承受血晶禁网。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

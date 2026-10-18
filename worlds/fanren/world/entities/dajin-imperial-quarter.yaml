@@ -1,0 +1,18 @@
+id: dajin-imperial-quarter
+kind: location
+name: 晋京皇城区
+description: 晋京最北的广大皇城区；外围街路连向城中，宫门以内有各自的准入界限。
+placement: dajin-jinjing
+facts:
+  - id: dajin-imperial-quarter-route-dajin-jinjing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjing
+    description: 从皇城区外缘沿城内街路返回晋京其余街区；须实际移动。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

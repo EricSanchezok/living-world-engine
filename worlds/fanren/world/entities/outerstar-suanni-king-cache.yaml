@@ -1,0 +1,22 @@
+id: outerstar-suanni-king-cache
+kind: container
+name: 狻猊王私用储备
+description: 个人修行与赏赐用的有限私产。
+placement: canon-suanni-king
+facts:
+  - id: outerstar-suanni-king-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-suanni-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 100
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

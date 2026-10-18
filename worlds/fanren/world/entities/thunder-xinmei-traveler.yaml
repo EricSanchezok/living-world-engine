@@ -1,0 +1,151 @@
+id: thunder-xinmei-traveler
+kind: person
+name: 弦预
+description: 心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。
+placement: thunder-small-clan-court
+facts:
+  - id: thunder-xinmei-traveler-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: thunder-xinmei-traveler-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴修行、路图绘制、近身危机感应，不能预知所有伏击。
+    description: 元婴修行、路图绘制、近身危机感应，不能预知所有伏击。
+    access:
+      kind: private
+  - id: thunder-xinmei-traveler-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-xinmei-people
+    description: affiliation
+    access:
+      kind: private
+  - id: thunder-xinmei-traveler-acquaintance-thunder-cloud-copyist
+    predicate: acquaintance
+    value:
+      kind: entity
+      entityId: thunder-cloud-copyist
+    description: acquaintance
+    access:
+      kind: private
+meters:
+  - id: thunder-xinmei-traveler-health
+    definition_id: health
+    current: 100
+  - id: thunder-xinmei-traveler-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: thunder-xinmei-traveler-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: thunder-xinmei-traveler-force
+    definition_id: force
+    value: 4
+  - id: thunder-xinmei-traveler-craft
+    definition_id: craft
+    value: 2
+  - id: thunder-xinmei-traveler-perception
+    definition_id: perception
+    value: 4
+  - id: thunder-xinmei-traveler-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: thunder-xinmei-traveler
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。
+      voice: 先说自己亲见哪段路，再区分哪件事只是心头不安。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 为一条未亲走的北路寻找可靠同行或已有观察记录。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 弦预
+        description: 心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。
+        status: observed
+      - id: location
+        name: 行旅会面院
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: thunder-review-thunder-xinmei-traveler-private-stock
+        name: 弦预私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: thunder-review-thunder-xinmei-people
+        name: 心魅族
+        description: 自己所属族群，族内的私事仍依本人经历知情。
+        status: observed
+      - id: thunder-review-thunder-cloud-copyist
+        name: 凝页
+        description: 曾核过对方的一页沿路水源记，尚未同走北路。
+        status: observed
+      - id: thunder-review-thunder-traveler-notes
+        name: 弦预沿路水源记
+        description: 自己逐路画的记录，北路尚缺实见。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴修行、路图绘制、近身危机感应，不能预知所有伏击。
+        description: 元婴修行、路图绘制、近身危机感应，不能预知所有伏击。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-xinmei-traveler
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-small-clan-court
+      - local_entity_id: thunder-review-thunder-xinmei-traveler-private-stock
+        canonical_entity_ids:
+          - thunder-xinmei-traveler-private-stock
+      - local_entity_id: thunder-review-thunder-xinmei-people
+        canonical_entity_ids:
+          - thunder-xinmei-people
+      - local_entity_id: thunder-review-thunder-cloud-copyist
+        canonical_entity_ids:
+          - thunder-cloud-copyist
+      - local_entity_id: thunder-review-thunder-traveler-notes
+        canonical_entity_ids:
+          - thunder-traveler-notes

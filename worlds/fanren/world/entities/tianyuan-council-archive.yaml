@@ -1,0 +1,26 @@
+id: tianyuan-council-archive
+kind: location
+name: 天渊城文案库
+description: 保存正式决议、领用簿和任务档案，私密记录按职权开放。
+placement: tianyuan-council-hall
+facts:
+  - id: tianyuan-council-archive-route-tianyuan-council-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-council-hall
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-council-archive-condition-tianyuan-council-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 保存正式决议、领用簿和任务档案，私密记录按职权开放。
+    description: 保存正式决议、领用簿和任务档案，私密记录按职权开放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

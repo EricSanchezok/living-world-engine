@@ -1,0 +1,24 @@
+id: canon-ye-chu-private-stock
+kind: container
+name: 叶楚私用储备
+description: 本人可支配的有限储备，与族库和受托物分开。
+placement: canon-ye-chu
+facts:
+  - id: canon-ye-chu-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ye-chu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 2
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

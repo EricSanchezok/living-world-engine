@@ -1,0 +1,26 @@
+id: minghe-blood-bat-group
+kind: group
+name: 血沼人面血蝠
+description: 十八只血蝠在沼岸觅食，普通撕裂后可尝试重合，相克火焰或多次实伤会杀死。
+placement: minghe-blood-marsh
+facts:
+  - id: minghe-blood-bat-group-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters:
+  - id: minghe-blood-bat-group-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 18
+ratings:
+  - id: minghe-blood-bat-group-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

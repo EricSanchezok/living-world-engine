@@ -1,0 +1,26 @@
+id: tianyuan-duyu-retreat
+kind: location
+name: 杜宇岛中静修室
+description: 背山石室分外函龛与内静室，来函由本人休息时察看；外层供给案不通私人藏物。
+placement: spirit-holy-island
+facts:
+  - id: tianyuan-duyu-retreat-route-to-spirit-holy-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: route-to-spirit-holy-island
+    access:
+      kind: private
+  - id: tianyuan-duyu-retreat-route-conditions-spirit-holy-island
+    predicate: route-conditions-spirit-holy-island
+    value:
+      kind: text
+      value: 岛内山径通到外函龛；入内须杜宇允诺，圣岛登岛查验仍另行成立。
+    description: 岛内山径通到外函龛；入内须杜宇允诺，圣岛登岛查验仍另行成立。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

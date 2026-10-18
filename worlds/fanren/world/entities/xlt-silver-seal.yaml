@@ -1,0 +1,28 @@
+id: xlt-silver-seal
+kind: item
+name: 银叶古树图印
+description: 留于左臂的寄附图印，不能作为可随手出售的纸符，也不形成第二个本体。
+placement: xlt-yin
+facts:
+  - id: xlt-silver-seal-binding
+    predicate: bound-to
+    value:
+      kind: entity
+      entityId: xlt-yin
+    description: bound-to
+    access:
+      kind: private
+  - id: xlt-silver-seal-condition
+    predicate: activation-condition
+    value:
+      kind: text
+      value: 须承印者施法与足够法力，借用木灵气则扣减实际林木储备；本版每分钟形态维持耗4份木灵、18法力，距离和敌术干扰仍影响成功。
+    description: 须承印者施法与足够法力，借用木灵气则扣减实际林木储备；本版每分钟形态维持耗4份木灵、18法力，距离和敌术干扰仍影响成功。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-yin
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

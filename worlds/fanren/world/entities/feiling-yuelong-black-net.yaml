@@ -1,0 +1,18 @@
+id: feiling-yuelong-black-net
+kind: item
+name: 承力黑网
+description: 以法力张开黑色丝网，暂兜金属性天地光流，待炼炉承受得住时逐次释放；容纳和持续操控都有负担，不是任意能量的无限容器。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-black-net-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

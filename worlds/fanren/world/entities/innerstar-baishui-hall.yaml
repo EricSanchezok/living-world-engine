@@ -1,0 +1,34 @@
+id: innerstar-baishui-hall
+kind: location
+name: 白水楼
+description: 金剑旗的法器商阁。
+placement: innerstar-tiandu-market
+facts:
+  - id: innerstar-baishui-hall-route-innerstar-tiandu-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-tiandu-market
+    description: 通往天都街
+    access:
+      kind: public
+  - id: innerstar-baishui-hall-travel-innerstar-tiandu-market
+    predicate: travel-innerstar-tiandu-market
+    value:
+      kind: text
+      value: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    description: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    access:
+      kind: public
+  - id: innerstar-baishui-hall-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: innerstar-liulian-group
+    description: 六连联合店阁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

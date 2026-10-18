@@ -1,0 +1,30 @@
+id: yue-wanbao-tea-set
+kind: item
+name: 万宝楼茶具与茶料
+description: 一壶四杯与封存茶料、清水；沏茶须用现有茶水并实际加热，未沏的茶不能当作已送到客人面前。
+placement: yue-wanbao-guest-room
+facts:
+  - id: yue-wanbao-tea-set-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-wanbao-business
+    description: 实际所有人；保管、搬运和使用许可另行确认。
+    access:
+      kind: public
+  - id: yue-wanbao-tea-set-hospitality
+    predicate: service-rule
+    value:
+      kind: text
+      value: 当班人经掌柜许可可用一壶份茶叶和一壶份清水待客；泡成后原料减少。香气与提神程度视实际品质和饮用者，不保证消除疲劳或任何病痛。
+    description: 当班人经掌柜许可可用一壶份茶叶和一壶份清水待客；泡成后原料减少。香气与提神程度视实际品质和饮用者，不保证消除疲劳或任何病痛。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-biyun-tea
+    amount: 12
+  - definition_id: yue-clean-water
+    amount: 4
+ratings: []
+shared_activity_resources: []

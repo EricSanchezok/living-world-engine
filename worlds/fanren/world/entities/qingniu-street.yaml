@@ -1,0 +1,50 @@
+id: qingniu-street
+kind: location
+name: 青牛街
+description: 青牛镇东西贯通的主街，酒楼在镇另一端，客栈在西端。
+placement: qingniu-town
+facts:
+  - id: qingniu-street-route-qingniu-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-town
+    description: 青牛镇东西贯通的主街，酒楼在镇另一端，客栈在西端。
+    access:
+      kind: public
+  - id: qingniu-street-route-qingniu-guesthouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-guesthouse
+    description: 青牛镇唯一客栈，位于镇西，掌柜为旅客安排食宿。
+    access:
+      kind: public
+  - id: qingniu-street-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 从青牛镇向西通彩霞山，沿途有岔路；行程受脚力、天气、停歇与车辆影响。
+    access:
+      kind: public
+  - id: qingniu-street-route-wu-family-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wu-family-school
+    description: 舞岩家经营的武馆，院中留着练习拳脚的场地。
+    access:
+      kind: public
+  - id: qingniu-street-route-peer-market-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: peer-market-town
+    description: 青牛镇外的一处商旅镇子，钱庄、手艺人和附近村人汇集。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

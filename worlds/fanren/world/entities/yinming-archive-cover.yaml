@@ -1,0 +1,18 @@
+id: yinming-archive-cover
+kind: item
+name: 旧皮布
+description: 一块可暂挡滴水的旧布，还没架到碑上。
+placement: yinming-main-archive
+facts:
+  - id: yinming-archive-cover-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

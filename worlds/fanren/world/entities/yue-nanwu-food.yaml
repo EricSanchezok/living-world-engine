@@ -1,0 +1,20 @@
+id: yue-nanwu-food
+kind: item
+name: 南乌饭铺米粮
+description: 店中未烹米粮，供实际做饭售卖。
+placement: yue-nanwu-city
+facts:
+  - id: yue-nanwu-food-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-nanwu-host
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 40
+ratings: []
+shared_activity_resources: []

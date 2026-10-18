@@ -1,0 +1,26 @@
+id: dajin-feng-vault
+kind: location
+name: 冯家密窟
+description: 温石砌成的隐秘厅室，藏物分架保管，另有一座传送阵。
+placement: dajin-xueling-range
+facts:
+  - id: dajin-feng-vault-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-feng-clan
+    description: 由冯家保管的族产，实际取用须家族许可。
+    access:
+      kind: public
+  - id: dajin-feng-vault-route-dajin-feng-vault-door
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-feng-vault-door
+    description: 使用相连阵返回门后通道，需要阵况和供能满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,210 @@
+id: feiling-watch-clerk
+kind: person
+name: 栖澜
+description: 白玉族守卫文书，负责灯具和轮值交接。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-watch-clerk-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - feiling-watch-clerk
+  - id: feiling-watch-clerk-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神防护、书面记录与巡守器械检查。
+    description: 化神防护、书面记录与巡守器械检查。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-watch-clerk
+  - id: feiling-watch-clerk-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 白玉族飞灵血脉。
+    description: 白玉族飞灵血脉。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-watch-clerk
+  - id: feiling-watch-clerk-current-contact-canon-jin-feng
+    predicate: current-contact
+    value:
+      kind: entity
+      entityId: canon-jin-feng
+    description: current-contact
+    access:
+      kind: private
+meters:
+  - id: feiling-watch-clerk-health
+    definition_id: health
+    current: 100
+  - id: feiling-watch-clerk-mana
+    definition_id: mana
+    current: 1100
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: feiling-watch-clerk-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: feiling-watch-clerk-force
+    definition_id: force
+    value: 5
+  - id: feiling-watch-clerk-craft
+    definition_id: craft
+    value: 4
+  - id: feiling-watch-clerk-perception
+    definition_id: perception
+    value: 5
+  - id: feiling-watch-clerk-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: feiling-watch-clerk
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 白玉族守卫文书，负责灯具和轮值交接。
+      voice: 说话按时间顺序，面对指责会先摊开原始记录。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清两份寒风报告时间不一致的原因。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 栖澜
+        description: 白玉族守卫文书，负责灯具和轮值交接。
+        status: observed
+      - id: location
+        name: 地渊守军备勤楼
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-feiling-lamp-stock
+        name: 守军灯具材料
+        description: 检修灯具和调校计时砂漏的储备。
+        status: observed
+      - id: known-feiling-fast-clock
+        name: 偏快的巡守砂漏
+        description: 交接时使用的砂漏，外观无显著破损。
+        status: observed
+      - id: known-feiling-reference-clock
+        name: 备用巡守砂漏
+        description: 有最近校准记录的备用砂漏，可与在用者比对。
+        status: observed
+      - id: known-feiling-wind-log
+        name: 寒风轮值原始记录
+        description: 两组记录寒风抵达时间不同，其中一组沿用了偏快砂漏，尚无据证明有人伪造。
+        status: observed
+      - id: known-canon-jin-feng
+        name: 金峰
+        description: 本轮边防值勤关系，文书可按实际发现报告。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神防护、书面记录与巡守器械检查。
+        description: 化神防护、书面记录与巡守器械检查。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 白玉族飞灵血脉。
+        description: 白玉族飞灵血脉。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: wind-log
+        subjectId: self
+        predicate: wind-log
+        value:
+          kind: text
+          value: 两份报告时间相差，不能只凭不一致就处罚当班者；需要查计时器与交接记录。
+        description: 两份报告时间相差，不能只凭不一致就处罚当班者；需要查计时器与交接记录。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: clock-offer
+        subjectId: self
+        predicate: clock-offer
+        value:
+          kind: text
+          value: 金统领同意查清并修复计时误差后支付十五低阶灵石和一次基础凝甲课旁听。
+        description: 金统领同意查清并修复计时误差后支付十五低阶灵石和一次基础凝甲课旁听。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        description: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - feiling-watch-clerk
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-guard-yard
+      - local_entity_id: known-feiling-lamp-stock
+        canonical_entity_ids:
+          - feiling-lamp-stock
+      - local_entity_id: known-feiling-fast-clock
+        canonical_entity_ids:
+          - feiling-fast-clock
+      - local_entity_id: known-feiling-reference-clock
+        canonical_entity_ids:
+          - feiling-reference-clock
+      - local_entity_id: known-feiling-wind-log
+        canonical_entity_ids:
+          - feiling-wind-log
+      - local_entity_id: known-canon-jin-feng
+        canonical_entity_ids:
+          - canon-jin-feng

@@ -1,0 +1,20 @@
+id: seas-travel-saving
+kind: container
+name: 卢缄积蓄
+description: 可自行支配的出行资金，与自己的货物分开。
+placement: seas-journey-applicant
+facts:
+  - id: seas-travel-saving-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-journey-applicant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

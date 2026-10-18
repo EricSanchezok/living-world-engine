@@ -1,0 +1,20 @@
+id: seas-signal-fund
+kind: container
+name: 传讯壁灵石盒
+description: 每次与一端持续一刻通讯耗一枚中阶石，不接通仍需记录实际试验消耗。
+placement: seas-meeting-hall
+facts:
+  - id: seas-signal-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

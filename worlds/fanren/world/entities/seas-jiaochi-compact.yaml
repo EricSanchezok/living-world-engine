@@ -1,0 +1,18 @@
+id: seas-jiaochi-compact
+kind: item
+name: 角蚩三真灵古契约凭记
+description: 族中守存的古约凭记；本次召请需族中授权与三真灵实际回应，不因后来事件自动打开。
+placement: thunder-jiaochi
+facts:
+  - id: seas-jiaochi-compact-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

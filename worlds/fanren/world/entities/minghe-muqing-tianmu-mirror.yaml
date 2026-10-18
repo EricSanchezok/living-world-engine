@@ -1,0 +1,29 @@
+id: minghe-muqing-tianmu-mirror
+kind: item
+name: 天木镜
+description: 木青长久培炼的木纹青镜，吐纳木气，由她随身保管。
+placement: canon-mu-qing
+facts:
+  - id: minghe-muqing-tianmu-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-muqing-tianmu-mirror-bounded-operation
+    predicate: bounded-operation
+    value:
+      kind: text
+      value: 木青已会祭镜护身，每次开启耗20法力、持续每个本地时辰耗5；防护随修为及攻击实际裁定，不凭宝物名保证抵挡所有神通。
+    description: 木青已会祭镜护身，每次开启耗20法力、持续每个本地时辰耗5；防护随修为及攻击实际裁定，不凭宝物名保证抵挡所有神通。
+    access:
+      kind: private
+meters:
+  - id: minghe-muqing-tianmu-mirror-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

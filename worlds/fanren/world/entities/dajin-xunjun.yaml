@@ -1,0 +1,18 @@
+id: dajin-xunjun
+kind: location
+name: 苀郡
+description: 与封州相接的郡域，边界山路另有实际距离。
+placement: human-dajin
+facts:
+  - id: dajin-xunjun-route-dajin-fengzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-fengzhou
+    description: 沿交界山路通行，不能瞬移越界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

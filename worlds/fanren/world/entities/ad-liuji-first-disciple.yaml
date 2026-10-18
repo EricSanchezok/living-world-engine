@@ -1,0 +1,160 @@
+id: ad-liuji-first-disciple
+kind: person
+name: 六极大弟子
+description: 未具名的长期合体弟子，数万年依靠师门资源修行，亦面对候选化身的束缚。
+placement: ad-liuji-palace
+facts:
+  - id: ad-liuji-first-disciple-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - ad-liuji-first-disciple
+  - id: ad-liuji-first-disciple-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体魔功、洞府经营和师门传承；功法留有六极的控制后手。
+    description: 合体魔功、洞府经营和师门传承；功法留有六极的控制后手。
+    access:
+      kind: agents
+      agentIds:
+        - ad-liuji-first-disciple
+  - id: ad-liuji-first-disciple-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-liuji-first-disciple
+meters:
+  - id: ad-liuji-first-disciple-health
+    definition_id: health
+    current: 100
+  - id: ad-liuji-first-disciple-mana
+    definition_id: mana
+    current: 1540
+quantities: []
+ratings:
+  - id: ad-liuji-first-disciple-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: ad-liuji-first-disciple-force
+    definition_id: force
+    value: 7
+  - id: ad-liuji-first-disciple-craft
+    definition_id: craft
+    value: 7
+  - id: ad-liuji-first-disciple-perception
+    definition_id: perception
+    value: 7
+  - id: ad-liuji-first-disciple-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: ad-liuji-first-disciple
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 未具名的长期合体弟子，数万年依靠师门资源修行，亦面对候选化身的束缚。
+      voice: 对师父恭敬，谈自己的修行安排却很清楚，私下会说一句活得久也要有自己的日子。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取独立洞府的使用权与自己的经营收益，认真衡量师命条件。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 六极大弟子
+        description: 未具名的长期合体弟子，数万年依靠师门资源修行，亦面对候选化身的束缚。
+        status: observed
+      - id: location
+        name: 六极宫
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-liuji-first-disciple-private-stock
+        name: 六极大弟子的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-canon-liu-ji
+        name: 六极
+        description: 真实师徒，功法有后手，弟子仍有自己的欲望与选择。
+        status: observed
+      - id: known-ad-first-disciple-deed
+        name: 大弟子洞府议案
+        description: 请划一处既有修行院供独立用度，每30共同日向师门交20魔石，可自营剩余产出；目前仍是请求，不能当已获产权。
+        status: observed
+      - id: known-ad-disciple-court
+        name: 六极宫外修行院
+        description: 请求独立使用的真实小院，不认为已是自己资产。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体魔功、洞府经营和师门传承；功法留有六极的控制后手。
+        description: 合体魔功、洞府经营和师门传承；功法留有六极的控制后手。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-liuji-first-disciple
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-liuji-palace
+      - local_entity_id: known-ad-liuji-first-disciple-private-stock
+        canonical_entity_ids:
+          - ad-liuji-first-disciple-private-stock
+      - local_entity_id: known-canon-liu-ji
+        canonical_entity_ids:
+          - canon-liu-ji
+      - local_entity_id: known-ad-first-disciple-deed
+        canonical_entity_ids:
+          - ad-first-disciple-deed
+      - local_entity_id: known-ad-disciple-court
+        canonical_entity_ids:
+          - ad-disciple-court

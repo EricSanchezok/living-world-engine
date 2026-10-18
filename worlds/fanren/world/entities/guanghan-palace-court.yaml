@@ -1,0 +1,99 @@
+id: guanghan-palace-court
+kind: location
+name: 紫殿广场
+description: 主殿前广场有距离幻阵，直线目测会误判通路。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-palace-court-route-guanghan-stairway
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-stairway
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-palace-court-condition-guanghan-stairway
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-palace-court-route-guanghan-side-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-side-hall
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-palace-court-condition-guanghan-side-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-palace-court-route-guanghan-east-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-east-hall
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-palace-court-condition-guanghan-east-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-palace-court-route-guanghan-rear-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-rear-hall
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-palace-court-condition-guanghan-rear-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-palace-court-route-guanghan-purple-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-purple-palace
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-palace-court-condition-guanghan-purple-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际解决主殿门的强禁制与紫雷；不因侧殿开启就视主殿已开。
+    description: 须实际解决主殿门的强禁制与紫雷；不因侧殿开启就视主殿已开。
+    access:
+      kind: public
+  - id: guanghan-palace-court-illusion
+    predicate: illusion
+    value:
+      kind: text
+      value: 视觉距离与真实距离错位，灵目、阵理或足够力量可尝试破解；普通看清场景不表示看穿。
+    description: 视觉距离与真实距离错位，灵目、阵理或足够力量可尝试破解；普通看清场景不表示看穿。
+    access:
+      kind: discoverable
+      condition: 反复行走、测距或使用针对性的破幻能力。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

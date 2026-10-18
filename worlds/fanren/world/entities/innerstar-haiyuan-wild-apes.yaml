@@ -1,0 +1,19 @@
+id: innerstar-haiyuan-wild-apes
+kind: creature-group
+name: 近岸野生海猿
+description: 三头未被收服的海猿，会潜水捕鱼和低阶水箭；可逃跑或反抗。
+placement: innerstar-haiyuan-coast
+facts:
+  - id: innerstar-haiyuan-wild-apes-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 3
+    description: 当前三头，捕捉、迁离、死亡会改变数量。
+    access:
+      kind: discoverable
+      condition: 在近岸实际看清并清点海猿，不能从传闻获知当前总数。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

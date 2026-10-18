@@ -1,0 +1,24 @@
+id: tianyuan-guard-maintenance-fund
+kind: container
+name: 守卫维护预算
+description: 本轮维护款与材料，已获准的任务才能支用。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-guard-maintenance-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 200
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: grain
+    amount: 60
+ratings: []
+shared_activity_resources: []

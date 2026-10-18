@@ -1,0 +1,272 @@
+id: thunder-apprentice
+kind: person
+name: 岑音
+description: 青族筑基修士，已做过两件小样，希望决定自己今后的手艺。
+placement: thunder-public-debate
+facts:
+  - id: thunder-apprentice-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - thunder-apprentice
+  - id: thunder-apprentice-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基修行、基础机关制作与细纹描绘。
+    description: 筑基修行、基础机关制作与细纹描绘。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-apprentice
+  - id: thunder-apprentice-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    description: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-apprentice
+  - id: thunder-apprentice-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-qing-people
+    description: affiliation
+    access:
+      kind: public
+  - id: thunder-apprentice-sibling-thunder-apprentice-brother
+    predicate: sibling
+    value:
+      kind: entity
+      entityId: thunder-apprentice-brother
+    description: sibling
+    access:
+      kind: private
+  - id: thunder-apprentice-considers-teacher-thunder-wangu-teacher
+    predicate: considers-teacher
+    value:
+      kind: entity
+      entityId: thunder-wangu-teacher
+    description: considers-teacher
+    access:
+      kind: private
+  - id: thunder-apprentice-considers-teacher-thunder-jing-teacher
+    predicate: considers-teacher
+    value:
+      kind: entity
+      entityId: thunder-jing-teacher
+    description: considers-teacher
+    access:
+      kind: private
+meters:
+  - id: thunder-apprentice-health
+    definition_id: health
+    current: 100
+  - id: thunder-apprentice-mana
+    definition_id: mana
+    current: 440
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: thunder-apprentice-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: thunder-apprentice-force
+    definition_id: force
+    value: 2
+  - id: thunder-apprentice-craft
+    definition_id: craft
+    value: 2
+  - id: thunder-apprentice-perception
+    definition_id: perception
+    value: 2
+  - id: thunder-apprentice-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: thunder-apprentice
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 青族筑基修士，已做过两件小样，希望决定自己今后的手艺。
+      voice: 说话认真却会因兴奋抢话，谈自己的作品时眼睛发亮。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 亲自比较两家试学条件，找能表达自己想法的道路。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 岑音
+        description: 青族筑基修士，已做过两件小样，希望决定自己今后的手艺。
+        status: observed
+      - id: location
+        name: 问艺台
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-thunder-qing-people
+        name: 青族
+        description: 自己所属的族群或公务机构。
+        status: observed
+      - id: known-thunder-apprentice-brother
+        name: 岑桥
+        description: 一起长大的兄妹，兄长知道妹妹正在择师。
+        status: observed
+      - id: known-thunder-wangu-teacher
+        name: 许渐
+        description: 已做过一次试作，尚未拜师或签约。
+        status: observed
+      - id: known-thunder-jing-teacher
+        name: 练霜
+        description: 已就微构手艺交谈，尚未拜师或签约。
+        status: observed
+      - id: known-thunder-debate-host
+        name: 许衡
+        description: 曾见面讨论工艺，各有不同偏好。
+        status: observed
+      - id: known-thunder-apprentice-personal-kit
+        name: 岑音的私用行囊
+        description: 私人修炼和生活用品，机构资源另行保管。
+        status: observed
+      - id: known-thunder-wangu-study-offer
+        name: 岑音的万古试学邀书
+        description: 收到并读过的真实邀请，条款可比较。
+        status: observed
+      - id: known-thunder-jing-study-offer
+        name: 岑音的晶族试学邀书
+        description: 收到并读过的真实邀请，条款可比较。
+        status: observed
+      - id: known-thunder-apprentice-durable
+        name: 岑音的耐用木偶
+        description: 以厚构件支撑的搬运木偶，能搬两份材料但步态粗拙。
+        status: observed
+      - id: known-thunder-apprentice-fine
+        name: 岑音的细纹机关鸟
+        description: 微构机关鸟，可短途带一张纸，却不适合暴雨和重物。
+        status: observed
+      - id: known-thunder-apprentice-stones
+        name: 岑音的试作灵石
+        description: 供自己决定如何演示的有限灵石。
+        status: observed
+      - id: known-thunder-debate-notice
+        name: 问艺台本轮论题
+        description: 本轮论题邀请，尚未宣布胜者。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基修行、基础机关制作与细纹描绘。
+        description: 筑基修行、基础机关制作与细纹描绘。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        description: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: choice
+        subjectId: self
+        predicate: choice
+        value:
+          kind: text
+          value: 自己喜欢细纹也想学实用傀儡，尚未选择；愿听建议和实际演示，但不接受被替作决定。
+        description: 自己喜欢细纹也想学实用傀儡，尚未选择；愿听建议和实际演示，但不接受被替作决定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        description: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-apprentice
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-public-debate
+      - local_entity_id: known-thunder-qing-people
+        canonical_entity_ids:
+          - thunder-qing-people
+      - local_entity_id: known-thunder-apprentice-brother
+        canonical_entity_ids:
+          - thunder-apprentice-brother
+      - local_entity_id: known-thunder-wangu-teacher
+        canonical_entity_ids:
+          - thunder-wangu-teacher
+      - local_entity_id: known-thunder-jing-teacher
+        canonical_entity_ids:
+          - thunder-jing-teacher
+      - local_entity_id: known-thunder-debate-host
+        canonical_entity_ids:
+          - thunder-debate-host
+      - local_entity_id: known-thunder-apprentice-personal-kit
+        canonical_entity_ids:
+          - thunder-apprentice-personal-kit
+      - local_entity_id: known-thunder-wangu-study-offer
+        canonical_entity_ids:
+          - thunder-wangu-study-offer
+      - local_entity_id: known-thunder-jing-study-offer
+        canonical_entity_ids:
+          - thunder-jing-study-offer
+      - local_entity_id: known-thunder-apprentice-durable
+        canonical_entity_ids:
+          - thunder-apprentice-durable
+      - local_entity_id: known-thunder-apprentice-fine
+        canonical_entity_ids:
+          - thunder-apprentice-fine
+      - local_entity_id: known-thunder-apprentice-stones
+        canonical_entity_ids:
+          - thunder-apprentice-stones
+      - local_entity_id: known-thunder-debate-notice
+        canonical_entity_ids:
+          - thunder-debate-notice

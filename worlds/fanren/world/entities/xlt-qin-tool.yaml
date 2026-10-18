@@ -1,0 +1,18 @@
+id: xlt-qin-tool
+kind: item
+name: 秦照的石工凿具
+description: 石工凿具可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-qin
+facts:
+  - id: xlt-qin-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-qin
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

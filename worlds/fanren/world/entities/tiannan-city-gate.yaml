@@ -1,0 +1,26 @@
+id: tiannan-city-gate
+kind: location
+name: 阗天城门房
+description: 城阵值守所在，来客能申明身份和用途，值守有真实轮班及公款。
+placement: human-tiantian-city
+facts:
+  - id: tiannan-city-gate-route-human-tiantian-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiantian-city
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-city-gate-travel-human-tiantian-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

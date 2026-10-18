@@ -1,0 +1,74 @@
+id: thunder-tianxu-hall
+kind: location
+name: 天旭阁
+description: 万古对外接洽处，接引、访客与传承申请有各自记录。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-tianxu-hall-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古对外接洽处，接引、访客与传承申请有各自记录。
+    description: 万古对外接洽处，接引、访客与传承申请有各自记录。
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-route-thunder-war-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-war-fort
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-condition-thunder-war-fort
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古的大型堡垒设施，内殿需获得接见，库物不对路人开放。
+    description: 万古的大型堡垒设施，内殿需获得接见，库物不对路人开放。
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-route-thunder-wangu-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wangu-workshop
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-condition-thunder-wangu-workshop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 提供傀儡入门试作的工坊，材料按人登记。
+    description: 提供傀儡入门试作的工坊，材料按人登记。
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-route-guanghan-archive-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-archive-room
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-tianxu-hall-condition-guanghan-archive-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 保管旧次入界记述与研究借阅记录的小室，原件阅览需保管者同意。
+    description: 保管旧次入界记述与研究借阅记录的小室，原件阅览需保管者同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

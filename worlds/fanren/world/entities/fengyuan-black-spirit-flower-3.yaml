@@ -1,0 +1,18 @@
+id: fengyuan-black-spirit-flower-3
+kind: item
+name: 成熟黑灵花3
+description: 一朵真实成熟的黑灵花；当前只有这三朵可采，生长周期不会随玩家进出而刷新。
+placement: fengyuan-black-spirit-tree
+facts:
+  - id: fengyuan-black-spirit-flower-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

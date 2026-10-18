@@ -1,0 +1,18 @@
+id: feiling-lore-map
+kind: item
+name: 入口旧路图
+description: 只画银门到一层边缘的旧图，岔路处有互相冲突的两笔；深层地理没有绘出。
+placement: feiling-library
+facts:
+  - id: feiling-lore-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

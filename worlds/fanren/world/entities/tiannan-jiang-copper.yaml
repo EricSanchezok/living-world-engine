@@ -1,0 +1,20 @@
+id: tiannan-jiang-copper
+kind: item
+name: 余棠待交铜线
+description: 本次运输两份铜线原料，暂归余棠；周筠只能凭收据收存，未承诺买断。
+placement: tiannan-jiang-cart
+facts:
+  - id: tiannan-jiang-copper-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-yu-tang
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

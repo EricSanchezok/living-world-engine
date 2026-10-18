@@ -1,0 +1,50 @@
+id: yue-market-guesthouse
+kind: location
+name: 坊市客栈
+description: 旅人可投宿歇息，取房仍须店家确认空房与费用。
+placement: yue-huangfeng-market
+facts:
+  - id: yue-market-guesthouse-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-market-guesthouse-property-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-guesthouse-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-guesthouse-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-guesthouse-route-yue-market-guest-room-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-guest-room-1
+    description: 沿客栈内走道进出房间；入住须掌柜确认空房并交付钥匙，门锁关闭时需对应钥匙开启。
+    access:
+      kind: public
+  - id: yue-market-guesthouse-route-yue-market-guest-room-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-guest-room-2
+    description: 沿客栈内走道进出房间；入住须掌柜确认空房并交付钥匙，门锁关闭时需对应钥匙开启。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

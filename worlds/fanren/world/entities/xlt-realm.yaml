@@ -1,0 +1,26 @@
+id: xlt-realm
+kind: location
+name: 小灵天
+description: 在虚空中流动的独立微型界面，数族分居，有自己的山川、聚落和远行生活。
+placement: null
+facts:
+  - id: xlt-realm-separate-space
+    predicate: space-boundary
+    value:
+      kind: text
+      value: 此界与灵界不是可步行跨越的相邻地区；只有实际存在并开启的空间通道可供跨界。
+    description: 此界与灵界不是可步行跨越的相邻地区；只有实际存在并开启的空间通道可供跨界。
+    access:
+      kind: private
+  - id: xlt-realm-qi
+    predicate: environment
+    value:
+      kind: text
+      value: 灵气供应低于灵界典型富集区域，具体修炼依地点、资源、功法和身体条件，无统一倍率。
+    description: 灵气供应低于灵界典型富集区域，具体修炼依地点、资源、功法和身体条件，无统一倍率。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: fengyuan-taishou-mountains
+kind: location
+name: 太兽山脉
+description: 山岭间有古兽踪迹和不同深度的巢域，贸然进入可能面对远强于自身的生灵；确切数量与位置需要实查。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-taishou-mountains-route-to-fengyuan-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-one-sky
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-taishou-mountains-route-conditions-fengyuan-one-sky
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    description: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

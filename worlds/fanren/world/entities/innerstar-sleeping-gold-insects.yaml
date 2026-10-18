@@ -1,0 +1,43 @@
+id: innerstar-sleeping-gold-insects
+kind: creature-group
+name: 沉眠的噬金虫幼虫群
+description: 地层深处沉眠的银色幼虫，尚未被人收服。
+placement: innerstar-deep-soil
+facts:
+  - id: innerstar-sleeping-gold-insects-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 350
+    description: 当前群体350只，分离、伤亡或繁殖必须相应改变真实数量。
+    access:
+      kind: private
+  - id: innerstar-sleeping-gold-insects-dormancy
+    predicate: dormancy
+    value:
+      kind: text
+      value: 长期假死沉眠，普通地动和海潮不足以唤醒；附近实际聚集奇虫的持续气味可能触发进食苏醒，仍须判断传递距离与血玉蜘蛛等天敌。
+    description: 当前沉眠，尚无养虫气味触发。
+    access:
+      kind: private
+  - id: innerstar-sleeping-gold-insects-unowned
+    predicate: bond-status
+    value:
+      kind: text
+      value: 野生，未认主。
+    description: 尚未被人收服。
+    access:
+      kind: private
+  - id: innerstar-sleeping-gold-insects-material-limits
+    predicate: material-limits
+    value:
+      kind: text
+      value: 银色幼虫能吞金属、灵气与适当灵虫，玉木可困；蛛虫互克仍须比较成熟程度、等级和真实攻击，不能保证吞尽任何敌手。
+    description: 银色幼虫能吞金属、灵气与适当灵虫，玉木可困；蛛虫互克仍须比较成熟程度、等级和真实攻击，不能保证吞尽任何敌手。
+    access:
+      kind: discoverable
+      condition: 实际研究或试验幼虫的摄食、束缚或交战反应，只揭示当次足以观察的性质。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

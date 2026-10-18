@@ -1,0 +1,18 @@
+id: tianyuan-yitian-spent
+kind: item
+name: 耗尽护腕
+description: 内芯耗尽，只有外壳可作教学对照；补壳不能恢复已经没有的灵力核心。
+placement: tianyuan-yitian-crafter
+facts:
+  - id: tianyuan-yitian-spent-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-crafter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,51 @@
+id: dv-pool-cave
+kind: location
+name: 碧潭钟乳洞
+description: 钟乳石垂于顶壁，三十余丈洞窟中央是深碧潭，水下古门被幻术遮蔽。
+placement: human-devil-valley
+facts:
+  - id: dv-pool-cave-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-pool-cave-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 内谷山路到钟乳洞，须安全路径与定位；深潭不能因听过门名就知所在。
+    description: 内谷山路到钟乳洞，须安全路径与定位；深潭不能因听过门名就知所在。
+    access:
+      kind: public
+  - id: dv-pool-cave-route-dv-seal-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-seal-hall
+    description: route-to
+    access:
+      kind: public
+  - id: dv-pool-cave-condition-dv-seal-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 先安全潜至潭底并识破幻术，再解除血咒之门；古骸精元是已知可行方法之一，任意骨灰无效。
+    description: 先安全潜至潭底并识破幻术，再解除血咒之门；古骸精元是已知可行方法之一，任意骨灰无效。
+    access:
+      kind: public
+  - id: dv-pool-cave-depth
+    predicate: water-depth
+    value:
+      kind: text
+      value: 碧潭深数百丈；潜入二三百丈仍不到底，继续百余丈才到青石潭底。没有常开干燥通路。
+    description: 碧潭深数百丈；潜入二三百丈仍不到底，继续百余丈才到青石潭底。没有常开干燥通路。
+    access:
+      kind: discoverable
+      condition: 以实际潜行、测深或可靠探查确认潭底，不能仅凭岸上望一眼得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

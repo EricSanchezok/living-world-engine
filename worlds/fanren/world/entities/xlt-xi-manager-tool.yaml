@@ -1,0 +1,18 @@
+id: xlt-xi-manager-tool
+kind: item
+name: 弦汐的器物借还簿
+description: 器物借还簿可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-xi-manager
+facts:
+  - id: xlt-xi-manager-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-xi-manager
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

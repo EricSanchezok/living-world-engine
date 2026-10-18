@@ -1,0 +1,74 @@
+id: yue-mo-mansion
+kind: location
+name: 嘉元墨府
+description: 墨居仁离家后妻女仍居住的宅院，内外院与会务书房相隔。
+placement: yue-jiayuan
+facts:
+  - id: yue-mo-mansion-route-yue-jiayuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-travel-yue-jiayuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-route-yue-mo-inner-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-inner-court
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-travel-yue-mo-inner-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-route-yue-mo-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-office
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-travel-yue-mo-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-route-yue-mo-practice-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-practice-court
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-mansion-travel-yue-mo-practice-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-qu-tool
+kind: item
+name: 曲宁的配药匣
+description: 配药匣可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-qu
+facts:
+  - id: xlt-qu-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-qu
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

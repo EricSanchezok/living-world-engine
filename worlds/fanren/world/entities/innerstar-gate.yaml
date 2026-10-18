@@ -1,0 +1,34 @@
+id: innerstar-gate
+kind: location
+name: 天星城东门
+description: 登记身份环与来客资格的入口。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-gate-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-gate-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 登记身份环与来客资格的入口。
+    description: 登记身份环与来客资格的入口。
+    access:
+      kind: public
+  - id: innerstar-gate-entry-rule
+    predicate: entry-rule
+    value:
+      kind: text
+      value: 一般修士按身份环核验；结丹者可申请免入城长居费。城门登记不授予洞府、内宫入口或卫队指挥权。
+    description: 一般修士按身份环核验；结丹者可申请免入城长居费。城门登记不授予洞府、内宫入口或卫队指挥权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

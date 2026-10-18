@@ -1,0 +1,18 @@
+id: innerstar-family-letter
+kind: item
+name: 余泊给家里的纸条
+description: 写着若因风浪延后开船便回家吃饭，尚未交给陶芸。
+placement: innerstar-sailor
+facts:
+  - id: innerstar-family-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-sailor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

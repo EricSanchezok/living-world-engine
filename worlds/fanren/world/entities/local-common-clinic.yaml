@@ -1,0 +1,18 @@
+id: local-common-clinic
+kind: location
+name: 门内常用医舍
+description: 普通弟子求诊与处理外伤的医舍，三位大夫在此轮值。
+placement: caixia-mountain
+facts:
+  - id: local-common-clinic-route-qixuan-kitchen
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-kitchen
+    description: 堂院普通道路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

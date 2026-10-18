@@ -1,0 +1,26 @@
+id: global-fu-tradition-book
+kind: item
+name: 符家金针传习册
+description: 由医舍保管的家传术册，有基础篇和封存秘篇。
+placement: global-fu-clinic
+facts:
+  - id: global-fu-tradition-book-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-fu-family
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-fu-tradition-book-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。
+    description: 基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

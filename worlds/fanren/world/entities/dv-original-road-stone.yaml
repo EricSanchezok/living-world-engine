@@ -1,0 +1,18 @@
+id: dv-original-road-stone
+kind: item
+name: 问山旧路刻片
+description: 一块有旧地形刻纹的石片；只记山口外围，无法标出谷中宝库。
+placement: dv-tracing-room
+facts:
+  - id: dv-original-road-stone-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-map-owner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

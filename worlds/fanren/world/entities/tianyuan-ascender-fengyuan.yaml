@@ -1,0 +1,198 @@
+id: tianyuan-ascender-fengyuan
+kind: person
+name: 冯原
+description: 从另一处人界飞升不久的化神修士，行事谨慎，正在了解天渊城的生活。
+placement: spirit-feiling-reception
+facts:
+  - id: tianyuan-ascender-fengyuan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-ascender-fengyuan
+  - id: tianyuan-ascender-fengyuan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神剑诀、护身法与神识检视，尚未熟悉本地制度。
+    description: 化神剑诀、护身法与神识检视，尚未熟悉本地制度。
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-ascender-fengyuan
+  - id: tianyuan-ascender-fengyuan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-ascender-fengyuan
+  - id: tianyuan-ascender-fengyuan-ascender-residue
+    predicate: ascender-residue
+    value:
+      kind: text
+      value: 确有异界气息，未开始连续灭尘丹疗程。
+    description: 确有异界气息，未开始连续灭尘丹疗程。
+    access:
+      kind: discoverable
+      condition: 经当事人同意，由懂接引诊察的修士实际检测。
+meters:
+  - id: tianyuan-ascender-fengyuan-health
+    definition_id: health
+    current: 100
+  - id: tianyuan-ascender-fengyuan-mana
+    definition_id: mana
+    current: 1100
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: tianyuan-ascender-fengyuan-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: tianyuan-ascender-fengyuan-force
+    definition_id: force
+    value: 5
+  - id: tianyuan-ascender-fengyuan-craft
+    definition_id: craft
+    value: 3
+  - id: tianyuan-ascender-fengyuan-perception
+    definition_id: perception
+    value: 5
+  - id: tianyuan-ascender-fengyuan-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: tianyuan-ascender-fengyuan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 从另一处人界飞升不久的化神修士，行事谨慎，正在了解天渊城的生活。
+      voice: 对灵界新事物有压不住的好奇，仍保持多年修行者的自尊，遇疑问愿意坦然请教。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核实灭尘丹需求，找可承担的城中职务。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 冯原
+        description: 从另一处人界飞升不久的化神修士，行事谨慎，正在了解天渊城的生活。
+        status: observed
+      - id: location
+        name: 飞灵殿接引室
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-tianyuan-dust-physician
+        name: 周砚丹
+        description: 负责解释领药条件的医师。
+        status: observed
+      - id: review-tianyuan-guest-key
+        name: 东廊客舍现用钥牌
+        description: 已领到的客舍钥牌，知道可先安顿和休息。
+        status: observed
+      - id: review-tianyuan-guest-quarter
+        name: 飞灵殿东廊客舍
+        description: 为自己临时安排的东廊客舍，仍可去接引室商议事务。
+        status: observed
+      - id: review-tianyuan-lecture-invitation
+        name: 冯原本期问修名帖
+        description: 自己可补充疑问的申请，知道仍待确认，不以为已经获得所有功法。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神剑诀、护身法与神识检视，尚未熟悉本地制度。
+        description: 化神剑诀、护身法与神识检视，尚未熟悉本地制度。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: arrival-history
+        subjectId: self
+        predicate: arrival-history
+        value:
+          kind: text
+          value: 自己从另一界飞升，尚未服过灭尘丹；希望听清代价再接受职务。
+        description: 自己从另一界飞升，尚未服过灭尘丹；希望听清代价再接受职务。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 记得入场时此地已入夜。
+        description: 开篇时的夜色记忆。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - tianyuan-ascender-fengyuan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit-feiling-reception
+      - local_entity_id: known-tianyuan-dust-physician
+        canonical_entity_ids:
+          - tianyuan-dust-physician
+      - local_entity_id: review-tianyuan-guest-key
+        canonical_entity_ids:
+          - tianyuan-guest-key
+      - local_entity_id: review-tianyuan-guest-quarter
+        canonical_entity_ids:
+          - tianyuan-guest-quarter
+      - local_entity_id: review-tianyuan-lecture-invitation
+        canonical_entity_ids:
+          - tianyuan-lecture-invitation

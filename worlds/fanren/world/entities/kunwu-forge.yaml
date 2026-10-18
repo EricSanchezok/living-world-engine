@@ -1,0 +1,58 @@
+id: kunwu-forge
+kind: location
+name: 铸灵堂
+description: 厚白光屏会弥合，旧居与材料库多已撤空。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-forge-route-kunwu-forge-storage
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-forge-storage
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-forge-condition-kunwu-forge-storage
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 通过主屏障后可检查旧库，箱中并无材料。
+    description: 通过主屏障后可检查旧库，箱中并无材料。
+    access:
+      kind: public
+  - id: kunwu-forge-route-kunwu-hualing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-hualing
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-forge-condition-kunwu-hualing
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地火温度与炼鼎禁制各自存在。
+    description: 地火温度与炼鼎禁制各自存在。
+    access:
+      kind: public
+  - id: kunwu-forge-route-kunwu-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-square
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-forge-condition-kunwu-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

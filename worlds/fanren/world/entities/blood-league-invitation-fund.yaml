@@ -1,0 +1,20 @@
+id: blood-league-invitation-fund
+kind: container
+name: 旧谱核验预算
+description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+placement: blood-league-headquarters
+facts:
+  - id: blood-league-invitation-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 10
+ratings: []
+shared_activity_resources: []

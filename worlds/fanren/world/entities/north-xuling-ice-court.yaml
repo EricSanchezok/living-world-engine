@@ -1,0 +1,42 @@
+id: north-xuling-ice-court
+kind: location
+name: 第一殿冰雕庭院
+description: 有古炼冰兽雕像的庭院，未获许可和控制知识的通行可能触发守卫。
+placement: north-xuling-hall-one
+facts:
+  - id: north-xuling-ice-court-route-north-xuling-hall-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-hall-one
+    description: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    access:
+      kind: public
+  - id: north-xuling-ice-court-travel-north-xuling-hall-one
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    description: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    access:
+      kind: public
+  - id: north-xuling-ice-court-route-north-xuling-inner-array-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-inner-array-room
+    description: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    access:
+      kind: public
+  - id: north-xuling-ice-court-travel-north-xuling-inner-array-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    description: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

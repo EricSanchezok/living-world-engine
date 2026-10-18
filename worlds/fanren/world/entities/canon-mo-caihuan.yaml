@@ -1,0 +1,248 @@
+id: canon-mo-caihuan
+kind: person
+name: 墨彩环
+description: 严氏与墨居仁所生的八岁女孩，好奇活泼，希望有人认真回答自己的问题。
+placement: yue-mo-inner-court
+facts:
+  - id: canon-mo-caihuan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-caihuan
+  - id: canon-mo-caihuan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 儿童识字与日常生活能力，没有法力。
+    description: 儿童识字与日常生活能力，没有法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-caihuan
+  - id: canon-mo-caihuan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根
+    description: 无灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-mo-caihuan-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yue-mo-household
+    description: 墨府中的家人或弟子，有实际生活关系。
+    access:
+      kind: public
+  - id: canon-mo-caihuan-mo-family
+    predicate: child-of
+    value:
+      kind: entity
+      entityId: canon-mo-juren
+    description: 父亲墨居仁。离家多年，近况须实际打听。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-caihuan
+        - canon-mo-juren
+meters:
+  - id: canon-mo-caihuan-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 12
+ratings:
+  - id: canon-mo-caihuan-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-mo-caihuan-force
+    definition_id: force
+    value: 0
+  - id: canon-mo-caihuan-craft
+    definition_id: craft
+    value: 1
+  - id: canon-mo-caihuan-perception
+    definition_id: perception
+    value: 0
+  - id: canon-mo-caihuan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-mo-caihuan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 严氏与墨居仁所生的八岁女孩，好奇活泼，希望有人认真回答自己的问题。
+      voice: 说话直，想到什么就问，熟人面前很有精神。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 问娘亲为何爹爹还没有回家，然后和姐妹一起用饭。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 墨彩环
+        description: 严氏与墨居仁所生的八岁女孩，好奇活泼，希望有人认真回答自己的问题。
+        status: observed
+      - id: location
+        name: 墨府内院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-mo-caihuan-pouch
+        name: 墨彩环的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-mo-household
+        name: 墨家家产共同体
+        description: 墨府中的家人或弟子，有实际生活关系。
+        status: observed
+      - id: known-canon-mo-li-wife
+        name: 墨府李氏
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-mo-liu-wife
+        name: 墨府刘氏
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-mo-yan-wife
+        name: 墨府严氏
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-mo-wang-wife
+        name: 墨府王氏
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-mo-yuzhu
+        name: 墨玉珠
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-mo-fengwu
+        name: 墨凤舞
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-yan-ge
+        name: 燕歌
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: known-canon-zhao-kun
+        name: 赵坤
+        description: 共同生活的墨府家人或弟子，知道对方目前年岁和日常习惯。
+        status: observed
+      - id: yue-known-mo-juren
+        name: 墨居仁
+        description: 离家外出的家长、师父或义兄。长久没有见面，当前行止不明，盼有可信消息。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 儿童识字与日常生活能力，没有法力。
+        description: 儿童识字与日常生活能力，没有法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 问娘亲为何爹爹还没有回家，然后和姐妹一起用饭。
+        description: 问娘亲为何爹爹还没有回家，然后和姐妹一起用饭。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        description: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-mo-caihuan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-mo-inner-court
+      - local_entity_id: known-canon-mo-caihuan-pouch
+        canonical_entity_ids:
+          - canon-mo-caihuan-pouch
+      - local_entity_id: known-yue-mo-household
+        canonical_entity_ids:
+          - yue-mo-household
+      - local_entity_id: known-canon-mo-li-wife
+        canonical_entity_ids:
+          - canon-mo-li-wife
+      - local_entity_id: known-canon-mo-liu-wife
+        canonical_entity_ids:
+          - canon-mo-liu-wife
+      - local_entity_id: known-canon-mo-yan-wife
+        canonical_entity_ids:
+          - canon-mo-yan-wife
+      - local_entity_id: known-canon-mo-wang-wife
+        canonical_entity_ids:
+          - canon-mo-wang-wife
+      - local_entity_id: known-canon-mo-yuzhu
+        canonical_entity_ids:
+          - canon-mo-yuzhu
+      - local_entity_id: known-canon-mo-fengwu
+        canonical_entity_ids:
+          - canon-mo-fengwu
+      - local_entity_id: known-canon-yan-ge
+        canonical_entity_ids:
+          - canon-yan-ge
+      - local_entity_id: known-canon-zhao-kun
+        canonical_entity_ids:
+          - canon-zhao-kun
+      - local_entity_id: yue-known-mo-juren
+        canonical_entity_ids:
+          - canon-mo-juren

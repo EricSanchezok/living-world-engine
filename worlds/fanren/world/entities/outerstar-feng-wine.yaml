@@ -1,0 +1,34 @@
+id: outerstar-feng-wine
+kind: item
+name: 风希的碧焰酒
+description: 以前用已耗去妖丹和百余年酿成的三小杯，当前没有掺混沌魔气。
+placement: canon-feng-xi
+facts:
+  - id: outerstar-feng-wine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-feng-xi
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-feng-wine-remaining-cups
+    predicate: remaining-cups
+    value:
+      kind: number
+      value: 3
+    description: remaining-cups
+    access:
+      kind: private
+  - id: outerstar-feng-wine-composition
+    predicate: composition
+    value:
+      kind: text
+      value: 当前这份酒没有那次专门加入的混沌魔气，饮用须依据体质与实际效用判断。
+    description: 当前这份酒没有那次专门加入的混沌魔气，饮用须依据体质与实际效用判断。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

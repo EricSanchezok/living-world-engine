@@ -1,0 +1,34 @@
+id: seas-jia-entry-seal
+kind: item
+name: 贾长老进入符
+description: 一枚刻有塔内阵纹的符片，由贾姓长老持有；只能辅助穿过所登记的拍卖洞天禁制。
+placement: canon-helian-jia
+facts:
+  - id: seas-jia-entry-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-jia-entry-seal-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-helian-jia
+    description: custodian
+    access:
+      kind: private
+  - id: seas-jia-entry-seal-access-boundary
+    predicate: access-boundary
+    value:
+      kind: text
+      value: 此符只匹配本处洞天，盗取不会取得长老身份；没有已知复制手艺，持有者仍要避开损坏、反制和不匹配的禁制。
+    description: 此符只匹配本处洞天，盗取不会取得长老身份；没有已知复制手艺，持有者仍要避开损坏、反制和不匹配的禁制。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: innerstar-harbor-tide-notice
+kind: item
+name: 港口潮汛记牌
+description: 记牌是今日观测记录，会随新记录更新，不是必然天气预言。
+placement: innerstar-harbor
+facts:
+  - id: innerstar-harbor-tide-notice-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-harbor-tide-notice-recent-witness
+    predicate: recent-witness
+    value:
+      kind: text
+      value: 傍晚沿岸信使见西南浪涌比昨日大，近礁有一头带伤海兽；无法据此断言所有航路必遭袭。
+    description: 傍晚沿岸信使见西南浪涌比昨日大，近礁有一头带伤海兽；无法据此断言所有航路必遭袭。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

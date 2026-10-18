@@ -1,0 +1,18 @@
+id: feiling-wind-log
+kind: item
+name: 寒风轮值原始记录
+description: 两组记录寒风抵达时间不同，其中一组沿用了偏快砂漏，尚无据证明有人伪造。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-wind-log-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

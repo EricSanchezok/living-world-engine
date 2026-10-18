@@ -1,0 +1,35 @@
+id: thunder-greenlight-domain
+kind: location
+name: 绿光周边诸小族地域
+description: 多小族商路交汇的区域，公开驿路之外是荒野。
+placement: thunder-continent
+facts:
+  - id: thunder-greenlight-domain-route-seas-suyin-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-suyin-domain
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-domain-condition-seas-suyin-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有获得本地线索并越过隐蔽路径才可到达，普通地图仅知大概区域。
+    description: 只有获得本地线索并越过隐蔽路径才可到达，普通地图仅知大概区域。
+    access:
+      kind: public
+  - id: thunder-greenlight-domain-root-detail-molv-concealment
+    predicate: root-detail-molv-concealment
+    value:
+      kind: text
+      value: 墨绿族隐匿法须修习，施展时移动飞遁受限，可能被强神识或特殊探察识破；墨绿族与木族不同。
+    description: 墨绿族隐匿法须修习，施展时移动飞遁受限，可能被强神识或特殊探察识破；墨绿族与木族不同。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

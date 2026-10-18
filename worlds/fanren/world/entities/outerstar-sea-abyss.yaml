@@ -1,0 +1,42 @@
+id: outerstar-sea-abyss
+kind: location
+name: 奇渊海渊
+description: 大片海床向深处陡落，已知海图只标出部分外围，不知最深处。
+placement: human-outer-star-sea
+facts:
+  - id: outerstar-sea-abyss-route-human-qiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-qiyuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-sea-abyss-condition-human-qiyuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从奇渊岛向南远航至海渊边缘，按结丹修士全速约半月的路程估计；实际耗时随个人遁速、补给和海况改变。
+    description: 从奇渊岛向南远航至海渊边缘，按结丹修士全速约半月的路程估计；实际耗时随个人遁速、补给和海况改变。
+    access:
+      kind: public
+  - id: outerstar-sea-abyss-route-human-wanzhang-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanzhang-sea
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-sea-abyss-condition-human-wanzhang-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

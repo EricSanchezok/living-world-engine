@@ -1,0 +1,18 @@
+id: blood-student-mirror
+kind: item
+name: 灯见试演幻镜
+description: 将自己记住的旅途组合为可退出幻景的练习法器，不产生真实道路或别人记忆。
+placement: blood-huanxin-student
+facts:
+  - id: blood-student-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-huanxin-student
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

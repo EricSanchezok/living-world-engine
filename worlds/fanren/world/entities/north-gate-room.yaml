@@ -1,0 +1,26 @@
+id: north-gate-room
+kind: location
+name: 冰城门房
+description: 值守房，存放来客记录和当值物资。
+placement: north-ice-city
+facts:
+  - id: north-gate-room-route-north-ice-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-ice-city
+    description: 门房只是外层值守，不等于进入秘境。
+    access:
+      kind: public
+  - id: north-gate-room-travel-north-ice-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门房只是外层值守，不等于进入秘境。
+    description: 门房只是外层值守，不等于进入秘境。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

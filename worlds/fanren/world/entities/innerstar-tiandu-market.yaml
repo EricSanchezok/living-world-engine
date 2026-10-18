@@ -1,0 +1,82 @@
+id: innerstar-tiandu-market
+kind: location
+name: 天都街
+description: 护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。
+placement: human-kuixing-city
+facts:
+  - id: innerstar-tiandu-market-route-human-kuixing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-condition-human-kuixing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。
+    description: 护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-route-innerstar-baishui-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-baishui-hall
+    description: 通往白水楼
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-travel-innerstar-baishui-hall
+    predicate: travel-innerstar-baishui-hall
+    value:
+      kind: text
+      value: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    description: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-route-innerstar-shanhai-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-shanhai-hall
+    description: 通往山海阁
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-travel-innerstar-shanhai-hall
+    predicate: travel-innerstar-shanhai-hall
+    value:
+      kind: text
+      value: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    description: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-route-innerstar-yuhuan-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-yuhuan-house
+    description: 通往玉环居
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-travel-innerstar-yuhuan-house
+    predicate: travel-innerstar-yuhuan-house
+    value:
+      kind: text
+      value: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    description: 沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。
+    access:
+      kind: public
+  - id: innerstar-tiandu-market-district-layout
+    predicate: district-layout
+    value:
+      kind: text
+      value: 这是覆盖魁星城北区的交易城区，白罩内有多条街巷，并非一条狭巷。
+    description: 这是覆盖魁星城北区的交易城区，白罩内有多条街巷，并非一条狭巷。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

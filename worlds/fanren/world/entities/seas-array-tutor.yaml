@@ -1,0 +1,215 @@
+id: seas-array-tutor
+kind: person
+name: 商砚
+description: 商盟合体阵师，爱惜肯反复校对的后辈，也不愿替别人承担所有承诺。
+placement: seas-fengyuan-relay-hall
+facts:
+  - id: seas-array-tutor-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - seas-array-tutor
+  - id: seas-array-tutor-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体阵法、跨洲阵运行与低阶接引符传授。
+    description: 合体阵法、跨洲阵运行与低阶接引符传授。
+    access:
+      kind: agents
+      agentIds:
+        - seas-array-tutor
+  - id: seas-array-tutor-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-array-tutor
+meters:
+  - id: seas-array-tutor-health
+    definition_id: health
+    current: 100
+  - id: seas-array-tutor-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-array-tutor-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: seas-array-tutor-force
+    definition_id: force
+    value: 7
+  - id: seas-array-tutor-craft
+    definition_id: craft
+    value: 7
+  - id: seas-array-tutor-perception
+    definition_id: perception
+    value: 7
+  - id: seas-array-tutor-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: seas-array-tutor
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 商盟合体阵师，爱惜肯反复校对的后辈，也不愿替别人承担所有承诺。
+      voice: 常直接问哪里算错，指出问题时会递笔让对方自己改；对认真作业有耐心。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否收青序做有薪学徒，让她先完成一份实际可测的刻符作品。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 商砚
+        description: 商盟合体阵师，爱惜肯反复校对的后辈，也不愿替别人承担所有承诺。
+        status: observed
+      - id: location
+        name: 风元商盟传送厅
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-array-tutor-private-stock
+        name: 商砚的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-fei-yun
+        name: 飞云仙子
+        description: 已有接引阵工作往来，可就转职试艺具体商议。
+        status: observed
+      - id: known-seas-adult-attendant
+        name: 青序
+        description: 已亲手递过试艺请求，尚未成为正式学徒。
+        status: observed
+      - id: known-seas-apprentice-offer
+        name: 商砚试艺条件
+        description: 自愿刻一低阶接引示意符：需一份刻符材料和两低阶石，实测只显短距方向，不开跨洲门；合格后愿给每本地月20低阶石学徒工钱，尚须本人接受及处理原役务契。
+        status: observed
+      - id: known-seas-qingxu-contract
+        name: 青序役务契据
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-qingxu-request
+        name: 青序转职申请
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-apprentice-fund
+        name: 阵务学徒预算
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-fengyuan-relay-hall
+        name: 风元商盟传送厅
+        description: 自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。
+        status: observed
+      - id: known-seas-fengyuan-array-core
+        name: 商盟风元阵体
+        description: 连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。
+        status: observed
+      - id: known-seas-fengyuan-energy
+        name: 商盟风元公用供能库
+        description: 自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体阵法、跨洲阵运行与低阶接引符传授。
+        description: 合体阵法、跨洲阵运行与低阶接引符传授。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-array-tutor
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-fengyuan-relay-hall
+      - local_entity_id: known-seas-array-tutor-private-stock
+        canonical_entity_ids:
+          - seas-array-tutor-private-stock
+      - local_entity_id: known-canon-fei-yun
+        canonical_entity_ids:
+          - canon-fei-yun
+      - local_entity_id: known-seas-adult-attendant
+        canonical_entity_ids:
+          - seas-adult-attendant
+      - local_entity_id: known-seas-apprentice-offer
+        canonical_entity_ids:
+          - seas-apprentice-offer
+      - local_entity_id: known-seas-qingxu-contract
+        canonical_entity_ids:
+          - seas-qingxu-contract
+      - local_entity_id: known-seas-qingxu-request
+        canonical_entity_ids:
+          - seas-qingxu-request
+      - local_entity_id: known-seas-apprentice-fund
+        canonical_entity_ids:
+          - seas-apprentice-fund
+      - local_entity_id: known-seas-fengyuan-relay-hall
+        canonical_entity_ids:
+          - seas-fengyuan-relay-hall
+      - local_entity_id: known-seas-fengyuan-array-core
+        canonical_entity_ids:
+          - seas-fengyuan-array-core
+      - local_entity_id: known-seas-fengyuan-energy
+        canonical_entity_ids:
+          - seas-fengyuan-energy

@@ -1,0 +1,26 @@
+id: feiling-muqing-root-tree
+kind: item
+name: 木青本命灵树
+description: 洞深处扎根的灵树，是木青妖身根本，树体损伤会牵连其修炼与化身。
+placement: feiling-mujing-cave
+facts:
+  - id: feiling-muqing-root-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-muqing-root-tree-same-subject-as
+    predicate: same-subject-as
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: same-subject-as
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

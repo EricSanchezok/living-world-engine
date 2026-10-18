@@ -1,0 +1,174 @@
+id: ad-route-scholar
+kind: person
+name: 折纹
+description: 合体阵纹研究者，持已核的外岛观测函，不知池中秘密。
+placement: ad-moyuan-port
+facts:
+  - id: ad-route-scholar-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - ad-route-scholar
+  - id: ad-route-scholar-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体阵理、海上防护和雷纹记录。
+    description: 合体阵理、海上防护和雷纹记录。
+    access:
+      kind: agents
+      agentIds:
+        - ad-route-scholar
+  - id: ad-route-scholar-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-route-scholar
+meters:
+  - id: ad-route-scholar-health
+    definition_id: health
+    current: 100
+  - id: ad-route-scholar-mana
+    definition_id: mana
+    current: 1540
+quantities: []
+ratings:
+  - id: ad-route-scholar-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: ad-route-scholar-force
+    definition_id: force
+    value: 7
+  - id: ad-route-scholar-craft
+    definition_id: craft
+    value: 7
+  - id: ad-route-scholar-perception
+    definition_id: perception
+    value: 7
+  - id: ad-route-scholar-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: ad-route-scholar
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 合体阵纹研究者，持已核的外岛观测函，不知池中秘密。
+      voice: 喜欢把疑问画在空中，愿承认模型可能错；听到禁地会先问可公开的边界。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 找船前往外岛观察雷纹，愿与守岛者约定测量范围。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 折纹
+        description: 合体阵纹研究者，持已核的外岛观测函，不知池中秘密。
+        status: observed
+      - id: location
+        name: 魔源海岸渡口
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-route-scholar-private-stock
+        name: 折纹的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-sea-pilot
+        name: 沐舟
+        description: 已商议短航的船主与研究者，尚未签署所有条款。
+        status: observed
+      - id: known-ad-route-letter
+        name: 无常外岛观测回函
+        description: 允许折纹在20共同日内到外岛申请两共同日雷纹观测；不保证洗灵池入口，不免海行风险，正式范围由到场双方确认。
+        status: observed
+      - id: known-ad-research-budget
+        name: 折纹海行预算
+        description: 用于这次可拒绝的观察行程。
+        status: observed
+      - id: known-canon-wu-chang
+        name: 无常
+        description: 经真实信函确认外岛观测请求，未许诺进入谷底。
+        status: observed
+      - id: known-ad-short-voyage-draft
+        name: 渡口短航议约
+        description: 船主提出的短航条款，尚未支付。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体阵理、海上防护和雷纹记录。
+        description: 合体阵理、海上防护和雷纹记录。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-route-scholar
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-moyuan-port
+      - local_entity_id: known-ad-route-scholar-private-stock
+        canonical_entity_ids:
+          - ad-route-scholar-private-stock
+      - local_entity_id: known-ad-sea-pilot
+        canonical_entity_ids:
+          - ad-sea-pilot
+      - local_entity_id: known-ad-route-letter
+        canonical_entity_ids:
+          - ad-route-letter
+      - local_entity_id: known-ad-research-budget
+        canonical_entity_ids:
+          - ad-research-budget
+      - local_entity_id: known-canon-wu-chang
+        canonical_entity_ids:
+          - canon-wu-chang
+      - local_entity_id: known-ad-short-voyage-draft
+        canonical_entity_ids:
+          - ad-short-voyage-draft

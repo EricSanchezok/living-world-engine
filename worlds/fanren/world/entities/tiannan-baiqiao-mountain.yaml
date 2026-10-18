@@ -1,0 +1,26 @@
+id: tiannan-baiqiao-mountain
+kind: location
+name: 百巧院西脉
+description: 西脉炉室与器坊分布其间，烟道和灵火阵位相连，材料由各主人保管。
+placement: tiannan-yunmeng-mountains
+facts:
+  - id: tiannan-baiqiao-mountain-route-tiannan-yunmeng-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-yunmeng-mountains
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-baiqiao-mountain-travel-tiannan-yunmeng-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

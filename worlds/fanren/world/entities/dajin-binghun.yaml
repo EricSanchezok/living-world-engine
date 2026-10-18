@@ -1,0 +1,26 @@
+id: dajin-binghun
+kind: location
+name: 冰魂谷
+description: 寒气凛冽的隐秘山谷，谷口幻阵遮蔽视线。
+placement: dajin-zhenhuan
+facts:
+  - id: dajin-binghun-route-dajin-zhenhuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-zhenhuan
+    description: 隐秘禁地，知位置仍不等于获准进入。
+    access:
+      kind: public
+  - id: dajin-binghun-travel-dajin-zhenhuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐秘禁地，知位置仍不等于获准进入。
+    description: 隐秘禁地，知位置仍不等于获准进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

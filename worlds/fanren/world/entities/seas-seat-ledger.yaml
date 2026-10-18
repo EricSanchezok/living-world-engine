@@ -1,0 +1,18 @@
+id: seas-seat-ledger
+kind: item
+name: 本轮跨洲运力账
+description: 三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。
+placement: seas-pass-clerk
+facts:
+  - id: seas-seat-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

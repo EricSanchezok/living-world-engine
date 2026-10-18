@@ -1,0 +1,42 @@
+id: human-mulan-steppe
+kind: location
+name: 慕兰／天澜大草原
+description: 从天南南部延向大晋的广阔游牧草原；慕兰称慕兰草原，突兀称天澜草原。北部与南部各有部落活动和巡逻边界。
+placement: human-realm
+facts:
+  - id: human-mulan-steppe-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    access:
+      kind: public
+  - id: human-mulan-steppe-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    description: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    access:
+      kind: public
+  - id: human-mulan-steppe-route-steppe-tuwu-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tuwu-south
+    description: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    access:
+      kind: public
+  - id: human-mulan-steppe-travel-steppe-tuwu-south
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    description: 南侧入口和北部相隔漫长草原；跨区步行、骑乘或飞遁须累计实际路程与补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

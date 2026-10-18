@@ -1,0 +1,29 @@
+id: thunder-island-boat
+kind: item
+name: 蝎尾公用浅海舟
+description: 有短桨和帆，可载四位普通行旅者及少量物资，只适合近岸；潮席受托照管。
+placement: thunder-scorpion-tail-settlement
+facts:
+  - id: thunder-island-boat-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-washi-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-island-boat-use-condition
+    predicate: use-condition
+    value:
+      kind: text
+      value: 下水需舟手或已学操舟者、合适潮位与船体完好；载客四人上限为本舟结构限制，不能凭此横渡至雷鸣。
+    description: 下水需舟手或已学操舟者、合适潮位与船体完好；载客四人上限为本舟结构限制，不能凭此横渡至雷鸣。
+    access:
+      kind: private
+meters:
+  - id: thunder-island-boat-health
+    definition_id: health
+    current: 90
+quantities: []
+ratings: []
+shared_activity_resources: []

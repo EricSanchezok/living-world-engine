@@ -1,0 +1,34 @@
+id: canon-yellow-sand-mochen-banners
+kind: item
+name: 黄沙三十六魔尘幡
+description: 三十六杆构成一套的镇族器物；动用可能损伤与反噬，祖训限制的是部族行为，不使外人永远无法破禁。
+placement: steppe-yellow-sand-store
+facts:
+  - id: canon-yellow-sand-mochen-banners-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: mulan-yellow-sand-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-yellow-sand-mochen-banners-intact-members
+    predicate: intact-components
+    value:
+      kind: number
+      value: 36
+    description: intact-components
+    access:
+      kind: public
+  - id: canon-yellow-sand-mochen-banners-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-sha-jian
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tiannan-panlong-river
+kind: location
+name: 蟠龙江险滩
+description: 元武境内江河险滩，水势与地形使沿岸寻踪不易。
+placement: human-yuanwu
+facts:
+  - id: tiannan-panlong-river-route-human-yuanwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yuanwu
+    description: 由元武官道转入蟠龙江险滩；水势、船载和船工判断决定能否渡过，不能自动安全通航。
+    access:
+      kind: public
+  - id: tiannan-panlong-river-route-tiannan-panlong-ferry
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-panlong-ferry
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

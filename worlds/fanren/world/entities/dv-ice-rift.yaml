@@ -1,0 +1,42 @@
+id: dv-ice-rift
+kind: location
+name: 飞雪冰缝
+description: 冰雪边缘有一条向下延伸的宽裂缝，缝底通内谷，寒光映在冰壁上。
+placement: human-devil-valley
+facts:
+  - id: dv-ice-rift-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-ice-rift-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接近冰缝须应对当前古兽并找到安全下降位置。
+    description: 接近冰缝须应对当前古兽并找到安全下降位置。
+    access:
+      kind: public
+  - id: dv-ice-rift-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-ice-rift-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿冰缝可通内谷，需寒地防护和现地裂缝勘察，没有免费跳过内谷风险。
+    description: 沿冰缝可通内谷，需寒地防护和现地裂缝勘察，没有免费跳过内谷风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: yue-mine-keeper-pouch
+kind: item
+name: 祝砚的日用包
+description: 随身普通衣物、餐具与个人口粮。
+placement: yue-mine-keeper
+facts:
+  - id: yue-mine-keeper-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-mine-keeper
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+ratings: []
+shared_activity_resources: []

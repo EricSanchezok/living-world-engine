@@ -1,0 +1,26 @@
+id: minghe-blue-ghost-group
+kind: group
+name: 雾中厉魄
+description: 八团可变形厉魄藏于蓝雾，普通兵刃难以伤其形体，克魂火焰和法术仍可灭杀。
+placement: minghe-blue-fog
+facts:
+  - id: minghe-blue-ghost-group-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters:
+  - id: minghe-blue-ghost-group-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 8
+ratings:
+  - id: minghe-blue-ghost-group-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

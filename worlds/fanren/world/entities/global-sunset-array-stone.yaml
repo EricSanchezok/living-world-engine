@@ -1,0 +1,26 @@
+id: global-sunset-array-stone
+kind: item
+name: 读数不稳的阵石
+description: 一枚待校验的阵石，表面有细裂。
+placement: global-sunset-watch
+facts:
+  - id: global-sunset-array-stone-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-border
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-sunset-array-stone-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 细裂导致读数不稳，需实查修复或替换，不能只口头宣称完成。
+    description: 细裂导致读数不稳，需实查修复或替换，不能只口头宣称完成。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

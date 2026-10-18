@@ -1,0 +1,28 @@
+id: north-inner-transfer-one
+kind: item
+name: 殿内小厅传送阵
+description: 成对内部传送阵的一端，备有二十枚低阶灵石供能。
+placement: north-xuling-inner-array-room
+facts:
+  - id: north-inner-transfer-one-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: north-inner-transfer-one-paired
+    predicate: transmission-destination
+    value:
+      kind: entity
+      entityId: north-inner-transfer-two
+    description: transmission-destination
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

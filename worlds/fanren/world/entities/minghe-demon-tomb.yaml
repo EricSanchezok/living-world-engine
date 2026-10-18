@@ -1,0 +1,26 @@
+id: minghe-demon-tomb
+kind: location
+name: 魔坟
+description: 古代异界魔物残骸和凝成魔器之地，禁制与污染仍在。
+placement: minghe-space
+facts:
+  - id: minghe-demon-tomb-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-demon-tomb-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 古代异界魔物残骸和凝成魔器之地，禁制与污染仍在。
+    description: 古代异界魔物残骸和凝成魔器之地，禁制与污染仍在。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

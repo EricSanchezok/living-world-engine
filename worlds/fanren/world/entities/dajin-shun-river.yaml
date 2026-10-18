@@ -1,0 +1,50 @@
+id: dajin-shun-river
+kind: location
+name: 舜江
+description: 辽州第二大江；河运需船、季节判断和护送。
+placement: dajin-liaozhou
+facts:
+  - id: dajin-shun-river-route-dajin-liaozhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-liaozhou
+    description: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    access:
+      kind: public
+  - id: dajin-shun-river-travel-dajin-liaozhou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    description: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    access:
+      kind: public
+  - id: dajin-shun-river-route-dajin-river-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-river-wharf
+    description: 靠岸需减速系缆，卸货须实际搬运。
+    access:
+      kind: public
+  - id: dajin-shun-river-travel-dajin-river-wharf
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 靠岸需减速系缆，卸货须实际搬运。
+    description: 靠岸需减速系缆，卸货须实际搬运。
+    access:
+      kind: public
+  - id: steppe-route-dajin-shun-river-steppe-tianshui-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianshui-river
+    description: 沿连通的主河道持续行舟或遁行可入大晋舜江；需真实行程、避开险流和检查。两河相连不代表从任意支汊一步抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

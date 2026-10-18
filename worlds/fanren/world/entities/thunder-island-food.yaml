@@ -1,0 +1,20 @@
+id: thunder-island-food
+kind: container
+name: 蝎尾采集口粮
+description: 十六份准备供一次近岸采集的干粮。
+placement: thunder-scorpion-tail-settlement
+facts:
+  - id: thunder-island-food-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-washi-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-food-ration
+    amount: 16
+ratings: []
+shared_activity_resources: []

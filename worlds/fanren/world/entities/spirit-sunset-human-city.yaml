@@ -1,0 +1,74 @@
+id: spirit-sunset-human-city
+kind: location
+name: 落日城（人族）
+description: 靠近落日之墓的人族城池，炼体士、修士与凡人共同生活，和边界另一端的同名妖城相隔甚远。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-sunset-human-city-route-spirit-inner-caravan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: 靠近落日之墓的人族城池，炼体士、修士与凡人共同生活，和边界另一端的同名妖城相隔甚远。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-route-spirit-sunset-human-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-market
+    description: 供应经核验材料的交易街，普通灵具材料与炼制高阶法宝所需之物不能混同。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-route-spirit-sunset-border
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-border
+    description: 通向广大边界山川的入口，穿越远处森林、湖泊与荒原仍需要漫长行程和真实防护。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-route-spirit-huangliang-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-huangliang-mountain
+    description: 落日城附近的一片山地，洞府周围有禁制，来访者须在外通报。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-cultivator-administration
+    predicate: civil-administration
+    value:
+      kind: text
+      value: 人族修士主持的边界大城；城中凡人、炼体士和修士均可依法生活，不能因是修士城便把凡人排除。
+    description: 人族修士主持的边界大城；城中凡人、炼体士和修士均可依法生活，不能因是修士城便把凡人排除。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-route-demon-sunset-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-sunset-city
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-condition-demon-sunset-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿越落日之墓边界需引路、补给与风险评估，方向相同不意味着近在咫尺。
+    description: 穿越落日之墓边界需引路、补给与风险评估，方向相同不意味着近在咫尺。
+    access:
+      kind: public
+  - id: spirit-sunset-human-city-route-global-jinyu-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-jinyu-court
+    description: 可沿人族陆路前往金玉外院；路程需实际安排，内潭不对未经许可者开放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

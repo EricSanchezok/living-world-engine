@@ -1,0 +1,18 @@
+id: dajin-tianfu-ancestral-chest
+kind: item
+name: 天符门祖传符匣
+description: 古朴木匣封存祖传灵符，依掌门保管制度领取，非对所有来客开放。
+placement: dajin-tianfu-archive
+facts:
+  - id: dajin-tianfu-ancestral-chest-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianfu
+    description: 属于门派传承，掌门职司保管不等于任意个人可售。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

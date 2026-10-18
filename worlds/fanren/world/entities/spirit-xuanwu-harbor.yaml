@@ -1,0 +1,42 @@
+id: spirit-xuanwu-harbor
+kind: location
+name: 玄武城接引港
+description: 来往人群交易、问路和核验通行文书的地方，贵重货物由各自持有人保管。
+placement: spirit-xuanwu-capital
+facts:
+  - id: spirit-xuanwu-harbor-route-spirit-xuanwu-capital
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-capital
+    description: 来往人群交易、问路和核验通行文书的地方，贵重货物由各自持有人保管。
+    access:
+      kind: public
+  - id: spirit-xuanwu-harbor-route-spirit-xuanwu-route-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-route-office
+    description: 须持实际行程票并逐段乘用沿线交通；路线指向远方终点，不构成瞬移。
+    access:
+      kind: public
+  - id: spirit-xuanwu-harbor-route-to-spirit3-xuanwu-stockade
+    predicate: route-to-spirit3-xuanwu-stockade
+    value:
+      kind: entity
+      entityId: spirit3-xuanwu-stockade
+    description: route-to-spirit3-xuanwu-stockade
+    access:
+      kind: private
+  - id: spirit-xuanwu-harbor-route-conditions-spirit3-xuanwu-stockade
+    predicate: route-conditions-spirit3-xuanwu-stockade
+    value:
+      kind: text
+      value: 连接移动海港与岸上溪寨，港位会变；海段须船与引航，陆段沿实地道路并备补给。
+    description: 连接移动海港与岸上溪寨，港位会变；海段须船与引航，陆段沿实地道路并备补给。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

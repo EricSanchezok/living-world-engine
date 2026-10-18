@@ -1,0 +1,34 @@
+id: yue-tianhe-teahouse
+kind: location
+name: 天鹤居
+description: 三层茶楼，客人可坐堂饮茶，安静的楼上座位由店中安排。
+placement: yue-yanling-fort
+facts:
+  - id: yue-tianhe-teahouse-route-yue-yanling-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yanling-fort
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+  - id: yue-tianhe-teahouse-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-tianhe-teahouse-price
+    predicate: service-price
+    value:
+      kind: text
+      value: 当前每壶雪铃茶十文，耗一份茶叶与清水；续泡不用重复消耗新叶，换叶要另取库存。
+    description: 当前每壶雪铃茶十文，耗一份茶叶与清水；续泡不用重复消耗新叶，换叶要另取库存。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

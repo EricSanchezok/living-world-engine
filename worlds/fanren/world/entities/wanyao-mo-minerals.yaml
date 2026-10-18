@@ -1,0 +1,20 @@
+id: wanyao-mo-minerals
+kind: item
+name: 墨荫的矿料
+description: 用于议价的私人矿料，放在修器处不代表已经支付。
+placement: wanyao-workshop
+facts:
+  - id: wanyao-mo-minerals-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanyao-mo-yin
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: dv-candle-fruit-3
+kind: item
+name: 成熟灵烛果3
+description: 当前成熟的灵果，生于湖中植株。
+placement: dv-oasis
+facts:
+  - id: dv-candle-fruit-3-attached-to
+    predicate: attached-to
+    value:
+      kind: entity
+      entityId: dv-candle-stem
+    description: attached-to
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

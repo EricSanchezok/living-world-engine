@@ -1,0 +1,90 @@
+id: spirit-guard-tower
+kind: location
+name: 天渊城轮值塔
+description: 甲士按任务集合和交接，普通来访者在塔外传话，不可凭修为强取军械。
+placement: tianyuan-city
+facts:
+  - id: spirit-guard-tower-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 甲士按任务集合和交接，普通来访者在塔外传话，不可凭修为强取军械。
+    access:
+      kind: public
+  - id: spirit-guard-tower-route-spirit-wilderness-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-gate
+    description: 正常出入蛮荒的城关，需核对身份与警戒；关外风险不会因持有地图而消失。
+    access:
+      kind: public
+  - id: spirit-guard-tower-route-tianyuan-council-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-council-hall
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-guard-tower-condition-tianyuan-council-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长老会处理城务的议事所在，守卫核验来由，公民可以经外院提交呈文。
+    description: 长老会处理城务的议事所在，守卫核验来由，公民可以经外院提交呈文。
+    access:
+      kind: public
+  - id: spirit-guard-tower-route-tianyuan-guard-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-guard-yard
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-guard-tower-condition-tianyuan-guard-yard
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 轮值人员检修器械、领取口粮并交接记录的院落。
+    description: 轮值人员检修器械、领取口粮并交接记录的院落。
+    access:
+      kind: public
+  - id: spirit-guard-tower-route-tianyuan-holy-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-holy-reception
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-guard-tower-condition-tianyuan-holy-reception
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 负责接收圣岛函件与核验接应许可的静室。
+    description: 负责接收圣岛函件与核验接应许可的静室。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-guard-tower-route-to-tianyuan-tianjia-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-tianjia-hall
+    description: route-to-tianyuan-tianjia-hall
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-guard-tower-route-conditions-tianyuan-tianjia-hall
+    predicate: route-conditions-tianyuan-tianjia-hall
+    value:
+      kind: text
+      value: 塔内军需走廊步行，柜门仅准领用人与保管者开启。
+    description: 塔内军需走廊步行，柜门仅准领用人与保管者开启。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

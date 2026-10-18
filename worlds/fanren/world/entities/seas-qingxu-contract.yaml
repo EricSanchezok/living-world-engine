@@ -1,0 +1,18 @@
+id: seas-qingxu-contract
+kind: item
+name: 青序役务契据
+description: 青序现担任接待役务，去向由执事签转；本人已提出以技术劳动换取独立工位。契据表达机构权力，不使本人意愿被魔法改写。
+placement: seas-guest-court
+facts:
+  - id: seas-qingxu-contract-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

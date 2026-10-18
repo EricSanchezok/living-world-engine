@@ -1,0 +1,18 @@
+id: north-xuling-hall-three
+kind: location
+name: 虚灵殿第3殿
+description: 三座古殿之一，有独立地下通道；当前封闭。未详写内部房间须实地勘察，不能自动获得另一殿物资。
+placement: north-hanli-realm
+facts:
+  - id: north-xuling-hall-three-entry-state
+    predicate: entry-state
+    value:
+      kind: text
+      value: closed
+    description: closed
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

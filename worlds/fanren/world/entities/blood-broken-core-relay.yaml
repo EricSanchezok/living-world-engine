@@ -1,0 +1,27 @@
+id: blood-broken-core-relay
+kind: item
+name: 中枢损坏传送阵
+description: 阵纹、槽位与供能均残缺，旧次损毁造成冰魄受困。
+placement: blood-core-hall
+facts:
+  - id: blood-broken-core-relay-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+  - id: blood-broken-core-relay-repair-conditions
+    predicate: repair-conditions
+    value:
+      kind: text
+      value: 须精通高阶古阵、实际勘察并投入足够适配材料与灵石；所需补足为十六份适配灵材与八高阶石，且须在外侧施工。修复目标为三次受控传送，成功与否依实际修复。
+    description: 须精通高阶古阵、实际勘察并投入足够适配材料与灵石；所需补足为十六份适配灵材与八高阶石，且须在外侧施工。修复目标为三次受控传送，成功与否依实际修复。
+    access:
+      kind: discoverable
+      condition: 有能力的阵师实际检查残阵并拟定修复方案。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: kunwu-magnetic-grove
+kind: location
+name: 金磁灵木道
+description: 两列高树叠加重力，金质飞宝受牵，树内藏降魔咒。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-magnetic-grove-route-kunwu-thunder-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-thunder-wall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-magnetic-grove-condition-kunwu-thunder-wall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须过雷壁再进入金磁灵木范围。
+    description: 须过雷壁再进入金磁灵木范围。
+    access:
+      kind: public
+  - id: kunwu-magnetic-grove-route-kunwu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-magnetic-grove-condition-kunwu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 重力和降魔咒可同时作用，不能一概凭土遁绕过。
+    description: 重力和降魔咒可同时作用，不能一概凭土遁绕过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

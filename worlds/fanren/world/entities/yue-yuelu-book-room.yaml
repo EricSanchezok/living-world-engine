@@ -1,0 +1,26 @@
+id: yue-yuelu-book-room
+kind: location
+name: 岳麓藏书室
+description: 这里可阅门中丹器资料，书本原件不得擅自携出。
+placement: yue-yuelu-hall
+facts:
+  - id: yue-yuelu-book-room-route-yue-yuelu-dan-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-dan-room
+    description: 管理者以对应令牌开启石梯后方可上下。炼气来客先取得筑基修士担保；资格每次核验，原件不得擅带。
+    access:
+      kind: public
+  - id: yue-yuelu-book-room-fees
+    predicate: service-price
+    value:
+      kind: text
+      value: 常规阅览每时辰一低阶灵石，复制每份十低阶灵石；时辰为两小时。付款、计时、复制材料与原件保管分别处理。
+    description: 常规阅览每时辰一低阶灵石，复制每份十低阶灵石；时辰为两小时。付款、计时、复制材料与原件保管分别处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

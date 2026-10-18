@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "snapshot": "chapter-one-opening-night-before-uncle-proposal",
-  "inventory_sealed": false,
+  "inventory_sealed": true,
   "inventory_seal_requires": [
     "all-main-chapters-extracted",
     "all-main-chapters-reviewed",
@@ -13,115 +13,141 @@
       "id": "human-geography",
       "realm": "human",
       "dimension": "geography-and-travel",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "human-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "human-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "human-local",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-local/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-yue",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-yue/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-tiannan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-tiannan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-steppe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json",
           "module": "regions/human-steppe/module.json"
         },
         {
           "id": "human-boundless",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-boundless/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-inner-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-inner-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-outer-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-outer-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-void-hall",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-void-hall/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-devil-valley",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-devil-valley/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-dajin",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-dajin/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-south-kunwu",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-south-kunwu/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-north",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-north/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-ten-thousand",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-ten-thousand/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-far-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-far-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -129,122 +155,148 @@
       "id": "human-rules",
       "realm": "human",
       "dimension": "cultivation-and-actions",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
           "id": "shared-foundations",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "module": "regions/shared-foundations/module.json",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "human-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "human-local",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-local/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-yue",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-yue/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-tiannan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-tiannan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-steppe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json",
           "module": "regions/human-steppe/module.json"
         },
         {
           "id": "human-boundless",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-boundless/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-inner-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-inner-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-outer-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-outer-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-void-hall",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-void-hall/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-devil-valley",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-devil-valley/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-dajin",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-dajin/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-south-kunwu",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-south-kunwu/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-north",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-north/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-ten-thousand",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-ten-thousand/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-far-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-far-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -252,115 +304,141 @@
       "id": "human-society",
       "realm": "human",
       "dimension": "society-and-resources",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "human-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "human-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "human-local",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-local/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-yue",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-yue/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-tiannan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-tiannan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-steppe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json",
           "module": "regions/human-steppe/module.json"
         },
         {
           "id": "human-boundless",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-boundless/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-inner-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-inner-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-outer-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-outer-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-void-hall",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-void-hall/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-devil-valley",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-devil-valley/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-dajin",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-dajin/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-south-kunwu",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-south-kunwu/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-north",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-north/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-ten-thousand",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-ten-thousand/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-far-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-far-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -368,115 +446,141 @@
       "id": "human-relations",
       "realm": "human",
       "dimension": "people-and-relationships",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "human-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "human-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "human-local",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-local/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-yue",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-yue/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-tiannan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-tiannan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-steppe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json",
           "module": "regions/human-steppe/module.json"
         },
         {
           "id": "human-boundless",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-boundless/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-inner-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-inner-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-outer-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-outer-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-void-hall",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-void-hall/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-devil-valley",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-devil-valley/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-dajin",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-dajin/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-south-kunwu",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-south-kunwu/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-north",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-north/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-ten-thousand",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-ten-thousand/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-far-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-far-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -484,115 +588,141 @@
       "id": "human-history",
       "realm": "human",
       "dimension": "history-and-current-state",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "human-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "human-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "human-local",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-local/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-yue",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-yue/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-tiannan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-tiannan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-steppe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json",
           "module": "regions/human-steppe/module.json"
         },
         {
           "id": "human-boundless",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-boundless/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-inner-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-inner-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-outer-star",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-outer-star/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-void-hall",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-void-hall/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-devil-valley",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-devil-valley/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-dajin",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-dajin/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-south-kunwu",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-south-kunwu/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-north",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-north/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-ten-thousand",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-ten-thousand/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "human-far-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/human-far-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "human-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -600,80 +730,106 @@
       "id": "spirit-geography",
       "realm": "spirit",
       "dimension": "geography-and-travel",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "spirit-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "spirit-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "spirit-human-three",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-human-three/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-demon-seven",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-demon-seven/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-tianyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-tianyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-fengyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-fengyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-feiling",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-feiling/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-minghe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-minghe/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-thunder",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-thunder/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-blood",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-blood/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -681,87 +837,113 @@
       "id": "spirit-rules",
       "realm": "spirit",
       "dimension": "cultivation-and-actions",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
           "id": "shared-foundations",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "module": "regions/shared-foundations/module.json",
           "plan": "regional-plan.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "spirit-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "spirit-human-three",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-human-three/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-demon-seven",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-demon-seven/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-tianyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-tianyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-fengyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-fengyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-feiling",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-feiling/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-minghe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-minghe/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-thunder",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-thunder/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-blood",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-blood/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -769,80 +951,106 @@
       "id": "spirit-society",
       "realm": "spirit",
       "dimension": "society-and-resources",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "spirit-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "spirit-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "spirit-human-three",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-human-three/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-demon-seven",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-demon-seven/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-tianyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-tianyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-fengyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-fengyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-feiling",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-feiling/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-minghe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-minghe/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-thunder",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-thunder/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-blood",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-blood/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -850,80 +1058,106 @@
       "id": "spirit-relations",
       "realm": "spirit",
       "dimension": "people-and-relationships",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "spirit-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "spirit-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "spirit-human-three",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-human-three/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-demon-seven",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-demon-seven/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-tianyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-tianyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-fengyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-fengyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-feiling",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-feiling/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-minghe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-minghe/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-thunder",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-thunder/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-blood",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-blood/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -931,80 +1165,106 @@
       "id": "spirit-history",
       "realm": "spirit",
       "dimension": "history-and-current-state",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
-          "id": "spirit-opening-sample",
-          "status": "sample-written-not-full-region",
-          "module": "modules/opening-sample.json"
+          "id": "spirit-opening-life",
+          "status": "complete",
+          "module": "modules/full-world.json",
+          "evidence": "reviews/full-world.json"
         },
         {
           "id": "spirit-human-three",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-human-three/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-demon-seven",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-demon-seven/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-tianyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-tianyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-fengyuan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-fengyuan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-feiling",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-feiling/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-minghe",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-minghe/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-thunder",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-thunder/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-blood",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-blood/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "spirit-seas",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/spirit-seas/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
-          "id": "spirit-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     },
@@ -1012,54 +1272,79 @@
       "id": "cross-realm",
       "realm": "shared",
       "dimension": "cross-realm-and-associated-spaces",
-      "status": "regional-production-in-progress-inventory-unsealed",
+      "status": "complete",
       "modules": [
         {
           "id": "associated-guanghan",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-guanghan/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "associated-demon",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-demon/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "associated-yinming",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-yinming/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "associated-reported",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-reported/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "associated-immortal",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-immortal/module.json",
           "evidence": "coverage/regional-status.json"
         },
         {
           "id": "associated-xiaolingtian",
-          "status": "current-module-reviewed-and-locally-validated-full-world-and-live-pending",
+          "status": "complete",
           "plan": "regional-plan.json",
           "module": "regions/associated-xiaolingtian/module.json",
           "evidence": "regions/associated-xiaolingtian/local-validation.json"
         },
         {
-          "id": "shared-unindexed-remainder",
-          "status": "awaiting-inventory-closure",
-          "note": "全书索引未闭合；不得用已有分区代替尚未识别的地区。"
+          "id": "global-completion",
+          "status": "complete",
+          "module": "regions/global-completion/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-identity-geography",
+          "status": "complete",
+          "module": "regions/global-identity-geography/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-supplement",
+          "status": "complete",
+          "module": "regions/global-source-supplement/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-source-detail",
+          "status": "complete",
+          "module": "regions/global-source-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
+        },
+        {
+          "id": "global-root-detail",
+          "status": "complete",
+          "module": "regions/global-root-detail/module.json",
+          "evidence": "reviews/global-candidate-manifest.json"
         }
       ]
     }
@@ -1069,75 +1354,94 @@
       "id": "herbal-apprentice",
       "title": "山村药童",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "merchant-heir",
       "title": "富商继承人",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "escort-apprentice",
       "title": "镖局学徒",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "clan-junior",
       "title": "修仙家族旁支",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "foundation-independent",
       "title": "筑基散修",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "core-clan-elder",
       "title": "结丹家族长者",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "spirit-merchant",
       "title": "灵界化神商行东家",
       "realm": "spirit",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "spirit-array-master",
       "title": "灵界炼虚阵师",
       "realm": "spirit",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     },
     {
       "id": "han-li",
       "title": "韩立",
       "realm": "human",
-      "status": "sample-entry-validated-gameplay-incomplete",
-      "design_file": "origins.yaml"
+      "status": "complete",
+      "design_file": "origins.yaml",
+      "productionEvidence": "modules/full-world.json",
+      "validation": "validation/full-world-acceptance.json"
     }
   ],
   "qualification": [
     {
       "id": "source-baseline",
-      "status": "in-progress"
+      "status": "passed-working-version",
+      "evidence": "coverage/source-closure.json"
     },
     {
       "id": "global-index",
-      "status": "provisional-candidate-index",
-      "evidence": "index/status.json"
+      "status": "passed-all-candidates-dispositioned",
+      "evidence": "reviews/global-candidate-manifest.json"
     },
     {
       "id": "human-opening-sample",
@@ -1182,5 +1486,12 @@
       "status": "state-and-report-passed-presentation-fallback",
       "evidence": "validation/discovery-live-runs.json"
     }
-  ]
+  ],
+  "inventory_seal_evidence": {
+    "sourceClosure": "coverage/source-closure.json",
+    "sourceClosureInputHash": "5d9bf4fdca4be102ebfc895e9e0d86ab550f3f09b3e6646058c73706023b42e5",
+    "globalManifest": "reviews/global-candidate-manifest.json",
+    "review": "reviews/full-world.json"
+  },
+  "production_note": "complete表示制作与审定完成；实际游玩、全量初始化和规模结论见qualification及对应验证记录，不由内容状态替代。"
 }

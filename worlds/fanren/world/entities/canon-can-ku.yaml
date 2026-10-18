@@ -1,0 +1,240 @@
+id: canon-can-ku
+kind: person
+name: 粲苦
+description: 粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。
+placement: dajin-tianji-head-hall
+facts:
+  - id: canon-can-ku-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴初期
+    description: 元婴初期
+    access:
+      kind: agents
+      agentIds:
+        - canon-can-ku
+  - id: canon-can-ku-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。
+    description: 经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。
+    access:
+      kind: agents
+      agentIds:
+        - canon-can-ku
+  - id: canon-can-ku-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、木、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 金、木、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-can-ku
+  - id: dajin-can-manager
+    predicate: leads
+    value:
+      kind: entity
+      entityId: dajin-tianji-guild
+    description: 主持商号经营与秘法取用授权。
+    access:
+      kind: public
+meters:
+  - id: canon-can-ku-health
+    definition_id: health
+    current: 100
+  - id: canon-can-ku-mana
+    definition_id: mana
+    current: 600
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: canon-can-ku-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-can-ku-force
+    definition_id: force
+    value: 3
+  - id: canon-can-ku-craft
+    definition_id: craft
+    value: 2
+  - id: canon-can-ku-perception
+    definition_id: perception
+    value: 4
+  - id: canon-can-ku-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-can-ku
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。
+      voice: 按自身经历交谈，重视代价、师承和权限。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对样品耗材、安排值守并留出修炼时间。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 粲苦
+        description: 粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-dajin-tianji-head-hall
+        name: 天机殿
+        description: 碧绿色大殿悬于空中，玉阶连通玉门，内有议事偏厅。
+        status: observed
+      - id: known-dajin-tianji-head-space
+        name: 天机总殿空间
+        description: 十余里宽、数百丈高的游离空间；玉门、悬梯和碧殿分列其内，地面有楼阁。
+        status: observed
+      - id: known-dajin-tianji-jade-gate
+        name: 天机玉门
+        description: 巨玉门前有轮值者和机关卫，进入须取得许可。
+        status: observed
+      - id: known-dajin-tianji-secret-archive
+        name: 天机秘法库
+        description: 地面藏典楼阁，秘术与出售器具分开保管，取典须有阁主授权。
+        status: observed
+      - id: known-dajin-tianji-head-store
+        name: 天机总殿器材库
+        description: 维持禁制与机关的材料分柜登记，动用商号资产须核实权限。
+        status: observed
+      - id: known-dajin-tianji-guild
+        name: 天机阁
+        description: 经营天机屋等器物的商号，主楼与分号有不同保管和议价权限。
+        status: observed
+      - id: known-original-dajin-tianji-liqi
+        name: 李屺
+        description: 李屺在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-canon-can-ku-practice-tool
+        name: 修习用器
+        description: 个人练习器具，不能凭名称视为后期顶阶法宝。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人生活、修学和亲见的当前关系。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: knows-own-canon-can-ku-practice-tool
+        subjectId: known-canon-can-ku-practice-tool
+        predicate: owned-by
+        value:
+          kind: local_entity
+          localEntityId: self
+        description: 本人持有的个人修习器物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-can-ku-cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 元婴初期
+        description: 元婴初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-can-ku-learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。
+        description: 经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-can-ku-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 有修炼资格，根系细分未设定。
+        description: 有修炼资格，根系细分未设定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-dajin-can-manager
+        subjectId: self
+        predicate: leads
+        value:
+          kind: local_entity
+          localEntityId: known-dajin-tianji-guild
+        description: 主持商号经营与秘法取用授权。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、木、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 金、木、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-can-ku
+      - local_entity_id: known-dajin-tianji-head-hall
+        canonical_entity_ids:
+          - dajin-tianji-head-hall
+      - local_entity_id: known-dajin-tianji-head-space
+        canonical_entity_ids:
+          - dajin-tianji-head-space
+      - local_entity_id: known-dajin-tianji-jade-gate
+        canonical_entity_ids:
+          - dajin-tianji-jade-gate
+      - local_entity_id: known-dajin-tianji-secret-archive
+        canonical_entity_ids:
+          - dajin-tianji-secret-archive
+      - local_entity_id: known-dajin-tianji-head-store
+        canonical_entity_ids:
+          - dajin-tianji-head-store
+      - local_entity_id: known-dajin-tianji-guild
+        canonical_entity_ids:
+          - dajin-tianji-guild
+      - local_entity_id: known-original-dajin-tianji-liqi
+        canonical_entity_ids:
+          - original-dajin-tianji-liqi
+      - local_entity_id: known-canon-can-ku-practice-tool
+        canonical_entity_ids:
+          - canon-can-ku-practice-tool

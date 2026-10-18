@@ -1,0 +1,42 @@
+id: yue-xianglu-canal
+kind: location
+name: 乡鲁大运河嘉元段
+description: 南北运河穿城，水流、船只、码头与货物需实际交接。
+placement: yue-jiayuan
+facts:
+  - id: yue-xianglu-canal-route-yue-jiayuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-xianglu-canal-travel-yue-jiayuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-xianglu-canal-route-yue-jiayuan-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan-wharf
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-xianglu-canal-travel-yue-jiayuan-wharf
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

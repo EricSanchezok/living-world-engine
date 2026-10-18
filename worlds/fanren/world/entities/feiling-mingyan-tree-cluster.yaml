@@ -1,0 +1,28 @@
+id: feiling-mingyan-tree-cluster
+kind: container
+name: 三株冥焰树
+description: 三株沿潭生长的冥焰树，当前一枚成熟果，两株尚未结果；成熟果采后须再经历长期生长。
+placement: feiling-corrupt-forest
+facts:
+  - id: feiling-mingyan-tree-cluster-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-mingyan-tree-cluster-regrowth
+    predicate: regrowth
+    value:
+      kind: text
+      value: 每株成熟周期约五百年，成熟果只有一枚；摘果后库存扣减，不能下一步再次收获。
+    description: 每株成熟周期约五百年，成熟果只有一枚；摘果后库存扣减，不能下一步再次收获。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-mingyan-ripe
+    amount: 1
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: blood-sponsor-letter
+kind: item
+name: 栾砚的申报封信
+description: 封给守城府周如晦，内容是申请新增材料铺柜位；接约后可投递，收件人没有义务因送信者到达便准许申请。
+placement: blood-sponsor
+facts:
+  - id: blood-sponsor-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

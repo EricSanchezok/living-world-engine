@@ -1,0 +1,24 @@
+id: minghe-purple-lightning
+kind: creature
+name: 紫电虫
+description: 长期培育的珍虫，能运用电光攻防。
+placement: minghe-xuling-insectarium
+facts:
+  - id: minghe-purple-lightning-bonded-to
+    predicate: bonded-to
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: bonded-to
+    access:
+      kind: private
+meters:
+  - id: minghe-purple-lightning-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: minghe-purple-lightning-force
+    definition_id: force
+    value: 7
+shared_activity_resources: []

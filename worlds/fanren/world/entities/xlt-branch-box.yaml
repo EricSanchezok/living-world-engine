@@ -1,0 +1,28 @@
+id: xlt-branch-box
+kind: container
+name: 共护圃断枝匣
+description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+placement: xlt-sacred-grove
+facts:
+  - id: xlt-branch-box-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-grove-custodians
+    description: owned-by
+    access:
+      kind: public
+  - id: xlt-branch-box-custody
+    predicate: custody
+    value:
+      kind: text
+      value: 绮蕊保管不等于私人所有；出售须共护约定中的相关方实际同意。
+    description: 绮蕊保管不等于私人所有；出售须共护约定中的相关方实际同意。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: xlt-gangwood
+    amount: 2
+ratings: []
+shared_activity_resources: []

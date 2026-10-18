@@ -1,0 +1,22 @@
+id: spirit3-tianling-court-fund
+kind: container
+name: 天灵灵皇本期事务公库
+description: 本期可以安排的六十枚高阶石及十六份材料；不是境域全部财富。
+placement: spirit3-tianling-hall
+facts:
+  - id: spirit3-tianling-court-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianling-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

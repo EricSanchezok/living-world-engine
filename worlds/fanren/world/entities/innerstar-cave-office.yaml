@@ -1,0 +1,26 @@
+id: innerstar-cave-office
+kind: location
+name: 圣山租居所
+description: 办理洞府范围、租期、交接和维护事项的小院。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-cave-office-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-cave-office-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 办理洞府范围、租期、交接和维护事项的小院。
+    description: 办理洞府范围、租期、交接和维护事项的小院。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

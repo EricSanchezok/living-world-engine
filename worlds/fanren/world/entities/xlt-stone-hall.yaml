@@ -1,0 +1,18 @@
+id: xlt-stone-hall
+kind: location
+name: 峰顶石殿
+description: 厚石墙围出的议事场所，停用的案几尚在，开会要有人召集。
+placement: xlt-high-peak
+facts:
+  - id: xlt-stone-hall-route-xlt-high-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-high-peak
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

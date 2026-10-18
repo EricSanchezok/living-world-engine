@@ -1,0 +1,26 @@
+id: feiling-first-layer-shelter
+kind: location
+name: 一层石檐避风处
+description: 采集者临时换气、照料伤口与检查灯具的避风石檐。
+placement: feiling-abyss-1
+facts:
+  - id: feiling-first-layer-shelter-route-feiling-abyss-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-1
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-first-layer-shelter-condition-feiling-abyss-1
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 采集者临时换气、照料伤口与检查灯具的避风石檐。
+    description: 采集者临时换气、照料伤口与检查灯具的避风石檐。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: canon-ganlan-cauldron-2
+kind: item
+name: 乾蓝鼎乙
+description: 成对仿制古宝中的一件，当前由宫方持有；可辅助乾蓝冰焰和对应通道，不是虚天鼎。
+placement: north-hanli-realm
+facts:
+  - id: canon-ganlan-cauldron-2-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

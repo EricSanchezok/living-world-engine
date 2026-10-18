@@ -1,0 +1,26 @@
+id: fengyuan-tianchan-domain
+kind: location
+name: 鸣林族地
+description: 天蝉族的一处已知族域，外围道路与居民禁区分开，访客的目的会影响接待方式。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-tianchan-domain-route-to-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-tianchan-domain-route-conditions-fengyuan-border-exchange
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

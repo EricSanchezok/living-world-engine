@@ -1,0 +1,22 @@
+id: fengyuan-shura-city-material
+kind: container
+name: 天蛛城维护公料
+description: 现有工料和高阶石供局部补禁；复杂空间工艺仍需懂得的人来做。
+placement: fengyuan-shura-tianzhu-city
+facts:
+  - id: fengyuan-shura-city-material-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-shura-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 18
+  - definition_id: high-stone
+    amount: 16
+ratings: []
+shared_activity_resources: []

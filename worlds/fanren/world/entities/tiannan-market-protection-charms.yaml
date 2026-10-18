@@ -1,0 +1,20 @@
+id: tiannan-market-protection-charms
+kind: item
+name: 罗姝护身符匣
+description: 四张一次性低阶护身符，报价每张八块低阶灵石，受攻击可能提前耗尽。
+placement: tiannan-luo-shu
+facts:
+  - id: tiannan-market-protection-charms-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-luo-shu
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: tiannan-protection-talisman
+    amount: 4
+ratings: []
+shared_activity_resources: []

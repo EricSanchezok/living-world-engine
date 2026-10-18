@@ -1,0 +1,20 @@
+id: fengyuan-shadow-public-purse
+kind: container
+name: 曲照集公共钱袋
+description: 维修路标与清理道路的有限公款。
+placement: fengyuan-shadow-town
+facts:
+  - id: fengyuan-shadow-public-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings: []
+shared_activity_resources: []

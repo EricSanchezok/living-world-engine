@@ -1,0 +1,18 @@
+id: local-qixuan-sidehall-1
+kind: location
+name: 七玄偏殿1
+description: 峰顶六座小石殿之一，门内按次序编号。
+placement: sunset-peak
+facts:
+  - id: local-qixuan-sidehall-1-route-qixuan-main-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-main-hall
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

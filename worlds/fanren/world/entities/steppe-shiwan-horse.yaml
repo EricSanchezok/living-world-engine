@@ -1,0 +1,20 @@
+id: steppe-shiwan-horse
+kind: item
+name: 石湾驮马
+description: 木车使用的一匹成年驮马，尚未套车；动物需休息、饮水和草料。
+placement: steppe-shiwan-camp
+facts:
+  - id: steppe-shiwan-horse-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-shiwan-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: steppe-horse
+    amount: 1
+ratings: []
+shared_activity_resources: []

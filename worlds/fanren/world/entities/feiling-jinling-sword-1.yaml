@@ -1,0 +1,18 @@
+id: feiling-jinling-sword-1
+kind: item
+name: 金灵短剑1
+description: 双剑术所用的一柄真实短剑。
+placement: feiling-jinling-swords
+facts:
+  - id: feiling-jinling-sword-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-ling-ape
+    description: 所有权归属。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

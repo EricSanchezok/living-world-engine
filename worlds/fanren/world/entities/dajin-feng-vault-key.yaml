@@ -1,0 +1,28 @@
+id: dajin-feng-vault-key
+kind: item
+name: 密窟银钥
+description: 银色法器钥匙，与特定石门孔洞及禁制配合使用。
+placement: dajin-feng-store
+facts:
+  - id: dajin-feng-vault-key-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-feng-clan
+    description: 由冯家保管的族产，实际取用须家族许可。
+    access:
+      kind: public
+  - id: dajin-feng-vault-key-keeper
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: original-dajin-feng-shoujian
+    description: 只有获授权者可以领用钥匙。
+    access:
+      kind: agents
+      agentIds:
+        - original-dajin-feng-shoujian
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

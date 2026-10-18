@@ -1,0 +1,26 @@
+id: tiannan-yuling-young-beast
+kind: creature
+name: 灰鬃幼兽
+description: 当期幼兽，有血肉与饥饿，警惕陌生人。
+placement: tiannan-yuling-court
+facts:
+  - id: tiannan-yuling-young-beast-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-shi-jing
+    description: owned-by
+    access:
+      kind: public
+  - id: tiannan-yuling-young-beast-training
+    predicate: training-state
+    value:
+      kind: text
+      value: 只认石璟的喂食声令，尚不可靠执行远离视野的指令。
+    description: 只认石璟的喂食声令，尚不可靠执行远离视野的指令。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

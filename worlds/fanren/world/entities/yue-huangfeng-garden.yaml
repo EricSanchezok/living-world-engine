@@ -1,0 +1,35 @@
+id: yue-huangfeng-garden
+kind: location
+name: 百药园
+description: 需要日常养护的灵药园，园中药材仍有所有者。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-huangfeng-garden-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-garden-travel-yue-huangfeng-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-garden-yellow-leaf
+    predicate: plant-condition
+    value:
+      kind: text
+      value: 一小畦养护草叶黄，根部有积水，排水沟被落叶堵住；并非整园药材同时报废。
+    description: 一小畦养护草叶黄，根部有积水，排水沟被落叶堵住；并非整园药材同时报废。
+    access:
+      kind: discoverable
+      condition: 近察黄叶株的根土与排水沟，具备园务辨识。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

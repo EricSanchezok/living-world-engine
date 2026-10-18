@@ -1,0 +1,191 @@
+id: canon-chi-lei-laozu
+kind: person
+name: 赤雷老祖
+description: 赤袍面有金雷纹的大乘，性情强横而看重真本事，威名使他很少耐心解释。
+placement: blood-chilei-retreat
+facts:
+  - id: canon-chi-lei-laozu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-chi-lei-laozu
+  - id: canon-chi-lei-laozu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 赤雷遁法、雷蛟法相与雷法强攻，依自身法力；不能无视同阶防护。
+    description: 赤雷遁法、雷蛟法相与雷法强攻，依自身法力；不能无视同阶防护。
+    access:
+      kind: agents
+      agentIds:
+        - canon-chi-lei-laozu
+  - id: canon-chi-lei-laozu-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。
+    description: 雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。
+    access:
+      kind: private
+  - id: canon-chi-lei-laozu-current-negotiation
+    predicate: current-negotiation
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: current-negotiation
+    access:
+      kind: private
+meters:
+  - id: canon-chi-lei-laozu-health
+    definition_id: health
+    current: 100
+  - id: canon-chi-lei-laozu-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-chi-lei-laozu-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-chi-lei-laozu-force
+    definition_id: force
+    value: 8
+  - id: canon-chi-lei-laozu-craft
+    definition_id: craft
+    value: 6
+  - id: canon-chi-lei-laozu-perception
+    definition_id: perception
+    value: 8
+  - id: canon-chi-lei-laozu-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-chi-lei-laozu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 赤袍面有金雷纹的大乘，性情强横而看重真本事，威名使他很少耐心解释。
+      voice: 声如闷雷，喜欢用一句命令开场；看中真本事时肯直认，但讨价还价仍爱抬高身价。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否以六十高阶灵石出售一式雷法散手，或要求增加交换条件。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 赤雷老祖
+        description: 赤袍面有金雷纹的大乘，性情强横而看重真本事，威名使他很少耐心解释。
+        status: observed
+      - id: location
+        name: 赤雷观云台
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-chi-lei-laozu-resources
+        name: 赤雷老祖个人储备
+        description: 有限私人修炼用石和材料；同门公产不在此袋。
+        status: observed
+      - id: known-canon-blood-ruyi
+        name: 如意
+        description: 正在谈雷法散手交易，已经互通报价但尚未付款。
+        status: observed
+      - id: known-blood-chilei-guard-plate
+        name: 赤雷护身雷牌
+        description: 个人护身法器，持续注法力可挡常规冲击，会被足够强攻击击坏。
+        status: observed
+      - id: known-blood-chilei-hand-method
+        name: 赤雷散手原简
+        description: 一式可教授的雷法散手，须雷法根基与实练才能用；原简包含步骤，买副本不取得原简所有权。
+        status: observed
+      - id: known-blood-chilei-offer
+        name: 雷法散手报价函
+        description: 自己送出的六十高阶灵石报价，收件者尚未承诺付款。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 赤雷遁法、雷蛟法相与雷法强攻，依自身法力；不能无视同阶防护。
+        description: 赤雷遁法、雷蛟法相与雷法强攻，依自身法力；不能无视同阶防护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 决定是否以六十高阶灵石出售一式雷法散手，或要求增加交换条件。
+        description: 决定是否以六十高阶灵石出售一式雷法散手，或要求增加交换条件。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-cultivation-foundation
+        subjectId: self
+        predicate: cultivation-foundation
+        value:
+          kind: text
+          value: 雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。
+        description: 雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-chi-lei-laozu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-chilei-retreat
+      - local_entity_id: known-canon-chi-lei-laozu-resources
+        canonical_entity_ids:
+          - canon-chi-lei-laozu-resources
+      - local_entity_id: known-canon-blood-ruyi
+        canonical_entity_ids:
+          - canon-blood-ruyi
+      - local_entity_id: known-blood-chilei-guard-plate
+        canonical_entity_ids:
+          - blood-chilei-guard-plate
+      - local_entity_id: known-blood-chilei-hand-method
+        canonical_entity_ids:
+          - blood-chilei-hand-method
+      - local_entity_id: known-blood-chilei-offer
+        canonical_entity_ids:
+          - blood-chilei-offer

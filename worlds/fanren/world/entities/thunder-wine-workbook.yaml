@@ -1,0 +1,18 @@
+id: thunder-wine-workbook
+kind: item
+name: 银穗的普通酒课手录
+description: 记录普通灵酒的火候观察，银穗可自行决定是否教人；不包含彩流罂专属秘法。
+placement: thunder-wine-attendant
+facts:
+  - id: thunder-wine-workbook-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wine-attendant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

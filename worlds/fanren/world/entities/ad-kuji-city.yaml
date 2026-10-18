@@ -1,0 +1,34 @@
+id: ad-kuji-city
+kind: location
+name: 枯寂城
+description: 海家所在的远方城池，炼器产业与城防分属不同管辖。
+placement: associated-demon-realm
+facts:
+  - id: ad-kuji-city-route-to-ad-yexiu-city
+    predicate: route-to-ad-yexiu-city
+    value:
+      kind: entity
+      entityId: ad-yexiu-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-kuji-city-route-to-ad-tianmang-valley
+    predicate: route-to-ad-tianmang-valley
+    value:
+      kind: entity
+      entityId: ad-tianmang-valley
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-kuji-city-route-to-ad-haiyun-mountains
+    predicate: route-to-ad-haiyun-mountains
+    value:
+      kind: entity
+      entityId: ad-haiyun-mountains
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

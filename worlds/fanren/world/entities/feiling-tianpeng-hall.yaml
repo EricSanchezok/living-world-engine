@@ -1,0 +1,42 @@
+id: feiling-tianpeng-hall
+kind: location
+name: 天鹏议事殿
+description: 长老与圣主处理族内事务的场所。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-tianpeng-hall-route-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-hall-condition-feiling-tianpeng-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长老与圣主处理族内事务的场所。
+    description: 长老与圣主处理族内事务的场所。
+    access:
+      kind: public
+  - id: feiling-tianpeng-hall-route-feiling-sealed-vault
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-sealed-vault
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-hall-condition-feiling-sealed-vault
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 受长老共同守护的传承库，出入和取物需要相应许可。
+    description: 受长老共同守护的传承库，出入和取物需要相应许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

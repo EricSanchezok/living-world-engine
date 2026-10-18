@@ -1,0 +1,20 @@
+id: innerstar-tea-leaves
+kind: item
+name: 一包普通茶叶
+description: 装有四杯份普通干茶的小包，分取后相应减少存量。
+placement: innerstar-qinghe-teahouse
+facts:
+  - id: innerstar-tea-leaves-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-tea-keeper
+    description: 叶岑经营管理，租借或出售须实际协商。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: innerstar-dry-tea-portion
+    amount: 4
+ratings: []
+shared_activity_resources: []

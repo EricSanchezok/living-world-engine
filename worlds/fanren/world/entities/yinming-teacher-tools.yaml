@@ -1,0 +1,18 @@
+id: yinming-teacher-tools
+kind: item
+name: 封谨的个人器具
+description: 内力、短兵和盾阵训练；没有灵根。所需的有限工具，不包含无限兽晶。
+placement: yinming-teacher
+facts:
+  - id: yinming-teacher-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-teacher
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

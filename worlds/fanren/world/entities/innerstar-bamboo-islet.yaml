@@ -1,0 +1,42 @@
+id: innerstar-bamboo-islet
+kind: location
+name: 留竹小岛
+description: 偏僻岛屿上的小宗经营薄田和药圃，镇派旧物不公开示人。
+placement: human-inner-star-sea
+facts:
+  - id: innerstar-bamboo-islet-route-human-weixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-weixing-island
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-bamboo-islet-condition-human-weixing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 偏僻岛屿上的小宗经营薄田和药圃，镇派旧物不公开示人。
+    description: 偏僻岛屿上的小宗经营薄田和药圃，镇派旧物不公开示人。
+    access:
+      kind: public
+  - id: innerstar-bamboo-islet-route-innerstar-bamboo-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-bamboo-garden
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-bamboo-islet-condition-innerstar-bamboo-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 小宗封闭内圃，外人需先获准，护持竹盆的阵纹仍完整。
+    description: 小宗封闭内圃，外人需先获准，护持竹盆的阵纹仍完整。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

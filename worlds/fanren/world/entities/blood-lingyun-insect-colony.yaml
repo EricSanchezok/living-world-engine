@@ -1,0 +1,55 @@
+id: blood-lingyun-insect-colony
+kind: creature-group
+name: 灵云自养蛊群
+description: 虫箱中共有六十只鸣虫，用于研究光照与鸣声；由虫室长期培育，需防逃和定期饲喂。
+placement: blood-wangu-mountain
+facts:
+  - id: blood-lingyun-insect-colony-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-lingyun
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-lingyun-insect-colony-maintenance
+    predicate: maintenance
+    value:
+      kind: text
+      value: 每个本地日实耗一份所属饲料；匮乏先影响健康与听令，不能凭法术无限生食。
+    description: 每个本地日实耗一份所属饲料；匮乏先影响健康与听令，不能凭法术无限生食。
+    access:
+      kind: private
+  - id: blood-lingyun-insect-colony-feed-stock
+    predicate: feed-stock
+    value:
+      kind: entity
+      entityId: blood-lingyun-insect-feed
+    description: feed-stock
+    access:
+      kind: private
+  - id: blood-lingyun-insect-colony-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 成员数以本群数量账为准。个体死亡须扣一；受伤或分离个体需建立具伤势的实际子群或个体并转移对应数量，原群同步减少。群体健康为未分离成员的整体状态，不能以一个治愈动作复活或复制已损失成员。
+    description: 成员数以本群数量账为准。个体死亡须扣一；受伤或分离个体需建立具伤势的实际子群或个体并转移对应数量，原群同步减少。群体健康为未分离成员的整体状态，不能以一个治愈动作复活或复制已损失成员。
+    access:
+      kind: private
+  - id: blood-lingyun-insect-colony-breeding-boundary
+    predicate: breeding-boundary
+    value:
+      kind: text
+      value: 繁衍须有真实配对、卵与孵育过程；现有成年成员数量不会按一条描述自动增长。
+    description: 繁衍须有真实配对、卵与孵育过程；现有成年成员数量不会按一条描述自动增长。
+    access:
+      kind: private
+meters:
+  - id: blood-lingyun-insect-colony-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: blood-murmur-insect-count
+    amount: 60
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-yan-tool
+kind: item
+name: 焰芒的炼器炉
+description: 炼器炉可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-wind-volcano
+facts:
+  - id: xlt-yan-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-yan
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

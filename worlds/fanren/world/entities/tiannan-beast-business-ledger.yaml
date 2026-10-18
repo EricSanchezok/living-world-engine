@@ -1,0 +1,18 @@
+id: tiannan-beast-business-ledger
+kind: item
+name: 天星坊兽业商号账簿
+description: 已记录当前柜中存量，今晚尚无新订制、交兽或欠款。
+placement: tiannan-tianxing-beast-court
+facts:
+  - id: tiannan-beast-business-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-beast-business
+    description: 记录属于店业，查看须经负责人同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

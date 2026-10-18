@@ -1,0 +1,138 @@
+id: seas-underground-headquarters
+kind: location
+name: 风元商盟地下总堂
+description: 石顶光源照亮林木街路的地下空间，多座接引台连接外界。
+placement: fengyuan-continent
+facts:
+  - id: seas-underground-headquarters-route-seas-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-reception
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-reception
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿地下石路行走，不需另耗跨洲灵石。
+    description: 沿地下石路行走，不需另耗跨洲灵石。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-meeting-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-meeting-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-meeting-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-guest-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-guest-court
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-guest-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-auction-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-auction-tower
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-auction-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-archive
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-shadow-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-shadow-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-shadow-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-elders-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-elders-court
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-elders-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-underground-headquarters-route-seas-fengyuan-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-fengyuan-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-underground-headquarters-condition-seas-fengyuan-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 正常内街行走，内阵需获准接近。
+    description: 正常内街行走，内阵需获准接近。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

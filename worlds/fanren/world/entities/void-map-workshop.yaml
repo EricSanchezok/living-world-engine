@@ -1,0 +1,26 @@
+id: void-map-workshop
+kind: location
+name: 海图装裱铺
+description: 旧图和新测海路分架存放，缺损的字可研究也可不冒险。
+placement: human-nanhe-island
+facts:
+  - id: void-map-workshop-route-human-nanhe-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-nanhe-island
+    description: route-to
+    access:
+      kind: public
+  - id: void-map-workshop-condition-human-nanhe-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

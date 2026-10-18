@@ -1,0 +1,18 @@
+id: ad-map-ledger
+kind: item
+name: 迟简旧商路采录
+description: 真实记录能证明其中一印来自已迁走的商号；只能否定某段传承，不能自动推出唯一新路线。
+placement: ad-guangyuan-surveyor
+facts:
+  - id: ad-map-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-guangyuan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

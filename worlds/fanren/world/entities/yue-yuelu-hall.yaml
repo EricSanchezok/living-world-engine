@@ -1,0 +1,34 @@
+id: yue-yuelu-hall
+kind: location
+name: 岳麓殿
+description: 丹器资料和地火所在殿宇，内外之间有受守卫管理的传送阵。
+placement: yue-wujun-mountain
+facts:
+  - id: yue-yuelu-hall-route-yue-wujun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-wujun-mountain
+    description: 由两名值班守卫核验通行资格并操作传送阵；通常单次一低阶灵石，豁免须有实际批准。
+    access:
+      kind: public
+  - id: yue-yuelu-hall-route-yue-yuelu-dan-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-dan-room
+    description: 按实际通道行走，内室使用仍须对应管理许可。
+    access:
+      kind: public
+  - id: yue-yuelu-hall-route-yue-yuelu-fire-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-fire-hall
+    description: 按实际通道行走，内室使用仍须对应管理许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

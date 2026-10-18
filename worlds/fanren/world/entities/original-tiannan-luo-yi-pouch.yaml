@@ -1,0 +1,18 @@
+id: original-tiannan-luo-yi-pouch
+kind: item
+name: 罗翊的日用行囊
+description: 普通衣物与书写工具；不包含接待处的全部库存。
+placement: original-tiannan-luo-yi
+facts:
+  - id: original-tiannan-luo-yi-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-luo-yi
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,29 @@
+id: minghe-insect-food-b
+kind: container
+name: 虫圃乙箱饲料
+description: 四包需稀释使用的干药料。
+placement: minghe-xuling-insectarium
+facts:
+  - id: minghe-insect-food-b-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-insect-food-b-label-fault
+    predicate: label-fault
+    value:
+      kind: text
+      value: 搬运时外层临时签牌错挂，箱底原批号仍可比对；无证据说明有人下毒。
+    description: 搬运时外层临时签牌错挂，箱底原批号仍可比对；无证据说明有人下毒。
+    access:
+      kind: discoverable
+      condition: 查看箱底批号并与进货记录比较。
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,32 @@
+id: guanghan-rainbow-fish
+kind: creature-group
+name: 飞虹鱼湖群
+description: 群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。
+placement: guanghan-ore-lake
+facts:
+  - id: guanghan-rainbow-fish-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 3000
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-rainbow-fish-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。
+    description: 群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。
+    access:
+      kind: private
+meters:
+  - id: guanghan-rainbow-fish-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-rainbow-fish-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

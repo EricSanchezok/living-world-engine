@@ -1,0 +1,18 @@
+id: spirit-xuanwu-pilot-equipment
+kind: item
+name: 程海笙的引航盘
+description: 标示近港信标方向的法盘，维护要消耗真实灵石，不能追踪任意人物。
+placement: spirit-xuanwu-pilot
+facts:
+  - id: spirit-xuanwu-pilot-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-pilot
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

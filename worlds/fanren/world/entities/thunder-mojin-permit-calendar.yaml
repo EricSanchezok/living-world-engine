@@ -1,0 +1,34 @@
+id: thunder-mojin-permit-calendar
+kind: item
+name: 青灵云海开放簿
+description: 年度许可窗口与入山条件的当值记录。
+placement: thunder-mojin-warden
+facts:
+  - id: thunder-mojin-permit-calendar-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-mojin-permit-calendar-next-opening
+    predicate: next-opening
+    value:
+      kind: text
+      value: 当前尚闭；计划在五灵界本地日后即1728000共同秒开启一次，开放三十灵界本地日即10368000共同秒。计划可因真实阵况与决策改变，不会强迫任何人进入。
+    description: 当前尚闭；计划在五灵界本地日后即1728000共同秒开启一次，开放三十灵界本地日即10368000共同秒。计划可因真实阵况与决策改变，不会强迫任何人进入。
+    access:
+      kind: public
+  - id: thunder-mojin-permit-calendar-eligibility
+    predicate: eligibility
+    value:
+      kind: text
+      value: 常规许可限圣阶以下；须实名登记和知道魔气风险。逾时困留须自行承担真实危险，不能靠说已回城跳过。
+    description: 常规许可限圣阶以下；须实名登记和知道魔气风险。逾时困留须自行承担真实危险，不能靠说已回城跳过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

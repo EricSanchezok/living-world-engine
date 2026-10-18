@@ -1,0 +1,26 @@
+id: south-ye-archive
+kind: location
+name: 叶家密档室
+description: 古碑残片、探访记述和测绘草稿分案，研究尚未完成。
+placement: south-ye-estate
+facts:
+  - id: south-ye-archive-route-south-ye-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-ye-estate
+    description: route-to
+    access:
+      kind: public
+  - id: south-ye-archive-condition-south-ye-estate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: yue-yuejing
+kind: location
+name: 越京
+description: 越国中央的都城，主要道路通向各州；城中有四个分区。
+placement: human-yue
+facts:
+  - id: yue-yuejing-route-human-yue
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yue
+    description: 沿实际驿路进入都城，路程需按出发州地和交通手段计算。
+    access:
+      kind: public
+  - id: yue-yuejing-route-yue-yuejing-east
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-east
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-route-yue-yuejing-west
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-west
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-route-yue-yuejing-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-south
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-route-yue-yuejing-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-north
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-route-yue-baiju-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-baiju-mountain
+    description: 沿现存道路或适用遁行抵达，仍需实际路程和通行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

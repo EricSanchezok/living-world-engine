@@ -1,0 +1,26 @@
+id: minghe-blackwind-inner-room
+kind: location
+name: 黑风阁内室
+description: 阁内铺着青砖，几张座椅围着一张乌木桌，门边黑气随阁楼主人的法诀开合。
+placement: minghe-xuling-blackwind-pavilion
+facts:
+  - id: minghe-blackwind-inner-room-route-to-minghe-xuling-insectarium
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-xuling-insectarium
+    description: 黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。
+    access:
+      kind: private
+  - id: minghe-blackwind-inner-room-route-conditions-minghe-xuling-insectarium
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。
+    description: 黑风阁须由虚灵在此处实际展开并开放入口，来客才能从门内外通行；收起或移走阁楼后这处入口不可使用。进入不免除阁内大小变化与持续法力条件。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: canon-bingpo-blood-soul
+kind: dormant-soul
+name: 冰魄沉眠血魂
+description: 尚未唤醒凝成血躯的一缕血魂，血灵、血魂、血魄是此主体后来的不同称谓。
+placement: blood-bingpo-soul-bottle
+facts:
+  - id: canon-bingpo-blood-soul-source-person
+    predicate: source-person
+    value:
+      kind: entity
+      entityId: canon-bingpo
+    description: source-person
+    access:
+      kind: private
+  - id: canon-bingpo-blood-soul-memory-boundary
+    predicate: memory-boundary
+    value:
+      kind: text
+      value: 只有本尊预留的部分记忆，无完整人界经历；封存多年后还需唤醒与整理，不能即时回答全书秘密。
+    description: 只有本尊预留的部分记忆，无完整人界经历；封存多年后还需唤醒与整理，不能即时回答全书秘密。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

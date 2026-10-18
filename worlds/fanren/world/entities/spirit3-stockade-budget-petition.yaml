@@ -1,0 +1,26 @@
+id: spirit3-stockade-budget-petition
+kind: item
+name: 石溪寨护具呈文
+description: 石溪寨拟申请6高阶灵石和2份工料添置护具；由教头递呈，尚未答复。
+placement: spirit3-xuanwu-hall
+facts:
+  - id: spirit3-stockade-budget-petition-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-xuanwu-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-stockade-budget-petition-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: spirit3-stockade-teacher
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

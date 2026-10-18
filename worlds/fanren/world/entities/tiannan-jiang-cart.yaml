@@ -1,0 +1,18 @@
+id: tiannan-jiang-cart
+kind: item
+name: 余棠的载货小车
+description: 一辆人力小车，装着已点数的待运铜线。
+placement: tiannan-jiang-post
+facts:
+  - id: tiannan-jiang-cart-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-yu-tang
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

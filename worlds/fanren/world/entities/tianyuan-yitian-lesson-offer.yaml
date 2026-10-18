@@ -1,0 +1,26 @@
+id: tianyuan-yitian-lesson-offer
+kind: item
+name: 倚天辨损讲席要约
+description: 请池见素展示两件样品并讲辨损，最多容十人，愿付8枚中阶石；还没确定日期和接受，不能据此给她强排课程。
+placement: tianyuan-yitian-steward
+facts:
+  - id: tianyuan-yitian-lesson-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-stewardship
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-yitian-lesson-offer-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-steward
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

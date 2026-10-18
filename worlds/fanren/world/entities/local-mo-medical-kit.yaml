@@ -1,0 +1,18 @@
+id: local-mo-medical-kit
+kind: item
+name: 墨大夫医具
+description: 诊脉、针灸与处理外伤的医具，药材另从药园领取。
+placement: canon-mo-juren
+facts:
+  - id: local-mo-medical-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-juren
+    description: 随身用具属于持有人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

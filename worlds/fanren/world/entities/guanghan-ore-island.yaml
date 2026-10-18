@@ -1,0 +1,58 @@
+id: guanghan-ore-island
+kind: location
+name: 双峰湖心岛
+description: 千余里岛地上灰绿两峰并立，湖岸没有现成的安全登陆保证。
+placement: guanghan-ore-lake
+facts:
+  - id: guanghan-ore-island-route-guanghan-ore-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-ore-lake
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ore-island-condition-guanghan-ore-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-ore-island-route-guanghan-grey-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-grey-peak
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ore-island-condition-guanghan-grey-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-ore-island-route-guanghan-green-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-green-peak
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ore-island-condition-guanghan-green-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: void-wanfa-public-stock
+kind: container
+name: 万法公库当期料
+description: 这一批公用材料只有六份，药鼎需四份，阵屋需四份。
+placement: void-wanfa-court
+facts:
+  - id: void-wanfa-public-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanfa-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+  - definition_id: low-stone
+    amount: 120
+ratings: []
+shared_activity_resources: []

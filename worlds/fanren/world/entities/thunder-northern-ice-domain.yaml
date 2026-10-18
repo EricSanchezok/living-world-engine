@@ -1,0 +1,51 @@
+id: thunder-northern-ice-domain
+kind: location
+name: 雷鸣极北冰域
+description: 冰雪覆盖的荒远地域，雪吼聚落与雷光奔行的兽踪都需实地寻找。
+placement: thunder-continent
+facts:
+  - id: thunder-northern-ice-domain-route-to-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-northern-ice-domain-route-conditions-thunder-cloud-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。
+    description: 跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。
+    access:
+      kind: private
+  - id: thunder-northern-ice-domain-route-to-thunder-thunder-lion-den
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-thunder-lion-den
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-northern-ice-domain-route-conditions-thunder-thunder-lion-den
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。
+    description: 只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。
+    access:
+      kind: private
+  - id: thunder-northern-ice-domain-root-detail-extreme-mountain-materials
+    predicate: root-detail-extreme-mountain-materials
+    value:
+      kind: text
+      value: 昊阴石深藏冰川下难以神识探察，寒魄的远感是特定能力；感应、开采和炼成极山分别需要实际行动。
+    description: 昊阴石深藏冰川下难以神识探察，寒魄的远感是特定能力；感应、开采和炼成极山分别需要实际行动。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

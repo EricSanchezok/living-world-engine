@@ -1,0 +1,18 @@
+id: far-zhao-tools
+kind: item
+name: 舟匠工具包
+description: 旧木槌、木楔和手锯。
+placement: far-zhao-chuan
+facts:
+  - id: far-zhao-tools-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-zhao-chuan
+    description: 由赵川所有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

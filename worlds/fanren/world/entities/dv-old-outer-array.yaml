@@ -1,0 +1,26 @@
+id: dv-old-outer-array
+kind: location
+name: 外谷旧落台
+description: 小石台接纳来自内谷古阵的传送，阵面留有可检修接点；目前只能沿出谷方向使用。
+placement: dv-outer
+facts:
+  - id: dv-old-outer-array-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-old-outer-array-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实查通路到台；它不会自动通向谷外或其他大陆。
+    description: 沿实查通路到台；它不会自动通向谷外或其他大陆。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

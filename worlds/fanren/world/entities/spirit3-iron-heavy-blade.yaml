@@ -1,0 +1,18 @@
+id: spirit3-iron-heavy-blade
+kind: item
+name: 守备乌铁刀
+description: 厚重普通乌铁刀，可劈砍但强度有限。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit3-iron-heavy-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

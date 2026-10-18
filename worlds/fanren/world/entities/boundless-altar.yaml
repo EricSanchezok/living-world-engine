@@ -1,0 +1,26 @@
+id: boundless-altar
+kind: location
+name: 魔渊古祭台
+description: 海底魔渊中宽阔石台，中央完整石碑仍镇住阵眼。
+placement: boundless-abyss
+facts:
+  - id: boundless-altar-route-boundless-abyss
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-abyss
+    description: 继续深入须持续护持，消耗随魔性与深度增加。
+    access:
+      kind: public
+  - id: boundless-altar-travel-boundless-abyss
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 继续深入须持续护持，消耗随魔性与深度增加。
+    description: 继续深入须持续护持，消耗随魔性与深度增加。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

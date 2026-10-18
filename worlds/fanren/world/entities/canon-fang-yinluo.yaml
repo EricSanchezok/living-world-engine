@@ -1,0 +1,266 @@
+id: canon-fang-yinluo
+kind: person
+name: 房姓宗主
+description: 房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。
+placement: dajin-yinluo-main-hall
+facts:
+  - id: canon-fang-yinluo-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴初期
+    description: 元婴初期
+    access:
+      kind: agents
+      agentIds:
+        - canon-fang-yinluo
+  - id: canon-fang-yinluo-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。
+    description: 阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fang-yinluo
+  - id: canon-fang-yinluo-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fang-yinluo
+  - id: dajin-fang-spouse
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: canon-lu-yinluo
+    description: 两人目前为伴侣。
+    access:
+      kind: public
+  - id: dajin-fang-leader
+    predicate: leads
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: 承担本宗管理职责，宗产与个人财物不同。
+    access:
+      kind: public
+meters:
+  - id: canon-fang-yinluo-health
+    definition_id: health
+    current: 100
+  - id: canon-fang-yinluo-mana
+    definition_id: mana
+    current: 600
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: canon-fang-yinluo-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-fang-yinluo-force
+    definition_id: force
+    value: 3
+  - id: canon-fang-yinluo-craft
+    definition_id: craft
+    value: 2
+  - id: canon-fang-yinluo-perception
+    definition_id: perception
+    value: 4
+  - id: canon-fang-yinluo-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-fang-yinluo
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。
+      voice: 按自身经历交谈，重视代价、师承和权限。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 检查炼尸院耗材，处理外务馆送来的借用申请。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 房姓宗主
+        description: 房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-canon-lu-yinluo
+        name: 陆夫人
+        description: 陆夫人在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-dajin-yinluo-main-hall
+        name: 阴罗宗总坛
+        description: 古传宗门的议事与修行本山，进入需通过宗门禁制和值守。
+        status: observed
+      - id: known-dajin-yinluo-sect
+        name: 阴罗宗
+        description: 魔道宗门，长老、宗主与各分系存在不同利益。
+        status: observed
+      - id: known-dajin-yinluo-corpse-yard
+        name: 阴罗炼尸院
+        description: 炼养尸体与维持禁制的专用场所，材料与尸具必须真实存在。
+        status: observed
+      - id: known-dajin-yinluo-lamp-room
+        name: 阴罗元神灯秘室
+        description: 与主体相连的灯具分座安放；灯况须实际检查，不自行公开传播。
+        status: observed
+      - id: known-original-dajin-yinluo-zhoujian
+        name: 周简
+        description: 周简在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-canon-fang-yinluo-soul-lamp
+        name: 房姓宗主的元神灯
+        description: 灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。
+        status: observed
+      - id: known-canon-lu-yinluo-soul-lamp
+        name: 陆夫人的元神灯
+        description: 灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。
+        status: observed
+      - id: known-canon-fang-yinluo-practice-tool
+        name: 修习用器
+        description: 个人练习器具，不能凭名称视为后期顶阶法宝。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人生活、修学和亲见的当前关系。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: knows-own-canon-fang-yinluo-practice-tool
+        subjectId: known-canon-fang-yinluo-practice-tool
+        predicate: owned-by
+        value:
+          kind: local_entity
+          localEntityId: self
+        description: 本人持有的个人修习器物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-fang-yinluo-cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 元婴初期
+        description: 元婴初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-fang-yinluo-learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。
+        description: 阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-fang-yinluo-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 有修炼资格，根系细分未设定。
+        description: 有修炼资格，根系细分未设定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-dajin-fang-spouse
+        subjectId: self
+        predicate: spouse
+        value:
+          kind: local_entity
+          localEntityId: known-canon-lu-yinluo
+        description: 两人目前为伴侣。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-dajin-fang-leader
+        subjectId: self
+        predicate: leads
+        value:
+          kind: local_entity
+          localEntityId: known-dajin-yinluo-sect
+        description: 承担本宗管理职责，宗产与个人财物不同。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-fang-yinluo
+      - local_entity_id: known-canon-lu-yinluo
+        canonical_entity_ids:
+          - canon-lu-yinluo
+      - local_entity_id: known-dajin-yinluo-main-hall
+        canonical_entity_ids:
+          - dajin-yinluo-main-hall
+      - local_entity_id: known-dajin-yinluo-sect
+        canonical_entity_ids:
+          - dajin-yinluo-sect
+      - local_entity_id: known-dajin-yinluo-corpse-yard
+        canonical_entity_ids:
+          - dajin-yinluo-corpse-yard
+      - local_entity_id: known-dajin-yinluo-lamp-room
+        canonical_entity_ids:
+          - dajin-yinluo-lamp-room
+      - local_entity_id: known-original-dajin-yinluo-zhoujian
+        canonical_entity_ids:
+          - original-dajin-yinluo-zhoujian
+      - local_entity_id: known-canon-fang-yinluo-soul-lamp
+        canonical_entity_ids:
+          - canon-fang-yinluo-soul-lamp
+      - local_entity_id: known-canon-lu-yinluo-soul-lamp
+        canonical_entity_ids:
+          - canon-lu-yinluo-soul-lamp
+      - local_entity_id: known-canon-fang-yinluo-practice-tool
+        canonical_entity_ids:
+          - canon-fang-yinluo-practice-tool

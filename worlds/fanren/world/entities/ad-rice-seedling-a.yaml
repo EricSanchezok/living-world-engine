@@ -1,0 +1,18 @@
+id: ad-rice-seedling-a
+kind: item
+name: 血牙米甲苗
+description: 第一株未熟苗，有独立根系，移栽会改变实际所在。
+placement: ad-rice-seedlings
+facts:
+  - id: ad-rice-seedling-a-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-grower
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: canon-shenlou-stone
+kind: item
+name: 蜃楼石
+description: 护宫方位阵的阵眼异宝，置于有防护的阵位；离位或被毁会影响对应阵法，不能从名称生成第二块。
+placement: north-shenlou-zone
+facts:
+  - id: canon-shenlou-stone-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

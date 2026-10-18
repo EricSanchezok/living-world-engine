@@ -1,0 +1,166 @@
+id: canon-hu-yushuang
+kind: person
+name: 胡玉双
+description: 血天活动的三尾狐修士，长于主持交易、察言观色与保护自己的体面。
+placement: seas-hu-house
+facts:
+  - id: canon-hu-yushuang-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-hu-yushuang
+  - id: canon-hu-yushuang-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体狐族修行、媚术、宝物辨识与拍卖主持。
+    description: 合体狐族修行、媚术、宝物辨识与拍卖主持。
+    access:
+      kind: agents
+      agentIds:
+        - canon-hu-yushuang
+  - id: canon-hu-yushuang-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-hu-yushuang
+meters:
+  - id: canon-hu-yushuang-health
+    definition_id: health
+    current: 100
+  - id: canon-hu-yushuang-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-hu-yushuang-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-hu-yushuang-force
+    definition_id: force
+    value: 7
+  - id: canon-hu-yushuang-craft
+    definition_id: craft
+    value: 7
+  - id: canon-hu-yushuang-perception
+    definition_id: perception
+    value: 7
+  - id: canon-hu-yushuang-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-hu-yushuang
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血天活动的三尾狐修士，长于主持交易、察言观色与保护自己的体面。
+      voice: 平日笑语灵活，遭调侃时会反问到对方面前；谈钱和职责时格外清楚。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否接一份远赴风元主持小场交易的邀约，保留自己报价。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 胡玉双
+        description: 血天活动的三尾狐修士，长于主持交易、察言观色与保护自己的体面。
+        status: observed
+      - id: location
+        name: 胡氏三尾狐修行所
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-hu-yushuang-private-stock
+        name: 胡玉双的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-seas-hu-invitation
+        name: 飞云致胡玉双邀约
+        description: 请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。
+        status: observed
+      - id: known-canon-fei-yun
+        name: 飞云仙子
+        description: 过去经商盟信函介绍的同行，本次具体邀约仍待本人决定。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体狐族修行、媚术、宝物辨识与拍卖主持。
+        description: 合体狐族修行、媚术、宝物辨识与拍卖主持。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-hu-yushuang
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-hu-house
+      - local_entity_id: known-canon-hu-yushuang-private-stock
+        canonical_entity_ids:
+          - canon-hu-yushuang-private-stock
+      - local_entity_id: known-seas-hu-invitation
+        canonical_entity_ids:
+          - seas-hu-invitation
+      - local_entity_id: known-canon-fei-yun
+        canonical_entity_ids:
+          - canon-fei-yun

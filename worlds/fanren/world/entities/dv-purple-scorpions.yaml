@@ -1,0 +1,26 @@
+id: dv-purple-scorpions
+kind: social-group
+name: 成熟紫纹蝎群
+description: 十四只乌紫色成熟飞蝎，可以分散行动。
+placement: dv-scorpion-peak
+facts:
+  - id: dv-purple-scorpions-count
+    predicate: count
+    value:
+      kind: number
+      value: 14
+    description: count
+    access:
+      kind: private
+  - id: dv-purple-scorpions-behavior
+    predicate: behavior
+    value:
+      kind: text
+      value: 飞速与甲壳、剧毒俱强，偏好强毒气味；诱饵能影响行动但不保证所有个体同时离巢。
+    description: 飞速与甲壳、剧毒俱强，偏好强毒气味；诱饵能影响行动但不保证所有个体同时离巢。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

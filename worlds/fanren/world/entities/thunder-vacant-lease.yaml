@@ -1,0 +1,26 @@
+id: thunder-vacant-lease
+kind: item
+name: 松窗洞待签租契
+description: 范围含居室、静室、空院与小试验间，不含山峰、公用水道和其他洞府。
+placement: thunder-cave-registrar
+facts:
+  - id: thunder-vacant-lease-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-vacant-lease-terms
+    predicate: terms
+    value:
+      kind: text
+      value: 一次租期百个人界年即3153600000共同秒，现报价一百二十高阶灵石，签收交付才起算；获邀访客可留宿但不能转租，危险试验须约定防护。
+    description: 一次租期百个人界年即3153600000共同秒，现报价一百二十高阶灵石，签收交付才起算；获邀访客可留宿但不能转租，危险试验须约定防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

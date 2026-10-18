@@ -1,0 +1,29 @@
+id: ad-niepan-silver-body
+kind: creature
+name: 涅槃银化身
+description: 本体收回静养的同主体化身，当前未出征；可按本体真实恢复与控制有限活动。
+placement: ad-niepan-retreat
+facts:
+  - id: ad-niepan-silver-body-same-subject
+    predicate: same-subject
+    value:
+      kind: entity
+      entityId: canon-nie-pan
+    description: same-subject
+    access:
+      kind: private
+  - id: ad-niepan-silver-body-current-ability
+    predicate: current-ability
+    value:
+      kind: text
+      value: 能受本体有限驱动进行交谈、搬运和护持；施术消耗涅槃当前真实法力预算，不能在收回静养状态独立获得全盛战力。
+    description: 能受本体有限驱动进行交谈、搬运和护持；施术消耗涅槃当前真实法力预算，不能在收回静养状态独立获得全盛战力。
+    access:
+      kind: private
+meters:
+  - id: ad-niepan-silver-body-health
+    definition_id: health
+    current: 70
+quantities: []
+ratings: []
+shared_activity_resources: []

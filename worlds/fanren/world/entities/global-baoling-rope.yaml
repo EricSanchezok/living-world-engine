@@ -1,0 +1,26 @@
+id: global-baoling-rope
+kind: item
+name: 钟架备用绳扣
+description: 一套待更换的磨损绳扣与一条备用绳。
+placement: global-baoling-temple
+facts:
+  - id: global-baoling-rope-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-baoling-temple
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-baoling-rope-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 绳扣磨损可实查；备用绳一次替换就消耗该备用件，不再作为第二条。
+    description: 绳扣磨损可实查；备用绳一次替换就消耗该备用件，不再作为第二条。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

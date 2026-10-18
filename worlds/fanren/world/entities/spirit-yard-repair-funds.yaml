@@ -1,0 +1,20 @@
+id: spirit-yard-repair-funds
+kind: container
+name: 货场维修预算袋
+description: 专用于已接收维修单的现款，不是管事私人零用。
+placement: spirit-wharf
+facts:
+  - id: spirit-yard-repair-funds-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yard-steward
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

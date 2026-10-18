@@ -1,0 +1,42 @@
+id: seas-island-gate
+kind: location
+name: 龙岛验帖殿
+description: 检验真实邀请、接引身份与禁区边界。
+placement: seas-dragon-island
+facts:
+  - id: seas-island-gate-route-seas-moke-approach
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-moke-approach
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-gate-condition-seas-moke-approach
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需真实坐标和跨界耐力、岛方接引或已核验凭证；虚空行旅需实际耗时，不是普通御风捷径。
+    description: 需真实坐标和跨界耐力、岛方接引或已核验凭证；虚空行旅需实际耗时，不是普通御风捷径。
+    access:
+      kind: public
+  - id: seas-island-gate-route-seas-island-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-town
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-gate-condition-seas-island-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛方核验并批准普通街区出入后可用殿内短阵；不得凭口头称受邀越过禁区。
+    description: 岛方核验并批准普通街区出入后可用殿内短阵；不得凭口头称受邀越过禁区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

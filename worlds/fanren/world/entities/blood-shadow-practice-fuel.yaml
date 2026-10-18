@@ -1,0 +1,22 @@
+id: blood-shadow-practice-fuel
+kind: container
+name: 血影试法储料
+description: 用于有限试法的已经持有材料。
+placement: canon-xue-ying-zi
+facts:
+  - id: blood-shadow-practice-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xue-ying-zi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: prepared-material
+    amount: 6
+  - definition_id: mid-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

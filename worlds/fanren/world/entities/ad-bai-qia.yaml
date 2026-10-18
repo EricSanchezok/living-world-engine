@@ -1,0 +1,187 @@
+id: ad-bai-qia
+kind: person
+name: 白洽
+description: 白家当日驯兽房管事，处理族有坐骑与租费。
+placement: ad-huanye-city
+facts:
+  - id: ad-bai-qia-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: ad-bai-qia-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚魔功、八足蜥育养、火云矿用具维护。
+    description: 炼虚魔功、八足蜥育养、火云矿用具维护。
+    access:
+      kind: private
+  - id: ad-bai-qia-relation-ad-zhao-shao
+    predicate: relation-ad-zhao-shao
+    value:
+      kind: entity
+      entityId: ad-zhao-shao
+    description: 共同护路费用尚未谈拢。
+    access:
+      kind: private
+  - id: ad-bai-qia-relation-ad-ning-xun
+    predicate: relation-ad-ning-xun
+    value:
+      kind: entity
+      entityId: ad-ning-xun
+    description: 坐骑服务与产权分开，彼此已看过约稿。
+    access:
+      kind: private
+  - id: ad-bai-qia-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: ad-bai-family
+    description: member-of
+    access:
+      kind: public
+meters:
+  - id: ad-bai-qia-health
+    definition_id: health
+    current: 100
+  - id: ad-bai-qia-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: ad-bai-qia-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: ad-bai-qia-force
+    definition_id: force
+    value: 6
+  - id: ad-bai-qia-craft
+    definition_id: craft
+    value: 6
+  - id: ad-bai-qia-perception
+    definition_id: perception
+    value: 6
+  - id: ad-bai-qia-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: ad-bai-qia
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 白家当日驯兽房管事，处理族有坐骑与租费。
+      voice: 把话说得缓而明，夸人会指出具体做法。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 议定新一趟短程护送是否出租族有成年蜥，留足繁育与族用数量。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 白洽
+        description: 白家当日驯兽房管事，处理族有坐骑与租费。
+        status: observed
+      - id: location
+        name: 幻夜城
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-bai-qia-purse
+        name: 白洽私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-zhao-shao
+        name: 赵韶
+        description: 共同护路费用尚未谈拢。
+        status: observed
+      - id: known-ad-ning-xun
+        name: 宁旬
+        description: 坐骑服务与产权分开，彼此已看过约稿。
+        status: observed
+      - id: known-ad-bai-family
+        name: 幻夜白家
+        description: 自身所属族群，有公私资产边界。
+        status: observed
+      - id: known-ad-bai-family-fund
+        name: 白家驯兽房公库
+        description: 族产，白洽只能依授权支饲养、维修与出行费用。
+        status: observed
+      - id: known-ad-bai-adult-lizard
+        name: 白家成年八足蜥
+        description: 族有的一头成年坐骑，区别闻沙私人两兽；体力、饲养和返还须记账。
+        status: observed
+      - id: known-ad-firecloud-xu
+        name: 许铎
+        description: 矿场雇员，按权限与实际劳动支付，不能视作本人随身财产。
+        status: observed
+      - id: known-ad-firecloud-yan
+        name: 严绣
+        description: 矿场雇员，按权限与实际劳动支付，不能视作本人随身财产。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚魔功、八足蜥育养、火云矿用具维护。
+        description: 炼虚魔功、八足蜥育养、火云矿用具维护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-bai-qia
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-huanye-city
+      - local_entity_id: known-ad-bai-qia-purse
+        canonical_entity_ids:
+          - ad-bai-qia-purse
+      - local_entity_id: known-ad-zhao-shao
+        canonical_entity_ids:
+          - ad-zhao-shao
+      - local_entity_id: known-ad-ning-xun
+        canonical_entity_ids:
+          - ad-ning-xun
+      - local_entity_id: known-ad-bai-family
+        canonical_entity_ids:
+          - ad-bai-family
+      - local_entity_id: known-ad-bai-family-fund
+        canonical_entity_ids:
+          - ad-bai-family-fund
+      - local_entity_id: known-ad-bai-adult-lizard
+        canonical_entity_ids:
+          - ad-bai-adult-lizard
+      - local_entity_id: known-ad-firecloud-xu
+        canonical_entity_ids:
+          - ad-firecloud-xu
+      - local_entity_id: known-ad-firecloud-yan
+        canonical_entity_ids:
+          - ad-firecloud-yan

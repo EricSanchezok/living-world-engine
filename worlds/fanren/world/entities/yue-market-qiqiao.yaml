@@ -1,0 +1,34 @@
+id: yue-market-qiqiao
+kind: location
+name: 七巧阁
+description: 灵材交易铺，库内不同材料须分别验看用途和数量。
+placement: yue-huangfeng-market
+facts:
+  - id: yue-market-qiqiao-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-market-qiqiao-property-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-qiqiao-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-qiqiao-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

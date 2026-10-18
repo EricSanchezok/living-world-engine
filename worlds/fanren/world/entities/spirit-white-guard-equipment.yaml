@@ -1,0 +1,18 @@
+id: spirit-white-guard-equipment
+kind: item
+name: 陆栖山的重弩
+description: 供炼体守卫操作的重弩，随附三枚实体弩矢，射出后须回收或补充。
+placement: spirit-white-guard
+facts:
+  - id: spirit-white-guard-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-white-guard
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

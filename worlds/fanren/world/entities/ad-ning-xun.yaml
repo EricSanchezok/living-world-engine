@@ -1,0 +1,144 @@
+id: ad-ning-xun
+kind: person
+name: 宁旬
+description: 宁家小库保管人，给长辈理账但有个人积蓄。
+placement: ad-huanye-city
+facts:
+  - id: ad-ning-xun-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: ad-ning-xun-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴魔功、货物封存与验账。
+    description: 元婴魔功、货物封存与验账。
+    access:
+      kind: private
+  - id: ad-ning-xun-relation-ad-bai-qia
+    predicate: relation-ad-bai-qia
+    value:
+      kind: entity
+      entityId: ad-bai-qia
+    description: 坐骑服务与产权分开，彼此已看过约稿。
+    access:
+      kind: private
+  - id: ad-ning-xun-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: ad-ning-family
+    description: member-of
+    access:
+      kind: public
+meters:
+  - id: ad-ning-xun-health
+    definition_id: health
+    current: 100
+  - id: ad-ning-xun-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: ad-ning-xun-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: ad-ning-xun-force
+    definition_id: force
+    value: 4
+  - id: ad-ning-xun-craft
+    definition_id: craft
+    value: 4
+  - id: ad-ning-xun-perception
+    definition_id: perception
+    value: 4
+  - id: ad-ning-xun-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: ad-ning-xun
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 宁家小库保管人，给长辈理账但有个人积蓄。
+      voice: 口气稳，算错了愿意当面重算。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 确认本族付费买到的只是运输服务而非白家坐骑所有权。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 宁旬
+        description: 宁家小库保管人，给长辈理账但有个人积蓄。
+        status: observed
+      - id: location
+        name: 幻夜城
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-ning-xun-purse
+        name: 宁旬私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-bai-qia
+        name: 白洽
+        description: 坐骑服务与产权分开，彼此已看过约稿。
+        status: observed
+      - id: known-ad-ning-family
+        name: 幻夜宁家
+        description: 自身所属族群，有公私资产边界。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴魔功、货物封存与验账。
+        description: 元婴魔功、货物封存与验账。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-ning-xun
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-huanye-city
+      - local_entity_id: known-ad-ning-xun-purse
+        canonical_entity_ids:
+          - ad-ning-xun-purse
+      - local_entity_id: known-ad-bai-qia
+        canonical_entity_ids:
+          - ad-bai-qia
+      - local_entity_id: known-ad-ning-family
+        canonical_entity_ids:
+          - ad-ning-family

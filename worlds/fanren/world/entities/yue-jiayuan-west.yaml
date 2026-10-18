@@ -1,0 +1,34 @@
+id: yue-jiayuan-west
+kind: location
+name: 嘉元西城区
+description: 城西街巷与码头工人生活、搬运营生相接。
+placement: yue-jiayuan
+facts:
+  - id: yue-jiayuan-west-route-yue-jiayuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan
+    description: 沿嘉元城内公共街路实际行走；途中院门、店铺和货仓另受各自通行条件限制。
+    access:
+      kind: public
+  - id: yue-jiayuan-west-dominant-guild
+    predicate: dominant-guild
+    value:
+      kind: entity
+      entityId: jingjiao-guild
+    description: 惊蛟会在此地有强势经营与江湖影响；居民和商户的私产仍各归其主，势力影响不等官府所有权。
+    access:
+      kind: public
+  - id: yue-jiayuan-west-route-yue-jiayuan-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan-wharf
+    description: 沿嘉元城内公共街路实际行走；途中院门、店铺和货仓另受各自通行条件限制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

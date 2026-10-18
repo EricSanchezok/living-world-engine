@@ -1,0 +1,45 @@
+id: canon-mulan-yuanming-lamp
+kind: item
+name: 元明灯
+description: 唯一青铜传承古灯。祭仪所显九道灯影不是九件独立古宝；当前未点燃，也没有已降临的圣禽投影。
+placement: steppe-lamp-room
+facts:
+  - id: canon-mulan-yuanming-lamp-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: mulan-tribal-community
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-mulan-yuanming-lamp-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-deng-shou
+    description: custodian
+    access:
+      kind: public
+  - id: canon-mulan-yuanming-lamp-unlit
+    predicate: operating-state
+    value:
+      kind: text
+      value: 灯未点燃，现场没有圣禽投影；若有人点灯必须记录耗油、操作者、法力及维持时间。
+    description: 灯未点燃，现场没有圣禽投影；若有人点灯必须记录耗油、操作者、法力及维持时间。
+    access:
+      kind: public
+  - id: steppe-yuanming-flame-limits
+    predicate: capability
+    value:
+      kind: text
+      value: 受适当操作者婴火、法力与灯油条件催动时可放青焰炼宝，尤克木性；法焰有被抵抗或器物封禁的可能。灯未点燃时不会自动伤害或炼化附近物品。
+    description: 青焰不是对任何法宝都无条件即毁的权限；应核点灯、供能、接触及抵抗条件。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhong-mulan
+        - steppe-deng-shou
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

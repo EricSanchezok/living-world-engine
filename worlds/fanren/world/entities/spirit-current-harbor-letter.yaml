@@ -1,0 +1,27 @@
+id: spirit-current-harbor-letter
+kind: item
+name: 玄武港现位回函
+description: 程海笙刚送来的现位回函，折口有行旅封签。
+placement: spirit-xuanwu-route-office
+facts:
+  - id: spirit-current-harbor-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-caravan-service
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-current-harbor-letter-confirmed-position
+    predicate: confirmed-position
+    value:
+      kind: text
+      value: 回函确认当前接引港可正常靠近，远航者仍须使用港方领航信标；此回函只确认一段接驳，不含任何古龟控制权。
+    description: 回函确认当前接引港可正常靠近，远航者仍须使用港方领航信标；此回函只确认一段接驳，不含任何古龟控制权。
+    access:
+      kind: discoverable
+      condition: 有权阅信者实际开函阅读，或石穗向其讲明内容。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

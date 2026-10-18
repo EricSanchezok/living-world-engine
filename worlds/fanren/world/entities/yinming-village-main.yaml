@@ -1,0 +1,186 @@
+id: yinming-village-main
+kind: location
+name: 黑石大村
+description: 主村有厚墙、檀云石符和旧碑屋。
+placement: yinming-stones
+facts:
+  - id: yinming-village-main-route-yinming-stones
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-stones
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-stones
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-hall
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 处理公共事务与邻村来函。
+    description: 处理公共事务与邻村来函。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-platform
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-platform
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石符凹槽空置，内部已注有限阴力。
+    description: 石符凹槽空置，内部已注有限阴力。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-archive
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧石碑上记着前人修行与文字对照。
+    description: 旧石碑上记着前人修行与文字对照。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-grain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-grain
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-grain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 种粮、口粮和熏肉分别码放。
+    description: 种粮、口粮和熏肉分别码放。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-workshop
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-workshop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 骨材、半成品与浸槽不混放。
+    description: 骨材、半成品与浸槽不混放。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-guest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-guest
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-guest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两间各有一床，可按来人意愿分配。
+    description: 两间各有一床，可按来人意愿分配。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-gate
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门轴需要维护，守门人按风况值班。
+    description: 门轴需要维护，守门人按风况值班。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-school
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-school
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 教年轻人步法、结伴警戒和盾矛配合。
+    description: 教年轻人步法、结伴警戒和盾矛配合。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-infirmary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-infirmary
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-infirmary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有凡俗药物、夹板与清洁工具。
+    description: 只有凡俗药物、夹板与清洁工具。
+    access:
+      kind: public
+  - id: yinming-village-main-route-yinming-main-kitchen
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-main-kitchen
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-main-condition-yinming-main-kitchen
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按真实领取食物做饭，余粮可送回库。
+    description: 按真实领取食物做饭，余粮可送回库。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

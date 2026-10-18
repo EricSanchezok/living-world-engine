@@ -1,0 +1,18 @@
+id: local-scholar-knife-02
+kind: item
+name: 儒生前辈的练习飞刀乙
+description: 一枚可投掷且需要寻回的凡铁飞刀。
+placement: canon-martial-uncle-scholar
+facts:
+  - id: local-scholar-knife-02-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-martial-uncle-scholar
+    description: 随身用具属于持有人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

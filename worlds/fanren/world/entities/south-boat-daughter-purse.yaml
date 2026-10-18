@@ -1,0 +1,20 @@
+id: south-boat-daughter-purse
+kind: container
+name: 葛小宁的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-boat-daughter
+facts:
+  - id: south-boat-daughter-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-boat-daughter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 50
+ratings: []
+shared_activity_resources: []

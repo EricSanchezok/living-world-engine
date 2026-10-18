@@ -1,0 +1,26 @@
+id: steppe-shiwan-store
+kind: location
+name: 石湾供奉库
+description: 部落积下的灵石、草药与粮食各有封签，分殿供奉和日常口粮在册上分栏。
+placement: steppe-shiwan-camp
+facts:
+  - id: steppe-shiwan-store-route-steppe-shiwan-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-shiwan-camp
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-shiwan-store-travel-steppe-shiwan-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

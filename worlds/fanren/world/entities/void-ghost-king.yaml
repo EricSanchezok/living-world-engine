@@ -1,0 +1,18 @@
+id: void-ghost-king
+kind: animal-group
+name: 鬼雾中的鬼王
+description: 一个较强鬼物，占据深雾。
+placement: void-mist
+facts:
+  - id: void-ghost-king-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 1
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

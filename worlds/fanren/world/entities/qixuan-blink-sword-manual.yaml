@@ -1,0 +1,36 @@
+id: qixuan-blink-sword-manual
+kind: item
+name: 眨眼剑谱传本
+description: 七绝堂存藏的凡俗剑技资料；书中技术不是读到即熟练，门内取阅受管理。
+placement: qixuan-seven-arts-hall
+facts:
+  - id: qixuan-blink-sword-manual-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 门派藏本，不是玩家初始奖励。
+    access:
+      kind: private
+  - id: qixuan-blink-sword-manual-training-scope
+    predicate: training-scope
+    value:
+      kind: text
+      value: 不依赖内家真气，结合身法、时机、环境、器具与多种技巧；具体招式需逐段学练，不自动授予战斗胜利。
+    description: 不依赖内家真气，结合身法、时机、环境、器具与多种技巧；具体招式需逐段学练，不自动授予战斗胜利。
+    access:
+      kind: discoverable
+      condition: 实际取得传本、识字并阅读相应段落；仅听名字不算学会。
+  - id: global-detail-blink-text-contents
+    predicate: readable-technique-contents
+    value:
+      kind: text
+      value: 以光线、视觉误差、地形与行动时机配合身法和器具；招式分有细部变化。书中要求不以已成内家真气的路线兼练，并须耐性与合适天赋；这些学习条件不保证刺杀必成。实际借阅、读懂和练习后才能获得相应招式。
+    description: 以光线、视觉误差、地形与行动时机配合身法和器具；招式分有细部变化。书中要求不以已成内家真气的路线兼练，并须耐性与合适天赋；这些学习条件不保证刺杀必成。实际借阅、读懂和练习后才能获得相应招式。
+    access:
+      kind: discoverable
+      condition: 实际获准接触传本并阅读相应段落。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

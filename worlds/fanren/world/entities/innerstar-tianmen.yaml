@@ -1,0 +1,26 @@
+id: innerstar-tianmen
+kind: location
+name: 天门峰
+description: 青云山三主峰之一，有修炼洞府与禁制。
+placement: innerstar-qingyun-mountain
+facts:
+  - id: innerstar-tianmen-route-innerstar-qingyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-qingyun-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-tianmen-condition-innerstar-qingyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青云山三主峰之一，有修炼洞府与禁制。
+    description: 青云山三主峰之一，有修炼洞府与禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

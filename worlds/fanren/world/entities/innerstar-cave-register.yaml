@@ -1,0 +1,26 @@
+id: innerstar-cave-register
+kind: item
+name: 空洞租居册
+description: 听潮、临风两洞尚未出租，青石小院由金青合法租用至当前起六十个人界年之后。
+placement: innerstar-cave-office
+facts:
+  - id: innerstar-cave-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-cave-register-jin-lease
+    predicate: jin-lease
+    value:
+      kind: text
+      value: 现有租约还余六十个人界年；金青可以继续居住并自行打理私物，不得转卖整座山。
+    description: 现有租约还余六十个人界年；金青可以继续居住并自行打理私物，不得转卖整座山。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,235 @@
+id: thunder-jing-teacher
+kind: person
+name: 练霜
+description: 晶族工艺师，重精密灵纹，愿收外族有耐心的学生。
+placement: thunder-jing-workshop
+facts:
+  - id: thunder-jing-teacher-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - thunder-jing-teacher
+  - id: thunder-jing-teacher-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神修行、灵纹刻绘与器物测试。
+    description: 化神修行、灵纹刻绘与器物测试。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-jing-teacher
+  - id: thunder-jing-teacher-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    description: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-jing-teacher
+  - id: thunder-jing-teacher-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-jing-people
+    description: affiliation
+    access:
+      kind: public
+  - id: thunder-jing-teacher-offers-apprenticeship-thunder-apprentice
+    predicate: offers-apprenticeship
+    value:
+      kind: entity
+      entityId: thunder-apprentice
+    description: offers-apprenticeship
+    access:
+      kind: private
+meters:
+  - id: thunder-jing-teacher-health
+    definition_id: health
+    current: 100
+  - id: thunder-jing-teacher-mana
+    definition_id: mana
+    current: 1100
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: thunder-jing-teacher-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: thunder-jing-teacher-force
+    definition_id: force
+    value: 5
+  - id: thunder-jing-teacher-craft
+    definition_id: craft
+    value: 5
+  - id: thunder-jing-teacher-perception
+    definition_id: perception
+    value: 5
+  - id: thunder-jing-teacher-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: thunder-jing-teacher
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 晶族工艺师，重精密灵纹，愿收外族有耐心的学生。
+      voice: 讲话轻快，遇精细处会突然放慢；对粗糙样品会直接指出问题。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 让岑音看清细工路线的好处，也准备接受她另作选择。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 练霜
+        description: 晶族工艺师，重精密灵纹，愿收外族有耐心的学生。
+        status: observed
+      - id: location
+        name: 晶族微构坊
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-thunder-jing-people
+        name: 晶族
+        description: 自己所属的族群或公务机构。
+        status: observed
+      - id: known-thunder-apprentice
+        name: 岑音
+        description: 已就微构手艺交谈，尚未拜师或签约。
+        status: observed
+      - id: known-thunder-wangu-teacher
+        name: 许渐
+        description: 曾见面讨论工艺，各有不同偏好。
+        status: observed
+      - id: known-thunder-jing-teacher-personal-kit
+        name: 练霜的私用行囊
+        description: 私人修炼和生活用品，机构资源另行保管。
+        status: observed
+      - id: known-thunder-jing-study-offer
+        name: 岑音的晶族试学邀书
+        description: 十二本地月试学：每本地月十二低阶灵石补助，先学细纹刻绘；可保留个人作品署名，第六本地月后可复议。
+        status: observed
+      - id: known-thunder-jing-teaching-fund
+        name: 十二本地月试学预留款
+        description: 先预留十二个月补助，超出这段期限的新款须另议；公库不会自动替付。
+        status: observed
+      - id: known-thunder-debate-notice
+        name: 问艺台本轮论题
+        description: 本轮论题邀请，尚未宣布胜者。
+        status: observed
+      - id: known-thunder-independent-scholar
+        name: 温砚
+        description: 见过并聊过工艺研究的熟人，能自行决定是否合作。
+        status: observed
+      - id: known-thunder-debate-host
+        name: 许衡
+        description: 本轮论辩的主持人，曾商量演示规则。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神修行、灵纹刻绘与器物测试。
+        description: 化神修行、灵纹刻绘与器物测试。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        description: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: debate-position
+        subjectId: self
+        predicate: debate-position
+        value:
+          kind: text
+          value: 自己主张轻巧细纹有独立价值，传纸与重载不应混为同一个评分。
+        description: 自己主张轻巧细纹有独立价值，传纸与重载不应混为同一个评分。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        description: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-jing-teacher
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-jing-workshop
+      - local_entity_id: known-thunder-jing-people
+        canonical_entity_ids:
+          - thunder-jing-people
+      - local_entity_id: known-thunder-apprentice
+        canonical_entity_ids:
+          - thunder-apprentice
+      - local_entity_id: known-thunder-wangu-teacher
+        canonical_entity_ids:
+          - thunder-wangu-teacher
+      - local_entity_id: known-thunder-jing-teacher-personal-kit
+        canonical_entity_ids:
+          - thunder-jing-teacher-personal-kit
+      - local_entity_id: known-thunder-jing-study-offer
+        canonical_entity_ids:
+          - thunder-jing-study-offer
+      - local_entity_id: known-thunder-jing-teaching-fund
+        canonical_entity_ids:
+          - thunder-jing-teaching-fund
+      - local_entity_id: known-thunder-debate-notice
+        canonical_entity_ids:
+          - thunder-debate-notice
+      - local_entity_id: known-thunder-independent-scholar
+        canonical_entity_ids:
+          - thunder-independent-scholar
+      - local_entity_id: known-thunder-debate-host
+        canonical_entity_ids:
+          - thunder-debate-host

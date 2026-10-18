@@ -1,0 +1,26 @@
+id: north-liucui-seat
+kind: location
+name: 柳翠派驻地
+description: 位于半岛外围，来往与物资独立于小极宫内库。
+placement: human-beiming-island
+facts:
+  - id: north-liucui-seat-route-north-entry-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-entry-market
+    description: 外围道路与引路，仍须防寒和准入。
+    access:
+      kind: public
+  - id: north-liucui-seat-travel-north-entry-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外围道路与引路，仍须防寒和准入。
+    description: 外围道路与引路，仍须防寒和准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

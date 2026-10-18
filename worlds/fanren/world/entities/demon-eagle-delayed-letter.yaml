@@ -1,0 +1,35 @@
+id: demon-eagle-delayed-letter
+kind: item
+name: 迟到的巡路函
+description: 迟到的巡路函，交接痕迹清楚可辨。
+placement: demon-eagle-courier
+facts:
+  - id: demon-eagle-delayed-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-eagle-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-eagle-delayed-letter-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 玄北衡命玄青翎把此前沿崖风路巡察结果送到岳白岑处：原定东崖落脚点受横风影响，需要暂改西侧停靠。尚无对方确认，不能假定商队已经改路。
+    description: 玄北衡命玄青翎把此前沿崖风路巡察结果送到岳白岑处：原定东崖落脚点受横风影响，需要暂改西侧停靠。尚无对方确认，不能假定商队已经改路。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+  - id: demon-eagle-delayed-letter-recipient
+    predicate: recipient
+    value:
+      kind: entity
+      entityId: demon-wolf-steward
+    description: recipient
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

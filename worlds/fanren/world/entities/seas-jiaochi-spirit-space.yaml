@@ -1,0 +1,26 @@
+id: seas-jiaochi-spirit-space
+kind: location
+name: 角蚩古契约真灵栖地
+description: 与雷鸣相通但入口受古契约制约的独特空间；当前未有战争召请。
+placement: spirit-realm
+facts:
+  - id: seas-jiaochi-spirit-space-route-thunder-jiaochi
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jiaochi
+    description: route-to
+    access:
+      kind: public
+  - id: seas-jiaochi-spirit-space-condition-thunder-jiaochi
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须契约持有方与真灵回应，真实仪式和承载能力；普通访客不因知道名字即可穿入。
+    description: 须契约持有方与真灵回应，真实仪式和承载能力；普通访客不因知道名字即可穿入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

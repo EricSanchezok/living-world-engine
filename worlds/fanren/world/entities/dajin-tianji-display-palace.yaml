@@ -1,0 +1,26 @@
+id: dajin-tianji-display-palace
+kind: item
+name: 折叠天机府
+description: 盒内乳白灵光包着一套折叠洞府构件，展开和收取须掌握对应法门并有足够空地。 收拢前须移出活物和灵药；附设兽舍不具有灵兽袋保命能力。
+placement: dajin-tianji-store
+facts:
+  - id: dajin-tianji-display-palace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianji-guild
+    description: 本商号所存配套器物，转让须获所有者授权。
+    access:
+      kind: public
+  - id: dajin-tianji-folding-state
+    predicate: folding-state
+    value:
+      kind: text
+      value: 已收拢；只让屋舍及一同炼制的桌椅等死物随之变化，保持同一器物。活物受变幻空间巨压，封闭后又不能吸取外界灵气，不能借此运输住民或长期养兽，药园灵药须先移植。
+    description: 收放不复制器物或资源，随府变化的死物范围不扩展到任意临时置入物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

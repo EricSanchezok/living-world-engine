@@ -1,0 +1,20 @@
+id: feiling-wood-wine-vessel
+kind: container
+name: 木髓酒坛
+description: 以灵木髓酿成的浓酒，封坛中尚余八杯。
+placement: feiling-muqing-hall
+facts:
+  - id: feiling-wood-wine-vessel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-wood-pith-wine
+    amount: 8
+ratings: []
+shared_activity_resources: []

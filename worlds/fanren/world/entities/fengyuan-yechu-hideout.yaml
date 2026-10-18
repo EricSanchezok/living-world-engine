@@ -1,0 +1,26 @@
+id: fengyuan-yechu-hideout
+kind: location
+name: 木棉材色辨验间
+description: 收存木材样片的小间，与邻铺共用外廊，里间有单独封门。
+placement: fengyuan-mumian-city
+facts:
+  - id: fengyuan-yechu-hideout-route-to-fengyuan-mumian-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mumian-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-yechu-hideout-route-conditions-fengyuan-mumian-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 下层公共廊可到门外；里间由现用者保管。
+    description: 下层公共廊可到门外；里间由现用者保管。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

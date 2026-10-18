@@ -1,0 +1,18 @@
+id: innerstar-haiyuan-array
+kind: item
+name: 收购埠护栏阵
+description: 商户合资的小阵，阻低阶兽冲撞；须灵石维护，强攻会损坏。
+placement: innerstar-haiyuan-market
+facts:
+  - id: innerstar-haiyuan-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-merchants
+    description: 由海猿岛商户合伙所有；实际交付才改变归属。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

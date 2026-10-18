@@ -1,0 +1,20 @@
+id: seas-wind-gold-stock
+kind: container
+name: 砺角风精金库
+description: 当前80斤风精金，其中20斤有驿院旧约；出售必须减少此库实际重量。
+placement: seas-island-town
+facts:
+  - id: seas-wind-gold-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-trader
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: wind-gold-jin
+    amount: 80
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: blood-xuehen-transfer-array
+kind: blood-array
+name: 血痕宗跨陆阵
+description: 古跨陆阵体尚完整，目的地盘可调；当前没有收到接收端的有效回信。
+placement: blood-xuehen-array-hall
+facts:
+  - id: blood-xuehen-transfer-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xuehen-sect
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-xuehen-transfer-array-activation-condition
+    predicate: activation-condition
+    value:
+      kind: text
+      value: 先核清可接收的真实阵端、两端当次许可和耗材需求，再实付所需极品灵石。当前阵槽无石、无获准目的地，未经真实目标核验不得试送旅客。
+    description: 先核清可接收的真实阵端、两端当次许可和耗材需求，再实付所需极品灵石。当前阵槽无石、无获准目的地，未经真实目标核验不得试送旅客。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

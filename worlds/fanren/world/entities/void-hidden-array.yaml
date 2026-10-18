@@ -1,0 +1,51 @@
+id: void-hidden-array
+kind: location
+name: 旧阵密室
+description: 尘土覆盖的小室藏着可通第二层的简陋传送阵，石墙尚完整。
+placement: void-tower-five
+facts:
+  - id: void-hidden-array-route-void-tower-five
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-five
+    description: route-to
+    access:
+      kind: public
+  - id: void-hidden-array-condition-void-tower-five
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-hidden-array-route-void-spring
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-spring
+    description: route-to
+    access:
+      kind: public
+  - id: void-hidden-array-condition-void-spring
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-hidden-array-destination
+    predicate: destination
+    value:
+      kind: text
+      value: 此阵通向内殿第二层的灵泉宝室，不是直接出殿的阵。
+    description: 此阵通向内殿第二层的灵泉宝室，不是直接出殿的阵。
+    access:
+      kind: discoverable
+      condition: 实际检验阵理或使用此阵抵达目的地。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

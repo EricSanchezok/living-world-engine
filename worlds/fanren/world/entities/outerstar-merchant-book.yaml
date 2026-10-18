@@ -1,0 +1,18 @@
+id: outerstar-merchant-book
+kind: item
+name: 程素药名抄本
+description: 只录已查证古药名，千叶露须八级妖兽旁伴生的草汁，普通伴妖草不算。
+placement: outerstar-young-scholar
+facts:
+  - id: outerstar-merchant-book-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-young-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

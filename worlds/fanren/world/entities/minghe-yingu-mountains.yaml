@@ -1,0 +1,58 @@
+id: minghe-yingu-mountains
+kind: location
+name: 阴骨山脉
+description: 阴气深重的山脉，神池殿藏于深处。
+placement: minghe-space
+facts:
+  - id: minghe-yingu-mountains-route-minghe-withered-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-withered-wood
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-yingu-mountains-condition-minghe-withered-wood
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阴气深重的山脉，神池殿藏于深处。
+    description: 阴气深重的山脉，神池殿藏于深处。
+    access:
+      kind: public
+  - id: minghe-yingu-mountains-route-minghe-god-pool-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-god-pool-palace
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-yingu-mountains-condition-minghe-god-pool-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。
+    description: 有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。
+    access:
+      kind: public
+  - id: minghe-yingu-mountains-route-to-minghe-black-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-black-lake
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-yingu-mountains-route-conditions-minghe-black-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。
+    description: 沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

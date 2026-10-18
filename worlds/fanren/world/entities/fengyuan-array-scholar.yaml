@@ -1,0 +1,142 @@
+id: fengyuan-array-scholar
+kind: person
+name: 榆砚
+description: 研究旧阵结构的炼虚木族学者，愿意承认古卷中尚不能验证的部分。
+placement: fengyuan-old-array-study
+facts:
+  - id: fengyuan-array-scholar-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: fengyuan-array-scholar-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 木系炼虚法、低功率阵纹模型、有限试阵观察；没有实布大阵的完整条件。
+    description: 木系炼虚法、低功率阵纹模型、有限试阵观察；没有实布大阵的完整条件。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-array-scholar-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-array-scholar-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: fengyuan-array-scholar-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: fengyuan-array-scholar-force
+    definition_id: force
+    value: 6
+  - id: fengyuan-array-scholar-craft
+    definition_id: craft
+    value: 4
+  - id: fengyuan-array-scholar-perception
+    definition_id: perception
+    value: 6
+  - id: fengyuan-array-scholar-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: fengyuan-array-scholar
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 研究旧阵结构的炼虚木族学者，愿意承认古卷中尚不能验证的部分。
+      voice: 讲阵图会把已试过与还没试过分开，说到失败时带一点自嘲。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 用缩小的枝络模型核对旧图中供能次序，争取一次不伤活树的展示。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 榆砚
+        description: 研究旧阵结构的炼虚木族学者，愿意承认古卷中尚不能验证的部分。
+        status: observed
+      - id: location
+        name: 木棉阵学小楼
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-array-scholar-private-stock
+        name: 榆砚私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-wood-array-design
+        name: 旧木阵设计副卷
+        description: 本人获准研读的旧卷，未实际成功布成原型。
+        status: observed
+      - id: fengyuan-review-fengyuan-array-model
+        name: 枝络试阵模型
+        description: 自己组好的缩尺模型。
+        status: observed
+      - id: fengyuan-review-fengyuan-array-model-stock
+        name: 阵学模型料
+        description: 试验预算已经到库。
+        status: observed
+      - id: fengyuan-review-fengyuan-tree-warden
+        name: 槐叙
+        description: 负责古树的人，坚持试验先证明不会伤根。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 木系炼虚法、低功率阵纹模型、有限试阵观察；没有实布大阵的完整条件。
+        description: 木系炼虚法、低功率阵纹模型、有限试阵观察；没有实布大阵的完整条件。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-array-scholar
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-old-array-study
+      - local_entity_id: fengyuan-review-fengyuan-array-scholar-private-stock
+        canonical_entity_ids:
+          - fengyuan-array-scholar-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-wood-array-design
+        canonical_entity_ids:
+          - fengyuan-wood-array-design
+      - local_entity_id: fengyuan-review-fengyuan-array-model
+        canonical_entity_ids:
+          - fengyuan-array-model
+      - local_entity_id: fengyuan-review-fengyuan-array-model-stock
+        canonical_entity_ids:
+          - fengyuan-array-model-stock
+      - local_entity_id: fengyuan-review-fengyuan-tree-warden
+        canonical_entity_ids:
+          - fengyuan-tree-warden

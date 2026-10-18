@@ -1,0 +1,18 @@
+id: outerstar-blackstone-dock
+kind: location
+name: 黑石城外泊埠
+description: 石堤内泊着近海船只，水深与风浪仍须查看。
+placement: human-qiyuan-island
+facts:
+  - id: outerstar-blackstone-dock-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: 沿城门通向海边的路步行；离城仍须留意守卫和海况。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

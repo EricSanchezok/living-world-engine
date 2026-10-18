@@ -1,0 +1,26 @@
+id: feiling-city-arena
+kind: location
+name: 圣城白玉竞技台
+description: 圆场围着鹏鸟石雕，光幕护住中央白玉台；此处与远方玉皇顶的较技场分别管理。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-city-arena-route-to-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-city-arena-route-conditions-feiling-tianpeng-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

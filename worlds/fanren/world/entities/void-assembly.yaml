@@ -1,0 +1,42 @@
+id: void-assembly
+kind: location
+name: 玉柱大厅
+description: 数十兽禽浮雕玉柱立在宽大厅里，此时无人聚会。
+placement: human-void-hall
+facts:
+  - id: void-assembly-route-void-entry
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-entry
+    description: route-to
+    access:
+      kind: public
+  - id: void-assembly-condition-void-entry
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-assembly-route-void-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-mist
+    description: route-to
+    access:
+      kind: public
+  - id: void-assembly-condition-void-mist
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

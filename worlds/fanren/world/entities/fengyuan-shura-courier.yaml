@@ -1,0 +1,142 @@
+id: fengyuan-shura-courier
+kind: person
+name: 岑足
+description: 替城内传话和查探林边的化神修罗蛛，喜欢野外胜过听长篇训话。
+placement: fengyuan-shura-tianzhu-city
+facts:
+  - id: fengyuan-shura-courier-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: private
+  - id: fengyuan-shura-courier-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 修罗蛛本体行动、吐丝标路、短程隐蔽与实际侦察；当前不会成年时间法则。
+    description: 修罗蛛本体行动、吐丝标路、短程隐蔽与实际侦察；当前不会成年时间法则。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-shura-courier-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-shura-courier-mana
+    definition_id: mana
+    current: 900
+quantities: []
+ratings:
+  - id: fengyuan-shura-courier-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: fengyuan-shura-courier-force
+    definition_id: force
+    value: 5
+  - id: fengyuan-shura-courier-craft
+    definition_id: craft
+    value: 3
+  - id: fengyuan-shura-courier-perception
+    definition_id: perception
+    value: 5
+  - id: fengyuan-shura-courier-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: fengyuan-shura-courier
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 替城内传话和查探林边的化神修罗蛛，喜欢野外胜过听长篇训话。
+      voice: 说话快，常把看到的先后动作讲得很具体；没看到的地方会直接指向地形。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把空鱼交来的试作器带到内殿，争取下一次出行能自己选择路线。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 岑足
+        description: 替城内传话和查探林边的化神修罗蛛，喜欢野外胜过听长篇训话。
+        status: observed
+      - id: location
+        name: 天蛛城
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-courier-private-stock
+        name: 岑足私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-canon-shura-luo-matriarch
+        name: 罗族母
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-crafter
+        name: 环汀
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-trial-box
+        name: 空鱼试作小匣
+        description: 环汀用已有旧匣修好的演示器，可容下三件杯碗大小死物，不装活人；每次存取耗操作者2法力。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-trade-letter
+        name: 空鱼交换呈书
+        description: 流阙提议按次维护城中三个旧小匣，换取一段不索族人血食的约定；没有已获同意，也不替所有未来族人许终身奴契。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 修罗蛛本体行动、吐丝标路、短程隐蔽与实际侦察；当前不会成年时间法则。
+        description: 修罗蛛本体行动、吐丝标路、短程隐蔽与实际侦察；当前不会成年时间法则。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-shura-courier
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-shura-tianzhu-city
+      - local_entity_id: fengyuan-review-fengyuan-shura-courier-private-stock
+        canonical_entity_ids:
+          - fengyuan-shura-courier-private-stock
+      - local_entity_id: fengyuan-review-canon-shura-luo-matriarch
+        canonical_entity_ids:
+          - canon-shura-luo-matriarch
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-crafter
+        canonical_entity_ids:
+          - fengyuan-kongyu-crafter
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-trial-box
+        canonical_entity_ids:
+          - fengyuan-kongyu-trial-box
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-trade-letter
+        canonical_entity_ids:
+          - fengyuan-kongyu-trade-letter

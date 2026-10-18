@@ -1,0 +1,26 @@
+id: spirit-huangliang-mountain
+kind: location
+name: 黄粱灵君所居山地
+description: 落日城附近的一片山地，洞府周围有禁制，来访者须在外通报。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-huangliang-mountain-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: 落日城附近的一片山地，洞府周围有禁制，来访者须在外通报。
+    access:
+      kind: public
+  - id: spirit-huangliang-mountain-route-spirit-huangliang-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-huangliang-cave
+    description: 供主人修炼、读书与会客的洞府，外门与内室分隔。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

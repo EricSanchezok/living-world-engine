@@ -1,0 +1,44 @@
+id: canon-tianlei-bamboo
+kind: item
+name: 连根天雷竹
+description: 有根的小节天雷竹，安置于真实竹盆中，生长极慢。
+placement: innerstar-bamboo-garden
+facts:
+  - id: canon-tianlei-bamboo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-bamboo-school
+    description: owned-by
+    access:
+      kind: private
+  - id: canon-tianlei-bamboo-identity
+    predicate: identity
+    value:
+      kind: text
+      value: 天雷竹活株；带根可继续栽培，炼成法宝后不再作为这株活竹生长。
+    description: 天雷竹活株；带根可继续栽培，炼成法宝后不再作为这株活竹生长。
+    access:
+      kind: discoverable
+      condition: 获准看见竹株并有相应灵植知识，或由知情者可靠说明。
+  - id: canon-tianlei-bamboo-custody
+    predicate: custody
+    value:
+      kind: text
+      value: 此时属于留竹小宗，尚未售出。
+    description: 此时属于留竹小宗，尚未售出。
+    access:
+      kind: private
+  - id: canon-tianlei-bamboo-material-properties
+    predicate: material-properties
+    value:
+      kind: text
+      value: 天雷竹通常千年增长寸许；灵性年份两千以下白雷、五千以上蓝雷、万年以上淡金辟邪雷，中间细分须实际判断。带根可生长，膏玉可保灵气；当前不能仅凭期待变作万年竹。
+    description: 天雷竹通常千年增长寸许；灵性年份两千以下白雷、五千以上蓝雷、万年以上淡金辟邪雷，中间细分须实际判断。带根可生长，膏玉可保灵气；当前不能仅凭期待变作万年竹。
+    access:
+      kind: discoverable
+      condition: 获准检查活竹且掌握相关灵植知识，或实际读取可靠的天雷竹资料。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

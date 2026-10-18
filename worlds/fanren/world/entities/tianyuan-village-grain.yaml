@@ -1,0 +1,28 @@
+id: tianyuan-village-grain
+kind: container
+name: 王氏姐弟共有干粮
+description: 四十八份已晒干存粮，由王禾保管；其中一半份额属于王杼，售出或赠送须尊重双方约定。
+placement: tianyuan-hinterland-village
+facts:
+  - id: tianyuan-village-grain-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-village-supplier
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-village-grain-joint-interest
+    predicate: joint-interest
+    value:
+      kind: text
+      value: 王禾与王杼各半共有，王禾只有保管权，不得私自出售王杼的一半。
+    description: 王禾与王杼各半共有，王禾只有保管权，不得私自出售王杼的一半。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 48
+ratings: []
+shared_activity_resources: []

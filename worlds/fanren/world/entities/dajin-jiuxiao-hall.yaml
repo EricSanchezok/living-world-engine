@@ -1,0 +1,18 @@
+id: dajin-jiuxiao-hall
+kind: item
+name: 九霄殿构件
+description: 一座可借用的白石大殿器物，尚未展开悬空。使用须场地、操作法门、授权和真实供能。
+placement: dajin-tianji-store
+facts:
+  - id: dajin-jiuxiao-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianji-guild
+    description: 天机阁可借出的设施，借用不转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

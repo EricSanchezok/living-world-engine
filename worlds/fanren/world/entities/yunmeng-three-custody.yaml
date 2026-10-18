@@ -1,0 +1,34 @@
+id: yunmeng-three-custody
+kind: organization
+name: 云梦三派古树共管
+description: 三派围绕古树的共同管理关系，各宗私有产业不并入此处。
+placement: tiannan-tree-grotto
+facts:
+  - id: yunmeng-three-custody-member-luoyun-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: luoyun-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: yunmeng-three-custody-member-gujian-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: gujian-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: yunmeng-three-custody-member-baiqiao-academy
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: baiqiao-academy
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

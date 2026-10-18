@@ -1,0 +1,90 @@
+id: feiling-abyss-3
+kind: location
+name: 地渊第3层
+description: 地下第3层。阴气、地形和居民各异；不同层次通道须实际辨认。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-3-route-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-3-condition-feiling-abyss-2
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-3-route-feiling-abyss-4
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-4
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-3-condition-feiling-abyss-4
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-3-route-feiling-muxian-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muxian-valley
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-3-condition-feiling-muxian-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木青居所所在的山谷，有木殿和通向修炼地的山路。
+    description: 木青居所所在的山谷，有木殿和通向修炼地的山路。
+    access:
+      kind: public
+  - id: feiling-abyss-3-route-to-feiling-wanteng-pass
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-wanteng-pass
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-abyss-3-route-conditions-feiling-wanteng-pass
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿藤道下降至三层，须保证攀飞与防护。
+    description: 沿藤道下降至三层，须保证攀飞与防护。
+    access:
+      kind: private
+  - id: feiling-abyss-3-route-to-feiling-underground-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-underground-river
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-abyss-3-route-conditions-feiling-underground-river
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿水道下降；逆行需克服水流，不能默认顺流原路即返。
+    description: 沿水道下降；逆行需克服水流，不能默认顺流原路即返。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

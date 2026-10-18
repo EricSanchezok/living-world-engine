@@ -1,0 +1,20 @@
+id: minghe-insect-food-a
+kind: container
+name: 虫圃甲箱饲料
+description: 四包普通虫粮，箱边写着上次正确批号。
+placement: minghe-xuling-insectarium
+facts:
+  - id: minghe-insect-food-a-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 4
+ratings: []
+shared_activity_resources: []

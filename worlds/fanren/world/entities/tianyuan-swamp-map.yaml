@@ -1,0 +1,18 @@
+id: tianyuan-swamp-map
+kind: item
+name: 浮黎旧巡路图
+description: 记录三条曾可走的硬地线和两处雾水区；巡路图可能过时，不包含未知潜伏者坐标。
+placement: tianyuan-patrol-post
+facts:
+  - id: tianyuan-swamp-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tianyuan-xuri-peak
+kind: location
+name: 旭日峰
+description: 两族内部一座葱绿山峰，溪谷和山石间有可供低阶修士歇息的灵气；本期开放坡面没有被私人洞府封闭，水源和营位须现场查看。
+placement: spirit-human-demon-territory
+facts:
+  - id: tianyuan-xuri-peak-route-to-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: route-to-spirit-tianyuan-street
+    access:
+      kind: private
+  - id: tianyuan-xuri-peak-route-conditions-spirit-tianyuan-street
+    predicate: route-conditions-spirit-tianyuan-street
+    value:
+      kind: text
+      value: 由城内面向两族领土的道路，跨过辖外山道抵达；需实际多日行程与途中补给，所需时间随能力与路况，不经过蛮荒外墙。
+    description: 由城内面向两族领土的道路，跨过辖外山道抵达；需实际多日行程与途中补给，所需时间随能力与路况，不经过蛮荒外墙。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

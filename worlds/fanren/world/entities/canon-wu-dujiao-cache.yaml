@@ -1,0 +1,22 @@
+id: canon-wu-dujiao-cache
+kind: container
+name: 妖修私藏
+description: 自己在海中收集的有限材料。
+placement: outerstar-jinflood-court
+facts:
+  - id: canon-wu-dujiao-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wu-dujiao
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

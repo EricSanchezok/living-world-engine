@@ -1,0 +1,18 @@
+id: minghe-outer-signal
+kind: item
+name: 外巡院传讯盘
+description: 只与内岸配对盘互通，两端操作者各自只知道送来的消息。
+placement: minghe-gate-warden
+facts:
+  - id: minghe-outer-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

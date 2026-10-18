@@ -1,0 +1,51 @@
+id: guanghan-stairway
+kind: location
+name: 白石登山阶
+description: 逐级上升的山阶，向上吸力增加，原地休息可等吸力减弱。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-stairway-route-guanghan-transfer-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-transfer-platform
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-stairway-condition-guanghan-transfer-platform
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-stairway-route-guanghan-palace-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-palace-court
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-stairway-condition-guanghan-palace-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-stairway-ascent-rest
+    predicate: ascent-rest
+    value:
+      kind: text
+      value: 向上攀登所受吸力逐级增加；停留可缓和。返程是否受同样阻力须实际试探，不能把后来空间失控时的轻松下行当永恒规则。
+    description: 向上攀登所受吸力逐级增加；停留可缓和。返程是否受同样阻力须实际试探，不能把后来空间失控时的轻松下行当永恒规则。
+    access:
+      kind: discoverable
+      condition: 实际攀阶、停留并比较身体受力。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

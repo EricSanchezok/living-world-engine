@@ -1,0 +1,18 @@
+id: spirit3-anyuan-cart
+kind: item
+name: 曹砚的街市兽车
+description: 四轮载人车，需活驮兽、车轴完好与实际道路才能移动。
+placement: spirit3-anyuan-cart-shed
+facts:
+  - id: spirit3-anyuan-cart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-cart-driver
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

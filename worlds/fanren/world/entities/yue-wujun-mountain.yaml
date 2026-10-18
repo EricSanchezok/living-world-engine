@@ -1,0 +1,26 @@
+id: yue-wujun-mountain
+kind: location
+name: 巫钧山
+description: 黄枫重地所在山峰，入山须接受守卫查验。
+placement: yue-taiyue-range
+facts:
+  - id: yue-wujun-mountain-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 经门内山路到巫钧山守卫处，来客须先说明事由，不能越过查验直入殿内。
+    access:
+      kind: public
+  - id: yue-wujun-mountain-route-yue-yuelu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-hall
+    description: 由两名值班守卫核验通行资格并操作传送阵；通常单次一低阶灵石，豁免须有实际批准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

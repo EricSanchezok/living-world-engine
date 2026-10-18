@@ -1,0 +1,140 @@
+id: canon-zhao-elder
+kind: person
+name: 赵长老
+description: 性情直率的资深武者，与李长老交好。
+placement: qixuan-treasure-gathering-hall
+facts:
+  - id: canon-zhao-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 内家掌法与长期江湖经验；武学熟练程度仍受状态影响。
+    description: 内家掌法与长期江湖经验；武学熟练程度仍受状态影响。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhao-elder
+  - id: canon-zhao-elder-friend-of
+    predicate: friend-of
+    value:
+      kind: entity
+      entityId: canon-li-elder
+    description: 旧交
+    access:
+      kind: private
+  - id: canon-zhao-elder-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 七玄门成员。
+    access:
+      kind: private
+meters:
+  - id: canon-zhao-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-zhao-elder-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 30
+ratings:
+  - id: canon-zhao-elder-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-zhao-elder-perception
+    definition_id: perception
+    value: 2
+  - id: canon-zhao-elder-craft
+    definition_id: craft
+    value: 2
+  - id: canon-zhao-elder-influence
+    definition_id: influence
+    value: 2
+  - id: canon-zhao-elder-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-zhao-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 性情直率的资深武者，与李长老交好。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查看堂中日常工作与自己的练功安排。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 赵长老
+        description: 性情直率的资深武者，与李长老交好。
+        status: observed
+      - id: location
+        name: 聚宝堂堂院
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-canon-li-elder
+        name: 李长老
+        description: 旧交关系，了解彼此日常生活；不知道对方所有私念。
+        status: observed
+      - id: known-qixuan-sect
+        name: 七玄门
+        description: 自己生活与习武的门派。
+        status: observed
+      - id: known-canon-qixuan-master
+        name: 王门主
+        description: 处理日常门务的负责人。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 内家掌法与长期江湖经验；武学熟练程度仍受状态影响。
+        description: 内家掌法与长期江湖经验；武学熟练程度仍受状态影响。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-zhao-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - qixuan-treasure-gathering-hall
+      - local_entity_id: known-canon-li-elder
+        canonical_entity_ids:
+          - canon-li-elder
+      - local_entity_id: known-qixuan-sect
+        canonical_entity_ids:
+          - qixuan-sect
+      - local_entity_id: known-canon-qixuan-master
+        canonical_entity_ids:
+          - canon-qixuan-master

@@ -1,0 +1,26 @@
+id: canon-qimiao-zhenren-personal-stock
+kind: container
+name: 七妙真人的私用行囊
+description: 个人修行、行旅储备，与宗门或族产不同。
+placement: canon-qimiao-zhenren
+facts:
+  - id: canon-qimiao-zhenren-personal-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qimiao-zhenren
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+  - definition_id: mid-stone
+    amount: 4
+  - definition_id: grain
+    amount: 5
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

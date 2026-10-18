@@ -1,0 +1,32 @@
+id: seas-ninghorse-2
+kind: creature
+name: 驿院狞马2
+description: 驿院目前饲养的一匹狞马，能虚空行旅但有自身疲劳、性情和适应过程。
+placement: seas-dragon-stable
+facts:
+  - id: seas-ninghorse-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-keeper
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-ninghorse-2-training-state
+    predicate: training-state
+    value:
+      kind: text
+      value: 熟悉缓起缓停的配合，仍需照管。
+    description: 熟悉缓起缓停的配合，仍需照管。
+    access:
+      kind: private
+meters:
+  - id: seas-ninghorse-2-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: seas-ninghorse-2-force
+    definition_id: force
+    value: 5
+shared_activity_resources: []

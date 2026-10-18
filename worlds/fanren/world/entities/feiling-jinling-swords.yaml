@@ -1,0 +1,18 @@
+id: feiling-jinling-swords
+kind: container
+name: 金灵双短剑
+description: 金灵的双剑套，内有两柄独立短剑，分别可取出、损坏或遗失。
+placement: canon-jin-ling-ape
+facts:
+  - id: feiling-jinling-swords-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-ling-ape
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

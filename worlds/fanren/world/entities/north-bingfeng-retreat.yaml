@@ -1,0 +1,26 @@
+id: north-bingfeng-retreat
+kind: location
+name: 冰凤闭关洞室
+description: 洞室；外界传闻通过守岛者或实际来访传入。
+placement: north-bingyuan
+facts:
+  - id: north-bingfeng-retreat-route-north-bingyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-bingyuan
+    description: 守岛者通报，闭关者可拒绝接待。
+    access:
+      kind: public
+  - id: north-bingfeng-retreat-travel-north-bingyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 守岛者通报，闭关者可拒绝接待。
+    description: 守岛者通报，闭关者可拒绝接待。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

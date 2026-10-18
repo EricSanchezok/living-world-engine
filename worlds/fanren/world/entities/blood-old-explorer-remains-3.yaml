@@ -1,0 +1,26 @@
+id: blood-old-explorer-remains-3
+kind: item
+name: 旧次探索者遗骸3
+description: 旧次冲突遗留骸骨，已死去，不是可无代价复活的当前NPC。
+placement: blood-core-hall
+facts:
+  - id: blood-old-explorer-remains-3-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+  - id: blood-old-explorer-remains-3-physical-state
+    predicate: physical-state
+    value:
+      kind: text
+      value: 银甲寸裂，丹田被旁边另一骨手洞穿；在旧阵边。
+    description: 银甲寸裂，丹田被旁边另一骨手洞穿；在旧阵边。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

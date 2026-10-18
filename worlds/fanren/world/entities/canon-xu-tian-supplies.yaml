@@ -1,0 +1,22 @@
+id: canon-xu-tian-supplies
+kind: container
+name: 旭天的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-xu-tian
+facts:
+  - id: canon-xu-tian-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-tian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

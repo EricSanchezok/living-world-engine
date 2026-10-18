@@ -1,0 +1,27 @@
+id: feiling-relic-hongyun
+kind: item
+name: 红云舍利
+description: 旧代长老的舍利，含遗留神念，未经审查贸然炼化有反噬危险。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-relic-hongyun-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-relic-hongyun-historical-origin
+    predicate: historical-origin
+    value:
+      kind: text
+      value: 第九代大长老红云遗物，存在遗留神念，需辨识并承担实际风险。
+    description: 第九代大长老红云遗物，存在遗留神念，需辨识并承担实际风险。
+    access:
+      kind: discoverable
+      condition: 得到传承库许可并查阅对应封存记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

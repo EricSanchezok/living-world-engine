@@ -1,0 +1,35 @@
+id: yue-qin-hall
+kind: location
+name: 秦宅客厅
+description: 接待商户和族内议事的厅堂。
+placement: yue-qin-estate
+facts:
+  - id: yue-qin-hall-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-hall-route-yue-qin-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-estate
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+  - id: yue-qin-hall-secret-room-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-secret-room
+    description: 偏厅古瓶机关转到正确位置才能开启隐藏门；仅听说有密室不等会开。
+    access:
+      kind: discoverable
+      condition: 实际观察到机关开门，或获可信指点并检查偏厅古瓶与墙缝。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

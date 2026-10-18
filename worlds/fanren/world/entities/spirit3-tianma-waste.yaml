@@ -1,0 +1,26 @@
+id: spirit3-tianma-waste
+kind: location
+name: 天马荒原
+description: 天元境边沿的黄土风沙地域，灵气匮乏，另一侧称名未在现有图册核明。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit3-tianma-waste-route-to-spirit-inner-caravan-road
+    predicate: route-to-spirit-inner-caravan-road
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: route-to-spirit-inner-caravan-road
+    access:
+      kind: private
+  - id: spirit3-tianma-waste-route-conditions-spirit-inner-caravan-road
+    predicate: route-conditions-spirit-inner-caravan-road
+    value:
+      kind: text
+      value: 从天元侧边路长途进入，荒原无现成水粮，须携足补给；未核另一侧不能随意传送。
+    description: 从天元侧边路长途进入，荒原无现成水粮，须携足补给；未核另一侧不能随意传送。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

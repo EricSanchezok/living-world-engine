@@ -1,0 +1,26 @@
+id: blood-outer-implement-hall
+kind: location
+name: 分宫法器石台厅
+description: 成排长方形石台陈列各种法器，光泽强弱不一；有些需重新祭炼和检查，不等于全部顶阶宝物。
+placement: blood-outer-palaces
+facts:
+  - id: blood-outer-implement-hall-route-blood-gold-silver-corridor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-gold-silver-corridor
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-implement-hall-condition-blood-gold-silver-corridor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 朱红门在金银傀儡身后，接近会触发守卫；可研究古控制结构或实际突破，不能绕过存在中的身体和巨锤。
+    description: 朱红门在金银傀儡身后，接近会触发守卫；可研究古控制结构或实际突破，不能绕过存在中的身体和巨锤。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: dv-copy-paper
+kind: container
+name: 徐氏备纸墨
+description: 本次只够制作两份抄本的纸墨。
+placement: dv-copy-scholar
+facts:
+  - id: dv-copy-paper-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-copy-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

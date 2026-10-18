@@ -1,0 +1,243 @@
+id: canon-jiaochi-tu
+kind: person
+name: 图使者
+description: 负责角蚩边防事务的高阶修士，既有功名心也懂保留底牌。
+placement: thunder-jiaochi-frontier
+facts:
+  - id: canon-jiaochi-tu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiaochi-tu
+  - id: canon-jiaochi-tu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚顶阶与半圣层次手段、遁术和侦测器操作。
+    description: 炼虚顶阶与半圣层次手段、遁术和侦测器操作。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiaochi-tu
+  - id: canon-jiaochi-tu-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    description: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiaochi-tu
+  - id: canon-jiaochi-tu-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: affiliation
+    access:
+      kind: public
+  - id: canon-jiaochi-tu-reports-to-canon-jiaochi-yin
+    predicate: reports-to
+    value:
+      kind: entity
+      entityId: canon-jiaochi-yin
+    description: reports-to
+    access:
+      kind: private
+meters:
+  - id: canon-jiaochi-tu-health
+    definition_id: health
+    current: 100
+  - id: canon-jiaochi-tu-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-jiaochi-tu-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: canon-jiaochi-tu-force
+    definition_id: force
+    value: 6
+  - id: canon-jiaochi-tu-craft
+    definition_id: craft
+    value: 6
+  - id: canon-jiaochi-tu-perception
+    definition_id: perception
+    value: 6
+  - id: canon-jiaochi-tu-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-jiaochi-tu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 负责角蚩边防事务的高阶修士，既有功名心也懂保留底牌。
+      voice: 说话谨慎，汇报喜欢先陈结果再补缘由，被质疑会压低声音。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核实来自绿光方向的商路消息，再向殷尊者报告。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 图使者
+        description: 负责角蚩边防事务的高阶修士，既有功名心也懂保留底牌。
+        status: observed
+      - id: location
+        name: 角蚩界口
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-thunder-jiaochi-power
+        name: 角蚩族
+        description: 自己所属的族群或公务机构。
+        status: observed
+      - id: known-canon-jiaochi-yin
+        name: 殷尊者
+        description: 在边防公务中长期共事。
+        status: observed
+      - id: known-canon-jiaochi-tu-personal-kit
+        name: 图使者的私用行囊
+        description: 私人修炼和生活用品，机构资源另行保管。
+        status: observed
+      - id: known-thunder-jiaochi-compass
+        name: 研武院天玄罗盘
+        description: 自己参与的有限试验器具，尚未对当前布置得出结果。
+        status: observed
+      - id: known-thunder-jiaochi-scan-fuel
+        name: 研武院试验用石
+        description: 自己参与的有限试验器具，尚未对当前布置得出结果。
+        status: observed
+      - id: known-thunder-jiaochi-target
+        name: 试验引气铜片
+        description: 自己参与的有限试验器具，尚未对当前布置得出结果。
+        status: observed
+      - id: known-thunder-jiaochi-screen
+        name: 遮蔽试验罩
+        description: 自己参与的有限试验器具，尚未对当前布置得出结果。
+        status: observed
+      - id: seas-jiaochi-compact-known
+        name: 角蚩三真灵古契约凭记
+        description: 族中可核验的旧约，实际召请仍需族中批准与真灵回应。
+        status: observed
+      - id: seas-known-canon-ti-long
+        name: 蹄龙
+        description: 族中长期供奉的独立真灵，知道其名和旧约关系，未接收未来战事。
+        status: hypothesized
+      - id: seas-known-canon-tai-que
+        name: 泰雀
+        description: 族中长期供奉的独立真灵，知道其名和旧约关系，未接收未来战事。
+        status: hypothesized
+      - id: seas-known-canon-yang-lu
+        name: 阳鹿
+        description: 族中长期供奉的独立真灵，知道其名和旧约关系，未接收未来战事。
+        status: hypothesized
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: seas-tribal-compact-record
+        kind: observation
+        description: 自己职务中核验过的古契约与族内典籍。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚顶阶与半圣层次手段、遁术和侦测器操作。
+        description: 炼虚顶阶与半圣层次手段、遁术和侦测器操作。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        description: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        description: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-jiaochi-tu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-jiaochi-frontier
+      - local_entity_id: known-thunder-jiaochi-power
+        canonical_entity_ids:
+          - thunder-jiaochi-power
+      - local_entity_id: known-canon-jiaochi-yin
+        canonical_entity_ids:
+          - canon-jiaochi-yin
+      - local_entity_id: known-canon-jiaochi-tu-personal-kit
+        canonical_entity_ids:
+          - canon-jiaochi-tu-personal-kit
+      - local_entity_id: known-thunder-jiaochi-compass
+        canonical_entity_ids:
+          - thunder-jiaochi-compass
+      - local_entity_id: known-thunder-jiaochi-scan-fuel
+        canonical_entity_ids:
+          - thunder-jiaochi-scan-fuel
+      - local_entity_id: known-thunder-jiaochi-target
+        canonical_entity_ids:
+          - thunder-jiaochi-target
+      - local_entity_id: known-thunder-jiaochi-screen
+        canonical_entity_ids:
+          - thunder-jiaochi-screen
+      - local_entity_id: seas-jiaochi-compact-known
+        canonical_entity_ids:
+          - seas-jiaochi-compact
+      - local_entity_id: seas-known-canon-ti-long
+        canonical_entity_ids:
+          - canon-ti-long
+      - local_entity_id: seas-known-canon-tai-que
+        canonical_entity_ids:
+          - canon-tai-que
+      - local_entity_id: seas-known-canon-yang-lu
+        canonical_entity_ids:
+          - canon-yang-lu

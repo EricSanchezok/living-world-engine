@@ -1,0 +1,18 @@
+id: spirit3-stockade-shield
+kind: item
+name: 石溪寨练力盾
+description: 普通骨木盾，能承物理撞击，裂损需材料修补。
+placement: spirit3-stockade-teacher
+facts:
+  - id: spirit3-stockade-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-stockade-teacher
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

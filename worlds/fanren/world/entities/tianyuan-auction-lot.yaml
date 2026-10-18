@@ -1,0 +1,18 @@
+id: tianyuan-auction-lot
+kind: item
+name: 棘葭寄售寒纹晶片
+description: 一枚材料晶片，能在已知低阶防护器中缓和一次过热损伤，嵌入须懂相应修补、耗一份工料；使用后晶纹裂解。不能反复防护，也不提高修为。
+placement: tianyuan-auction-hall
+facts:
+  - id: tianyuan-auction-lot-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-market-demon-clerk
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

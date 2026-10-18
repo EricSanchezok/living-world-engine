@@ -1,0 +1,18 @@
+id: ad-test-plot-proposal
+kind: item
+name: 金穗试种约稿
+description: 请求分出一株苗与四份兽血给自己的试种格，愿付24魔石并自行承担养护；双方尚未同意。
+placement: ad-lake-apprentice
+facts:
+  - id: ad-test-plot-proposal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

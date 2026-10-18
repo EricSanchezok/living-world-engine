@@ -1,0 +1,42 @@
+id: human-red-coral-island
+kind: location
+name: 红瑚岛
+description: 环岛海底有色彩斑斓的珊瑚，外缘水道暗礁密集。
+placement: human-outer-star-sea
+facts:
+  - id: human-red-coral-island-route-human-ningcui-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-ningcui-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-red-coral-island-condition-human-ningcui-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+  - id: human-red-coral-island-route-outerstar-redcoral-bed
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-redcoral-bed
+    description: route-to
+    access:
+      kind: public
+  - id: human-red-coral-island-condition-outerstar-redcoral-bed
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 珊瑚簇间有十三叶的异草，潮沟处有觅食的海兽。
+    description: 珊瑚簇间有十三叶的异草，潮沟处有觅食的海兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

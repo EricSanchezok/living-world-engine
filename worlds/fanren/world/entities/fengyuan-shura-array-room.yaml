@@ -1,0 +1,42 @@
+id: fengyuan-shura-array-room
+kind: location
+name: 伏灵山旧跨界阵室
+description: 山腹侧室内嵌着古式跨界阵，边槽能安置实际灵石，旁边石台用来刻返程坐标。
+placement: fengyuan-fuling-mountain
+facts:
+  - id: fengyuan-shura-array-room-route-to-fengyuan-fuling-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuling-mountain
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-shura-array-room-route-conditions-fengyuan-fuling-mountain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 山内到侧室须灵王许可并开启房门，进入房间本身不触发跨界。
+    description: 山内到侧室须灵王许可并开启房门，进入房间本身不触发跨界。
+    access:
+      kind: private
+  - id: fengyuan-shura-array-room-route-to-fengyuan-shura-whitewood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-whitewood
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-shura-array-room-route-conditions-fengyuan-shura-whitewood
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 这条关系是跨界而非步行：去程须获阵室控制、完整护心、返程坐标、120极品石及200法力；启动真实扣库存。回程须身在此界、佩戴仍有余量的同一护心并主动捏碎，落到实际预设坐标附近，不能无条件回此房间。
+    description: 这条关系是跨界而非步行：去程须获阵室控制、完整护心、返程坐标、120极品石及200法力；启动真实扣库存。回程须身在此界、佩戴仍有余量的同一护心并主动捏碎，落到实际预设坐标附近，不能无条件回此房间。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

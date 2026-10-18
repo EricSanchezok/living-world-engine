@@ -1,0 +1,18 @@
+id: blood-xu-key-a
+kind: item
+name: 许含章的密室钥牌
+description: 开封所需的一半钥诀，需与另一保管人协作。
+placement: blood-xu-keeper
+facts:
+  - id: blood-xu-key-a-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

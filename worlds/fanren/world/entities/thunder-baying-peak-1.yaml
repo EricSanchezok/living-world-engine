@@ -1,0 +1,42 @@
+id: thunder-baying-peak-1
+kind: location
+name: 云霞山
+description: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+placement: thunder-baying-mountains
+facts:
+  - id: thunder-baying-peak-1-route-thunder-baying-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-baying-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-baying-peak-1-condition-thunder-baying-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+    description: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+    access:
+      kind: public
+  - id: thunder-baying-peak-1-route-thunder-vacant-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-vacant-cave
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-baying-peak-1-condition-thunder-vacant-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须得到合法居用许可或其他足以进入的实际手段；知晓洞名不等于租用。
+    description: 须得到合法居用许可或其他足以进入的实际手段；知晓洞名不等于租用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

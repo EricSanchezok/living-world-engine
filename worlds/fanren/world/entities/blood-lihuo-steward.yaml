@@ -1,0 +1,187 @@
+id: blood-lihuo-steward
+kind: person
+name: 陆衡
+description: 离火宗当任炼虚执事，把宗门的灵石和自己的袋子分得很清楚。
+placement: blood-lihuo-office
+facts:
+  - id: blood-lihuo-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: blood-lihuo-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修法、记账、辨药与宗内文书验印；无权自行赠出禁地祭坛。
+    description: 炼虚修法、记账、辨药与宗内文书验印；无权自行赠出禁地祭坛。
+    access:
+      kind: private
+  - id: blood-lihuo-steward-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    description: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    access:
+      kind: private
+  - id: blood-lihuo-steward-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: blood-lihuo-sect
+    description: member-of
+    access:
+      kind: private
+  - id: blood-lihuo-steward-authorized-scope
+    predicate: authorized-scope
+    value:
+      kind: text
+      value: 在本职文书范围内安排验收与维护；跨陆开阵或变更贡约须由组织实际授权，不能据职位自行赠送公产。
+    description: 在本职文书范围内安排验收与维护；跨陆开阵或变更贡约须由组织实际授权，不能据职位自行赠送公产。
+    access:
+      kind: private
+meters:
+  - id: blood-lihuo-steward-health
+    definition_id: health
+    current: 100
+  - id: blood-lihuo-steward-mana
+    definition_id: mana
+    current: 600
+quantities: []
+ratings:
+  - id: blood-lihuo-steward-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: blood-lihuo-steward-force
+    definition_id: force
+    value: 6
+  - id: blood-lihuo-steward-craft
+    definition_id: craft
+    value: 5
+  - id: blood-lihuo-steward-perception
+    definition_id: perception
+    value: 6
+  - id: blood-lihuo-steward-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: blood-lihuo-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 离火宗当任炼虚执事，把宗门的灵石和自己的袋子分得很清楚。
+      voice: 说账目时先报到期日和余额，遇到强硬来客会解释自己能签到哪一步。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 向上宗争取把本期供养分成两次交付，或者接受对方的等价药材方案。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陆衡
+        description: 离火宗当任炼虚执事，把宗门的灵石和自己的袋子分得很清楚。
+        status: observed
+      - id: location
+        name: 离火宗执事房
+        description: 自己当前居处。
+        status: observed
+      - id: review-blood-lihuo-steward-review-stock
+        name: 陆衡自用储备
+        description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+        status: observed
+      - id: review-blood-lihuo-sect
+        name: 离火宗
+        description: 在山地经营药地与修行场所的宗门，按年向上宗供养，遇强敌时可依约请求庇护。
+        status: observed
+      - id: review-blood-lihuo-upper-sect
+        name: 离火宗所依上宗
+        description: 收取离火宗年供并承诺庇护的上宗，收供和重大援助均须由相应职司确认。
+        status: observed
+      - id: review-blood-lihuo-ledger
+        name: 离火宗年供账
+        description: 本期应交上宗24高阶灵石，30个本地日后到期；公库已备18。可申请延期或接受已约定等价药材，未经双方同意不算结清。
+        status: observed
+      - id: review-blood-upper-reply
+        name: 上宗收供回函
+        description: 允许申请用6份已验药材抵6枚高阶灵石，但须实际交付并验收；是否分期另议，未授权执事挪用私人款。
+        status: observed
+      - id: review-blood-lihuo-tribute-stock
+        name: 离火宗年供备款
+        description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+        status: observed
+      - id: review-blood-lihuo-altar
+        name: 离火宗古祭坛
+        description: 残台半埋山石，古纹有断裂；入口封木说明须经宗门许可才可勘查。
+        status: observed
+      - id: closeout-blood-upper-collector
+        name: 上宗收供使
+        description: 已有面对面往来，知道对方的身份与议事分工；不能直接知道对方未透露的打算。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身修行、亲历和已读记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修法、记账、辨药与宗内文书验印；无权自行赠出禁地祭坛。
+        description: 炼虚修法、记账、辨药与宗内文书验印；无权自行赠出禁地祭坛。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-lihuo-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-lihuo-office
+      - local_entity_id: review-blood-lihuo-steward-review-stock
+        canonical_entity_ids:
+          - blood-lihuo-steward-review-stock
+      - local_entity_id: review-blood-lihuo-sect
+        canonical_entity_ids:
+          - blood-lihuo-sect
+      - local_entity_id: review-blood-lihuo-upper-sect
+        canonical_entity_ids:
+          - blood-lihuo-upper-sect
+      - local_entity_id: review-blood-lihuo-ledger
+        canonical_entity_ids:
+          - blood-lihuo-ledger
+      - local_entity_id: review-blood-upper-reply
+        canonical_entity_ids:
+          - blood-upper-reply
+      - local_entity_id: review-blood-lihuo-tribute-stock
+        canonical_entity_ids:
+          - blood-lihuo-tribute-stock
+      - local_entity_id: review-blood-lihuo-altar
+        canonical_entity_ids:
+          - blood-lihuo-altar
+      - local_entity_id: closeout-blood-upper-collector
+        canonical_entity_ids:
+          - blood-upper-collector

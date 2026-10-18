@@ -1,0 +1,26 @@
+id: steppe-liuting-store
+kind: location
+name: 柳汀共库
+description: 粮袋垫在木板上，工具和盐包分列；领用人须在布册上留下份额，族长只受托保管。
+placement: steppe-liuting-camp
+facts:
+  - id: steppe-liuting-store-route-steppe-liuting-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-camp
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-store-travel-steppe-liuting-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

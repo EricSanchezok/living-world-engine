@@ -1,0 +1,22 @@
+id: void-map-restorer-kit
+kind: container
+name: 陆绘的随身器具
+description: 低阶法力、辨旧墨、装裱与手艺。所需的个人日常器具。
+placement: void-map-restorer
+facts:
+  - id: void-map-restorer-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-map-restorer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: canon-xuanhuang-mirror
+kind: item
+name: 玄黄镜
+description: 万法门古镜，照摄形成晶棱有杀伤力，实际成败受对手防御与境界影响。
+placement: canon-wan-tianming
+facts:
+  - id: canon-xuanhuang-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wan-tianming
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

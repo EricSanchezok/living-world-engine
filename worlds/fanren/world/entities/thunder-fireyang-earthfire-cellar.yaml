@@ -1,0 +1,26 @@
+id: thunder-fireyang-earthfire-cellar
+kind: location
+name: 火阳地火窖
+description: 石阶尽头的热窖以地火温养族中旧丹，火口旁留有照看丹匣的位置。
+placement: thunder-fireyang-settlement
+facts:
+  - id: thunder-fireyang-earthfire-cellar-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-fireyang-community
+    description: 地火窖属火阳支族。
+    access:
+      kind: private
+  - id: thunder-fireyang-earthfire-cellar-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fireyang-settlement
+    description: 石阶上行通住区。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

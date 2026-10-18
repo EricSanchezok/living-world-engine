@@ -1,0 +1,42 @@
+id: void-tower-three
+kind: location
+name: 内殿第3层
+description: 交错的青石道连向禁室和通层法阵。
+placement: void-tower
+facts:
+  - id: void-tower-three-route-void-tower-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-two
+    description: route-to
+    access:
+      kind: public
+  - id: void-tower-three-condition-void-tower-two
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    description: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    access:
+      kind: public
+  - id: void-tower-three-route-void-tower-four
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-four
+    description: route-to
+    access:
+      kind: public
+  - id: void-tower-three-condition-void-tower-four
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    description: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

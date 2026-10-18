@@ -1,0 +1,26 @@
+id: feiling-transmission-hall
+kind: location
+name: 传灵殿
+description: 族人申领功法和接受传承考核的殿堂；来历、资质、既有功法须先由执事核实。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-transmission-hall-route-to-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-transmission-hall-route-conditions-feiling-tianpeng-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

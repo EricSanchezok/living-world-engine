@@ -1,0 +1,18 @@
+id: tianyuan-practice-seal
+kind: item
+name: 广武监督阵符
+description: 控制本殿现用训练屏障，每次开启需本人20法力及殿中1枚中阶灵石；屏障防护有界，不能封住任意高阶强敌。
+placement: tianyuan-duel-arbiter
+facts:
+  - id: tianyuan-practice-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

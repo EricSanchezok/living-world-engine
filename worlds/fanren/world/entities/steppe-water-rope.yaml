@@ -1,0 +1,18 @@
+id: steppe-water-rope
+kind: item
+name: 柳汀井绳与水桶
+description: 可从现有井水汲取饮用水；绳长只够这口井，断损需真实麻料修补。
+placement: steppe-liuting-well
+facts:
+  - id: steppe-water-rope-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-liuting-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: innerstar-miaoyin-head-personal-pouch
+kind: container
+name: 晏夫人的私用行囊
+description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+placement: innerstar-miaoyin-head
+facts:
+  - id: innerstar-miaoyin-head-personal-pouch-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-miaoyin-head
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 4
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

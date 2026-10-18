@@ -1,0 +1,26 @@
+id: blood-xuesha-cave
+kind: location
+name: 血煞静修府
+description: 灰石洞府内分内外两间静室，长案上有化身养护记录。
+placement: blood-continent
+facts:
+  - id: blood-xuesha-cave-review-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: review-route-blood-crane-city
+    access:
+      kind: public
+  - id: blood-xuesha-cave-review-route-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

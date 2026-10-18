@@ -1,0 +1,42 @@
+id: blood-bone-retreat
+kind: location
+name: 血骨门静修山居
+description: 血骨门山中的静修住处。萧冥留出一间偏室比对旧阵，残盘、材料和两种阵解就在这里，内室仍是他的私人修炼之所。
+placement: blood-bone-domain
+facts:
+  - id: blood-bone-retreat-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: route-to
+    access:
+      kind: public
+  - id: blood-bone-retreat-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-bone-retreat-review-route-blood-bone-ancestral-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-bone-ancestral-hall
+    description: review-route-blood-bone-ancestral-hall
+    access:
+      kind: public
+  - id: blood-bone-retreat-review-route-condition-blood-bone-ancestral-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

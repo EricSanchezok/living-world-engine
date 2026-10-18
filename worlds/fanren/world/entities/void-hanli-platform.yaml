@@ -1,0 +1,44 @@
+id: void-hanli-platform
+kind: location
+name: 寒骊台
+description: 鼎藏在台中，台面与塔内机关仍完整。
+placement: void-tower-five
+facts:
+  - id: void-hanli-platform-route-void-tower-five
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-five
+    description: route-to
+    access:
+      kind: public
+  - id: void-hanli-platform-condition-void-tower-five
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-hanli-platform-sensing-isolation
+    predicate: sensing-isolation
+    value:
+      kind: text
+      value: 天罡罩可阻隔外部秘术对内部相关对象的感应，未收到信号不直接证明对象平安或死亡。
+    description: 天罡罩可阻隔外部秘术对内部相关对象的感应，未收到信号不直接证明对象平安或死亡。
+    access:
+      kind: discoverable
+      condition: 实际探测罩内外感应差异或取得已验证的禁制知识。
+  - id: void-hanli-platform-control-interface
+    predicate: control-interface
+    value:
+      kind: text
+      value: 祭坛藏有巨型控制法阵，中心的鼎形纹样是阵眼标记；操纵须相配虚天鼎、法诀与足够协同法力。
+    description: 祭坛藏有巨型控制法阵，中心的鼎形纹样是阵眼标记；操纵须相配虚天鼎、法诀与足够协同法力。
+    access:
+      kind: discoverable
+      condition: 实际显露并检查祭坛隐藏控制阵，或获得可信且可核对的相配控制传承。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

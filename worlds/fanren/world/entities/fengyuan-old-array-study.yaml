@@ -1,0 +1,26 @@
+id: fengyuan-old-array-study
+kind: location
+name: 木棉阵学小楼
+description: 木窗对着两层之间的枝桥，楼内有可拆下的阵盘支架和按年代收存的图卷。
+placement: fengyuan-mumian-city
+facts:
+  - id: fengyuan-old-array-study-route-to-fengyuan-mumian-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mumian-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-old-array-study-route-conditions-fengyuan-mumian-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内枝桥步行，研究室需主持者许可。
+    description: 城内枝桥步行，研究室需主持者许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

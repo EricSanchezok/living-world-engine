@@ -1,0 +1,37 @@
+id: root-heiyin-ruin
+kind: location
+name: 黑隐古遗址
+description: 山间破损的古代石筑遗址，废墟深处须逐步勘查。
+placement: feiling-heiyin-mountains
+facts:
+  - id: root-heiyin-ruin-route-to-feiling-heiyin-mountains
+    predicate: route-to-feiling-heiyin-mountains
+    value:
+      kind: entity
+      entityId: feiling-heiyin-mountains
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-heiyin-ruin-travel-condition-feiling-heiyin-mountains
+    predicate: travel-condition-feiling-heiyin-mountains
+    value:
+      kind: text
+      value: 沿山道踏查，崩坏石构与未知生灵可能阻路；没有自动到手的血杏。
+    description: 沿山道踏查，崩坏石构与未知生灵可能阻路；没有自动到手的血杏。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-heiyin-ruin-root-detail-heiyin-ruin
+    predicate: root-detail-heiyin-ruin
+    value:
+      kind: text
+      value: 破损古石构深处可能留有旧物或植物，须实地勘查；找到地图、发现和采得资源是不同过程。
+    description: 破损古石构深处可能留有旧物或植物，须实地勘查；找到地图、发现和采得资源是不同过程。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

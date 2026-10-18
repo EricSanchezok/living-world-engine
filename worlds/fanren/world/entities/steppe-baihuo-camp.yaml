@@ -1,0 +1,42 @@
+id: steppe-baihuo-camp
+kind: location
+name: 拜火部炊烟营地
+description: 营地用泥灶集中烤肉和烘皮；一间小石棚供法士练习控火，火盆有人轮流看守。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-baihuo-camp-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-baihuo-camp-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-baihuo-camp-route-steppe-baihuo-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-baihuo-store
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-baihuo-camp-travel-steppe-baihuo-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: human-tiantian-city
+kind: location
+name: 阗天城
+description: 巨石修筑的修士城，门墙与坊巷相接；上元灭光阵的启闭有掌管者及灵石成本。
+placement: human-yu
+facts:
+  - id: human-tiantian-city-route-human-yu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yu
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tiantian-city-travel-human-yu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tiantian-city-route-tiannan-city-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-city-market
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tiantian-city-travel-tiannan-city-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tiantian-city-route-tiannan-city-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-city-gate
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tiantian-city-travel-tiannan-city-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

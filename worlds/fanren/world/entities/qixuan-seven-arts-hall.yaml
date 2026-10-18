@@ -1,0 +1,27 @@
+id: qixuan-seven-arts-hall
+kind: location
+name: 七绝堂堂院
+description: 门内机构使用的院舍，访客须先通报。
+placement: caixia-mountain
+facts:
+  - id: qixuan-seven-arts-hall-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: global-detail-seven-arts-old-techniques
+    predicate: available-martial-instruction
+    value:
+      kind: text
+      value: 门内旧武学包括偏灵巧的缠丝手和偏刚猛的狂蟒劲；学习须教习愿教、本人训练与时间，不因进入堂院即全会。具体传授资格依门内管理。
+    description: 门内旧武学包括偏灵巧的缠丝手和偏刚猛的狂蟒劲；学习须教习愿教、本人训练与时间，不因进入堂院即全会。具体传授资格依门内管理。
+    access:
+      kind: discoverable
+      condition: 实际询问知情教习或查阅获准的门内目录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

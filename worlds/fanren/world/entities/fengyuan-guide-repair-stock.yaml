@@ -1,0 +1,22 @@
+id: fengyuan-guide-repair-stock
+kind: container
+name: 阙微的修补材料
+description: 修理路标的有限材料。
+placement: fengyuan-shadow-sister
+facts:
+  - id: fengyuan-guide-repair-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-sister
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+  - definition_id: low-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

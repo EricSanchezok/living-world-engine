@@ -1,0 +1,53 @@
+id: dv-white-altar
+kind: location
+name: 白石祭坛
+description: 数百丈高的梯形白石建筑，四面有阶梯，顶端四座麒麟柱围着古供台。
+placement: human-devil-valley
+facts:
+  - id: dv-white-altar-route-dv-wet-basin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-wet-basin
+    description: route-to
+    access:
+      kind: public
+  - id: dv-white-altar-condition-dv-wet-basin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁飞盆地必须徒步与逐段查裂缝；登阶另有重力，不能沿route免除法力与体力代价。
+    description: 禁飞盆地必须徒步与逐段查裂缝；登阶另有重力，不能沿route免除法力与体力代价。
+    access:
+      kind: public
+  - id: dv-white-altar-route-dv-grey-gap
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-grey-gap
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 实察祭坛结构并拥有足够古阵/空间知识，或由知情者真实传授。
+  - id: dv-white-altar-condition-dv-grey-gap
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 必须依次解开柱阵遮蔽、以可用破界珠及足够法力稳定空间通路，并满足个体护持。无形魂体须适配寄体；当前没有已开启通道。
+    description: 必须依次解开柱阵遮蔽、以可用破界珠及足够法力稳定空间通路，并满足个体护持。无形魂体须适配寄体；当前没有已开启通道。
+    access:
+      kind: discoverable
+      condition: 实察祭坛结构并拥有足够古阵/空间知识，或由知情者真实传授。
+  - id: dv-white-altar-structure
+    predicate: structure
+    value:
+      kind: text
+      value: 阶梯越高附加重力越强；顶面约百余丈，白玉砖间有六七丈碧美玉供桌，四角青柱约十丈。攀登耗力和用时取决于承受者的实际能力。
+    description: 阶梯越高附加重力越强；顶面约百余丈，白玉砖间有六七丈碧美玉供桌，四角青柱约十丈。攀登耗力和用时取决于承受者的实际能力。
+    access:
+      kind: discoverable
+      condition: 登临并实际检查对应高度的阶梯、顶面和青柱。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

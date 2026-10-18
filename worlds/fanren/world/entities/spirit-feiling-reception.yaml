@@ -1,0 +1,66 @@
+id: spirit-feiling-reception
+kind: location
+name: 飞灵殿接引室
+description: 登记实际到来者的身份、气息和所需协助，不把本地修士当作飞升者。
+placement: spirit-feiling-hall
+facts:
+  - id: spirit-feiling-reception-route-spirit-feiling-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-feiling-hall
+    description: 登记实际到来者的身份、气息和所需协助，不把本地修士当作飞升者。
+    access:
+      kind: public
+  - id: spirit-feiling-reception-route-tianyuan-dust-dispensary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-dust-dispensary
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-feiling-reception-condition-tianyuan-dust-dispensary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 核验飞升者气息与领药记录后交付相应丹药，库门双锁。
+    description: 核验飞升者气息与领药记录后交付相应丹药，库门双锁。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-feiling-reception-route-to-tianyuan-feiling-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-feiling-platform
+    description: route-to-tianyuan-feiling-platform
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-feiling-reception-route-conditions-tianyuan-feiling-platform
+    predicate: route-conditions-tianyuan-feiling-platform
+    value:
+      kind: text
+      value: 台边登记后经实际接送路入城，需查验、道路与时间；不能从任意下界随意走到此台。
+    description: 台边登记后经实际接送路入城，需查验、道路与时间；不能从任意下界随意走到此台。
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-feiling-reception-route-to-tianyuan-guest-quarter
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-guest-quarter
+    description: route-to-tianyuan-guest-quarter
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-feiling-reception-route-conditions-tianyuan-guest-quarter
+    predicate: route-conditions-tianyuan-guest-quarter
+    value:
+      kind: text
+      value: 殿内步行到东廊；关门后须用本舍钥牌或实际破禁，不可穿门。
+    description: 殿内步行到东廊；关门后须用本舍钥牌或实际破禁，不可穿门。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

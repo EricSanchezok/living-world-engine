@@ -1,0 +1,27 @@
+id: tianyuan-holy-plan-repair
+kind: item
+name: 修缮方案甲
+description: 修缮方案甲，交接痕迹清楚可辨。
+placement: tianyuan-holy-steward
+facts:
+  - id: tianyuan-holy-plan-repair-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-holy-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-holy-plan-repair-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 修补接引台现有导灵槽，需八份现有材料、四十中阶灵石雇工和两个本地日。现有旧石仍可用，但此方案一年后需再次检查。费用尚未支付，是否聘得工匠仍需确认。
+    description: 修补接引台现有导灵槽，需八份现有材料、四十中阶灵石雇工和两个本地日。现有旧石仍可用，但此方案一年后需再次检查。费用尚未支付，是否聘得工匠仍需确认。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

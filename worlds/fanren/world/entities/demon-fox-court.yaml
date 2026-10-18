@@ -1,0 +1,26 @@
+id: demon-fox-court
+kind: location
+name: 妖狐之地议事处
+description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+placement: demon-fox-territory
+facts:
+  - id: demon-fox-court-route-demon-fox-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-fox-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-court-condition-demon-fox-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

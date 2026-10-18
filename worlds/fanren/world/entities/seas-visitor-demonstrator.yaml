@@ -1,0 +1,18 @@
+id: seas-visitor-demonstrator
+kind: item
+name: 桑络接口样件
+description: 可接普通风灵小舟测试的真实样件，需两份灵材和一中阶石完成装配；不适用于未勘查的大型舟。
+placement: seas-dragon-crafts-visitor
+facts:
+  - id: seas-visitor-demonstrator-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-crafts-visitor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

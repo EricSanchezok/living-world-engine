@@ -1,0 +1,26 @@
+id: wanyao-banner-ground
+kind: location
+name: 万妖幡祭地
+description: 万妖幡的祭炼地，此幡在这里积蓄力量并接受维护。
+placement: human-wanyao-valley
+facts:
+  - id: wanyao-banner-ground-route-human-wanyao-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanyao-valley
+    description: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    access:
+      kind: public
+  - id: wanyao-banner-ground-travel-human-wanyao-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    description: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

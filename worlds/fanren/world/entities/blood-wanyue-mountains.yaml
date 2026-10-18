@@ -1,0 +1,58 @@
+id: blood-wanyue-mountains
+kind: location
+name: 万月山脉
+description: 古藏所在的连绵山地，入口时机与确切路径并非公开常识。
+placement: blood-continent
+facts:
+  - id: blood-wanyue-mountains-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: route-to
+    access:
+      kind: public
+  - id: blood-wanyue-mountains-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-wanyue-mountains-route-blood-lake-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-lake-shore
+    description: route-to
+    access:
+      kind: public
+  - id: blood-wanyue-mountains-condition-blood-lake-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-wanyue-mountains-route-blood-qingping-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qingping-cave
+    description: route-to
+    access:
+      kind: public
+  - id: blood-wanyue-mountains-condition-blood-qingping-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

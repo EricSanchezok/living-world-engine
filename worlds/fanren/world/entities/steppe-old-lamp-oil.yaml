@@ -1,0 +1,20 @@
+id: steppe-old-lamp-oil
+kind: item
+name: 古灯油封柜
+description: 现存六十份旧灵油，已封口；开柜、分装、点灯须减少相应实际库存。
+placement: steppe-lamp-room
+facts:
+  - id: steppe-old-lamp-oil-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: mulan-tribal-community
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: steppe-lamp-oil
+    amount: 60
+ratings: []
+shared_activity_resources: []

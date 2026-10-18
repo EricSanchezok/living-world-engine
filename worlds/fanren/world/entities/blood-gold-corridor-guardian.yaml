@@ -1,0 +1,24 @@
+id: blood-gold-corridor-guardian
+kind: construct
+name: 金刚长廊傀儡
+description: 古年有伤但仍能活动的金色巨傀儡，接近木门者会遭双锤攻击；没有可谈判的人类人格。
+placement: blood-gold-silver-corridor
+facts:
+  - id: blood-gold-corridor-guardian-operating-boundary
+    predicate: operating-boundary
+    value:
+      kind: text
+      value: 威力相当于合体层级的机械守卫，由护宫阵供能与控制；结构被毁或控制被切断后停止行动。
+    description: 威力相当于合体层级的机械守卫，由护宫阵供能与控制；结构被毁或控制被切断后停止行动。
+    access:
+      kind: private
+meters:
+  - id: blood-gold-corridor-guardian-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: blood-gold-corridor-guardian-force
+    definition_id: force
+    value: 7
+shared_activity_resources: []

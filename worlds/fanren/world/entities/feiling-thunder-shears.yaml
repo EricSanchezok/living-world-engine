@@ -1,0 +1,26 @@
+id: feiling-thunder-shears
+kind: item
+name: 雷蛟剪
+description: 小巧青剪带淡银花纹，灌法可现双青雷蛟；借用不改变族有产权。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-thunder-shears-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-thunder-shears-use-cost
+    predicate: use-cost
+    value:
+      kind: text
+      value: 每次祭出至少耗用操作者20法力；持续追击按施法过程追加消耗。免长祭但强敌可夺控，不能无声脱离实际保管者。
+    description: 每次祭出至少耗用操作者20法力；持续追击按施法过程追加消耗。免长祭但强敌可夺控，不能无声脱离实际保管者。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

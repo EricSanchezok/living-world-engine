@@ -1,0 +1,20 @@
+id: blood-treasury-auxiliary
+kind: container
+name: 炉钵杂器组
+description: 炉、钵等杂器，炼丹/收纳等用途须逐件核实，不含自动增长的丹药。
+placement: blood-outer-implement-hall
+facts:
+  - id: blood-treasury-auxiliary-withdrawal-accounting
+    predicate: withdrawal-accounting
+    value:
+      kind: text
+      value: 取一件须从本组减少一件，再建立该具体物的持有与已鉴性质；未经鉴定不由角色任意指定高阶威能。合计1060件，不能同时把整库与已取件重复入账。
+    description: 取一件须从本组减少一件，再建立该具体物的持有与已鉴性质；未经鉴定不由角色任意指定高阶威能。合计1060件，不能同时把整库与已取件重复入账。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: tianding-implement-unit
+    amount: 90
+ratings: []
+shared_activity_resources: []

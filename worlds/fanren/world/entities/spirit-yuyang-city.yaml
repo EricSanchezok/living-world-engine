@@ -1,0 +1,34 @@
+id: spirit-yuyang-city
+kind: location
+name: 虞阳城
+description: 三境初立时建起的古城，炼体学派与灵具作坊沿街相邻。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-yuyang-city-route-spirit-inner-caravan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: 三境初立时建起的古城，炼体学派与灵具作坊沿街相邻。
+    access:
+      kind: public
+  - id: spirit-yuyang-city-route-spirit-yuyang-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuyang-tower
+    description: 收藏炼体法门与心得的塔楼，阅览者须按藏本权限取阅，不得以读过一页自称练成。
+    access:
+      kind: public
+  - id: spirit-yuyang-city-route-spirit-yuyang-workshops
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuyang-workshops
+    description: 低阶装置修补与灵具匠学艺的街区，炉台和图册由各店保管。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-qian-tool
+kind: item
+name: 钳泽的护路甲
+description: 护路甲可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-qian
+facts:
+  - id: xlt-qian-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-qian
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-nanlong-domain
+kind: location
+name: 南陇族地
+description: 起伏的岭地间分布着南陇族的居所，来访者沿族域接待通路寻找引路者。
+placement: feiling-territory
+facts:
+  - id: feiling-nanlong-domain-route-feiling-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-territory
+    description: 跨族域的长程通路。
+    access:
+      kind: public
+  - id: feiling-nanlong-domain-condition-nanlong
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨族域远行须有路线、补给与接待许可，按飞行能力与实际行程计时，不构成即时传送。
+    description: 跨族域远行须有路线、补给与接待许可，按飞行能力与实际行程计时，不构成即时传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

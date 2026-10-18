@@ -1,0 +1,26 @@
+id: dv-yuji-pavilion
+kind: location
+name: 玉矶阁
+description: 藏府中的古阁尚完整，楼下置古器，楼上有六只玉盒和一轴背剑儒生画。
+placement: dv-cangkun-hidden-cave
+facts:
+  - id: dv-yuji-pavilion-route-dv-cangkun-hidden-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-cangkun-hidden-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-yuji-pavilion-condition-dv-cangkun-hidden-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须通过仍在的太妙神禁及内层机关。
+    description: 须通过仍在的太妙神禁及内层机关。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

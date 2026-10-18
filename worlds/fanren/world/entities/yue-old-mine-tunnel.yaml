@@ -1,0 +1,27 @@
+id: yue-old-mine-tunnel
+kind: location
+name: 旧矿支脉道
+description: 沿旧矿脉挖出的支道，石壁保留凿痕，走到尽头仍有未开凿的岩层。
+placement: yue-old-mine
+facts:
+  - id: yue-old-mine-tunnel-route-yue-old-mine
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-old-mine
+    description: 矿工沿开凿的支道行走，挖进未开岩层需工具、时间和防护。
+    access:
+      kind: public
+  - id: yue-old-mine-tunnel-hidden-cavern
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-old-mine-cavern
+    description: 支道尽头的薄岩后通天然洞穴；须先确定空腔位置再实际开出足够通道，未开岩壁不能直接穿行。
+    access:
+      kind: discoverable
+      condition: 在支道尽头实际检查石壁通风/回响，或以适用探查手段定位后方空腔。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

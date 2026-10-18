@@ -1,0 +1,18 @@
+id: stone-pond
+kind: location
+name: 小石潭洞府
+description: 越国山地中的修士洞府，附近有小药圃。
+placement: human-realm
+facts:
+  - id: stone-pond-route-stone-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: stone-garden
+    description: 洞府与药圃有步道相连。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

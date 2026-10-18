@@ -1,0 +1,24 @@
+id: thunder-alliance-treasury
+kind: container
+name: 云城本轮公务库
+description: 已入库的本轮城务资源，拨给任务后仍需记录支用。
+placement: thunder-tongling-hall
+facts:
+  - id: thunder-alliance-treasury-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 120
+  - definition_id: mid-stone
+    amount: 500
+  - definition_id: craft-material
+    amount: 80
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: spirit-body-medicine
+kind: container
+name: 炼体院护筋药包
+description: 施岚配好的普通护筋药包，供按实际情况安排的训练或劳损护理。
+placement: spirit-body-school
+facts:
+  - id: spirit-body-medicine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-body-healer
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 10
+ratings: []
+shared_activity_resources: []

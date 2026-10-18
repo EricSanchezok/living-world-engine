@@ -1,0 +1,189 @@
+id: canon-wan-xiaoshan
+kind: person
+name: 万小山
+description: 万家八岁少年，好奇外面的门派和法术，尚未远行。
+placement: yue-wan-cliff
+facts:
+  - id: canon-wan-xiaoshan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - canon-wan-xiaoshan
+  - id: canon-wan-xiaoshan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 识字、家族常识和初学吐纳，尚未形成可用法力。
+    description: 识字、家族常识和初学吐纳，尚未形成可用法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wan-xiaoshan
+  - id: canon-wan-xiaoshan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金木土三属性灵根
+    description: 金木土三属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-wan-xiaoshan-age
+    predicate: age-at-opening
+    value:
+      kind: number
+      value: 8
+    description: age-at-opening
+    access:
+      kind: public
+  - id: canon-wan-xiaoshan-family-yue-wan-aunt
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: yue-wan-aunt
+    description: 姑母与侄子，共同生活，知道对方今日功课。
+    access:
+      kind: public
+meters:
+  - id: canon-wan-xiaoshan-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 20
+ratings:
+  - id: canon-wan-xiaoshan-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-wan-xiaoshan-force
+    definition_id: force
+    value: 0
+  - id: canon-wan-xiaoshan-craft
+    definition_id: craft
+    value: 1
+  - id: canon-wan-xiaoshan-perception
+    definition_id: perception
+    value: 0
+  - id: canon-wan-xiaoshan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-wan-xiaoshan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 万家八岁少年，好奇外面的门派和法术，尚未远行。
+      voice: 话多而直，遇新鲜事喜欢连问几个为什么。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把家里教的修仙常识记牢，争取跟长辈到附近看看。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 万小山
+        description: 万家八岁少年，好奇外面的门派和法术，尚未远行。
+        status: observed
+      - id: location
+        name: 枯崖山万家
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-wan-xiaoshan-pouch
+        name: 万小山的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-wan-aunt
+        name: 万芸
+        description: 姑母与侄子，共同生活，知道对方今日功课。
+        status: observed
+      - id: known-yue-wan-reading-book
+        name: 万家常识小册
+        description: 姑母陪自己读的家用修仙常识册。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 识字、家族常识和初学吐纳，尚未形成可用法力。
+        description: 识字、家族常识和初学吐纳，尚未形成可用法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把家里教的修仙常识记牢，争取跟长辈到附近看看。
+        description: 把家里教的修仙常识记牢，争取跟长辈到附近看看。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        description: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wan-xiaoshan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-wan-cliff
+      - local_entity_id: known-canon-wan-xiaoshan-pouch
+        canonical_entity_ids:
+          - canon-wan-xiaoshan-pouch
+      - local_entity_id: known-yue-wan-aunt
+        canonical_entity_ids:
+          - yue-wan-aunt
+      - local_entity_id: known-yue-wan-reading-book
+        canonical_entity_ids:
+          - yue-wan-reading-book

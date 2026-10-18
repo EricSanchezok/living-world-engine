@@ -1,0 +1,58 @@
+id: thunder-gailing-city
+kind: location
+name: 盖灵城
+description: 角蚩主城之一，厚重城门之外道路汇聚，城内军务与居住坊巷各有出入凭据。
+placement: thunder-jiaochi
+facts:
+  - id: thunder-gailing-city-route-to-thunder-jiaochi-frontier
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-frontier
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-gailing-city-route-conditions-thunder-jiaochi-frontier
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。
+    description: 长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。
+    access:
+      kind: private
+  - id: thunder-gailing-city-route-to-thunder-tianjiao-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianjiao-mountain
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-gailing-city-route-conditions-thunder-tianjiao-mountain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿山道至山门，超过警戒石须获许可。
+    description: 沿山道至山门，超过警戒石须获许可。
+    access:
+      kind: private
+  - id: thunder-gailing-city-route-to-thunder-offering-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-offering-hall
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-gailing-city-route-conditions-thunder-offering-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 到外厅可递送清册，供位禁区须独立许可。
+    description: 到外厅可递送清册，供位禁区须独立许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

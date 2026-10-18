@@ -1,0 +1,42 @@
+id: blood-bone-domain
+kind: location
+name: 血骨门辖域
+description: 有宗门城池、修行山岭与外来交易者的广大辖区。
+placement: blood-continent
+facts:
+  - id: blood-bone-domain-route-blood-ruyi-residence
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-ruyi-residence
+    description: route-to
+    access:
+      kind: public
+  - id: blood-bone-domain-condition-blood-ruyi-residence
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+  - id: blood-bone-domain-route-blood-eagle-residence
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-eagle-residence
+    description: route-to
+    access:
+      kind: public
+  - id: blood-bone-domain-condition-blood-eagle-residence
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

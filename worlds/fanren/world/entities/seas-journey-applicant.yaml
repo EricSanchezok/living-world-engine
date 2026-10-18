@@ -1,0 +1,194 @@
+id: seas-journey-applicant
+kind: person
+name: 卢缄
+description: 炼虚异族刻印师，获雷鸣坊会邀请参加工艺讨论，习惯独自旅行。
+placement: seas-reception
+facts:
+  - id: seas-journey-applicant-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - seas-journey-applicant
+  - id: seas-journey-applicant-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修行、符刻与小型保湿匣制作。
+    description: 炼虚修行、符刻与小型保湿匣制作。
+    access:
+      kind: agents
+      agentIds:
+        - seas-journey-applicant
+  - id: seas-journey-applicant-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-journey-applicant
+meters:
+  - id: seas-journey-applicant-health
+    definition_id: health
+    current: 100
+  - id: seas-journey-applicant-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-journey-applicant-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: seas-journey-applicant-force
+    definition_id: force
+    value: 6
+  - id: seas-journey-applicant-craft
+    definition_id: craft
+    value: 6
+  - id: seas-journey-applicant-perception
+    definition_id: perception
+    value: 6
+  - id: seas-journey-applicant-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: seas-journey-applicant
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 炼虚异族刻印师，获雷鸣坊会邀请参加工艺讨论，习惯独自旅行。
+      voice: 言辞不多，听到工艺问题会眼睛发亮；讨价还价前总先确认自己要付多少时间。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取按期赴雷鸣问艺，核清转乘是否可行，再决定是否改变行程或将邀请改为书面交流。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 卢缄
+        description: 炼虚异族刻印师，获雷鸣坊会邀请参加工艺讨论，习惯独自旅行。
+        status: observed
+      - id: location
+        name: 商盟接引茶棚
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-journey-applicant-private-stock
+        name: 卢缄的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-seas-workshop-invitation
+        name: 雷鸣坊会邀请札
+        description: 邀请卢缄在90个灵界本地日内赴云城问艺台作刻印交流；接受或拒绝均由本人选择。
+        status: observed
+      - id: known-seas-travel-saving
+        name: 卢缄积蓄
+        description: 可自行支配的出行资金，与自己的货物分开。
+        status: observed
+      - id: known-seas-seat-ledger
+        name: 本轮跨洲运力账
+        description: 三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。
+        status: observed
+      - id: known-seas-cargo-rules
+        name: 活物行李验收规则
+        description: 当前已可查阅的受理条件和费用，未替自己签任何出行约。
+        status: observed
+      - id: known-seas-pass-clerk
+        name: 柯衡
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+      - id: known-seas-herb-scholar
+        name: 岑枝
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修行、符刻与小型保湿匣制作。
+        description: 炼虚修行、符刻与小型保湿匣制作。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-journey-applicant
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-reception
+      - local_entity_id: known-seas-journey-applicant-private-stock
+        canonical_entity_ids:
+          - seas-journey-applicant-private-stock
+      - local_entity_id: known-seas-workshop-invitation
+        canonical_entity_ids:
+          - seas-workshop-invitation
+      - local_entity_id: known-seas-travel-saving
+        canonical_entity_ids:
+          - seas-travel-saving
+      - local_entity_id: known-seas-seat-ledger
+        canonical_entity_ids:
+          - seas-seat-ledger
+      - local_entity_id: known-seas-cargo-rules
+        canonical_entity_ids:
+          - seas-cargo-rules
+      - local_entity_id: known-seas-pass-clerk
+        canonical_entity_ids:
+          - seas-pass-clerk
+      - local_entity_id: known-seas-herb-scholar
+        canonical_entity_ids:
+          - seas-herb-scholar

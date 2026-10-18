@@ -1,0 +1,158 @@
+id: thunder-cloud-copyist
+kind: person
+name: 凝页
+description: 云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。
+placement: thunder-cloud-archive
+facts:
+  - id: thunder-cloud-copyist-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: private
+  - id: thunder-cloud-copyist-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。
+    description: 元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。
+    access:
+      kind: private
+  - id: thunder-cloud-copyist-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-cloud-people
+    description: affiliation
+    access:
+      kind: private
+  - id: thunder-cloud-copyist-acquaintance-thunder-xinmei-traveler
+    predicate: acquaintance
+    value:
+      kind: entity
+      entityId: thunder-xinmei-traveler
+    description: acquaintance
+    access:
+      kind: private
+meters:
+  - id: thunder-cloud-copyist-health
+    definition_id: health
+    current: 100
+  - id: thunder-cloud-copyist-mana
+    definition_id: mana
+    current: 720
+quantities: []
+ratings:
+  - id: thunder-cloud-copyist-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: thunder-cloud-copyist-force
+    definition_id: force
+    value: 4
+  - id: thunder-cloud-copyist-craft
+    definition_id: craft
+    value: 2
+  - id: thunder-cloud-copyist-perception
+    definition_id: perception
+    value: 4
+  - id: thunder-cloud-copyist-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: thunder-cloud-copyist
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。
+      voice: 喜欢让对方指出具体哪一页，纠错后会平和地解释理由。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否接受异族学者合写一份标明传闻的远行册。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 凝页
+        description: 云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。
+        status: observed
+      - id: location
+        name: 云族誊录间
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: thunder-review-thunder-cloud-copyist-private-stock
+        name: 凝页私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: thunder-review-thunder-cloud-people
+        name: 云族
+        description: 自己所属族群，族内的私事仍依本人经历知情。
+        status: observed
+      - id: thunder-review-thunder-xinmei-traveler
+        name: 弦预
+        description: 曾核过对方的一页沿路水源记，尚未同走北路。
+        status: observed
+      - id: thunder-review-thunder-traveler-notes
+        name: 弦预沿路水源记
+        description: 曾读其中一页；没有借阅全本，也不知道对方未走之路。
+        status: observed
+      - id: thunder-review-thunder-public-race-ledger
+        name: 公开族际地理簿
+        description: 自己整理的公开簿，传闻有标记，阅者不能当密报。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。
+        description: 元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-cloud-copyist
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-cloud-archive
+      - local_entity_id: thunder-review-thunder-cloud-copyist-private-stock
+        canonical_entity_ids:
+          - thunder-cloud-copyist-private-stock
+      - local_entity_id: thunder-review-thunder-cloud-people
+        canonical_entity_ids:
+          - thunder-cloud-people
+      - local_entity_id: thunder-review-thunder-xinmei-traveler
+        canonical_entity_ids:
+          - thunder-xinmei-traveler
+      - local_entity_id: thunder-review-thunder-traveler-notes
+        canonical_entity_ids:
+          - thunder-traveler-notes
+      - local_entity_id: thunder-review-thunder-public-race-ledger
+        canonical_entity_ids:
+          - thunder-public-race-ledger

@@ -1,0 +1,20 @@
+id: thunder-continental-fuel
+kind: container
+name: 跨洲专用储备
+description: 已拨至密殿的二十四枚极品灵石，恰好供本次配置一次跨洲传送；启阵须从真实库存扣减。
+placement: thunder-fujiao-secret-hall
+facts:
+  - id: thunder-continental-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: top-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

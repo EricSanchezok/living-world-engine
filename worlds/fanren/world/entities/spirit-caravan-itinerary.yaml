@@ -1,0 +1,27 @@
+id: spirit-caravan-itinerary
+kind: item
+name: 远汀行程与收费簿
+description: 记录现有队伍、接驳对象和发车条件的簿册，远地港位须核准后确定。
+placement: spirit-xuanwu-route-office
+facts:
+  - id: spirit-caravan-itinerary-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-caravan-service
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-caravan-itinerary-service-terms
+    predicate: service-terms
+    value:
+      kind: text
+      value: 城内货场至内境关口搬运，标准箱每箱2枚低阶灵石；长途天元境商路需按人货、护卫、补给与当前路况另议。至玄武港或天灵城的线路必须逐段取得接驳认可，不接受付款后凭空瞬达。
+    description: 城内货场至内境关口搬运，标准箱每箱2枚低阶灵石；长途天元境商路需按人货、护卫、补给与当前路况另议。至玄武港或天灵城的线路必须逐段取得接驳认可，不接受付款后凭空瞬达。
+    access:
+      kind: discoverable
+      condition: 实际向石穗询问并阅读当前行程簿。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

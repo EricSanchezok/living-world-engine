@@ -1,0 +1,58 @@
+id: tiannan-six-demonic
+kind: organization
+name: 天罗六宗联盟
+description: 天罗六宗联盟的宗门或联盟共同体，职分、成员与公产分开；与陌生人交涉须由实际掌事者决定。
+placement: human-tianluo
+facts:
+  - id: tiannan-six-demonic-member-guiling-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: guiling-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: tiannan-six-demonic-member-yuling-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: yuling-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: tiannan-six-demonic-member-hehuan-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: hehuan-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: tiannan-six-demonic-member-moyan-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: moyan-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: tiannan-six-demonic-member-tiansha-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: tiansha-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+  - id: tiannan-six-demonic-member-qianhuan-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: qianhuan-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

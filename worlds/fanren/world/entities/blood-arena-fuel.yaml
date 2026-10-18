@@ -1,0 +1,20 @@
+id: blood-arena-fuel
+kind: container
+name: 竞技场维护用石
+description: 当前护阵使用储备，每次正常较技消耗六枚低阶灵石。
+placement: blood-arena
+facts:
+  - id: blood-arena-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-bone-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

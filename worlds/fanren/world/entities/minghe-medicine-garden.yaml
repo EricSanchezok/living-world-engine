@@ -1,0 +1,35 @@
+id: minghe-medicine-garden
+kind: location
+name: 翎苔药圃
+description: 为普通虫粮和药用植物而设的小片圃地。
+placement: minghe-lintai-market
+facts:
+  - id: minghe-medicine-garden-route-minghe-lintai-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-lintai-market
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-medicine-garden-condition-minghe-lintai-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 为普通虫粮和药用植物而设的小片圃地。
+    description: 为普通虫粮和药用植物而设的小片圃地。
+    access:
+      kind: public
+  - id: minghe-medicine-garden-irrigation-fault
+    predicate: irrigation-fault
+    value:
+      kind: text
+      value: 支渠过滤石被泥沙堵住，水流不足导致叶黄；清堵和两轮观察可改善新叶，已经坏掉的叶片不能直接变成合格货。
+    description: 支渠过滤石被泥沙堵住，水流不足导致叶黄；清堵和两轮观察可改善新叶，已经坏掉的叶片不能直接变成合格货。
+    access:
+      kind: discoverable
+      condition: 查看支渠滤石、土壤湿度并比较未堵支渠的植株。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

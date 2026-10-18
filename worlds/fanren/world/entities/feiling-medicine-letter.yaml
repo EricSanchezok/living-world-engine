@@ -1,0 +1,18 @@
+id: feiling-medicine-letter
+kind: item
+name: 沿海采购函
+description: 收件人玉皇顶宁羽，请核准四包常用药与运费；没有必须由岚止本人送达的条款。
+placement: feiling-courier
+facts:
+  - id: feiling-medicine-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-wing-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

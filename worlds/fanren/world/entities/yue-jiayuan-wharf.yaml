@@ -1,0 +1,51 @@
+id: yue-jiayuan-wharf
+kind: location
+name: 嘉元西城小码头
+description: 石阶接着木栈，苦力轮流接小舟生意，装货与争执都在此发生。
+placement: yue-jiayuan
+facts:
+  - id: yue-jiayuan-wharf-route-yue-xianglu-canal
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-xianglu-canal
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-jiayuan-wharf-travel-yue-xianglu-canal
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-jiayuan-wharf-route-yue-jiayuan-west
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan-west
+    description: 沿嘉元城内公共街路实际行走；途中院门、店铺和货仓另受各自通行条件限制。
+    access:
+      kind: public
+  - id: global-detail-wharf-berthing
+    predicate: berthing-conditions
+    value:
+      kind: text
+      value: 这里是偏小的木板码头，普通大船不常来，繁忙季其他码头泊位不足时也可能靠泊。货物需有真实装卸人手和工具。
+    description: 这里是偏小的木板码头，普通大船不常来，繁忙季其他码头泊位不足时也可能靠泊。货物需有真实装卸人手和工具。
+    access:
+      kind: public
+  - id: global-detail-wharf-business-custom
+    predicate: local-business-custom
+    value:
+      kind: text
+      value: 此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。
+    description: 此码头有人坚持上岸客商须雇本地苦力，即使货不多；这只是行规与利益要求，客人可协商或拒绝，是否争执和动手由各方决定。孙二狗与黑熊当前约好轮流接上门生意，不抢对方轮次；具体下一单先核双方交接。
+    access:
+      kind: discoverable
+      condition: 实际接洽本地脚夫、船夫或旁观一次接单交接。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

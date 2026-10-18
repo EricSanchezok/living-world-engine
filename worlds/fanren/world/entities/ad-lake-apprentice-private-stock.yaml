@@ -1,0 +1,22 @@
+id: ad-lake-apprentice-private-stock
+kind: container
+name: 金穗的自用储备
+description: 本人财物，与机构公库和门人财产分开。
+placement: ad-lake-apprentice
+facts:
+  - id: ad-lake-apprentice-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

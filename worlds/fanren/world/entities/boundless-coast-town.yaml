@@ -1,0 +1,58 @@
+id: boundless-coast-town
+kind: location
+name: 闵州海边小城
+description: 依海而建的城镇，居民在街巷间经营日常生计。
+placement: boundless-minzhou
+facts:
+  - id: boundless-coast-town-route-boundless-fengri
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-fengri
+    description: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    access:
+      kind: public
+  - id: boundless-coast-town-travel-boundless-fengri
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    description: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    access:
+      kind: public
+  - id: boundless-coast-town-route-boundless-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-market
+    description: 城中街路，普通步行可达。
+    access:
+      kind: public
+  - id: boundless-coast-town-travel-boundless-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城中街路，普通步行可达。
+    description: 城中街路，普通步行可达。
+    access:
+      kind: public
+  - id: boundless-coast-town-route-boundless-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-shore
+    description: 沿北门外坡路到海岸，步行约半个时辰。
+    access:
+      kind: public
+  - id: boundless-coast-town-travel-boundless-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿北门外坡路到海岸，步行约半个时辰。
+    description: 沿北门外坡路到海岸，步行约半个时辰。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

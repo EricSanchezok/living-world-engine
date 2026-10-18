@@ -1,0 +1,201 @@
+id: south-herbalist
+kind: person
+name: 何松年
+description: 乡医的配偶，采药谋生，熟悉自家常走山路，不知道古封印秘密。
+placement: south-market-home
+facts:
+  - id: south-herbalist-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - south-herbalist
+  - id: south-herbalist-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通药草采集、辨瘴气和行路。
+    description: 普通药草采集、辨瘴气和行路。
+    access:
+      kind: agents
+      agentIds:
+        - south-herbalist
+  - id: south-herbalist-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+    description: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+    access:
+      kind: agents
+      agentIds:
+        - south-herbalist
+  - id: south-herbalist-spouse-south-healer
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: south-healer
+    description: spouse
+    access:
+      kind: private
+  - id: south-herbalist-teaches-south-herb-apprentice
+    predicate: teaches
+    value:
+      kind: entity
+      entityId: south-herb-apprentice
+    description: teaches
+    access:
+      kind: private
+meters:
+  - id: south-herbalist-health
+    definition_id: health
+    current: 100
+  - id: south-herbalist-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: south-herbalist-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: south-herbalist-force
+    definition_id: force
+    value: 1
+  - id: south-herbalist-craft
+    definition_id: craft
+    value: 4
+  - id: south-herbalist-perception
+    definition_id: perception
+    value: 1
+  - id: south-herbalist-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: south-herbalist
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 乡医的配偶，采药谋生，熟悉自家常走山路，不知道古封印秘密。
+      voice: 爱讲山路笑话，遇真有危险会收起笑容。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把雨前晒干的药叶收妥，决定明日是否带学徒上山。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 何松年
+        description: 乡医的配偶，采药谋生，熟悉自家常走山路，不知道古封印秘密。
+        status: observed
+      - id: location
+        name: 何阮家住屋
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-south-herbalist-purse
+        name: 何松年的小袋
+        description: 本人随身钱物，不含家产或宗门库。
+        status: observed
+      - id: known-south-healer
+        name: 阮青禾
+        description: 共同生活的夫妻，各有工作与财物。
+        status: observed
+      - id: known-south-herb-apprentice
+        name: 田霁
+        description: 日常采药师徒，有具体学艺和住用约定。
+        status: observed
+      - id: known-south-herbal-household
+        name: 何阮家日用箱
+        description: 家庭用品，配偶与同住学徒知道用途，不能被访客直接认成自己库存。
+        status: observed
+      - id: known-south-market-clinic
+        name: 草庐医舍
+        description: 从自己的日常往来知道此处或物，不因此取得所有权。
+        status: observed
+      - id: known-south-market
+        name: 回溪药市
+        description: 从自己的日常往来知道此处或物，不因此取得所有权。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通药草采集、辨瘴气和行路。
+        description: 普通药草采集、辨瘴气和行路。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+        description: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-work
+        subjectId: self
+        predicate: opening-work
+        value:
+          kind: text
+          value: 把雨前晒干的药叶收妥，决定明日是否带学徒上山。
+        description: 把雨前晒干的药叶收妥，决定明日是否带学徒上山。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - south-herbalist
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-market-home
+      - local_entity_id: known-south-herbalist-purse
+        canonical_entity_ids:
+          - south-herbalist-purse
+      - local_entity_id: known-south-healer
+        canonical_entity_ids:
+          - south-healer
+      - local_entity_id: known-south-herb-apprentice
+        canonical_entity_ids:
+          - south-herb-apprentice
+      - local_entity_id: known-south-herbal-household
+        canonical_entity_ids:
+          - south-herbal-household
+      - local_entity_id: known-south-market-clinic
+        canonical_entity_ids:
+          - south-market-clinic
+      - local_entity_id: known-south-market
+        canonical_entity_ids:
+          - south-market

@@ -1,0 +1,24 @@
+id: future-fengyuan-imprisoned-immortal-private-stock
+kind: container
+name: 凝躯仙魂私用储备
+description: 本人可支配的有限储备，与族库和受托物分开。
+placement: future-fengyuan-imprisoned-immortal
+facts:
+  - id: future-fengyuan-imprisoned-immortal-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-fengyuan-imprisoned-immortal
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 16
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

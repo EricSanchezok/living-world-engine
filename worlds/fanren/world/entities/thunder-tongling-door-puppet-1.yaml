@@ -1,0 +1,34 @@
+id: thunder-tongling-door-puppet-1
+kind: container
+name: 通灵殿白袍守卫1
+description: 一具炼虚顶阶威能的守门傀儡，按万古授权执行有限警戒。
+placement: thunder-tongling-hall
+facts:
+  - id: thunder-tongling-door-puppet-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-tongling-door-puppet-1-guard-rule
+    predicate: guard-rule
+    value:
+      kind: text
+      value: 以核验来客与阻止强闯为现有命令；每次实战消耗对应能源，不能替主人作政治承诺。
+    description: 以核验来客与阻止强闯为现有命令；每次实战消耗对应能源，不能替主人作政治承诺。
+    access:
+      kind: public
+meters:
+  - id: thunder-tongling-door-puppet-1-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: high-stone
+    amount: 2
+ratings:
+  - id: thunder-tongling-door-puppet-1-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

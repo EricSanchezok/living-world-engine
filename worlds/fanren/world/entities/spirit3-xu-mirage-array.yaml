@@ -1,0 +1,42 @@
+id: spirit3-xu-mirage-array
+kind: item
+name: 许氏迷蜃幻境阵基
+description: 万年前复原的七八成幻阵阵基，令外观山峰坐标偏移；阵力不是实际搬山。
+placement: blood-xu-ancestral-estate
+facts:
+  - id: spirit3-xu-mirage-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-xu-mirage-array-use-boundary
+    predicate: use-boundary
+    value:
+      kind: text
+      value: 持授权控制牌并有阵能才可调整幻景，仍有弱点；强敌识破或破坏阵基可使防护失效。
+    description: 持授权控制牌并有阵能才可调整幻景，仍有弱点；强敌识破或破坏阵基可使防护失效。
+    access:
+      kind: private
+  - id: spirit3-xu-mirage-array-active-operation-cost
+    predicate: active-operation-cost
+    value:
+      kind: text
+      value: 原有阵基维持固定幻景；每次主动变更或临时打开入口须从供能盒实耗1高阶灵石。遇强攻会损伤阵基，修复需实料，不保证抗合体。
+    description: 原有阵基维持固定幻景；每次主动变更或临时打开入口须从供能盒实耗1高阶灵石。遇强攻会损伤阵基，修复需实料，不保证抗合体。
+    access:
+      kind: private
+  - id: spirit3-xu-mirage-array-powered-state
+    predicate: powered-state
+    value:
+      kind: text
+      value: 当前原有幻景正在维持，表象山峰与实际位置不同；许含章须用控制牌和真实灵石才能调整或开启入口。
+    description: 当前原有幻景正在维持，表象山峰与实际位置不同；许含章须用控制牌和真实灵石才能调整或开启入口。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

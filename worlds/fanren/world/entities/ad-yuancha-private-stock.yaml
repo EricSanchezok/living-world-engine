@@ -1,0 +1,22 @@
+id: ad-yuancha-private-stock
+kind: container
+name: 元刹自用储备
+description: 本人有限财物。
+placement: canon-yuan-cha
+facts:
+  - id: ad-yuancha-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yuan-cha
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 240
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

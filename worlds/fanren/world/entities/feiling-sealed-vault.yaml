@@ -1,0 +1,26 @@
+id: feiling-sealed-vault
+kind: location
+name: 天鹏传承密室
+description: 受长老共同守护的传承库，出入和取物需要相应许可。
+placement: feiling-tianpeng-hall
+facts:
+  - id: feiling-sealed-vault-route-feiling-tianpeng-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-hall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-sealed-vault-condition-feiling-tianpeng-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 受长老共同守护的传承库，出入和取物需要相应许可。
+    description: 受长老共同守护的传承库，出入和取物需要相应许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

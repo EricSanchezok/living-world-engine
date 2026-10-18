@@ -1,0 +1,18 @@
+id: ad-rice-mature
+kind: item
+name: 沈黍成熟血牙米
+description: 唯一成熟的一粒，食用或种植会实际消耗；可改善肉身但功法临时增幅需具体条件。
+placement: ad-rice-field
+facts:
+  - id: ad-rice-mature-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-grower
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

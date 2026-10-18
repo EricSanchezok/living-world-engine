@@ -1,0 +1,27 @@
+id: fengyuan-seedling-bed
+kind: item
+name: 青梢负责的幼枝圃
+description: 五处幼枝根床，其中靠溪的两处叶尖发黄。
+placement: fengyuan-wood-rest-grove
+facts:
+  - id: fengyuan-seedling-bed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-seedling-bed-soil-condition
+    predicate: soil-condition
+    value:
+      kind: text
+      value: 靠溪两处土中混入太多新采矿砂，排水变差；清理渠道并换用真实适土可改善，不能靠施法一句话凭空换土。
+    description: 靠溪两处土中混入太多新采矿砂，排水变差；清理渠道并换用真实适土可改善，不能靠施法一句话凭空换土。
+    access:
+      kind: discoverable
+      condition: 检查根床、土样和渠道，比较正常与发黄的两处。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

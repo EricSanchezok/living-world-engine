@@ -1,0 +1,22 @@
+id: feiling-muqing-garden
+kind: container
+name: 木精洞养护材料
+description: 维持洞内灵植所需的真实材料，领用要向主人或受托者说明。
+placement: feiling-mujing-cave
+facts:
+  - id: feiling-muqing-garden-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 20
+  - definition_id: craft-material
+    amount: 15
+ratings: []
+shared_activity_resources: []

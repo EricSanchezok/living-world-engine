@@ -1,0 +1,20 @@
+id: feiling-poison-bees
+kind: creature-group
+name: 毒兰护花蜂群
+description: 四十八只护花毒蜂围着兰株活动。
+placement: feiling-orchid-marsh
+facts:
+  - id: feiling-poison-bees-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-creature-count
+    amount: 48
+ratings: []
+shared_activity_resources: []

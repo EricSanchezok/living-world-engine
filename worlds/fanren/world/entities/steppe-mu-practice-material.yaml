@@ -1,0 +1,28 @@
+id: steppe-mu-practice-material
+kind: item
+name: 穆氏练火药材
+description: 已购两份普通干药，练火消耗需从这批扣除，新三份尚待禾岳同意。
+placement: steppe-tianfeng-hearth
+facts:
+  - id: steppe-mu-practice-material-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-tianfeng
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-mu-practice-material-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-mu-tianfeng
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

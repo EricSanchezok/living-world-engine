@@ -1,0 +1,18 @@
+id: spirit-sunset-human-market
+kind: location
+name: 落日城灵具材料街
+description: 供应经核验材料的交易街，普通灵具材料与炼制高阶法宝所需之物不能混同。
+placement: spirit-sunset-human-city
+facts:
+  - id: spirit-sunset-human-market-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: 供应经核验材料的交易街，普通灵具材料与炼制高阶法宝所需之物不能混同。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

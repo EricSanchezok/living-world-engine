@@ -1,0 +1,28 @@
+id: dajin-kuzhu-store
+kind: location
+name: 苦竹岛值守库
+description: 巡阵器物与维护材料分类保存，取用要记录用途。
+placement: dajin-kuzhu-yingfeng-hall
+facts:
+  - id: dajin-kuzhu-store-managed-by
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: canon-ku-zhu
+    description: 取用须获当前管理者许可。
+    access:
+      kind: public
+  - id: dajin-kuzhu-store-route-dajin-kuzhu-yingfeng-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-yingfeng-hall
+    description: 器库有值守与保管安排。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: maintenance-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

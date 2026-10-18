@@ -1,0 +1,194 @@
+id: seas-herb-scholar
+kind: person
+name: 岑枝
+description: 外族合体草木研究者，带着自己的活种，想在血天观察土性变化。
+placement: seas-reception
+facts:
+  - id: seas-herb-scholar-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - seas-herb-scholar
+  - id: seas-herb-scholar-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体木法、活种养护与材料研究。
+    description: 合体木法、活种养护与材料研究。
+    access:
+      kind: agents
+      agentIds:
+        - seas-herb-scholar
+  - id: seas-herb-scholar-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-herb-scholar
+meters:
+  - id: seas-herb-scholar-health
+    definition_id: health
+    current: 100
+  - id: seas-herb-scholar-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-herb-scholar-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: seas-herb-scholar-force
+    definition_id: force
+    value: 7
+  - id: seas-herb-scholar-craft
+    definition_id: craft
+    value: 7
+  - id: seas-herb-scholar-perception
+    definition_id: perception
+    value: 7
+  - id: seas-herb-scholar-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: seas-herb-scholar
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 外族合体草木研究者，带着自己的活种，想在血天观察土性变化。
+      voice: 喜欢拿根须和叶色解释自己的担心，受敷衍时会直接把样本摆出来。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取一席跨洲运力，不愿让研究活种被误当普通货包压坏。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 岑枝
+        description: 外族合体草木研究者，带着自己的活种，想在血天观察土性变化。
+        status: observed
+      - id: location
+        name: 商盟接引茶棚
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-herb-scholar-private-stock
+        name: 岑枝的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-seas-plant-box
+        name: 岑枝活种匣
+        description: 十二株自育耐盐草苗，叶缘微卷，缓慢养护可缓解；没有开瓶即死的陷阱。
+        status: observed
+      - id: known-seas-travel-price-fund
+        name: 岑枝出行预算
+        description: 本人预留费用，不含盟中任何公共灵石。
+        status: observed
+      - id: known-seas-seat-ledger
+        name: 本轮跨洲运力账
+        description: 三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。
+        status: observed
+      - id: known-seas-cargo-rules
+        name: 活物行李验收规则
+        description: 当前已可查阅的受理条件和费用，未替自己签任何出行约。
+        status: observed
+      - id: known-seas-pass-clerk
+        name: 柯衡
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+      - id: known-seas-journey-applicant
+        name: 卢缄
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体木法、活种养护与材料研究。
+        description: 合体木法、活种养护与材料研究。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-herb-scholar
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-reception
+      - local_entity_id: known-seas-herb-scholar-private-stock
+        canonical_entity_ids:
+          - seas-herb-scholar-private-stock
+      - local_entity_id: known-seas-plant-box
+        canonical_entity_ids:
+          - seas-plant-box
+      - local_entity_id: known-seas-travel-price-fund
+        canonical_entity_ids:
+          - seas-travel-price-fund
+      - local_entity_id: known-seas-seat-ledger
+        canonical_entity_ids:
+          - seas-seat-ledger
+      - local_entity_id: known-seas-cargo-rules
+        canonical_entity_ids:
+          - seas-cargo-rules
+      - local_entity_id: known-seas-pass-clerk
+        canonical_entity_ids:
+          - seas-pass-clerk
+      - local_entity_id: known-seas-journey-applicant
+        canonical_entity_ids:
+          - seas-journey-applicant

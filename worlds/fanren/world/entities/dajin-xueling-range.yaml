@@ -1,0 +1,28 @@
+id: dajin-xueling-range
+kind: location
+name: 雪陵山脉
+description: 大晋一带的山脉，山路与深山地形不同；古墓传闻不能代替已探明入口。
+placement: human-dajin
+facts:
+  - id: dajin-xueling-range-route-dajin-feng-vault-door
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-vault-door
+    description: 找到实际瀑布及门后通道，不能仅凭山名定位。
+    access:
+      kind: discoverable
+      condition: 取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。
+  - id: dajin-xueling-range-route-global-xuanye-tomb
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-xuanye-tomb
+    description: 须实地辨认隐藏墓口及禁制。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

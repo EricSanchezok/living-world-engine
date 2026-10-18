@@ -1,0 +1,26 @@
+id: outerstar-array-flag-4
+kind: item
+name: 陆芩困兽阵旗4
+description: 四面配套阵旗之一，需先布好地形并持续法力或灵石供给。
+placement: outerstar-array-hunter
+facts:
+  - id: outerstar-array-flag-4-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-array-hunter
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-array-flag-4-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 完好
+    description: 完好
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

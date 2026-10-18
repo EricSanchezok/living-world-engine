@@ -1,0 +1,30 @@
+id: ad-firecloud-work-store
+kind: container
+name: 火云矿工棚库
+description: 已经采出的3份常品与5份支护料分柜，不把在矿量同已采量重复计算。
+placement: ad-firecloud-mine
+facts:
+  - id: ad-firecloud-work-store-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bai-family
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-firecloud-work-store-allocated-material
+    predicate: allocated-material
+    value:
+      kind: text
+      value: 8份中3份为已采常品，5份为支护料；不可把两种材料当任意法宝通用配方。
+    description: 8份中3份为已采常品，5份为支护料；不可把两种材料当任意法宝通用配方。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: demon-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

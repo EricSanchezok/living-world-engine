@@ -1,0 +1,24 @@
+id: canon-xu-ling-private-stock
+kind: container
+name: 虚灵私用材料
+description: 个人修行与检修所用的有限储备。
+placement: canon-xu-ling
+facts:
+  - id: canon-xu-ling-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 80
+  - definition_id: high-stone
+    amount: 5
+  - definition_id: craft-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

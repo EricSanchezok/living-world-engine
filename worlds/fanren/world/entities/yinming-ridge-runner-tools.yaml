@@ -1,0 +1,18 @@
+id: yinming-ridge-runner-tools
+kind: item
+name: 灰穗的个人器具
+description: 熟悉村路、简单武技与准确复述。所需的有限工具，不包含无限兽晶。
+placement: yinming-ridge-runner
+facts:
+  - id: yinming-ridge-runner-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-ridge-runner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

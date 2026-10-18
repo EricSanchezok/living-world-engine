@@ -1,0 +1,219 @@
+id: canon-bingfeng
+kind: person
+name: 冰凤
+description: 长期闭关于冰渊岛的冰凤妖修，重视自己的族群与修行，对小极宫的古老压迫存有记忆。
+placement: north-bingfeng-retreat
+facts:
+  - id: canon-bingfeng-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+  - id: canon-bingfeng-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 十级妖兽之身、冰寒神通与本族有限撕裂空间能力；撕裂空间须考虑位置、稳定性、力量和风险。
+    description: 十级妖兽之身、冰寒神通与本族有限撕裂空间能力；撕裂空间须考虑位置、稳定性、力量和风险。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+  - id: canon-bingfeng-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 冰凤妖族血脉，不按人族五行灵根直接套用。
+    description: 冰凤妖族血脉，不按人族五行灵根直接套用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+  - id: canon-bingfeng-affiliation
+    predicate: affiliated-with
+    value:
+      kind: entity
+      entityId: north-ice-sea-host
+    description: affiliated-with
+    access:
+      kind: public
+  - id: canon-bingfeng-ritual-knowledge
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 知晓本族进阶仪式的重要性和临时提升修为的危险；具体运用须满足身体、资源和已有修学。
+    description: 知晓本族进阶仪式的重要性和临时提升修为的危险；具体运用须满足身体、资源和已有修学。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+  - id: canon-bingfeng-ice-combat
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 极寒白焰、冰羽化剑和两具受自己主持的化身；化身消耗施术条件与法力，可被击败，当前未施展。
+    description: 极寒白焰、冰羽化剑和两具受自己主持的化身；化身消耗施术条件与法力，可被击败，当前未施展。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+meters:
+  - id: canon-bingfeng-health
+    definition_id: health
+    current: 100
+  - id: canon-bingfeng-mana
+    definition_id: mana
+    current: 850
+quantities:
+  - definition_id: low-stone
+    amount: 160
+ratings:
+  - id: canon-bingfeng-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-bingfeng-force
+    definition_id: force
+    value: 4
+  - id: canon-bingfeng-craft
+    definition_id: craft
+    value: 3
+  - id: canon-bingfeng-perception
+    definition_id: perception
+    value: 4
+  - id: canon-bingfeng-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: canon-bingfeng
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 长期闭关于冰渊岛的冰凤妖修，重视自己的族群与修行，对小极宫的古老压迫存有记忆。
+      voice: 按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 稳固修行，听取岛上变化；没有已经敲定的进攻小极宫计划。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 冰凤
+        description: 长期闭关于冰渊岛的冰凤妖修，重视自己的族群与修行，对小极宫的古老压迫存有记忆。
+        status: observed
+      - id: location
+        name: 冰凤闭关洞室
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-bingfeng-pouch
+        name: 冰凤的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-north-ice-sea-host
+        name: 冰海诸族
+        description: 自己长期生活并有影响的冰海群体；不同部族有自己的需求。
+        status: observed
+      - id: known-north-shuang-lu
+        name: 霜芦
+        description: 长期居岛的晚辈，有自己的物资和行路需求。
+        status: observed
+      - id: known-north-bo-yun
+        name: 泊云
+        description: 长期居岛的晚辈，有自己的物资和行路需求。
+        status: observed
+      - id: known-canon-bingfeng-dongtian-boat
+        name: 洞天舟凝炼中胚体
+        description: 冰凤以自身寒元长期凝炼的唯一舟体；当前未完工，不具备完整防御能力。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 十级妖兽之身、冰寒神通与本族有限撕裂空间能力；撕裂空间须考虑位置、稳定性、力量和风险。
+        description: 十级妖兽之身、冰寒神通与本族有限撕裂空间能力；撕裂空间须考虑位置、稳定性、力量和风险。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 稳固修行，听取岛上变化；没有已经敲定的进攻小极宫计划。
+        description: 稳固修行，听取岛上变化；没有已经敲定的进攻小极宫计划。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是元婴修士。
+        description: 自己是元婴修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: ice-grudge
+        subjectId: self
+        predicate: attitude
+        value:
+          kind: text
+          value: 对当年冰魄仙子及其寒焰传承持旧怨；须实际辨识来人和行为。
+        description: 基于本人既有旧怨，不代表所有族人永远同一态度。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-bingfeng
+      - local_entity_id: location
+        canonical_entity_ids:
+          - north-bingfeng-retreat
+      - local_entity_id: known-canon-bingfeng-pouch
+        canonical_entity_ids:
+          - canon-bingfeng-pouch
+      - local_entity_id: known-north-ice-sea-host
+        canonical_entity_ids:
+          - north-ice-sea-host
+      - local_entity_id: known-north-shuang-lu
+        canonical_entity_ids:
+          - north-shuang-lu
+      - local_entity_id: known-north-bo-yun
+        canonical_entity_ids:
+          - north-bo-yun
+      - local_entity_id: known-canon-bingfeng-dongtian-boat
+        canonical_entity_ids:
+          - canon-bingfeng-dongtian-boat

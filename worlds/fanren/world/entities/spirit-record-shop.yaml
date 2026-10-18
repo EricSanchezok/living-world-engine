@@ -1,0 +1,54 @@
+id: spirit-record-shop
+kind: location
+name: 观途书铺
+description: 出售行路图、地理册和抄本的铺子，不把常识图册冒充高阶功法。
+placement: tianyuan-city
+facts:
+  - id: spirit-record-shop-route-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: 出售行路图、地理册和抄本的铺子，不把常识图册冒充高阶功法。
+    access:
+      kind: public
+  - id: spirit-record-shop-root-detail-taiyi-virtual-talisman
+    predicate: root-detail-taiyi-virtual-talisman
+    value:
+      kind: text
+      value: 太一化清符虚化穿避实物有时限及法力要求，遁速和动作兼容受限；攻击或破禁须判断能否保持虚化，特殊法术可能使其显形。
+    description: 太一化清符虚化穿避实物有时限及法力要求，遁速和动作兼容受限；攻击或破禁须判断能否保持虚化，特殊法术可能使其显形。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-record-shop-root-detail-giant-talisman
+    predicate: root-detail-giant-talisman
+    value:
+      kind: text
+      value: 巨灵符须化神以上祭炼，可辅助节点防护，仍不能保证无伤过界。
+    description: 巨灵符须化神以上祭炼，可辅助节点防护，仍不能保证无伤过界。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-record-shop-root-detail-crying-bloodwood
+    predicate: root-detail-crying-bloodwood
+    value:
+      kind: text
+      value: 泣灵血木为变异木灵残躯，可配精血工法制替劫器，消耗已炼载体才可替劫；与泣灵圣祖不是同一物或同一身份。
+    description: 泣灵血木为变异木灵残躯，可配精血工法制替劫器，消耗已炼载体才可替劫；与泣灵圣祖不是同一物或同一身份。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-record-shop-root-detail-ascension-belief
+    predicate: root-detail-ascension-belief
+    value:
+      kind: text
+      value: 各人可将飞升视作目标，成仙不等绝对永不可死；界外经历须有实际往来或可信记录才能知晓。
+    description: 各人可将飞升视作目标，成仙不等绝对永不可死；界外经历须有实际往来或可信记录才能知晓。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

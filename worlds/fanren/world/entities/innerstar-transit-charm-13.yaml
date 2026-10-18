@@ -1,0 +1,26 @@
+id: innerstar-transit-charm-13
+kind: item
+name: 星空殿护身传送符13
+description: 尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。
+placement: innerstar-transit-supply
+facts:
+  - id: innerstar-transit-charm-13-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+  - id: innerstar-transit-charm-13-use-condition
+    predicate: use-condition
+    value:
+      kind: text
+      value: 须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。
+    description: 须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

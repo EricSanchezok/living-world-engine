@@ -1,0 +1,26 @@
+id: wanyao-che-retreat
+kind: location
+name: 车老妖封修洞府
+description: 封修处；本体有长寿和修行限制，传讯与出手需要真实手段。
+placement: human-wanyao-valley
+facts:
+  - id: wanyao-che-retreat-route-human-wanyao-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanyao-valley
+    description: 谷主封修区，需有实际许可和足够手段。
+    access:
+      kind: public
+  - id: wanyao-che-retreat-travel-human-wanyao-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷主封修区，需有实际许可和足够手段。
+    description: 谷主封修区，需有实际许可和足够手段。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

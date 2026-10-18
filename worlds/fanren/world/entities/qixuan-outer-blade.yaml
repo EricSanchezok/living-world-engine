@@ -1,0 +1,34 @@
+id: qixuan-outer-blade
+kind: organization
+name: 外刃堂
+description: 七玄门内部机构；具体当夜库存及行政流程以已写入的状态为准。
+placement: qixuan-outer-blade-hall
+facts:
+  - id: qixuan-outer-blade-part-of
+    predicate: part-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 属于七玄门，不另立独立宗门。
+    access:
+      kind: private
+  - id: qixuan-outer-blade-belongs-to-division
+    predicate: belongs-to-division
+    value:
+      kind: entity
+      entityId: qixuan-outer
+    description: 所属内外门分部。
+    access:
+      kind: private
+  - id: qixuan-outer-blade-recruit-path
+    predicate: recruitment
+    value:
+      kind: text
+      value: 从表现杰出、进一步受训者中选用，待遇较普通外门优厚；有意愿不等于已有职位。
+    description: 进一步训练后可能选入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

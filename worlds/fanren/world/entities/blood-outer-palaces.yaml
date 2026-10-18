@@ -1,0 +1,90 @@
+id: blood-outer-palaces
+kind: location
+name: 天鼎外围分宫
+description: 上百区域中的外围群落，光柱分区，各有禁制与房室。
+placement: blood-tianding-palace
+facts:
+  - id: blood-outer-palaces-route-blood-tianding-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tianding-palace
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-palaces-condition-blood-tianding-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-outer-palaces-route-blood-wood-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wood-garden
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-palaces-condition-blood-wood-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-outer-palaces-route-blood-earth-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-earth-array
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-palaces-condition-blood-earth-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-outer-palaces-route-blood-blood-prison
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-blood-prison
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-palaces-condition-blood-blood-prison
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-outer-palaces-route-blood-gold-silver-corridor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-gold-silver-corridor
+    description: route-to
+    access:
+      kind: public
+  - id: blood-outer-palaces-condition-blood-gold-silver-corridor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先穿过相关分宫禁制并抵达长廊，别区解禁不自动停掉本廊守卫。
+    description: 须先穿过相关分宫禁制并抵达长廊，别区解禁不自动停掉本廊守卫。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

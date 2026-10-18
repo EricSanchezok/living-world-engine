@@ -1,0 +1,18 @@
+id: spirit-cuilong-seedling-3
+kind: item
+name: 南麓幼苗盆3
+description: 一盆普通炼气辅助草药幼苗，盆底有与石旁圆印相似的湿泥。
+placement: spirit-cuilong-south-line
+facts:
+  - id: spirit-cuilong-seedling-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-cuilong-garden-worker
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,31 @@
+id: tianyuan-holy-maintenance-fund
+kind: item
+name: 圣岛接引台修缮储备
+description: 圣岛接引台修缮储备，交接痕迹清楚可辨。
+placement: spirit-holy-island
+facts:
+  - id: tianyuan-holy-maintenance-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-holy-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-holy-maintenance-fund-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 阮澄负责本项修缮，单次预算不超过八十中阶灵石；个人修炼、其他采购不得直接挪用。
+    description: 阮澄负责本项修缮，单次预算不超过八十中阶灵石；个人修炼、其他采购不得直接挪用。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 80
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

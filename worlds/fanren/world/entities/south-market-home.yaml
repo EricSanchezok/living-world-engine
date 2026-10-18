@@ -1,0 +1,26 @@
+id: south-market-home
+kind: location
+name: 何阮家住屋
+description: 仓后两间住屋，有日常炊具与桌凳。
+placement: south-market
+facts:
+  - id: south-market-home-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-home-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

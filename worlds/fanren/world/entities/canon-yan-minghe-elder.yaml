@@ -1,0 +1,167 @@
+id: canon-yan-minghe-elder
+kind: person
+name: 言姓隐修者
+description: 冥河隐修的言姓修士，常与附近修行者互通消息。
+placement: minghe-yan-retreat
+facts:
+  - id: canon-yan-minghe-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-yan-minghe-elder
+  - id: canon-yan-minghe-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘级防护与阴气辨识，当前具体术法为个体自修。
+    description: 大乘级防护与阴气辨识，当前具体术法为个体自修。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yan-minghe-elder
+  - id: canon-yan-minghe-elder-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 以长期炼气养神所修成的大乘法体，熟悉自己的气息和功行。
+    description: 以长期炼气养神所修成的大乘法体，熟悉自己的气息和功行。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yan-minghe-elder
+  - id: canon-yan-minghe-elder-contact-canon-jin-yan-hou
+    predicate: old-acquaintance
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: old-acquaintance
+    access:
+      kind: private
+meters:
+  - id: canon-yan-minghe-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-yan-minghe-elder-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: canon-yan-minghe-elder-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-yan-minghe-elder-force
+    definition_id: force
+    value: 8
+  - id: canon-yan-minghe-elder-craft
+    definition_id: craft
+    value: 5
+  - id: canon-yan-minghe-elder-perception
+    definition_id: perception
+    value: 8
+  - id: canon-yan-minghe-elder-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-yan-minghe-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 冥河隐修的言姓修士，常与附近修行者互通消息。
+      voice: 爱先听传闻出处，偶有挖苦老友的兴致，谈自己研究会很投入。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 整理自己的观测记录，比较两处阴气变化。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 言姓隐修者
+        description: 冥河隐修的言姓修士，常与附近修行者互通消息。
+        status: observed
+      - id: location
+        name: 言姓隐修者洞府
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-jin-yan-hou
+        name: 金焰候
+        description: 隐修邻居，偶尔互通愿意公开的近况。
+        status: observed
+      - id: known-canon-yan-minghe-elder-private-stock
+        name: 言姓隐修者私用材料
+        description: 个人修行与检修所用的有限储备。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘级防护与阴气辨识，当前具体术法为个体自修。
+        description: 大乘级防护与阴气辨识，当前具体术法为个体自修。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 以长期炼气养神所修成的大乘法体，熟悉自己的气息和功行。
+        description: 以长期炼气养神所修成的大乘法体，熟悉自己的气息和功行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yan-minghe-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-yan-retreat
+      - local_entity_id: known-canon-jin-yan-hou
+        canonical_entity_ids:
+          - canon-jin-yan-hou
+      - local_entity_id: known-canon-yan-minghe-elder-private-stock
+        canonical_entity_ids:
+          - canon-yan-minghe-elder-private-stock

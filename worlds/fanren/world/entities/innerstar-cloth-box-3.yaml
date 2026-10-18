@@ -1,0 +1,18 @@
+id: innerstar-cloth-box-3
+kind: item
+name: 普通布匹箱3
+description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+placement: innerstar-ship-cargo
+facts:
+  - id: innerstar-cloth-box-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

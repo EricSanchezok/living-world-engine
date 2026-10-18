@@ -1,0 +1,20 @@
+id: innerstar-nanming-cash
+kind: container
+name: 若泉药铺经营款
+description: 药铺收支所用钱匣。
+placement: innerstar-nanming-herbshop
+facts:
+  - id: innerstar-nanming-cash-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-nanming-herbshop
+    description: 药铺经营财物，不等于店主个人随身钱财。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 60
+ratings: []
+shared_activity_resources: []

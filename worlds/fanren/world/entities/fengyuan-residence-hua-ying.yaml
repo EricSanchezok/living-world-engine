@@ -1,0 +1,26 @@
+id: fengyuan-residence-hua-ying
+kind: location
+name: 化影静修居
+description: 独立院落设有试法空地和收藏静室，门前留一处可坐谈的石台。
+placement: fengyuan-jushou-domain
+facts:
+  - id: fengyuan-residence-hua-ying-route-to-fengyuan-jushou-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-jushou-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-residence-hua-ying-route-conditions-fengyuan-jushou-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

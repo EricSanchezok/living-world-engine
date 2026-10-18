@@ -1,0 +1,27 @@
+id: seas-suyin-public-star-chart
+kind: item
+name: 观星者公开星图片
+description: 观星者自绘的季节星位和测量记号，遮去了族中修法线索。
+placement: seas-suyin-keeper
+facts:
+  - id: seas-suyin-public-star-chart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-suyin-keeper
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-suyin-public-star-chart-copy-cost
+    predicate: copy-cost
+    value:
+      kind: text
+      value: 本人会按公开图绘制纸本；每份耗一份普通材料和一个时辰，不能据此复制被遮去的族中内法。
+    description: 本人会按公开图绘制纸本；每份耗一份普通材料和一个时辰，不能据此复制被遮去的族中内法。
+    access:
+      kind: discoverable
+      condition: 本人愿意说明交换工序或实际观看图册。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

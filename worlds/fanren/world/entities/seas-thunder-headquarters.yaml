@@ -1,0 +1,42 @@
+id: seas-thunder-headquarters
+kind: location
+name: 雷鸣商盟总堂
+description: 银灰石庭面向雷鸣商路，公示栏记录货运和传送受理时段；主事内室另有门禁。
+placement: thunder-cloud-city
+facts:
+  - id: seas-thunder-headquarters-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: seas-thunder-headquarters-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 云城内正常往来，商盟内室须接引。
+    description: 云城内正常往来，商盟内室须接引。
+    access:
+      kind: public
+  - id: seas-thunder-headquarters-route-seas-thunder-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-thunder-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-thunder-headquarters-condition-seas-thunder-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只在获准时进入阵厅，步行入厅不消耗传送石。
+    description: 只在获准时进入阵厅，步行入厅不消耗传送石。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

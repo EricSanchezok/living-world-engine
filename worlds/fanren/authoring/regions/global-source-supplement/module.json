@@ -68,7 +68,7 @@
           "predicate": "conditional-conversion",
           "value": {
             "kind": "text",
-            "value": "须在明净夜空下有光线实际照达；袋、盒、厚叶遮蔽及阴雨不累计。当前人界天象下累计七个完整合格夜晚的等效暴露量凝成一滴，部分夜晚按实际有效时长累计。生成时扣除七夜进度，已有一滴未取出则不继续积累；瓶盖可随凝成后正常开启。其他界面天象须重新核定，不自动照搬七个当地长夜。"
+            "value": "须在明净夜空下有光线实际照达；袋、盒、厚叶遮蔽及阴雨不累计。人界天象下约七个完整合格夜晚、灵界已证环境下约三个当地合格夜晚的等效暴露量凝成一滴，部分夜晚按实际有效时长累计，跨界按完成比例换算进度。生成时扣除这一轮全部进度，已有一滴未取出则不继续积累；瓶盖可随凝成后正常开启。灵界吸光时仅有淡白光，近前仔细观察仍可能发现。其他未验证界面不能照搬；月亮多寡或灵气浓度不能单独据以无限加速。"
           },
           "description": "凝液取决于实际环境与连续记录。",
           "access": {
@@ -116,7 +116,7 @@
           "predicate": "liquid-storage",
           "value": {
             "kind": "text",
-            "value": "瓶内原液可留存；取出时记数量、容器和时间。普通容器原液一刻即900秒后消散失效，稀释稍久亦会失效，尚无依据的精确延长时间不能凭称述取得。"
+            "value": "瓶内原液可留存；取出时记数量、容器和时间。普通容器原液一刻即900秒后消散失效，稀释稍久亦会失效。具有已证储灵能力的黄铜瓶法器可将保存延至一天即86400秒，过时仍消散；普通铜瓶不因材质相同获得该能力，其他未经验证的保存期限不能凭称述取得。"
           },
           "description": "取出凝液须及时使用。",
           "access": {
@@ -492,7 +492,8 @@
     ],
     "fact:canon-heaven-bottle-body-condensation-rule": [
       "source-supplement-bottle-light-conditions",
-      "source-supplement-bottle-progress-calibration"
+      "source-supplement-bottle-progress-calibration",
+      "source-supplement-bottle-spirit-environment"
     ],
     "fact:canon-heaven-bottle-body-exposure-progress": [
       "source-supplement-bottle-progress-calibration"

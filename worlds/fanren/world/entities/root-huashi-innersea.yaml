@@ -1,0 +1,37 @@
+id: root-huashi-innersea
+kind: location
+name: 花石内海
+description: 灵族附近的广阔水域，水族生活和通行需顾及旧领地。
+placement: fengyuan-spirit-domain
+facts:
+  - id: root-huashi-innersea-route-to-fengyuan-spirit-domain
+    predicate: route-to-fengyuan-spirit-domain
+    value:
+      kind: entity
+      entityId: fengyuan-spirit-domain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huashi-innersea-travel-condition-fengyuan-spirit-domain
+    predicate: travel-condition-fengyuan-spirit-domain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huashi-innersea-root-detail-huashi-innersea
+    predicate: root-detail-huashi-innersea
+    value:
+      kind: text
+      value: 花石长期视此为领地，水路通行须考虑其态度；水族水遁依水域与法力，不把全域生灵视为同一主体。
+    description: 花石长期视此为领地，水路通行须考虑其态度；水族水遁依水域与法力，不把全域生灵视为同一主体。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

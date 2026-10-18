@@ -1,0 +1,18 @@
+id: local-clinic-splint
+kind: item
+name: 待修夹板
+description: 边缘毛刺待磨平，不能当已经绑好在伤者身上。
+placement: local-common-clinic
+facts:
+  - id: local-clinic-splint-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

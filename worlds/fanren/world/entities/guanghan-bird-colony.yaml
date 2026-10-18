@@ -1,0 +1,24 @@
+id: guanghan-bird-colony
+kind: creature-group
+name: 万禽岭崖巢群
+description: 有各自身体的局部兽群，护食、育幼和避险；不是全界生物总数。
+placement: guanghan-myriad-bird-ridge
+facts:
+  - id: guanghan-bird-colony-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 32
+    description: individual-count
+    access:
+      kind: private
+meters:
+  - id: guanghan-bird-colony-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-bird-colony-force
+    definition_id: force
+    value: 5
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: minghe-smith-stock
+kind: container
+name: 若簧修理材料
+description: 可供小器修理的当前材料。
+placement: minghe-workshop
+facts:
+  - id: minghe-smith-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-box-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: low-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

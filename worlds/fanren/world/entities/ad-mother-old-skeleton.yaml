@@ -1,0 +1,21 @@
+id: ad-mother-old-skeleton
+kind: container
+name: 螟母古骨壳
+description: 海底深渊的一具巨大白玉骨壳，女仙残魂寄占其中。
+placement: ad-seal-inner-cave
+facts:
+  - id: ad-mother-old-skeleton-original-body-of
+    predicate: original-body-of
+    value:
+      kind: entity
+      entityId: canon-ming-mother
+    description: original-body-of
+    access:
+      kind: private
+meters:
+  - id: ad-mother-old-skeleton-health
+    definition_id: health
+    current: 65
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: thunder-fireyang-settlement
+kind: location
+name: 火阳住区
+description: 木石棚屋沿坡分布，白石小殿旁有地火窖，沿海空地晾着草药和渔网。
+placement: thunder-firecloud-island
+facts:
+  - id: thunder-fireyang-settlement-route-to-thunder-sharp-tooth-settlement
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-sharp-tooth-settlement
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-fireyang-settlement-route-conditions-thunder-sharp-tooth-settlement
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。
+    description: 近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。
+    access:
+      kind: private
+  - id: thunder-fireyang-settlement-route-to-thunder-firecoral-overseas-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-firecoral-overseas-array
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-fireyang-settlement-route-conditions-thunder-firecoral-overseas-array
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿海岸到残台；海风无遮蔽，残台本身不能传送。
+    description: 沿海岸到残台；海风无遮蔽，残台本身不能传送。
+    access:
+      kind: private
+  - id: thunder-fireyang-settlement-route-thunder-fireyang-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fireyang-port
+    description: 住区有实际小路通向港口。
+    access:
+      kind: private
+  - id: thunder-fireyang-settlement-route-thunder-fireyang-earthfire-cellar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fireyang-earthfire-cellar
+    description: 住区有实际小路通向地火窖。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

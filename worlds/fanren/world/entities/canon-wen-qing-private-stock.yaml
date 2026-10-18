@@ -1,0 +1,24 @@
+id: canon-wen-qing-private-stock
+kind: container
+name: 温青的修炼储备
+description: 个人法器维护与修行用料，星宫公库需另行授权。
+placement: canon-wen-qing
+facts:
+  - id: canon-wen-qing-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wen-qing
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 100
+  - definition_id: high-stone
+    amount: 5
+  - definition_id: craft-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

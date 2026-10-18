@@ -1,0 +1,34 @@
+id: yinming-village-field
+kind: location
+name: 薄田村
+description: 守护少数可耕薄土，粮食与种子分开存。
+placement: yinming-red-soil
+facts:
+  - id: yinming-village-field-route-yinming-red-soil
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-red-soil
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-field-condition-yinming-red-soil
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-village-field-blocked-ditch
+    predicate: blocked-ditch
+    value:
+      kind: text
+      value: 沟中两块碎石阻水，移石清淤需两小时与一把工具；不是灵气污染。
+    description: 沟中两块碎石阻水，移石清淤需两小时与一把工具；不是灵气污染。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

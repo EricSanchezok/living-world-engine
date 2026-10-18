@@ -1,0 +1,18 @@
+id: yinming-archivist-tools
+kind: item
+name: 闻墨的个人器具
+description: 辨古文、部分妖文、抄刻与保存石碑。所需的有限工具，不包含无限兽晶。
+placement: yinming-archivist
+facts:
+  - id: yinming-archivist-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-archivist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

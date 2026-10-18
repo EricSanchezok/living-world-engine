@@ -1,0 +1,26 @@
+id: minghe-lamp-cover
+kind: item
+name: 盘垣损坏的灯罩
+description: 私用灵灯外罩裂开，仍可带到器修棚修补，未送出。
+placement: minghe-gold-guard
+facts:
+  - id: minghe-lamp-cover-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-gold-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-lamp-cover-repair-need
+    predicate: repair-need
+    value:
+      kind: text
+      value: 外罩裂口需一份低阶修补材料和一千八百秒器工劳作；尚未委托。此物是盘垣私产，公账不自动报销。
+    description: 外罩裂口需一份低阶修补材料和一千八百秒器工劳作；尚未委托。此物是盘垣私产，公账不自动报销。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

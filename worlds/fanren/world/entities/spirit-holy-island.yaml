@@ -1,0 +1,68 @@
+id: spirit-holy-island
+kind: location
+name: 圣岛
+description: 浮空岛屿以禁制隐藏所在，只有获准接应者能循当次指引进入；不因听过名字就知道坐标。
+placement: spirit-human-demon-territory
+facts:
+  - id: spirit-holy-island-route-tianyuan-holy-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-holy-reception
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-holy-island-condition-tianyuan-holy-reception
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 必须有当前有效引路符与接应人；进入路径不是公开地图，失去接引不能直接闯入。
+    description: 必须有当前有效引路符与接应人；进入路径不是公开地图，失去接引不能直接闯入。
+    access:
+      kind: public
+  - id: spirit-holy-island-route-to-tianyuan-duyu-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-duyu-retreat
+    description: route-to-tianyuan-duyu-retreat
+    access:
+      kind: private
+  - id: spirit-holy-island-route-conditions-tianyuan-duyu-retreat
+    predicate: route-conditions-tianyuan-duyu-retreat
+    value:
+      kind: text
+      value: 岛内山径通到外函龛；入内须杜宇允诺，圣岛登岛查验仍另行成立。
+    description: 岛内山径通到外函龛；入内须杜宇允诺，圣岛登岛查验仍另行成立。
+    access:
+      kind: private
+  - id: spirit-holy-island-route-to-root-tianti-shuge
+    predicate: route-to-root-tianti-shuge
+    value:
+      kind: entity
+      entityId: root-tianti-shuge
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-holy-island-travel-condition-root-tianti-shuge
+    predicate: travel-condition-root-tianti-shuge
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-holy-island-root-detail-holyisland-relic
+    predicate: root-detail-holyisland-relic
+    value:
+      kind: text
+      value: 圣岛具有半个玄天至宝的隐秘性质；只有实际获知者知道，地理存在本身不公开内情。
+    description: 圣岛具有半个玄天至宝的隐秘性质；只有实际获知者知道，地理存在本身不公开内情。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

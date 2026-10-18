@@ -1,0 +1,26 @@
+id: tianyuan-ming-workshop
+kind: location
+name: 鸣修士山中试法居
+description: 独立院落内有隔音试法室，几块旧碑记录材料共振；居者按自己的步调研究。
+placement: spirit-tianyun-mountain
+facts:
+  - id: tianyuan-ming-workshop-route-to-spirit-tianyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyun-mountain
+    description: route-to-spirit-tianyun-mountain
+    access:
+      kind: private
+  - id: tianyuan-ming-workshop-route-conditions-spirit-tianyun-mountain
+    predicate: route-conditions-spirit-tianyun-mountain
+    value:
+      kind: text
+      value: 沿现用山路到试法居外，入室需居者许可或实际破禁。
+    description: 沿现用山路到试法居外，入室需居者许可或实际破禁。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

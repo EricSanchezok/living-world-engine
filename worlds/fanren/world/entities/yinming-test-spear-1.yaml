@@ -1,0 +1,18 @@
+id: yinming-test-spear-1
+kind: item
+name: 待试旧骨矛1
+description: 骨体尚完好，残余阴火已弱；再浸需真实分配沉水。
+placement: yinming-main-workshop
+facts:
+  - id: yinming-test-spear-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

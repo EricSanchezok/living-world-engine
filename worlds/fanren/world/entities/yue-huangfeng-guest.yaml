@@ -1,0 +1,26 @@
+id: yue-huangfeng-guest
+kind: location
+name: 黄枫谷迎宾楼
+description: 接待外来者，房间禁法和正式弟子权限分别核验。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-huangfeng-guest-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-guest-travel-yue-huangfeng-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

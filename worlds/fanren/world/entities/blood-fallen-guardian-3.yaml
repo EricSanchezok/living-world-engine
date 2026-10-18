@@ -1,0 +1,18 @@
+id: blood-fallen-guardian-3
+kind: item
+name: 失效血甲傀儡3
+description: 旧战后倒地的完整傀儡躯壳；是否可修复与控制需勘察，不在拾取时自动听命。
+placement: blood-core-hall
+facts:
+  - id: blood-fallen-guardian-3-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

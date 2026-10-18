@@ -1,0 +1,42 @@
+id: minghe-fuyou-territory
+kind: location
+name: 蜉蝣族域
+description: 蜉蝣族居住与经营的广大地域；从蛮荒抵达需要长途补给、路径判断及入境交涉。
+placement: fengyuan-continent
+facts:
+  - id: minghe-fuyou-territory-route-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-fuyou-territory-condition-fengyuan-continent
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 蜉蝣族居住与经营的广大地域；从蛮荒抵达需要长途补给、路径判断及入境交涉。
+    description: 蜉蝣族居住与经营的广大地域；从蛮荒抵达需要长途补给、路径判断及入境交涉。
+    access:
+      kind: public
+  - id: minghe-fuyou-territory-route-minghe-lintai-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-lintai-market
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-fuyou-territory-condition-minghe-lintai-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外来商客可按许可停留的边地集镇，虫粮、药材与器具交易常见。
+    description: 外来商客可按许可停留的边地集镇，虫粮、药材与器具交易常见。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

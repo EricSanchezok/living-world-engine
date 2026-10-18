@@ -1,0 +1,42 @@
+id: thunder-tianjiao-mountain
+kind: location
+name: 天角圣山
+description: 峰腹有供族中修行的封闭处所，外来访客止于山门，进入须经守者通报。
+placement: thunder-jiaochi
+facts:
+  - id: thunder-tianjiao-mountain-route-to-thunder-gailing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-gailing-city
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-tianjiao-mountain-route-conditions-thunder-gailing-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿山道至山门，超过警戒石须获许可。
+    description: 沿山道至山门，超过警戒石须获许可。
+    access:
+      kind: private
+  - id: thunder-tianjiao-mountain-route-to-thunder-jiaochi-bell-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-bell-hall
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-tianjiao-mountain-route-conditions-thunder-jiaochi-bell-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 内道受禁制守护，仅获准人员可入，破禁另判能力与后果。
+    description: 内道受禁制守护，仅获准人员可入，破禁另判能力与后果。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

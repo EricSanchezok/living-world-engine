@@ -1,0 +1,210 @@
+id: steppe-shi-ling
+kind: person
+name: 石苓
+description: 石岚十三岁的女儿，已测出低资质的水木土灵根，尚未受开灵教学。她既喜欢河湾的生活，也想学会替部落找水。
+placement: steppe-shiwan-camp
+facts:
+  - id: steppe-shi-ling-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - steppe-shi-ling
+  - id: steppe-shi-ling-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 识字和照料驮马；已检测水木土灵根，但尚未学得引气功法。
+    description: 识字和照料驮马；已检测水木土灵根，但尚未学得引气功法。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-shi-ling
+  - id: steppe-shi-ling-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 水、木、土三属性低资质灵根，已检测；未修炼。
+    description: 水、木、土三属性低资质灵根，已检测；未修炼。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-shi-ling
+  - id: steppe-shi-ling-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: steppe-shiwan-tribe
+    description: 自己所属的部落或传承共同体，公库与私人财物分开。
+    access:
+      kind: public
+  - id: steppe-shi-ling-father
+    predicate: father
+    value:
+      kind: entity
+      entityId: steppe-shi-lan
+    description: father
+    access:
+      kind: public
+  - id: steppe-shi-ling-language
+    predicate: known-language
+    value:
+      kind: text
+      value: 突兀口语与文字。
+    description: 突兀口语与文字。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-shi-ling
+meters:
+  - id: steppe-shi-ling-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 12
+ratings:
+  - id: steppe-shi-ling-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: steppe-shi-ling-force
+    definition_id: force
+    value: 0
+  - id: steppe-shi-ling-craft
+    definition_id: craft
+    value: 1
+  - id: steppe-shi-ling-perception
+    definition_id: perception
+    value: 0
+  - id: steppe-shi-ling-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: steppe-shi-ling
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 石岚十三岁的女儿，已测出低资质的水木土灵根，尚未受开灵教学。她既喜欢河湾的生活，也想学会替部落找水。
+      voice: 提问具体，常追问“我学会后能不能自己选”；尚不熟修士礼数。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 在等候开灵期间读懂供奉册，与父亲商量自己愿承担的回部服务期限。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 石苓
+        description: 石岚十三岁的女儿，已测出低资质的水木土灵根，尚未受开灵教学。她既喜欢河湾的生活，也想学会替部落找水。
+        status: observed
+      - id: location
+        name: 石湾部营地
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-steppe-shi-ling-pouch
+        name: 石苓的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-steppe-shi-lan
+        name: 石岚
+        description: 自己的父亲，为供奉积攒物资，也愿意听自己的想法。
+        status: observed
+      - id: known-steppe-shen-he
+        name: 莘禾
+        description: 检测灵根的仙师，问问题时没有嘲笑自己。
+        status: observed
+      - id: known-steppe-shiwan-tribe
+        name: 石湾部
+        description: 自己所属的部落或传承共同体，公库与私人财物分开。
+        status: observed
+      - id: known-steppe-application
+        name: 石苓入殿草约
+        description: 草约写明拟供24枚灵石、8包草药；学成后回部服务几年尚空白，没有签字即无债务。
+        status: observed
+      - id: known-steppe-school-register
+        name: 分殿开灵候选册
+        description: 石苓已测灵根；本轮约两年后开灵，缴贡和教习安排尚未完成；罗荻另列已入门弟子。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 识字和照料驮马；已检测水木土灵根，但尚未学得引气功法。
+        description: 识字和照料驮马；已检测水木土灵根，但尚未学得引气功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 在等候开灵期间读懂供奉册，与父亲商量自己愿承担的回部服务期限。
+        description: 在等候开灵期间读懂供奉册，与父亲商量自己愿承担的回部服务期限。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - steppe-shi-ling
+      - local_entity_id: location
+        canonical_entity_ids:
+          - steppe-shiwan-camp
+      - local_entity_id: known-steppe-shi-ling-pouch
+        canonical_entity_ids:
+          - steppe-shi-ling-pouch
+      - local_entity_id: known-steppe-shi-lan
+        canonical_entity_ids:
+          - steppe-shi-lan
+      - local_entity_id: known-steppe-shen-he
+        canonical_entity_ids:
+          - steppe-shen-he
+      - local_entity_id: known-steppe-shiwan-tribe
+        canonical_entity_ids:
+          - steppe-shiwan-tribe
+      - local_entity_id: known-steppe-application
+        canonical_entity_ids:
+          - steppe-application
+      - local_entity_id: known-steppe-school-register
+        canonical_entity_ids:
+          - steppe-school-register

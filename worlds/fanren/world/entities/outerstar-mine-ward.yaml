@@ -1,0 +1,193 @@
+id: outerstar-mine-ward
+kind: person
+name: 顾榆
+description: 受村中雇用的筑基护矿人，钱不多但与村人相熟。
+placement: outerstar-small-mine
+facts:
+  - id: outerstar-mine-ward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-mine-ward
+  - id: outerstar-mine-ward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基土法、浅层探查和支撑施工。
+    description: 筑基土法、浅层探查和支撑施工。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-mine-ward
+  - id: outerstar-mine-ward-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-mine-ward
+  - id: outerstar-mine-ward-works-for-outerstar-village-head
+    predicate: works-for
+    value:
+      kind: entity
+      entityId: outerstar-village-head
+    description: works-for
+    access:
+      kind: private
+  - id: outerstar-mine-ward-works-with
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: outerstar-village-community
+    description: works-with
+    access:
+      kind: private
+meters:
+  - id: outerstar-mine-ward-health
+    definition_id: health
+    current: 100
+  - id: outerstar-mine-ward-mana
+    definition_id: mana
+    current: 440
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: outerstar-mine-ward-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: outerstar-mine-ward-force
+    definition_id: force
+    value: 2
+  - id: outerstar-mine-ward-craft
+    definition_id: craft
+    value: 2
+  - id: outerstar-mine-ward-perception
+    definition_id: perception
+    value: 2
+  - id: outerstar-mine-ward-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: outerstar-mine-ward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受村中雇用的筑基护矿人，钱不多但与村人相熟。
+      voice: 愿意蹲下看痕迹，讨厌靠吓人抬价。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清异响，避免将普通坍塌误当妖兽。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 顾榆
+        description: 受村中雇用的筑基护矿人，钱不多但与村人相熟。
+        status: observed
+      - id: location
+        name: 白汀石矿
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-outerstar-mine-ward-provisions
+        name: 顾榆的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-village-head
+        name: 桑平
+        description: 顾榆按期受雇护矿，并非拥有矿工。
+        status: observed
+      - id: known-outerstar-ward-tool
+        name: 顾榆探土尺
+        description: 低阶土法器，能查浅层裂缝，无法贯穿整片岛岭。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基土法、浅层探查和支撑施工。
+        description: 筑基土法、浅层探查和支撑施工。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: mine-warning
+        subjectId: self
+        predicate: mine-warning
+        value:
+          kind: text
+          value: 陶石告诉我东巷支木发响，我还没进去勘察。
+        description: 陶石告诉我东巷支木发响，我还没进去勘察。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - outerstar-mine-ward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-small-mine
+      - local_entity_id: known-outerstar-mine-ward-provisions
+        canonical_entity_ids:
+          - outerstar-mine-ward-provisions
+      - local_entity_id: known-outerstar-village-head
+        canonical_entity_ids:
+          - outerstar-village-head
+      - local_entity_id: known-outerstar-ward-tool
+        canonical_entity_ids:
+          - outerstar-ward-tool

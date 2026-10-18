@@ -1,0 +1,26 @@
+id: fengyuan-trader-sap-request
+kind: item
+name: 木岑树汁请领函
+description: 木岑请领一瓶树汁，用于边市青梢育苗地的受损幼枝护理；若批准，由自己负责运回，现未获得任何现货。
+placement: fengyuan-tree-warden
+facts:
+  - id: fengyuan-trader-sap-request-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-trader
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-trader-sap-request-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: fengyuan-wood-trader
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

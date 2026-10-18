@@ -1,0 +1,26 @@
+id: outerstar-auction-lamp
+kind: item
+name: 寄售的避水灯
+description: 白沚委托寄售的避水灯，外壳完整，内部三道符纹中一道裂开。
+placement: outerstar-mingzhu
+facts:
+  - id: outerstar-auction-lamp-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-grass-keeper
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-auction-lamp-hidden-defect
+    predicate: hidden-defect
+    value:
+      kind: text
+      value: 内侧第三道符纹裂开，连续避水约半个时辰后容易失效。
+    description: 内侧第三道符纹裂开，连续避水约半个时辰后容易失效。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: kunwu-stone-hall
+kind: location
+name: 四廊石殿
+description: 四条走廊连偏殿法阵，地上石兽受阵驱动。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-stone-hall-route-kunwu-cloud-stairs
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-cloud-stairs
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-stone-hall-condition-kunwu-cloud-stairs
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石兽与四阵尚在，不能按章节自动解开。
+    description: 石兽与四阵尚在，不能按章节自动解开。
+    access:
+      kind: public
+  - id: kunwu-stone-hall-route-kunwu-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-square
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-stone-hall-condition-kunwu-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 广场禁空与沿途石兽阵分别生效。
+    description: 广场禁空与沿途石兽阵分别生效。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: tianyuan-holy-reception
+kind: location
+name: 圣岛使者接应处
+description: 负责接收圣岛函件与核验接应许可的静室。
+placement: tianyuan-city
+facts:
+  - id: tianyuan-holy-reception-route-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-holy-reception-condition-spirit-guard-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 负责接收圣岛函件与核验接应许可的静室。
+    description: 负责接收圣岛函件与核验接应许可的静室。
+    access:
+      kind: public
+  - id: tianyuan-holy-reception-route-spirit-holy-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-holy-reception-condition-spirit-holy-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 必须有当前有效引路符与接应人；进入路径不是公开地图，失去接引不能直接闯入。
+    description: 必须有当前有效引路符与接应人；进入路径不是公开地图，失去接引不能直接闯入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

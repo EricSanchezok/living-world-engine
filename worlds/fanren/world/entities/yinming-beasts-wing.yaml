@@ -1,0 +1,34 @@
+id: yinming-beasts-wing
+kind: animal-group
+name: 飞行阴兽当期群
+description: 有限现存群体，捕杀会减少其数量。
+placement: yinming-storm-summit
+facts:
+  - id: yinming-beasts-wing-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 220
+    description: living-count
+    access:
+      kind: private
+  - id: yinming-beasts-wing-food-safety
+    predicate: food-safety
+    value:
+      kind: text
+      value: 非已确认可供人类食用，不可按肉多就判无毒。
+    description: 非已确认可供人类食用，不可按肉多就判无毒。
+    access:
+      kind: private
+  - id: yinming-beasts-wing-crystal-bearing-count
+    predicate: crystal-bearing-count
+    value:
+      kind: number
+      value: 6
+    description: crystal-bearing-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

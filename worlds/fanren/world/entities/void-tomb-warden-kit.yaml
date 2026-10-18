@@ -1,0 +1,22 @@
+id: void-tomb-warden-kit
+kind: container
+name: 墨礁的随身器具
+description: 结丹初期、旧封阵巡检与传讯。所需的个人日常器具。
+placement: void-tomb-warden
+facts:
+  - id: void-tomb-warden-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-tomb-warden
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

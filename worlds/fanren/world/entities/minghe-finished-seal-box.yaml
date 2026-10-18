@@ -1,0 +1,34 @@
+id: minghe-finished-seal-box
+kind: item
+name: 翎墨订制的隔潮封盒
+description: 若簧已制成的空封盒，等翎墨来验收；可存放虫粮，不能消除已有霉变。
+placement: minghe-workshop
+facts:
+  - id: minghe-finished-seal-box-sale-status
+    predicate: sale-status
+    value:
+      kind: text
+      value: 验收前归若簧，双方口头约定验收交付时支付十二低阶灵石，尚未预付；交付和付款都需实际发生。
+    description: 验收前归若簧，双方口头约定验收交付时支付十二低阶灵石，尚未预付；交付和付款都需实际发生。
+    access:
+      kind: public
+  - id: minghe-finished-seal-box-preservation-boundary
+    predicate: preservation-boundary
+    value:
+      kind: text
+      value: 装入干燥虫粮并盖好可减轻受潮，不能凭封盒无中生有新虫粮，也不能修复已经变黄腐坏的叶片。
+    description: 装入干燥虫粮并盖好可减轻受潮，不能凭封盒无中生有新虫粮，也不能修复已经变黄腐坏的叶片。
+    access:
+      kind: public
+  - id: minghe-finished-seal-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-box-smith
+    description: 交付前属于制作者。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

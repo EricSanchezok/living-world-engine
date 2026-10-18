@@ -1,0 +1,22 @@
+id: ad-zhao-shao-purse
+kind: container
+name: 赵韶私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-zhao-shao
+facts:
+  - id: ad-zhao-shao-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-zhao-shao
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: north-solar-stone-room
+kind: location
+name: 玄玉洞太阳精石屋
+description: 祖传太阳精石建筑，隔挡洞中玄玉寒气；受损拆料会降低防护，里面没有无来源物资。
+placement: north-xuanyu-cave
+facts:
+  - id: north-solar-stone-room-route-north-xuanyu-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuanyu-cave
+    description: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    access:
+      kind: public
+  - id: north-solar-stone-room-travel-north-xuanyu-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    description: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

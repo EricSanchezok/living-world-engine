@@ -1,0 +1,34 @@
+id: blood-yellow-wind-chart
+kind: item
+name: 黄风图
+description: 封龛中的镇宗玄天图，可化沙漠风障；需诸长老共同许可后交一人主控。
+placement: blood-bone-ancestral-hall
+facts:
+  - id: blood-yellow-wind-chart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-bone-sect
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-yellow-wind-chart-joint-release
+    predicate: joint-release
+    value:
+      kind: text
+      value: 须三位当前具名太上明确同意、记录主控与归还条件；意见不一可继续协商。当前没有任何已生效的试演授权。
+    description: 须三位当前具名太上明确同意、记录主控与归还条件；意见不一可继续协商。当前没有任何已生效的试演授权。
+    access:
+      kind: private
+  - id: blood-yellow-wind-chart-current-demonstration
+    predicate: current-demonstration
+    value:
+      kind: text
+      value: 本次拟议有限试演为半个当地时辰；若获准，主控需实耗120法力及公库8高阶灵石。图像形成的砂土不作为可携出永久资源。
+    description: 本次拟议有限试演为半个当地时辰；若获准，主控需实耗120法力及公库8高阶灵石。图像形成的砂土不作为可携出永久资源。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

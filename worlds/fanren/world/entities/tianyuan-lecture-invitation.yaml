@@ -1,0 +1,26 @@
+id: tianyuan-lecture-invitation
+kind: item
+name: 冯原本期问修名帖
+description: 接引处为冯原登记一张旁听申请，尚待金越确认；可填写本人疑问，不代表已获正式功绩传道令。
+placement: tianyuan-ascender-fengyuan
+facts:
+  - id: tianyuan-lecture-invitation-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-ascender-fengyuan
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-lecture-invitation-submitted-by
+    predicate: submitted-by
+    value:
+      kind: entity
+      entityId: tianyuan-dust-keeper
+    description: submitted-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

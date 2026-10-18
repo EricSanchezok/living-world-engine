@@ -1,0 +1,42 @@
+id: innerstar-fengle-auction
+kind: location
+name: 丰乐拍卖行
+description: 丰乐商盟的天星拍卖场，物品和出售委托需当次登记，不能凭招牌获取任何稀材。
+placement: innerstar-market
+facts:
+  - id: innerstar-fengle-auction-route-innerstar-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-market
+    description: 沿城中街路通往天星坊市
+    access:
+      kind: public
+  - id: innerstar-fengle-auction-access-innerstar-market
+    predicate: access-innerstar-market
+    value:
+      kind: text
+      value: 需要实际行至门口并按接待情况进入。
+    description: 需要实际行至门口并按接待情况进入。
+    access:
+      kind: public
+  - id: innerstar-fengle-auction-affiliated
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: fengle-trade-alliance
+    description: 丰乐商盟经营。
+    access:
+      kind: public
+  - id: innerstar-fengle-auction-current-status
+    predicate: current-status
+    value:
+      kind: text
+      value: 本场当前未公告拍品或开拍时间；寄售须有实物、委托与主持者。
+    description: 本场当前未公告拍品或开拍时间；寄售须有实物、委托与主持者。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

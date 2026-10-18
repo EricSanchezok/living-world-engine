@@ -1,0 +1,20 @@
+id: feiling-giantflower-nest
+kind: container
+name: 巨灵花窝
+description: 一株可伪成小绿洲的巨灵花，花蜜三份；取蜜须安抚、压制或获得主人准许。
+placement: feiling-abyss-1
+facts:
+  - id: feiling-giantflower-nest-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-abyss-zhu-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-giantflower-nectar
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: fengyuan-greenlimb-refuge
+kind: location
+name: 绿肢隐谷
+description: 窄口后是温暖的石坡与小片晶色植物，谷内居民以姿态和短鸣交流，也有人懂外族语言。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-greenlimb-refuge-route-to-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-greenlimb-refuge-route-conditions-fengyuan-border-exchange
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 远程蛮荒谷路，无固定免费传送；需找向导或实际寻路，谷口陌生来客会被询问。
+    description: 远程蛮荒谷路，无固定免费传送；需找向导或实际寻路，谷口陌生来客会被询问。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

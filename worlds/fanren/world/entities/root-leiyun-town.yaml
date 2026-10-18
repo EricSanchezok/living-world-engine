@@ -1,0 +1,82 @@
+id: root-leiyun-town
+kind: location
+name: 雷云镇
+description: 魔金入口附近供申请者准备与接受检查的镇落。
+placement: thunder-tianyun
+facts:
+  - id: root-leiyun-town-route-to-thunder-mojin-cloud-sea
+    predicate: route-to-thunder-mojin-cloud-sea
+    value:
+      kind: entity
+      entityId: thunder-mojin-cloud-sea
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-travel-condition-thunder-mojin-cloud-sea
+    predicate: travel-condition-thunder-mojin-cloud-sea
+    value:
+      kind: text
+      value: 从镇外沿封锁区边缘行进；进入云海禁区需实际许可、信物和接引。
+    description: 从镇外沿封锁区边缘行进；进入云海禁区需实际许可、信物和接引。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-route-to-thunder-tianyun
+    predicate: route-to-thunder-tianyun
+    value:
+      kind: entity
+      entityId: thunder-tianyun
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-travel-condition-thunder-tianyun
+    predicate: travel-condition-thunder-tianyun
+    value:
+      kind: text
+      value: 沿联盟区域的远近路径行进，未知支路需打听或查图，不作瞬移。
+    description: 沿联盟区域的远近路径行进，未知支路需打听或查图，不作瞬移。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-route-to-root-leiyun-hall
+    predicate: route-to-root-leiyun-hall
+    value:
+      kind: entity
+      entityId: root-leiyun-hall
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-travel-condition-root-leiyun-hall
+    predicate: travel-condition-root-leiyun-hall
+    value:
+      kind: text
+      value: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    description: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-route-to-root-leiyun-arena
+    predicate: route-to-root-leiyun-arena
+    value:
+      kind: entity
+      entityId: root-leiyun-arena
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-town-travel-condition-root-leiyun-arena
+    predicate: travel-condition-root-leiyun-arena
+    value:
+      kind: text
+      value: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    description: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: minghe-sealed-milk
+kind: item
+name: 圣地封存神乳
+description: 一瓶封存神乳，须长老授权才能交换或发放。
+placement: minghe-inspection-court
+facts:
+  - id: minghe-sealed-milk-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-sealed-milk-use-boundary
+    predicate: use-boundary
+    value:
+      kind: text
+      value: 服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。
+    description: 服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: minghe-milk-dose
+    amount: 1
+ratings: []
+shared_activity_resources: []

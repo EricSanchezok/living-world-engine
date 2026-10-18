@@ -1,0 +1,18 @@
+id: blood-ruyi-array-board
+kind: item
+name: 如意护阵试盘
+description: 一块自用护阵试盘，当前有完整防护回路，可用来比较输入雷法后的相容性，不是故障强修任务。
+placement: canon-blood-ruyi
+facts:
+  - id: blood-ruyi-array-board-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: guanghan-seventh-chamber
+kind: location
+name: 第七练功密室
+description: 室内桌椅齐全，墙上挂着金光剑图，桌上三盒两瓶。
+placement: guanghan-practice-chambers
+facts:
+  - id: guanghan-seventh-chamber-route-guanghan-practice-chambers
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-practice-chambers
+    description: 沿偏殿原有走廊进出，具体密室须另行处理其隔音防窥门禁。
+    access:
+      kind: public
+  - id: guanghan-seventh-chamber-door-barrier
+    predicate: door-barrier
+    value:
+      kind: text
+      value: 银光阻挡外力并可被持续消磨，不自带主殿雷击；门和禁制尚未遭破坏。
+    description: 银光阻挡外力并可被持续消磨，不自带主殿雷击；门和禁制尚未遭破坏。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

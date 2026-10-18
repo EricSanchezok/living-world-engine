@@ -1,0 +1,247 @@
+id: canon-qimiao-zhenren
+kind: person
+name: 七妙真人
+description: 天魔宗鹰鼻修士，当前元婴中期，承担执法与传承职务。
+placement: dajin-motuo
+facts:
+  - id: canon-qimiao-zhenren-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-qimiao-zhenren
+  - id: canon-qimiao-zhenren-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 天魔术法、七真宝协用、赤鸣鼓火法与法器鉴察。
+    description: 天魔术法、七真宝协用、赤鸣鼓火法与法器鉴察。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qimiao-zhenren
+  - id: canon-qimiao-zhenren-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qimiao-zhenren
+  - id: canon-qimiao-zhenren-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-qimiao-zhenren-great-sect-acquaintance-canon-xuanqingzi
+    predicate: great-sect-acquaintance
+    value:
+      kind: entity
+      entityId: canon-xuanqingzi
+    description: great-sect-acquaintance
+    access:
+      kind: private
+  - id: canon-qimiao-zhenren-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-tianmo-sect
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: canon-qimiao-zhenren-health
+    definition_id: health
+    current: 100
+  - id: canon-qimiao-zhenren-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-qimiao-zhenren-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-qimiao-zhenren-force
+    definition_id: force
+    value: 5
+  - id: canon-qimiao-zhenren-craft
+    definition_id: craft
+    value: 4
+  - id: canon-qimiao-zhenren-perception
+    definition_id: perception
+    value: 4
+  - id: canon-qimiao-zhenren-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-qimiao-zhenren
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 天魔宗鹰鼻修士，当前元婴中期，承担执法与传承职务。
+      voice: 声音平稳有压迫感，喜欢让对方先说来意再给条件。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对门中外务交易，修养个人七真宝。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 七妙真人
+        description: 天魔宗鹰鼻修士，当前元婴中期，承担执法与传承职务。
+        status: observed
+      - id: location
+        name: 魔陀山
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-qimiao-zhenren-personal-stock
+        name: 七妙真人的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-canon-xuanqingzi
+        name: 玄青子
+        description: 大宗门长期往来，有利害合作也会保留底牌。
+        status: observed
+      - id: known-dajin-tianmo-sect
+        name: 天魔宗
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+      - id: known-kunwu-seven-treasures
+        name: 七真宝囊
+        description: 七妙随身七宝，七件独立载体，共同配合而非复制另套。
+        status: observed
+      - id: known-kunwu-red-drum
+        name: 赤鸣鼓
+        description: 灵宝仿制火鼓，连续催动耗大量法力，火光与声响真实影响附近。
+        status: observed
+      - id: known-kunwu-seven-1
+        name: 刀
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-2
+        name: 剑
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-3
+        name: 珠
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-4
+        name: 妙音宝镜
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-5
+        name: 未具名第五宝
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-6
+        name: 未具名第六宝
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-seven-7
+        name: 未具名第七宝
+        description: 七真宝中的一件实物。
+        status: observed
+      - id: known-kunwu-demon-rings
+        name: 五禁魔环
+        description: 从宗门或家族经历知道此物；准确现库存与当前动向仍须按最近记录或亲查核对。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 天魔术法、七真宝协用、赤鸣鼓火法与法器鉴察。
+        description: 天魔术法、七真宝协用、赤鸣鼓火法与法器鉴察。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 木、水双灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-qimiao-zhenren
+      - local_entity_id: location
+        canonical_entity_ids:
+          - dajin-motuo
+      - local_entity_id: known-canon-qimiao-zhenren-personal-stock
+        canonical_entity_ids:
+          - canon-qimiao-zhenren-personal-stock
+      - local_entity_id: known-canon-xuanqingzi
+        canonical_entity_ids:
+          - canon-xuanqingzi
+      - local_entity_id: known-dajin-tianmo-sect
+        canonical_entity_ids:
+          - dajin-tianmo-sect
+      - local_entity_id: known-kunwu-seven-treasures
+        canonical_entity_ids:
+          - kunwu-seven-treasures
+      - local_entity_id: known-kunwu-red-drum
+        canonical_entity_ids:
+          - kunwu-red-drum
+      - local_entity_id: known-kunwu-seven-1
+        canonical_entity_ids:
+          - kunwu-seven-1
+      - local_entity_id: known-kunwu-seven-2
+        canonical_entity_ids:
+          - kunwu-seven-2
+      - local_entity_id: known-kunwu-seven-3
+        canonical_entity_ids:
+          - kunwu-seven-3
+      - local_entity_id: known-kunwu-seven-4
+        canonical_entity_ids:
+          - kunwu-seven-4
+      - local_entity_id: known-kunwu-seven-5
+        canonical_entity_ids:
+          - kunwu-seven-5
+      - local_entity_id: known-kunwu-seven-6
+        canonical_entity_ids:
+          - kunwu-seven-6
+      - local_entity_id: known-kunwu-seven-7
+        canonical_entity_ids:
+          - kunwu-seven-7
+      - local_entity_id: known-kunwu-demon-rings
+        canonical_entity_ids:
+          - kunwu-demon-rings

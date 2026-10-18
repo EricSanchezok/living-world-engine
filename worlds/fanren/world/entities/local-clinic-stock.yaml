@@ -1,0 +1,22 @@
+id: local-clinic-stock
+kind: container
+name: 医舍药柜
+description: 有限现有资源；经授权用途支用与个人所得分开。
+placement: local-common-clinic
+facts:
+  - id: local-clinic-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 3
+  - definition_id: copper
+    amount: 180
+ratings: []
+shared_activity_resources: []

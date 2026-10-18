@@ -1,0 +1,18 @@
+id: innerstar-baimen-stock
+kind: container
+name: 白门抄本书架
+description: 书铺当前可供阅抄的有限册本。
+placement: innerstar-baimen-bookshop
+facts:
+  - id: innerstar-baimen-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

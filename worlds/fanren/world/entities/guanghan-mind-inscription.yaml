@@ -1,0 +1,43 @@
+id: guanghan-mind-inscription
+kind: item
+name: 炼神术末篇金篆石壁
+description: 五处刻文的最后部分，在银色光罩内；单独抄得此壁仍不足凑齐完整经文。
+placement: guanghan-mind-last-chamber
+facts:
+  - id: guanghan-mind-inscription-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-mind-inscription-last-cover
+    predicate: last-cover
+    value:
+      kind: text
+      value: 银罩有自我补充能力；三枚真实广寒令配合适当阵法是一条已验证的破罩途径，不把仿制品、令的名字或三张拓印算成三令。
+    description: 银罩有自我补充能力；三枚真实广寒令配合适当阵法是一条已验证的破罩途径，不把仿制品、令的名字或三张拓印算成三令。
+    access:
+      kind: discoverable
+      condition: 观察光罩并研究令力与阵法响应。
+  - id: guanghan-mind-inscription-learning-condition
+    predicate: learning-condition
+    value:
+      kind: text
+      value: 读懂金篆文、持有完整对应段、满足境界神识和法体条件后仍需真正修炼。石壁存在不表示远方人物已经获得文字或学成秘术。
+    description: 读懂金篆文、持有完整对应段、满足境界神识和法体条件后仍需真正修炼。石壁存在不表示远方人物已经获得文字或学成秘术。
+    access:
+      kind: private
+  - id: guanghan-mind-inscription-latent-risk
+    predicate: latent-risk
+    value:
+      kind: text
+      value: 此术提早激发神识潜力，继续修行有长期要求；自废和换体不能作为自动清除负担的手段。危险精确时限需要根据实际层级和可靠知识判断。
+    description: 此术提早激发神识潜力，继续修行有长期要求；自废和换体不能作为自动清除负担的手段。危险精确时限需要根据实际层级和可靠知识判断。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

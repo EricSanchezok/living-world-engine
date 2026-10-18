@@ -1,0 +1,22 @@
+id: ad-seal-repair-reserve
+kind: container
+name: 封印外围修护材料
+description: 有限封隙材料，修补能延缓具体裂隙而非宣布永远消灭虫母。
+placement: ad-seal-outer-post
+facts:
+  - id: ad-seal-repair-reserve-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-three-progenitors
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 40
+  - definition_id: demon-stone
+    amount: 400
+ratings: []
+shared_activity_resources: []

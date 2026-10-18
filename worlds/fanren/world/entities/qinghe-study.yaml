@@ -1,0 +1,18 @@
+id: qinghe-study
+kind: location
+name: 东家静室
+description: 商行东家的独立修炼居所，设有自用防护禁制。
+placement: tianyuan-city
+facts:
+  - id: qinghe-study-route-qinghe-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qinghe-store
+    description: 有普通道路通往青禾灵材行仓院；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

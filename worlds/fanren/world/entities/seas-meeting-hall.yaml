@@ -1,0 +1,42 @@
+id: seas-meeting-hall
+kind: location
+name: 明尊议事厅
+description: 文书和传讯壁由值守者管理。
+placement: seas-underground-headquarters
+facts:
+  - id: seas-meeting-hall-route-seas-underground-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-underground-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: seas-meeting-hall-condition-seas-underground-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-meeting-hall-route-seas-black-spirit-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-black-spirit-space
+    description: route-to
+    access:
+      kind: public
+  - id: seas-meeting-hall-condition-seas-black-spirit-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须盟中持约者及真灵同意，接引仪式、空间条件与供奉均真实满足；当前未准备大型战地召灵。
+    description: 须盟中持约者及真灵同意，接引仪式、空间条件与供奉均真实满足；当前未准备大型战地召灵。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

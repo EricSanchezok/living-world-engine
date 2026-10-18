@@ -1,0 +1,26 @@
+id: fengyuan-shura-council
+kind: location
+name: 天蛛城内殿
+description: 宽阔内殿分别放着交涉席、族物箱与旧阵图；族母在此听取各方陈述。
+placement: fengyuan-shura-tianzhu-city
+facts:
+  - id: fengyuan-shura-council-route-to-fengyuan-shura-tianzhu-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-tianzhu-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-council-route-conditions-fengyuan-shura-tianzhu-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内步行到内殿，族库与内室另需许可。
+    description: 城内步行到内殿，族库与内室另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: global-fu-golden-needles
+kind: item
+name: 医舍金针匣
+description: 十二根已清洁金针装在有槽木匣里。
+placement: global-fu-clinic
+facts:
+  - id: global-fu-golden-needles-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-fu-family
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-fu-golden-needles-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。
+    description: 十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

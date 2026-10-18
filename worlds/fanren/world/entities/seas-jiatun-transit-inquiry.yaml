@@ -1,0 +1,27 @@
+id: seas-jiatun-transit-inquiry
+kind: item
+name: 甲豚对岸询函
+description: 从雷鸣接应殿送来的盖印短函，询问可否接受一支尚未具名登记的三人商旅队。
+placement: seas-jiatun-guardian
+facts:
+  - id: seas-jiatun-transit-inquiry-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain-people
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-jiatun-transit-inquiry-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 对岸询问三人赴风元的条件，尚未给姓名和有效身份证明，且对岸无回程耗材。守正可要求补资料、拒绝或待查，不等于已批准或已有队伍进入本殿。
+    description: 对岸询问三人赴风元的条件，尚未给姓名和有效身份证明，且对岸无回程耗材。守正可要求补资料、拒绝或待查，不等于已批准或已有队伍进入本殿。
+    access:
+      kind: discoverable
+      condition: 守正出示或实际获准阅读信函。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

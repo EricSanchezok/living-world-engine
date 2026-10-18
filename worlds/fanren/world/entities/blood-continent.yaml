@@ -1,0 +1,42 @@
+id: blood-continent
+kind: location
+name: 血天大陆
+description: 夜间天空泛血红的大陆，多种血道宗门与各族国度并存。
+placement: spirit-realm
+facts:
+  - id: blood-continent-review-route-blood-offshore-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-offshore-sea
+    description: review-route-blood-offshore-sea
+    access:
+      kind: public
+  - id: blood-continent-review-route-condition-blood-offshore-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-continent-route-seas-between-continents
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-between-continents
+    description: route-to
+    access:
+      kind: public
+  - id: blood-continent-condition-seas-between-continents
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    description: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

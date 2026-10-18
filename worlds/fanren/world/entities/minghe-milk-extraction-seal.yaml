@@ -1,0 +1,21 @@
+id: minghe-milk-extraction-seal
+kind: item
+name: 取乳密符
+description: 外巡院封存的一张专门取乳符，持符不免除圣地许可和守兽阻拦；成功取乳即耗去。
+placement: minghe-inspection-court
+facts:
+  - id: minghe-milk-extraction-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters:
+  - id: minghe-milk-extraction-seal-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

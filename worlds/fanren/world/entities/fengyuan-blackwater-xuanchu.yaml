@@ -1,0 +1,24 @@
+id: fengyuan-blackwater-xuanchu
+kind: creature
+name: 玄蜍兽
+description: 甲背厚实的小兽栖居黑水，受惊会扑击靠近水面的目标。
+placement: fengyuan-blackwater-lake
+facts:
+  - id: fengyuan-blackwater-xuanchu-usable-remains
+    predicate: usable-remains
+    value:
+      kind: text
+      value: 没有妖丹，皮肉不适宜炼器或入药；杀死它不会自动生成材料奖励。
+    description: 没有妖丹，皮肉不适宜炼器或入药；杀死它不会自动生成材料奖励。
+    access:
+      kind: public
+meters:
+  - id: fengyuan-blackwater-xuanchu-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: fengyuan-blackwater-xuanchu-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

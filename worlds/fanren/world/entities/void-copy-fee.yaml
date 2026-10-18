@@ -1,0 +1,20 @@
+id: void-copy-fee
+kind: container
+name: 抄简报酬
+description: 为本次誊写预留，不包含要求抄手替自己闯遗迹。
+placement: void-nanhe-cottage
+facts:
+  - id: void-copy-fee-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

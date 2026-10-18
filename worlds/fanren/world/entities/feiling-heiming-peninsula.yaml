@@ -1,0 +1,42 @@
+id: feiling-heiming-peninsula
+kind: location
+name: 黑冥半岛
+description: 与大陆相连的半岛，大部为黑冥雾笼罩。
+placement: feiling-territory
+facts:
+  - id: feiling-heiming-peninsula-route-feiling-chimo-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chimo-sea
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-heiming-peninsula-condition-feiling-chimo-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 与大陆相连的半岛，大部为黑冥雾笼罩。
+    description: 与大陆相连的半岛，大部为黑冥雾笼罩。
+    access:
+      kind: public
+  - id: feiling-heiming-peninsula-route-feiling-heiyin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-heiyin-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-heiming-peninsula-condition-feiling-heiyin-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 半岛一侧可辨山势的山脉，洞府和药地各有实际占有者。
+    description: 半岛一侧可辨山势的山脉，洞府和药地各有实际占有者。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

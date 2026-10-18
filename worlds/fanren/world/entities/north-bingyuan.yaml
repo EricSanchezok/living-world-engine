@@ -1,0 +1,58 @@
+id: north-bingyuan
+kind: location
+name: 冰渊岛
+description: 冰凤长期闭关的岛屿，外来者须面对冰海环境与当地势力。
+placement: human-ice-sea
+facts:
+  - id: north-bingyuan-route-human-ice-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-ice-sea
+    description: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    access:
+      kind: public
+  - id: north-bingyuan-travel-human-ice-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    description: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    access:
+      kind: public
+  - id: north-bingyuan-route-north-bingfeng-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-bingfeng-retreat
+    description: 守岛者通报，闭关者可拒绝接待。
+    access:
+      kind: public
+  - id: north-bingyuan-travel-north-bingfeng-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 守岛者通报，闭关者可拒绝接待。
+    description: 守岛者通报，闭关者可拒绝接待。
+    access:
+      kind: public
+  - id: north-bingyuan-route-north-bingyuan-ritual-ground
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-bingyuan-ritual-ground
+    description: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    access:
+      kind: public
+  - id: north-bingyuan-travel-north-bingyuan-ritual-ground
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    description: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

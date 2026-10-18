@@ -1,0 +1,24 @@
+id: canon-du-yu-private-stock
+kind: container
+name: 杜宇私用储备
+description: 个人储备与机构公物分开。
+placement: canon-du-yu
+facts:
+  - id: canon-du-yu-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-du-yu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: low-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

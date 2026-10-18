@@ -1,0 +1,26 @@
+id: void-port-ledger
+kind: item
+name: 海埠搬运账
+description: 本次实际搬了十二箱，抄账漏了一箱，现记十一箱。
+placement: void-jiyin-port
+facts:
+  - id: void-port-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-jiyin-administration
+    description: owned-by
+    access:
+      kind: private
+  - id: void-port-ledger-actual-error
+    predicate: actual-error
+    value:
+      kind: text
+      value: 实际十二箱、账记十一；每箱三十铜钱，本趟已付三百三十铜钱，尚差三十。
+    description: 实际十二箱、账记十一；每箱三十铜钱，本趟已付三百三十铜钱，尚差三十。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

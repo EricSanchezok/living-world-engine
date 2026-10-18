@@ -1,0 +1,22 @@
+id: steppe-liuting-flock
+kind: item
+name: 柳汀公用畜群
+description: 季松看管的十只羊和两匹驮马。活畜不能从“畜群”文字重复生出，买卖按真实只数减少；繁殖需时间、适当条件与因果。
+placement: steppe-liuting-pasture
+facts:
+  - id: steppe-liuting-flock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-liuting-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: steppe-sheep
+    amount: 10
+  - definition_id: steppe-horse
+    amount: 2
+ratings: []
+shared_activity_resources: []

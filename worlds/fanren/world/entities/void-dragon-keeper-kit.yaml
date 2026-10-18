@@ -1,0 +1,22 @@
+id: void-dragon-keeper-kit
+kind: container
+name: 方潭的随身器具
+description: 结丹修行、长期驯养与具体饲料记录。所需的个人日常器具。
+placement: void-dragon-keeper
+facts:
+  - id: void-dragon-keeper-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-dragon-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

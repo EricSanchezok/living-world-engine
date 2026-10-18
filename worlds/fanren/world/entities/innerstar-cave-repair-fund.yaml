@@ -1,0 +1,22 @@
+id: innerstar-cave-repair-fund
+kind: container
+name: 租居所维护款
+description: 仅供已批准的住处维护，匠人验修后按实际工料结算。
+placement: innerstar-cave-office
+facts:
+  - id: innerstar-cave-repair-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 90
+  - definition_id: craft-material
+    amount: 5
+ratings: []
+shared_activity_resources: []

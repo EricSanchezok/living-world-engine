@@ -1,0 +1,26 @@
+id: innerstar-beast-bay
+kind: location
+name: 停兽湾
+description: 大型海兽停泊处，主人须自己看管和给养。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-beast-bay-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-beast-bay-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 大型海兽停泊处，主人须自己看管和给养。
+    description: 大型海兽停泊处，主人须自己看管和给养。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

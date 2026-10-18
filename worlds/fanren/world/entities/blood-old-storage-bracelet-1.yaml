@@ -1,0 +1,22 @@
+id: blood-old-storage-bracelet-1
+kind: container
+name: 旧探索者储物镯1
+description: 两具旧尸各戴两只异色储物镯，共四只；其中物品须逐件检查。
+placement: blood-old-explorer-remains-3
+facts:
+  - id: blood-old-storage-bracelet-1-custody
+    predicate: custody
+    value:
+      kind: text
+      value: 原主已死，仍留在尸身；取出需发现镯子并检验储物禁制。
+    description: 原主已死，仍留在尸身；取出需发现镯子并检验储物禁制。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,19 @@
+id: spirit-anyuan-watch
+kind: organization
+name: 安远城守备
+description: 巡守城门与周边道路的守备机构，按情报调整警戒。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit-anyuan-watch-root-future-condition-revival-array
+    predicate: root-future-condition-revival-array
+    value:
+      kind: text
+      value: 当地可见一种三人配旗、镶石手镯与阵图的小回春阵术。它短时激发身体潜力，有伤身及寿元代价，不能作无害治疗；实际使用须持有完整阵具、会配合并支付供能，一次耗尽的阵具不能反复免费使用。
+    description: 当地可见一种三人配旗、镶石手镯与阵图的小回春阵术。它短时激发身体潜力，有伤身及寿元代价，不能作无害治疗；实际使用须持有完整阵具、会配合并支付供能，一次耗尽的阵具不能反复免费使用。
+    access:
+      kind: discoverable
+      condition: 实际查验当地设施或获准阅读并理解相关传承记录；不因身在此地自动知道。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

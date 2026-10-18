@@ -1,0 +1,20 @@
+id: yue-foundation-pill-chest
+kind: item
+name: 黄枫当期筑基丹匣
+description: 十二枚封存筑基丹供当期核准配给；管事须核实资格和库存再交付，持有者服丹仍不保证筑基。
+placement: yue-huangfeng-treasury
+facts:
+  - id: yue-foundation-pill-chest-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-foundation-pill
+    amount: 12
+ratings: []
+shared_activity_resources: []

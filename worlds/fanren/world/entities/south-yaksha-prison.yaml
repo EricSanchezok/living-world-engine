@@ -1,0 +1,26 @@
+id: south-yaksha-prison
+kind: location
+name: 尸灵血柱阵
+description: 十几根石柱围中央翠竹，阴灰光幕与血色禁锢相连。
+placement: south-yin-forks
+facts:
+  - id: south-yaksha-prison-route-south-yin-forks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-forks
+    description: route-to
+    access:
+      kind: public
+  - id: south-yaksha-prison-condition-south-yin-forks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 走近法阵会被其中尸灵察觉，穿越光幕另需处理禁制。
+    description: 走近法阵会被其中尸灵察觉，穿越光幕另需处理禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

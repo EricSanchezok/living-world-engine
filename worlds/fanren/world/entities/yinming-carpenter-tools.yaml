@@ -1,0 +1,18 @@
+id: yinming-carpenter-tools
+kind: item
+name: 陈槐的个人器具
+description: 木工、绳结与门轴检修。所需的有限工具，不包含无限兽晶。
+placement: yinming-carpenter
+facts:
+  - id: yinming-carpenter-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-carpenter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

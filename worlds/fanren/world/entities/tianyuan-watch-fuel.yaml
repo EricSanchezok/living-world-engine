@@ -1,0 +1,20 @@
+id: tianyuan-watch-fuel
+kind: container
+name: 近界观测阵装石
+description: 当前装入四枚中阶石，记录一次扣一枚，耗尽不继续监测。
+placement: tianyuan-near-watch-array
+facts:
+  - id: tianyuan-watch-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 4
+ratings: []
+shared_activity_resources: []

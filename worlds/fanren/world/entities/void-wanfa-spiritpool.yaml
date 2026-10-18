@@ -1,0 +1,26 @@
+id: void-wanfa-spiritpool
+kind: location
+name: 万法寒池
+description: 寒蛟栖息的灵池，饲养记录由守池人保管。
+placement: void-wanfa-seat
+facts:
+  - id: void-wanfa-spiritpool-route-void-wanfa-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-wanfa-court
+    description: route-to
+    access:
+      kind: public
+  - id: void-wanfa-spiritpool-condition-void-wanfa-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

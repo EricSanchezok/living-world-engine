@@ -1,0 +1,20 @@
+id: ad-veteran-carving-tools
+kind: container
+name: 石瘦刻甲工具
+description: 已用多年的刻刀与四份护甲修补料；每次小片护甲修补实际耗一份材料。
+placement: ad-veteran-workshop
+facts:
+  - id: ad-veteran-carving-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-seal-veteran
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

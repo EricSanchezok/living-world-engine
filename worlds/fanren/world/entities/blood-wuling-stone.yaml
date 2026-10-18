@@ -1,0 +1,18 @@
+id: blood-wuling-stone
+kind: item
+name: 巫道残碑
+description: 关于血狱外围的一份残损碑文，内层禁制内容已缺，不是全套安全地图。
+placement: canon-wuling-yu
+facts:
+  - id: blood-wuling-stone-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wuling-yu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

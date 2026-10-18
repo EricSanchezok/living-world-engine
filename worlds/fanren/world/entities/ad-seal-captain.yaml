@@ -1,0 +1,185 @@
+id: ad-seal-captain
+kind: person
+name: 晏崖
+description: 合体守院领队，了解封印危机的一部分，关心轮值者是否有活路。
+placement: ad-seal-outer-post
+facts:
+  - id: ad-seal-captain-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-captain
+  - id: ad-seal-captain-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体魔体、阵隙勘察与小队防卫。
+    description: 合体魔体、阵隙勘察与小队防卫。
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-captain
+  - id: ad-seal-captain-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-captain
+meters:
+  - id: ad-seal-captain-health
+    definition_id: health
+    current: 100
+  - id: ad-seal-captain-mana
+    definition_id: mana
+    current: 1540
+quantities: []
+ratings:
+  - id: ad-seal-captain-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: ad-seal-captain-force
+    definition_id: force
+    value: 7
+  - id: ad-seal-captain-craft
+    definition_id: craft
+    value: 7
+  - id: ad-seal-captain-perception
+    definition_id: perception
+    value: 7
+  - id: ad-seal-captain-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: ad-seal-captain
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 合体守院领队，了解封印危机的一部分，关心轮值者是否有活路。
+      voice: 嗓音低沉，先问伤势和人数，遇空泛忠诚会让人回到具体安排。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定批准一名老兵提前轮换还是等待接替，不用英雄话压人。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 晏崖
+        description: 合体守院领队，了解封印危机的一部分，关心轮值者是否有活路。
+        status: observed
+      - id: location
+        name: 始印外围守院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-seal-captain-private-stock
+        name: 晏崖的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-seal-veteran
+        name: 石瘦
+        description: 长期值守与轮换关系，知道老兵申请而未知未来结果。
+        status: observed
+      - id: known-ad-duty-register
+        name: 守院轮班簿
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+      - id: known-ad-veteran-request
+        name: 石瘦轮换申请
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+      - id: known-ad-duty-fund
+        name: 守院轮值预算
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+      - id: known-ad-seal-repair-reserve
+        name: 封印外围修护材料
+        description: 自己可调度的有限修护材料。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体魔体、阵隙勘察与小队防卫。
+        description: 合体魔体、阵隙勘察与小队防卫。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: duty-wage-ledger
+        subjectId: self
+        predicate: duty-wage-ledger
+        value:
+          kind: text
+          value: 本轮每日4魔石；石瘦已做12共同日、尚欠48，余两日由实际值守人计薪，支付要同步记账。
+        description: 本轮每日4魔石；石瘦已做12共同日、尚欠48，余两日由实际值守人计薪，支付要同步记账。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-seal-captain
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-seal-outer-post
+      - local_entity_id: known-ad-seal-captain-private-stock
+        canonical_entity_ids:
+          - ad-seal-captain-private-stock
+      - local_entity_id: known-ad-seal-veteran
+        canonical_entity_ids:
+          - ad-seal-veteran
+      - local_entity_id: known-ad-duty-register
+        canonical_entity_ids:
+          - ad-duty-register
+      - local_entity_id: known-ad-veteran-request
+        canonical_entity_ids:
+          - ad-veteran-request
+      - local_entity_id: known-ad-duty-fund
+        canonical_entity_ids:
+          - ad-duty-fund
+      - local_entity_id: known-ad-seal-repair-reserve
+        canonical_entity_ids:
+          - ad-seal-repair-reserve

@@ -1,0 +1,171 @@
+id: blood-qingjiao-chief-two
+kind: person
+name: 青蛟殿二殿主
+description: 青蛟族大乘，负责殿中公库，关心友人的许诺是否有足够实物支撑。
+placement: blood-qingjiao-palace
+facts:
+  - id: blood-qingjiao-chief-two-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: blood-qingjiao-court
+    description: member-of
+    access:
+      kind: private
+  - id: blood-qingjiao-chief-two-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: blood-qingjiao-chief-two-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 水中遁行、护体、辨认近海水流与依法度操纵本人法宝
+    description: 水中遁行、护体、辨认近海水流与依法度操纵本人法宝
+    access:
+      kind: private
+meters:
+  - id: blood-qingjiao-chief-two-health
+    definition_id: health
+    current: 100
+  - id: blood-qingjiao-chief-two-mana
+    definition_id: mana
+    current: 1800
+quantities: []
+ratings:
+  - id: blood-qingjiao-chief-two-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: blood-qingjiao-chief-two-force
+    definition_id: force
+    value: 8
+  - id: blood-qingjiao-chief-two-craft
+    definition_id: craft
+    value: 7
+  - id: blood-qingjiao-chief-two-perception
+    definition_id: perception
+    value: 8
+  - id: blood-qingjiao-chief-two-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: blood-qingjiao-chief-two
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 青蛟族大乘，负责殿中公库，关心友人的许诺是否有足够实物支撑。
+      voice: 会问费用由谁出、何时交账，认可真本事时答应得很干脆。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 审查水道勘验预算，把勘验与新开航路的承诺分开。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 青蛟殿二殿主
+        description: 青蛟族大乘，负责殿中公库，关心友人的许诺是否有足够实物支撑。
+        status: observed
+      - id: location
+        name: 青蛟殿海域
+        description: 当前所在地与日常事务所在。
+        status: observed
+      - id: closeout-blood-qingjiao-chief-two-private-stock
+        name: 青蛟殿二殿主私用石料
+        description: 本人私用储备，公款另存，不能代偿组织已定支出。
+        status: observed
+      - id: closeout-blood-qingjiao-court
+        name: 青蛟殿
+        description: 自己任职的宫属，知道当前公开议事规则与账目分工。
+        status: observed
+      - id: closeout-blood-qingjiao-chief-two-defense
+        name: 青蛟殿二殿主护身鳞佩
+        description: 相合水中护体的鳞佩，需本人主动实耗法力催动，受击会损坏。
+        status: observed
+      - id: closeout-blood-qingjiao-chief-one
+        name: 青蛟殿大殿主
+        description: 已有面对面往来，知道对方的身份与议事分工；不能直接知道对方未透露的打算。
+        status: observed
+      - id: closeout-canon-tu-yao
+        name: 涂咬
+        description: 已有面对面往来，知道对方的身份与议事分工；不能直接知道对方未透露的打算。
+        status: observed
+      - id: closeout-blood-qingjiao-letter
+        name: 青蛟殿水道询函
+        description: 殿方询问一处季节暗流是否仍可通行，需有实际新观察才可答复保证；并未宣布与镇海宫开战。
+        status: observed
+      - id: closeout-blood-qingjiao-council-note
+        name: 青蛟殿水路议簿
+        description: 两殿主只同意先问涂咬水情，尚未批准开航。公库拟拨8高阶灵石勘验，须两人会签后支付。
+        status: observed
+      - id: closeout-blood-qingjiao-public-stock
+        name: 青蛟殿水路公库
+        description: 本项组织事务的独立实存，未经授权不得转入个人袋；已收与待收分别记账。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 亲历、修习和本人已经参与的议事。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 水中遁行、护体、辨认近海水流与依法度操纵本人法宝
+        description: 水中遁行、护体、辨认近海水流与依法度操纵本人法宝
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-qingjiao-chief-two
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-qingjiao-palace
+      - local_entity_id: closeout-blood-qingjiao-chief-two-private-stock
+        canonical_entity_ids:
+          - blood-qingjiao-chief-two-private-stock
+      - local_entity_id: closeout-blood-qingjiao-court
+        canonical_entity_ids:
+          - blood-qingjiao-court
+      - local_entity_id: closeout-blood-qingjiao-chief-two-defense
+        canonical_entity_ids:
+          - blood-qingjiao-chief-two-defense
+      - local_entity_id: closeout-blood-qingjiao-chief-one
+        canonical_entity_ids:
+          - blood-qingjiao-chief-one
+      - local_entity_id: closeout-canon-tu-yao
+        canonical_entity_ids:
+          - canon-tu-yao
+      - local_entity_id: closeout-blood-qingjiao-letter
+        canonical_entity_ids:
+          - blood-qingjiao-letter
+      - local_entity_id: closeout-blood-qingjiao-council-note
+        canonical_entity_ids:
+          - blood-qingjiao-council-note
+      - local_entity_id: closeout-blood-qingjiao-public-stock
+        canonical_entity_ids:
+          - blood-qingjiao-public-stock

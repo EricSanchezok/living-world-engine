@@ -1,0 +1,26 @@
+id: yue-mo-practice-court
+kind: location
+name: 墨府习武院
+description: 供弟子与家人练武的小院，木架和练习桩是真实器物。
+placement: yue-mo-mansion
+facts:
+  - id: yue-mo-practice-court-route-yue-mo-mansion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-mansion
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-practice-court-travel-yue-mo-mansion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

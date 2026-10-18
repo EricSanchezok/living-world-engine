@@ -1,0 +1,20 @@
+id: seas-blood-signal-fund
+kind: container
+name: 本端传讯石盒
+description: 与已登记端通讯每刻需一中阶石。
+placement: blood-league-headquarters
+facts:
+  - id: seas-blood-signal-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

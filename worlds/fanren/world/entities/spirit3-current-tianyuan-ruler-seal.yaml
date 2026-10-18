@@ -1,0 +1,18 @@
+id: spirit3-current-tianyuan-ruler-seal
+kind: item
+name: 天元圣皇现用印令
+description: 证明当前职务的印令，单凭印令不能越过实物所有权与已定约束。
+placement: spirit3-current-tianyuan-ruler
+facts:
+  - id: spirit3-current-tianyuan-ruler-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

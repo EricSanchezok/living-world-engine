@@ -1,0 +1,130 @@
+id: dv-outer
+kind: location
+name: 坠魔谷外谷
+description: 褐色山岭、残留古禁与灵草并存，可见裂缝附近并不代表没有无形裂缝。
+placement: human-devil-valley
+facts:
+  - id: dv-outer-route-dv-mouth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-mouth
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-mouth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷口没有传送阵；须实地识别并避开当前裂缝或具可靠空间防护，普通护罩不能保证。
+    description: 谷口没有传送阵；须实地识别并避开当前裂缝或具可靠空间防护，普通护罩不能保证。
+    access:
+      kind: public
+  - id: dv-outer-route-dv-blood-boundary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-blood-boundary
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-blood-boundary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿外谷山路谨慎勘察，空间裂缝随时存在；上空不是免检捷径。
+    description: 沿外谷山路谨慎勘察，空间裂缝随时存在；上空不是免检捷径。
+    access:
+      kind: public
+  - id: dv-outer-route-dv-ice-rift
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-ice-rift
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-ice-rift
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接近冰缝须应对当前古兽并找到安全下降位置。
+    description: 接近冰缝须应对当前古兽并找到安全下降位置。
+    access:
+      kind: public
+  - id: dv-outer-route-dv-old-canyon
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-old-canyon
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-old-canyon
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外谷山道到峡口，内谷端的禁制尚未解除。
+    description: 外谷山道到峡口，内谷端的禁制尚未解除。
+    access:
+      kind: public
+  - id: dv-outer-route-dv-outer-round-pit
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer-round-pit
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-outer-round-pit
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    description: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    access:
+      kind: public
+  - id: dv-outer-route-dv-seven-color-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-seven-color-array
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-seven-color-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    description: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    access:
+      kind: public
+  - id: dv-outer-sky-restriction
+    predicate: sky-restriction
+    value:
+      kind: text
+      value: 古禁覆天；此圆坑附近升至约五六十丈会触发蓝雷，其他区域具体高度需探测。击落一次飞虫不能证明任何人都能无损通过。
+    description: 古禁覆天；此圆坑附近升至约五六十丈会触发蓝雷，其他区域具体高度需探测。击落一次飞虫不能证明任何人都能无损通过。
+    access:
+      kind: private
+  - id: dv-outer-route-dv-old-outer-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-old-outer-array
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-condition-dv-old-outer-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实查通路到台；它不会自动通向谷外或其他大陆。
+    description: 沿实查通路到台；它不会自动通向谷外或其他大陆。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

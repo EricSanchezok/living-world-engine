@@ -1,0 +1,26 @@
+id: fengyuan-black-spirit-tree
+kind: location
+name: 黑灵圣树
+description: 木族珍视的古树，花朵生长极慢，采摘须慎重。
+placement: fengyuan-wood-sanctuary
+facts:
+  - id: fengyuan-black-spirit-tree-route-fengyuan-wood-sanctuary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-wood-sanctuary
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-black-spirit-tree-condition-fengyuan-wood-sanctuary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木族珍视的古树，花朵生长极慢，采摘须慎重。
+    description: 木族珍视的古树，花朵生长极慢，采摘须慎重。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

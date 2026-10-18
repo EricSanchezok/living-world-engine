@@ -1,0 +1,18 @@
+id: feiling-yuelong-red-fan
+kind: item
+name: 赤红羽扇
+description: 可催炽风辅焰的羽扇，施展持续耗法力。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-red-fan-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

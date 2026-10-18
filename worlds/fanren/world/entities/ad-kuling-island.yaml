@@ -1,0 +1,42 @@
+id: ad-kuling-island
+kind: location
+name: 苦灵岛
+description: 雷海中蕴精纯灵气的独岛，地理与守卫关系同时限制出入。
+placement: associated-demon-realm
+facts:
+  - id: ad-kuling-island-route-ad-kuling-thunder-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kuling-thunder-sea
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kuling-island-condition-ad-kuling-thunder-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-kuling-island-route-ad-kunling-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kunling-valley
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kuling-island-condition-ad-kunling-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

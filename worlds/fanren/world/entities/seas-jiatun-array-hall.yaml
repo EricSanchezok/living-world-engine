@@ -1,0 +1,42 @@
+id: seas-jiatun-array-hall
+kind: location
+name: 甲豚族跨洲禁殿
+description: 守卫管理的跨洲阵所在，当前完整。
+placement: seas-jiatun-domain
+facts:
+  - id: seas-jiatun-array-hall-route-seas-jiatun-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain
+    description: route-to
+    access:
+      kind: public
+  - id: seas-jiatun-array-hall-condition-seas-jiatun-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按本族禁地规则获准入殿。
+    description: 按本族禁地规则获准入殿。
+    access:
+      kind: public
+  - id: seas-jiatun-array-hall-route-seas-jiatun-thunder-counterpart
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiatun-thunder-counterpart
+    description: route-to
+    access:
+      kind: public
+  - id: seas-jiatun-array-hall-condition-seas-jiatun-thunder-counterpart
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须两端授权、阵完整，出发端真实支付24极品与两完整芯；风元库目前可一次开阵，雷鸣回程端无耗材，须另备，不能借用远端库存。
+    description: 须两端授权、阵完整，出发端真实支付24极品与两完整芯；风元库目前可一次开阵，雷鸣回程端无耗材，须另备，不能借用远端库存。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

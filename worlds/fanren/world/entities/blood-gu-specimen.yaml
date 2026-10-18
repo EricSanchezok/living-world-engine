@@ -1,0 +1,18 @@
+id: blood-gu-specimen
+kind: item
+name: 血蛊保存标本
+description: 密封玻管中的一只已死血蛊，现为观察其离血后形态的标本；死物不能继续感染。
+placement: blood-market
+facts:
+  - id: blood-gu-specimen-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

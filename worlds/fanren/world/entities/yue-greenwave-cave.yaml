@@ -1,0 +1,34 @@
+id: yue-greenwave-cave
+kind: location
+name: 绿波洞
+description: 李化元夫妇修炼与会客的洞府。
+placement: yue-taiyue-range
+facts:
+  - id: yue-greenwave-cave-route-yue-taiyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-taiyue-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-greenwave-cave-travel-yue-taiyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-greenwave-cave-route-yue-greenwave-library
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-greenwave-library
+    description: 李化元或李夫人解除门口禁制后方可进入；取册还须逐件解封。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

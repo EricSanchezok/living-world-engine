@@ -1,0 +1,42 @@
+id: south-poison-valley
+kind: location
+name: 万毒谷
+description: 黄雾覆盖的林间盆地，毒虫与禁空危险必须在现场判断。
+placement: human-south-kunwu
+facts:
+  - id: south-poison-valley-route-human-south-kunwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-south-kunwu
+    description: route-to
+    access:
+      kind: public
+  - id: south-poison-valley-condition-human-south-kunwu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷内有毒雾虫群及禁空，飞行不能跳过实际防护。
+    description: 谷内有毒雾虫群及禁空，飞行不能跳过实际防护。
+    access:
+      kind: public
+  - id: south-poison-valley-route-south-yin-mouth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-mouth
+    description: route-to
+    access:
+      kind: public
+  - id: south-poison-valley-condition-south-yin-mouth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从可行石路靠近沟口；进去前须处理阴风。
+    description: 从可行石路靠近沟口；进去前须处理阴风。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

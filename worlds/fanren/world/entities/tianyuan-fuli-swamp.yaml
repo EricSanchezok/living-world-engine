@@ -1,0 +1,26 @@
+id: tianyuan-fuli-swamp
+kind: location
+name: 浮黎沼泽
+description: 低洼积水与雾带遮断视线，一些地段也干扰神念；巡路沿硬地绕行，深入前须重新勘路，不预设某名敌人必会潜伏。
+placement: spirit-wilderness-fringe
+facts:
+  - id: tianyuan-fuli-swamp-route-to-tianyuan-patrol-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-post
+    description: route-to-tianyuan-patrol-post
+    access:
+      kind: private
+  - id: tianyuan-fuli-swamp-route-conditions-tianyuan-patrol-post
+    predicate: route-conditions-tianyuan-patrol-post
+    value:
+      kind: text
+      value: 从近界巡哨沿实际野路前往沼泽，长途需按脚力、天气与地形耗时；与出入城阵分开，不凭同一父区瞬移。
+    description: 从近界巡哨沿实际野路前往沼泽，长途需按脚力、天气与地形耗时；与出入城阵分开，不凭同一父区瞬移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,74 @@
+id: demon-phoenix-town
+kind: location
+name: 墨羽城
+description: 黑凤族栖居与交易的地域，王庭控制主要灵脉与通行。城门或码头按当日记录核验来客。
+placement: demon-phoenix-territory
+facts:
+  - id: demon-phoenix-town-route-demon-phoenix-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-court
+    description: route-to
+    access:
+      kind: public
+  - id: demon-phoenix-town-condition-demon-phoenix-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-phoenix-town-route-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: route-to
+    access:
+      kind: public
+  - id: demon-phoenix-town-condition-spirit-demon-ward-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    description: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    access:
+      kind: public
+  - id: demon-phoenix-town-route-to-demon-phoenix-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-palace
+    description: route-to-demon-phoenix-palace
+    access:
+      kind: public
+  - id: demon-phoenix-town-condition-demon-phoenix-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。
+    description: 城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。
+    access:
+      kind: public
+  - id: demon-phoenix-town-route-to-demon-phoenix-lava-ground
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-lava-ground
+    description: route-to-demon-phoenix-lava-ground
+    access:
+      kind: public
+  - id: demon-phoenix-town-condition-demon-phoenix-lava-ground
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。
+    description: 沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

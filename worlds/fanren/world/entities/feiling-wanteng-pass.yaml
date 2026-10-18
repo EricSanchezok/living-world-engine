@@ -1,0 +1,42 @@
+id: feiling-wanteng-pass
+kind: location
+name: 万藤道
+description: 粗大古藤攀连石壁，深处通向第三层；虫群和寒风会改变可用落脚点。
+placement: feiling-abyss-2
+facts:
+  - id: feiling-wanteng-pass-route-to-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-wanteng-pass-route-conditions-feiling-abyss-2
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 到古藤口须查虫踪，通道持续有寒风。
+    description: 到古藤口须查虫踪，通道持续有寒风。
+    access:
+      kind: private
+  - id: feiling-wanteng-pass-route-to-feiling-abyss-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-3
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-wanteng-pass-route-conditions-feiling-abyss-3
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿藤道下降至三层，须保证攀飞与防护。
+    description: 沿藤道下降至三层，须保证攀飞与防护。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

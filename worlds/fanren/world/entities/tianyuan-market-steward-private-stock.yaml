@@ -1,0 +1,24 @@
+id: tianyuan-market-steward-private-stock
+kind: container
+name: 贺简私用储备
+description: 个人储备与机构公物分开。
+placement: tianyuan-market-steward
+facts:
+  - id: tianyuan-market-steward-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-market-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: low-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

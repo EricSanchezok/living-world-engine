@@ -1,0 +1,18 @@
+id: ad-qingling-hall
+kind: location
+name: 青灵殿
+description: 寨中青灵殿，入内依族中许可。
+placement: associated-demon-realm
+facts:
+  - id: ad-qingling-hall-route-to-ad-xunxiang-village
+    predicate: route-to-ad-xunxiang-village
+    value:
+      kind: entity
+      entityId: ad-xunxiang-village
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

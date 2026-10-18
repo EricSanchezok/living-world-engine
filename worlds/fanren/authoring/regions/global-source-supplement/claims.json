@@ -162,7 +162,7 @@
   },
   {
     "id": "source-supplement-bottle-progress-calibration",
-    "statement": "瓶躯初始凝液零滴、有效吸光进度零。当前人界环境的一次凝液需累计七个完整合格的晴夜暴露时段；不足整夜按实际有效时长比例记账，完全遮蔽或阴雨不计进度，中断只保留已积累的有效进度。凝成一滴后进度归零，瓶内仍有未取出的该滴时暂停下一轮，不凭空累存数百滴。此七夜、部分时长折算、保留进度和暂停方式是对已见七至八日过程的明确数值补写，不宣称正文逐项给出；若进入不同天象的其他界面须重新核定，不能照搬七个当地长夜。",
+    "statement": "瓶躯初始凝液零滴、有效吸光进度零。当前人界环境的一次凝液需累计七个完整合格的晴夜暴露时段；不足整夜按实际有效时长比例记账，完全遮蔽或阴雨不计进度，中断只保留已积累的有效进度。凝成一滴后进度归零，瓶内仍有未取出的该滴时暂停下一轮，不凭空累存数百滴。此七夜、部分时长折算、保留进度和暂停方式是对已见七至八日过程的明确数值补写，不宣称正文逐项给出；已证灵界环境采用约三个当地合格夜晚的等效暴露量；跨界时按已完成比例换算进度，不凭换界增出液量。这些分段累计与换算仍属数值补写，其他未验证界面不能照搬。",
     "classification": "calibration",
     "validAtOpening": true,
     "learnedTime": "作者确定共同开篇的必要位置、库存或量纲；人物须由亲历观察与学习获知。",
@@ -170,7 +170,8 @@
     "status": "reviewed",
     "dependencies": [
       "source-supplement-bottle-light-conditions",
-      "source-supplement-bottle-opening-placement"
+      "source-supplement-bottle-opening-placement",
+      "source-supplement-bottle-spirit-environment"
     ],
     "evidence": [
       {
@@ -268,7 +269,7 @@
   },
   {
     "id": "source-supplement-bottle-storage",
-    "statement": "韩将绿液留在小瓶内多年后仍见该滴；取出后试过瓷、玉、葫芦、银等普通容器，均未能超过一刻钟保存原液，稀释后稍久仍会消散。运行中原液离开瓶躯即记真实取出时间，超过一刻不再保有有效凝液；一刻按900秒换算属于量纲标定。此结论限已证的普通容器，不推断所有世界奇物都永不能保存。",
+    "statement": "韩将绿液留在小瓶内多年后仍见该滴；取出后试过瓷、玉、葫芦、银等普通容器，均未能超过一刻钟保存原液，稀释后稍久仍会消散。后来所得黄铜瓶明确是可保装入物灵力的辅助法器，实测将绿液存放延至一整天，过时仍消失；这不是普通黄铜材质的共同能力。运行中取出时须记真实数量、容器能力和时间：已证普通容器按一刻900秒，具本例储灵效用的法器按一天86400秒，其他容器不得无依据扩大；秒值为人界时间量纲换算。保留瓶内留存，不推所有奇物都永不能保存；该黄铜法器及实验知识不提前归韩。",
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "后文章节向读者揭示；各人物只有实际亲历、教学或试验所得的知识。",
@@ -291,6 +292,20 @@
         "start": 1124,
         "end": 1324,
         "anchorSha256": "9a09edbbb7973c1ce72519237a7954b7346ed23ff04c7076422ab3b4d030100e"
+      },
+      {
+        "chapterId": "qq-20637210",
+        "chapterSha256": "d65d4ad1540c8cd3143c3c8e13d61bff2608154c8621c683074ed584cf16d0d7",
+        "start": 392,
+        "end": 456,
+        "anchorSha256": "d1021d3e9a0672164b980cd6b98e298a4873fade1c792e7eb1e865a082ee654a"
+      },
+      {
+        "chapterId": "qq-20637210",
+        "chapterSha256": "d65d4ad1540c8cd3143c3c8e13d61bff2608154c8621c683074ed584cf16d0d7",
+        "start": 679,
+        "end": 776,
+        "anchorSha256": "7b7b9e78058b454ed8cde918c8f921a4262786978ad5f6a22ed45b2359aa9eb3"
       }
     ]
   },
@@ -396,6 +411,41 @@
         "start": 1082,
         "end": 1143,
         "anchorSha256": "289c365423239384af7a382ed151c6f25b1b734147460e7345f1dd9cf94d9b15"
+      }
+    ]
+  },
+  {
+    "id": "source-supplement-bottle-spirit-environment",
+    "statement": "韩到灵界后观察到小瓶凝出一滴由人界约七日变成灵界约三日，吸光时只放一层淡淡白光，须近前数丈仔细观察才容易察觉；这仍是有光可吸时的环境表现，不是无条件计时造液。把此环境反应回溯为瓶躯已有能力，但不前置韩的持有、实验记忆或把瓶搬到灵界。韩把改变归因七月及更浓灵气属于推断，不能制定月亮数或灵气浓度的线性加速公式。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在韩到灵界后获知；角色只有实际观察到瓶与当地天象的反应才知道。",
+    "openingReason": "回溯同一器物在已证环境下的有条件反应；当时才发生的持有与获知不回溯。",
+    "status": "reviewed",
+    "dependencies": [
+      "source-supplement-bottle-light-conditions"
+    ],
+    "evidence": [
+      {
+        "chapterId": "qq-28286863",
+        "chapterSha256": "b1be6ef2f32516ae245bd87fad952c582fb32adad392c398cdc7a565e5776514",
+        "start": 1281,
+        "end": 1309,
+        "anchorSha256": "291791ee70e55bbeafd90f236cabd53c02ec85787dd2fec8eda6914455a79448"
+      },
+      {
+        "chapterId": "qq-28286863",
+        "chapterSha256": "b1be6ef2f32516ae245bd87fad952c582fb32adad392c398cdc7a565e5776514",
+        "start": 1348,
+        "end": 1433,
+        "anchorSha256": "808bff271aa87544b847d288dc774faf9a7bfd9d89d604e7b403879c51af8bc5"
+      },
+      {
+        "chapterId": "qq-28286863",
+        "chapterSha256": "b1be6ef2f32516ae245bd87fad952c582fb32adad392c398cdc7a565e5776514",
+        "start": 1466,
+        "end": 1507,
+        "anchorSha256": "322638846af997d19c939ae2c584cfcb42bea2405c3e89c5512fce1402b5ef98"
       }
     ]
   }

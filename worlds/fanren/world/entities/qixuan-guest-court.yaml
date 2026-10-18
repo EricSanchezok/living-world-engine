@@ -1,0 +1,18 @@
+id: qixuan-guest-court
+kind: location
+name: 清客院
+description: 接待与安排来访者暂宿的院落，选拔人员并未必须于今晚入住。
+placement: caixia-mountain
+facts:
+  - id: qixuan-guest-court-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 接待与安排来访者暂宿的院落，选拔人员并未必须于今晚入住。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

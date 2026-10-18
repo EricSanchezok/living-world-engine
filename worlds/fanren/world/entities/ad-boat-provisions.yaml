@@ -1,0 +1,22 @@
+id: ad-boat-provisions
+kind: container
+name: 沐舟出航补给
+description: 支持短期近岸航行的饲料与补漏材料，远航须另补。
+placement: ad-moyuan-port
+facts:
+  - id: ad-boat-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-sea-pilot
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

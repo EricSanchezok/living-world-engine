@@ -1,0 +1,20 @@
+id: xlt-qin-stock
+kind: container
+name: 秦照修坛袋
+description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+placement: xlt-qin
+facts:
+  - id: xlt-qin-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-qin
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 16
+ratings: []
+shared_activity_resources: []

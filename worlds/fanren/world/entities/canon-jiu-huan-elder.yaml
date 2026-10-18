@@ -1,0 +1,174 @@
+id: canon-jiu-huan-elder
+kind: person
+name: 九幻老怪
+description: 守着本命法宝钻研禁制的高阶修士。
+placement: minghe-jiuhuan
+facts:
+  - id: canon-jiu-huan-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiu-huan-elder
+  - id: canon-jiu-huan-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘法力、幻门禁制与界面薄弱处探查。
+    description: 大乘法力、幻门禁制与界面薄弱处探查。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiu-huan-elder
+  - id: canon-jiu-huan-elder-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 长期高阶修行，具体族属未获确证。
+    description: 长期高阶修行，具体族属未获确证。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiu-huan-elder
+  - id: canon-jiu-huan-elder-contact-canon-huang-yuan-zi
+    predicate: prior-contact
+    value:
+      kind: entity
+      entityId: canon-huang-yuan-zi
+    description: prior-contact
+    access:
+      kind: private
+meters:
+  - id: canon-jiu-huan-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-jiu-huan-elder-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: canon-jiu-huan-elder-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-jiu-huan-elder-force
+    definition_id: force
+    value: 8
+  - id: canon-jiu-huan-elder-craft
+    definition_id: craft
+    value: 5
+  - id: canon-jiu-huan-elder-perception
+    definition_id: perception
+    value: 8
+  - id: canon-jiu-huan-elder-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-jiu-huan-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 守着本命法宝钻研禁制的高阶修士。
+      voice: 说话含蓄，报价前会问对方要承担什么损伤，涉及本命宝物很慎重。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 继续改进界面探测，筹备长期修行资源。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 九幻老怪
+        description: 守着本命法宝钻研禁制的高阶修士。
+        status: observed
+      - id: location
+        name: 九幻居所
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-jiu-huan-elder-private-stock
+        name: 九幻老怪私用储备
+        description: 当前有限材料与行路用石。
+        status: observed
+      - id: known-canon-huang-yuan-zi
+        name: 黄元子
+        description: 有过高阶修行往来，当前没有相互雇佣或借宝承诺。
+        status: observed
+      - id: known-minghe-nine-illusion-gate
+        name: 九幻如意门
+        description: 本命幻门至宝，可协助研判和松动某些禁制与界力；当前未借给黄元子。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘法力、幻门禁制与界面薄弱处探查。
+        description: 大乘法力、幻门禁制与界面薄弱处探查。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 长期高阶修行，具体族属未获确证。
+        description: 长期高阶修行，具体族属未获确证。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-jiu-huan-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-jiuhuan
+      - local_entity_id: known-canon-jiu-huan-elder-private-stock
+        canonical_entity_ids:
+          - canon-jiu-huan-elder-private-stock
+      - local_entity_id: known-canon-huang-yuan-zi
+        canonical_entity_ids:
+          - canon-huang-yuan-zi
+      - local_entity_id: known-minghe-nine-illusion-gate
+        canonical_entity_ids:
+          - minghe-nine-illusion-gate

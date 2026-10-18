@@ -1,0 +1,18 @@
+id: innerstar-haiyuan-feed
+kind: container
+name: 海猿的鱼食水桶
+description: 两条鲜鱼与一桶水，需实际消耗和补充。
+placement: innerstar-haiyuan-market
+facts:
+  - id: innerstar-haiyuan-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-trader
+    description: 由邱舟所有；实际交付才改变归属。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

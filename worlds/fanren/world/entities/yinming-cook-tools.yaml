@@ -1,0 +1,18 @@
+id: yinming-cook-tools
+kind: item
+name: 陶黍的个人器具
+description: 熏煮可食兽肉、配粮、防腐与辨常见有毒兽肉。所需的有限工具，不包含无限兽晶。
+placement: yinming-cook
+facts:
+  - id: yinming-cook-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-cook
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

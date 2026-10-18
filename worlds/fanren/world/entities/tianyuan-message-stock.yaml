@@ -1,0 +1,20 @@
+id: tianyuan-message-stock
+kind: container
+name: 备勤传书用石
+description: 六枚低阶石，逐次随传信器扣减。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-message-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 6
+ratings: []
+shared_activity_resources: []

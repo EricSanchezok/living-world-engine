@@ -1,0 +1,18 @@
+id: blood-wanhua-sword
+kind: item
+name: 斩麟魔剑
+description: 与蚀骨魔火配合的真实法器，可化木钗，形态变化不复制成第二把。
+placement: canon-wan-hua
+facts:
+  - id: blood-wanhua-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wan-hua
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

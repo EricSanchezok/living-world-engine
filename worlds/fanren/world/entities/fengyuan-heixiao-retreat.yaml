@@ -1,0 +1,35 @@
+id: fengyuan-heixiao-retreat
+kind: location
+name: 黑崖禁居
+description: 封闭的崖中洞府，来历不明的黑甲强者在内静修，外院接信。
+placement: fengyuan-yaksha-domain
+facts:
+  - id: fengyuan-heixiao-retreat-route-fengyuan-yaksha-crag-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-crag-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-heixiao-retreat-condition-fengyuan-yaksha-crag-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封闭的崖中洞府，来历不明的黑甲强者在内静修，外院接信。
+    description: 封闭的崖中洞府，来历不明的黑甲强者在内静修，外院接信。
+    access:
+      kind: public
+  - id: fengyuan-heixiao-retreat-root-detail-heixiao-law
+    predicate: root-detail-heixiao-law
+    value:
+      kind: text
+      value: 划天为地与强韧法体是特定实修能力，断体可复仍会重伤耗能，不灭之名非永生保证。
+    description: 划天为地与强韧法体是特定实修能力，断体可复仍会重伤耗能，不灭之名非永生保证。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

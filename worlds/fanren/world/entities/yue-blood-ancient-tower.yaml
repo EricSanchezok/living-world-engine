@@ -1,0 +1,51 @@
+id: yue-blood-ancient-tower
+kind: location
+name: 中心巨塔
+description: 百丈古塔立在密林中央，门户与内室仍被古禁封闭。
+placement: yue-blood-inner-wood
+facts:
+  - id: yue-blood-ancient-tower-route-yue-blood-inner-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-inner-wood
+    description: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    access:
+      kind: public
+  - id: yue-blood-ancient-tower-travel-yue-blood-inner-wood
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    description: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    access:
+      kind: public
+  - id: yue-blood-ancient-tower-route-yue-blood-tower-lower-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-tower-lower-room
+    description: 需先解除外门古禁并进入塔内，沿实际石阶到对应室内。
+    access:
+      kind: public
+  - id: yue-blood-ancient-tower-route-yue-blood-tower-upper-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-tower-upper-room
+    description: 需先解除外门古禁并进入塔内，沿实际石阶到对应室内。
+    access:
+      kind: public
+  - id: yue-blood-ancient-tower-outer-pressure
+    predicate: entry-condition
+    value:
+      kind: text
+      value: 要无视外围压制进入此区域须有元婴后期修为；持对应禁制令牌方可正常开启塔门。强破古禁是另一项有风险的实际行动，不能凭声称持令视作成功。
+    description: 要无视外围压制进入此区域须有元婴后期修为；持对应禁制令牌方可正常开启塔门。强破古禁是另一项有风险的实际行动，不能凭声称持令视作成功。
+    access:
+      kind: discoverable
+      condition: 实际研究此处禁制及对应令牌，或得到有证据的可靠使用记录；远望巨塔不足。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

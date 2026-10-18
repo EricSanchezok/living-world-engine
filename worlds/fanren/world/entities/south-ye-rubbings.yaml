@@ -1,0 +1,18 @@
+id: south-ye-rubbings
+kind: item
+name: 获准誊写的残碑摹页
+description: 两页有缺字的摹本，不含全部昆吾封印知识。
+placement: south-ye-archive
+facts:
+  - id: south-ye-rubbings-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-ye-family
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

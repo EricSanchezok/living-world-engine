@@ -1,0 +1,22 @@
+id: steppe-yellow-stock
+kind: item
+name: 黄沙当期护库料箱
+description: 普通封纹修补与练法材料，沙坚可受托发放；圣幡不在普通消耗料中。
+placement: steppe-yellow-sand-store
+facts:
+  - id: steppe-yellow-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: mulan-yellow-sand-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 30
+ratings: []
+shared_activity_resources: []

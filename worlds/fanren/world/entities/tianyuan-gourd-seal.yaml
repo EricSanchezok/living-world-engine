@@ -1,0 +1,18 @@
+id: tianyuan-gourd-seal
+kind: item
+name: 葫芦现用封签
+description: 一张尚未使用的封签，完成本次收押即贴封；破损后不能当完好封签复用。
+placement: tianyuan-patrol-chief
+facts:
+  - id: tianyuan-gourd-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: yinming-deputy-tools
+kind: item
+name: 沈砾的个人器具
+description: 依师传操作既有石符、清理槽纹，不会凭空造符。所需的有限工具，不包含无限兽晶。
+placement: yinming-deputy
+facts:
+  - id: yinming-deputy-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-deputy
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

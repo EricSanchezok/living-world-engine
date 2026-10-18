@@ -1,0 +1,20 @@
+id: spirit3-xu-array-fund
+kind: container
+name: 许氏幻阵供能盒
+description: 当前可供阵使用的十二枚高阶石，与养护其他祖物公库分开。
+placement: blood-xu-ancestral-estate
+facts:
+  - id: spirit3-xu-array-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

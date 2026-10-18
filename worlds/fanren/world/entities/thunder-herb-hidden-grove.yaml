@@ -1,0 +1,19 @@
+id: thunder-herb-hidden-grove
+kind: location
+name: 雾根幽谷
+description: 雾气常停在谷底，倒木下的湿土藏着细根。芝仙避居于此，采药人尚未找出它的藏根之处。
+placement: thunder-continent
+facts:
+  - id: thunder-herb-hidden-grove-location-secrecy
+    predicate: location-secrecy
+    value:
+      kind: text
+      value: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    description: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    access:
+      kind: discoverable
+      condition: 实际取得位置与入口线索。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

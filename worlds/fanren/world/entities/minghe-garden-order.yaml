@@ -1,0 +1,26 @@
+id: minghe-garden-order
+kind: item
+name: 翎墨虫粮订单
+description: 白笙已付八低阶灵石定金；三灵界本地日后交三包合格虫粮，再付四块尾款，双方可协商延期或退款。
+placement: minghe-young-gardener
+facts:
+  - id: minghe-garden-order-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-young-gardener
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-garden-order-deadline-seconds
+    predicate: deadline-seconds
+    value:
+      kind: number
+      value: 1036800
+    description: deadline-seconds
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

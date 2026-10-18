@@ -1,0 +1,42 @@
+id: yue-blood-under-swamp
+kind: location
+name: 青石殿地下沼泽
+description: 地下黑泥冒泡，潮热气流沿阶道交换，白玉亭立在中央。
+placement: yue-blood-stone-hall
+facts:
+  - id: yue-blood-under-swamp-route-yue-blood-stone-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-stone-hall
+    description: 沿狭窄青石台阶下到百余丈地下，潮热、视线和退路都受环境限制。
+    access:
+      kind: public
+  - id: yue-blood-under-swamp-travel-yue-blood-stone-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿狭窄青石台阶下到百余丈地下，潮热、视线和退路都受环境限制。
+    description: 沿狭窄青石台阶下到百余丈地下，潮热、视线和退路都受环境限制。
+    access:
+      kind: public
+  - id: yue-blood-under-swamp-route-yue-blood-jade-pavilion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-jade-pavilion
+    description: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    access:
+      kind: public
+  - id: yue-blood-under-swamp-travel-yue-blood-jade-pavilion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    description: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

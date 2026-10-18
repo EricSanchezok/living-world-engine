@@ -1,0 +1,18 @@
+id: xlt-mantis-plain
+kind: location
+name: 巨螂荒原
+description: 石丘间有虫类兽径，通行者需要认清住民划定的采食地。
+placement: xlt-realm
+facts:
+  - id: xlt-mantis-plain-route-xlt-border-pass
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-border-pass
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

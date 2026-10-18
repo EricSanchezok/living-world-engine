@@ -1,0 +1,18 @@
+id: feiling-oath-original
+kind: item
+name: 天鹏之誓正卷
+description: 封存的誓约载体，名录与签署效力须通过仪式核实。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-oath-original-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

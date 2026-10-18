@@ -1,0 +1,200 @@
+id: feiling-council-steward
+kind: person
+name: 宁羽
+description: 联席议事处值事，熟悉各支使者的日常要求。
+placement: feiling-yuhuang-peak
+facts:
+  - id: feiling-council-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - feiling-council-steward
+  - id: feiling-council-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚飞灵法力、函件核验与跨支协调。
+    description: 炼虚飞灵法力、函件核验与跨支协调。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-council-steward
+  - id: feiling-council-steward-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 飞灵血脉修行。
+    description: 飞灵血脉修行。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-council-steward
+  - id: feiling-council-steward-current-contact-feiling-courier
+    predicate: current-contact
+    value:
+      kind: entity
+      entityId: feiling-courier
+    description: current-contact
+    access:
+      kind: private
+  - id: feiling-council-steward-current-contact-feiling-wing-healer
+    predicate: current-contact
+    value:
+      kind: entity
+      entityId: feiling-wing-healer
+    description: current-contact
+    access:
+      kind: private
+meters:
+  - id: feiling-council-steward-health
+    definition_id: health
+    current: 100
+  - id: feiling-council-steward-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: feiling-council-steward-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: feiling-council-steward-force
+    definition_id: force
+    value: 6
+  - id: feiling-council-steward-craft
+    definition_id: craft
+    value: 4
+  - id: feiling-council-steward-perception
+    definition_id: perception
+    value: 6
+  - id: feiling-council-steward-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: feiling-council-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 联席议事处值事，熟悉各支使者的日常要求。
+      voice: 称呼周到，但争执久了会直接问双方各愿意让哪一步。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核验沿海采购函并签回收讫，按记录安排各支使者会面。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 宁羽
+        description: 联席议事处值事，熟悉各支使者的日常要求。
+        status: observed
+      - id: location
+        name: 玉皇顶
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-feiling-medicine-letter
+        name: 沿海采购函
+        description: 收件人玉皇顶宁羽，请核准四包常用药与运费；没有必须由岚止本人送达的条款。
+        status: observed
+      - id: known-feiling-public-stock
+        name: 天鹏公共储备
+        description: 族内养护和有限委托费用，需相关长老核准。
+        status: observed
+      - id: known-feiling-courier
+        name: 岚止
+        description: 曾有送函交接，知道对方是本次函件收件人。
+        status: observed
+      - id: known-feiling-wing-healer
+        name: 羽珩
+        description: 有常用药采购往来，本次函件已交岚止但尚未送达。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚飞灵法力、函件核验与跨支协调。
+        description: 炼虚飞灵法力、函件核验与跨支协调。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 飞灵血脉修行。
+        description: 飞灵血脉修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: incoming-letter
+        subjectId: self
+        predicate: incoming-letter
+        value:
+          kind: text
+          value: 等待羽珩药材采购函，签收后可核发用料，运费由天鹏公库支付。
+        description: 等待羽珩药材采购函，签收后可核发用料，运费由天鹏公库支付。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        description: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - feiling-council-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-yuhuang-peak
+      - local_entity_id: known-feiling-medicine-letter
+        canonical_entity_ids:
+          - feiling-medicine-letter
+      - local_entity_id: known-feiling-public-stock
+        canonical_entity_ids:
+          - feiling-public-stock
+      - local_entity_id: known-feiling-courier
+        canonical_entity_ids:
+          - feiling-courier
+      - local_entity_id: known-feiling-wing-healer
+        canonical_entity_ids:
+          - feiling-wing-healer

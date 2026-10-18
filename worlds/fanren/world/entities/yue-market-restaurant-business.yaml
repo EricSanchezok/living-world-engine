@@ -1,0 +1,18 @@
+id: yue-market-restaurant-business
+kind: organization
+name: 坊市酒楼当期商号
+description: 独立经营账目，铺面租自黄枫谷；商号货款与个人随身钱分开。
+placement: yue-market-restaurant
+facts:
+  - id: yue-market-restaurant-business-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-restaurant-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

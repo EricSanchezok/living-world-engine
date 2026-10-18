@@ -1,0 +1,18 @@
+id: north-hall-relocation-array
+kind: item
+name: 三殿迁移古阵
+description: 秘境地下环绕三殿的固定法阵，当前封存；并非随手可搬走的阵盘。
+placement: north-hanli-realm
+facts:
+  - id: north-hall-relocation-array-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

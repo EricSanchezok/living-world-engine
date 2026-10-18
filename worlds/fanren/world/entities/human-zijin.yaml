@@ -1,0 +1,26 @@
+id: human-zijin
+kind: location
+name: 紫金国
+description: 越国南向长途线路上的国家；路过不等于已经抵达九国盟。
+placement: human-tiannan
+facts:
+  - id: human-zijin-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-zijin-travel-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

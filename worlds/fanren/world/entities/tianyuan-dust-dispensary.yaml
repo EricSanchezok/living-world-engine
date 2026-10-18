@@ -1,0 +1,34 @@
+id: tianyuan-dust-dispensary
+kind: location
+name: 飞灵殿丹药房
+description: 核验飞升者气息与领药记录后交付相应丹药，库门双锁。
+placement: spirit-feiling-hall
+facts:
+  - id: tianyuan-dust-dispensary-route-spirit-feiling-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-feiling-reception
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-dust-dispensary-condition-spirit-feiling-reception
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 核验飞升者气息与领药记录后交付相应丹药，库门双锁。
+    description: 核验飞升者气息与领药记录后交付相应丹药，库门双锁。
+    access:
+      kind: public
+  - id: tianyuan-dust-dispensary-outer-lock-state
+    predicate: outer-lock-state
+    value:
+      kind: text
+      value: 外门当前值班开放，吕慎持外锁钥匙，闭门后仍需真实开锁才能进入。
+    description: 外门当前值班开放，吕慎持外锁钥匙，闭门后仍需真实开锁才能进入。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

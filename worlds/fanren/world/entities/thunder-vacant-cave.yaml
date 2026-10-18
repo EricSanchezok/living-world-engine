@@ -1,0 +1,34 @@
+id: thunder-vacant-cave
+kind: location
+name: 云霞山松窗洞
+description: 石窗外是云霞山的松林，洞内分出居室、静室、空院和小试验间。门锁仍封着，租客尚未确定。
+placement: thunder-baying-peak-1
+facts:
+  - id: thunder-vacant-cave-route-thunder-baying-peak-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-baying-peak-1
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-vacant-cave-condition-thunder-baying-peak-1
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须得到合法居用许可或其他足以进入的实际手段；知晓洞名不等于租用。
+    description: 须得到合法居用许可或其他足以进入的实际手段；知晓洞名不等于租用。
+    access:
+      kind: public
+  - id: thunder-vacant-cave-occupancy
+    predicate: occupancy
+    value:
+      kind: text
+      value: 当前空置，钥符在登记者处，尚无租客或已开始的租期。
+    description: 当前空置，钥符在登记者处，尚无租客或已开始的租期。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

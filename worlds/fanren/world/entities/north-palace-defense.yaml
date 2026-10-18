@@ -1,0 +1,20 @@
+id: north-palace-defense
+kind: item
+name: 小极宫镇宫大阵
+description: 笼罩冰城外围的层叠禁制，当前维护与通行防护状态，阵体可受损。
+placement: north-ice-city
+facts:
+  - id: north-palace-defense-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 100
+ratings: []
+shared_activity_resources: []

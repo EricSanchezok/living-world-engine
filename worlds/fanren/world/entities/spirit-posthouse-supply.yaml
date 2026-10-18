@@ -1,0 +1,22 @@
+id: spirit-posthouse-supply
+kind: container
+name: 天元驿递补给
+description: 当前驿站能动用的口粮和周转现款。
+placement: spirit-tianyuan-capital
+facts:
+  - id: spirit-posthouse-supply-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-capital-postmaster
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 120
+  - definition_id: low-stone
+    amount: 100
+ratings: []
+shared_activity_resources: []

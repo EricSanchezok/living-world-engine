@@ -1,0 +1,18 @@
+id: yinming-red-hunter-tools
+kind: item
+name: 红岑的个人器具
+description: 骨矛、潜行和碧蟾踪迹。所需的有限工具，不包含无限兽晶。
+placement: yinming-red-hunter
+facts:
+  - id: yinming-red-hunter-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-red-hunter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

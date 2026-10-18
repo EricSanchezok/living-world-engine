@@ -1,0 +1,30 @@
+id: tiannan-jinma-inn-stock
+kind: item
+name: 归路客栈周转库
+description: 有限库存，有单独账目；保管人只可按已约定用途支用。
+placement: tiannan-jinma-inn
+facts:
+  - id: tiannan-jinma-inn-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-wu-bai
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-jinma-inn-stock-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-wu-bai
+    description: 实际保管人；保管不等于归个人所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 40
+  - definition_id: grain
+    amount: 24
+ratings: []
+shared_activity_resources: []

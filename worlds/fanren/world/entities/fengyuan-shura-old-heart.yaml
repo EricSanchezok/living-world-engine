@@ -1,0 +1,28 @@
+id: fengyuan-shura-old-heart
+kind: item
+name: 完整修罗旧心护器
+description: 由一枚旧修罗之心炼成的贴身护器，尚未启用，尚未刻返程坐标；只能保护一个实际佩戴者，捏碎返程后不可再用。
+placement: canon-ling-king
+facts:
+  - id: fengyuan-shura-old-heart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ling-king
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-shura-old-heart-activation-state
+    predicate: activation-state
+    value:
+      kind: text
+      value: 未启用；未刻返回坐标；不在小修罗界时不扣防护余量。
+    description: 未启用；未刻返回坐标；不在小修罗界时不扣防护余量。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-shura-heart-reserve
+    amount: 10368000
+ratings: []
+shared_activity_resources: []

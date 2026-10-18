@@ -1,0 +1,25 @@
+id: innerstar-reef-beast
+kind: creature
+name: 礁背海兽
+description: 低阶海兽伏在礁石外缘，背鳍受伤，对靠近巢口的船影很警惕。
+placement: innerstar-near-reef
+facts:
+  - id: innerstar-reef-beast-behavior
+    predicate: behavior
+    value:
+      kind: text
+      value: 不主动追逐远绕的船只，近触巢口会甩尾和扑咬；受伤并不代表无力反抗，也不保证击杀掉落妖丹。
+    description: 不主动追逐远绕的船只，近触巢口会甩尾和扑咬；受伤并不代表无力反抗，也不保证击杀掉落妖丹。
+    access:
+      kind: discoverable
+      condition: 从安全距离持续观察其反应和行动范围。
+meters:
+  - id: innerstar-reef-beast-health
+    definition_id: health
+    current: 65
+quantities: []
+ratings:
+  - id: innerstar-reef-beast-force
+    definition_id: force
+    value: 2
+shared_activity_resources: []

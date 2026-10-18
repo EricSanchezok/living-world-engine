@@ -1,0 +1,68 @@
+id: canon-heaven-bottle-body
+kind: item
+name: 青绿小瓶
+description: 泥土裹着一只颇沉的小瓶，细长颈、圆腹，瓶盖紧闭；擦净处可见青绿色泽与叶状纹饰。
+placement: source-qixuan-valley-peak-path
+facts:
+  - id: canon-heaven-bottle-body-concealment
+    predicate: concealment
+    value:
+      kind: text
+      value: 藏在山路低洼处的泥土落叶下，未被清理或触及前不显露。
+    description: 落叶泥土遮住瓶身。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-material-resistance
+    predicate: material-resistance
+    value:
+      kind: text
+      value: 寻常徒手拧拉和凡人铁锤重击不能轻易开盖或砸损，仍须依据实际力量和已证手段判断。
+    description: 细纹瓶身的材料异常坚硬。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-condensation-rule
+    predicate: conditional-conversion
+    value:
+      kind: text
+      value: 须在明净夜空下有光线实际照达；袋、盒、厚叶遮蔽及阴雨不累计。人界天象下约七个完整合格夜晚、灵界已证环境下约三个当地合格夜晚的等效暴露量凝成一滴，部分夜晚按实际有效时长累计，跨界按完成比例换算进度。生成时扣除这一轮全部进度，已有一滴未取出则不继续积累；瓶盖可随凝成后正常开启。灵界吸光时仅有淡白光，近前仔细观察仍可能发现。其他未验证界面不能照搬；月亮多寡或灵气浓度不能单独据以无限加速。
+    description: 凝液取决于实际环境与连续记录。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-exposure-progress
+    predicate: effective-exposure-nights
+    value:
+      kind: number
+      value: 0
+    description: 已累计的有效晴夜暴露量。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-bottle-cap-state
+    predicate: container-cap-state
+    value:
+      kind: text
+      value: 紧闭；尚未完成这一轮凝成。
+    description: 瓶盖当前紧闭。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-plant-use
+    predicate: plant-use
+    value:
+      kind: text
+      value: 原液需对已有植物实际施用并扣除所用滴量。已证一滴对一株普通人参隔夜增至百年药性，三乌草反复滴用可继续增龄；稀释分施许多草药只有较弱增长。其他种类与剂量须按实际效果判断，不保证全植物同倍率，也不能无中生株。直接给动物服用有胀体爆裂的实证风险；催熟草药制药另依实际方药。
+    description: 滴液必须真实消耗，作用按对象判断。
+    access:
+      kind: private
+  - id: canon-heaven-bottle-body-liquid-storage
+    predicate: liquid-storage
+    value:
+      kind: text
+      value: 瓶内原液可留存；取出时记数量、容器和时间。普通容器原液一刻即900秒后消散失效，稀释稍久亦会失效。具有已证储灵能力的黄铜瓶法器可将保存延至一天即86400秒，过时仍消散；普通铜瓶不因材质相同获得该能力，其他未经验证的保存期限不能凭称述取得。
+    description: 取出凝液须及时使用。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: source-green-condensate
+    amount: 0
+ratings: []
+shared_activity_resources: []

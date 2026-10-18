@@ -1,0 +1,20 @@
+id: ad-market-fund
+kind: container
+name: 货场采购公款
+description: 卢砚仅有经授权的采购权，不能将全款视为私囊。
+placement: ad-bloodcrow-market
+facts:
+  - id: ad-market-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-market
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 420
+ratings: []
+shared_activity_resources: []

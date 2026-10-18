@@ -1,0 +1,18 @@
+id: xlt-green-grove
+kind: location
+name: 三印林圃
+description: 三片古木各有承印者看护，采伐与借用木灵气须实际协商。
+placement: xlt-green-sea
+facts:
+  - id: xlt-green-grove-route-xlt-green-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-green-sea
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

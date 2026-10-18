@@ -1,0 +1,19 @@
+id: xlt-inner-thicket
+kind: location
+name: 林下裂隙
+description: 古木根须环绕的偏僻林地，寻常视野中没有敞开的门户。
+placement: xlt-green-sea
+facts:
+  - id: xlt-inner-thicket-route-xlt-green-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-green-sea
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: discoverable
+      condition: 获得当地路图、向熟悉者询问或实地探查成功。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

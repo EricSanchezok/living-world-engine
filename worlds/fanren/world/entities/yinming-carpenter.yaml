@@ -1,0 +1,173 @@
+id: yinming-carpenter
+kind: person
+name: 陈槐
+description: 修木门多年的木工，脚踝前日轻扭。
+placement: yinming-main-infirmary
+facts:
+  - id: yinming-carpenter-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - yinming-carpenter
+  - id: yinming-carpenter-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 木工、绳结与门轴检修。
+    description: 木工、绳结与门轴检修。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-carpenter
+  - id: yinming-carpenter-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根；现有能力来自凡俗经历与训练。
+    description: 无灵根；现有能力来自凡俗经历与训练。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-carpenter
+  - id: yinming-carpenter-teaches-yinming-carpenter-pupil
+    predicate: teaches
+    value:
+      kind: entity
+      entityId: yinming-carpenter-pupil
+    description: teaches
+    access:
+      kind: private
+  - id: yinming-carpenter-injury
+    predicate: injury
+    value:
+      kind: text
+      value: 脚踝轻度扭伤，需休息，仍能口述检查法，不能无事跑去举重门。
+    description: 脚踝轻度扭伤，需休息，仍能口述检查法，不能无事跑去举重门。
+    access:
+      kind: private
+meters:
+  - id: yinming-carpenter-health
+    definition_id: health
+    current: 100
+  - id: yinming-carpenter-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: yinming-carpenter-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: yinming-carpenter-force
+    definition_id: force
+    value: 3
+  - id: yinming-carpenter-craft
+    definition_id: craft
+    value: 5
+  - id: yinming-carpenter-perception
+    definition_id: perception
+    value: 1
+  - id: yinming-carpenter-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yinming-carpenter
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 修木门多年的木工，脚踝前日轻扭。
+      voice: 爱用旧门的毛病讲道理，会笑着承认腿不如从前。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把门轴修法教给年轻助手，自己先养伤。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陈槐
+        description: 修木门多年的木工，脚踝前日轻扭。
+        status: observed
+      - id: location
+        name: 村医石屋
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yinming-carpenter-tools
+        name: 陈槐的个人器具
+        description: 木工、绳结与门轴检修。所需的有限工具，不包含无限兽晶。
+        status: observed
+      - id: known-yinming-carpenter-pupil
+        name: 石苗
+        description: 实际木工师徒。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 木工、绳结与门轴检修。
+        description: 木工、绳结与门轴检修。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        description: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: local-life
+        subjectId: self
+        predicate: local-life
+        value:
+          kind: text
+          value: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        description: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yinming-carpenter
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yinming-main-infirmary
+      - local_entity_id: known-yinming-carpenter-tools
+        canonical_entity_ids:
+          - yinming-carpenter-tools
+      - local_entity_id: known-yinming-carpenter-pupil
+        canonical_entity_ids:
+          - yinming-carpenter-pupil

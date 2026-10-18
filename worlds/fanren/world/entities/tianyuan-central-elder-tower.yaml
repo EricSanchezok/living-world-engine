@@ -1,0 +1,26 @@
+id: tianyuan-central-elder-tower
+kind: location
+name: 天渊城长老塔
+description: 中心青塔比普通军塔更粗大，两族议事通道会于塔中；接待层、当值厅和私室分别查验。
+placement: tianyuan-city
+facts:
+  - id: tianyuan-central-elder-tower-route-to-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: route-to-spirit-tianyuan-street
+    access:
+      kind: private
+  - id: tianyuan-central-elder-tower-route-conditions-spirit-tianyuan-street
+    predicate: route-conditions-spirit-tianyuan-street
+    value:
+      kind: text
+      value: 城内至长老塔公共接待层，进入军务与议事空间须获许可。
+    description: 城内至长老塔公共接待层，进入军务与议事空间须获许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

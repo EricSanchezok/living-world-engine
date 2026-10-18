@@ -1,0 +1,27 @@
+id: demon-phoenix-fireworm-record
+kind: item
+name: 火虫观察簿
+description: 岩槽编号、吐丝记录与护育禁采安排逐页写在石纸上。
+placement: demon-phoenix-firekeeper-tools
+facts:
+  - id: demon-phoenix-fireworm-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-fireworm-record-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 岩槽1至3已各吐一根，三根已入公库；岩槽4至6未成熟，尚无可信成熟日。采丝和转让需记账，虫不可因换岩槽重复登记首丝。
+    description: 岩槽1至3已各吐一根，三根已入公库；岩槽4至6未成熟，尚无可信成熟日。采丝和转让需记账，虫不可因换岩槽重复登记首丝。
+    access:
+      kind: discoverable
+      condition: 实际查阅观察簿或向筱砚询问已报告的记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

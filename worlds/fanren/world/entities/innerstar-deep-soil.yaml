@@ -1,0 +1,18 @@
+id: innerstar-deep-soil
+kind: location
+name: 小寰岛深层土缝
+description: 岛屿地面深处未经开掘的狭窄地层，地表没有现成入口。
+placement: human-xiaohuan-island
+facts:
+  - id: innerstar-deep-soil-entry-condition
+    predicate: entry-condition
+    value:
+      kind: text
+      value: 需要真实探查和深入地层的能力；在地表走动不会自动看见或进入。
+    description: 没有现成入口，须有实际探查、开掘或遁行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

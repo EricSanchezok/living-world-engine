@@ -1,0 +1,144 @@
+id: ad-fang-qiu
+kind: person
+name: 方秋
+description: 方家独立修器人，愿合作但重自己时间。
+placement: ad-huanye-city
+facts:
+  - id: ad-fang-qiu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: private
+  - id: ad-fang-qiu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神魔火与低阶魔甲修补。
+    description: 化神魔火与低阶魔甲修补。
+    access:
+      kind: private
+  - id: ad-fang-qiu-relation-ad-tao-cen
+    predicate: relation-ad-tao-cen
+    value:
+      kind: entity
+      entityId: ad-tao-cen
+    description: 通过景鹭往来交换低阶器修材料。
+    access:
+      kind: private
+  - id: ad-fang-qiu-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: ad-fang-family
+    description: member-of
+    access:
+      kind: public
+meters:
+  - id: ad-fang-qiu-health
+    definition_id: health
+    current: 100
+  - id: ad-fang-qiu-mana
+    definition_id: mana
+    current: 900
+quantities: []
+ratings:
+  - id: ad-fang-qiu-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: ad-fang-qiu-force
+    definition_id: force
+    value: 5
+  - id: ad-fang-qiu-craft
+    definition_id: craft
+    value: 5
+  - id: ad-fang-qiu-perception
+    definition_id: perception
+    value: 5
+  - id: ad-fang-qiu-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: ad-fang-qiu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 方家独立修器人，愿合作但重自己时间。
+      voice: 说事简短，遇有趣的旧器才多问几句。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成两具旧护甲维修，考虑同行提议的材料交换。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 方秋
+        description: 方家独立修器人，愿合作但重自己时间。
+        status: observed
+      - id: location
+        name: 幻夜城
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-fang-qiu-purse
+        name: 方秋私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-tao-cen
+        name: 陶岑
+        description: 通过景鹭往来交换低阶器修材料。
+        status: observed
+      - id: known-ad-fang-family
+        name: 幻夜方家
+        description: 自身所属族群，有公私资产边界。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神魔火与低阶魔甲修补。
+        description: 化神魔火与低阶魔甲修补。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-fang-qiu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-huanye-city
+      - local_entity_id: known-ad-fang-qiu-purse
+        canonical_entity_ids:
+          - ad-fang-qiu-purse
+      - local_entity_id: known-ad-tao-cen
+        canonical_entity_ids:
+          - ad-tao-cen
+      - local_entity_id: known-ad-fang-family
+        canonical_entity_ids:
+          - ad-fang-family

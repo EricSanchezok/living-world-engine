@@ -1,0 +1,35 @@
+id: thunder-jing-workshop
+kind: location
+name: 晶族微构坊
+description: 精细灵纹与工艺研究之处，正在征询一名学徒。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-jing-workshop-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jing-workshop-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 精细灵纹与工艺研究之处，正在征询一名学徒。
+    description: 精细灵纹与工艺研究之处，正在征询一名学徒。
+    access:
+      kind: public
+  - id: thunder-jing-workshop-root-detail-demon-armor
+    predicate: root-detail-demon-armor
+    value:
+      kind: text
+      value: 天外魔甲需适用魔气与材料祭炼修复，具体魔核方案须检验甲伤；增幅与穿戴者匹配有关，甲可受损。魔烟鸟追踪须真实寄念。
+    description: 天外魔甲需适用魔气与材料祭炼修复，具体魔核方案须检验甲伤；增幅与穿戴者匹配有关，甲可受损。魔烟鸟追踪须真实寄念。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

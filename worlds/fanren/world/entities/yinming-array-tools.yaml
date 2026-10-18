@@ -1,0 +1,18 @@
+id: yinming-array-tools
+kind: item
+name: 顾清的个人器具
+description: 石符、有限阵法学识和旧有筑基经历；此地不能普通施法。所需的有限工具，不包含无限兽晶。
+placement: yinming-array
+facts:
+  - id: yinming-array-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-array
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

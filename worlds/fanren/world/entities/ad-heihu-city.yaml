@@ -1,0 +1,27 @@
+id: ad-heihu-city
+kind: location
+name: 黑葫城
+description: 乱云山北面的城池，当前没有后期虫海围城。
+placement: associated-demon-realm
+facts:
+  - id: ad-heihu-city-route-to-ad-luanyun-mountain
+    predicate: route-to-ad-luanyun-mountain
+    value:
+      kind: entity
+      entityId: ad-luanyun-mountain
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-heihu-city-root-detail-blackgourd-defense
+    predicate: root-detail-blackgourd-defense
+    value:
+      kind: text
+      value: 护罩、塔上雷弧和箭矢依能源、操作者及实存弹药，断供会削弱防守。
+    description: 护罩、塔上雷弧和箭矢依能源、操作者及实存弹药，断供会削弱防守。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

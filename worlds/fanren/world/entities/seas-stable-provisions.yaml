@@ -1,0 +1,22 @@
+id: seas-stable-provisions
+kind: container
+name: 驿院饲草和训练物资
+description: 真实有限补给，训练和远行需规划。
+placement: seas-dragon-stable
+facts:
+  - id: seas-stable-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 80
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

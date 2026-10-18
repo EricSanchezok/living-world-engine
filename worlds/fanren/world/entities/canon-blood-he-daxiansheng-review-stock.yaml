@@ -1,0 +1,22 @@
+id: canon-blood-he-daxiansheng-review-stock
+kind: container
+name: 何大先生自用储备
+description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+placement: canon-blood-he-daxiansheng
+facts:
+  - id: canon-blood-he-daxiansheng-review-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-he-daxiansheng
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

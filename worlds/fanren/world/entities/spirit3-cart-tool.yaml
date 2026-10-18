@@ -1,0 +1,26 @@
+id: spirit3-cart-tool
+kind: item
+name: 守备借出的轮轴工具
+description: 冯棠同意借至下一本地日；已交曹砚，归还前不再算守备库内现物。
+placement: spirit3-cart-driver
+facts:
+  - id: spirit3-cart-tool-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-cart-tool-due-world-time
+    predicate: due-world-time
+    value:
+      kind: text
+      value: 345600全局秒；到期只触发催还或协商，不自动瞬移。
+    description: 345600全局秒；到期只触发催还或协商，不自动瞬移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

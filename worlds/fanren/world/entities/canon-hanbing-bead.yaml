@@ -1,0 +1,18 @@
+id: canon-hanbing-bead
+kind: item
+name: 寒冰珠
+description: 能够在炎热环境中护持一定范围的旧珠，仍依施法与条件。
+placement: canon-man-huzi
+facts:
+  - id: canon-hanbing-bead-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-man-huzi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

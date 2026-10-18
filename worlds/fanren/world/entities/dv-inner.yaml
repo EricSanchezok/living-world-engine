@@ -1,0 +1,235 @@
+id: dv-inner
+kind: location
+name: 坠魔谷内谷
+description: 血色禁光围起的大片山地，局部有雪地、沙漠、熔岩与盆地；神识观察须受具体禁制约束。
+placement: human-devil-valley
+facts:
+  - id: dv-inner-route-dv-polar-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-polar-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-polar-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 十余里元光段须持续持有并驱动阴环等真实适用防护，普通护身罩不足；队伍超出护持范围者另判。
+    description: 十余里元光段须持续持有并驱动阴环等真实适用防护，普通护身罩不足；队伍超出护持范围者另判。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-ice-rift
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-ice-rift
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-ice-rift
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿冰缝可通内谷，需寒地防护和现地裂缝勘察，没有免费跳过内谷风险。
+    description: 沿冰缝可通内谷，需寒地防护和现地裂缝勘察，没有免费跳过内谷风险。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-old-canyon
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-old-canyon
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-old-canyon
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需识别并解除当前多层古禁，暴力硬闯会触发反击；没有天晶东门已完成的开路。
+    description: 需识别并解除当前多层古禁，暴力硬闯会触发反击；没有天晶东门已完成的开路。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-scorpion-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-scorpion-peak
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-scorpion-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山间行进需防裂隙与古蝎，靠毒饵引走也要真实饵料与诱引路径。
+    description: 山间行进需防裂隙与古蝎，靠毒饵引走也要真实饵料与诱引路径。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-hidden-rifts
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-hidden-rifts
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-hidden-rifts
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此路必须能探测无形裂缝；一般神识强并不保证发现。
+    description: 此路必须能探测无形裂缝；一般神识强并不保证发现。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-pool-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-pool-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-pool-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 内谷山路到钟乳洞，须安全路径与定位；深潭不能因听过门名就知所在。
+    description: 内谷山路到钟乳洞，须安全路径与定位；深潭不能因听过门名就知所在。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-wet-basin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-wet-basin
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-wet-basin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从山路进入潮湿盆地，临近禁飞地须落地。
+    description: 从山路进入潮湿盆地，临近禁飞地须落地。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-bird-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-bird-peak
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-bird-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 行进须实地勘察裂隙，峰形可供定位，不保证其他旧标记仍在。
+    description: 行进须实地勘察裂隙，峰形可供定位，不保证其他旧标记仍在。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-garden-contact
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-garden-contact
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-garden-contact
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 正常内谷山路勘察到山隙；空间对应尚闭合，抵达不等于进入残园。
+    description: 正常内谷山路勘察到山隙；空间对应尚闭合，抵达不等于进入残园。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-map-side-cache
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-map-side-cache
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-map-side-cache
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须现场辨认露出的门框阵纹、勘察安全路并移开真实落石；青袍古图不直接指向此处。
+    description: 须现场辨认露出的门框阵纹、勘察安全路并移开真实落石；青袍古图不直接指向此处。
+    access:
+      kind: public
+  - id: dv-inner-disordered-qi
+    predicate: disordered-qi
+    value:
+      kind: text
+      value: 多属性天地灵气混杂暴躁，施法与吸纳须考虑干扰；不是完全无灵气。可见游走裂缝与潜藏裂缝分开检测。
+    description: 多属性天地灵气混杂暴躁，施法与吸纳须考虑干扰；不是完全无灵气。可见游走裂缝与潜藏裂缝分开检测。
+    access:
+      kind: private
+  - id: dv-inner-route-dv-old-inner-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-old-inner-array
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-old-inner-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须查古遗录或实地勘察才知道此台；穿行仍受裂缝与古禁限制。
+    description: 须查古遗录或实地勘察才知道此台；穿行仍受裂缝与古禁限制。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-subsurface-lava-basin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-subsurface-lava-basin
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-subsurface-lava-basin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行内谷至盆地，需要实际勘察路线和应对局部古禁。
+    description: 穿行内谷至盆地，需要实际勘察路线和应对局部古禁。
+    access:
+      kind: public
+  - id: dv-inner-route-dv-herb-ridge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-herb-ridge
+    description: route-to
+    access:
+      kind: public
+  - id: dv-inner-condition-dv-herb-ridge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 实察坡地裂缝、辨识草药后采收；内谷裂缝与外谷情形不同，不能据旧印象直接闯入。
+    description: 实察坡地裂缝、辨识草药后采收；内谷裂缝与外谷情形不同，不能据旧印象直接闯入。
+    access:
+      kind: public
+  - id: dv-inner-creature-response
+    predicate: creature-response
+    value:
+      kind: text
+      value: 内谷的异样影响可使部分灵兽躁乱，具体反应并不一致。须观察所携灵兽自身状况，不能把一次失控推广为所有灵兽必然失控。
+    description: 内谷的异样影响可使部分灵兽躁乱，具体反应并不一致。须观察所携灵兽自身状况，不能把一次失控推广为所有灵兽必然失控。
+    access:
+      kind: discoverable
+      condition: 在内谷实际观察灵兽反应，或获得有具体对象和经历依据的可靠告知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,253 @@
+id: tianyuan-elder-ninglu
+kind: person
+name: 宁露
+description: 人族医道长老，重视救治资源分配。
+placement: tianyuan-council-hall
+facts:
+  - id: tianyuan-elder-ninglu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-elder-ninglu
+  - id: tianyuan-elder-ninglu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 高阶诊治、辨丹与解毒，缺药仍不能随意治愈。
+    description: 高阶诊治、辨丹与解毒，缺药仍不能随意治愈。
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-elder-ninglu
+  - id: tianyuan-elder-ninglu-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - tianyuan-elder-ninglu
+  - id: tianyuan-elder-ninglu-office-member
+    predicate: office-member
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: office-member
+    access:
+      kind: public
+meters:
+  - id: tianyuan-elder-ninglu-health
+    definition_id: health
+    current: 100
+  - id: tianyuan-elder-ninglu-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 500
+ratings:
+  - id: tianyuan-elder-ninglu-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: tianyuan-elder-ninglu-force
+    definition_id: force
+    value: 7
+  - id: tianyuan-elder-ninglu-craft
+    definition_id: craft
+    value: 5
+  - id: tianyuan-elder-ninglu-perception
+    definition_id: perception
+    value: 7
+  - id: tianyuan-elder-ninglu-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: tianyuan-elder-ninglu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 人族医道长老，重视救治资源分配。
+      voice: 声音轻，面对伤者先问哪里痛；在会议上会直接指出某项节省由谁来承受。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 保住丹房应急储备，让受伤的守卫和商旅都能得到有凭据的诊治。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 宁露
+        description: 人族医道长老，重视救治资源分配。
+        status: observed
+      - id: location
+        name: 天渊城议事堂
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-spirit-city-council
+        name: 天渊城长老会
+        description: 自己当值的长老机构。
+        status: observed
+      - id: known-spirit-guard-captain
+        name: 岳照川
+        description: 负责日常轮值报告的青冥卫。
+        status: observed
+      - id: known-tianyuan-elder-ninglu-personal-tools
+        name: 宁露的随身行囊
+        description: 个人修行与出行材料，不是议事公库。
+        status: observed
+      - id: city-known-canon-tianyuan-gu-elder
+        name: 谷长老
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-canon-jinyue-monk
+        name: 金越禅师
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-canon-leiluo-zhenren
+        name: 雷罗真人
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-wenshu
+        name: 闻枢
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-duanchao
+        name: 段潮
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-baiyan
+        name: 白雁衡
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-yesui
+        name: 夜穗
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-shifeng
+        name: 石封
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+      - id: city-known-tianyuan-elder-linsu
+        name: 林肃
+        description: 同在天渊城长老会议事，多次当面往来；只知道公开职务和既往合作，不了解其未透露的私人打算。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 高阶诊治、辨丹与解毒，缺药仍不能随意治愈。
+        description: 高阶诊治、辨丹与解毒，缺药仍不能随意治愈。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-agenda
+        subjectId: self
+        predicate: current-agenda
+        value:
+          kind: text
+          value: 备勤院提出八十低阶灵石修桥预算，需要确有损伤的记录及材料明细。
+        description: 备勤院提出八十低阶灵石修桥预算，需要确有损伤的记录及材料明细。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 记得入场时此地已入夜。
+        description: 开篇时的夜色记忆。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - tianyuan-elder-ninglu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tianyuan-council-hall
+      - local_entity_id: known-spirit-city-council
+        canonical_entity_ids:
+          - spirit-city-council
+      - local_entity_id: known-spirit-guard-captain
+        canonical_entity_ids:
+          - spirit-guard-captain
+      - local_entity_id: known-tianyuan-elder-ninglu-personal-tools
+        canonical_entity_ids:
+          - tianyuan-elder-ninglu-personal-tools
+      - local_entity_id: city-known-canon-tianyuan-gu-elder
+        canonical_entity_ids:
+          - canon-tianyuan-gu-elder
+      - local_entity_id: city-known-canon-jinyue-monk
+        canonical_entity_ids:
+          - canon-jinyue-monk
+      - local_entity_id: city-known-canon-leiluo-zhenren
+        canonical_entity_ids:
+          - canon-leiluo-zhenren
+      - local_entity_id: city-known-tianyuan-elder-wenshu
+        canonical_entity_ids:
+          - tianyuan-elder-wenshu
+      - local_entity_id: city-known-tianyuan-elder-duanchao
+        canonical_entity_ids:
+          - tianyuan-elder-duanchao
+      - local_entity_id: city-known-tianyuan-elder-baiyan
+        canonical_entity_ids:
+          - tianyuan-elder-baiyan
+      - local_entity_id: city-known-tianyuan-elder-yesui
+        canonical_entity_ids:
+          - tianyuan-elder-yesui
+      - local_entity_id: city-known-tianyuan-elder-shifeng
+        canonical_entity_ids:
+          - tianyuan-elder-shifeng
+      - local_entity_id: city-known-tianyuan-elder-linsu
+        canonical_entity_ids:
+          - tianyuan-elder-linsu

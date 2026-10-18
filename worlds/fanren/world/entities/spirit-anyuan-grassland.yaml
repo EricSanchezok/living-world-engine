@@ -1,0 +1,42 @@
+id: spirit-anyuan-grassland
+kind: location
+name: 安远城外草原
+description: 远离城墙后缺少庇护，草坡间有兽迹，路线随水源和兽群迁移而调整。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-anyuan-grassland-route-spirit-anyuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-gate
+    description: 远离城墙后缺少庇护，草坡间有兽迹，路线随水源和兽群迁移而调整。
+    access:
+      kind: public
+  - id: spirit-anyuan-grassland-route-spirit-qingluo-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-qingluo-desert
+    description: 青灰沙砾延伸向远处，昼夜温差大，灵气较稀，偶发空间裂缝不能作为可靠传送手段。
+    access:
+      kind: public
+  - id: spirit-anyuan-grassland-route-to-spirit3-heiling-range
+    predicate: route-to-spirit3-heiling-range
+    value:
+      kind: entity
+      entityId: spirit3-heiling-range
+    description: route-to-spirit3-heiling-range
+    access:
+      kind: private
+  - id: spirit-anyuan-grassland-route-conditions-spirit3-heiling-range
+    predicate: route-conditions-spirit3-heiling-range
+    value:
+      kind: text
+      value: 沿野外山口与草原长途行进，需补给、导航且可能遭兽，不瞬移。
+    description: 沿野外山口与草原长途行进，需补给、导航且可能遭兽，不瞬移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: canon-yan-wen-pouch
+kind: item
+name: 燕文的日用包
+description: 随身普通衣物、餐具与个人口粮。
+placement: canon-yan-wen
+facts:
+  - id: canon-yan-wen-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yan-wen
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+ratings: []
+shared_activity_resources: []

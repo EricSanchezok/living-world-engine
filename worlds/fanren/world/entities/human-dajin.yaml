@@ -1,0 +1,34 @@
+id: human-dajin
+kind: location
+name: 大晋
+description: 一百零八州的广阔人间疆域，凡俗朝廷与修仙势力交错。
+placement: human-realm
+facts:
+  - id: human-dajin-route-dajin-fangjian-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-fangjian-mountain
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+  - id: human-dajin-route-south-jiuyou-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-jiuyou-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-dajin-condition-south-jiuyou-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧商路能达静院外，宗库另有权限。
+    description: 旧商路能达静院外，宗库另有权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

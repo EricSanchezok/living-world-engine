@@ -1,0 +1,27 @@
+id: spirit-training-record
+kind: item
+name: 磐石院训练册
+description: 记录教法、受训者负重与休息的册子，未填的页不能当作已经练过。
+placement: spirit-body-school
+facts:
+  - id: spirit-training-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-body-teacher
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-training-record-curriculum
+    predicate: curriculum
+    value:
+      kind: text
+      value: 先由霍岩与施岚检查旧伤，再练一个7200秒的基础课，包括缓慢吐纳、低负重发力和休息；消耗一包护筋药，学费6枚低阶灵石，4枚付霍岩、2枚付施岚。首次课目标是掌握安全动作，不承诺提升境界或炼体等级。无钱可协商实际劳动换取费用，须明确任务、验收和记账。
+    description: 先由霍岩与施岚检查旧伤，再练一个7200秒的基础课，包括缓慢吐纳、低负重发力和休息；消耗一包护筋药，学费6枚低阶灵石，4枚付霍岩、2枚付施岚。首次课目标是掌握安全动作，不承诺提升境界或炼体等级。无钱可协商实际劳动换取费用，须明确任务、验收和记账。
+    access:
+      kind: discoverable
+      condition: 实际阅读训练册或接受教习完整说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

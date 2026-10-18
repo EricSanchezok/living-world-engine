@@ -1,0 +1,73 @@
+id: thunder-mojin-palace
+kind: location
+name: 魔金深山隐宫
+description: 深山宫殿藏在岩谷阴影中，外厅供三名旧部议事，后部密室各有看守与禁制。
+placement: thunder-mojin-mountains
+facts:
+  - id: thunder-mojin-palace-route-thunder-mojin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-mountains
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-palace-condition-thunder-mojin-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐宫旧部知道私下山路；外人须先发现入口，沿路有真实禁制与警戒。
+    description: 隐宫旧部知道私下山路；外人须先发现入口，沿路有真实禁制与警戒。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-palace-route-thunder-mojin-refuge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-refuge
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-palace-condition-thunder-mojin-refuge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 主人掌控的空间入口，未经允许不能凭知道位置进入。
+    description: 主人掌控的空间入口，未经允许不能凭知道位置进入。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-palace-location-secrecy
+    predicate: location-secrecy
+    value:
+      kind: text
+      value: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    description: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    access:
+      kind: discoverable
+      condition: 实际取得位置与入口线索。
+  - id: thunder-mojin-palace-root-detail-zhenlin-source
+    predicate: root-detail-zhenlin-source
+    value:
+      kind: text
+      value: 真麟本源涉残留混沌气，承受炼化须相应法体、神念与时间；炼成自家真元后不能原样再送给另一人，强取通常只得元气。
+    description: 真麟本源涉残留混沌气，承受炼化须相应法体、神念与时间；炼成自家真元后不能原样再送给另一人，强取通常只得元气。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: thunder-mojin-palace-root-detail-possession-and-zhenlin
+    predicate: root-detail-possession-and-zhenlin
+    value:
+      kind: text
+      value: 寄附者、分魂、原宿主和残念须分别识别；控制变化不复制财产，不凭称号判断原魂死亡。外魔的自述可能有欺骗或认知局限。
+    description: 寄附者、分魂、原宿主和残念须分别识别；控制变化不复制财产，不凭称号判断原魂死亡。外魔的自述可能有欺骗或认知局限。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

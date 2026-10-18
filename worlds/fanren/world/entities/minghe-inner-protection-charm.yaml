@@ -1,0 +1,28 @@
+id: minghe-inner-protection-charm
+kind: item
+name: 槐宁短驻护身符
+description: 用于当前短时抵御阴气的符器，不能消除蜉蝣族长期滞留圣地的根本风险。
+placement: minghe-inner-keeper
+facts:
+  - id: minghe-inner-protection-charm-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-inner-keeper
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-inner-protection-charm-duration-seconds
+    predicate: duration-seconds
+    value:
+      kind: number
+      value: 1036800
+    description: duration-seconds
+    access:
+      kind: agents
+      agentIds:
+        - minghe-inner-keeper
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

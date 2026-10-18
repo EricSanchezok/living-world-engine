@@ -1,0 +1,19 @@
+id: minghe-hidden-abyss-rift
+kind: location
+name: 地渊底层隐裂
+description: 深层岩缝中存在难以捕捉的空间波动，入口尚未被本地居民辨认。
+placement: feiling-abyss-7
+facts:
+  - id: minghe-hidden-abyss-rift-route-to
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-river
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 实际定位空间波动、检验界面薄弱处并具有合适破界和阴水防护能力。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

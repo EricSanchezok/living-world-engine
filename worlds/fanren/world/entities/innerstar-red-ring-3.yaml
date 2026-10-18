@@ -1,0 +1,26 @@
+id: innerstar-red-ring-3
+kind: item
+name: 红色永久身份环3
+description: 未登记的身份环，须实际交付、记名并按条件激活。
+placement: innerstar-ring-stock
+facts:
+  - id: innerstar-red-ring-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-red-ring-3-registration-rule
+    predicate: registration-rule
+    value:
+      kind: text
+      value: 付800低阶灵石并由登记员记录。滴血认主后供该人长期进出，转卖不自动转移身份。
+    description: 付800低阶灵石并由登记员记录。滴血认主后供该人长期进出，转卖不自动转移身份。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

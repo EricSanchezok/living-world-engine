@@ -1,0 +1,26 @@
+id: yue-baiji-hall
+kind: location
+name: 百机堂
+description: 处理谷内杂务分配的堂所。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-baiji-hall-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+  - id: yue-baiji-work-authority
+    predicate: assignment-authority
+    value:
+      kind: text
+      value: 叶管事分配杂务；当期领用公共材料须登记，报酬随实际工作核定，不因领到任务就直接发足。
+    description: 叶管事分配杂务；当期领用公共材料须登记，报酬随实际工作核定，不因领到任务就直接发足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

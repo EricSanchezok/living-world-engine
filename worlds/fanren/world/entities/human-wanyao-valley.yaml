@@ -1,0 +1,122 @@
+id: human-wanyao-valley
+kind: location
+name: 万妖谷
+description: 古妖势力据有的山谷，外围与核心修行地并非同一权限。
+placement: human-dajin
+facts:
+  - id: human-wanyao-valley-route-wanyao-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-gate
+    description: 外围山路，陌生者需通报来意。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外围山路，陌生者需通报来意。
+    description: 外围山路，陌生者需通报来意。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-banner-ground
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-banner-ground
+    description: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-banner-ground
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    description: 祭地由谷方控制，万妖幡不是公共可拾取物。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-che-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-che-retreat
+    description: 谷主封修区，需有实际许可和足够手段。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-che-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷主封修区，需有实际许可和足够手段。
+    description: 谷主封修区，需有实际许可和足够手段。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-xiong-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-xiong-cave
+    description: 副谷主私人洞府，来者须通报。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-xiong-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 副谷主私人洞府，来者须通报。
+    description: 副谷主私人洞府，来者须通报。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-public-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-public-store
+    description: 库务核验后领物；搬运和账目可被追查。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-public-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 库务核验后领物；搬运和账目可被追查。
+    description: 库务核验后领物；搬运和账目可被追查。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-qing-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-qing-cave
+    description: 副谷主私人洞府，须通报来意和获得许可。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-qing-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 副谷主私人洞府，须通报来意和获得许可。
+    description: 副谷主私人洞府，须通报来意和获得许可。
+    access:
+      kind: public
+  - id: human-wanyao-valley-route-wanyao-wu-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-wu-cave
+    description: 谷内支路，进入私人洞室需当事人同意。
+    access:
+      kind: public
+  - id: human-wanyao-valley-travel-wanyao-wu-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷内支路，进入私人洞室需当事人同意。
+    description: 谷内支路，进入私人洞室需当事人同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,82 @@
+id: root-black-domain-platform
+kind: location
+name: 黑域交易台
+description: 交换双方与主持者站立的台面，禁制用于隔开围观者。
+placement: root-black-domain-pavilions
+facts:
+  - id: root-black-domain-platform-route-to-root-black-domain-pavilions
+    predicate: route-to-root-black-domain-pavilions
+    value:
+      kind: entity
+      entityId: root-black-domain-pavilions
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-platform-travel-condition-root-black-domain-pavilions
+    predicate: travel-condition-root-black-domain-pavilions
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-platform-root-detail-black-domain
+    predicate: root-detail-black-domain
+    value:
+      kind: text
+      value: 按当前规矩，交易台只容双方与主持者，限制窥探和私斗，犯禁可被追究；匿名不免实际核验，席位不等实到人口。
+    description: 按当前规矩，交易台只容双方与主持者，限制窥探和私斗，犯禁可被追究；匿名不免实际核验，席位不等实到人口。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-black-domain-platform-root-detail-wansen-wheel
+    predicate: root-detail-wansen-wheel
+    value:
+      kind: text
+      value: 万森轮盘叠加幻境须真实器物和大量法力，困住强者仍要看主持与破阵手段。
+    description: 万森轮盘叠加幻境须真实器物和大量法力，困住强者仍要看主持与破阵手段。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-black-domain-platform-root-detail-small-sumeru-bead
+    predicate: root-detail-small-sumeru-bead
+    value:
+      kind: text
+      value: 小须弥珠为半须弥炼制失败产物，仍有特定容量及入体隐蔽用法；移入的货物不会在外部复制一份。
+    description: 小须弥珠为半须弥炼制失败产物，仍有特定容量及入体隐蔽用法；移入的货物不会在外部复制一份。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-black-domain-platform-root-detail-qitian-gong
+    predicate: root-detail-qitian-gong
+    value:
+      kind: text
+      value: 齐天锣正槌与仿槌不同，听锣效果随次数、境界和人数变化，反噬与器物损伤须计；交易介绍不保证每次升阶。
+    description: 齐天锣正槌与仿槌不同，听锣效果随次数、境界和人数变化，反噬与器物损伤须计；交易介绍不保证每次升阶。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-black-domain-platform-root-detail-black-domain-relics
+    predicate: root-detail-black-domain-relics
+    value:
+      kind: text
+      value: 移海扇等强宝仍要持有、法力和实际目标条件；拍品须真实送到和验明，排名不代替所有权与交割。
+    description: 移海扇等强宝仍要持有、法力和实际目标条件；拍品须真实送到和验明，排名不代替所有权与交割。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-black-domain-platform-root-detail-sin-cloud
+    predicate: root-detail-sin-cloud
+    value:
+      kind: text
+      value: 孽云涉及精魂、禁令与天象反噬，卖者声称的魂数不是已验证配方，魂量不自动成为可重生的人口。
+    description: 孽云涉及精魂、禁令与天象反噬，卖者声称的魂数不是已验证配方，魂量不自动成为可重生的人口。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

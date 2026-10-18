@@ -1,0 +1,22 @@
+id: void-cliff-repair-budget
+kind: container
+name: 旧甲修护预算
+description: 给工匠的当期预算与材料，尚未成交。
+placement: void-man-cave
+facts:
+  - id: void-cliff-repair-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-man-huzi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 6
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

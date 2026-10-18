@@ -1,0 +1,27 @@
+id: tiannan-tiansha-cracked-tile-b
+kind: item
+name: 护院阵裂纹片乙
+description: 仍装在阵座里的旧石片，表面有可见细裂。
+placement: tiannan-tiansha-courtyard-ward
+facts:
+  - id: tiannan-tiansha-cracked-tile-b-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiansha-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-tiansha-cracked-tile-b-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 可导灵但断续，尚未取下。
+    description: 更换需要相容材料和实际操作。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,199 @@
+id: seas-pass-clerk
+kind: person
+name: 柯衡
+description: 商盟炼虚登记员，记人名和条款很准，对临时改签很头疼。
+placement: seas-reception
+facts:
+  - id: seas-pass-clerk-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - seas-pass-clerk
+  - id: seas-pass-clerk-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修行、商盟凭证核对和阵务登记。
+    description: 炼虚修行、商盟凭证核对和阵务登记。
+    access:
+      kind: agents
+      agentIds:
+        - seas-pass-clerk
+  - id: seas-pass-clerk-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-pass-clerk
+meters:
+  - id: seas-pass-clerk-health
+    definition_id: health
+    current: 100
+  - id: seas-pass-clerk-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-pass-clerk-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: seas-pass-clerk-force
+    definition_id: force
+    value: 6
+  - id: seas-pass-clerk-craft
+    definition_id: craft
+    value: 6
+  - id: seas-pass-clerk-perception
+    definition_id: perception
+    value: 6
+  - id: seas-pass-clerk-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: seas-pass-clerk
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 商盟炼虚登记员，记人名和条款很准，对临时改签很头疼。
+      voice: 说话清楚但不机械，常先复述对方最急的一件事，再翻文书核对。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 向两位目的地不同的申请人讲清百年用阵间隔，商议取舍、替代路线或延期，不先收无法兑现的票钱。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 柯衡
+        description: 商盟炼虚登记员，记人名和条款很准，对临时改签很头疼。
+        status: observed
+      - id: location
+        name: 商盟接引茶棚
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-pass-clerk-private-stock
+        name: 柯衡的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-seas-seat-ledger
+        name: 本轮跨洲运力账
+        description: 三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。
+        status: observed
+      - id: known-seas-cargo-rules
+        name: 活物行李验收规则
+        description: 当前已可查阅的受理条件和费用，未替自己签任何出行约。
+        status: observed
+      - id: known-seas-herb-scholar
+        name: 岑枝
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+      - id: known-seas-journey-applicant
+        name: 卢缄
+        description: 已在接引处见面讨论不同目的地，尚可自由决定是否合作。
+        status: observed
+      - id: reviewed-seas-patrol-rider
+        name: 严照
+        description: 商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。
+        status: observed
+      - id: reviewed-seas-patrol-ledger
+        name: 巡哨查验簿
+        description: 写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: reviewed-current-duty
+        kind: observation
+        description: 实际登记和巡哨交接。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修行、商盟凭证核对和阵务登记。
+        description: 炼虚修行、商盟凭证核对和阵务登记。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-pass-clerk
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-reception
+      - local_entity_id: known-seas-pass-clerk-private-stock
+        canonical_entity_ids:
+          - seas-pass-clerk-private-stock
+      - local_entity_id: known-seas-seat-ledger
+        canonical_entity_ids:
+          - seas-seat-ledger
+      - local_entity_id: known-seas-cargo-rules
+        canonical_entity_ids:
+          - seas-cargo-rules
+      - local_entity_id: known-seas-herb-scholar
+        canonical_entity_ids:
+          - seas-herb-scholar
+      - local_entity_id: known-seas-journey-applicant
+        canonical_entity_ids:
+          - seas-journey-applicant
+      - local_entity_id: reviewed-seas-patrol-rider
+        canonical_entity_ids:
+          - seas-patrol-rider
+      - local_entity_id: reviewed-seas-patrol-ledger
+        canonical_entity_ids:
+          - seas-patrol-ledger

@@ -1,0 +1,34 @@
+id: caixia-mountain
+kind: location
+name: 彩霞山
+description: 又名落凤山，山脉十余里、山峰十余座；七玄门在此长期驻守，彩凤化山为当地传说。
+placement: jingzhou
+facts:
+  - id: caixia-mountain-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 又名落凤山，山脉十余里、山峰十余座；七玄门在此长期驻守，彩凤化山为当地传说。
+    access:
+      kind: public
+  - id: caixia-mountain-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 进山入口有人值守，访客可以陈明来意，准入属于门派决定。
+    access:
+      kind: public
+  - id: caixia-mountain-route-local-thorn-gully
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-thorn-gully
+    description: 山顶观察后须自备绳索、攀爬工具和安全落点。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,74 @@
+id: fengyuan-mumian-city
+kind: location
+name: 木棉城
+description: 十几根巨木托起层层木屋和连桥，树干内的升降通廊把居民送到不同高度。下层交易廊可访，上层族务楼按事由查验。
+placement: fengyuan-wood-domain
+facts:
+  - id: fengyuan-mumian-city-route-to-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-conditions-fengyuan-border-exchange
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿过木族既有边防和林路；携货者须说明来路与交易对象，飞行仍需真实法力和路程。
+    description: 穿过木族既有边防和林路；携货者须说明来路与交易对象，飞行仍需真实法力和路程。
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-to-fengyuan-sacred-tree-enclosure
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-sacred-tree-enclosure
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-conditions-fengyuan-sacred-tree-enclosure
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 木棉城到旧禁地须跨林谷飞行；入内需要现守护者许可，接待廊之外有实际防护。
+    description: 木棉城到旧禁地须跨林谷飞行；入内需要现守护者许可，接待廊之外有实际防护。
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-to-fengyuan-old-array-study
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-old-array-study
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-conditions-fengyuan-old-array-study
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内枝桥步行，研究室需主持者许可。
+    description: 城内枝桥步行，研究室需主持者许可。
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-to-fengyuan-yechu-hideout
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-yechu-hideout
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mumian-city-route-conditions-fengyuan-yechu-hideout
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 下层公共廊可到门外；里间由现用者保管。
+    description: 下层公共廊可到门外；里间由现用者保管。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

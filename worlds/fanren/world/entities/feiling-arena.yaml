@@ -1,0 +1,26 @@
+id: feiling-arena
+kind: location
+name: 玉皇顶较技场
+description: 有防护光罩的切磋场，场外另受禁止随意动手的规矩约束。
+placement: feiling-yuhuang-peak
+facts:
+  - id: feiling-arena-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-arena-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有防护光罩的切磋场，场外另受禁止随意动手的规矩约束。
+    description: 有防护光罩的切磋场，场外另受禁止随意动手的规矩约束。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

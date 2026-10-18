@@ -1,0 +1,20 @@
+id: yue-east-market-broken-feet
+kind: item
+name: 贺铸待修阵脚
+description: 两块有裂口的示警阵脚，店中自有旧物。
+placement: yue-east-market-smith
+facts:
+  - id: yue-east-market-broken-feet-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-east-market-house
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

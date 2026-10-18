@@ -1,0 +1,26 @@
+id: guanghan-grey-peak
+kind: location
+name: 灰色矿峰
+description: 万丈余高的灰色山峰，大半山体寸草不生，岩层藏有特殊矿石。
+placement: guanghan-ore-island
+facts:
+  - id: guanghan-grey-peak-route-guanghan-ore-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-ore-island
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-grey-peak-condition-guanghan-ore-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

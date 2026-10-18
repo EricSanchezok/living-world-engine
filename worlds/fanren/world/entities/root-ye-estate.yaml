@@ -1,0 +1,28 @@
+id: root-ye-estate
+kind: location
+name: 灵界叶家居地
+description: 族中聚居、修行和管理产业的居地；家门内有公库和各人的私居。
+placement: spirit-human-demon-territory
+facts:
+  - id: root-ye-estate-route-to-spirit-human-demon-territory
+    predicate: route-to-spirit-human-demon-territory
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-ye-estate-travel-condition-spirit-human-demon-territory
+    predicate: travel-condition-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: tianyuan-monitor-stock
+kind: container
+name: 乾坤盘本期用石
+description: 八枚中阶石逐次消耗；没有剩余时须补给，不能用观测结果兑换石。
+placement: tianyuan-yiling-hall
+facts:
+  - id: tianyuan-monitor-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

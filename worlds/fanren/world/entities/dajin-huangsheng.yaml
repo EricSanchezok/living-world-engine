@@ -1,0 +1,18 @@
+id: dajin-huangsheng
+kind: location
+name: 皇圣观
+description: 三皇观之一，由男修主持；与另两观的从属关系不令财产自动共有。
+placement: human-dajin
+facts:
+  - id: dajin-huangsheng-branch-of
+    predicate: branch-of
+    value:
+      kind: entity
+      entityId: dajin-sanhuang
+    description: 三皇观分支。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

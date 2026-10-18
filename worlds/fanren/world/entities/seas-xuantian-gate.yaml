@@ -1,0 +1,58 @@
+id: seas-xuantian-gate
+kind: location
+name: 商盟玄天门
+description: 通地下接引台的巨大光门，出入须身份核验；此门不是玄天之宝。
+placement: seas-heijiao-peaks
+facts:
+  - id: seas-xuantian-gate-route-seas-heijiao-peaks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-heijiao-peaks
+    description: route-to
+    access:
+      kind: public
+  - id: seas-xuantian-gate-condition-seas-heijiao-peaks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁区前止飞舟，验资格后由接引进入光门。
+    description: 禁区前止飞舟，验资格后由接引进入光门。
+    access:
+      kind: public
+  - id: seas-xuantian-gate-route-seas-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-reception
+    description: route-to
+    access:
+      kind: public
+  - id: seas-xuantian-gate-condition-seas-reception
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 光门与地下接引台构成短程通道，准许、阵完整与当值接引缺一不可。
+    description: 光门与地下接引台构成短程通道，准许、阵完整与当值接引缺一不可。
+    access:
+      kind: public
+  - id: seas-xuantian-gate-reviewed-route-seas-patrol-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-patrol-post
+    description: reviewed-route-seas-patrol-post
+    access:
+      kind: public
+  - id: seas-xuantian-gate-reviewed-condition-seas-patrol-post
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    description: 山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

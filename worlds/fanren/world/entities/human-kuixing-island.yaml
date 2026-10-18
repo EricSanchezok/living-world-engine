@@ -1,0 +1,106 @@
+id: human-kuixing-island
+kind: location
+name: 魁星岛
+description: 乱星海西南大岛，有聚落、港口和往返海船。
+placement: human-inner-star-sea
+facts:
+  - id: human-kuixing-island-route-innerstar-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-harbor
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-island-condition-innerstar-harbor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    description: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    access:
+      kind: public
+  - id: human-kuixing-island-route-human-dongshi-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-dongshi-city
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-island-condition-human-dongshi-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 魁星岛一处商贸城市，有修仙者往来的市集。
+    description: 魁星岛一处商贸城市，有修仙者往来的市集。
+    access:
+      kind: public
+  - id: human-kuixing-island-route-human-kuixing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-city
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-island-condition-human-kuixing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛上大城，城外禁空禁制对不同修为影响不同。
+    description: 岛上大城，城外禁空禁制对不同修为影响不同。
+    access:
+      kind: public
+  - id: human-kuixing-island-route-human-xiaohuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-xiaohuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-island-condition-human-xiaohuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 偏远小岛有小灵脉和渔村，防护阵需持续灵石维持。
+    description: 偏远小岛有小灵脉和渔村，防护阵需持续灵石维持。
+    access:
+      kind: public
+  - id: human-kuixing-island-route-innerstar-kuixing-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-harbor
+    description: 通往魁星港
+    access:
+      kind: public
+  - id: human-kuixing-island-condition-innerstar-kuixing-harbor
+    predicate: condition-innerstar-kuixing-harbor
+    value:
+      kind: text
+      value: 从港口经岛上道路进入，检查和通行须按实际办理。
+    description: 从港口经岛上道路进入，检查和通行须按实际办理。
+    access:
+      kind: public
+  - id: human-kuixing-island-residency-terms
+    predicate: residency-terms
+    value:
+      kind: text
+      value: 外来修士可临居；有当地大户作保并登记后可永久居住、任职或参加本岛灵地比试。任职须履职，灵石供给与不任职者缴费分别结算。
+    description: 外来修士可临居；有当地大户作保并登记后可永久居住、任职或参加本岛灵地比试。任职须履职，灵石供给与不任职者缴费分别结算。
+    access:
+      kind: public
+  - id: human-kuixing-island-perimeter-array
+    predicate: perimeter-array
+    value:
+      kind: text
+      value: 本岛被大型禁制笼罩，进出须实际核查通路与当时管制；不能据此断言任意境界都绝对无法穿过。
+    description: 本岛被大型禁制笼罩，进出须实际核查通路与当时管制；不能据此断言任意境界都绝对无法穿过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

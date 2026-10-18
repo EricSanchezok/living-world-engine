@@ -1,0 +1,24 @@
+id: canon-tian-kui-purse
+kind: container
+name: 天奎狼王的储物袋
+description: 个人旅费与修炼材料，领地公产另置。
+placement: canon-tian-kui
+facts:
+  - id: canon-tian-kui-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tian-kui
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 200
+  - definition_id: high-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 15
+ratings: []
+shared_activity_resources: []

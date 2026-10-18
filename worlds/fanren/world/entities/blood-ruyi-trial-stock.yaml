@@ -1,0 +1,22 @@
+id: blood-ruyi-trial-stock
+kind: container
+name: 如意试演预算
+description: 从其个人总储备另列的试演用石；当前资金原始总额按两处合计，不存在重复预扣。
+placement: canon-blood-ruyi
+facts:
+  - id: blood-ruyi-trial-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

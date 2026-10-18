@@ -1,0 +1,32 @@
+id: guanghan-deer-lions
+kind: creature-group
+name: 鹿首狮兽群
+description: 麋鹿般头颅与狮身的猎群，沿草原边缘觅食。
+placement: guanghan-mainland-steppe
+facts:
+  - id: guanghan-deer-lions-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 12
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-deer-lions-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 麋鹿般头颅与狮身的猎群，沿草原边缘觅食。
+    description: 麋鹿般头颅与狮身的猎群，沿草原边缘觅食。
+    access:
+      kind: private
+meters:
+  - id: guanghan-deer-lions-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-deer-lions-force
+    definition_id: force
+    value: 5
+shared_activity_resources: []

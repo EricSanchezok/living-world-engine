@@ -1,0 +1,50 @@
+id: tianyuan-vacant-cave-a
+kind: location
+name: 翠泷山北坡甲洞
+description: 带小药圃的空置洞府，基础防护尚可，水渠需清理。
+placement: spirit-cuilong-mountain
+facts:
+  - id: tianyuan-vacant-cave-a-route-spirit-cuilong-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-cuilong-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-a-condition-spirit-cuilong-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 带小药圃的空置洞府，基础防护尚可，水渠需清理。
+    description: 带小药圃的空置洞府，基础防护尚可，水渠需清理。
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-a-tenure-owner
+    predicate: tenure-owner
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: tenure-owner
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-a-lease-conditions
+    predicate: lease-conditions
+    value:
+      kind: text
+      value: 可申请三十个人界日居用，费用40低阶灵石；药圃现无成熟灵草，住用权不包含整座山脉。
+    description: 可申请三十个人界日居用，费用40低阶灵石；药圃现无成熟灵草，住用权不包含整座山脉。
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-a-channel-repair
+    predicate: channel-repair
+    value:
+      kind: text
+      value: 清除现有泥沙需有工具、体力和三千六百秒，恢复实际水流；没有自动刷新灵草的效果。
+    description: 清除现有泥沙需有工具、体力和三千六百秒，恢复实际水流；没有自动刷新灵草的效果。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

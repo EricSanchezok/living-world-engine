@@ -1,0 +1,42 @@
+id: south-zhonglou
+kind: location
+name: 中娄府
+description: 与普云府相邻的府地。
+placement: human-south-kunwu
+facts:
+  - id: south-zhonglou-route-south-puyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-puyun
+    description: route-to
+    access:
+      kind: public
+  - id: south-zhonglou-condition-south-puyun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两府相邻，仍需实际行路。
+    description: 两府相邻，仍需实际行路。
+    access:
+      kind: public
+  - id: south-zhonglou-route-south-jintu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-jintu
+    description: route-to
+    access:
+      kind: public
+  - id: south-zhonglou-condition-south-jintu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿山路登亭。
+    description: 沿山路登亭。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

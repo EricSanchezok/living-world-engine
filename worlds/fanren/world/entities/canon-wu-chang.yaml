@@ -1,0 +1,191 @@
+id: canon-wu-chang
+kind: person
+name: 无常
+description: 苦灵岛旧任看守之一，愿用有限交易减少无谓冲突。
+placement: ad-kuling-island
+facts:
+  - id: canon-wu-chang-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-wu-chang
+  - id: canon-wu-chang-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘魔法、防护与岛务；不知池底瓶灵存在。
+    description: 大乘魔法、防护与岛务；不知池底瓶灵存在。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wu-chang
+  - id: canon-wu-chang-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wu-chang
+  - id: canon-wu-chang-unknown-bottle-spirit
+    predicate: unknown-bottle-spirit
+    value:
+      kind: text
+      value: 不知道洗灵池中瓶灵的存在与精确身份。
+    description: 不知道洗灵池中瓶灵的存在与精确身份。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wu-chang
+meters:
+  - id: canon-wu-chang-health
+    definition_id: health
+    current: 100
+  - id: canon-wu-chang-mana
+    definition_id: mana
+    current: 1760
+quantities: []
+ratings:
+  - id: canon-wu-chang-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-wu-chang-force
+    definition_id: force
+    value: 8
+  - id: canon-wu-chang-craft
+    definition_id: craft
+    value: 7
+  - id: canon-wu-chang-perception
+    definition_id: perception
+    value: 8
+  - id: canon-wu-chang-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-wu-chang
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 苦灵岛旧任看守之一，愿用有限交易减少无谓冲突。
+      voice: 喜欢反问要付什么，口吻轻松却记得每句许诺。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 评估外岛观测交换能否补充守岛材料，保留池入口禁限。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 无常
+        description: 苦灵岛旧任看守之一，愿用有限交易减少无谓冲突。
+        status: observed
+      - id: location
+        name: 苦灵岛
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-wu-chang-private-stock
+        name: 无常的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-canon-mie-qing
+        name: 灭情
+        description: 共同值守苦灵岛的旧同僚，各有判断。
+        status: observed
+      - id: known-canon-yuan-yan
+        name: 元魇
+        description: 守岛职务与实际通报，允许提出不同处理方案。
+        status: observed
+      - id: known-ad-route-scholar
+        name: 折纹
+        description: 经真实信函确认外岛观测请求，未许诺进入谷底。
+        status: observed
+      - id: known-ad-route-letter
+        name: 无常外岛观测回函
+        description: 已经签出的有边界回函。
+        status: observed
+      - id: known-canon-xie-daoren
+        name: 黄金蟹（蟹道人）
+        description: 长久存在的黄金伪仙儡，只能以符合条件的供奉商议，非直属属下。
+        status: observed
+      - id: known-ad-wash-pool
+        name: 洗灵池
+        description: 从历代守岛记录知道的灵池，不曾亲身入内观察池底。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘魔法、防护与岛务；不知池底瓶灵存在。
+        description: 大乘魔法、防护与岛务；不知池底瓶灵存在。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wu-chang
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-kuling-island
+      - local_entity_id: known-canon-wu-chang-private-stock
+        canonical_entity_ids:
+          - canon-wu-chang-private-stock
+      - local_entity_id: known-canon-mie-qing
+        canonical_entity_ids:
+          - canon-mie-qing
+      - local_entity_id: known-canon-yuan-yan
+        canonical_entity_ids:
+          - canon-yuan-yan
+      - local_entity_id: known-ad-route-scholar
+        canonical_entity_ids:
+          - ad-route-scholar
+      - local_entity_id: known-ad-route-letter
+        canonical_entity_ids:
+          - ad-route-letter
+      - local_entity_id: known-canon-xie-daoren
+        canonical_entity_ids:
+          - canon-xie-daoren
+      - local_entity_id: known-ad-wash-pool
+        canonical_entity_ids:
+          - ad-wash-pool

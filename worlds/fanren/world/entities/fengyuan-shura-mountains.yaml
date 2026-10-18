@@ -1,0 +1,58 @@
+id: fengyuan-shura-mountains
+kind: location
+name: 天蛛群山
+description: 连绵山地内有受天蛛城约束的巡行者，也有自行栖息的兽群，平原藏在山脉深处。
+placement: fengyuan-minor-shura-realm
+facts:
+  - id: fengyuan-shura-mountains-route-to-fengyuan-shura-whitewood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-whitewood
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-mountains-route-conditions-fengyuan-shura-whitewood
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿越白林与山脚，须避开实际毒气和巡行者；不能把空旷外观当无主安全区。
+    description: 穿越白林与山脚，须避开实际毒气和巡行者；不能把空旷外观当无主安全区。
+    access:
+      kind: public
+  - id: fengyuan-shura-mountains-route-to-fengyuan-shura-tianzhu-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-tianzhu-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-mountains-route-conditions-fengyuan-shura-tianzhu-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 飞至城墙外须表明来意；进入要经过守门者开启的禁制通路，不能把无门城墙当普通敞门。
+    description: 飞至城墙外须表明来意；进入要经过守门者开启的禁制通路，不能把无门城墙当普通敞门。
+    access:
+      kind: public
+  - id: fengyuan-shura-mountains-route-to-fengyuan-shura-island-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-island-sea
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-mountains-route-conditions-fengyuan-shura-island-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 飞越山海须实际法力与路程，并观察海岛残禁。
+    description: 飞越山海须实际法力与路程，并观察海岛残禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: xlt-herb-stock
+kind: container
+name: 露汀药篓
+description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+placement: xlt-lu
+facts:
+  - id: xlt-herb-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-lu
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: xlt-antidote-herb
+    amount: 12
+ratings: []
+shared_activity_resources: []

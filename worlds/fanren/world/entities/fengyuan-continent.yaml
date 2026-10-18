@@ -1,0 +1,204 @@
+id: fengyuan-continent
+kind: location
+name: 风元大陆
+description: 种族众多的广大大陆，西北诸族之间隔着蛮荒、险地与各自边防。
+placement: spirit-realm
+facts:
+  - id: fengyuan-continent-route-to-fengyuan-residence-fengyuan-yellow-robed-nun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-residence-fengyuan-yellow-robed-nun
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-route-conditions-fengyuan-residence-fengyuan-yellow-robed-nun
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-to-fengyuan-residence-fengyuan-gold-staff-elder
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-residence-fengyuan-gold-staff-elder
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-route-conditions-fengyuan-residence-fengyuan-gold-staff-elder
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-to-fengyuan-residence-fengyuan-bamboo-scholar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-residence-fengyuan-bamboo-scholar
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-route-conditions-fengyuan-residence-fengyuan-bamboo-scholar
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-to-fengyuan-mingsha-waste
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mingsha-waste
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-route-conditions-fengyuan-mingsha-waste
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 目的地是广大陆内的阴煞禁地；须实际定位、旅行和抗煞保护，修为不足贸入可能重伤。
+    description: 目的地是广大陆内的阴煞禁地；须实际定位、旅行和抗煞保护，修为不足贸入可能重伤。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-to-fengyuan-thunder-crossing-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-thunder-crossing-sea
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-route-conditions-fengyuan-thunder-crossing-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿实际海岸出海，跨陆航行须方向、补给和持续行动，不以两点关系跳过海程。
+    description: 沿实际海岸出海，跨陆航行须方向、补给和持续行动，不以两点关系跳过海程。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-fuyou-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-fuyou-territory
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-fuyou-territory
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 蜉蝣族居住与经营的广大地域；从蛮荒抵达需要长途补给、路径判断及入境交涉。
+    description: 蜉蝣族居住与经营的广大地域；从蛮荒抵达需要长途补给、路径判断及入境交涉。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-changyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-changyuan
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-changyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-biyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-biyuan
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-biyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-bumie
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-bumie
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-bumie
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-jiuhuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-jiuhuan
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-jiuhuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-minghe-xueyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-xueyuan
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-continent-condition-minghe-xueyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+  - id: fengyuan-continent-route-to-root-miyun-forest
+    predicate: route-to-root-miyun-forest
+    value:
+      kind: entity
+      entityId: root-miyun-forest
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: fengyuan-continent-travel-condition-root-miyun-forest
+    predicate: travel-condition-root-miyun-forest
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

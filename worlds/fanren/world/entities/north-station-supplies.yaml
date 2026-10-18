@@ -1,0 +1,24 @@
+id: north-station-supplies
+kind: item
+name: 迎雪驿物资
+description: 罗瑾保管的有限口粮、灯油和盐，不够无限接待旅人。
+placement: north-snow-station
+facts:
+  - id: north-station-supplies-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-luo-jin
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 22
+  - definition_id: lamp-oil
+    amount: 6
+  - definition_id: salt-bag
+    amount: 10
+ratings: []
+shared_activity_resources: []

@@ -24,7 +24,7 @@ it("imports the unchanged full world and rejects thinking, model and frozen asse
     const frozen = prepareNonthinkingWorld(root, baseline), catalog = loadModelCatalog(frozen.catalogPath);
     expect(prepareNonthinkingWorld(root, baseline)).toEqual(frozen);
     database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
-    expect(installBundledWorlds(database, catalog, frozen.worldsRoot)).toHaveLength(1);
+    expect(installBundledWorlds(database, catalog, frozen.worldsRoot, ["blackmarsh"])).toHaveLength(1);
     const world = database.load("blackmarsh", STEP_E2_PROTOCOL.seed, catalog);
     expect(world.contentHash).toBe(frozen.worldHash);
     expect(Object.keys(world.initialState.agents)).toHaveLength(47);

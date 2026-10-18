@@ -1,0 +1,26 @@
+id: innerstar-nanming-market
+kind: location
+name: 南明坊市
+description: 港口附近的小城坊市，有材料铺和转售货物的商人。
+placement: human-nanming-island
+facts:
+  - id: innerstar-nanming-market-route-innerstar-nanming-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-port
+    description: 沿小城和港口相连街道步行。
+    access:
+      kind: public
+  - id: innerstar-nanming-market-route-innerstar-nanming-herbshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-herbshop
+    description: 从临街店门步行进出。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

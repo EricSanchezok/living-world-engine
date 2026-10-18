@@ -1,0 +1,18 @@
+id: spirit-yuque-clerk-equipment
+kind: item
+name: 沈蘅的灵压盘
+description: 感应来客未遮掩的外露灵压，不能读取秘密、认知或储物。
+placement: spirit-yuque-clerk
+facts:
+  - id: spirit-yuque-clerk-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-clerk
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-boat
+kind: item
+name: 露汀木舟
+description: 能走浅水的小舟，船桨有裂口，载重有限，不能凭此横渡空间。
+placement: xlt-night-marsh
+facts:
+  - id: xlt-boat-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-lu
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

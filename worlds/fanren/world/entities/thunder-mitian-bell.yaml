@@ -1,0 +1,29 @@
+id: thunder-mitian-bell
+kind: item
+name: 迷天神钟
+description: 雪白巨钟供于翠绿玉桌，钟内灵性与器身相依；外层阵纹可控制局部共鸣，圣器分化须另有高阶主持。
+placement: thunder-jiaochi-bell-hall
+facts:
+  - id: thunder-mitian-bell-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-mitian-bell-bounded-operation
+    predicate: bounded-operation
+    value:
+      kind: text
+      value: 当前谛晷能在殿内以二块高阶灵石和二十法力试开隔音共鸣，最多一刻钟，扰动停止须收法；此权限不能制造临时玄天圣器或召来古契约真灵。
+    description: 当前谛晷能在殿内以二块高阶灵石和二十法力试开隔音共鸣，最多一刻钟，扰动停止须收法；此权限不能制造临时玄天圣器或召来古契约真灵。
+    access:
+      kind: private
+meters:
+  - id: thunder-mitian-bell-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

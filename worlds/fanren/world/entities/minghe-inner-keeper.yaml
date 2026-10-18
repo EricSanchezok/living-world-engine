@@ -1,0 +1,214 @@
+id: minghe-inner-keeper
+kind: person
+name: 槐宁
+description: 临时内驻的圣地验收者，知道普通蜉蝣族人久留有害，准备在本轮交接后返回。
+placement: minghe-entry-bank
+facts:
+  - id: minghe-inner-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - minghe-inner-keeper
+  - id: minghe-inner-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚阴气防护、矿材辨别与阵基维护。
+    description: 炼虚阴气防护、矿材辨别与阵基维护。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-inner-keeper
+  - id: minghe-inner-keeper-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 蜉蝣族修行。
+    description: 蜉蝣族修行。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-inner-keeper
+  - id: minghe-inner-keeper-receives-from
+    predicate: receives-from
+    value:
+      kind: entity
+      entityId: minghe-gate-warden
+    description: receives-from
+    access:
+      kind: private
+meters:
+  - id: minghe-inner-keeper-health
+    definition_id: health
+    current: 100
+  - id: minghe-inner-keeper-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings:
+  - id: minghe-inner-keeper-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: minghe-inner-keeper-force
+    definition_id: force
+    value: 6
+  - id: minghe-inner-keeper-craft
+    definition_id: craft
+    value: 5
+  - id: minghe-inner-keeper-perception
+    definition_id: perception
+    value: 6
+  - id: minghe-inner-keeper-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: minghe-inner-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 临时内驻的圣地验收者，知道普通蜉蝣族人久留有害，准备在本轮交接后返回。
+      voice: 说数量仔细，遇可疑材料会让人摸摸纹理再解释。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 验收本轮六份补料，然后随接引窗口撤回外巡院，不再继续长期内驻。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 槐宁
+        description: 临时内驻的圣地验收者，知道普通蜉蝣族人久留有害，准备在本轮交接后返回。
+        status: observed
+      - id: location
+        name: 冥河接引岸
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-minghe-gate-warden
+        name: 羽衍
+        description: 外巡接引与内岸验收工作，信件和传讯实际送达才知对方新消息。
+        status: observed
+      - id: known-minghe-current-transit-writ
+        name: 本次送材许可
+        description: 准许经羽衍核验的一组至多三人将六份补料送至内岸槐宁，三本地日内有效；不包括深入神池和魔坟。
+        status: observed
+      - id: known-minghe-entry-bank
+        name: 冥河接引岸
+        description: 授权接引抵达的石岸，阴气需实际防护。
+        status: observed
+      - id: known-minghe-inner-protection-charm
+        name: 槐宁短驻护身符
+        description: 用于当前短时抵御阴气的符器，不能消除蜉蝣族长期滞留圣地的根本风险。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚阴气防护、矿材辨别与阵基维护。
+        description: 炼虚阴气防护、矿材辨别与阵基维护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 蜉蝣族修行。
+        description: 蜉蝣族修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-delivery
+        subjectId: self
+        predicate: current-delivery
+        value:
+          kind: text
+          value: 等待外巡院六份阵基材料，自己会验质量并回执；尚不知道哪名来客承接。
+        description: 等待外巡院六份阵基材料，自己会验质量并回执；尚不知道哪名来客承接。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: limited-stay
+        subjectId: self
+        predicate: limited-stay
+        value:
+          kind: text
+          value: 自己已临时内驻数日本地日，普通族人不宜久留；已约定本轮交接窗口撤回，当前没有理由继续滞留。
+        description: 自己已临时内驻数日本地日，普通族人不宜久留；已约定本轮交接窗口撤回，当前没有理由继续滞留。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: rare-window
+        subjectId: self
+        predicate: rare-window
+        value:
+          kind: text
+          value: 本轮筹备完成，仅余一次六百秒开放额度，四块高阶灵石只在开启时消耗一次；双方需协调送材和槐宁撤回。下轮至少再准备六个当地月，且须补足高阶主持与材料。
+        description: 本轮筹备完成，仅余一次六百秒开放额度，四块高阶灵石只在开启时消耗一次；双方需协调送材和槐宁撤回。下轮至少再准备六个当地月，且须补足高阶主持与材料。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - minghe-inner-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-entry-bank
+      - local_entity_id: known-minghe-gate-warden
+        canonical_entity_ids:
+          - minghe-gate-warden
+      - local_entity_id: known-minghe-current-transit-writ
+        canonical_entity_ids:
+          - minghe-current-transit-writ
+      - local_entity_id: known-minghe-entry-bank
+        canonical_entity_ids:
+          - minghe-entry-bank
+      - local_entity_id: known-minghe-inner-protection-charm
+        canonical_entity_ids:
+          - minghe-inner-protection-charm

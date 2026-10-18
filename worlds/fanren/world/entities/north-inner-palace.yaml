@@ -1,0 +1,90 @@
+id: north-inner-palace
+kind: location
+name: 小极宫内宫
+description: 需依宫规通行的山上内宫。
+placement: north-ice-city
+facts:
+  - id: north-inner-palace-route-north-ice-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-ice-city
+    description: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    access:
+      kind: public
+  - id: north-inner-palace-travel-north-ice-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    description: 依内宫门规通报并步行通过相关山道，实际禁制依条件裁决。
+    access:
+      kind: public
+  - id: north-inner-palace-route-north-hanli-realm
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-hanli-realm
+    description: 需知道入口并获准，开门禁制由掌管者控制。
+    access:
+      kind: public
+  - id: north-inner-palace-travel-north-hanli-realm
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需知道入口并获准，开门禁制由掌管者控制。
+    description: 需知道入口并获准，开门禁制由掌管者控制。
+    access:
+      kind: public
+  - id: north-inner-palace-route-north-stockroom
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-stockroom
+    description: 领物需授权并核对账目，私取会形成可追查后果。
+    access:
+      kind: public
+  - id: north-inner-palace-travel-north-stockroom
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 领物需授权并核对账目，私取会形成可追查后果。
+    description: 领物需授权并核对账目，私取会形成可追查后果。
+    access:
+      kind: public
+  - id: north-inner-palace-route-north-library
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-library
+    description: 需获得具体阅读许可，跨层由值守按类别开结界。
+    access:
+      kind: public
+  - id: north-inner-palace-travel-north-library
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需获得具体阅读许可，跨层由值守按类别开结界。
+    description: 需获得具体阅读许可，跨层由值守按类别开结界。
+    access:
+      kind: public
+  - id: north-inner-palace-route-north-fruit-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-fruit-garden
+    description: 果实属公产，领用需实际批准。
+    access:
+      kind: public
+  - id: north-inner-palace-travel-north-fruit-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 果实属公产，领用需实际批准。
+    description: 果实属公产，领用需实际批准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

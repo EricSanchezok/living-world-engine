@@ -1,0 +1,60 @@
+id: thunder-mojin-cloud-sea
+kind: location
+name: 青灵云海
+description: 封锁魔金山脉的阵区，准许窗口与身份由守阵者核验。
+placement: thunder-tianyun
+facts:
+  - id: thunder-mojin-cloud-sea-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-mojin-cloud-sea-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封锁魔金山脉的阵区，准许窗口与身份由守阵者核验。
+    description: 封锁魔金山脉的阵区，准许窗口与身份由守阵者核验。
+    access:
+      kind: public
+  - id: thunder-mojin-cloud-sea-route-thunder-mojin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-mojin-cloud-sea-condition-thunder-mojin-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有已开的许可窗口才可循接引区通过；强行越过须真实突破禁制和魔气，不能把知晓地点当无害通行。
+    description: 只有已开的许可窗口才可循接引区通过；强行越过须真实突破禁制和魔气，不能把知晓地点当无害通行。
+    access:
+      kind: public
+  - id: thunder-mojin-cloud-sea-route-to-root-leiyun-town
+    predicate: route-to-root-leiyun-town
+    value:
+      kind: entity
+      entityId: root-leiyun-town
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-mojin-cloud-sea-travel-condition-root-leiyun-town
+    predicate: travel-condition-root-leiyun-town
+    value:
+      kind: text
+      value: 从镇外沿封锁区边缘行进；进入云海禁区需实际许可、信物和接引。
+    description: 从镇外沿封锁区边缘行进；进入云海禁区需实际许可、信物和接引。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: qixuan-kitchen
+kind: location
+name: 门内大厨房
+description: 给弟子供应饭食的厨房；饭时忙碌，取用粮食须经厨役安排。
+placement: caixia-mountain
+facts:
+  - id: qixuan-kitchen-route-divine-hand-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: divine-hand-valley
+    description: 给弟子供应饭食的厨房；饭时忙碌，取用粮食须经厨役安排。
+    access:
+      kind: public
+  - id: qixuan-kitchen-route-local-cliff-grove
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-cliff-grove
+    description: 沿山路入林，所耗时间由距离、光照与步速确定。
+    access:
+      kind: public
+  - id: qixuan-kitchen-route-local-common-clinic
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-common-clinic
+    description: 堂院普通道路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

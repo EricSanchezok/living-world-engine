@@ -1,0 +1,26 @@
+id: dajin-yinluo-hall
+kind: location
+name: 阴罗宗外务馆
+description: 阴罗宗驻地方的外务馆，负责接待和地方事务。
+placement: human-dajin
+facts:
+  - id: dajin-yinluo-hall-route-south-yinluo-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yinluo-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dajin-yinluo-hall-condition-south-yinluo-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外务馆需引荐才准进入内山。
+    description: 外务馆需引荐才准进入内山。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

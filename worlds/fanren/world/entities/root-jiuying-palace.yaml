@@ -1,0 +1,46 @@
+id: root-jiuying-palace
+kind: location
+name: 九迎仙宫
+description: 按层分隔的接待宫，各层禁门有各自准入令。
+placement: root-feixian-peak
+facts:
+  - id: root-jiuying-palace-route-to-root-feixian-peak
+    predicate: route-to-root-feixian-peak
+    value:
+      kind: entity
+      entityId: root-feixian-peak
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-jiuying-palace-travel-condition-root-feixian-peak
+    predicate: travel-condition-root-feixian-peak
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-jiuying-palace-floor-permissions
+    predicate: floor-permissions
+    value:
+      kind: text
+      value: 准入令对应指定楼层和有效时段，不因持一层令即可穿过其他层禁门。接待者核验后可发新令。
+    description: 准入令对应指定楼层和有效时段，不因持一层令即可穿过其他层禁门。接待者核验后可发新令。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-jiuying-palace-root-detail-jiuxian-layout
+    predicate: root-detail-jiuxian-layout
+    value:
+      kind: text
+      value: 飞仙峰、万宝殿与本宫由实际通路相连，各层独令和空间禁制限制常规准入。
+    description: 飞仙峰、万宝殿与本宫由实际通路相连，各层独令和空间禁制限制常规准入。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: tiannan-talisman-business-stock
+kind: item
+name: 天星坊符业商号货料柜
+description: 店业货款与材料，收支需记在店簿中。
+placement: tiannan-tianxing-talisman-shop
+facts:
+  - id: tiannan-talisman-business-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-talisman-business
+    description: 货款与材料归商号。
+    access:
+      kind: public
+  - id: tiannan-talisman-business-stock-kept-by
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-xie-wenquan
+    description: 负责实物保管和记账，个人随身钱另计。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 200
+  - definition_id: yue-blank-paper
+    amount: 30
+  - definition_id: yue-cinnabar-use
+    amount: 30
+  - definition_id: tiannan-protection-talisman
+    amount: 4
+ratings: []
+shared_activity_resources: []

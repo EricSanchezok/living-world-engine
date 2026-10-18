@@ -1,0 +1,20 @@
+id: root-yitian-yitian-fund
+kind: container
+name: 倚天门修护款
+description: 已分账的有限储备，支出后须减少余额。
+placement: root-yitian-yitian-court
+facts:
+  - id: root-yitian-yitian-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-yitian-yitian
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 900
+ratings: []
+shared_activity_resources: []

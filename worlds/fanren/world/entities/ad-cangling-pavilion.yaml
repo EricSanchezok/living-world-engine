@@ -1,0 +1,27 @@
+id: ad-cangling-pavilion
+kind: location
+name: 藏灵阁
+description: 另设的族有藏灵阁，阁中存放与出借须登记。
+placement: associated-demon-realm
+facts:
+  - id: ad-cangling-pavilion-route-to-ad-xunxiang-village
+    predicate: route-to-ad-xunxiang-village
+    value:
+      kind: entity
+      entityId: ad-xunxiang-village
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-cangling-pavilion-root-detail-sevenfold-tower
+    predicate: root-detail-sevenfold-tower
+    value:
+      kind: text
+      value: 塔中幻兽、傀儡、琉璃卫及空间节点各依载体和能量，可破坏或耗尽；七彩外观不足以认定同一件塔。
+    description: 塔中幻兽、傀儡、琉璃卫及空间节点各依载体和能量，可破坏或耗尽；七彩外观不足以认定同一件塔。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

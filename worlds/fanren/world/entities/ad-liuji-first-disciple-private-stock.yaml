@@ -1,0 +1,22 @@
+id: ad-liuji-first-disciple-private-stock
+kind: container
+name: 六极大弟子的自用储备
+description: 本人财物，与机构公库和门人财产分开。
+placement: ad-liuji-first-disciple
+facts:
+  - id: ad-liuji-first-disciple-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-liuji-first-disciple
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 240
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

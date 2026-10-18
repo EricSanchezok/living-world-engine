@@ -1,0 +1,50 @@
+id: void-gallery-two
+kind: location
+name: 宝光阁二层
+description: 蓝色球罩内悬着不同古宝，神识不能任意外探。
+placement: human-void-hall
+facts:
+  - id: void-gallery-two-route-void-gallery-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-gallery-one
+    description: route-to
+    access:
+      kind: public
+  - id: void-gallery-two-condition-void-gallery-one
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-gallery-two-route-void-illusion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-illusion
+    description: route-to
+    access:
+      kind: public
+  - id: void-gallery-two-condition-void-illusion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-gallery-two-illumination
+    predicate: illumination
+    value:
+      kind: text
+      value: 蓝色球罩发出柔和光芒，局部明暗依此处空间与禁制。
+    description: 蓝色球罩发出柔和光芒，局部明暗依此处空间与禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

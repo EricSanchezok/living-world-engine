@@ -1,0 +1,26 @@
+id: ad-wash-space
+kind: location
+name: 洗灵池空间
+description: 方圆百里的灵气空间，有巨木、五色光团与深池。
+placement: associated-demon-realm
+facts:
+  - id: ad-wash-space-route-ad-kunling-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kunling-valley
+    description: route-to
+    access:
+      kind: public
+  - id: ad-wash-space-condition-ad-kunling-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 通过完整谷底阵往返；须突破或获得守卫许可，魔族被空间拒绝，入内者按修为与实际压迫判断停留；即使有足够法力也不能无限逗留。
+    description: 通过完整谷底阵往返；须突破或获得守卫许可，魔族被空间拒绝，入内者按修为与实际压迫判断停留；即使有足够法力也不能无限逗留。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

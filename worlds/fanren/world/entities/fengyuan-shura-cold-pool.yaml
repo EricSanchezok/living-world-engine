@@ -1,0 +1,26 @@
+id: fengyuan-shura-cold-pool
+kind: location
+name: 封藏寒潭
+description: 玄冰封住深潭的上口，寒气从水层向外渗出；深入越多越难保持护体法力。
+placement: fengyuan-shura-frozen-island
+facts:
+  - id: fengyuan-shura-cold-pool-route-to-fengyuan-shura-frozen-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-frozen-island
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-cold-pool-route-conditions-fengyuan-shura-frozen-island
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从山谷上口到封藏地须抵御寒气；进入深潭还要真正破开冰封和更强护持。
+    description: 从山谷上口到封藏地须抵御寒气；进入深潭还要真正破开冰封和更强护持。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

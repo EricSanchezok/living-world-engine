@@ -1,0 +1,42 @@
+id: feiling-underground-river
+kind: location
+name: 二层隐河
+description: 石隙中隐蔽河流向下贯穿三层，须辨流向、留退路并防水下妖物。
+placement: feiling-abyss-2
+facts:
+  - id: feiling-underground-river-route-to-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-underground-river-route-conditions-feiling-abyss-2
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 河口隐在岩隙，未查图或探路不会自动知其位置。
+    description: 河口隐在岩隙，未查图或探路不会自动知其位置。
+    access:
+      kind: private
+  - id: feiling-underground-river-route-to-feiling-abyss-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-3
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-underground-river-route-conditions-feiling-abyss-3
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿水道下降；逆行需克服水流，不能默认顺流原路即返。
+    description: 沿水道下降；逆行需克服水流，不能默认顺流原路即返。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

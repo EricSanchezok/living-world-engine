@@ -1,0 +1,18 @@
+id: blood-a-blade
+kind: item
+name: 平鹭短刃
+description: 熟悉的防身短刃，不能凭空换成高阶法宝。
+placement: blood-contestant-a
+facts:
+  - id: blood-a-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-contestant-a
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

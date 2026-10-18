@@ -1,0 +1,20 @@
+id: yue-blood-herb-0
+kind: item
+name: 沼泽边玉髓芝
+description: 当前在株玉髓芝，仍需辨认、采下和保存，采集后相应减少。
+placement: yue-blood-under-swamp
+facts:
+  - id: yue-blood-herb-0-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-stem
+    amount: 3
+ratings: []
+shared_activity_resources: []

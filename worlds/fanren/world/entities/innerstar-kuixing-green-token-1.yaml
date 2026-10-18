@@ -1,0 +1,26 @@
+id: innerstar-kuixing-green-token-1
+kind: item
+name: 临时绿色玉牌1
+description: 尚未记名发出的岛务用品，须登记和实际交付。
+placement: innerstar-kuixing-port-office
+facts:
+  - id: innerstar-kuixing-green-token-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 尚属岛务所。
+    access:
+      kind: public
+  - id: innerstar-kuixing-green-token-1-registration-rule
+    predicate: registration-rule
+    value:
+      kind: text
+      value: 临时记名入岛，遗失须补领；办理定居后交回。
+    description: 临时记名入岛，遗失须补领；办理定居后交回。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

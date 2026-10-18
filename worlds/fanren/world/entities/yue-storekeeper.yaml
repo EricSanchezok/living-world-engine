@@ -1,0 +1,220 @@
+id: yue-storekeeper
+kind: person
+name: 韩守平
+description: 配给库值班弟子，与山村韩家没有已知亲缘。
+placement: yue-huangfeng-treasury
+facts:
+  - id: yue-storekeeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-storekeeper
+  - id: yue-storekeeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 库存清点、封存和基础御物。
+    description: 库存清点、封存和基础御物。
+    access:
+      kind: agents
+      agentIds:
+        - yue-storekeeper
+  - id: yue-storekeeper-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根，已经检验。
+    description: 木水两属性灵根，已经检验。
+    access:
+      kind: agents
+      agentIds:
+        - yue-storekeeper
+  - id: yue-storekeeper-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 黄枫谷当期执事弟子，承担实际园务、器坊或库务。
+    access:
+      kind: public
+  - id: yue-storekeeper-knows-canon-nie-ying
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: canon-nie-ying
+    description: 曾为日用配给当面交接，相互认识。
+    access:
+      kind: agents
+      agentIds:
+        - yue-storekeeper
+        - canon-nie-ying
+meters:
+  - id: yue-storekeeper-health
+    definition_id: health
+    current: 100
+  - id: yue-storekeeper-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-storekeeper-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-storekeeper-force
+    definition_id: force
+    value: 1
+  - id: yue-storekeeper-craft
+    definition_id: craft
+    value: 1
+  - id: yue-storekeeper-perception
+    definition_id: perception
+    value: 1
+  - id: yue-storekeeper-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-storekeeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 配给库值班弟子，与山村韩家没有已知亲缘。
+      voice: 态度平和，交接时习惯请对方当面数过。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 按管事许可发料，留足日常修补用量。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 韩守平
+        description: 配给库值班弟子，与山村韩家没有已知亲缘。
+        status: observed
+      - id: location
+        name: 黄枫配给库
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-storekeeper-pouch
+        name: 韩守平的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-foundation-pill-chest
+        name: 黄枫当期筑基丹匣
+        description: 当期封存十二枚筑基丹，批准配给后需要实际开匣交接。
+        status: observed
+      - id: known-yue-huangfeng-stock
+        name: 黄枫当期公共储备
+        description: 当期公共储备，须核用途并记账。
+        status: observed
+      - id: known-canon-zhong-lingdao
+        name: 钟灵道
+        description: 负责当前宗务批准的钟管事，发料前须取得相符许可。
+        status: observed
+      - id: known-huangfeng-sect
+        name: 黄枫谷
+        description: 黄枫谷当期执事弟子，承担实际园务、器坊或库务。
+        status: observed
+      - id: known-yue-craft-worker
+        name: 赵鸣
+        description: 器坊往来的执事弟子，领料时当面点清。
+        status: observed
+      - id: known-yue-craft-peer
+        name: 沈素
+        description: 器坊往来的执事弟子，领料时当面点清。
+        status: observed
+      - id: known-canon-nie-ying
+        name: 聂盈
+        description: 来领取过日用材料的聂盈师妹，领取须依门内许可，并非她有任意开库权限。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 库存清点、封存和基础御物。
+        description: 库存清点、封存和基础御物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 按管事许可发料，留足日常修补用量。
+        description: 按管事许可发料，留足日常修补用量。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-storekeeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-huangfeng-treasury
+      - local_entity_id: known-yue-storekeeper-pouch
+        canonical_entity_ids:
+          - yue-storekeeper-pouch
+      - local_entity_id: known-yue-foundation-pill-chest
+        canonical_entity_ids:
+          - yue-foundation-pill-chest
+      - local_entity_id: known-yue-huangfeng-stock
+        canonical_entity_ids:
+          - yue-huangfeng-stock
+      - local_entity_id: known-canon-zhong-lingdao
+        canonical_entity_ids:
+          - canon-zhong-lingdao
+      - local_entity_id: known-huangfeng-sect
+        canonical_entity_ids:
+          - huangfeng-sect
+      - local_entity_id: known-yue-craft-worker
+        canonical_entity_ids:
+          - yue-craft-worker
+      - local_entity_id: known-yue-craft-peer
+        canonical_entity_ids:
+          - yue-craft-peer
+      - local_entity_id: known-canon-nie-ying
+        canonical_entity_ids:
+          - canon-nie-ying

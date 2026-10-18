@@ -1,0 +1,26 @@
+id: wanyao-wu-cave
+kind: location
+name: 三目妖修洞室
+description: 洞室，生体神通的修炼需要时间，第三目仍为身体的一部分。
+placement: human-wanyao-valley
+facts:
+  - id: wanyao-wu-cave-route-human-wanyao-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanyao-valley
+    description: 谷内支路，进入私人洞室需当事人同意。
+    access:
+      kind: public
+  - id: wanyao-wu-cave-travel-human-wanyao-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷内支路，进入私人洞室需当事人同意。
+    description: 谷内支路，进入私人洞室需当事人同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

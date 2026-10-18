@@ -1,0 +1,35 @@
+id: guanghan-xuling-pill-3
+kind: item
+name: 虚灵丹3
+description: 一枚真实古丹，服下或损毁即减少；并非所有境界都适用的无风险升级物。
+placement: guanghan-purple-pill-bottle
+facts:
+  - id: guanghan-xuling-pill-3-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-xuling-pill-3-medicine-identity
+    predicate: medicine-identity
+    value:
+      kind: text
+      value: 太虚妙灵丹，又称虚灵丹；同一实物的别名。
+    description: 太虚妙灵丹，又称虚灵丹；同一实物的别名。
+    access:
+      kind: private
+  - id: guanghan-xuling-pill-3-medicine-effect
+    predicate: medicine-effect
+    value:
+      kind: text
+      value: 对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。
+    description: 对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。
+    access:
+      kind: discoverable
+      condition: 取得可靠丹药辨识与服用资料。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

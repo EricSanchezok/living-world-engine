@@ -1,0 +1,21 @@
+id: yue-qin-family
+kind: organization
+name: 越京秦家
+description: 经营铜料和商路的家族；宗族资产与各人私用钱财分开。
+placement: yue-yuejing-east
+facts:
+  - id: yue-qin-family-old-protector
+    predicate: protected-by
+    value:
+      kind: entity
+      entityId: canon-li-huayuan
+    description: 师兄旧恩使李化元长期承诺照拂秦家，实际救援仍须得知危险并采取行动。
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-huayuan
+        - canon-qin-yan
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

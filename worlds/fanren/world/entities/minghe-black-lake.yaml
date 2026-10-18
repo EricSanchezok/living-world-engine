@@ -1,0 +1,42 @@
+id: minghe-black-lake
+kind: location
+name: 枯林外黑湖
+description: 湖面黑如墨，绿雾贴水流动，岸边枯枝深陷淤泥；水面没有显眼渡船。
+placement: minghe-space
+facts:
+  - id: minghe-black-lake-route-to-minghe-withered-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-withered-wood
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-black-lake-route-conditions-minghe-withered-wood
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。
+    description: 林边可以抵湖岸；离林时骨物的复形条件变化，水上另有绿雾风险。
+    access:
+      kind: private
+  - id: minghe-black-lake-route-to-minghe-yingu-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-yingu-mountains
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-black-lake-route-conditions-minghe-yingu-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。
+    description: 沿湖岸绕向灰山是长程荒野路径，需时间、方向判断和阴气防护；不穿越湖底。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

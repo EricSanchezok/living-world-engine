@@ -1,0 +1,74 @@
+id: feiling-chimo-sea
+kind: location
+name: 赤魔海
+description: 海路漫长，天气、海兽和补给决定通行安全。
+placement: feiling-territory
+facts:
+  - id: feiling-chimo-sea-route-feiling-tianpeng-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chimo-sea-condition-feiling-tianpeng-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海路漫长，天气、海兽和补给决定通行安全。
+    description: 海路漫长，天气、海兽和补给决定通行安全。
+    access:
+      kind: public
+  - id: feiling-chimo-sea-route-feiling-heiming-peninsula
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-heiming-peninsula
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chimo-sea-condition-feiling-heiming-peninsula
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 与大陆相连的半岛，大部为黑冥雾笼罩。
+    description: 与大陆相连的半岛，大部为黑冥雾笼罩。
+    access:
+      kind: public
+  - id: feiling-chimo-sea-route-feiling-shore-pier
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-shore-pier
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chimo-sea-condition-feiling-shore-pier
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旅人登岸验货和照顾飞禽的地方。
+    description: 旅人登岸验货和照顾飞禽的地方。
+    access:
+      kind: public
+  - id: feiling-chimo-sea-route-seas-wuya-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-wuya-sea
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chimo-sea-condition-seas-wuya-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长期沿岸与外海航行，须真实航路，不等于一步跨洲。
+    description: 长期沿岸与外海航行，须真实航路，不等于一步跨洲。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

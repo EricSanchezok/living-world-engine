@@ -1,0 +1,42 @@
+id: feiling-bloodflame-mountain
+kind: location
+name: 血焰山
+description: 岩洞如迷宫，热流引向山腹熔岩湖；散布的机关与傀儡会对未经许可者示警。
+placement: feiling-abyss-5
+facts:
+  - id: feiling-bloodflame-mountain-route-to-feiling-abyss-5
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-5
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-mountain-route-conditions-feiling-abyss-5
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 山腹由地血守禁，须获主人准许或实际应对机关。
+    description: 山腹由地血守禁，须获主人准许或实际应对机关。
+    access:
+      kind: private
+  - id: feiling-bloodflame-mountain-route-to-feiling-bloodflame-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-lake
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-mountain-route-conditions-feiling-bloodflame-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿行山内旧道，避开熔岩喷口和傀儡岗。
+    description: 穿行山内旧道，避开熔岩喷口和傀儡岗。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

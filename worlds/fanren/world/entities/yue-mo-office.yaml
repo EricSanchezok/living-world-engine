@@ -1,0 +1,26 @@
+id: yue-mo-office
+kind: location
+name: 惊蛟会嘉元书房
+description: 严氏处理实际会务与家产的书房，暗舵另受王氏掌管。
+placement: yue-mo-mansion
+facts:
+  - id: yue-mo-office-route-yue-mo-mansion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-mansion
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-office-travel-yue-mo-mansion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

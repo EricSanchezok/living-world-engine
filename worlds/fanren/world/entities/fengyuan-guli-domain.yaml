@@ -1,0 +1,42 @@
+id: fengyuan-guli-domain
+kind: location
+name: 暖石台地
+description: 古黎族的一处已知族域，外围道路与居民禁区分开，访客的目的会影响接待方式。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-guli-domain-route-to-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-guli-domain-route-conditions-fengyuan-border-exchange
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-guli-domain-route-to-fengyuan-residence-wu-ling-lady
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-residence-wu-ling-lady
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-guli-domain-route-conditions-fengyuan-residence-wu-ling-lady
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

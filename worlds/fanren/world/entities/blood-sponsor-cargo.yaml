@@ -1,0 +1,20 @@
+id: blood-sponsor-cargo
+kind: container
+name: 送血骨门的灵材箱
+description: 已与萧冥约定送去比对旧阵材料，仍属栾砚，验收与价格另议。
+placement: blood-sponsor-cart
+facts:
+  - id: blood-sponsor-cargo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

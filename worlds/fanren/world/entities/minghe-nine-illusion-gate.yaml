@@ -1,0 +1,27 @@
+id: minghe-nine-illusion-gate
+kind: item
+name: 九幻如意门
+description: 本命幻门至宝，可协助研判和松动某些禁制与界力；当前未借给黄元子。
+placement: canon-jiu-huan-elder
+facts:
+  - id: minghe-nine-illusion-gate-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jiu-huan-elder
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-nine-illusion-gate-capability-boundary
+    predicate: capability-boundary
+    value:
+      kind: text
+      value: 持有者须祭炼并施法，针对具体禁制和界力工作；不是任何空间无条件畅通。
+    description: 持有者须祭炼并施法，针对具体禁制和界力工作；不是任何空间无条件畅通。
+    access:
+      kind: discoverable
+      condition: 经原主介绍或确有能力辨识。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

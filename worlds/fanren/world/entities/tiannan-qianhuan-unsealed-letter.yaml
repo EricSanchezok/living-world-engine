@@ -1,0 +1,52 @@
+id: tiannan-qianhuan-unsealed-letter
+kind: item
+name: 缺印的询价信
+description: 送到外务院的普通纸信，署名姚蘅，却没有双方约定的双叶印。
+placement: tiannan-qianhuan-outer-court
+facts:
+  - id: tiannan-qianhuan-unsealed-letter-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-yao-heng
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-qianhuan-unsealed-letter-writer
+    predicate: written-by
+    value:
+      kind: entity
+      entityId: original-tiannan-yao-heng
+    description: 客观作者为姚蘅，林乔尚未核实。
+    access:
+      kind: private
+  - id: tiannan-qianhuan-unsealed-letter-content
+    predicate: document-content
+    value:
+      kind: text
+      value: 署名姚蘅，请林乔报普通幻光符材料的现价和可交时间，无付款或转移物品命令。
+    description: 只是一份报价询问。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-qianhuan-unsealed-letter-seal
+    predicate: seal-condition
+    value:
+      kind: text
+      value: 写信时忘盖双叶印；没有被别人调包。
+    description: 未调查前林乔不自动知道遗漏原因。
+    access:
+      kind: private
+  - id: tiannan-qianhuan-unsealed-letter-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-lin-qiao
+    description: 暂存待核来历。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

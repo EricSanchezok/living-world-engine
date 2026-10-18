@@ -1,0 +1,42 @@
+id: void-mist
+kind: location
+name: 外殿鬼雾
+description: 鬼雾深处有前轮遗骨，能见范围有限。
+placement: human-void-hall
+facts:
+  - id: void-mist-route-void-assembly
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-assembly
+    description: route-to
+    access:
+      kind: public
+  - id: void-mist-condition-void-assembly
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-mist-route-void-pavilions
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-pavilions
+    description: route-to
+    access:
+      kind: public
+  - id: void-mist-condition-void-pavilions
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

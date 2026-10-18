@@ -1,0 +1,26 @@
+id: ad-niepan-retreat
+kind: location
+name: 涅槃地下静养宫
+description: 山腹休养场所，本体半休眠，外务由已有意志的分体有限处理。
+placement: associated-demon-realm
+facts:
+  - id: ad-niepan-retreat-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-niepan-retreat-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

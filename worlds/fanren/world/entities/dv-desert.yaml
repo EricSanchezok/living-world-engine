@@ -1,0 +1,42 @@
+id: dv-desert
+kind: location
+name: 内谷沙漠
+description: 大片沙地夹在群山中，沙丘遮住地标，内部绿洲被旧幻阵藏起。
+placement: human-devil-valley
+facts:
+  - id: dv-desert-route-dv-bird-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-bird-peak
+    description: route-to
+    access:
+      kind: public
+  - id: dv-desert-condition-dv-bird-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿鸟喙所指方向前进，沙地庞大，须辨位和补给。
+    description: 沿鸟喙所指方向前进，沙地庞大，须辨位和补给。
+    access:
+      kind: public
+  - id: dv-desert-route-dv-oasis
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-oasis
+    description: route-to
+    access:
+      kind: public
+  - id: dv-desert-condition-dv-oasis
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须识破绿洲幻阵或有真实已核方位，湖底守兽仍在。
+    description: 须识破绿洲幻阵或有真实已核方位，湖底守兽仍在。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

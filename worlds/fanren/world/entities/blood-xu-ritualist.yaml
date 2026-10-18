@@ -1,0 +1,279 @@
+id: blood-xu-ritualist
+kind: person
+name: 许望川
+description: 许氏化神礼器修士，能辨认祖器封符，却未学到外存的完整血魂唤醒术。
+placement: blood-xu-ancestral-estate
+facts:
+  - id: blood-xu-ritualist-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - blood-xu-ritualist
+  - id: blood-xu-ritualist-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神冰法、符记辨认、祖庙封存禁制。
+    description: 化神冰法、符记辨认、祖庙封存禁制。
+    access:
+      kind: agents
+      agentIds:
+        - blood-xu-ritualist
+  - id: blood-xu-ritualist-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: blood-xu-ritualist-clan-membership
+    predicate: clan-membership
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: clan-membership
+    access:
+      kind: private
+meters:
+  - id: blood-xu-ritualist-health
+    definition_id: health
+    current: 100
+  - id: blood-xu-ritualist-mana
+    definition_id: mana
+    current: 1100
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-xu-ritualist-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: blood-xu-ritualist-force
+    definition_id: force
+    value: 5
+  - id: blood-xu-ritualist-craft
+    definition_id: craft
+    value: 5
+  - id: blood-xu-ritualist-perception
+    definition_id: perception
+    value: 5
+  - id: blood-xu-ritualist-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: blood-xu-ritualist
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 许氏化神礼器修士，能辨认祖器封符，却未学到外存的完整血魂唤醒术。
+      voice: 解释器物时细致而兴奋，祖父辈的说法会先复述再辨是否有实证。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 用不破封的方式验证祖器状况，争取抄录旧目录供后辈学习。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 许望川
+        description: 许氏化神礼器修士，能辨认祖器封符，却未学到外存的完整血魂唤醒术。
+        status: observed
+      - id: location
+        name: 冰魄许氏祖居
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-blood-xu-ritualist-resources
+        name: 许望川的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-blood-xu-keeper
+        name: 许含章
+        description: 长期共同保管祖物的同族，熟悉彼此行事。
+        status: observed
+      - id: known-blood-xu-clan
+        name: 冰魄许氏一脉
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-blood-xu-paired-bottle
+        name: 许氏祖传血魂配瓶
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-blood-xu-blood-coffin
+        name: 许氏血晶棺
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-blood-xu-catalog
+        name: 许氏祖物旧目录
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-blood-xu-fund
+        name: 许氏养护公库
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-canon-bingpo
+        name: 冰魄仙子
+        description: 家中既有祖物及共同记载；先祖长久失踪，现准确下落和翁手中的封盒均不知情。
+        status: observed
+      - id: known-blood-xu-key-a
+        name: 许含章的密室钥牌
+        description: 共同开启祖庙的两枚实际钥牌之一，知道各由谁持有。
+        status: observed
+      - id: known-blood-xu-key-b
+        name: 许望川的密室钥牌
+        description: 共同开启祖庙的两枚实际钥牌之一，知道各由谁持有。
+        status: observed
+      - id: three-region-spirit3-xu-copper-hills
+        name: 许氏精铜矿丘
+        description: 黄红矿土延向许氏有灵脉的族地，矿产与修行灵气的取舍长期存在。
+        status: observed
+      - id: three-region-spirit3-xu-mine
+        name: 许氏现用矿井
+        description: 支撑木与矿轨分出一段已勘明开采面，深处未勘地层不算现有可取库存。
+        status: observed
+      - id: three-region-spirit3-xu-copper-stock
+        name: 许氏已采精铜
+        description: 八份已经采出和初炼的精铜，不等于整条矿脉储量。
+        status: observed
+      - id: three-region-spirit3-xu-mirage-array
+        name: 许氏迷蜃幻境阵基
+        description: 万年前复原的七八成幻阵阵基，令外观山峰坐标偏移；阵力不是实际搬山。
+        status: observed
+      - id: three-region-spirit3-xu-mirage-token
+        name: 许氏现用幻阵控制牌
+        description: 许含章按家族事务保管的当前控制牌，使用须核对已获授权。牌侧刻有当前保管人的验印记。
+        status: observed
+      - id: three-region-spirit3-xu-array-fund
+        name: 许氏幻阵供能盒
+        description: 当前可供阵使用的十二枚高阶石，与养护其他祖物公库分开。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: three-region-family-memory
+        kind: observation
+        description: 家族长期居住与本人已经参与的矿务和护阵事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神冰法、符记辨认、祖庙封存禁制。
+        description: 化神冰法、符记辨认、祖庙封存禁制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: soul-rite-boundary
+        subjectId: self
+        predicate: soul-rite-boundary
+        value:
+          kind: text
+          value: 知道祖传棺瓶的基本养护及血脉关系，尚未取得带走那只瓶中附带的完整血魂术，不能仅凭祖训成功唤醒。
+        description: 知道祖传棺瓶的基本养护及血脉关系，尚未取得带走那只瓶中附带的完整血魂术，不能仅凭祖训成功唤醒。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: three-region-known-array-operation
+        subjectId: self
+        predicate: known-array-operation
+        value:
+          kind: text
+          value: 本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。
+        description: 本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - three-region-family-memory
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-xu-ritualist
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-xu-ancestral-estate
+      - local_entity_id: known-blood-xu-ritualist-resources
+        canonical_entity_ids:
+          - blood-xu-ritualist-resources
+      - local_entity_id: known-blood-xu-keeper
+        canonical_entity_ids:
+          - blood-xu-keeper
+      - local_entity_id: known-blood-xu-clan
+        canonical_entity_ids:
+          - blood-xu-clan
+      - local_entity_id: known-blood-xu-paired-bottle
+        canonical_entity_ids:
+          - blood-xu-paired-bottle
+      - local_entity_id: known-blood-xu-blood-coffin
+        canonical_entity_ids:
+          - blood-xu-blood-coffin
+      - local_entity_id: known-blood-xu-catalog
+        canonical_entity_ids:
+          - blood-xu-catalog
+      - local_entity_id: known-blood-xu-fund
+        canonical_entity_ids:
+          - blood-xu-fund
+      - local_entity_id: known-canon-bingpo
+        canonical_entity_ids:
+          - canon-bingpo
+      - local_entity_id: known-blood-xu-key-a
+        canonical_entity_ids:
+          - blood-xu-key-a
+      - local_entity_id: known-blood-xu-key-b
+        canonical_entity_ids:
+          - blood-xu-key-b
+      - local_entity_id: three-region-spirit3-xu-copper-hills
+        canonical_entity_ids:
+          - spirit3-xu-copper-hills
+      - local_entity_id: three-region-spirit3-xu-mine
+        canonical_entity_ids:
+          - spirit3-xu-mine
+      - local_entity_id: three-region-spirit3-xu-copper-stock
+        canonical_entity_ids:
+          - spirit3-xu-copper-stock
+      - local_entity_id: three-region-spirit3-xu-mirage-array
+        canonical_entity_ids:
+          - spirit3-xu-mirage-array
+      - local_entity_id: three-region-spirit3-xu-mirage-token
+        canonical_entity_ids:
+          - spirit3-xu-mirage-token
+      - local_entity_id: three-region-spirit3-xu-array-fund
+        canonical_entity_ids:
+          - spirit3-xu-array-fund

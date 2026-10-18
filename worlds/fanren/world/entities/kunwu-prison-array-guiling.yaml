@@ -1,0 +1,34 @@
+id: kunwu-prison-array-guiling
+kind: item
+name: 古困灵阵
+description: 囚禁和休眠传送为同一旧设施的不同状态；昆吾整体破封及阵势联动才可触发一次护符与转送。
+placement: kunwu-guiling-prison
+facts:
+  - id: kunwu-prison-array-guiling-imprisoned
+    predicate: imprisoned
+    value:
+      kind: entity
+      entityId: canon-gui-ling
+    description: imprisoned
+    access:
+      kind: private
+  - id: kunwu-prison-array-guiling-conditional-destination
+    predicate: conditional-destination
+    value:
+      kind: entity
+      entityId: kunwu-foot
+    description: conditional-destination
+    access:
+      kind: private
+  - id: kunwu-prison-array-guiling-current-operation
+    predicate: current-operation
+    value:
+      kind: text
+      value: 封禁开启、传送休眠；普通接近不生成护符，不自动把访客传送昆吾。
+    description: 封禁开启、传送休眠；普通接近不生成护符，不自动把访客传送昆吾。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

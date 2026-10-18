@@ -1,0 +1,22 @@
+id: void-island-steward-kit
+kind: container
+name: 乌汀的随身器具
+description: 筑基修行、港务账目和验货。所需的个人日常器具。
+placement: void-island-steward
+facts:
+  - id: void-island-steward-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-island-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

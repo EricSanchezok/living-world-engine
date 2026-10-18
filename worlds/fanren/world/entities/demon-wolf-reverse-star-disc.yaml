@@ -1,0 +1,34 @@
+id: demon-wolf-reverse-star-disc
+kind: item
+name: 狼族逆星盘
+description: 本族实际盘体留在灵界。昆吾所见双印影像只是临时投影；开通须双方信号相合、施术能力与巨大资源，不常开。
+placement: demon-wolf-court
+facts:
+  - id: demon-wolf-reverse-star-disc-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tian-kui
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-wolf-reverse-star-disc-linked-soul-imprints
+    predicate: linked-soul-imprints
+    value:
+      kind: entity
+      entityId: canon-linglong-body
+    description: linked-soul-imprints
+    access:
+      kind: private
+  - id: demon-wolf-reverse-star-disc-current-channel
+    predicate: current-channel
+    value:
+      kind: text
+      value: 休眠，当前没有正在通过的通道。
+    description: 休眠，当前没有正在通过的通道。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

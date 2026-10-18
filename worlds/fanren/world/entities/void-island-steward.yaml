@@ -1,0 +1,193 @@
+id: void-island-steward
+kind: person
+name: 乌汀
+description: 受雇管海埠的筑基执事，不是乌丑，姓氏不能合并身份。
+placement: void-jiyin-port
+facts:
+  - id: void-island-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - void-island-steward
+  - id: void-island-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基修行、港务账目和验货。
+    description: 筑基修行、港务账目和验货。
+    access:
+      kind: agents
+      agentIds:
+        - void-island-steward
+  - id: void-island-steward-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - void-island-steward
+  - id: void-island-steward-serves
+    predicate: serves
+    value:
+      kind: entity
+      entityId: canon-ji-yin
+    description: serves
+    access:
+      kind: private
+  - id: void-island-steward-contract-with
+    predicate: contract-with
+    value:
+      kind: entity
+      entityId: void-boat-owner
+    description: contract-with
+    access:
+      kind: private
+meters:
+  - id: void-island-steward-health
+    definition_id: health
+    current: 100
+  - id: void-island-steward-mana
+    definition_id: mana
+    current: 440
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: void-island-steward-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: void-island-steward-force
+    definition_id: force
+    value: 2
+  - id: void-island-steward-craft
+    definition_id: craft
+    value: 3
+  - id: void-island-steward-perception
+    definition_id: perception
+    value: 2
+  - id: void-island-steward-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: void-island-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受雇管海埠的筑基执事，不是乌丑，姓氏不能合并身份。
+      voice: 说账时很清楚，怕被迁怒但会保存凭据。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核清两船工钱再将账目送往内院。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 乌汀
+        description: 受雇管海埠的筑基执事，不是乌丑，姓氏不能合并身份。
+        status: observed
+      - id: location
+        name: 极阴岛海埠
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-void-island-steward-kit
+        name: 乌汀的随身器具
+        description: 筑基修行、港务账目和验货。所需的个人日常器具。
+        status: observed
+      - id: known-canon-ji-yin
+        name: 极阴祖师
+        description: 海埠公事往来，账目尚待核清。
+        status: observed
+      - id: known-void-boat-owner
+        name: 沈棹
+        description: 这一趟送货约定按实搬运结算，不是主人奴仆关系。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基修行、港务账目和验货。
+        description: 筑基修行、港务账目和验货。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间，后续按实际天时行动。
+        description: 当地此时为夜间，后续按实际天时行动。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: cargo-wages
+        subjectId: self
+        predicate: cargo-wages
+        value:
+          kind: text
+          value: 抄账记十一箱，沈棹说搬了十二箱；我还未看原交接单，若确实少付应从公箱补三十。
+        description: 抄账记十一箱，沈棹说搬了十二箱；我还未看原交接单，若确实少付应从公箱补三十。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - void-island-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-jiyin-port
+      - local_entity_id: known-void-island-steward-kit
+        canonical_entity_ids:
+          - void-island-steward-kit
+      - local_entity_id: known-canon-ji-yin
+        canonical_entity_ids:
+          - canon-ji-yin
+      - local_entity_id: known-void-boat-owner
+        canonical_entity_ids:
+          - void-boat-owner

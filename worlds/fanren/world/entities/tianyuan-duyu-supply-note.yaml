@@ -1,0 +1,26 @@
+id: tianyuan-duyu-supply-note
+kind: item
+name: 阮澄供给问笺
+description: 阮澄问杜宇是否继续按旧额领取两份静修工料；此轮尚待回复和交货。
+placement: canon-du-yu
+facts:
+  - id: tianyuan-duyu-supply-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-duyu-supply-note-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: tianyuan-holy-steward
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

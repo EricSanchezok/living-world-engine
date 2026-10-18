@@ -1,0 +1,22 @@
+id: demon-fox-herbalist-tools
+kind: container
+name: 胡秋绒的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-fox-herbalist
+facts:
+  - id: demon-fox-herbalist-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-fox-herbalist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: human-dongshi-city
+kind: location
+name: 东石城
+description: 魁星岛一处商贸城市，有修仙者往来的市集。
+placement: human-kuixing-island
+facts:
+  - id: human-dongshi-city-route-human-kuixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-dongshi-city-condition-human-kuixing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 魁星岛一处商贸城市，有修仙者往来的市集。
+    description: 魁星岛一处商贸城市，有修仙者往来的市集。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

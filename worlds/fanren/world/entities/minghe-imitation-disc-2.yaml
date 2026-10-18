@@ -1,0 +1,27 @@
+id: minghe-imitation-disc-2
+kind: item
+name: 仿逆星盘2
+description: 有限的重入器物，需配套法诀与正确条件；成功开启一次后耗尽。
+placement: canon-qing-yuan-zi
+facts:
+  - id: minghe-imitation-disc-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-imitation-disc-2-single-use
+    predicate: single-use
+    value:
+      kind: text
+      value: 开启所耗为此件自身，必须令该器物失去可用状态，不能复印文书得到第二件。
+    description: 开启所耗为此件自身，必须令该器物失去可用状态，不能复印文书得到第二件。
+    access:
+      kind: discoverable
+      condition: 受主人说明或准确辨识器物。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

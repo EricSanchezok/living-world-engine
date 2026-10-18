@@ -1,0 +1,18 @@
+id: spirit-anyuan-city
+kind: location
+name: 安远城
+description: 临近草原的人族城池，居民在城中做工、交易和修行，守军留意野外兽群变化。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit-anyuan-city-route-spirit-anyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-market
+    description: 凡俗钱物和修行资源分别作价，店家按实物与成色议价。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: feiling-goldwind-array
+kind: container
+name: 金罡风魔阵柱组
+description: 一百零八根金风柱构成金罡风魔阵，用于引来金属性天地力并削弱其威势；缺柱或柱身损伤会影响阵势，不能直接用于水属合炼。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-goldwind-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-goldwind-column
+    amount: 108
+ratings: []
+shared_activity_resources: []

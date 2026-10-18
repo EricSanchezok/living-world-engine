@@ -1,0 +1,42 @@
+id: blood-xuehen-domain
+kind: location
+name: 血痕宗辖地
+description: 血纹石岭环抱宗门，内院的跨陆阵厅与外客市道分隔。
+placement: blood-continent
+facts:
+  - id: blood-xuehen-domain-review-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: review-route-blood-crane-city
+    access:
+      kind: public
+  - id: blood-xuehen-domain-review-route-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-xuehen-domain-review-route-blood-xuehen-array-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xuehen-array-hall
+    description: review-route-blood-xuehen-array-hall
+    access:
+      kind: public
+  - id: blood-xuehen-domain-review-route-condition-blood-xuehen-array-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

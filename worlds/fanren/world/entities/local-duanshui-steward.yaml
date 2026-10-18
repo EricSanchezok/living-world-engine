@@ -1,0 +1,136 @@
+id: local-duanshui-steward
+kind: person
+name: 顾平
+description: 地方凡俗生活者，有自己有限资产、职责与选择。
+placement: local-duanshui-yard
+facts:
+  - id: local-duanshui-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通刀术与本地行路经验；无修仙法力。
+    description: 普通刀术与本地行路经验；无修仙法力。
+    access:
+      kind: private
+  - id: local-duanshui-steward-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: local-duanshui
+    description: "{'entity': 'local-duanshui'}"
+    access:
+      kind: private
+meters:
+  - id: local-duanshui-steward-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: local-duanshui-steward-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: local-duanshui-steward-force
+    definition_id: force
+    value: 1
+  - id: local-duanshui-steward-craft
+    definition_id: craft
+    value: 2
+  - id: local-duanshui-steward-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: local-duanshui-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地方凡俗生活者，有自己有限资产、职责与选择。
+      voice: 讲实地见过的事，对道听途说总补一句尚未核实。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-life
+        description: 核实一段边路是否可走，再答复铁枪会的协作提议。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 顾平
+        description: 地方凡俗生活者，有自己有限资产、职责与选择。
+        status: observed
+      - id: location
+        name: 断水门堂院
+        description: 本人日常所在。
+        status: observed
+      - id: known-local-duanshui-steward-purse
+        name: 顾平私囊
+        description: 本人实际支配的积蓄。
+        status: observed
+      - id: known-local-duanshui
+        name: 断水门
+        description: 自己的组织与公私资产边界。
+        status: observed
+      - id: known-local-duanshui-fund
+        name: 断水门公库
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-iron-spear-steward
+        name: 周菱
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-luosha-slope
+        name: 落沙坡
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的学习、工作与生活经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通刀术与本地行路经验；无修仙法力。
+        description: 普通刀术与本地行路经验；无修仙法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - local-duanshui-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-duanshui-yard
+      - local_entity_id: known-local-duanshui-steward-purse
+        canonical_entity_ids:
+          - local-duanshui-steward-purse
+      - local_entity_id: known-local-duanshui
+        canonical_entity_ids:
+          - local-duanshui
+      - local_entity_id: known-local-duanshui-fund
+        canonical_entity_ids:
+          - local-duanshui-fund
+      - local_entity_id: known-local-iron-spear-steward
+        canonical_entity_ids:
+          - local-iron-spear-steward
+      - local_entity_id: known-local-luosha-slope
+        canonical_entity_ids:
+          - local-luosha-slope

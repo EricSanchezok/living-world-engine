@@ -1,0 +1,34 @@
+id: demon-phoenix-fireworm-6
+kind: creature
+name: 熔岩火虫（岩槽6）
+description: 细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。
+placement: demon-phoenix-lava-ground
+facts:
+  - id: demon-phoenix-fireworm-6-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-fireworm-6-silk-lifecycle
+    predicate: silk-lifecycle
+    value:
+      kind: text
+      value: 尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。
+    description: 尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。
+    access:
+      kind: public
+  - id: demon-phoenix-fireworm-6-handling
+    predicate: handling
+    value:
+      kind: text
+      value: 移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。
+    description: 移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

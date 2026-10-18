@@ -1,0 +1,42 @@
+id: south-yin-mouth
+kind: location
+name: 阴阳窟入口
+description: 百丈宽地沟中阴风不息，洞口向地下分出岔道。
+placement: south-poison-valley
+facts:
+  - id: south-yin-mouth-route-south-poison-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-poison-valley
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-mouth-condition-south-poison-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从可行石路靠近沟口；进去前须处理阴风。
+    description: 从可行石路靠近沟口；进去前须处理阴风。
+    access:
+      kind: public
+  - id: south-yin-mouth-route-south-yin-forks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-forks
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-mouth-condition-south-yin-forks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 越深惊魄阴风越强，没有合适护魂与防御会受伤。
+    description: 越深惊魄阴风越强，没有合适护魂与防御会受伤。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

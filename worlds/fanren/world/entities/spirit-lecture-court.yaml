@@ -1,0 +1,42 @@
+id: spirit-lecture-court
+kind: location
+name: 天渊城听法院
+description: 面向符合资格修士的讲道院，开讲前公布讲者与主题，不保证每次答疑都有突破。
+placement: tianyuan-city
+facts:
+  - id: spirit-lecture-court-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 面向符合资格修士的讲道院，开讲前公布讲者与主题，不保证每次答疑都有突破。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-lecture-court-route-to-tianyuan-merit-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-merit-office
+    description: route-to-tianyuan-merit-office
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-lecture-court-route-conditions-tianyuan-merit-office
+    predicate: route-conditions-tianyuan-merit-office
+    value:
+      kind: text
+      value: 城内步行至天广听法院；听讲仍须当期令牌、讲师确实到场，不使人自动领悟。
+    description: 城内步行至天广听法院；听讲仍须当期令牌、讲师确实到场，不使人自动领悟。
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-lecture-court-formal-name
+    predicate: formal-name
+    value:
+      kind: text
+      value: 天广殿；本版听法院为其前庭与讲席的统一实例。
+    description: 天广殿；本版听法院为其前庭与讲席的统一实例。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

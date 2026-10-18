@@ -1,0 +1,181 @@
+id: yue-craft-peer
+kind: person
+name: 沈素
+description: 负责器坊材料登记的女弟子，与赵鸣合作多年。
+placement: yue-huangfeng-workyard
+facts:
+  - id: yue-craft-peer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-craft-peer
+  - id: yue-craft-peer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 材料辨认、记录与基础御物。
+    description: 材料辨认、记录与基础御物。
+    access:
+      kind: agents
+      agentIds:
+        - yue-craft-peer
+  - id: yue-craft-peer-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根，已经检验。
+    description: 木水两属性灵根，已经检验。
+    access:
+      kind: agents
+      agentIds:
+        - yue-craft-peer
+  - id: yue-craft-peer-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 黄枫谷当期执事弟子，承担实际园务、器坊或库务。
+    access:
+      kind: public
+meters:
+  - id: yue-craft-peer-health
+    definition_id: health
+    current: 100
+  - id: yue-craft-peer-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-craft-peer-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-craft-peer-force
+    definition_id: force
+    value: 1
+  - id: yue-craft-peer-craft
+    definition_id: craft
+    value: 1
+  - id: yue-craft-peer-perception
+    definition_id: perception
+    value: 1
+  - id: yue-craft-peer-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-craft-peer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 负责器坊材料登记的女弟子，与赵鸣合作多年。
+      voice: 算数清楚，发现别人漏写会当场指出。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清备用铜片实际领用量，避免重复计费。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 沈素
+        description: 负责器坊材料登记的女弟子，与赵鸣合作多年。
+        status: observed
+      - id: location
+        name: 黄枫器坊院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-craft-peer-pouch
+        name: 沈素的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-craft-worker
+        name: 赵鸣
+        description: 合作多年的同门，材料领用会当面核对。
+        status: observed
+      - id: known-huangfeng-sect
+        name: 黄枫谷
+        description: 黄枫谷当期执事弟子，承担实际园务、器坊或库务。
+        status: observed
+      - id: known-yue-storekeeper
+        name: 韩守平
+        description: 认识配给库韩守平，领料需要许可。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 材料辨认、记录与基础御物。
+        description: 材料辨认、记录与基础御物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 查清备用铜片实际领用量，避免重复计费。
+        description: 查清备用铜片实际领用量，避免重复计费。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-craft-peer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-huangfeng-workyard
+      - local_entity_id: known-yue-craft-peer-pouch
+        canonical_entity_ids:
+          - yue-craft-peer-pouch
+      - local_entity_id: known-yue-craft-worker
+        canonical_entity_ids:
+          - yue-craft-worker
+      - local_entity_id: known-huangfeng-sect
+        canonical_entity_ids:
+          - huangfeng-sect
+      - local_entity_id: known-yue-storekeeper
+        canonical_entity_ids:
+          - yue-storekeeper

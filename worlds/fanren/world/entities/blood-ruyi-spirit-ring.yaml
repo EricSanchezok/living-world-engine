@@ -1,0 +1,18 @@
+id: blood-ruyi-spirit-ring
+kind: item
+name: 如意灵禽环
+description: 可临时收容自己六头血鸠的灵兽环，生灵收放不复制数量，也不能无条件拘禁敌方修士。
+placement: canon-blood-ruyi
+facts:
+  - id: blood-ruyi-spirit-ring-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

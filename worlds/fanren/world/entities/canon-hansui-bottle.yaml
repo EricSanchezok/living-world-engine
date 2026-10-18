@@ -1,0 +1,20 @@
+id: canon-hansui-bottle
+kind: item
+name: 小极宫传承寒髓瓶
+description: 当前库存小瓶，寒髓已有六滴；开瓶和服用需处理真实寒气。其他液体来源须实地发现并计量，不能凭空补满。
+placement: north-stockroom
+facts:
+  - id: canon-hansui-bottle-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: north-hansui-drop
+    amount: 6
+ratings: []
+shared_activity_resources: []

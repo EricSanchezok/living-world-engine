@@ -1,0 +1,90 @@
+id: human-ningcui-island
+kind: location
+name: 凝翠岛
+description: 近海礁石环绕的补给岛，店铺各自挂着招牌。
+placement: human-outer-star-sea
+facts:
+  - id: human-ningcui-island-route-human-red-coral-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-red-coral-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-ningcui-island-condition-human-red-coral-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+  - id: human-ningcui-island-route-human-qiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-qiyuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-ningcui-island-condition-human-qiyuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+  - id: human-ningcui-island-route-outerstar-ningcui-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-ningcui-array
+    description: route-to
+    access:
+      kind: public
+  - id: human-ningcui-island-condition-outerstar-ningcui-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阵纹间有守阵人留下的用石记录。
+    description: 阵纹间有守阵人留下的用石记录。
+    access:
+      kind: public
+  - id: human-ningcui-island-route-outerstar-ningcui-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-ningcui-market
+    description: route-to
+    access:
+      kind: public
+  - id: human-ningcui-island-condition-outerstar-ningcui-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 数家铺子卖图、收材料，也替修士找出海伙伴。
+    description: 数家铺子卖图、收材料，也替修士找出海伙伴。
+    access:
+      kind: public
+  - id: human-ningcui-island-route-outerstar-team-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-team-yard
+    description: route-to
+    access:
+      kind: public
+  - id: human-ningcui-island-condition-outerstar-team-yard
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 出海人合议路线的小院，有租借的阵旗和晒干的粮袋。
+    description: 出海人合议路线的小院，有租借的阵旗和晒干的粮袋。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

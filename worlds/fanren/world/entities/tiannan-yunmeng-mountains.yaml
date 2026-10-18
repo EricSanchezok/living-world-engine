@@ -1,0 +1,90 @@
+id: tiannan-yunmeng-mountains
+kind: location
+name: 云梦山脉
+description: 灵气充沛的山脉，主脉、西脉、东脉分别有三宗管辖，外来者须寻路通报。
+placement: human-xi
+facts:
+  - id: tiannan-yunmeng-mountains-route-tiannan-xi-crossroads
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-xi-crossroads
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-travel-tiannan-xi-crossroads
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-route-tiannan-gujian-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-gujian-mountain
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-travel-tiannan-gujian-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-route-tiannan-baiqiao-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-baiqiao-mountain
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-travel-tiannan-baiqiao-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-route-tiannan-luoyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-luoyun-mountain
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-travel-tiannan-luoyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-route-tiannan-tree-grotto
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-tree-grotto
+    description: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    access:
+      kind: public
+  - id: tiannan-yunmeng-mountains-travel-tiannan-tree-grotto
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    description: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

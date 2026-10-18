@@ -1,0 +1,26 @@
+id: thunder-ordinary-wine
+kind: item
+name: 醇香阁日用灵酒
+description: 待客的普通灵酒，不冒充九香珍酿。
+placement: thunder-chunxiang-winehall
+facts:
+  - id: thunder-ordinary-wine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-cai-liu-ying
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-ordinary-wine-remaining-cups
+    predicate: remaining-cups
+    value:
+      kind: number
+      value: 60
+    description: remaining-cups
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

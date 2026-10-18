@@ -1,0 +1,26 @@
+id: xlt-lakeside
+kind: location
+name: 澄蒲湖村
+description: 茶田沿坡而生，村中石埠通向摆渡小舟，临湖街上有药铺和收茶棚。
+placement: xlt-human-land
+facts:
+  - id: xlt-lakeside-route-xlt-human-land
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-human-land
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-lakeside-route-xlt-tea-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-tea-yard
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: thunder-continent
+kind: location
+name: 雷鸣大陆
+description: 众多异族割据的大洲，各族疆域之间有商道、险地和各自掌控的传送设施。
+placement: spirit-realm
+facts:
+  - id: fengyuan-review-thunder-continent-route-to-fengyuan-thunder-crossing-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-thunder-crossing-sea
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-review-thunder-continent-route-conditions-fengyuan-thunder-crossing-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。
+    description: 从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。
+    access:
+      kind: private
+  - id: thunder-continent-route-seas-between-continents
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-between-continents
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-continent-condition-seas-between-continents
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    description: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

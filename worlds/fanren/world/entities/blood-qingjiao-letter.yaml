@@ -1,0 +1,26 @@
+id: blood-qingjiao-letter
+kind: item
+name: 青蛟殿水道询函
+description: 殿方询问一处季节暗流是否仍可通行，需有实际新观察才可答复保证；并未宣布与镇海宫开战。
+placement: blood-tuyao-refuge
+facts:
+  - id: blood-qingjiao-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tu-yao
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-qingjiao-letter-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: blood-qingjiao-chief-one
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

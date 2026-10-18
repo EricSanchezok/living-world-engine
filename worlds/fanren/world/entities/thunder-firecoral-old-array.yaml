@@ -1,0 +1,34 @@
+id: thunder-firecoral-old-array
+kind: item
+name: 绿光至火瑚古阵
+description: 旧阵长久闲置，海外联系已断；本地维护不等于远端已修好。
+placement: thunder-greenlight-array
+facts:
+  - id: thunder-firecoral-old-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-firecoral-old-array-status
+    predicate: status
+    value:
+      kind: text
+      value: 长久废置失联，尚未取得远端现况与可校验的完整修法。
+    description: 长久废置失联，尚未取得远端现况与可校验的完整修法。
+    access:
+      kind: public
+  - id: thunder-firecoral-old-array-paired-array
+    predicate: paired-array
+    value:
+      kind: entity
+      entityId: thunder-firecoral-overseas-array
+    description: paired-array
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

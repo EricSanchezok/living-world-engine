@@ -1,0 +1,18 @@
+id: outerstar-fengle-charts
+kind: item
+name: 丰乐铺海图册
+description: 三份纸图和来客记号，近路多为旧资料，不自动报告海兽移动。
+placement: outerstar-fengle-shop
+facts:
+  - id: outerstar-fengle-charts-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengle-trade-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

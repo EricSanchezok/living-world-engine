@@ -1,0 +1,26 @@
+id: void-map-pearl-1
+kind: item
+name: 封墓地图珠1
+description: 注灵可显半幅旧地图，两颗合起来标封墓岛。
+placement: void-pearl-necklace
+facts:
+  - id: void-map-pearl-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-map-customer
+    description: owned-by
+    access:
+      kind: private
+  - id: void-map-pearl-1-hidden-map
+    predicate: hidden-map
+    value:
+      kind: text
+      value: 记录封墓荒岛旧位置与外阵，未知近况，非虚天残图。
+    description: 记录封墓荒岛旧位置与外阵，未知近况，非虚天残图。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

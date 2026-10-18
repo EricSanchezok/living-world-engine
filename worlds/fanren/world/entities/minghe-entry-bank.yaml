@@ -1,0 +1,42 @@
+id: minghe-entry-bank
+kind: location
+name: 冥河接引岸
+description: 授权接引抵达的石岸，阴气需实际防护。
+placement: minghe-space
+facts:
+  - id: minghe-entry-bank-route-minghe-outer-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-outer-gate
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-entry-bank-condition-minghe-outer-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有当前已筹备窗口、双方配合和有效许可均成立才能启用；本次耗四块高阶灵石并清零一次开放额度，持续六百秒，可让至多六名普通人形来客及合理行李往返。超时未归者须另寻真实离境办法。
+    description: 只有当前已筹备窗口、双方配合和有效许可均成立才能启用；本次耗四块高阶灵石并清零一次开放额度，持续六百秒，可让至多六名普通人形来客及合理行李往返。超时未归者须另寻真实离境办法。
+    access:
+      kind: public
+  - id: minghe-entry-bank-route-minghe-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-river
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-entry-bank-condition-minghe-river
+    predicate: condition-minghe-river
+    value:
+      kind: text
+      value: 内岸通往冥河岸属于空间内部路径；阴水和阴气需实际防护，不能靠接引许可免除。
+    description: 内岸通往冥河岸属于空间内部路径；阴水和阴气需实际防护，不能靠接引许可免除。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

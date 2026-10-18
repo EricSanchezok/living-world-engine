@@ -1,0 +1,18 @@
+id: outerstar-old-chart
+kind: item
+name: 莫图的旧海图
+description: 三年前绘制的近岸暗礁图；东南水道深度已失准，不会自动显示海兽现在的位置。
+placement: outerstar-map-shop
+facts:
+  - id: outerstar-old-chart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-mapmaker
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

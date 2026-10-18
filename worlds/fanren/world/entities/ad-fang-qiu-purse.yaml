@@ -1,0 +1,22 @@
+id: ad-fang-qiu-purse
+kind: container
+name: 方秋私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-fang-qiu
+facts:
+  - id: ad-fang-qiu-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-fang-qiu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,191 @@
+id: canon-wen-xin-feng
+kind: person
+name: 文心凤
+description: 幻心门与商盟间往来的大乘女修，神态沉静，对幻术和真实判断有兴趣。
+placement: blood-huanxin-hall
+facts:
+  - id: canon-wen-xin-feng-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-wen-xin-feng
+  - id: canon-wen-xin-feng-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘幻术、神识与幻心门传承；幻术不自动等于改写客观事实。
+    description: 大乘幻术、神识与幻心门传承；幻术不自动等于改写客观事实。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wen-xin-feng
+  - id: canon-wen-xin-feng-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: canon-wen-xin-feng-institutional-affiliation
+    predicate: institutional-affiliation
+    value:
+      kind: entity
+      entityId: blood-huanxin-sect
+    description: institutional-affiliation
+    access:
+      kind: public
+  - id: canon-wen-xin-feng-league-colleague
+    predicate: league-colleague
+    value:
+      kind: entity
+      entityId: canon-bi-ying
+    description: league-colleague
+    access:
+      kind: private
+  - id: canon-wen-xin-feng-teacher
+    predicate: teacher
+    value:
+      kind: entity
+      entityId: blood-huanxin-student
+    description: teacher
+    access:
+      kind: private
+meters:
+  - id: canon-wen-xin-feng-health
+    definition_id: health
+    current: 100
+  - id: canon-wen-xin-feng-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-wen-xin-feng-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-wen-xin-feng-force
+    definition_id: force
+    value: 8
+  - id: canon-wen-xin-feng-craft
+    definition_id: craft
+    value: 6
+  - id: canon-wen-xin-feng-perception
+    definition_id: perception
+    value: 8
+  - id: canon-wen-xin-feng-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-wen-xin-feng
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 幻心门与商盟间往来的大乘女修，神态沉静，对幻术和真实判断有兴趣。
+      voice: 声音悦耳、从容，常先让人把试验做完，再温和指出被忽略的一处。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 评定一位后辈的幻术作品，决定是否允许其外出独立行事。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 文心凤
+        description: 幻心门与商盟间往来的大乘女修，神态沉静，对幻术和真实判断有兴趣。
+        status: observed
+      - id: location
+        name: 幻心门客堂
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-canon-wen-xin-feng-resources
+        name: 文心凤的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-bi-ying
+        name: 碧影
+        description: 两者在商盟事务中长期往来，不共享私人心念。
+        status: observed
+      - id: known-blood-huanxin-student
+        name: 灯见
+        description: 有实际教学关系，本次弟子希望争取独立外出。
+        status: observed
+      - id: known-blood-student-mirror
+        name: 灯见试演幻镜
+        description: 弟子近来创作的幻景，准备亲自看其如何控制退出与真假边界。
+        status: observed
+      - id: known-blood-student-consent
+        name: 幻景试演告知页
+        description: 弟子承诺的试演规则。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘幻术、神识与幻心门传承；幻术不自动等于改写客观事实。
+        description: 大乘幻术、神识与幻心门传承；幻术不自动等于改写客观事实。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wen-xin-feng
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-huanxin-hall
+      - local_entity_id: known-canon-wen-xin-feng-resources
+        canonical_entity_ids:
+          - canon-wen-xin-feng-resources
+      - local_entity_id: known-canon-bi-ying
+        canonical_entity_ids:
+          - canon-bi-ying
+      - local_entity_id: known-blood-huanxin-student
+        canonical_entity_ids:
+          - blood-huanxin-student
+      - local_entity_id: known-blood-student-mirror
+        canonical_entity_ids:
+          - blood-student-mirror
+      - local_entity_id: known-blood-student-consent
+        canonical_entity_ids:
+          - blood-student-consent

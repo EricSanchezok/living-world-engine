@@ -1,0 +1,189 @@
+id: canon-qin-ping
+kind: person
+name: 秦平
+description: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+placement: yue-qin-estate
+facts:
+  - id: canon-qin-ping-age
+    predicate: age
+    value:
+      kind: text
+      value: 12岁
+    description: 12岁
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-ping
+  - id: canon-qin-ping-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-ping
+  - id: canon-qin-ping-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+    description: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-ping
+  - id: canon-qin-ping-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根
+    description: 无灵根
+    access:
+      kind: discoverable
+      condition: 实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。
+  - id: canon-qin-ping-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 秦家家人或受雇办事者，公产仍属家族。
+    access:
+      kind: public
+meters:
+  - id: canon-qin-ping-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: silver
+    amount: 3
+ratings:
+  - id: canon-qin-ping-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-qin-ping-craft
+    definition_id: craft
+    value: 1
+  - id: canon-qin-ping-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-qin-ping
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+      voice: 说话还带少年急切，受吩咐后会问清送到哪一院。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 先把外院扫干净，再回屋歇息。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 秦平
+        description: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+        status: observed
+      - id: location
+        name: 秦宅
+        description: 自己日常生活或当值之处。
+        status: observed
+      - id: known-canon-qin-ping-pouch
+        name: 秦平的日用包
+        description: 自己的日用品与口粮，不是公家的账。
+        status: observed
+      - id: known-canon-qin-yan
+        name: 秦言
+        description: 秦家主人，来客和重要差事应向他通报。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的生活、修学、交往及已见记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: age
+        subjectId: self
+        predicate: age
+        value:
+          kind: text
+          value: 12岁
+        description: 12岁
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 凡人
+        description: 凡人
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+        description: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己未经过可靠验灵，不知道是否有灵根。
+        description: 自己未经过可靠验灵，不知道是否有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 先把外院扫干净，再回屋歇息。
+        description: 先把外院扫干净，再回屋歇息。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-qin-ping
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-qin-estate
+      - local_entity_id: known-canon-qin-ping-pouch
+        canonical_entity_ids:
+          - canon-qin-ping-pouch
+      - local_entity_id: known-canon-qin-yan
+        canonical_entity_ids:
+          - canon-qin-yan

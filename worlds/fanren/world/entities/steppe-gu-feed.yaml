@@ -1,0 +1,28 @@
+id: steppe-gu-feed
+kind: item
+name: 谷氏灵兽饲料
+description: 已在栏中备好的五份饲料；岑禾未交的货不算本库存。
+placement: steppe-gu-reed-house
+facts:
+  - id: steppe-gu-feed-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-gu-shuangpu
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-gu-feed-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-gu-shuangpu
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+ratings: []
+shared_activity_resources: []

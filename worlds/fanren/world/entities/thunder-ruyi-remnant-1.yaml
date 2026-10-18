@@ -1,0 +1,29 @@
+id: thunder-ruyi-remnant-1
+kind: item
+name: 玄天如意刃残片1
+description: 古代断裂的一片玄天残刃，只有这一片实际物体，残片威能与完整宝物不同。
+placement: canon-duo-yan-mo
+facts:
+  - id: thunder-ruyi-remnant-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-duo-yan-mo
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-ruyi-remnant-1-use-limit
+    predicate: use-limit
+    value:
+      kind: text
+      value: 法力与祭炼决定能否驱动，残刃不是完整玄天宝物；没有已知可随手复原三片的方法。
+    description: 法力与祭炼决定能否驱动，残刃不是完整玄天宝物；没有已知可随手复原三片的方法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-duo-yan-mo
+        - canon-bao-hua
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

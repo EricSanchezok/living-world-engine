@@ -1,0 +1,18 @@
+id: south-boat
+kind: item
+name: 葛家的旧木舟
+description: 舟缝刚用实木胶补好，是否渗漏尚未试水；不是已确认沉船。
+placement: south-market-landing
+facts:
+  - id: south-boat-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-boatkeeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

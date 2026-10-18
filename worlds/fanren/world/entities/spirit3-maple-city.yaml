@@ -1,0 +1,58 @@
+id: spirit3-maple-city
+kind: location
+name: 枫林城
+description: 天元偏处修士城，城外南向长路通往黄红丘陵与许氏族地。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit3-maple-city-route-to-spirit3-maple-array-hall
+    predicate: route-to-spirit3-maple-array-hall
+    value:
+      kind: entity
+      entityId: spirit3-maple-array-hall
+    description: route-to-spirit3-maple-array-hall
+    access:
+      kind: private
+  - id: spirit3-maple-city-route-conditions-spirit3-maple-array-hall
+    predicate: route-conditions-spirit3-maple-array-hall
+    value:
+      kind: text
+      value: 步行到传送殿外；进阵须获准。
+    description: 步行到传送殿外；进阵须获准。
+    access:
+      kind: private
+  - id: spirit3-maple-city-route-to-spirit-inner-caravan-road
+    predicate: route-to-spirit-inner-caravan-road
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: route-to-spirit-inner-caravan-road
+    access:
+      kind: private
+  - id: spirit3-maple-city-route-conditions-spirit-inner-caravan-road
+    predicate: route-conditions-spirit-inner-caravan-road
+    value:
+      kind: text
+      value: 循天元内境道路长途行进，需真实交通和补给。
+    description: 循天元内境道路长途行进，需真实交通和补给。
+    access:
+      kind: private
+  - id: spirit3-maple-city-route-to-spirit3-xu-copper-hills
+    predicate: route-to-spirit3-xu-copper-hills
+    value:
+      kind: entity
+      entityId: spirit3-xu-copper-hills
+    description: route-to-spirit3-xu-copper-hills
+    access:
+      kind: private
+  - id: spirit3-maple-city-route-conditions-spirit3-xu-copper-hills
+    predicate: route-conditions-spirit3-xu-copper-hills
+    value:
+      kind: text
+      value: 经黄红丘陵长途往返，需真实交通和补给；耗时取决于路线、速度和停留。
+    description: 经黄红丘陵长途往返，需真实交通和补给；耗时取决于路线、速度和停留。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

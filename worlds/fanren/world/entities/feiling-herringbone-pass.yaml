@@ -1,0 +1,42 @@
+id: feiling-herringbone-pass
+kind: location
+name: 人字峰旧入口
+description: 灰白双峰夹出人字形，向下的裂道通第二层；风与暗气沿狭缝上涌。
+placement: feiling-abyss-1
+facts:
+  - id: feiling-herringbone-pass-route-to-feiling-abyss-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-1
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-herringbone-pass-route-conditions-feiling-abyss-1
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需辨认峰形、避开寒风才可入裂道。
+    description: 需辨认峰形、避开寒风才可入裂道。
+    access:
+      kind: private
+  - id: feiling-herringbone-pass-route-to-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-herringbone-pass-route-conditions-feiling-abyss-2
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿裂道长距离下降，低修者须防暗气和寒风。
+    description: 沿裂道长距离下降，低修者须防暗气和寒风。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

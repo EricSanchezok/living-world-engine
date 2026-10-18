@@ -1,0 +1,178 @@
+id: minghe-garden-neighbor
+kind: person
+name: 白笙
+description: 卖干药的熟客，已预付了一批虫粮的钱。
+placement: minghe-lintai-market
+facts:
+  - id: minghe-garden-neighbor-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - minghe-garden-neighbor
+  - id: minghe-garden-neighbor-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹法力、草药保存与行商。
+    description: 结丹法力、草药保存与行商。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-garden-neighbor
+  - id: minghe-garden-neighbor-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 蜉蝣族修行。
+    description: 蜉蝣族修行。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-garden-neighbor
+  - id: minghe-garden-neighbor-prepaid-to
+    predicate: prepaid-to
+    value:
+      kind: entity
+      entityId: minghe-young-gardener
+    description: prepaid-to
+    access:
+      kind: private
+meters:
+  - id: minghe-garden-neighbor-health
+    definition_id: health
+    current: 100
+  - id: minghe-garden-neighbor-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings:
+  - id: minghe-garden-neighbor-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: minghe-garden-neighbor-force
+    definition_id: force
+    value: 3
+  - id: minghe-garden-neighbor-craft
+    definition_id: craft
+    value: 5
+  - id: minghe-garden-neighbor-perception
+    definition_id: perception
+    value: 3
+  - id: minghe-garden-neighbor-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: minghe-garden-neighbor
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 卖干药的熟客，已预付了一批虫粮的钱。
+      voice: 议价利落，谈老朋友会叹气，最在意是否如实交代。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 拿到品质合格的货，也愿给药农时间查清问题。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 白笙
+        description: 卖干药的熟客，已预付了一批虫粮的钱。
+        status: observed
+      - id: location
+        name: 翎苔集
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-minghe-young-gardener
+        name: 翎墨
+        description: 白笙已付八块低阶灵石定金，翎墨须交三包合格虫粮或协商退款。
+        status: observed
+      - id: known-minghe-market-leaf-stock
+        name: 白笙待售虫粮
+        description: 五包自有干虫粮，暂拟每包五低阶灵石；愿否出售给翎墨及改签订单要真实商议。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹法力、草药保存与行商。
+        description: 结丹法力、草药保存与行商。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 蜉蝣族修行。
+        description: 蜉蝣族修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: prepaid-order
+        subjectId: self
+        predicate: prepaid-order
+        value:
+          kind: text
+          value: 已付八块定金，现有八十灵石是付款后余额；验收三包合格虫粮再付四块，不合格可商议延期或退款。
+        description: 已付八块定金，现有八十灵石是付款后余额；验收三包合格虫粮再付四块，不合格可商议延期或退款。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - minghe-garden-neighbor
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-lintai-market
+      - local_entity_id: known-minghe-young-gardener
+        canonical_entity_ids:
+          - minghe-young-gardener
+      - local_entity_id: known-minghe-market-leaf-stock
+        canonical_entity_ids:
+          - minghe-market-leaf-stock

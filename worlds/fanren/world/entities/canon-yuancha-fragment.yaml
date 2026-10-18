@@ -1,0 +1,26 @@
+id: canon-yuancha-fragment
+kind: soul-component
+name: 元刹分魂源
+description: 元刹当年下到人界的分魂，当前融合于狼身心智；不与古魔界本体自动共享消息。
+placement: canon-linglong-body
+facts:
+  - id: canon-yuancha-fragment-source-person
+    predicate: source-person
+    value:
+      kind: entity
+      entityId: canon-yuan-cha
+    description: source-person
+    access:
+      kind: private
+  - id: canon-yuancha-fragment-remaining-cross-space-summons
+    predicate: remaining-cross-space-summons
+    value:
+      kind: number
+      value: 1
+    description: remaining-cross-space-summons
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

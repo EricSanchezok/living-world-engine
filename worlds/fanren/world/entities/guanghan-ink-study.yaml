@@ -1,0 +1,26 @@
+id: guanghan-ink-study
+kind: location
+name: 云城墨衡书舍
+description: 两位文字研究者租用的静室，桌上分开放着摹本与自己的注释。
+placement: thunder-cloud-city
+facts:
+  - id: guanghan-ink-study-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ink-study-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两位文字研究者租用的静室，桌上分开放着摹本与自己的注释。
+    description: 两位文字研究者租用的静室，桌上分开放着摹本与自己的注释。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

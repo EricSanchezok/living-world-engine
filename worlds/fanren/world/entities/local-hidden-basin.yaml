@@ -1,0 +1,18 @@
+id: local-hidden-basin
+kind: location
+name: 槐洞小水潭
+description: 小盆地四壁陡峭，进入须找到老槐树洞与狭窄通道；没有韩厉交易记忆。
+placement: caixia-mountain
+facts:
+  - id: local-hidden-basin-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 按地形寻找槐洞，再匍匐过狭道；行人不初始知道确切入口。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

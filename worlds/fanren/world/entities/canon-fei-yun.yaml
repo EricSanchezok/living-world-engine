@@ -1,0 +1,240 @@
+id: canon-fei-yun
+kind: person
+name: 飞云仙子
+description: 紫衣接引修士，重视职务评价，对下属的去向有真实决定权。
+placement: seas-guest-court
+facts:
+  - id: canon-fei-yun-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-fei-yun
+  - id: canon-fei-yun-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体修行、接引短阵、接待组织与信息核验。
+    description: 合体修行、接引短阵、接待组织与信息核验。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fei-yun
+  - id: canon-fei-yun-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fei-yun
+meters:
+  - id: canon-fei-yun-health
+    definition_id: health
+    current: 100
+  - id: canon-fei-yun-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-fei-yun-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-fei-yun-force
+    definition_id: force
+    value: 7
+  - id: canon-fei-yun-craft
+    definition_id: craft
+    value: 7
+  - id: canon-fei-yun-perception
+    definition_id: perception
+    value: 7
+  - id: canon-fei-yun-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-fei-yun
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 紫衣接引修士，重视职务评价，对下属的去向有真实决定权。
+      voice: 在贵客前措辞周全，和熟人说话直接；忙起来会先问哪件事今天必须办。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 处理一名成年侍役提出的转职申请，平衡用人安排与自己的承诺。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 飞云仙子
+        description: 紫衣接引修士，重视职务评价，对下属的去向有真实决定权。
+        status: observed
+      - id: location
+        name: 商盟贵宾院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-fei-yun-private-stock
+        name: 飞云仙子的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-ming-zun
+        name: 明尊
+        description: 长期主事与接引合作，彼此熟悉办事方式。
+        status: observed
+      - id: known-seas-adult-attendant
+        name: 青序
+        description: 接待负责人和受约束的成年侍役，本次已有转职申请。
+        status: observed
+      - id: known-seas-array-tutor
+        name: 商砚
+        description: 已有接引阵工作往来，可就转职试艺具体商议。
+        status: observed
+      - id: known-seas-qingxu-contract
+        name: 青序役务契据
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-qingxu-request
+        name: 青序转职申请
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-apprentice-offer
+        name: 商砚试艺条件
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-apprentice-fund
+        name: 阵务学徒预算
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-seven-orifice-wall
+        name: 七窍心音传讯壁
+        description: 熟悉自己办公处的传讯法器及开关。
+        status: observed
+      - id: known-seas-hu-invitation
+        name: 飞云致胡玉双邀约
+        description: 请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。
+        status: observed
+      - id: known-seas-hu-host-budget
+        name: 主持酬金预留
+        description: 已获批准可用的主持酬金预算。
+        status: observed
+      - id: known-canon-hu-yushuang
+        name: 胡玉双
+        description: 过去经商盟信函介绍的同行，本次具体邀约仍待本人决定。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体修行、接引短阵、接待组织与信息核验。
+        description: 合体修行、接引短阵、接待组织与信息核验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: signal-cost
+        subjectId: self
+        predicate: signal-cost
+        value:
+          kind: text
+          value: 跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。
+        description: 跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: reviewed-transit-interval
+        subjectId: self
+        predicate: known-transit-condition
+        value:
+          kind: text
+          value: 现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。
+        description: 从当前受理文书和当事人说明获知的行程限制。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-fei-yun
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-guest-court
+      - local_entity_id: known-canon-fei-yun-private-stock
+        canonical_entity_ids:
+          - canon-fei-yun-private-stock
+      - local_entity_id: known-canon-ming-zun
+        canonical_entity_ids:
+          - canon-ming-zun
+      - local_entity_id: known-seas-adult-attendant
+        canonical_entity_ids:
+          - seas-adult-attendant
+      - local_entity_id: known-seas-array-tutor
+        canonical_entity_ids:
+          - seas-array-tutor
+      - local_entity_id: known-seas-qingxu-contract
+        canonical_entity_ids:
+          - seas-qingxu-contract
+      - local_entity_id: known-seas-qingxu-request
+        canonical_entity_ids:
+          - seas-qingxu-request
+      - local_entity_id: known-seas-apprentice-offer
+        canonical_entity_ids:
+          - seas-apprentice-offer
+      - local_entity_id: known-seas-apprentice-fund
+        canonical_entity_ids:
+          - seas-apprentice-fund
+      - local_entity_id: known-seas-seven-orifice-wall
+        canonical_entity_ids:
+          - seas-seven-orifice-wall
+      - local_entity_id: known-seas-hu-invitation
+        canonical_entity_ids:
+          - seas-hu-invitation
+      - local_entity_id: known-seas-hu-host-budget
+        canonical_entity_ids:
+          - seas-hu-host-budget
+      - local_entity_id: known-canon-hu-yushuang
+        canonical_entity_ids:
+          - canon-hu-yushuang

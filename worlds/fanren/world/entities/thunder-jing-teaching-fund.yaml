@@ -1,0 +1,22 @@
+id: thunder-jing-teaching-fund
+kind: container
+name: 十二本地月试学预留款
+description: 先预留十二个月补助，超出这段期限的新款须另议；公库不会自动替付。
+placement: thunder-jing-workshop
+facts:
+  - id: thunder-jing-teaching-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jing-teacher
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 144
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: north-guest-lodges
+kind: location
+name: 寒骊秘境贵宾楼群
+description: 山壁旁十几座相似接待阁楼，楼内防窥禁制可被高阶手段破坏并引起察觉。
+placement: north-hanli-realm
+facts:
+  - id: north-guest-lodges-route-north-hanli-realm
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-hanli-realm
+    description: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    access:
+      kind: public
+  - id: north-guest-lodges-travel-north-hanli-realm
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    description: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

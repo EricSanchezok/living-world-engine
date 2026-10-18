@@ -1,0 +1,34 @@
+id: thunder-apprentice-durable
+kind: item
+name: 岑音的耐用木偶
+description: 以厚构件支撑的搬运木偶，能搬两份材料但步态粗拙。
+placement: thunder-apprentice
+facts:
+  - id: thunder-apprentice-durable-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-apprentice
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-apprentice-durable-trial-capability
+    predicate: trial-capability
+    value:
+      kind: text
+      value: 装一低阶灵石可搬运两份材料三百秒，耗尽即停。
+    description: 装一低阶灵石可搬运两份材料三百秒，耗尽即停。
+    access:
+      kind: public
+  - id: thunder-apprentice-durable-loaded-stones
+    predicate: loaded-stones
+    value:
+      kind: number
+      value: 0
+    description: loaded-stones
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

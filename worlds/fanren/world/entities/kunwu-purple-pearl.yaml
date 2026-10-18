@@ -1,0 +1,18 @@
+id: kunwu-purple-pearl
+kind: item
+name: 紫幽珠
+description: 九幽镇宗器，削弱惊魄阴风需真实施法，给同行加持须耗精血。 临时神光能维持多久取决于阴风强弱；风势不变时约七八天，仍须自身护持。
+placement: south-jiuyou-vault
+facts:
+  - id: kunwu-purple-pearl-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-jiuyou-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

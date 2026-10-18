@@ -1,0 +1,218 @@
+id: fengyuan-border-exchange
+kind: location
+name: 折枝边市
+description: 林缘获准交易的市口，有双方可以坐下来交涉的棚亭。
+placement: fengyuan-black-leaf-forest
+facts:
+  - id: fengyuan-border-exchange-route-fengyuan-black-leaf-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-black-leaf-forest
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-condition-fengyuan-black-leaf-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 林缘获准交易的市口，有双方可以坐下来交涉的棚亭。
+    description: 林缘获准交易的市口，有双方可以坐下来交涉的棚亭。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-fengyuan-wood-sanctuary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-wood-sanctuary
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-condition-fengyuan-wood-sanctuary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 古老圣树与护持禁制所在，族人依职权照料，外人需获许可。
+    description: 古老圣树与护持禁制所在，族人依职权照料，外人需获许可。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-mumian-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mumian-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-mumian-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿过木族既有边防和林路；携货者须说明来路与交易对象，飞行仍需真实法力和路程。
+    description: 穿过木族既有边防和林路；携货者须说明来路与交易对象，飞行仍需真实法力和路程。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-greenlimb-refuge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-greenlimb-refuge
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-greenlimb-refuge
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 远程蛮荒谷路，无固定免费传送；需找向导或实际寻路，谷口陌生来客会被询问。
+    description: 远程蛮荒谷路，无固定免费传送；需找向导或实际寻路，谷口陌生来客会被询问。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-tianji-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-tianji-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-tianji-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-jushou-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-jushou-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-jushou-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-guli-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-guli-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-guli-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-tianchan-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-tianchan-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-tianchan-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-jinshi-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-jinshi-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-jinshi-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-to-fengyuan-xihe-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-xihe-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-conditions-fengyuan-xihe-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    description: 跨族域远行，须真实飞行或乘具、补给和边界许可；贸易往来不是无条件军事通行。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-thunder-fengyuan-relay
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fengyuan-relay
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-condition-thunder-fengyuan-relay
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阵院外仍是蛮荒商路，须有路线、补给和实际行旅能力才能到折枝边市；跨洲落地不等于安全回到人妖族域。
+    description: 阵院外仍是蛮荒商路，须有路线、补给和实际行旅能力才能到折枝边市；跨洲落地不等于安全回到人妖族域。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-seas-jiatun-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-condition-seas-jiatun-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循跨族商路远行，通关需得到实际守卫承认。
+    description: 循跨族商路远行，通关需得到实际守卫承认。
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-route-seas-yu-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-yu-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-border-exchange-condition-seas-yu-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 蛮荒长途旅行，贸易关系不代表随时免费开阵。
+    description: 蛮荒长途旅行，贸易关系不代表随时免费开阵。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

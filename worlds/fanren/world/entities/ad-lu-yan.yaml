@@ -1,0 +1,172 @@
+id: ad-lu-yan
+kind: person
+name: 卢砚
+description: 货场受托验货人，主持这一季有限矿料采购。
+placement: ad-bloodcrow-market
+facts:
+  - id: ad-lu-yan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: ad-lu-yan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚魔功、矿石鉴别与货账核验。
+    description: 炼虚魔功、矿石鉴别与货账核验。
+    access:
+      kind: private
+  - id: ad-lu-yan-relation-ad-tao-cen
+    predicate: relation-ad-tao-cen
+    value:
+      kind: entity
+      entityId: ad-tao-cen
+    description: 长期验货委托与器修往来，各自议价。
+    access:
+      kind: private
+  - id: ad-lu-yan-relation-ad-niu-cun
+    predicate: relation-ad-niu-cun
+    value:
+      kind: entity
+      entityId: ad-niu-cun
+    description: 本次矿道支护约定，按实际劳动结薪。
+    access:
+      kind: private
+meters:
+  - id: ad-lu-yan-health
+    definition_id: health
+    current: 100
+  - id: ad-lu-yan-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: ad-lu-yan-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: ad-lu-yan-force
+    definition_id: force
+    value: 6
+  - id: ad-lu-yan-craft
+    definition_id: craft
+    value: 6
+  - id: ad-lu-yan-perception
+    definition_id: perception
+    value: 6
+  - id: ad-lu-yan-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: ad-lu-yan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 货场受托验货人，主持这一季有限矿料采购。
+      voice: 先看货再开口，能认可细心的新手。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核清一批外表合格却轻了两成的矿料，决定退货、补价或委托复验。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 卢砚
+        description: 货场受托验货人，主持这一季有限矿料采购。
+        status: observed
+      - id: location
+        name: 血鸦城外货场
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-ad-lu-yan-purse
+        name: 卢砚私囊
+        description: 本人已挣得的财物。
+        status: observed
+      - id: known-ad-tao-cen
+        name: 陶岑
+        description: 长期验货委托与器修往来，各自议价。
+        status: observed
+      - id: known-ad-niu-cun
+        name: 牛存
+        description: 本次矿道支护约定，按实际劳动结薪。
+        status: observed
+      - id: known-ad-market-fund
+        name: 货场采购公款
+        description: 卢砚仅有经授权的采购权，不能将全款视为私囊。
+        status: observed
+      - id: known-ad-mineral-load
+        name: 待验血光晶矿料
+        description: 20份已采矿料，夹杂空隙，只有16份可用晶质；复验不凭空增加材料。
+        status: observed
+      - id: known-ad-miner-support
+        name: 矿道支护料
+        description: 修完这一段支架实际耗2份，余料留矿方；此项不等同继续开矿。
+        status: observed
+      - id: known-ad-wage-slip
+        name: 牛存支护工单
+        description: 已完成前半段，矿方尚欠3魔石；后半段完成再得3，付款从货场公款扣除并记已付。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚魔功、矿石鉴别与货账核验。
+        description: 炼虚魔功、矿石鉴别与货账核验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-lu-yan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-bloodcrow-market
+      - local_entity_id: known-ad-lu-yan-purse
+        canonical_entity_ids:
+          - ad-lu-yan-purse
+      - local_entity_id: known-ad-tao-cen
+        canonical_entity_ids:
+          - ad-tao-cen
+      - local_entity_id: known-ad-niu-cun
+        canonical_entity_ids:
+          - ad-niu-cun
+      - local_entity_id: known-ad-market-fund
+        canonical_entity_ids:
+          - ad-market-fund
+      - local_entity_id: known-ad-mineral-load
+        canonical_entity_ids:
+          - ad-mineral-load
+      - local_entity_id: known-ad-miner-support
+        canonical_entity_ids:
+          - ad-miner-support
+      - local_entity_id: known-ad-wage-slip
+        canonical_entity_ids:
+          - ad-wage-slip

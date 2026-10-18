@@ -1,0 +1,18 @@
+id: canon-boluo-bracelet
+kind: item
+name: 四颗婆罗珠手链
+description: 定神安魂的四珠手链；有助抗扰，不保证任何幻境无效。
+placement: canon-ji-yin
+facts:
+  - id: canon-boluo-bracelet-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ji-yin
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

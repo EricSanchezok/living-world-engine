@@ -1,0 +1,26 @@
+id: innerstar-mortal-street
+kind: location
+name: 临潮街
+description: 饭铺、布店、修船铺相连的凡俗街区。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-mortal-street-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-mortal-street-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 饭铺、布店、修船铺相连的凡俗街区。
+    description: 饭铺、布店、修船铺相连的凡俗街区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

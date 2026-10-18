@@ -1,0 +1,18 @@
+id: ad-veteran-request
+kind: item
+name: 石瘦轮换申请
+description: 本人提出提前2共同日轮换，愿先教安全路线和交接真实虫隙记录，不谎报已经获准。
+placement: ad-seal-veteran
+facts:
+  - id: ad-veteran-request-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-seal-veteran
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

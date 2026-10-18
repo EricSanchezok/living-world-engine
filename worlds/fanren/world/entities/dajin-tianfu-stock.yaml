@@ -1,0 +1,22 @@
+id: dajin-tianfu-stock
+kind: item
+name: 天符门材料柜
+description: 门内公用原料，傅衡能经批准领用并登记损耗。
+placement: dajin-baizhu
+facts:
+  - id: dajin-tianfu-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianfu
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 24
+  - definition_id: low-stone
+    amount: 110
+ratings: []
+shared_activity_resources: []

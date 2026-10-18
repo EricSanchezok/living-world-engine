@@ -1,0 +1,22 @@
+id: blood-array-trial-fund
+kind: container
+name: 旧阵对照试验材料
+description: 为这一场实际试验准备的有限材料。
+placement: blood-bone-retreat
+facts:
+  - id: blood-array-trial-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xiao-ming
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+  - definition_id: low-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

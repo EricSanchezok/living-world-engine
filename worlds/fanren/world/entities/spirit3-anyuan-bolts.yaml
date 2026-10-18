@@ -1,0 +1,20 @@
+id: spirit3-anyuan-bolts
+kind: container
+name: 门弩现用长矢
+description: 只有十二支可发射长矢，射出须扣实存，回收需判断损坏。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit3-anyuan-bolts-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: spirit3-heavy-bolt
+    amount: 12
+ratings: []
+shared_activity_resources: []

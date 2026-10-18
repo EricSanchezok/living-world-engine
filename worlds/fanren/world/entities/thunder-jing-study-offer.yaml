@@ -1,0 +1,26 @@
+id: thunder-jing-study-offer
+kind: item
+name: 岑音的晶族试学邀书
+description: 十二本地月试学：每本地月十二低阶灵石补助，先学细纹刻绘；可保留个人作品署名，第六本地月后可复议。
+placement: thunder-jing-teacher
+facts:
+  - id: thunder-jing-study-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jing-teacher
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-jing-study-offer-acceptance
+    predicate: acceptance
+    value:
+      kind: text
+      value: 邀请尚未接受，必须岑音本人同意；外人不能代她拜师，也可协商新的具体条件。
+    description: 邀请尚未接受，必须岑音本人同意；外人不能代她拜师，也可协商新的具体条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

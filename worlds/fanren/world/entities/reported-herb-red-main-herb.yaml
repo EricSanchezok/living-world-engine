@@ -1,0 +1,44 @@
+id: reported-herb-red-main-herb
+kind: container
+name: 赤红绛云丹主药
+description: 赤红似焰的未具名古药，绛云丹的一种主材；当前有四份可采药用部位。
+placement: reported-garden-beds
+facts:
+  - id: reported-herb-red-main-herb-harvest-boundary
+    predicate: harvest-boundary
+    value:
+      kind: text
+      value: 不能移植；本版将其与移入容器自燃的一类对应，属明确解释性标定。可在原地采药，不得挖走后仍算完好株。
+    description: 不能移植；本版将其与移入容器自燃的一类对应，属明确解释性标定。可在原地采药，不得挖走后仍算完好株。
+    access:
+      kind: private
+  - id: reported-herb-red-main-herb-longevity-limit
+    predicate: longevity-limit
+    value:
+      kind: text
+      value: 现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。
+    description: 现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。
+    access:
+      kind: private
+  - id: reported-herb-red-main-herb-ownership-state
+    predicate: ownership-state
+    value:
+      kind: text
+      value: 未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。
+    description: 未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。
+    access:
+      kind: private
+  - id: reported-herb-red-main-herb-regrowth
+    predicate: regrowth
+    value:
+      kind: text
+      value: 药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。
+    description: 药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: ancient-herb-portion
+    amount: 4
+ratings: []
+shared_activity_resources: []

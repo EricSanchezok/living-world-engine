@@ -1,0 +1,34 @@
+id: future-tianyuan-qin-elder-room
+kind: location
+name: 秦姓老修士静室
+description: 访学期间由本人使用的独立石室；坐榻、练习空地和收纳格分处两侧，门锁只应本人钥牌。
+placement: tianyuan-old-study-yard
+facts:
+  - id: future-tianyuan-qin-elder-room-route-to-tianyuan-old-study-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-old-study-yard
+    description: route-to-tianyuan-old-study-yard
+    access:
+      kind: private
+  - id: future-tianyuan-qin-elder-room-route-conditions-tianyuan-old-study-yard
+    predicate: route-conditions-tianyuan-old-study-yard
+    value:
+      kind: text
+      value: 持本室钥牌或经本人许可开门进入，强行破禁仍须真实能力与代价。
+    description: 持本室钥牌或经本人许可开门进入，强行破禁仍须真实能力与代价。
+    access:
+      kind: private
+  - id: future-tianyuan-qin-elder-room-current-occupant
+    predicate: current-occupant
+    value:
+      kind: entity
+      entityId: future-tianyuan-qin-elder
+    description: current-occupant
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

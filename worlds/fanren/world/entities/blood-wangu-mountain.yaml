@@ -1,0 +1,26 @@
+id: blood-wangu-mountain
+kind: location
+name: 万蛊山
+description: 湿暖山谷分布虫室与防逸结界，药渣堆放处隔着低墙；外道仍开放。
+placement: blood-continent
+facts:
+  - id: blood-wangu-mountain-review-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: review-route-blood-crane-city
+    access:
+      kind: public
+  - id: blood-wangu-mountain-review-route-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

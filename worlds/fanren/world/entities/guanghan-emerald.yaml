@@ -1,0 +1,26 @@
+id: guanghan-emerald
+kind: plant-group
+name: 翠金草药畦
+description: 外观翠绿含金纹的未名灵草，药性尚未被当代研究者确认。
+placement: guanghan-garden
+facts:
+  - id: guanghan-emerald-living-plant-count
+    predicate: living-plant-count
+    value:
+      kind: number
+      value: 18
+    description: living-plant-count
+    access:
+      kind: private
+  - id: guanghan-emerald-harvest-accounting
+    predicate: harvest-accounting
+    value:
+      kind: text
+      value: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    description: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,38 @@
+id: yue-market-tiangong-stock
+kind: item
+name: 天工楼货柜
+description: 低阶金石料每份二低阶灵石；炼制要先议工时、材料与失败责任。
+placement: yue-market-tiangong
+facts:
+  - id: yue-market-tiangong-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-tiangong-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-tiangong-stock-terms
+    predicate: sale-terms
+    value:
+      kind: text
+      value: 低阶金石料每份二低阶灵石；炼制要先议工时、材料与失败责任。
+    description: 低阶金石料每份二低阶灵石；炼制要先议工时、材料与失败责任。
+    access:
+      kind: public
+  - id: yue-market-tiangong-stock-authorize
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    description: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 16
+  - definition_id: low-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

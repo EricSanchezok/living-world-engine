@@ -1,0 +1,26 @@
+id: ad-bai-adult-lizard
+kind: creature
+name: 白家成年八足蜥
+description: 族有的一头成年坐骑，区别闻沙私人两兽；体力、饲养和返还须记账。
+placement: ad-huanye-city
+facts:
+  - id: ad-bai-adult-lizard-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bai-family
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-bai-adult-lizard-feeding
+    predicate: feeding
+    value:
+      kind: text
+      value: 每日需一份相容饲料，族库当前有备；出门不能重复留在族中供他人使用。
+    description: 每日需一份相容饲料，族库当前有备；出门不能重复留在族中供他人使用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

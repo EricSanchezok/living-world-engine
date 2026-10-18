@@ -1,0 +1,24 @@
+id: guanghan-sea-hunters
+kind: creature-group
+name: 八凶海外礁猎群
+description: 有各自身体的局部兽群，护食、育幼和避险；不是全界生物总数。
+placement: guanghan-eight-fierce-sea
+facts:
+  - id: guanghan-sea-hunters-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 8
+    description: individual-count
+    access:
+      kind: private
+meters:
+  - id: guanghan-sea-hunters-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-sea-hunters-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

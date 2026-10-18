@@ -1,0 +1,18 @@
+id: local-charcoal-bag
+kind: item
+name: 打铁房炭料
+description: 一袋供小炉加热的炭料，用尽须采购。
+placement: local-metalworks
+facts:
+  - id: local-charcoal-bag-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: local-metalworker
+    description: 铁匠的料与用具。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

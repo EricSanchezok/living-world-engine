@@ -1,0 +1,26 @@
+id: thunder-small-clan-court
+kind: location
+name: 行旅会面院
+description: 租住小院供往来异族歇脚与互通航路；各家门内是私室，院中挂着约谈牌。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-small-clan-court-route-to-thunder-cloud-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-gate
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-small-clan-court-route-conditions-thunder-cloud-gate
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经城内道路可到公共院落，客房不随意开放。
+    description: 经城内道路可到公共院落，客房不随意开放。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

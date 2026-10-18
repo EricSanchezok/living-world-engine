@@ -1,0 +1,28 @@
+id: yue-east-market-till
+kind: item
+name: 贺氏公款匣
+description: 商铺收付低阶灵石，账房管理不等个人所有。
+placement: yue-east-market-clerk
+facts:
+  - id: yue-east-market-till-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-east-market-house
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-east-market-till-authority
+    predicate: resource-authority
+    value:
+      kind: text
+      value: 贺簿可代材料铺收已确认货款、支付已核采购和领料开销；私人借款须商议，收付款必须有实际对象和数额。
+    description: 贺簿可代材料铺收已确认货款、支付已核采购和领料开销；私人借款须商议，收付款必须有实际对象和数额。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 50
+ratings: []
+shared_activity_resources: []

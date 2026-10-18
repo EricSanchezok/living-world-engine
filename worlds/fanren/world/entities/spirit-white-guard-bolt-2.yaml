@@ -1,0 +1,18 @@
+id: spirit-white-guard-bolt-2
+kind: item
+name: 守卫重弩矢2
+description: 一枚实体弩矢，射出须移动到实际落点，不能无限连发同一枚。
+placement: spirit-white-guard
+facts:
+  - id: spirit-white-guard-bolt-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-white-guard
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

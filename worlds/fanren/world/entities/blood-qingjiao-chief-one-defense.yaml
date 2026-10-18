@@ -1,0 +1,26 @@
+id: blood-qingjiao-chief-one-defense
+kind: item
+name: 青蛟殿大殿主护身鳞佩
+description: 相合水中护体的鳞佩，需本人主动实耗法力催动，受击会损坏。
+placement: blood-qingjiao-chief-one
+facts:
+  - id: blood-qingjiao-chief-one-defense-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-qingjiao-chief-one
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-qingjiao-chief-one-defense-use-cost
+    predicate: use-cost
+    value:
+      kind: text
+      value: 每次主动防御实耗20法力，防护强弱取决于施术与来袭力度，不是无损抵挡。
+    description: 每次主动防御实耗20法力，防护强弱取决于施术与来袭力度，不是无损抵挡。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

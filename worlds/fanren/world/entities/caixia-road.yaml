@@ -1,0 +1,66 @@
+id: caixia-road
+kind: location
+name: 青牛镇西行商道
+description: 从青牛镇向西通彩霞山，沿途有岔路；行程受脚力、天气、停歇与车辆影响。
+placement: jingzhou
+facts:
+  - id: caixia-road-route-qingniu-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-street
+    description: 从青牛镇向西通彩霞山，沿途有岔路；行程受脚力、天气、停歇与车辆影响。
+    access:
+      kind: public
+  - id: caixia-road-route-caixia-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-mountain
+    description: 又名落凤山，山脉十余里、山峰十余座；七玄门在此长期驻守，彩凤化山为当地传说。
+    access:
+      kind: public
+  - id: caixia-road-route-wild-wolf-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wild-wolf-headquarters
+    description: 野狼帮处理帮务和核算收入的总坛，陌生访客会受盘问。
+    access:
+      kind: public
+  - id: caixia-road-route-zhang-tie-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: zhang-tie-home
+    description: 张铁家中的普通住屋，家人靠日常劳作维持生计。
+    access:
+      kind: public
+  - id: caixia-road-route-jingzhou-capital
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: jingzhou-capital
+    description: 镜州首府，有集市和商旅往来；前往各地须安排路程与食宿。
+    access:
+      kind: public
+  - id: caixia-road-route-local-hidden-basin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-hidden-basin
+    description: 按地形寻找槐洞，再匍匐过狭道；行人不初始知道确切入口。
+    access:
+      kind: private
+  - id: caixia-road-route-local-luosha-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-luosha-slope
+    description: 沿普通边界驿道步行或骑行，不能略过补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

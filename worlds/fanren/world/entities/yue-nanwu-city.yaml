@@ -1,0 +1,26 @@
+id: yue-nanwu-city
+kind: location
+name: 南乌城
+description: 越京附近的城镇，驿路和集市连接周边乡里。
+placement: human-yue
+facts:
+  - id: yue-nanwu-city-route-human-yue
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yue
+    description: 沿现存道路或适用遁行抵达，仍需实际路程和通行条件。
+    access:
+      kind: public
+  - id: yue-nanwu-city-food-price
+    predicate: service-price
+    value:
+      kind: text
+      value: 方禾饭铺一碗饭十文，实际烹成与食用才减少米粮，不能只说请客就吃到。
+    description: 方禾饭铺一碗饭十文，实际烹成与食用才减少米粮，不能只说请客就吃到。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

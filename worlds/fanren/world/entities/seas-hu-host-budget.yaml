@@ -1,0 +1,20 @@
+id: seas-hu-host-budget
+kind: container
+name: 主持酬金预留
+description: 飞云获准就本次主持工作议价的实际预留，不自动支付未接受的邀约。
+placement: seas-guest-court
+facts:
+  - id: seas-hu-host-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

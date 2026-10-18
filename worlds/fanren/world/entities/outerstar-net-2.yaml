@@ -1,0 +1,18 @@
+id: outerstar-net-2
+kind: item
+name: 村中破网
+description: 渔网一角撕裂，需要一份修补材料和熟练织网人约半日。
+placement: outerstar-reef-village
+facts:
+  - id: outerstar-net-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-village-community
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

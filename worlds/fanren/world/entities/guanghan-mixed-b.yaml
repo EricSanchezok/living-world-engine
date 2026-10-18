@@ -1,0 +1,26 @@
+id: guanghan-mixed-b
+kind: plant-group
+name: 南侧稀植药畦
+description: 尚有7株不同外观的古灵药，与旁侧已单独登记的药株分开计数。
+placement: guanghan-garden
+facts:
+  - id: guanghan-mixed-b-living-plant-count
+    predicate: living-plant-count
+    value:
+      kind: number
+      value: 7
+    description: living-plant-count
+    access:
+      kind: private
+  - id: guanghan-mixed-b-harvest-accounting
+    predicate: harvest-accounting
+    value:
+      kind: text
+      value: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    description: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

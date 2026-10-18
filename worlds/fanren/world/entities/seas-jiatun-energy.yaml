@@ -1,0 +1,20 @@
+id: seas-jiatun-energy
+kind: container
+name: 甲豚阵供能库
+description: 族中登记的一次输送供能。
+placement: seas-jiatun-array-hall
+facts:
+  - id: seas-jiatun-energy-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: top-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

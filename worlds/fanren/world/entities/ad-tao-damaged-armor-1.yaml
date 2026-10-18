@@ -1,0 +1,26 @@
+id: ad-tao-damaged-armor-1
+kind: item
+name: 待修低阶魔甲1
+description: 护甲裂纹需修补，当前防护有限；不等于已修好。
+placement: ad-tao-cen
+facts:
+  - id: ad-tao-damaged-armor-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-jing-lu
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-tao-damaged-armor-1-repair-condition
+    predicate: repair-condition
+    value:
+      kind: text
+      value: 使用陶岑一份相容修补料与至少半时辰细作，复验合格才恢复当前甲片防护。
+    description: 使用陶岑一份相容修补料与至少半时辰细作，复验合格才恢复当前甲片防护。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

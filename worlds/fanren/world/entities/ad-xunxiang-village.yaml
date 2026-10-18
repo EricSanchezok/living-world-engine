@@ -1,0 +1,43 @@
+id: ad-xunxiang-village
+kind: location
+name: 熏香寨
+description: 紫木间的青翼聚居地；可容人数不等于现有居民名册。
+placement: associated-demon-realm
+facts:
+  - id: ad-xunxiang-village-route-to-ad-tiesha-ridge
+    predicate: route-to-ad-tiesha-ridge
+    value:
+      kind: entity
+      entityId: ad-tiesha-ridge
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-xunxiang-village-route-to-ad-qingling-hall
+    predicate: route-to-ad-qingling-hall
+    value:
+      kind: entity
+      entityId: ad-qingling-hall
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-xunxiang-village-route-to-ad-cangling-pavilion
+    predicate: route-to-ad-cangling-pavilion
+    value:
+      kind: entity
+      entityId: ad-cangling-pavilion
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-xunxiang-village-root-detail-demon-lineage
+    predicate: root-detail-demon-lineage
+    value:
+      kind: text
+      value: 高阶魔族生育较难是倾向，不是绝对不能再育。青翼魔族与飞灵族、人界青翼鸟不同，族群交通依实际飞蛇与饲养。
+    description: 高阶魔族生育较难是倾向，不是绝对不能再育。青翼魔族与飞灵族、人界青翼鸟不同，族群交通依实际飞蛇与饲养。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

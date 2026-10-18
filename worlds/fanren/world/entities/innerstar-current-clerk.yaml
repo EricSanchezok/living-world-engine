@@ -1,0 +1,247 @@
+id: innerstar-current-clerk
+kind: person
+name: 顾篆
+description: 六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。
+placement: innerstar-yuhuan-house
+facts:
+  - id: innerstar-current-clerk-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气7层。
+    description: 炼气7层。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-current-clerk
+  - id: innerstar-current-clerk-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。
+    description: 辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-current-clerk
+  - id: innerstar-current-clerk-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 水、木、土三灵根，已检测并据此入道。
+    description: 水、木、土三灵根，已检测并据此入道。
+    access:
+      kind: discoverable
+      condition: 有检测能力者取得本人同意并实际查验灵根。
+  - id: innerstar-current-clerk-trade-authority
+    predicate: trade-authority
+    value:
+      kind: text
+      value: 受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。
+    description: 受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-current-clerk
+  - id: innerstar-current-clerk-employed-by
+    predicate: employed-by
+    value:
+      kind: entity
+      entityId: innerstar-liulian-group
+    description: 由六连店阁雇用，负责日常交易；不因此拥有商号。
+    access:
+      kind: public
+meters:
+  - id: innerstar-current-clerk-health
+    definition_id: health
+    current: 100
+  - id: innerstar-current-clerk-mana
+    definition_id: mana
+    current: 50
+quantities:
+  - definition_id: low-stone
+    amount: 9
+ratings:
+  - id: innerstar-current-clerk-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: innerstar-current-clerk-force
+    definition_id: force
+    value: 2
+  - id: innerstar-current-clerk-craft
+    definition_id: craft
+    value: 2
+  - id: innerstar-current-clerk-perception
+    definition_id: perception
+    value: 2
+  - id: innerstar-current-clerk-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-current-clerk
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。
+      voice: 先说明实物与条件，遇未明之处愿意查验，不夸大承诺。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 顾篆
+        description: 六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。
+        status: observed
+      - id: location
+        name: 玉环居
+        description: 当前所在且熟悉的生活地点。
+        status: observed
+      - id: known-innerstar-liulian-group
+        name: 六连殿
+        description: 六家殿阁联合经营的商家，共同进退；商号财物不等于雇员私财。
+        status: observed
+      - id: known-innerstar-baishui-hall
+        name: 白水楼
+        description: 金剑旗的法器商阁。
+        status: observed
+      - id: known-innerstar-shanhai-hall
+        name: 山海阁
+        description: 蓝兽旗的商阁。
+        status: observed
+      - id: known-innerstar-yuhuan-house
+        name: 玉环居
+        description: 青灵芝旗的灵药商阁。
+        status: observed
+      - id: known-innerstar-liulian-working-fund
+        name: 六连店阁周转匣
+        description: 店阁共有的有限周转灵石。
+        status: observed
+      - id: known-innerstar-current-xueling
+        name: 玉环现存雪灵水
+        description: 一小瓶奇寒透明液；实际分量只够一次常规冲关用量，消耗后须补货。
+        status: observed
+      - id: known-innerstar-current-tianhuo
+        name: 玉环现存天火液
+        description: 一小瓶炙热赤液；实际分量只够一次常规冲关用量，不能重复服用不减存量。
+        status: observed
+      - id: known-innerstar-current-sea-notes
+        name: 海丹药性汇抄
+        description: 记录妖丹主辅料的区别、灵药性状和有限冲关作用；不是完整炼制丹方，不自动授予炼丹技能。
+        status: observed
+      - id: known-innerstar-current-water-shield
+        name: 白水普通水盾
+        description: 一面普通水属性下阶防御法器，需炼气者注入法力维持，受力过强可破。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 实际生活、学艺与经营经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: own-foundation
+        subjectId: self
+        predicate: own-foundation
+        value:
+          kind: text
+          value: 自己炼气7层，水木土三灵根。
+        description: 自己炼气7层，水木土三灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: skill
+        subjectId: self
+        predicate: skill
+        value:
+          kind: text
+          value: 辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。
+        description: 辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: purpose
+        subjectId: self
+        predicate: purpose
+        value:
+          kind: text
+          value: 核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。
+        description: 核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此前出门与开店时亲见夜色；此后时段按实际经过变化。
+        description: 此前出门与开店时亲见夜色；此后时段按实际经过变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: trade-authority
+        subjectId: self
+        predicate: trade-authority
+        value:
+          kind: text
+          value: 受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。
+        description: 受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-current-clerk
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-yuhuan-house
+      - local_entity_id: known-innerstar-liulian-group
+        canonical_entity_ids:
+          - innerstar-liulian-group
+      - local_entity_id: known-innerstar-baishui-hall
+        canonical_entity_ids:
+          - innerstar-baishui-hall
+      - local_entity_id: known-innerstar-shanhai-hall
+        canonical_entity_ids:
+          - innerstar-shanhai-hall
+      - local_entity_id: known-innerstar-yuhuan-house
+        canonical_entity_ids:
+          - innerstar-yuhuan-house
+      - local_entity_id: known-innerstar-liulian-working-fund
+        canonical_entity_ids:
+          - innerstar-liulian-working-fund
+      - local_entity_id: known-innerstar-current-xueling
+        canonical_entity_ids:
+          - innerstar-current-xueling
+      - local_entity_id: known-innerstar-current-tianhuo
+        canonical_entity_ids:
+          - innerstar-current-tianhuo
+      - local_entity_id: known-innerstar-current-sea-notes
+        canonical_entity_ids:
+          - innerstar-current-sea-notes
+      - local_entity_id: known-innerstar-current-water-shield
+        canonical_entity_ids:
+          - innerstar-current-water-shield

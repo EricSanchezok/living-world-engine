@@ -1,0 +1,18 @@
+id: dv-lu-wind-flag
+kind: item
+name: 鲁卫英风旗
+description: 一面风属性法旗，须持续投入法力驱动。
+placement: canon-lu-weiying
+facts:
+  - id: dv-lu-wind-flag-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-lu-weiying
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

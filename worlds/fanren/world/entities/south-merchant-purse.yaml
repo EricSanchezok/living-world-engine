@@ -1,0 +1,20 @@
+id: south-merchant-purse
+kind: container
+name: 宋之行的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-merchant
+facts:
+  - id: south-merchant-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-merchant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 50
+ratings: []
+shared_activity_resources: []

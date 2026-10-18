@@ -1,0 +1,131 @@
+id: canon-ye-chu
+kind: person
+name: 叶楚
+description: 在木族生活中维持掩护的人族修士，具有木凤灵血，熟悉两边不同的礼数。
+placement: fengyuan-yechu-hideout
+facts:
+  - id: canon-ye-chu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: canon-ye-chu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修行、木凤血脉相关木遁与气息掩护、木材辨验；掩护有被高阶神通识破的风险。
+    description: 炼虚修行、木凤血脉相关木遁与气息掩护、木材辨验；掩护有被高阶神通识破的风险。
+    access:
+      kind: private
+  - id: canon-ye-chu-true-origin
+    predicate: true-origin
+    value:
+      kind: text
+      value: 人族叶家出身，具有木凤灵血；当前掩护对普通往来者不公开。
+    description: 人族叶家出身，具有木凤灵血；当前掩护对普通往来者不公开。
+    access:
+      kind: agents
+      agentIds:
+        - canon-ye-chu
+meters:
+  - id: canon-ye-chu-health
+    definition_id: health
+    current: 100
+  - id: canon-ye-chu-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: canon-ye-chu-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: canon-ye-chu-force
+    definition_id: force
+    value: 6
+  - id: canon-ye-chu-craft
+    definition_id: craft
+    value: 4
+  - id: canon-ye-chu-perception
+    definition_id: perception
+    value: 6
+  - id: canon-ye-chu-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-ye-chu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 在木族生活中维持掩护的人族修士，具有木凤灵血，熟悉两边不同的礼数。
+      voice: 待客语气温和，谈到自身来处很少多说；面对专业材料则能给出细致判断。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成一批材色辨验，决定是否接下一项需要更深入族地的长期差事。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 叶楚
+        description: 在木族生活中维持掩护的人族修士，具有木凤灵血，熟悉两边不同的礼数。
+        status: observed
+      - id: location
+        name: 木棉材色辨验间
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-canon-ye-chu-private-stock
+        name: 叶楚私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-yechu-samples
+        name: 叶楚待验木样
+        description: 自己购来作辨验练习的实物。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修行、木凤血脉相关木遁与气息掩护、木材辨验；掩护有被高阶神通识破的风险。
+        description: 炼虚修行、木凤血脉相关木遁与气息掩护、木材辨验；掩护有被高阶神通识破的风险。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-ye-chu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-yechu-hideout
+      - local_entity_id: fengyuan-review-canon-ye-chu-private-stock
+        canonical_entity_ids:
+          - canon-ye-chu-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-yechu-samples
+        canonical_entity_ids:
+          - fengyuan-yechu-samples

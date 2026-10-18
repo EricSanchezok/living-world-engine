@@ -1,0 +1,29 @@
+id: demon-rat-exposed-ore
+kind: container
+name: 浅层露矿
+description: 渗水冲开的石壁露出少量可用矿料，权属仍归当地社区。
+placement: demon-rat-shallow-tunnel
+facts:
+  - id: demon-rat-exposed-ore-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-rat-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-rat-exposed-ore-extraction
+    predicate: extraction
+    value:
+      kind: text
+      value: 先支撑松石、疏水并获许可，再用一件支撑工具与三百六十秒勘验确定安全；采出多少即转移多少，不无限再生。
+    description: 先支撑松石、疏水并获许可，再用一件支撑工具与三百六十秒勘验确定安全；采出多少即转移多少，不无限再生。
+    access:
+      kind: discoverable
+      condition: 进入浅层运道现场勘察。
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

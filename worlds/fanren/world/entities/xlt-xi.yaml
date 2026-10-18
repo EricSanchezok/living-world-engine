@@ -1,0 +1,167 @@
+id: xlt-xi
+kind: person
+name: 细翼
+description: 巨螂商人记得许兰上一季的茶味，讨价时也会说实话。
+placement: xlt-border-pass
+facts:
+  - id: xlt-xi-cultivation
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xi
+  - id: xlt-xi-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 行商、鉴货、御器
+    description: 行商、鉴货、御器
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xi
+  - id: xlt-xi-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    description: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xi
+  - id: xlt-xi-member-of-xlt-mantis-people
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: xlt-mantis-people
+    description: member-of
+    access:
+      kind: public
+  - id: xlt-xi-trade-partner-xlt-xu-lan
+    predicate: trade-partner
+    value:
+      kind: entity
+      entityId: xlt-xu-lan
+    description: trade-partner
+    access:
+      kind: public
+meters:
+  - id: xlt-xi-health
+    definition_id: health
+    current: 100
+  - id: xlt-xi-mana
+    definition_id: mana
+    current: 540
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: xlt-xi-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: xlt-xi-force
+    definition_id: force
+    value: 3
+  - id: xlt-xi-craft
+    definition_id: craft
+    value: 3
+  - id: xlt-xi-perception
+    definition_id: perception
+    value: 3
+  - id: xlt-xi-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: xlt-xi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 巨螂商人记得许兰上一季的茶味，讨价时也会说实话。
+      voice: 用自己的经历说话，先回应眼前具体事情，不复述世界百科。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对茶样、余款和到货时间，决定是否接受绕路。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 细翼
+        description: 巨螂商人记得许兰上一季的茶味，讨价时也会说实话。
+        status: observed
+      - id: location
+        name: 折岚隘口
+        description: 自己当前所处之地。
+        status: observed
+      - id: known-xlt-mantis-people
+        name: 巨螂族
+        description: 自己所属的群体，但不因此知道其他成员的全部活动。
+        status: observed
+      - id: known-xlt-xu-lan
+        name: 许兰
+        description: 订了四十份干茶，已付十枚下阶灵石定金，余款待验货。
+        status: observed
+      - id: known-xlt-trade-ledger
+        name: 茶叶订货簿
+        description: 四十份干茶总价三十枚下阶灵石，十枚定金已收，二十枚待实际验货结清；约定交到折岚隘口。
+        status: observed
+      - id: known-xlt-xi-tool
+        name: 细翼的称货盘
+        description: 称货盘可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+        status: observed
+    evidence:
+      - id: own-life
+        kind: observation
+        description: 本人的修行、职业与日常往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skills
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 行商、鉴货、御器
+        description: 行商、鉴货、御器
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - own-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - xlt-xi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - xlt-border-pass
+      - local_entity_id: known-xlt-mantis-people
+        canonical_entity_ids:
+          - xlt-mantis-people
+      - local_entity_id: known-xlt-xu-lan
+        canonical_entity_ids:
+          - xlt-xu-lan
+      - local_entity_id: known-xlt-trade-ledger
+        canonical_entity_ids:
+          - xlt-trade-ledger
+      - local_entity_id: known-xlt-xi-tool
+        canonical_entity_ids:
+          - xlt-xi-tool

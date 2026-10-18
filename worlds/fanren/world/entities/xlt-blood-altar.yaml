@@ -1,0 +1,36 @@
+id: xlt-blood-altar
+kind: item
+name: 司南四方坛
+description: 四方三层古坛，四角有旧损，刻纹须清理辨读。
+placement: xlt-blood-altar-site
+facts:
+  - id: xlt-blood-altar-condition
+    predicate: facility-state
+    value:
+      kind: text
+      value: 缺一枚阵芯并有石角断裂，当前不能直接测算；修复需工艺、合适材料及实际时间。
+    description: 缺一枚阵芯并有石角断裂，当前不能直接测算；修复需工艺、合适材料及实际时间。
+    access:
+      kind: discoverable
+      condition: 现场检查刻纹、缺口和供能结构。
+  - id: xlt-blood-altar-scope
+    predicate: scan-scope
+    value:
+      kind: text
+      value: 血天及附近海域的可观测范围。
+    description: 血天及附近海域的可观测范围。
+    access:
+      kind: discoverable
+      condition: 读懂残拓、观察坛文或从可信阵师处学习。
+  - id: xlt-blood-altar-operation
+    predicate: operation-condition
+    value:
+      kind: text
+      value: 修复后在实际天象窗口测算，须适合的秘术、界息样本、8枚中阶灵石和两个时辰；结果给有限精度坐标，不开启门户。
+    description: 修复后在实际天象窗口测算，须适合的秘术、界息样本、8枚中阶灵石和两个时辰；结果给有限精度坐标，不开启门户。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

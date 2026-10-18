@@ -1,0 +1,74 @@
+id: feiling-muxian-valley
+kind: location
+name: 木仙谷
+description: 木青居所所在的山谷，有木殿和通向修炼地的山路。
+placement: feiling-abyss-3
+facts:
+  - id: feiling-muxian-valley-route-feiling-abyss-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-3
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-muxian-valley-condition-feiling-abyss-3
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木青居所所在的山谷，有木殿和通向修炼地的山路。
+    description: 木青居所所在的山谷，有木殿和通向修炼地的山路。
+    access:
+      kind: public
+  - id: feiling-muxian-valley-route-feiling-muqing-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muqing-hall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-muxian-valley-condition-feiling-muqing-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木青在金花座上接见下属与来客。
+    description: 木青在金花座上接见下属与来客。
+    access:
+      kind: public
+  - id: feiling-muxian-valley-route-feiling-mujing-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-mujing-cave
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-muxian-valley-condition-feiling-mujing-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木灵气浓郁的洞府，入口和内室由木青控制禁制。
+    description: 木灵气浓郁的洞府，入口和内室由木青控制禁制。
+    access:
+      kind: public
+  - id: feiling-muxian-valley-route-to-feiling-muqing-transit-dais
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muqing-transit-dais
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-muxian-valley-route-conditions-feiling-muqing-transit-dais
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 谷内到高台的普通道路；启用跨层阵须另具术法、接收阵和法力。
+    description: 谷内到高台的普通道路；启用跨层阵须另具术法、接收阵和法力。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

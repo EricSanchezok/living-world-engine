@@ -1,0 +1,34 @@
+id: dajin-huanyun
+kind: location
+name: 幻云峰
+description: 白露书院所在山峰，山路通向半山腰与峰顶。
+placement: dajin-yutian
+facts:
+  - id: dajin-huanyun-route-dajin-yutian
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yutian
+    description: 山道通往幻云峰。
+    access:
+      kind: public
+  - id: dajin-huanyun-route-dajin-bailu-academy
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-bailu-academy
+    description: 沿山道到书院门，门禁不会因到达就消失。
+    access:
+      kind: public
+  - id: dajin-huanyun-route-global-baoling-temple
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-baoling-temple
+    description: 两峰之间可循山路往来，崖壁和寺门仍需实际通过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

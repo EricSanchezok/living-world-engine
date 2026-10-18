@@ -1,0 +1,26 @@
+id: ad-route-letter
+kind: item
+name: 无常外岛观测回函
+description: 允许折纹在20共同日内到外岛申请两共同日雷纹观测；不保证洗灵池入口，不免海行风险，正式范围由到场双方确认。
+placement: ad-route-scholar
+facts:
+  - id: ad-route-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-route-scholar
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-route-letter-due-time
+    predicate: due-time
+    value:
+      kind: number
+      value: 1728000
+    description: due-time
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

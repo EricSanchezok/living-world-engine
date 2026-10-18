@@ -1,0 +1,20 @@
+id: far-zhao-stock
+kind: item
+name: 赵家待验药包
+description: 收来的两包普通草药，其中一包边角受潮。
+placement: far-luwan-shop
+facts:
+  - id: far-zhao-stock-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-zhao-zhi
+    description: 由赵芷所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

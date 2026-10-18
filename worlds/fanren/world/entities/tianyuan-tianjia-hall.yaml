@@ -1,0 +1,26 @@
+id: tianyuan-tianjia-hall
+kind: location
+name: 天甲殿
+description: 发甲案、验损架与锁柜分隔布置；军甲先登记再由实际保管人取出，空架不会自行补甲。
+placement: spirit-guard-tower
+facts:
+  - id: tianyuan-tianjia-hall-route-to-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: route-to-spirit-guard-tower
+    access:
+      kind: private
+  - id: tianyuan-tianjia-hall-route-conditions-spirit-guard-tower
+    predicate: route-conditions-spirit-guard-tower
+    value:
+      kind: text
+      value: 塔内军需走廊步行，柜门仅准领用人与保管者开启。
+    description: 塔内军需走廊步行，柜门仅准领用人与保管者开启。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

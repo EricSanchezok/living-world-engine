@@ -1,0 +1,60 @@
+id: demon-nine-immortal-market
+kind: location
+name: 九仙山常市
+description: 两族获准交易药材与器物的市坪；没有常年无限供应的万宝大会。
+placement: demon-nine-immortal-mountain
+facts:
+  - id: demon-nine-immortal-market-route-demon-nine-immortal-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: demon-nine-immortal-market-condition-demon-nine-immortal-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两族获准交易药材与器物的市坪；没有常年无限供应的万宝大会。
+    description: 两族获准交易药材与器物的市坪；没有常年无限供应的万宝大会。
+    access:
+      kind: public
+  - id: demon-nine-immortal-market-route-to-root-black-domain-entry
+    predicate: route-to-root-black-domain-entry
+    value:
+      kind: entity
+      entityId: root-black-domain-entry
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: demon-nine-immortal-market-travel-condition-root-black-domain-entry
+    predicate: travel-condition-root-black-domain-entry
+    value:
+      kind: text
+      value: 需先找到库房暗门并取得管理者许可或实际破门；没有公开招牌。
+    description: 需先找到库房暗门并取得管理者许可或实际破门；没有公开招牌。
+    access:
+      kind: private
+  - id: demon-nine-immortal-market-root-detail-demon-material-taboo
+    predicate: root-detail-demon-material-taboo
+    value:
+      kind: text
+      value: 妖族对同族骨丹用途可有禁忌，具体种属、来历与知情决定反应；这是社会规范，不是所有妖族无法学炼器的天生限制。
+    description: 妖族对同族骨丹用途可有禁忌，具体种属、来历与知情决定反应；这是社会规范，不是所有妖族无法学炼器的天生限制。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: demon-nine-immortal-market-root-detail-independent-elders
+    predicate: root-detail-independent-elders
+    value:
+      kind: text
+      value: 两族散修、王族与各地长者可以各持立场；王位争执、旧交和拒绝招揽是社会选择，同族并不共脑。
+    description: 两族散修、王族与各地长者可以各持立场；王位争执、旧交和拒绝招揽是社会选择，同族并不共脑。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

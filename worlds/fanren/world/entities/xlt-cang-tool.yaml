@@ -1,0 +1,18 @@
+id: xlt-cang-tool
+kind: item
+name: 苍枝的林圃令
+description: 林圃令可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-cang
+facts:
+  - id: xlt-cang-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-cang
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

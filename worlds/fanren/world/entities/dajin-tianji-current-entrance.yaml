@@ -1,0 +1,27 @@
+id: dajin-tianji-current-entrance
+kind: location
+name: 僻巷障眼墙
+description: 死巷尽头的石墙外观平常，障眼与后续禁制阻隔来客。
+placement: dajin-yuzhou-small-city
+facts:
+  - id: dajin-tianji-current-entrance-route-dajin-yuzhou-small-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yuzhou-small-city
+    description: 从当前出入口返回凡俗街巷。
+    access:
+      kind: public
+  - id: dajin-tianji-current-entrance-route-dajin-tianji-jade-gate
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-jade-gate
+    description: 穿墙及数层禁制后才进入游离空间，空间入口变换会使旧地址失效。
+    access:
+      kind: discoverable
+      condition: 实际取得当前入口/方位并通过相应禁制或主人许可。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

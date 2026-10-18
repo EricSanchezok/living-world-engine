@@ -1,0 +1,22 @@
+id: feiling-gatherer-cache
+kind: container
+name: 苔午采集包
+description: 本地采到的有限植物样本，可交换灯石和药物。
+placement: feiling-abyss-gatherer
+facts:
+  - id: feiling-gatherer-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-gatherer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

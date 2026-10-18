@@ -1,0 +1,26 @@
+id: feiling-yinhuo-hall
+kind: location
+name: 阴火殿
+description: 隔热石门后是炼制和养焰的内殿，器材按物性分架存放。
+placement: feiling-bloodflame-palace
+facts:
+  - id: feiling-yinhuo-hall-route-to-feiling-bloodflame-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-palace
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-yinhuo-hall-route-conditions-feiling-bloodflame-palace
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 内门仅准主人与受托者开关。
+    description: 内门仅准主人与受托者开关。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

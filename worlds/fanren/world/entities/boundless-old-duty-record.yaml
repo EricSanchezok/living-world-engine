@@ -1,0 +1,26 @@
+id: boundless-old-duty-record
+kind: item
+name: 太真古代职责卷
+description: 未编目的上古卷册，读者须具备阅读古文和进入秘阁的条件。
+placement: boundless-taizhen-secret-archive
+facts:
+  - id: boundless-old-duty-record-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: taizhen-sect
+    description: owned-by
+    access:
+      kind: public
+  - id: boundless-old-duty-record-contents
+    predicate: recorded-information
+    value:
+      kind: text
+      value: 本门古代由大晋真极门支派迁来，承担看守海下封魔古阵职责；只有大概构成，并非完备修复手册。
+    description: 本门古代由大晋真极门支派迁来，承担看守海下封魔古阵职责；只有大概构成，并非完备修复手册。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

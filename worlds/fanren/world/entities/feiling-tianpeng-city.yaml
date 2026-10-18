@@ -1,0 +1,154 @@
+id: feiling-tianpeng-city
+kind: location
+name: 天鹏圣城
+description: 天鹏族的主要聚居城，飞行往来连接依山修建的高处殿堂。
+placement: feiling-tianpeng-domain
+facts:
+  - id: feiling-tianpeng-city-route-feiling-tianpeng-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-condition-feiling-tianpeng-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天鹏族的主要聚居城，飞行往来连接依山修建的高处殿堂。
+    description: 天鹏族的主要聚居城，飞行往来连接依山修建的高处殿堂。
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-route-feiling-tianpeng-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-hall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-condition-feiling-tianpeng-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长老与圣主处理族内事务的场所。
+    description: 长老与圣主处理族内事务的场所。
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-route-feiling-trade-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-trade-hall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-condition-feiling-trade-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山壁拱门后分层殿堂，居民在各层交换器物、灵药和手艺。
+    description: 山壁拱门后分层殿堂，居民在各层交换器物、灵药和手艺。
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-route-feiling-library
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-library
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-condition-feiling-library
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按借阅权限收藏族内历史和常用手艺，秘传不摆在公开架上。
+    description: 按借阅权限收藏族内历史和常用手艺，秘传不摆在公开架上。
+    access:
+      kind: public
+  - id: feiling-tianpeng-city-route-to-feiling-city-pillars
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-city-pillars
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-conditions-feiling-city-pillars
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-to-feiling-city-arena
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-city-arena
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-conditions-feiling-city-arena
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-to-feiling-city-guesthouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-city-guesthouse
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-conditions-feiling-city-guesthouse
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-to-feiling-transmission-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-transmission-hall
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-conditions-feiling-transmission-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-to-feiling-sealed-soul-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-sealed-soul-tower
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-tianpeng-city-route-conditions-feiling-sealed-soul-tower
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

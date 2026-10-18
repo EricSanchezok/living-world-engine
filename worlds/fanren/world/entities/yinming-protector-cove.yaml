@@ -1,0 +1,28 @@
+id: yinming-protector-cove
+kind: container
+name: 村落护阴石盘
+description: 当前完好的石符兼阵，储能维持防雷与减风，强力困敌另耗储能。
+placement: yinming-village-cove
+facts:
+  - id: yinming-protector-cove-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-cove
+    description: owned-by
+    access:
+      kind: private
+  - id: yinming-protector-cove-energy-use
+    predicate: energy-use
+    value:
+      kind: text
+      value: 常规护村每一小时耗一刻储阴力；强力缠缚大兽每次另耗二十刻。一次用完整兽晶可转为四十八刻储能，是否成功依实际操作。
+    description: 常规护村每一小时耗一刻储阴力；强力缠缚大兽每次另耗二十刻。一次用完整兽晶可转为四十八刻储能，是否成功依实际操作。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yin-charge
+    amount: 120
+ratings: []
+shared_activity_resources: []

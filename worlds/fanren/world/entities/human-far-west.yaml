@@ -1,0 +1,42 @@
+id: human-far-west
+kind: location
+name: 极西之地
+description: 远在天南以西，沙漠隔开往来，涵盖两国之地；地远贫乏与旧势力约束使其自成修仙生活。
+placement: human-realm
+facts:
+  - id: human-far-west-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: route-to
+    access:
+      kind: public
+  - id: human-far-west-condition-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨越荒漠需要定位、补给与相应遁行能力；普通元婴修士按现有路线往返至少需要数十日。
+    description: 跨越荒漠需要定位、补给与相应遁行能力；普通元婴修士按现有路线往返至少需要数十日。
+    access:
+      kind: public
+  - id: human-far-west-route-dv-qianzhu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-qianzhu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: human-far-west-condition-dv-qianzhu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿当地路径到山门；访客须与当前人员交涉，不能以祖师名号免除其选择。
+    description: 沿当地路径到山门；访客须与当前人员交涉，不能以祖师名号免除其选择。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

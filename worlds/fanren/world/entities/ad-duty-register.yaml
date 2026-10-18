@@ -1,0 +1,50 @@
+id: ad-duty-register
+kind: item
+name: 守院轮班簿
+description: 石瘦本轮还剩2共同日；温甲可自愿提前接替，经领队记名后起算自己的14共同日。不得把代班计为重复劳动。
+placement: ad-seal-captain
+facts:
+  - id: ad-duty-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-three-progenitors
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-duty-register-veteran-due
+    predicate: veteran-due
+    value:
+      kind: number
+      value: 172800
+    description: veteran-due
+    access:
+      kind: private
+  - id: ad-duty-register-daily-wage
+    predicate: daily-wage
+    value:
+      kind: number
+      value: 4
+    description: daily-wage
+    access:
+      kind: private
+  - id: ad-duty-register-veteran-accrued-unpaid
+    predicate: veteran-accrued-unpaid
+    value:
+      kind: number
+      value: 48
+    description: veteran-accrued-unpaid
+    access:
+      kind: private
+  - id: ad-duty-register-payment-condition
+    predicate: payment-condition
+    value:
+      kind: text
+      value: 石瘦已完成12共同日、尚欠48魔石；余下两日实际履行才再得8。温甲正式接班后按每日4魔石计，不与石瘦重复计薪。支付时须公库扣款、本人实收并同步减少未付债务。
+    description: 石瘦已完成12共同日、尚欠48魔石；余下两日实际履行才再得8。温甲正式接班后按每日4魔石计，不与石瘦重复计薪。支付时须公库扣款、本人实收并同步减少未付债务。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

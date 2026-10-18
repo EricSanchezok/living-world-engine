@@ -1,0 +1,18 @@
+id: blood-xu-blood-coffin
+kind: item
+name: 许氏血晶棺
+description: 冰魄预先炼制的唤醒载体，现为完整空棺；有棺仍需确切秘术、血脉施术者、法力和血魂，不能空棺生出另一冰魄。
+placement: blood-xu-ancestral-chamber
+facts:
+  - id: blood-xu-blood-coffin-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

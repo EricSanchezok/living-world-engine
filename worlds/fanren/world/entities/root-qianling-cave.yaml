@@ -1,0 +1,37 @@
+id: root-qianling-cave
+kind: location
+name: 潜灵洞入口
+description: 通往潜修洞地的禁门；令牌与当期许可需核验，门外不能查看完整内部。
+placement: root-wanling-valley
+facts:
+  - id: root-qianling-cave-route-to-root-wanling-valley
+    predicate: route-to-root-wanling-valley
+    value:
+      kind: entity
+      entityId: root-wanling-valley
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-qianling-cave-travel-condition-root-wanling-valley
+    predicate: travel-condition-root-wanling-valley
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-qianling-cave-entry
+    predicate: entry
+    value:
+      kind: text
+      value: 须有当期有效潜灵令、得到管理者核验并开启相应禁制；没有令牌不能按常规入内，强行破禁仍可能尝试并有风险。
+    description: 须有当期有效潜灵令、得到管理者核验并开启相应禁制；没有令牌不能按常规入内，强行破禁仍可能尝试并有风险。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

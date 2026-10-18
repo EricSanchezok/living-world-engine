@@ -1,0 +1,121 @@
+id: canon-wu-ling-lady
+kind: person
+name: 乌灵夫人
+description: 古黎族古老修士，重视本命火法与细微控制，身边器具收拾得井然有序。
+placement: fengyuan-residence-wu-ling-lady
+facts:
+  - id: canon-wu-ling-lady-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-wu-ling-lady-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘祝融火法、法相与防护遁行；威力和精细控制均受法力、材料与目标所限。
+    description: 大乘祝融火法、法相与防护遁行；威力和精细控制均受法力、材料与目标所限。
+    access:
+      kind: private
+meters:
+  - id: canon-wu-ling-lady-health
+    definition_id: health
+    current: 100
+  - id: canon-wu-ling-lady-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-wu-ling-lady-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-wu-ling-lady-force
+    definition_id: force
+    value: 8
+  - id: canon-wu-ling-lady-craft
+    definition_id: craft
+    value: 6
+  - id: canon-wu-ling-lady-perception
+    definition_id: perception
+    value: 8
+  - id: canon-wu-ling-lady-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-wu-ling-lady
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 古黎族古老修士，重视本命火法与细微控制，身边器具收拾得井然有序。
+      voice: 谈条件缓而清楚，遇到把毁坏当威风的人会用一句反问截住。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 选择一份适合火候精炼的材料，看看能否用更少耗损做出稳定成品。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 乌灵夫人
+        description: 古黎族古老修士，重视本命火法与细微控制，身边器具收拾得井然有序。
+        status: observed
+      - id: location
+        name: 乌灵夫人静修居
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-canon-wu-ling-lady-private-stock
+        name: 乌灵夫人私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-wuling-furnace
+        name: 乌灵试火炉
+        description: 用于精细火候试验的私炉。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘祝融火法、法相与防护遁行；威力和精细控制均受法力、材料与目标所限。
+        description: 大乘祝融火法、法相与防护遁行；威力和精细控制均受法力、材料与目标所限。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wu-ling-lady
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-residence-wu-ling-lady
+      - local_entity_id: fengyuan-review-canon-wu-ling-lady-private-stock
+        canonical_entity_ids:
+          - canon-wu-ling-lady-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-wuling-furnace
+        canonical_entity_ids:
+          - fengyuan-wuling-furnace

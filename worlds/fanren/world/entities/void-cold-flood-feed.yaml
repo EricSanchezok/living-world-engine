@@ -1,0 +1,22 @@
+id: void-cold-flood-feed
+kind: container
+name: 寒蛟饲料
+description: 今批饲料含它不喜的苦草，尚不是证明其患病。
+placement: void-wanfa-spiritpool
+facts:
+  - id: void-cold-flood-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wan-sangu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 6
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

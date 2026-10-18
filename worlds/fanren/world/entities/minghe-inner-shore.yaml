@@ -1,0 +1,138 @@
+id: minghe-inner-shore
+kind: location
+name: 冥河内岸
+description: 穿过阴水和护障后的陆地，远处连着枯林与山脉。
+placement: minghe-space
+facts:
+  - id: minghe-inner-shore-route-minghe-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-river
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过阴水和护障后的陆地，远处连着枯林与山脉。
+    description: 穿过阴水和护障后的陆地，远处连着枯林与山脉。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-minghe-withered-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-withered-wood
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-withered-wood
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 白骨生物在林地阴气中活动，离开此地会迅速衰败。
+    description: 白骨生物在林地阴气中活动，离开此地会迅速衰败。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-minghe-demon-tomb
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-demon-tomb
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-demon-tomb
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 古代异界魔物残骸和凝成魔器之地，禁制与污染仍在。
+    description: 古代异界魔物残骸和凝成魔器之地，禁制与污染仍在。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-minghe-qingyuan-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-cave
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-qingyuan-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青元子维护阴气节点和独自修行的洞府，来访须通传。
+    description: 青元子维护阴气节点和独自修行的洞府，来访须通传。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-minghe-jinyan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-jinyan-island
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-jinyan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 湖中岛屿，金色建筑映照水面，外有防护禁制。
+    description: 湖中岛屿，金色建筑映照水面，外有防护禁制。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-minghe-yan-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-yan-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inner-shore-condition-minghe-yan-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 远离神池的石府，有独立观察阴气的庭台。
+    description: 远离神池的石府，有独立观察阴气的庭台。
+    access:
+      kind: public
+  - id: minghe-inner-shore-route-to-minghe-bone-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-bone-plain
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-inner-shore-route-conditions-minghe-bone-plain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。
+    description: 沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。
+    access:
+      kind: private
+  - id: minghe-inner-shore-route-to-minghe-black-hills
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-black-hills
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-inner-shore-route-conditions-minghe-black-hills
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。
+    description: 经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

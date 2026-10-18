@@ -1,0 +1,66 @@
+id: ad-huanxiao-desert
+kind: location
+name: 幻啸沙漠
+description: 法力和常规遁术受到强烈限制的广大沙漠。
+placement: associated-demon-realm
+facts:
+  - id: ad-huanxiao-desert-route-ad-huanye-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-huanye-city
+    description: route-to
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-condition-ad-huanye-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-route-ad-yinchuan-oasis
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-yinchuan-oasis
+    description: route-to
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-condition-ad-yinchuan-oasis
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-route-ad-moyuan-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-moyuan-port
+    description: route-to
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-condition-ad-moyuan-port
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-huanxiao-desert-route-to-ad-tiesha-ridge
+    predicate: route-to-ad-tiesha-ridge
+    value:
+      kind: entity
+      entityId: ad-tiesha-ridge
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

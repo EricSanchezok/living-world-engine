@@ -1,0 +1,18 @@
+id: dajin-kuzhu-training-sword-1
+kind: item
+name: 寒竹练剑1
+description: 木属性练剑，须由法力实际驱动，单口和合击不能凭空增殖。
+placement: dajin-kuzhu-store
+facts:
+  - id: dajin-kuzhu-training-sword-1-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ku-zhu
+    description: 岛主私用练剑，不随领取而转让所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

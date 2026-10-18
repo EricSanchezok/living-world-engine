@@ -1,0 +1,26 @@
+id: feiling-yuelong-water-process
+kind: item
+name: 水晶小炉作业册
+description: 越隆记下的水属小批合炼手序：一炉需六份已配晶料、八高阶灵石、两百法力及一个本地日专心操控；择稳妥天候，启澄水承力盘调节水属灵流，再以已掌水属方法鼎炼封晶。
+placement: feiling-yuelong-retreat
+facts:
+  - id: feiling-yuelong-water-process-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-yuelong-water-process-bounded-recipe
+    predicate: bounded-recipe
+    value:
+      kind: text
+      value: 仅适用于现有配料的一炉水属极元晶：澄水承力盘须完好，由越隆或同等已学者全程主持345600秒。8高阶灵石中2枚供阵盘、6枚供合炼；总耗6合炼晶料、200法力，成功才产1水属晶。失败仍可能耗料或损器；金风柱和承力黑网不作为水属工序设施。改变材料、金木两属或换人须重新判断。
+    description: 仅适用于现有配料的一炉水属极元晶：澄水承力盘须完好，由越隆或同等已学者全程主持345600秒。8高阶灵石中2枚供阵盘、6枚供合炼；总耗6合炼晶料、200法力，成功才产1水属晶。失败仍可能耗料或损器；金风柱和承力黑网不作为水属工序设施。改变材料、金木两属或换人须重新判断。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

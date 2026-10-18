@@ -1,0 +1,26 @@
+id: spirit3-tianling-hall
+kind: location
+name: 天灵灵皇理事院
+description: 树枝承托的木廊绕过叶影，议事台与封闭库房分处两枝，风声从下方树冠传来。
+placement: spirit-tianling-capital
+facts:
+  - id: spirit3-tianling-hall-route-to-spirit-tianling-capital
+    predicate: route-to-spirit-tianling-capital
+    value:
+      kind: entity
+      entityId: spirit-tianling-capital
+    description: route-to-spirit-tianling-capital
+    access:
+      kind: private
+  - id: spirit3-tianling-hall-route-conditions-spirit-tianling-capital
+    predicate: route-conditions-spirit-tianling-capital
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

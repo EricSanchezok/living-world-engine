@@ -1,0 +1,27 @@
+id: spirit-land-survey-order
+kind: item
+name: 南麓水线复勘单
+description: 邀请有阵法与测绘能力者复勘一段水线，重在查清而不是支持某一方。
+placement: spirit-yuque-upper
+facts:
+  - id: spirit-land-survey-order-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-land-survey-order-terms
+    predicate: terms
+    value:
+      kind: text
+      value: 获杜听潮认可后，可与沈蘅带登记图共同进入翠泷南麓勘验。完成两界标的测距、旧刻文辨认和水线流向记录，核对无误付80枚低阶灵石；不要求使用武力，也不授权取走私有灵药。
+    description: 获杜听潮认可后，可与沈蘅带登记图共同进入翠泷南麓勘验。完成两界标的测距、旧刻文辨认和水线流向记录，核对无误付80枚低阶灵石；不要求使用武力，也不授权取走私有灵药。
+    access:
+      kind: discoverable
+      condition: 经办人员实际展示并说明完整委托内容。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

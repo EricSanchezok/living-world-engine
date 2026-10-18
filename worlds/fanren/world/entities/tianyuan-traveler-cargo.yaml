@@ -1,0 +1,29 @@
+id: tianyuan-traveler-cargo
+kind: container
+name: 乌循的材料箱
+description: 箱子卡在岸石间，未落入水底。
+placement: tianyuan-stream-gully
+facts:
+  - id: tianyuan-traveler-cargo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-demon-traveler
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-traveler-cargo-actual-condition
+    predicate: actual-condition
+    value:
+      kind: text
+      value: 八份皮革材料尚在，外箱破裂但包内未湿，取出需稳住箱体而非凭空宣布全损。
+    description: 八份皮革材料尚在，外箱破裂但包内未湿，取出需稳住箱体而非凭空宣布全损。
+    access:
+      kind: discoverable
+      condition: 到现场检查箱口与内包。
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

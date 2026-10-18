@@ -1,0 +1,27 @@
+id: ad-qiling-treasury
+kind: location
+name: 泣灵藏宝殿
+description: 有若干石台与三主宝，进入不赋操控一切器物的能力。
+placement: ad-qiling-firehall
+facts:
+  - id: ad-qiling-treasury-route-to-ad-qiling-firehall
+    predicate: route-to-ad-qiling-firehall
+    value:
+      kind: entity
+      entityId: ad-qiling-firehall
+    description: 须通过真实火海与守卫，不能忽略赤晶石供能。
+    access:
+      kind: public
+  - id: ad-qiling-treasury-root-detail-earth-emperor-nails
+    predicate: root-detail-earth-emperor-nails
+    value:
+      kind: text
+      value: 土皇钉为成对玄天物，单双效力不同，锁真元须命中并驱使，借用不改变原主，不重复生成。
+    description: 土皇钉为成对玄天物，单双效力不同，锁真元须命中并驱使，借用不改变原主，不重复生成。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

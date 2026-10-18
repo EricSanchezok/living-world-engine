@@ -1,0 +1,196 @@
+id: canon-helian-jia
+kind: person
+name: 贾姓长老
+description: 麻衣清瘦的大乘长老，平时不重礼节，认真对待共同研习。
+placement: seas-elders-court
+facts:
+  - id: canon-helian-jia-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-jia
+  - id: canon-helian-jia-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘修行、合阵协同与宝物辨别。
+    description: 大乘修行、合阵协同与宝物辨别。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-jia
+  - id: canon-helian-jia-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-jia
+  - id: canon-helian-jia-council-member
+    predicate: council-member
+    value:
+      kind: entity
+      entityId: seas-helian-council
+    description: council-member
+    access:
+      kind: private
+meters:
+  - id: canon-helian-jia-health
+    definition_id: health
+    current: 100
+  - id: canon-helian-jia-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-helian-jia-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-helian-jia-force
+    definition_id: force
+    value: 8
+  - id: canon-helian-jia-craft
+    definition_id: craft
+    value: 7
+  - id: canon-helian-jia-perception
+    definition_id: perception
+    value: 8
+  - id: canon-helian-jia-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-helian-jia
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 麻衣清瘦的大乘长老，平时不重礼节，认真对待共同研习。
+      voice: 说话带笑，见后辈拘谨会摆手；真正耽误修炼时语句变短。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 协调四人的合练时段，避免一次接待占去所有闭关准备。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 贾姓长老
+        description: 麻衣清瘦的大乘长老，平时不重礼节，认真对待共同研习。
+        status: observed
+      - id: location
+        name: 四长老合研院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-helian-jia-private-stock
+        name: 贾姓长老的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-helian-elder-2
+        name: 商盟未具名第2长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-canon-helian-elder-3
+        name: 商盟未具名第3长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-canon-helian-elder-4
+        name: 商盟未具名第4长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-canon-ming-zun
+        name: 明尊
+        description: 主事与长老共同议事，但长老并非其无条件仆从。
+        status: observed
+      - id: known-seas-four-study-notes
+        name: 四长老合练札记
+        description: 参与记录的真实研究，不将愿望当已成神通。
+        status: observed
+      - id: reviewed-seas-jia-entry-seal
+        name: 贾长老进入符
+        description: 一枚刻有塔内阵纹的符片，由贾姓长老持有；只能辅助穿过所登记的拍卖洞天禁制。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: reviewed-current-duty
+        kind: observation
+        description: 自己保管长老进入符并使用过对应禁制。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘修行、合阵协同与宝物辨别。
+        description: 大乘修行、合阵协同与宝物辨别。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-helian-jia
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-elders-court
+      - local_entity_id: known-canon-helian-jia-private-stock
+        canonical_entity_ids:
+          - canon-helian-jia-private-stock
+      - local_entity_id: known-canon-helian-elder-2
+        canonical_entity_ids:
+          - canon-helian-elder-2
+      - local_entity_id: known-canon-helian-elder-3
+        canonical_entity_ids:
+          - canon-helian-elder-3
+      - local_entity_id: known-canon-helian-elder-4
+        canonical_entity_ids:
+          - canon-helian-elder-4
+      - local_entity_id: known-canon-ming-zun
+        canonical_entity_ids:
+          - canon-ming-zun
+      - local_entity_id: known-seas-four-study-notes
+        canonical_entity_ids:
+          - seas-four-study-notes
+      - local_entity_id: reviewed-seas-jia-entry-seal
+        canonical_entity_ids:
+          - seas-jia-entry-seal

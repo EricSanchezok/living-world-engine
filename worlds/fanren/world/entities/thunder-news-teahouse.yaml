@@ -1,0 +1,26 @@
+id: thunder-news-teahouse
+kind: location
+name: 听潮茶舍
+description: 旅客交换消息的茶舍，消息真假仍需查证。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-news-teahouse-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-news-teahouse-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旅客交换消息的茶舍，消息真假仍需查证。
+    description: 旅客交换消息的茶舍，消息真假仍需查证。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

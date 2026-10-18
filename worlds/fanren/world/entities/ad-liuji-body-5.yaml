@@ -1,0 +1,29 @@
+id: ad-liuji-body-5
+kind: creature
+name: 六极第5分体
+description: 同一六极主体的当前分体，持不同任务并非互不关联的人。
+placement: ad-liuji-palace
+facts:
+  - id: ad-liuji-body-5-same-subject
+    predicate: same-subject
+    value:
+      kind: entity
+      entityId: canon-liu-ji
+    description: same-subject
+    access:
+      kind: private
+  - id: ad-liuji-body-5-current-ability
+    predicate: current-ability
+    value:
+      kind: text
+      value: 可受本体调度观察、交涉和施展已学护持手段，使用同主体当前真实法力预算；跨处见闻需真实传递，不能无代价复制法力。
+    description: 可受本体调度观察、交涉和施展已学护持手段，使用同主体当前真实法力预算；跨处见闻需真实传递，不能无代价复制法力。
+    access:
+      kind: private
+meters:
+  - id: ad-liuji-body-5-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

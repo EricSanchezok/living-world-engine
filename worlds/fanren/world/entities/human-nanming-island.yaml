@@ -1,0 +1,26 @@
+id: human-nanming-island
+kind: location
+name: 南明岛
+description: 临近天星城的转运岛，来往船货在港口卸装。
+placement: human-inner-star-sea
+facts:
+  - id: human-nanming-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 须有真实海船或御器、辨明海路并备足给养。
+    access:
+      kind: public
+  - id: human-nanming-island-route-innerstar-nanming-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-port
+    description: 沿岸路往来港口和岛内。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: thunder-scholar-savings
+kind: container
+name: 温砚租居积蓄
+description: 攒下的个人灵石，租金与研究材料要由本人取舍。
+placement: thunder-independent-scholar
+facts:
+  - id: thunder-scholar-savings-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-independent-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 132
+ratings: []
+shared_activity_resources: []

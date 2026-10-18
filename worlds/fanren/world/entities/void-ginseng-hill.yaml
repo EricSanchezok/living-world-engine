@@ -1,0 +1,26 @@
+id: void-ginseng-hill
+kind: location
+name: 九曲小石山
+description: 寸草不生、灵气稀薄的小石山，与附近草木茂盛的大山不同。
+placement: void-garden
+facts:
+  - id: void-ginseng-hill-route-void-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-garden
+    description: route-to
+    access:
+      kind: public
+  - id: void-ginseng-hill-condition-void-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

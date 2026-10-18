@@ -1,0 +1,273 @@
+id: innerstar-shipowner
+kind: person
+name: 顾汀
+description: 凡俗船主，经营海贸多年，信任自己的舵手，也担心修士一句话改掉船期。
+placement: innerstar-harbor
+facts:
+  - id: innerstar-shipowner-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-shipowner
+  - id: innerstar-shipowner-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 海贸、船务与普通算账；没有灵根。
+    description: 海贸、船务与普通算账；没有灵根。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-shipowner
+  - id: innerstar-shipowner-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 没有灵根，不能按修仙者炼气入道。
+    description: 没有灵根，不能按修仙者炼气入道。
+    access:
+      kind: discoverable
+      condition: 有能力者经本人同意实际检测灵根。
+  - id: innerstar-shipowner-employs
+    predicate: employs
+    value:
+      kind: entity
+      entityId: innerstar-sailor
+    description: employs
+    access:
+      kind: private
+  - id: innerstar-shipowner-hires-escort
+    predicate: hires-escort
+    value:
+      kind: entity
+      entityId: innerstar-escort
+    description: hires-escort
+    access:
+      kind: private
+meters:
+  - id: innerstar-shipowner-health
+    definition_id: health
+    current: 100
+  - id: innerstar-shipowner-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 120
+ratings:
+  - id: innerstar-shipowner-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: innerstar-shipowner-force
+    definition_id: force
+    value: 1
+  - id: innerstar-shipowner-craft
+    definition_id: craft
+    value: 3
+  - id: innerstar-shipowner-perception
+    definition_id: perception
+    value: 1
+  - id: innerstar-shipowner-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-shipowner
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 凡俗船主，经营海贸多年，信任自己的舵手，也担心修士一句话改掉船期。
+      voice: 干脆而讲价，遇高阶修士仍会把船上人的吃饭问题说清。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取护航者按约出发，送到自己已收定金的货物。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 顾汀
+        description: 凡俗船主，经营海贸多年，信任自己的舵手，也担心修士一句话改掉船期。
+        status: observed
+      - id: location
+        name: 天星港
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-innerstar-shipowner-personal-pouch
+        name: 顾汀的私用行囊
+        description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+        status: observed
+      - id: known-innerstar-sailor
+        name: 余泊
+        description: 合作多年的船主和舵手，彼此知道当前船期。
+        status: observed
+      - id: known-innerstar-sea-ship
+        name: 青帆海船
+        description: 顾汀经营的大型凡俗海船，船身可承货，船底最近修补完整。
+        status: observed
+      - id: known-innerstar-ship-cargo
+        name: 青帆号布货
+        description: 六箱普通布匹，为自己购入转售的货。
+        status: observed
+      - id: known-innerstar-cloth-box-1
+        name: 普通布匹箱1
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-cloth-box-2
+        name: 普通布匹箱2
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-cloth-box-3
+        name: 普通布匹箱3
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-cloth-box-4
+        name: 普通布匹箱4
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-cloth-box-5
+        name: 普通布匹箱5
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-cloth-box-6
+        name: 普通布匹箱6
+        description: 一箱供凡俗穿衣的棉布，共十匹，不含灵性炼器材料。
+        status: observed
+      - id: known-innerstar-ship-provisions
+        name: 青帆号食水
+        description: 供本航次使用的口粮与饮水；人多或滞航会增加实际消耗。
+        status: observed
+      - id: known-innerstar-ship-escort-purse
+        name: 护航约定款
+        description: 约定付常冼的本次护航款，已经预付十低阶灵石，余款三十在到港后支付。
+        status: observed
+      - id: known-innerstar-escort
+        name: 常冼
+        description: 本次护航约定：已付十灵石在常冼现有160中，三十余款仍在船上独立钱袋；允许重新商议坏天气风险。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 海贸、船务与普通算账；没有灵根。
+        description: 海贸、船务与普通算账；没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 争取护航者按约出发，送到自己已收定金的货物。
+        description: 争取护航者按约出发，送到自己已收定金的货物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己尚未修仙。
+        description: 自己尚未修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己没有灵根。
+        description: 自己没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        description: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-shipowner
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-harbor
+      - local_entity_id: known-innerstar-shipowner-personal-pouch
+        canonical_entity_ids:
+          - innerstar-shipowner-personal-pouch
+      - local_entity_id: known-innerstar-sailor
+        canonical_entity_ids:
+          - innerstar-sailor
+      - local_entity_id: known-innerstar-sea-ship
+        canonical_entity_ids:
+          - innerstar-sea-ship
+      - local_entity_id: known-innerstar-ship-cargo
+        canonical_entity_ids:
+          - innerstar-ship-cargo
+      - local_entity_id: known-innerstar-cloth-box-1
+        canonical_entity_ids:
+          - innerstar-cloth-box-1
+      - local_entity_id: known-innerstar-cloth-box-2
+        canonical_entity_ids:
+          - innerstar-cloth-box-2
+      - local_entity_id: known-innerstar-cloth-box-3
+        canonical_entity_ids:
+          - innerstar-cloth-box-3
+      - local_entity_id: known-innerstar-cloth-box-4
+        canonical_entity_ids:
+          - innerstar-cloth-box-4
+      - local_entity_id: known-innerstar-cloth-box-5
+        canonical_entity_ids:
+          - innerstar-cloth-box-5
+      - local_entity_id: known-innerstar-cloth-box-6
+        canonical_entity_ids:
+          - innerstar-cloth-box-6
+      - local_entity_id: known-innerstar-ship-provisions
+        canonical_entity_ids:
+          - innerstar-ship-provisions
+      - local_entity_id: known-innerstar-ship-escort-purse
+        canonical_entity_ids:
+          - innerstar-ship-escort-purse
+      - local_entity_id: known-innerstar-escort
+        canonical_entity_ids:
+          - innerstar-escort

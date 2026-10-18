@@ -1,0 +1,36 @@
+id: demon-phoenix-silk-stock
+kind: container
+name: 三根晶炎丝
+description: 三根火红细丝分置隔热细管，管口记录了对应岩槽与采集日期。
+placement: demon-phoenix-common-stock
+facts:
+  - id: demon-phoenix-silk-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-silk-stock-material-identity
+    predicate: material-identity
+    value:
+      kind: text
+      value: 本容器一份材料专指一根完整晶炎丝；不能与普通炼器材料视作可等额互换。
+    description: 本容器一份材料专指一根完整晶炎丝；不能与普通炼器材料视作可等额互换。
+    access:
+      kind: public
+  - id: demon-phoenix-silk-stock-source-worms
+    predicate: source-worms
+    value:
+      kind: text
+      value: 对应岩槽1、2、3；这些虫的产丝已记账，库存使用后不能从同一虫再补。
+    description: 对应岩槽1、2、3；这些虫的产丝已记账，库存使用后不能从同一虫再补。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: crystal-flame-silk-thread
+    amount: 3
+ratings: []
+shared_activity_resources: []

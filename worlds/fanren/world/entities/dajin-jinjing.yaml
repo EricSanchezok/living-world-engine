@@ -1,0 +1,99 @@
+id: dajin-jinjing
+kind: location
+name: 晋京
+description: 大晋东部的凡俗都城，修士与凡人交错活动。
+placement: human-dajin
+facts:
+  - id: dajin-jinjing-route-dajin-city-lane
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-city-lane
+    description: 城门和街道通行，禁飞是地方规约。
+    access:
+      kind: public
+  - id: dajin-jinjing-travel-dajin-city-lane
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城门和街道通行，禁飞是地方规约。
+    description: 城门和街道通行，禁飞是地方规约。
+    access:
+      kind: public
+  - id: dajin-jinjing-route-dajin-temple-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-temple-room
+    description: 郊外道路步行或用适当载具。
+    access:
+      kind: public
+  - id: dajin-jinjing-travel-dajin-temple-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 郊外道路步行或用适当载具。
+    description: 郊外道路步行或用适当载具。
+    access:
+      kind: public
+  - id: dajin-jinjing-route-jinjiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjiang
+    description: 往金江郡的官道仍有距离和路况。
+    access:
+      kind: public
+  - id: dajin-capital-auction-tradition
+    predicate: market-tradition
+    value:
+      kind: text
+      value: 大型拍卖有相隔十年的办会传统；举办状态、入场要求与卖品仍须核实当期公告。
+    description: 听过周期不等于知道日期、门路或全部货单。
+    access:
+      kind: public
+  - id: dajin-jinjing-route-dajin-jinxi-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinxi-market
+    description: 坊市有隐匿禁制，不知入口的凡人不会仅凭路过自动入内。
+    access:
+      kind: discoverable
+      condition: 实际辨认隐匿禁制的入口，或从知情者取得可信指引。
+  - id: dajin-jinjing-secret-market-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-secret-market-valley
+    description: 远郊约三千里山路；须有实际位置线索和行程，不是城内一步即到。
+    access:
+      kind: private
+  - id: dajin-jinjing-route-south-ye-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-ye-estate
+    description: route-to
+    access:
+      kind: public
+  - id: dajin-jinjing-condition-south-ye-estate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 家族内院须被引入，朝廷身份不自动打开族库。
+    description: 家族内院须被引入，朝廷身份不自动打开族库。
+    access:
+      kind: public
+  - id: dajin-jinjing-route-dajin-imperial-quarter
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-imperial-quarter
+    description: 沿城内街路向最北皇城区外缘行走；宫门内部的通行另须许可，抵达城区不等于进入所有殿宇。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

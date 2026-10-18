@@ -1,0 +1,18 @@
+id: kunwu-boundary-talismans
+kind: item
+name: 破界符匣
+description: 有限存符，使用一张需实际消耗，单符不能打开任意通道。
+placement: south-taiyi-vault
+facts:
+  - id: kunwu-boundary-talismans-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-taiyi-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

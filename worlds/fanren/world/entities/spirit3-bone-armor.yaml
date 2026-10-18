@@ -1,0 +1,18 @@
+id: spirit3-bone-armor
+kind: item
+name: 守备骨片甲
+description: 普通兽骨缝制护甲，接缝易受损，不自动产生护罩。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit3-bone-armor-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

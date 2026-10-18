@@ -1,0 +1,183 @@
+id: dajin-xu-yan
+kind: person
+name: 徐砚
+description: 太一门外院接待，熟悉通报手续，对秘谷不妄言。
+placement: dajin-taiyi-court
+facts:
+  - id: dajin-xu-yan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - dajin-xu-yan
+  - id: dajin-xu-yan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基法力、门禁辨识和书信传递。
+    description: 筑基法力、门禁辨识和书信传递。
+    access:
+      kind: agents
+      agentIds:
+        - dajin-xu-yan
+  - id: dajin-xu-yan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 木、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - dajin-xu-yan
+  - id: dajin-xu-yan-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-taiyi-sect
+    description: 外院接待，不能擅自开放冰魂谷。
+    access:
+      kind: public
+meters:
+  - id: dajin-xu-yan-health
+    definition_id: health
+    current: 100
+  - id: dajin-xu-yan-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 40
+ratings:
+  - id: dajin-xu-yan-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: dajin-xu-yan-force
+    definition_id: force
+    value: 2
+  - id: dajin-xu-yan-craft
+    definition_id: craft
+    value: 1
+  - id: dajin-xu-yan-perception
+    definition_id: perception
+    value: 2
+  - id: dajin-xu-yan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: dajin-xu-yan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 太一门外院接待，熟悉通报手续，对秘谷不妄言。
+      voice: 按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把求见请求与随行货单逐件核实。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 徐砚
+        description: 太一门外院接待，熟悉通报手续，对秘谷不妄言。
+        status: observed
+      - id: location
+        name: 太一门外院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-dajin-xu-yan-pouch
+        name: 徐砚的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-dajin-taiyi-sect
+        name: 太一门
+        description: 外院接待，不能擅自开放冰魂谷。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基法力、门禁辨识和书信传递。
+        description: 筑基法力、门禁辨识和书信传递。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把求见请求与随行货单逐件核实。
+        description: 把求见请求与随行货单逐件核实。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 木、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 木、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - dajin-xu-yan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - dajin-taiyi-court
+      - local_entity_id: known-dajin-xu-yan-pouch
+        canonical_entity_ids:
+          - dajin-xu-yan-pouch
+      - local_entity_id: known-dajin-taiyi-sect
+        canonical_entity_ids:
+          - dajin-taiyi-sect

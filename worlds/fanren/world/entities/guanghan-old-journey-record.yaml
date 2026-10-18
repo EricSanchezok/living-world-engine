@@ -1,0 +1,37 @@
+id: guanghan-old-journey-record
+kind: item
+name: 旧次广寒行记
+description: 旧来访者留下的有限行记：外海、森林昼夜和普通避险；不含秘密药园坐标、炼神术全文或可用令。
+placement: guanghan-archive-room
+facts:
+  - id: guanghan-old-journey-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: guanghan-old-journey-record-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 可核部分为暗兽夜强、日间三眼巡兽频繁，以及返程需守接引阵；未到地区留空。
+    description: 可核部分为暗兽夜强、日间三眼巡兽频繁，以及返程需守接引阵；未到地区留空。
+    access:
+      kind: discoverable
+      condition: 经墨衡准许阅览或获得合法摹本。
+  - id: guanghan-old-journey-record-research-opportunity
+    predicate: research-opportunity
+    value:
+      kind: text
+      value: 获准后可比较旧印、年份与草稿，查明两种纪年为同一天的不同写法；需实际读写能力、材料和时间。此结论能使便览可发行，不会给出新令出现日期。
+    description: 获准后可比较旧印、年份与草稿，查明两种纪年为同一天的不同写法；需实际读写能力、材料和时间。此结论能使便览可发行，不会给出新令出现日期。
+    access:
+      kind: agents
+      agentIds:
+        - guanghan-archivist
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

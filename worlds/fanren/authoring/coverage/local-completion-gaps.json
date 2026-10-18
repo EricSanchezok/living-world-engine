@@ -1,73 +1,307 @@
 {
-  "formatVersion": 1,
-  "status": "remaining-full-scope-gates-not-phase-completion",
+  "formatVersion": 2,
+  "status": "source-and-candidate-closure-complete-runtime-acceptance-separate",
   "sourceAdjudication": {
-    "pendingBatches": 178,
-    "coveredBatches": 220,
-    "unsupported": 58,
-    "ambiguous": 361,
-    "residual": {
-      "unresolvedAliases": 160,
-      "unresolvedIssues": 1576,
-      "unresolvedIdentities": 420,
-      "omissions": 1401
+    "pendingBatches": 0,
+    "coveredBatches": 398,
+    "fullInputChapters": 2451,
+    "rawJudgments": {
+      "supported": 47773,
+      "unsupported": 94,
+      "ambiguous": 1172
     },
-    "note": "这些类别可能重叠，不相加为独立工作数；模型supported也不自动批准开篇事实。",
-    "source": "source-status.json#/adjudication"
+    "rawFindings": {
+      "unresolvedAliases": 413,
+      "unresolvedIssues": 2939,
+      "unresolvedIdentities": 918,
+      "omissions": 2834
+    },
+    "editoriallyResolvedFindings": 8370,
+    "pendingEditorialFindings": 0,
+    "note": "rawJudgments/rawFindings保留独立模型最初产生的问题类别；当前剩余以具体编辑闭合报告计，不把模型supported直接授为运行事实。",
+    "source": "source-status.json#/adjudication",
+    "closureSource": "source-closure.json"
   },
   "candidateInventory": {
     "allExtractedCandidates": 53818,
-    "regionalQueueMemberships": 29257,
-    "uniqueCandidatesInRegionalQueues": 24378,
-    "unassignedCandidates": 29440,
-    "strictlyDisposedMemberships": 789,
-    "uniqueStrictDisposedCandidates": 646,
-    "exactCrossRegionReuseProgressMemberships": 129,
-    "existingOtherClassificationRecords": 1090,
-    "note": "跨地区复用是已有候选的重复归属处置，不增加独立事实数；候选断言不能等同需要新增人物。",
+    "regionalQueueMemberships": 28781,
+    "uniqueCandidatesInRegionalQueues": 24236,
+    "strictlyDisposedMemberships": 28781,
+    "uniqueStrictDisposedCandidates": 24236,
+    "globallyDisposedUniqueCandidates": 53818,
+    "unassignedCandidates": 0,
+    "pendingDispositions": 0,
+    "note": "地区重复归属与跨地区精确复用不增加独立候选；全域候选逐条有明确采用、纠正、历史、后期或有据未定处置，不意味着同等数量的新增实体。",
     "strictDispositionSources": [
+      "../regions/associated-demon/candidate-dispositions.json",
+      "../regions/associated-guanghan/candidate-dispositions.json",
+      "../regions/associated-immortal/candidate-dispositions.json",
+      "../regions/associated-reported/candidate-dispositions.json",
+      "../regions/associated-xiaolingtian/candidate-dispositions.json",
       "../regions/associated-yinming/candidate-dispositions.json",
       "../regions/human-boundless/candidate-dispositions.json",
       "../regions/human-dajin/candidate-dispositions.json",
+      "../regions/human-devil-valley/candidate-dispositions.json",
       "../regions/human-far-seas/candidate-dispositions.json",
       "../regions/human-inner-star/candidate-dispositions.json",
+      "../regions/human-local/candidate-dispositions.json",
       "../regions/human-north/candidate-dispositions.json",
+      "../regions/human-outer-star/candidate-dispositions.json",
       "../regions/human-south-kunwu/candidate-dispositions.json",
+      "../regions/human-steppe/candidate-dispositions.json",
       "../regions/human-ten-thousand/candidate-dispositions.json",
+      "../regions/human-tiannan/candidate-dispositions.json",
       "../regions/human-void-hall/candidate-dispositions.json",
       "../regions/human-yue/candidate-dispositions.json",
-      "../regions/spirit-blood/candidate-dispositions.json"
+      "../regions/shared-foundations/candidate-dispositions.json",
+      "../regions/spirit-blood/candidate-dispositions.json",
+      "../regions/spirit-demon-seven/candidate-dispositions.json",
+      "../regions/spirit-feiling/candidate-dispositions.json",
+      "../regions/spirit-fengyuan/candidate-dispositions.json",
+      "../regions/spirit-human-three/candidate-dispositions.json",
+      "../regions/spirit-minghe/candidate-dispositions.json",
+      "../regions/spirit-seas/candidate-dispositions.json",
+      "../regions/spirit-thunder/candidate-dispositions.json",
+      "../regions/spirit-tianyuan/candidate-dispositions.json"
     ],
-    "regionalQueueSource": "regional-queues/status.json"
+    "globalManifestSource": "../reviews/global-candidate-manifest.json",
+    "closureSource": "source-closure.json"
   },
-  "sourceEvidenceAbsentIssueIds": [
-    "batch-0113-issue-0014",
-    "batch-0185-issue-0009",
-    "batch-0186-issue-0001",
-    "batch-0209-issue-0001",
-    "batch-0298-issue-0010",
-    "batch-0341-issue-0001"
-  ],
-  "nonMechanicalDecisions": [
-    "未分区候选需要按正文语义归属、去重或归档；不能仅换检索词批量批准。",
-    "大晋及其他区域候选中的身份、存亡、主体和时间适用性，需要具体编辑决定；大晋数量见 regionalEditorialStatus，不由索引重建自动审定。",
-    "1090条旧编辑分类需要核对原来的判断范围、源锚点及目标绑定；不是改字段即可宣称严格审定。",
-    "无引文的问题项保留待审；不能伪造原文锚点满足合同。",
-    "当前模块及其候选队列不封闭全域制作清单；完整范围、资源关系、出身、规模和实际游玩仍分别验收。"
-  ],
+  "sourceEvidenceAbsentIssueIds": [],
+  "historicalEvidenceAbsentIssues": {
+    "candidateIds": [
+      "batch-0113-issue-0014",
+      "batch-0185-issue-0009",
+      "batch-0186-issue-0001",
+      "batch-0209-issue-0001",
+      "batch-0298-issue-0010",
+      "batch-0341-issue-0001"
+    ],
+    "status": "handled-by-explicit-source-resolution-evidence-or-nonlore-metadata-exception",
+    "source": "source-closure.json",
+    "note": "历史提取里无引文的编辑流程问题没有伪造剧情原文；当前严格闭合只接受有绑定的具体来源处置或明示元数据例外。"
+  },
+  "nonMechanicalDecisions": [],
+  "remainingAcceptance": {
+    "worldInventory": "由当前coverage/world.json及全量模块审签证明范围闭合；本报告不代签。",
+    "runtime": "九种出身、真实状态变化、认知隔离、资源守恒、规模、延迟与好玩自然的实际游玩由独立运行记录验收。"
+  },
   "locallyCompleted": [
-    "来源和编辑阅读指纹重建；read/reviewed未批量提升。",
-    "过期地区制作阶段按当前模块/审签/锚点实证同步。",
-    "172条相同候选和报告指纹复用已记录，1条地区专属判断没有照搬。",
-    "北域449项与万妖谷95项当前队列均有严格处置；大晋当前已处置数量及来源见 regionalEditorialStatus。"
+    "2451章完整正文输入和398批提取/独立来源复核有指纹及请求审计。",
+    "来源残项逐条编辑处置与全域候选归属均通过当前严格验证。",
+    "章节read/reviewed按来源证据闭合归档，编辑直接通读范围另存；不声称任何人独自人工通读全部2451章。"
   ],
   "approvedForRuntime": false,
   "regionalEditorialStatus": {
+    "associated-demon": {
+      "completedCandidates": 1803,
+      "pendingCandidates": 0,
+      "totalCandidates": 1803,
+      "source": "../regions/associated-demon/candidate-dispositions.json",
+      "reportHash": "15bde7e01d3138a98a2ddd36d52f3cb0fc76fc44ba1dbb00f314f0e0ba5f2df6"
+    },
+    "associated-guanghan": {
+      "completedCandidates": 528,
+      "pendingCandidates": 0,
+      "totalCandidates": 528,
+      "source": "../regions/associated-guanghan/candidate-dispositions.json",
+      "reportHash": "fa7bed0bd112a69b5e8e90de83a95abc763b87e0e7ada01e508057aa2547016d"
+    },
+    "associated-immortal": {
+      "completedCandidates": 491,
+      "pendingCandidates": 0,
+      "totalCandidates": 491,
+      "source": "../regions/associated-immortal/candidate-dispositions.json",
+      "reportHash": "f61f241415a842a543b827c6e28a25fe757d46506847e292834f3224e0823269"
+    },
+    "associated-reported": {
+      "completedCandidates": 68,
+      "pendingCandidates": 0,
+      "totalCandidates": 68,
+      "source": "../regions/associated-reported/candidate-dispositions.json",
+      "reportHash": "f8d78535b5c7e468fac225dc69974dc701f3c81d404e07699389ca23b000a908"
+    },
+    "associated-xiaolingtian": {
+      "completedCandidates": 211,
+      "pendingCandidates": 0,
+      "totalCandidates": 211,
+      "source": "../regions/associated-xiaolingtian/candidate-dispositions.json",
+      "reportHash": "d63b18637b13af2548aede0bedaba1d456e3113f7c08fb10c0b4353744322b77"
+    },
+    "associated-yinming": {
+      "completedCandidates": 222,
+      "pendingCandidates": 0,
+      "totalCandidates": 222,
+      "source": "../regions/associated-yinming/candidate-dispositions.json",
+      "reportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f"
+    },
+    "human-boundless": {
+      "completedCandidates": 41,
+      "pendingCandidates": 0,
+      "totalCandidates": 41,
+      "source": "../regions/human-boundless/candidate-dispositions.json",
+      "reportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e"
+    },
     "human-dajin": {
-      "completedCandidates": 156,
-      "pendingCandidates": 1096,
+      "completedCandidates": 1252,
+      "pendingCandidates": 0,
       "totalCandidates": 1252,
-      "source": "../regions/human-dajin/candidate-dispositions.json"
+      "source": "../regions/human-dajin/candidate-dispositions.json",
+      "reportHash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2"
+    },
+    "human-devil-valley": {
+      "completedCandidates": 747,
+      "pendingCandidates": 0,
+      "totalCandidates": 747,
+      "source": "../regions/human-devil-valley/candidate-dispositions.json",
+      "reportHash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400"
+    },
+    "human-far-seas": {
+      "completedCandidates": 71,
+      "pendingCandidates": 0,
+      "totalCandidates": 71,
+      "source": "../regions/human-far-seas/candidate-dispositions.json",
+      "reportHash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e"
+    },
+    "human-inner-star": {
+      "completedCandidates": 2015,
+      "pendingCandidates": 0,
+      "totalCandidates": 2015,
+      "source": "../regions/human-inner-star/candidate-dispositions.json",
+      "reportHash": "7f78d9f8d6e94f654ec373a00f35ec9133b0003ea6a2bb3c9f23e9ec67987b19"
+    },
+    "human-local": {
+      "completedCandidates": 611,
+      "pendingCandidates": 0,
+      "totalCandidates": 611,
+      "source": "../regions/human-local/candidate-dispositions.json",
+      "reportHash": "e1a739a89f54ccd4e046eae41cc8b538c701758bf7e2498f42cd7099fd99e50e"
+    },
+    "human-north": {
+      "completedCandidates": 449,
+      "pendingCandidates": 0,
+      "totalCandidates": 449,
+      "source": "../regions/human-north/candidate-dispositions.json",
+      "reportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4"
+    },
+    "human-outer-star": {
+      "completedCandidates": 284,
+      "pendingCandidates": 0,
+      "totalCandidates": 284,
+      "source": "../regions/human-outer-star/candidate-dispositions.json",
+      "reportHash": "c759b61896443fd0b526307fda0cc173dcb483c6fb2f2fea06fbdfadae00f1df"
+    },
+    "human-south-kunwu": {
+      "completedCandidates": 805,
+      "pendingCandidates": 0,
+      "totalCandidates": 805,
+      "source": "../regions/human-south-kunwu/candidate-dispositions.json",
+      "reportHash": "3d4d2f474a1a249ead16db7092b3547f5042f4f05795b19bb9ceebdf8cb5efcf"
+    },
+    "human-steppe": {
+      "completedCandidates": 919,
+      "pendingCandidates": 0,
+      "totalCandidates": 919,
+      "source": "../regions/human-steppe/candidate-dispositions.json",
+      "reportHash": "5c89a25c02cfe25c7ae00ab02445f9ac89a4d683facc48878852714dd3f313fc"
+    },
+    "human-ten-thousand": {
+      "completedCandidates": 95,
+      "pendingCandidates": 0,
+      "totalCandidates": 95,
+      "source": "../regions/human-ten-thousand/candidate-dispositions.json",
+      "reportHash": "4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940"
+    },
+    "human-tiannan": {
+      "completedCandidates": 2961,
+      "pendingCandidates": 0,
+      "totalCandidates": 2961,
+      "source": "../regions/human-tiannan/candidate-dispositions.json",
+      "reportHash": "9880b5f9f641ea8948cc4aeae7f0ee18b8cb3236b36a96a5b4d605d8a112bc5a"
+    },
+    "human-void-hall": {
+      "completedCandidates": 1191,
+      "pendingCandidates": 0,
+      "totalCandidates": 1191,
+      "source": "../regions/human-void-hall/candidate-dispositions.json",
+      "reportHash": "209e637a06e852f3126b19c7134a7a007611e24cc010257460b482dd8fbc0b9e"
+    },
+    "human-yue": {
+      "completedCandidates": 1758,
+      "pendingCandidates": 0,
+      "totalCandidates": 1758,
+      "source": "../regions/human-yue/candidate-dispositions.json",
+      "reportHash": "2df6471795d23a4c3864495b18cf1de3b7fd19de78066825cf41f4816921ef54"
+    },
+    "shared-foundations": {
+      "completedCandidates": 6976,
+      "pendingCandidates": 0,
+      "totalCandidates": 6976,
+      "source": "../regions/shared-foundations/candidate-dispositions.json",
+      "reportHash": "460e7bce8cada1b313b6ff76805d2c2d67df783b0f0495967f6486ece18ddb1e"
+    },
+    "spirit-blood": {
+      "completedCandidates": 282,
+      "pendingCandidates": 0,
+      "totalCandidates": 282,
+      "source": "../regions/spirit-blood/candidate-dispositions.json",
+      "reportHash": "008c8b48beb1a04021855ededce4c3faf4b32399bf0851223bea52c9325f4806"
+    },
+    "spirit-demon-seven": {
+      "completedCandidates": 135,
+      "pendingCandidates": 0,
+      "totalCandidates": 135,
+      "source": "../regions/spirit-demon-seven/candidate-dispositions.json",
+      "reportHash": "05e8b123bfa229ebafb95a860f365258324730170ff97ab21acf1e5a0048fdfd"
+    },
+    "spirit-feiling": {
+      "completedCandidates": 1213,
+      "pendingCandidates": 0,
+      "totalCandidates": 1213,
+      "source": "../regions/spirit-feiling/candidate-dispositions.json",
+      "reportHash": "38f99eddf50a686735439f30b41a47f4d1db13bd1a2f313871c6f28c292cfc50"
+    },
+    "spirit-fengyuan": {
+      "completedCandidates": 770,
+      "pendingCandidates": 0,
+      "totalCandidates": 770,
+      "source": "../regions/spirit-fengyuan/candidate-dispositions.json",
+      "reportHash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f"
+    },
+    "spirit-human-three": {
+      "completedCandidates": 343,
+      "pendingCandidates": 0,
+      "totalCandidates": 343,
+      "source": "../regions/spirit-human-three/candidate-dispositions.json",
+      "reportHash": "6c6f25c645a52a35a4f011380fdf2e0b305e80175fe47e785b6ba2b5d10bef86"
+    },
+    "spirit-minghe": {
+      "completedCandidates": 416,
+      "pendingCandidates": 0,
+      "totalCandidates": 416,
+      "source": "../regions/spirit-minghe/candidate-dispositions.json",
+      "reportHash": "7ab7016fd0e3e71cab29cddd635f83447e7b9c6f67c365fa18d863e3d53730eb"
+    },
+    "spirit-seas": {
+      "completedCandidates": 219,
+      "pendingCandidates": 0,
+      "totalCandidates": 219,
+      "source": "../regions/spirit-seas/candidate-dispositions.json",
+      "reportHash": "249f79b0d208034b5e9195c2900d8c30160dcfb0fca6330409c3528692449138"
+    },
+    "spirit-thunder": {
+      "completedCandidates": 572,
+      "pendingCandidates": 0,
+      "totalCandidates": 572,
+      "source": "../regions/spirit-thunder/candidate-dispositions.json",
+      "reportHash": "9920be524382398595519186d6050651c7badc14461f23079259a21cc756af82"
+    },
+    "spirit-tianyuan": {
+      "completedCandidates": 1333,
+      "pendingCandidates": 0,
+      "totalCandidates": 1333,
+      "source": "../regions/spirit-tianyuan/candidate-dispositions.json",
+      "reportHash": "b49382f484cdba733c844136d9e068601f36905a91a404ead5c673e1c55d452f"
     }
   },
   "localIndexRefreshPaidCalls": 0

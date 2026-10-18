@@ -1,0 +1,18 @@
+id: spirit3-pupil-bone-shield
+kind: item
+name: 应朔试制骨盾
+description: 试制骨盾，操纵需8法力，仅适合当前已学基础防护。
+placement: spirit3-whitebone-pupil
+facts:
+  - id: spirit3-pupil-bone-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-whitebone-pupil
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

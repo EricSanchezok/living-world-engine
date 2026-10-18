@@ -1,0 +1,18 @@
+id: canon-zhuque-ring
+kind: item
+name: 朱雀环
+description: 南宫婉的唯一火性圈环法宝，圈禁与火焰均需本人法力维持；不保证压住同级或更强目标。
+placement: canon-nangong-wan
+facts:
+  - id: canon-zhuque-ring-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nangong-wan
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

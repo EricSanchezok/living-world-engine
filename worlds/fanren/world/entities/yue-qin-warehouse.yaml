@@ -1,0 +1,26 @@
+id: yue-qin-warehouse
+kind: location
+name: 秦家铜料仓
+description: 铜料入库须验收并记账，进出需管事许可。
+placement: yue-yuejing-east
+facts:
+  - id: yue-qin-warehouse-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-warehouse-route-yue-yuejing-east
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-east
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

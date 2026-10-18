@@ -1,0 +1,30 @@
+id: tiannan-wanmiao-service-stock
+kind: item
+name: 万妙符务纸墨
+description: 有限库存，有单独账目；保管人只可按已约定用途支用。
+placement: tiannan-wanmiao-counter
+facts:
+  - id: tiannan-wanmiao-service-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-wanmiao-temple
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-wanmiao-service-stock-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-yao-heng
+    description: 实际保管人；保管不等于归个人所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 45
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

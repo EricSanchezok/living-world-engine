@@ -1,0 +1,26 @@
+id: tiannan-taizhen-court
+kind: location
+name: 太真门静修院
+description: 院落，松影下的石阶通向静室和会客堂；独门典籍由门中掌管。
+placement: human-fengdu
+facts:
+  - id: tiannan-taizhen-court-route-human-fengdu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-fengdu
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-taizhen-court-travel-human-fengdu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

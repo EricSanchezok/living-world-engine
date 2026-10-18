@@ -1,0 +1,26 @@
+id: canon-warm-yang-jade
+kind: item
+name: 暖阳宝玉
+description: 墨家传存的温热宝玉，以温阳之力缓解特定阴寒毒性；须实际贴近与持续施用，不能当作对任何毒药都有效的万能解药。
+placement: yue-mo-inner-court
+facts:
+  - id: canon-warm-yang-jade-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-mo-household
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-warm-yang-jade-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-mo-yan-wife
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

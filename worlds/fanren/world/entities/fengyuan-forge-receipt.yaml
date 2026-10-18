@@ -1,0 +1,18 @@
+id: fengyuan-forge-receipt
+kind: item
+name: 伏刃修刃交接纸
+description: 梦祥方验收兵刃、约定四十低阶灵石工钱的纸据，尚无结清记号。
+placement: fengyuan-yaksha-smith
+facts:
+  - id: fengyuan-forge-receipt-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

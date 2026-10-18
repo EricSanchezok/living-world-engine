@@ -1,0 +1,42 @@
+id: guanghan-wanjian-map
+kind: item
+name: 万剑图
+description: 金光画卷内有万千剑形，原始剑气与神识剑意仍存在。
+placement: guanghan-seventh-chamber
+facts:
+  - id: guanghan-wanjian-map-unique-artifact
+    predicate: unique-artifact
+    value:
+      kind: text
+      value: 唯一原画；拓印可记录图样，不能复制其中遗留剑气。
+    description: 唯一原画；拓印可记录图样，不能复制其中遗留剑气。
+    access:
+      kind: private
+  - id: guanghan-wanjian-map-latent-knowledge
+    predicate: latent-knowledge
+    value:
+      kind: text
+      value: 含神识御剑的念剑诀相关传承，阅读者须具相应剑道和神识承受力，不能一眼学全。
+    description: 含神识御剑的念剑诀相关传承，阅读者须具相应剑道和神识承受力，不能一眼学全。
+    access:
+      kind: private
+  - id: guanghan-wanjian-map-hazard
+    predicate: hazard
+    value:
+      kind: text
+      value: 强行凝视会受到神识剑意冲击；合适禁制可抑制外泄而允许搬运。
+    description: 强行凝视会受到神识剑意冲击；合适禁制可抑制外泄而允许搬运。
+    access:
+      kind: private
+  - id: guanghan-wanjian-map-energy-state
+    predicate: energy-state
+    value:
+      kind: text
+      value: 原有剑气尚未被当代使用，是不可凭空补满的遗留。驱动需要先祭炼，耗尽会使图失去相关力量并毁损传承载体。
+    description: 原有剑气尚未被当代使用，是不可凭空补满的遗留。驱动需要先祭炼，耗尽会使图失去相关力量并毁损传承载体。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

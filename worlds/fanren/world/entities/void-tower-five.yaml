@@ -1,0 +1,58 @@
+id: void-tower-five
+kind: location
+name: 内殿第5层
+description: 交错的青石道连向禁室和通层法阵。
+placement: void-tower
+facts:
+  - id: void-tower-five-route-void-hanli-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-hanli-platform
+    description: route-to
+    access:
+      kind: public
+  - id: void-tower-five-condition-void-hanli-platform
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-tower-five-route-void-hidden-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-hidden-array
+    description: route-to
+    access:
+      kind: public
+  - id: void-tower-five-condition-void-hidden-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-tower-five-route-void-tower-four
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-four
+    description: route-to
+    access:
+      kind: public
+  - id: void-tower-five-condition-void-tower-four
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    description: 依真实通层传送阵、路径及守卫状态行进，不可跳层。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

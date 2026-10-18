@@ -1,0 +1,18 @@
+id: yinming-well-mason-tools
+kind: item
+name: 白石的个人器具
+description: 垒石、辨承重与简易护栏。所需的有限工具，不包含无限兽晶。
+placement: yinming-well-mason
+facts:
+  - id: yinming-well-mason-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-well-mason
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

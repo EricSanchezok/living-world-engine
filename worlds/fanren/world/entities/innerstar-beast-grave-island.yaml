@@ -1,0 +1,26 @@
+id: innerstar-beast-grave-island
+kind: location
+name: 无名妖兽墓岛
+description: 偏离常用航路的一座小岛，岩地荒凉，岛内有谷。
+placement: human-inner-star-sea
+facts:
+  - id: innerstar-beast-grave-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 需实际海行、定位与给养往来，偏航海域没有仅凭地名即抵达的通道。
+    access:
+      kind: public
+  - id: innerstar-beast-grave-island-route-innerstar-grave-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-grave-shore
+    description: 沿岛岸地面往来，出海另需舟船或相应御行能力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

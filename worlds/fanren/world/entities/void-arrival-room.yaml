@@ -1,0 +1,26 @@
+id: void-arrival-room
+kind: location
+name: 无门石屋
+description: 三十余丈无门石屋，墙面附着阻隔神念和攻击的禁制；第三层位置为有据推定。
+placement: void-tower-three
+facts:
+  - id: void-arrival-room-blocked-wall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当前石墙完整，无自由开启的门；通过需要真实破禁或可穿越当前禁制的空间能力，获知塔道名不等于已出去。
+    description: 石墙与禁制阻隔行动。
+    access:
+      kind: public
+  - id: void-arrival-room-outside
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-three
+    description: 破除石屋阻隔后接通第三层塔道；不是初始自由通道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

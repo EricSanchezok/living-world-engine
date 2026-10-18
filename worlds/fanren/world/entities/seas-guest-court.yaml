@@ -1,0 +1,26 @@
+id: seas-guest-court
+kind: location
+name: 商盟贵宾院
+description: 接待修士的庭院，有真实工作人员和受约束的服务安排。
+placement: seas-underground-headquarters
+facts:
+  - id: seas-guest-court-route-seas-underground-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-underground-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: seas-guest-court-condition-seas-underground-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

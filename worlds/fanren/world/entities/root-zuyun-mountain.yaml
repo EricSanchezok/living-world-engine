@@ -1,0 +1,37 @@
+id: root-zuyun-mountain
+kind: location
+name: 祖云山
+description: 灵族驻守的山地，石室与器修通路互有禁门。
+placement: fengyuan-spirit-domain
+facts:
+  - id: root-zuyun-mountain-route-to-fengyuan-spirit-domain
+    predicate: route-to-fengyuan-spirit-domain
+    value:
+      kind: entity
+      entityId: fengyuan-spirit-domain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-zuyun-mountain-travel-condition-fengyuan-spirit-domain
+    predicate: travel-condition-fengyuan-spirit-domain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-zuyun-mountain-root-detail-ling-clan-outposts
+    predicate: root-detail-ling-clan-outposts
+    value:
+      kind: text
+      value: 灵族金系、器灵支系不同，圣灵是合体称呼。人口繁衍困难是限制非永远禁止扩张，凝练特殊星气需实际方法条件。
+    description: 灵族金系、器灵支系不同，圣灵是合体称呼。人口繁衍困难是限制非永远禁止扩张，凝练特殊星气需实际方法条件。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

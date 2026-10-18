@@ -1,0 +1,18 @@
+id: fengyuan-xihe-public-map
+kind: item
+name: 细禾访客路图草稿
+description: 只列已经实测的三条街和门口记号，私宅部分留白；可现场核对后讨论是否刊用。
+placement: fengyuan-xihe-cartographer
+facts:
+  - id: fengyuan-xihe-public-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-xihe-cartographer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

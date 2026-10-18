@@ -1,0 +1,18 @@
+id: demon-rat-brace
+kind: item
+name: 运道支撑架
+description: 一套可拆卸支撑架，用于撑住浅层松石；放置后占据现场，不能同时在两处使用。
+placement: demon-rat-town
+facts:
+  - id: demon-rat-brace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-rat-community
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

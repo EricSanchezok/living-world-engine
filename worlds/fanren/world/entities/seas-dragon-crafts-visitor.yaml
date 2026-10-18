@@ -1,0 +1,176 @@
+id: seas-dragon-crafts-visitor
+kind: person
+name: 桑络
+description: 受樊咆子私人接引的成年合体外族匠人，有一套自己研究的轻舟接口。
+placement: seas-island-town
+facts:
+  - id: seas-dragon-crafts-visitor-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-crafts-visitor
+  - id: seas-dragon-crafts-visitor-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体修行、轻舟接口与风属性材料加工。
+    description: 合体修行、轻舟接口与风属性材料加工。
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-crafts-visitor
+  - id: seas-dragon-crafts-visitor-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-crafts-visitor
+meters:
+  - id: seas-dragon-crafts-visitor-health
+    definition_id: health
+    current: 100
+  - id: seas-dragon-crafts-visitor-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-dragon-crafts-visitor-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: seas-dragon-crafts-visitor-force
+    definition_id: force
+    value: 7
+  - id: seas-dragon-crafts-visitor-craft
+    definition_id: craft
+    value: 7
+  - id: seas-dragon-crafts-visitor-perception
+    definition_id: perception
+    value: 7
+  - id: seas-dragon-crafts-visitor-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: seas-dragon-crafts-visitor
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受樊咆子私人接引的成年合体外族匠人，有一套自己研究的轻舟接口。
+      voice: 讲工艺时爱拿实物演示，面对强者也会把授权条件逐项说清。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 用工艺图换一次留影观摩机会，并维护自己图样的复制条件。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 桑络
+        description: 受樊咆子私人接引的成年合体外族匠人，有一套自己研究的轻舟接口。
+        status: observed
+      - id: location
+        name: 龙岛交易小镇
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-dragon-crafts-visitor-private-stock
+        name: 桑络的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-fan-pao-zi
+        name: 樊咆子
+        description: 已经接引来岛的客人，认可其工艺但未答应所有交换请求。
+        status: observed
+      - id: known-seas-visitor-plan
+        name: 桑络轻舟接口图
+        description: 本人已测的轻舟接口，能省小型舟稳风耗力，不能替代跨界法器；愿交换一次观摩，但只许一份署名抄本。
+        status: observed
+      - id: known-seas-visitor-demonstrator
+        name: 桑络接口样件
+        description: 可接普通风灵小舟测试的真实样件，需两份灵材和一中阶石完成装配；不适用于未勘查的大型舟。
+        status: observed
+      - id: known-canon-golden-dragon-elder
+        name: 金龙大长老
+        description: 从接引者口中得知可向其申请观摩，尚未获得许可。
+        status: observed
+      - id: known-seas-fruit-custodian
+        name: 木循
+        description: 来客已在公开街区介绍轻舟接口，掌园者想询问可调遮光架，未承诺换出私传。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体修行、轻舟接口与风属性材料加工。
+        description: 合体修行、轻舟接口与风属性材料加工。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-dragon-crafts-visitor
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-island-town
+      - local_entity_id: known-seas-dragon-crafts-visitor-private-stock
+        canonical_entity_ids:
+          - seas-dragon-crafts-visitor-private-stock
+      - local_entity_id: known-canon-fan-pao-zi
+        canonical_entity_ids:
+          - canon-fan-pao-zi
+      - local_entity_id: known-seas-visitor-plan
+        canonical_entity_ids:
+          - seas-visitor-plan
+      - local_entity_id: known-seas-visitor-demonstrator
+        canonical_entity_ids:
+          - seas-visitor-demonstrator
+      - local_entity_id: known-canon-golden-dragon-elder
+        canonical_entity_ids:
+          - canon-golden-dragon-elder
+      - local_entity_id: known-seas-fruit-custodian
+        canonical_entity_ids:
+          - seas-fruit-custodian

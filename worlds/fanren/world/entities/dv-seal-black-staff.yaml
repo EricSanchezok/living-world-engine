@@ -1,0 +1,18 @@
+id: dv-seal-black-staff
+kind: item
+name: 镇钵乌黑禅杖
+description: 悬于银钵上方的三镇物之一；与另两物及玉符共同镇压，取走会改变封印，不是无后果拾取。
+placement: dv-seal-hall
+facts:
+  - id: dv-seal-black-staff-seals
+    predicate: seals
+    value:
+      kind: entity
+      entityId: dv-main-seal-bowl
+    description: seals
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

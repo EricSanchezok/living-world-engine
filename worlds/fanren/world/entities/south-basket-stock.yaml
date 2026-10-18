@@ -1,0 +1,20 @@
+id: south-basket-stock
+kind: container
+name: 葛小宁竹料
+description: 五份竹料可编篓，每份需真实工时。
+placement: south-lake-hamlet
+facts:
+  - id: south-basket-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-boat-daughter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+ratings: []
+shared_activity_resources: []

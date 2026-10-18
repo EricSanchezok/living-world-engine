@@ -1,0 +1,26 @@
+id: fengyuan-residence-yin-gangzi
+kind: location
+name: 银罡子静修居
+description: 独立院落设有试法空地和收藏静室，门前留一处可坐谈的石台。
+placement: fengyuan-tianji-domain
+facts:
+  - id: fengyuan-residence-yin-gangzi-route-to-fengyuan-tianji-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-tianji-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-residence-yin-gangzi-route-conditions-fengyuan-tianji-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

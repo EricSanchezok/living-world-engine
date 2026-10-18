@@ -1,0 +1,214 @@
+id: thunder-record-keeper
+kind: person
+name: 荔册
+description: 万古档案员，爱收藏旧城图，对重复讹传尤其敏感。
+placement: thunder-tianxu-hall
+facts:
+  - id: thunder-record-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - thunder-record-keeper
+  - id: thunder-record-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴修行、档案校对和旧式字纹辨识。
+    description: 元婴修行、档案校对和旧式字纹辨识。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-record-keeper
+  - id: thunder-record-keeper-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    description: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-record-keeper
+  - id: thunder-record-keeper-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: affiliation
+    access:
+      kind: public
+  - id: thunder-record-keeper-sold-rubbing-to-thunder-rumor-seller
+    predicate: sold-rubbing-to
+    value:
+      kind: entity
+      entityId: thunder-rumor-seller
+    description: sold-rubbing-to
+    access:
+      kind: private
+meters:
+  - id: thunder-record-keeper-health
+    definition_id: health
+    current: 100
+  - id: thunder-record-keeper-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: thunder-record-keeper-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: thunder-record-keeper-force
+    definition_id: force
+    value: 4
+  - id: thunder-record-keeper-craft
+    definition_id: craft
+    value: 4
+  - id: thunder-record-keeper-perception
+    definition_id: perception
+    value: 4
+  - id: thunder-record-keeper-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: thunder-record-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 万古档案员，爱收藏旧城图，对重复讹传尤其敏感。
+      voice: 对年份和印章兴致勃勃，谈闲话也常从某年某事说起。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 找出散落旧拓本的真正年份，决定公开怎样澄清。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 荔册
+        description: 万古档案员，爱收藏旧城图，对重复讹传尤其敏感。
+        status: observed
+      - id: location
+        name: 天旭阁
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-thunder-wangu-people
+        name: 万古族
+        description: 自己所属的族群或公务机构。
+        status: observed
+      - id: known-thunder-rumor-seller
+        name: 柳窗
+        description: 旧拓本曾依法出售，卖方当时注明是旧年份。
+        status: observed
+      - id: known-thunder-record-keeper-personal-kit
+        name: 荔册的私用行囊
+        description: 私人修炼和生活用品，机构资源另行保管。
+        status: observed
+      - id: known-thunder-alliance-treasury
+        name: 云城本轮公务库
+        description: 本轮有限公务资源，私人请求需获得批准。
+        status: observed
+      - id: known-thunder-old-guanghan-rubbing
+        name: 旧广寒纪事拓本
+        description: 自己此前出售的旧拓本。
+        status: observed
+      - id: known-thunder-rubbing-stub
+        name: 拓本出售存底
+        description: 保留在阁中的旧件出售记录。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴修行、档案校对和旧式字纹辨识。
+        description: 元婴修行、档案校对和旧式字纹辨识。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        description: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: old-rubbing-sale
+        subjectId: self
+        predicate: old-rubbing-sale
+        value:
+          kind: text
+          value: 自己卖的是明确标过旧年份的拓本，没有见过新广寒令。
+        description: 自己卖的是明确标过旧年份的拓本，没有见过新广寒令。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        description: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-record-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-tianxu-hall
+      - local_entity_id: known-thunder-wangu-people
+        canonical_entity_ids:
+          - thunder-wangu-people
+      - local_entity_id: known-thunder-rumor-seller
+        canonical_entity_ids:
+          - thunder-rumor-seller
+      - local_entity_id: known-thunder-record-keeper-personal-kit
+        canonical_entity_ids:
+          - thunder-record-keeper-personal-kit
+      - local_entity_id: known-thunder-alliance-treasury
+        canonical_entity_ids:
+          - thunder-alliance-treasury
+      - local_entity_id: known-thunder-old-guanghan-rubbing
+        canonical_entity_ids:
+          - thunder-old-guanghan-rubbing
+      - local_entity_id: known-thunder-rubbing-stub
+        canonical_entity_ids:
+          - thunder-rubbing-stub

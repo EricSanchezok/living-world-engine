@@ -1,0 +1,46 @@
+id: root-wuhai-temple
+kind: location
+name: 雾海观
+description: 保存祖师传承的小道观，门内有静室、药圃和旧卷柜。
+placement: spirit-human-demon-territory
+facts:
+  - id: root-wuhai-temple-route-to-spirit-human-demon-territory
+    predicate: route-to-spirit-human-demon-territory
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wuhai-temple-travel-condition-spirit-human-demon-territory
+    predicate: travel-condition-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wuhai-temple-root-detail-inheritance-device
+    predicate: root-detail-inheritance-device
+    value:
+      kind: text
+      value: 体内传承法器可按血脉、修为开启，取出或遭强夺可能损根基、自毁，须按本器结构判断；取得记载不等修成。
+    description: 体内传承法器可按血脉、修为开启，取出或遭强夺可能损根基、自毁，须按本器结构判断；取得记载不等修成。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-wuhai-temple-root-detail-wuhai-lineage
+    predicate: root-detail-wuhai-lineage
+    value:
+      kind: text
+      value: 本观祖师曾有下界雾海宗传承，具体下界未有足够资料确认为人族故乡界；各代弟子须实际拜师学习。
+    description: 本观祖师曾有下界雾海宗传承，具体下界未有足够资料确认为人族故乡界；各代弟子须实际拜师学习。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

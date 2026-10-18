@@ -1,0 +1,35 @@
+id: demon-phoenix-inner-sanctuary
+kind: location
+name: 黑凤族秘禁地
+description: 深入山腹的静修石室以层层阵门隔开，门外有存放入内文书的石龛；此刻没有获准入内的闭关者。
+placement: demon-phoenix-palace
+facts:
+  - id: demon-phoenix-inner-sanctuary-route-to-demon-phoenix-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-palace
+    description: route-to-demon-phoenix-palace
+    access:
+      kind: public
+  - id: demon-phoenix-inner-sanctuary-condition-demon-phoenix-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。
+    description: 秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。
+    access:
+      kind: public
+  - id: demon-phoenix-inner-sanctuary-root-detail-phoenix-yuan
+    predicate: root-detail-phoenix-yuan
+    value:
+      kind: text
+      value: 冰凤传承可由自身施法逼出元阴，效果及消耗与双修不同；须实际施法交付，不能从另一主体库存直接调用。
+    description: 冰凤传承可由自身施法逼出元阴，效果及消耗与双修不同；须实际施法交付，不能从另一主体库存直接调用。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

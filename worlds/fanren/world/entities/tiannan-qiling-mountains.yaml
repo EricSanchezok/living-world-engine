@@ -1,0 +1,42 @@
+id: tiannan-qiling-mountains
+kind: location
+name: 奇灵山
+description: 天罗西部绵延数万里的险山，灵兽奇虫出没，御灵宗控制其中山门地带。
+placement: human-tianluo
+facts:
+  - id: tiannan-qiling-mountains-route-human-tianluo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianluo
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-qiling-mountains-travel-human-tianluo
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-qiling-mountains-route-tiannan-yuling-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-yuling-court
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-qiling-mountains-travel-tiannan-yuling-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

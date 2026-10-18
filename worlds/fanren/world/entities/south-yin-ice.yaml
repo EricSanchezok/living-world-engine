@@ -1,0 +1,26 @@
+id: south-yin-ice
+kind: location
+name: 古剑冰壁
+description: 冰层内隐有蓝色剑影，旧洞痕迹须近前查验。
+placement: south-yin-forks
+facts:
+  - id: south-yin-ice-route-south-yin-forks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-forks
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-ice-condition-south-yin-forks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 冰滑与阴风并存，须真实行进和护持。
+    description: 冰滑与阴风并存，须真实行进和护持。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

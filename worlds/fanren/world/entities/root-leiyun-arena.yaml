@@ -1,0 +1,28 @@
+id: root-leiyun-arena
+kind: location
+name: 雷云竞技场
+description: 隔开测试与围观区域的场地，考核要有实际施术者、阵具和傀儡。
+placement: root-leiyun-town
+facts:
+  - id: root-leiyun-arena-route-to-root-leiyun-town
+    predicate: route-to-root-leiyun-town
+    value:
+      kind: entity
+      entityId: root-leiyun-town
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-arena-travel-condition-root-leiyun-town
+    predicate: travel-condition-root-leiyun-town
+    value:
+      kind: text
+      value: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    description: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

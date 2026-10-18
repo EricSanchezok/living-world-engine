@@ -1,0 +1,22 @@
+id: canon-meng-xiang-supplies
+kind: container
+name: 梦祥的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-meng-xiang
+facts:
+  - id: canon-meng-xiang-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-meng-xiang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

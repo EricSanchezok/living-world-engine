@@ -1,0 +1,26 @@
+id: ad-yuan-soul-anchor-1
+kind: item
+name: 元魇第1储备魂锚
+description: 一处由本人秘密保管的滴血元神寄存；不是新的人格或独立全知施术者，转主需真实主魂损毁和恢复过程。
+placement: ad-yuan-retreat
+facts:
+  - id: ad-yuan-soul-anchor-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yuan-yan
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-yuan-soul-anchor-1-same-subject
+    predicate: same-subject
+    value:
+      kind: entity
+      entityId: canon-yuan-yan
+    description: same-subject
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

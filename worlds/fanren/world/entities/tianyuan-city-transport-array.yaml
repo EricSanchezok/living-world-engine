@@ -1,0 +1,18 @@
+id: tianyuan-city-transport-array
+kind: item
+name: 备勤院传送阵
+description: 与巡察哨阵位配对，完整可用。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-city-transport-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

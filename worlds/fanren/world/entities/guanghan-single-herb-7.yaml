@@ -1,0 +1,27 @@
+id: guanghan-single-herb-7
+kind: plant
+name: 独株古灵药7
+description: 独立药圃中的一株古灵物，完整根系受到离土触发的保护结构影响。
+placement: guanghan-garden
+facts:
+  - id: guanghan-single-herb-7-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-single-herb-7-preservation-condition
+    predicate: preservation-condition
+    value:
+      kind: text
+      value: 直接连根粗暴拔起可引发植株自毁；快速切取含种部位并冰封、符禁有保存可能，仍须检验具体植株响应。
+    description: 直接连根粗暴拔起可引发植株自毁；快速切取含种部位并冰封、符禁有保存可能，仍须检验具体植株响应。
+    access:
+      kind: discoverable
+      condition: 实际检查根部禁制或在有代价的试验中发现，不随走近自动知晓。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

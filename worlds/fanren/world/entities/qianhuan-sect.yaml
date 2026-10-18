@@ -1,0 +1,26 @@
+id: qianhuan-sect
+kind: organization
+name: 千幻宗
+description: 千幻宗的宗门或联盟共同体，职分、成员与公产分开；与陌生人交涉须由实际掌事者决定。
+placement: human-tianluo
+facts:
+  - id: qianhuan-sect-alliance
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: tiannan-six-demonic
+    description: member-of
+    access:
+      kind: public
+  - id: qianhuan-sect-public-service
+    predicate: public-service-at
+    value:
+      kind: entity
+      entityId: tiannan-qianhuan-outer-court
+    description: 此处办理普通物资和来客交接；职员无权代表全宗承诺战争或处分秘宝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

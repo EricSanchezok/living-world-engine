@@ -1,0 +1,46 @@
+id: thunder-mojin-ape-cave
+kind: location
+name: 魔猿隐洞
+description: 岩缝后有一处狭长洞穴，外口被乱石和魔藤遮住。洞内没有通向隐宫的现成捷径。
+placement: thunder-mojin-mountains
+facts:
+  - id: thunder-mojin-ape-cave-route-thunder-mojin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-mountains
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-ape-cave-condition-thunder-mojin-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐洞入口被藏匿，须有实地线索、追踪或实际探查能力找到。
+    description: 隐洞入口被藏匿，须有实地线索、追踪或实际探查能力找到。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-ape-cave-location-secrecy
+    predicate: location-secrecy
+    value:
+      kind: text
+      value: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    description: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    access:
+      kind: discoverable
+      condition: 实际取得位置与入口线索。
+  - id: thunder-mojin-ape-cave-root-detail-mojin-caverns
+    predicate: root-detail-mojin-caverns
+    value:
+      kind: text
+      value: 山腹有岔路、厅室与旧结构；未知炼丹遗址和藏宝只能作为待查线索，不能因猜测生成确认物资。
+    description: 山腹有岔路、厅室与旧结构；未知炼丹遗址和藏宝只能作为待查线索，不能因猜测生成确认物资。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

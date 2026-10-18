@@ -1,0 +1,26 @@
+id: dajin-temple-room
+kind: location
+name: 城郊客舍
+description: 清静客舍，向之礼在此短住，平日来客稀少。
+placement: dajin-jinjing
+facts:
+  - id: dajin-temple-room-route-dajin-jinjing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjing
+    description: 郊外道路步行或用适当载具。
+    access:
+      kind: public
+  - id: dajin-temple-room-travel-dajin-jinjing
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 郊外道路步行或用适当载具。
+    description: 郊外道路步行或用适当载具。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

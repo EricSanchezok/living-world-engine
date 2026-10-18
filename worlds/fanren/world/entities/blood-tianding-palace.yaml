@@ -1,0 +1,51 @@
+id: blood-tianding-palace
+kind: location
+name: 天鼎宫
+description: 古代飞升者留下的分区宫殿，当前隐匿闭合；不按未来章节自动开门。
+placement: blood-wanyue-mountains
+facts:
+  - id: blood-tianding-palace-route-blood-lake-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-lake-shore
+    description: route-to
+    access:
+      kind: public
+  - id: blood-tianding-palace-condition-blood-lake-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须真实现世窗口、可用入口与足够钥匙/破禁能力；当前隐匿，无当前有效开门信号。仿钥匙不保证安全入内。
+    description: 须真实现世窗口、可用入口与足够钥匙/破禁能力；当前隐匿，无当前有效开门信号。仿钥匙不保证安全入内。
+    access:
+      kind: public
+  - id: blood-tianding-palace-route-blood-outer-palaces
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-outer-palaces
+    description: route-to
+    access:
+      kind: public
+  - id: blood-tianding-palace-condition-blood-outer-palaces
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+  - id: blood-tianding-palace-root-detail-refined-thunder
+    predicate: root-detail-refined-thunder
+    value:
+      kind: text
+      value: 红简所载炼雷法须取得、读懂、学成后才能配合相应雷术；不是任意金雷都具同效。
+    description: 红简所载炼雷法须取得、读懂、学成后才能配合相应雷术；不是任意金雷都具同效。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

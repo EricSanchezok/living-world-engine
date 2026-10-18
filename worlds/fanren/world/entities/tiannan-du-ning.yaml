@@ -1,0 +1,227 @@
+id: tiannan-du-ning
+kind: person
+name: 杜宁
+description: 百巧院器师，喜欢证明外观朴素的器物也能可靠，反感夸大成宝率。
+placement: tiannan-baiqiao-mountain
+facts:
+  - id: tiannan-du-ning-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-du-ning
+  - id: tiannan-du-ning-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基法力、金属整形与低阶器物制作。
+    description: 筑基法力、金属整形与低阶器物制作。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-du-ning
+  - id: tiannan-du-ning-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、火、土三灵根
+    description: 金、火、土三灵根。先天资质已固定，不能随求学意愿或检测结果变化。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-du-ning
+  - id: tiannan-du-ning-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: baiqiao-academy
+    description: 当前所属机构及承担的实事；个人财物仍归自己。
+    access:
+      kind: public
+  - id: tiannan-du-ning-root-assessment
+    predicate: root-assessment
+    value:
+      kind: text
+      value: 早年入门时已经检测过，本人知道自己的灵根属性；未授权的人不自动获知。
+    description: 检测是揭示既定资质，不负责生成新灵根。
+    access:
+      kind: agents
+      agentIds:
+        - tiannan-du-ning
+meters:
+  - id: tiannan-du-ning-health
+    definition_id: health
+    current: 100
+  - id: tiannan-du-ning-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 48
+ratings:
+  - id: tiannan-du-ning-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: tiannan-du-ning-force
+    definition_id: force
+    value: 2
+  - id: tiannan-du-ning-craft
+    definition_id: craft
+    value: 1
+  - id: tiannan-du-ning-perception
+    definition_id: perception
+    value: 2
+  - id: tiannan-du-ning-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: tiannan-du-ning
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 百巧院器师，喜欢证明外观朴素的器物也能可靠，反感夸大成宝率。
+      voice: 拿着实物解释，遇质疑喜欢请人亲手试。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 请古剑同道来比较两种护手设计，胜负以真实试用定。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 杜宁
+        description: 百巧院器师，喜欢证明外观朴素的器物也能可靠，反感夸大成宝率。
+        status: observed
+      - id: location
+        name: 百巧院西脉
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-tiannan-du-ning-pouch
+        name: 杜宁的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-baiqiao-academy
+        name: 百巧院
+        description: 当前所属机构及承担的实事；个人财物仍归自己。
+        status: observed
+      - id: known-tiannan-liang-shi
+        name: 梁适
+        description: 相识的器师与剑修，愿以实测争论器物设计。
+        status: observed
+      - id: known-tiannan-du-wristguard
+        name: 双型剑器护手
+        description: 两副低阶护手，一副更稳一副更轻；需分别佩戴测试，不能同时算同一人的完整效果。
+        status: observed
+      - id: known-canon-lu-luo
+        name: 吕洛
+        description: 认识落云宗吕洛，平日有过修学往来。
+        status: observed
+      - id: known-baiqiao-academy-current-stock
+        name: 百巧炼器公库
+        description: 本期由自己核数保管的公库，属于百巧院。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基法力、金属整形与低阶器物制作。
+        description: 筑基法力、金属整形与低阶器物制作。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 请古剑同道来比较两种护手设计，胜负以真实试用定。
+        description: 请古剑同道来比较两种护手设计，胜负以真实试用定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 早年检测与多年修学使自己知道具有金、火、土三灵根；修为仍须依功法资源和实际修炼。
+        description: 早年检测与多年修学使自己知道具有金、火、土三灵根；修为仍须依功法资源和实际修炼。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: public-stock-duty
+        subjectId: self
+        predicate: custody-duty
+        value:
+          kind: text
+          value: 自己应登记公库出入并说明公务用途；保管不赋私人所有权。
+        description: 自己应登记公库出入并说明公务用途；保管不赋私人所有权。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - tiannan-du-ning
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tiannan-baiqiao-mountain
+      - local_entity_id: known-tiannan-du-ning-pouch
+        canonical_entity_ids:
+          - tiannan-du-ning-pouch
+      - local_entity_id: known-baiqiao-academy
+        canonical_entity_ids:
+          - baiqiao-academy
+      - local_entity_id: known-tiannan-liang-shi
+        canonical_entity_ids:
+          - tiannan-liang-shi
+      - local_entity_id: known-tiannan-du-wristguard
+        canonical_entity_ids:
+          - tiannan-du-wristguard
+      - local_entity_id: known-canon-lu-luo
+        canonical_entity_ids:
+          - canon-lu-luo
+      - local_entity_id: known-baiqiao-academy-current-stock
+        canonical_entity_ids:
+          - baiqiao-academy-current-stock

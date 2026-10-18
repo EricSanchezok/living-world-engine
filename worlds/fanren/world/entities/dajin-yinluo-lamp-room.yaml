@@ -1,0 +1,18 @@
+id: dajin-yinluo-lamp-room
+kind: location
+name: 阴罗元神灯秘室
+description: 与主体相连的灯具分座安放；灯况须实际检查，不自行公开传播。
+placement: dajin-yinluo-main-hall
+facts:
+  - id: dajin-yinluo-lamp-room-route-dajin-yinluo-main-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yinluo-main-hall
+    description: 宗内秘室，未经许可不得进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

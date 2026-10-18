@@ -1,0 +1,42 @@
+id: north-snow-station
+kind: location
+name: 北地迎雪驿
+description: 避寒驿屋，有维持中的温室小阵和火炉，靠有限储备接待来客；走出暖屋仍须抗寒。
+placement: human-beiming-island
+facts:
+  - id: north-snow-station-route-human-beiming-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-beiming-island
+    description: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    access:
+      kind: public
+  - id: north-snow-station-travel-human-beiming-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    description: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    access:
+      kind: public
+  - id: north-snow-station-route-north-ice-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-ice-city
+    description: 沿雪路接近冰城，守门者会核对来意。
+    access:
+      kind: public
+  - id: north-snow-station-travel-north-ice-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿雪路接近冰城，守门者会核对来意。
+    description: 沿雪路接近冰城，守门者会核对来意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

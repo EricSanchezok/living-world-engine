@@ -1,0 +1,26 @@
+id: outerstar-fengle-shop
+kind: location
+name: 凝翠丰乐铺
+description: 柜上陈列海图与补给，后屋分存寄售货。
+placement: human-ningcui-island
+facts:
+  - id: outerstar-fengle-shop-route-outerstar-ningcui-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-ningcui-market
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-fengle-shop-condition-outerstar-ningcui-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 柜上陈列海图与补给，后屋分存寄售货。
+    description: 柜上陈列海图与补给，后屋分存寄售货。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

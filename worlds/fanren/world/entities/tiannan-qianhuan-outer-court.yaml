@@ -1,0 +1,18 @@
+id: tiannan-qianhuan-outer-court
+kind: location
+name: 千幻外务院
+description: 门派处理普通来客与物资交接的外院；不等于全部山门或公开修炼秘地。
+placement: human-tianluo
+facts:
+  - id: tiannan-qianhuan-outer-court-route-human-tianluo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianluo
+    description: 天罗干道可至外院门前，入内须核明来意与守值许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

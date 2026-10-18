@@ -1,0 +1,26 @@
+id: kunwu-rear-hall
+kind: location
+name: 昆吾后堂
+description: 金丝木主椅后悬三人望月图，绿桌光罩护八件旧物。
+placement: kunwu-hall
+facts:
+  - id: kunwu-rear-hall-route-kunwu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-rear-hall-condition-kunwu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 北极元光、幻阵与绿桌罩各须处理。
+    description: 北极元光、幻阵与绿桌罩各须处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

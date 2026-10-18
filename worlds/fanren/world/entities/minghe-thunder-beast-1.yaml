@@ -1,0 +1,32 @@
+id: minghe-thunder-beast-1
+kind: creature
+name: 冥雷兽1
+description: 守护神池的强大异兽，对靠近者保持警惕。
+placement: minghe-god-pool-palace
+facts:
+  - id: minghe-thunder-beast-1-guarding
+    predicate: guarding
+    value:
+      kind: entity
+      entityId: minghe-milk-pool
+    description: guarding
+    access:
+      kind: public
+  - id: minghe-thunder-beast-1-combat-capability
+    predicate: combat-capability
+    value:
+      kind: text
+      value: 冥雷与强大法体；受到攻击会真实受损，不能因守兽名号自动免疫一切。
+    description: 冥雷与强大法体；受到攻击会真实受损，不能因守兽名号自动免疫一切。
+    access:
+      kind: private
+meters:
+  - id: minghe-thunder-beast-1-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: minghe-thunder-beast-1-force
+    definition_id: force
+    value: 8
+shared_activity_resources: []

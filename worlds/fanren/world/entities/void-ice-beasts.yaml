@@ -1,0 +1,18 @@
+id: void-ice-beasts
+kind: animal-group
+name: 玄晶冰兽群
+description: 在峡谷深处栖息的有限兽群。
+placement: void-ice
+facts:
+  - id: void-ice-beasts-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 18
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

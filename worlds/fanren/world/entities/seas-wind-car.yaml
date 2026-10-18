@@ -1,0 +1,18 @@
+id: seas-wind-car
+kind: item
+name: 驿院风灵车
+description: 可由四匹狞马牵引的灵铜车，需驾驶者持续风法护持与真实行路；载客不保证自动获龙岛许可。
+placement: seas-dragon-stable
+facts:
+  - id: seas-wind-car-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

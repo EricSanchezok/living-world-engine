@@ -1,0 +1,18 @@
+id: innerstar-current-water-shield
+kind: item
+name: 白水普通水盾
+description: 一面普通水属性下阶防御法器，需炼气者注入法力维持，受力过强可破。
+placement: innerstar-baishui-hall
+facts:
+  - id: innerstar-current-water-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-liulian-group
+    description: 由六连殿所有；实际交付才改变归属。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

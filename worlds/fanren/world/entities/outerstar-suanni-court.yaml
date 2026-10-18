@@ -1,0 +1,26 @@
+id: outerstar-suanni-court
+kind: location
+name: 万丈海王庭
+description: 海沟内的石殿守着祖传器物，外厅接待各支海兽。
+placement: human-wanzhang-sea
+facts:
+  - id: outerstar-suanni-court-route-human-wanzhang-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanzhang-sea
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-suanni-court-condition-human-wanzhang-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海沟内的石殿守着祖传器物，外厅接待各支海兽。
+    description: 海沟内的石殿守着祖传器物，外厅接待各支海兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

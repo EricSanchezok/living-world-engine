@@ -1,0 +1,20 @@
+id: outerstar-mine-ore
+kind: container
+name: 已采矿料
+description: 已经开出的有限灵矿石料，尚未切分成可支付灵石。
+placement: outerstar-small-mine
+facts:
+  - id: outerstar-mine-ore-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-village-community
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

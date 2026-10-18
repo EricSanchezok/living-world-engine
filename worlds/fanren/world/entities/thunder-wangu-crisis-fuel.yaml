@@ -1,0 +1,20 @@
+id: thunder-wangu-crisis-fuel
+kind: container
+name: 万古危急阵用石
+description: 八枚高阶灵石封存，当前只够两次本阵配置。
+placement: thunder-wangu-crisis-entry
+facts:
+  - id: thunder-wangu-crisis-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

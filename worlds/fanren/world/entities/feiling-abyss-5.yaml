@@ -1,0 +1,58 @@
+id: feiling-abyss-5
+kind: location
+name: 地渊第5层
+description: 地下第5层。阴气、地形和居民各异；不同层次通道须实际辨认。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-5-route-feiling-abyss-4
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-4
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-5-condition-feiling-abyss-4
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-5-route-feiling-abyss-6
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-6
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-5-condition-feiling-abyss-6
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-5-route-to-feiling-bloodflame-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-mountain
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-abyss-5-route-conditions-feiling-bloodflame-mountain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 山腹由地血守禁，须获主人准许或实际应对机关。
+    description: 山腹由地血守禁，须获主人准许或实际应对机关。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

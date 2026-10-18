@@ -1,0 +1,18 @@
+id: demon-nine-scale
+kind: item
+name: 九仙山常市校秤
+description: 可用标准砝码检查重量；不能辨药性。
+placement: demon-nine-immortal-market
+facts:
+  - id: demon-nine-scale-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-nine-market-notary
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

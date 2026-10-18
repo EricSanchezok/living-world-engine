@@ -1,0 +1,20 @@
+id: innerstar-ship-provisions
+kind: container
+name: 青帆号食水
+description: 供本航次使用的口粮与饮水；人多或滞航会增加实际消耗。
+placement: innerstar-sea-ship
+facts:
+  - id: innerstar-ship-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 100
+ratings: []
+shared_activity_resources: []

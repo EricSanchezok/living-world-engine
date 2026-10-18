@@ -1,0 +1,42 @@
+id: tianyuan-council-hall
+kind: location
+name: 天渊城议事堂
+description: 长老会处理城务的议事所在，守卫核验来由，公民可以经外院提交呈文。
+placement: tianyuan-central-elder-tower
+facts:
+  - id: tianyuan-council-hall-route-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-council-hall-condition-spirit-guard-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长老会处理城务的议事所在，守卫核验来由，公民可以经外院提交呈文。
+    description: 长老会处理城务的议事所在，守卫核验来由，公民可以经外院提交呈文。
+    access:
+      kind: public
+  - id: tianyuan-council-hall-route-tianyuan-council-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-council-archive
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-council-hall-condition-tianyuan-council-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 保存正式决议、领用簿和任务档案，私密记录按职权开放。
+    description: 保存正式决议、领用簿和任务档案，私密记录按职权开放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

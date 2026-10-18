@@ -1,0 +1,26 @@
+id: yue-huangfeng-hall
+kind: location
+name: 黄枫谷议事殿
+description: 管事接收宗务呈报之地，有弟子值守。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-huangfeng-hall-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-hall-travel-yue-huangfeng-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

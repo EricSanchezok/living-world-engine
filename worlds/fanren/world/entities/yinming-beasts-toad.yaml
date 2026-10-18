@@ -1,0 +1,42 @@
+id: yinming-beasts-toad
+kind: animal-group
+name: 碧蟾兽当期群
+description: 有限现存群体，捕杀会减少其数量。
+placement: yinming-red-soil
+facts:
+  - id: yinming-beasts-toad-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 18
+    description: living-count
+    access:
+      kind: private
+  - id: yinming-beasts-toad-food-safety
+    predicate: food-safety
+    value:
+      kind: text
+      value: 属于可食种类，仍需实际检视与正确处理。
+    description: 属于可食种类，仍需实际检视与正确处理。
+    access:
+      kind: private
+  - id: yinming-beasts-toad-crystal-bearing-count
+    predicate: crystal-bearing-count
+    value:
+      kind: number
+      value: 0
+    description: crystal-bearing-count
+    access:
+      kind: private
+  - id: yinming-beasts-toad-escape
+    predicate: escape
+    value:
+      kind: text
+      value: 善于高跃逃离，可吐有限阴气；观察和包围能影响捕猎但不保证命中。
+    description: 善于高跃逃离，可吐有限阴气；观察和包围能影响捕猎但不保证命中。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

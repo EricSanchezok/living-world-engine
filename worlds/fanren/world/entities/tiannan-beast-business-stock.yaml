@@ -1,0 +1,30 @@
+id: tiannan-beast-business-stock
+kind: item
+name: 天星坊兽业商号货料柜
+description: 店业货款与材料，收支需记在店簿中。
+placement: tiannan-tianxing-beast-court
+facts:
+  - id: tiannan-beast-business-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-beast-business
+    description: 货款与材料归商号。
+    access:
+      kind: public
+  - id: tiannan-beast-business-stock-kept-by
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-liang-shouping
+    description: 负责实物保管和记账，个人随身钱另计。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 200
+  - definition_id: grain
+    amount: 14
+ratings: []
+shared_activity_resources: []

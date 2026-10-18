@@ -1,0 +1,20 @@
+id: spirit-land-survey-fund
+kind: container
+name: 玉阙阁勘界预算
+description: 供已登记勘界委托的现有费用。
+placement: spirit-yuque-upper
+facts:
+  - id: spirit-land-survey-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings: []
+shared_activity_resources: []

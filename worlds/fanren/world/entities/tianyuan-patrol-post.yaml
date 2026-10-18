@@ -1,0 +1,58 @@
+id: tianyuan-patrol-post
+kind: location
+name: 近界巡察哨
+description: 离城关有半本地日路程的小哨，地势与飞行速度影响实际行程。
+placement: spirit-wilderness-fringe
+facts:
+  - id: tianyuan-patrol-post-route-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-patrol-post-condition-spirit-wilderness-fringe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 离城关有半本地日路程的小哨，地势与飞行速度影响实际行程。
+    description: 离城关有半本地日路程的小哨，地势与飞行速度影响实际行程。
+    access:
+      kind: public
+  - id: tianyuan-patrol-post-route-tianyuan-stream-gully
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-stream-gully
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-patrol-post-condition-tianyuan-stream-gully
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 雨后水流较急的石涧，旧便桥一侧断裂。
+    description: 雨后水流较急的石涧，旧便桥一侧断裂。
+    access:
+      kind: public
+  - id: tianyuan-patrol-post-route-to-tianyuan-fuli-swamp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-fuli-swamp
+    description: route-to-tianyuan-fuli-swamp
+    access:
+      kind: private
+  - id: tianyuan-patrol-post-route-conditions-tianyuan-fuli-swamp
+    predicate: route-conditions-tianyuan-fuli-swamp
+    value:
+      kind: text
+      value: 从近界巡哨沿实际野路前往沼泽，长途需按脚力、天气与地形耗时；与出入城阵分开，不凭同一父区瞬移。
+    description: 从近界巡哨沿实际野路前往沼泽，长途需按脚力、天气与地形耗时；与出入城阵分开，不凭同一父区瞬移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

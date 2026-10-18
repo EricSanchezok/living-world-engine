@@ -1,0 +1,27 @@
+id: feiling-four-sha-text
+kind: item
+name: 四煞化甲术教学卷
+description: 石长老用于讲授的法诀，学习仍须有真实煞气与相应修为。
+placement: feiling-library
+facts:
+  - id: feiling-four-sha-text-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-feiling-shi-elder
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-four-sha-text-learnable-technique
+    predicate: learnable-technique
+    value:
+      kind: text
+      value: 可学习凝煞成甲的前层手法，效果受已有煞气、法力与训练影响；学会法诀不会凭空增加煞气。
+    description: 可学习凝煞成甲的前层手法，效果受已有煞气、法力与训练影响；学会法诀不会凭空增加煞气。
+    access:
+      kind: discoverable
+      condition: 获石长老准许阅读或亲授。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

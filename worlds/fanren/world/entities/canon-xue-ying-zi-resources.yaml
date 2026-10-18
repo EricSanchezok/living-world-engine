@@ -1,0 +1,24 @@
+id: canon-xue-ying-zi-resources
+kind: container
+name: 血影子个人储备
+description: 有限私人修炼用石和材料；同门公产不在此袋。
+placement: canon-xue-ying-zi
+facts:
+  - id: canon-xue-ying-zi-resources-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xue-ying-zi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 120
+  - definition_id: mid-stone
+    amount: 400
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

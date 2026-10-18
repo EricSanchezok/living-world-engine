@@ -1,0 +1,138 @@
+id: spirit-tianyuan-street
+kind: location
+name: 天渊城人族街区
+description: 塔楼间分布店铺、住处与办事院落，公开街路不通入他人的洞府禁制。
+placement: tianyuan-city
+facts:
+  - id: spirit-tianyuan-street-route-tianyuan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-city
+    description: 塔楼间分布店铺、住处与办事院落，公开街路不通入他人的洞府禁制。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-joint-checkpoint
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-joint-checkpoint
+    description: 商旅从三境七地到城中时登记货单、身份和来路；军用传送阵另有权限。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: 蛮荒材料、各地货物和修士器具在此交易，真假、交付与产权仍需各自核验。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-listening-spring
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: listening-spring
+    description: 通向听泉住处的街路，进入静室须主人允许。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-feiling-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-feiling-hall
+    description: 接待新来飞升者的殿阁，临时居所和办事室相连，各私室有自己的禁制。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-yuque-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-hall
+    description: 管理灵地居用手续的阁楼，申请者需核对身份、当前可用地块与租约。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: 甲士按任务集合和交接，普通来访者在塔外传话，不可凭修为强取军械。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-lecture-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-lecture-court
+    description: 面向符合资格修士的讲道院，开讲前公布讲者与主题，不保证每次答疑都有突破。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: 通往妖修驻区的关口，有双方差役协作；互通不等于能自由进入军务重地。
+    access:
+      kind: public
+  - id: spirit-tianyuan-street-route-spirit-body-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-body-school
+    description: 炼体教习诊看伤势并教授基本功的院落，有药房、休息房和练力石。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-tianyuan-street-route-to-tianyuan-central-elder-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-central-elder-tower
+    description: route-to-tianyuan-central-elder-tower
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-street-route-conditions-tianyuan-central-elder-tower
+    predicate: route-conditions-tianyuan-central-elder-tower
+    value:
+      kind: text
+      value: 城内至长老塔公共接待层，进入军务与议事空间须获许可。
+    description: 城内至长老塔公共接待层，进入军务与议事空间须获许可。
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-street-route-to-tianyuan-xuri-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-xuri-peak
+    description: route-to-tianyuan-xuri-peak
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-street-route-conditions-tianyuan-xuri-peak
+    predicate: route-conditions-tianyuan-xuri-peak
+    value:
+      kind: text
+      value: 由城内面向两族领土的道路，跨过辖外山道抵达；需实际多日行程与途中补给，所需时间随能力与路况，不经过蛮荒外墙。
+    description: 由城内面向两族领土的道路，跨过辖外山道抵达；需实际多日行程与途中补给，所需时间随能力与路况，不经过蛮荒外墙。
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-street-route-to-tianyuan-yitian-city-reference
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-city-reference
+    description: route-to-tianyuan-yitian-city-reference
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-street-route-conditions-tianyuan-yitian-city-reference
+    predicate: route-conditions-tianyuan-yitian-city-reference
+    value:
+      kind: text
+      value: 两族领土内部的长途道路，须按实际脚程、飞遁能力与歇息耗时；两城相距遥远，不能同一动作瞬至。
+    description: 两族领土内部的长途道路，须按实际脚程、飞遁能力与歇息耗时；两城相距遥远，不能同一动作瞬至。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,151 @@
+id: kunwu-stone-guards
+kind: construct-group
+name: 石灵守兽
+description: 受旧阵驱动的有限石卫群，载体和能量真实存在，没有自由造物能力。
+placement: kunwu-stone-hall
+facts:
+  - id: kunwu-stone-guards-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-stone-guards
+  - id: kunwu-stone-guards-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 石身、旧兵器与护阵联击；损毁载体须实际材料与能量修复。
+    description: 石身、旧兵器与护阵联击；损毁载体须实际材料与能量修复。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-stone-guards
+  - id: kunwu-stone-guards-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 旧阵驱动的物质载体，不是人族修士。
+    description: 旧阵驱动的物质载体，不是人族修士。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-stone-guards
+  - id: kunwu-stone-guards-controlled-by
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: kunwu-stone-control
+    description: controlled-by
+    access:
+      kind: private
+meters:
+  - id: kunwu-stone-guards-health
+    definition_id: health
+    current: 100
+  - id: kunwu-stone-guards-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: kunwu-guard-body
+    amount: 24
+  - definition_id: kunwu-array-charge
+    amount: 600
+ratings:
+  - id: kunwu-stone-guards-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: kunwu-stone-guards-force
+    definition_id: force
+    value: 4
+  - id: kunwu-stone-guards-craft
+    definition_id: craft
+    value: 4
+  - id: kunwu-stone-guards-perception
+    definition_id: perception
+    value: 3
+  - id: kunwu-stone-guards-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: kunwu-stone-guards
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受旧阵驱动的有限石卫群，载体和能量真实存在，没有自由造物能力。
+      voice: 没有人类寒暄，以转身、举刃和阵声回应。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 在所守范围内根据禁制条件拦阻入侵，不追到世界任意位置。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 石灵守兽
+        description: 受旧阵驱动的有限石卫群，载体和能量真实存在，没有自由造物能力。
+        status: observed
+      - id: location
+        name: 四廊石殿
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-kunwu-stone-control
+        name: 四偏殿石灵阵
+        description: 仅接受实际控制阵的本地信号。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 石身、旧兵器与护阵联击；损毁载体须实际材料与能量修复。
+        description: 石身、旧兵器与护阵联击；损毁载体须实际材料与能量修复。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 旧阵驱动的物质载体，不是人族修士。
+        description: 旧阵驱动的物质载体，不是人族修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - kunwu-stone-guards
+      - local_entity_id: location
+        canonical_entity_ids:
+          - kunwu-stone-hall
+      - local_entity_id: known-kunwu-stone-control
+        canonical_entity_ids:
+          - kunwu-stone-control

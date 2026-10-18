@@ -1,0 +1,18 @@
+id: thunder-bao-hua-flower-tree
+kind: item
+name: 静养花树
+description: 宝花静养空间内的真实花树，配合其已有功法，不能由旁人一句话复制。
+placement: thunder-mojin-refuge
+facts:
+  - id: thunder-bao-hua-flower-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bao-hua
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

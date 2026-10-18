@@ -1,0 +1,26 @@
+id: fengyuan-spirit-fortress-2
+kind: location
+name: 岚隘要塞
+description: 把守灵域另一处可通行隘口，住守与通称随当地生活形成。
+placement: fengyuan-spirit-domain
+facts:
+  - id: fengyuan-spirit-fortress-2-route-fengyuan-cuiyan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-cuiyan-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-spirit-fortress-2-condition-fengyuan-cuiyan-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 把守灵域另一处可通行隘口，住守与通称随当地生活形成。
+    description: 把守灵域另一处可通行隘口，住守与通称随当地生活形成。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,74 @@
+id: peer-market-town
+kind: location
+name: 邻镇集市
+description: 青牛镇外的一处商旅镇子，钱庄、手艺人和附近村人汇集。
+placement: jingzhou
+facts:
+  - id: peer-market-town-route-qingniu-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-street
+    description: 青牛镇外的一处商旅镇子，钱庄、手艺人和附近村人汇集。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-li-feiyu-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-li-feiyu-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-jin-dongbao-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-jin-dongbao-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-wang-family-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-wang-family-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-zhang-changgui-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-zhang-changgui-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-zhao-ziling-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-zhao-ziling-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-local-ma-rong-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-ma-rong-home
+    description: 家中有普通卧房与做家务的场地，家产不等于住户随身所有。
+    access:
+      kind: public
+  - id: peer-market-town-route-betrothed-family-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: betrothed-family-home
+    description: 附近另一镇的一户普通人家，有小院和家人住处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

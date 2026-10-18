@@ -1,0 +1,59 @@
+id: yue-yanling-fort
+kind: location
+name: 燕翎堡
+description: 燕家居住与议事的堡寨，凡俗族人与修士有不同工作。
+placement: yue-yanliang-range
+facts:
+  - id: yue-yanling-fort-route-yue-yanliang-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yanliang-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-yanling-fort-travel-yue-yanliang-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-yanling-fort-wall-crack
+    predicate: wall-condition
+    value:
+      kind: text
+      value: 外院东墙一道旧裂缝近两日渗水，尚未坍塌。检查排水与受力后方能判断修法。
+    description: 外院东墙一道旧裂缝近两日渗水，尚未坍塌。检查排水与受力后方能判断修法。
+    access:
+      kind: discoverable
+      condition: 获准走近外院东墙，查看裂纹和排水口。
+  - id: yue-yanling-fort-route-yue-feiyun-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-feiyun-hall
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+  - id: yue-yanling-fort-route-yue-tianhe-teahouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tianhe-teahouse
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+  - id: yue-yanling-fort-route-yue-fengyue-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fengyue-inn
+    description: 沿堡内街道走到门口；营业厅可问事，内室仍须主人同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

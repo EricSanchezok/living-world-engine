@@ -1,0 +1,26 @@
+id: spirit3-anyuan-cart-shed
+kind: location
+name: 安远街市车棚
+description: 遮雨木棚内有干草槽、载客车和路线价牌。
+placement: spirit-anyuan-market
+facts:
+  - id: spirit3-anyuan-cart-shed-route-to-spirit-anyuan-market
+    predicate: route-to-spirit-anyuan-market
+    value:
+      kind: entity
+      entityId: spirit-anyuan-market
+    description: route-to-spirit-anyuan-market
+    access:
+      kind: private
+  - id: spirit3-anyuan-cart-shed-route-conditions-spirit-anyuan-market
+    predicate: route-conditions-spirit-anyuan-market
+    value:
+      kind: text
+      value: 街市内步行可达，不进入私人储物箱。
+    description: 街市内步行可达，不进入私人储物箱。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: dajin-guanning
+kind: location
+name: 关宁府
+description: 辽州西端的府域，聚落、山路与各家院落相互分开。
+placement: dajin-liaozhou
+facts:
+  - id: dajin-guanning-route-dajin-liaozhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-liaozhou
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+  - id: dajin-guanning-route-dajin-xunyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-xunyun
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+  - id: dajin-guanning-route-dajin-xuejiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-xuejiang
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+  - id: dajin-guanning-route-dajin-feng-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-estate
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+  - id: dajin-guanning-route-dajin-qianguang-temple
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-qianguang-temple
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

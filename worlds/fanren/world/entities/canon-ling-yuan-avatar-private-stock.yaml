@@ -1,0 +1,22 @@
+id: canon-ling-yuan-avatar-private-stock
+kind: container
+name: 凌源铁沙岭化身自用储备
+description: 已存的有限个人资源；秘宝与机构财产另记。
+placement: canon-ling-yuan-avatar
+facts:
+  - id: canon-ling-yuan-avatar-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ling-yuan-avatar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 100
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,24 @@
+id: canon-hu-yushuang-private-stock
+kind: container
+name: 胡玉双的私人储备
+description: 自用财物，不属于所在机构公库。
+placement: canon-hu-yushuang
+facts:
+  - id: canon-hu-yushuang-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-hu-yushuang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 8
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

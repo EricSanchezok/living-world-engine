@@ -1,0 +1,74 @@
+id: ad-moyuan-sea
+kind: location
+name: 魔源海
+description: 东部魔海，魔气与混乱之气交杂，低空雷云不利长途飞行。
+placement: associated-demon-realm
+facts:
+  - id: ad-moyuan-sea-route-ad-fifth-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-fifth-river
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-sea-condition-ad-fifth-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-moyuan-sea-route-ad-moyuan-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-moyuan-port
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-sea-condition-ad-moyuan-port
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-moyuan-sea-route-ad-ape-reef
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-ape-reef
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-sea-condition-ad-ape-reef
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-moyuan-sea-route-ad-yuan-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-yuan-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moyuan-sea-condition-ad-yuan-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

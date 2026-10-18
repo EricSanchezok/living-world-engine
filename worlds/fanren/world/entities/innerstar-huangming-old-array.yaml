@@ -1,0 +1,27 @@
+id: innerstar-huangming-old-array
+kind: location
+name: 皇明古阵遗址
+description: 山洞中的旧石台上留有断续阵纹与破损槽口。
+placement: human-huangming-island
+facts:
+  - id: innerstar-huangming-old-array-route-innerstar-huangming-landing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-huangming-landing
+    description: 沿岛内小径到山洞口、再入洞抵达旧石台；须实际走过路段，留意沿途状况。
+    access:
+      kind: public
+  - id: innerstar-huangming-old-array-current-condition
+    predicate: array-condition
+    value:
+      kind: text
+      value: 阵纹有断损，供能槽空置，没有已验证的接收配对；当前未能启用。
+    description: 石台的当前结构与供能状态。
+    access:
+      kind: discoverable
+      condition: 实际抵达石台，具备相应阵法识读能力并逐项检查阵纹、供能槽与当前配对。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

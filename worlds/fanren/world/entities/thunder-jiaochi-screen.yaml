@@ -1,0 +1,18 @@
+id: thunder-jiaochi-screen
+kind: item
+name: 遮蔽试验罩
+description: 一件有限屏蔽气息的罩具，存在真实细缝；不能预先保证完全骗过探测盘。
+placement: thunder-jiaochi-research
+facts:
+  - id: thunder-jiaochi-screen-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

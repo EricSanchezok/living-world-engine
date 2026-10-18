@@ -1,0 +1,42 @@
+id: minghe-god-pool-palace
+kind: location
+name: 神池殿
+description: 有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。
+placement: minghe-yingu-mountains
+facts:
+  - id: minghe-god-pool-palace-route-minghe-yingu-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-yingu-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-god-pool-palace-condition-minghe-yingu-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。
+    description: 有上下殿的古老建筑，守护兽在附近活动，内池并非公共泉眼。
+    access:
+      kind: public
+  - id: minghe-god-pool-palace-route-minghe-milk-pool
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-milk-pool
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-god-pool-palace-condition-minghe-milk-pool
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 凝成神乳的池体，当前有一份可采凝液，其余尚未达到采集条件。
+    description: 凝成神乳的池体，当前有一份可采凝液，其余尚未达到采集条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

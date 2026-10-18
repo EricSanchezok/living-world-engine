@@ -1,0 +1,18 @@
+id: spirit3-sinew-one
+kind: item
+name: 地蛟筋甲
+description: 独立购入的一条地蛟筋，尚未截断。
+placement: spirit-repair-yard
+facts:
+  - id: spirit3-sinew-one-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

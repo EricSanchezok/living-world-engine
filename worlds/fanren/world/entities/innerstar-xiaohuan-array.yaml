@@ -1,0 +1,35 @@
+id: innerstar-xiaohuan-array
+kind: location
+name: 小寰护村阵
+description: 沿海设置的有限防护阵，阵枢需要验修和灵石。
+placement: innerstar-xiaohuan-village
+facts:
+  - id: innerstar-xiaohuan-array-route-innerstar-xiaohuan-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-xiaohuan-village
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-array-condition-innerstar-xiaohuan-village
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿海设置的有限防护阵，阵枢需要验修和灵石。
+    description: 沿海设置的有限防护阵，阵枢需要验修和灵石。
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-array-current-fault
+    predicate: current-fault
+    value:
+      kind: text
+      value: 东侧阵枢片裂开，阵仍能弱防海风，不能抵高阶妖兽。换一份适合材料并投入三低阶灵石、3600秒维修可恢复原有弱防护。
+    description: 东侧阵枢片裂开，阵仍能弱防海风，不能抵高阶妖兽。换一份适合材料并投入三低阶灵石、3600秒维修可恢复原有弱防护。
+    access:
+      kind: discoverable
+      condition: 进入阵枢检查损坏与剩余供能。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

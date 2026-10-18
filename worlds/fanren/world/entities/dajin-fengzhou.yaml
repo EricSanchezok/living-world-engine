@@ -1,0 +1,18 @@
+id: dajin-fengzhou
+kind: location
+name: 封州
+description: 大晋州域，邻接苀郡；不把两者边境当作邡莽总坛位置。
+placement: human-dajin
+facts:
+  - id: dajin-fengzhou-route-dajin-xunjun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-xunjun
+    description: 沿交界山路通行，不能瞬移越界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

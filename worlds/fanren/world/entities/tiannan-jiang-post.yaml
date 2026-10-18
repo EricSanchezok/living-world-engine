@@ -1,0 +1,18 @@
+id: tiannan-jiang-post
+kind: location
+name: 姜国禾溪小驿
+description: 商路沿途的小驿和寄货房，过境行商在此换车。
+placement: human-jiang
+facts:
+  - id: tiannan-jiang-post-route-human-jiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-jiang
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: boundless-fengri
+kind: location
+name: 封日城
+description: 闵州州府，商旅集散和州内交易所在。
+placement: boundless-minzhou
+facts:
+  - id: boundless-fengri-route-boundless-coast-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-coast-town
+    description: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    access:
+      kind: public
+  - id: boundless-fengri-travel-boundless-coast-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    description: 沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

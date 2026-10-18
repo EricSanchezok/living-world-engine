@@ -1,0 +1,186 @@
+id: blood-crane-city
+kind: location
+name: 血鹤城
+description: 血骨门治下的修士城池。进城、交易和公开较技各有规矩；守城府与交易广场之间往来频繁，入夜城墙上方映着血色天空。
+placement: blood-bone-domain
+facts:
+  - id: blood-crane-city-route-blood-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-gate
+    description: route-to
+    access:
+      kind: public
+  - id: blood-crane-city-condition-blood-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-crane-city-route-blood-bone-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-bone-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: blood-crane-city-condition-blood-bone-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-crane-city-route-blood-wanyue-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wanyue-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-crane-city-condition-blood-wanyue-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-crane-city-route-blood-qiyun-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qiyun-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-crane-city-condition-blood-qiyun-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-lihuo-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-lihuo-domain
+    description: review-route-blood-lihuo-domain
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-lihuo-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-wangu-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wangu-mountain
+    description: review-route-blood-wangu-mountain
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-wangu-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-luotian-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-luotian-valley
+    description: review-route-blood-luotian-valley
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-luotian-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-observation-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-observation-city
+    description: review-route-blood-observation-city
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-observation-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-xuesha-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xuesha-cave
+    description: review-route-blood-xuesha-cave
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-xuesha-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-blood-xuehen-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xuehen-domain
+    description: review-route-blood-xuehen-domain
+    access:
+      kind: public
+  - id: blood-crane-city-review-route-condition-blood-xuehen-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-crane-city-route-seas-blood-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-blood-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: blood-crane-city-condition-seas-blood-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城中行走至盟属阵厅，入阵需获准。
+    description: 城中行走至盟属阵厅，入阵需获准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

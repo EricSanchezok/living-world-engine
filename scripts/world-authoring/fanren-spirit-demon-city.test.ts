@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { stringify } from "yaml";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { projectAgentPerspective } from "../../src/engine/cognition/agent-perspective";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { quantityId } from "../../src/engine/runtime/runtime-id";
@@ -31,6 +31,10 @@ function archive() {
 }
 
 describe("Fanren demon territories and Tianyuan civil life", () => {
+  let worldArchive: Buffer;
+  // Reuse only immutable input bytes; each case still imports into its own fresh database.
+  beforeAll(() => { worldArchive = archive(); }, 60_000);
+
   it("binds reviews to complete modules while reserving cross-realm souls without duplicate actors", () => {
     for (const id of ["spirit-demon-seven", "spirit-tianyuan"]) {
       const region = read(`regions/${id}/module.json`), claims = read(`regions/${id}/claims.json`), review = read(`regions/${id}/review.json`);
@@ -63,7 +67,7 @@ describe("Fanren demon territories and Tianyuan civil life", () => {
     const directory = mkdtempSync(path.join(tmpdir(), "fanren-demon-city-"));
     const database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false });
     try {
-      const imported = database.importWorld(archive(), fixture.catalog);
+      const imported = database.importWorld(Buffer.from(worldArchive), fixture.catalog);
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: fixture.gateway });
       const created = await host.createInstance({ worldId: imported.id, start: { kind: "origin", originId, displayName: "行舟", appearance: "", motivation: "先认识身边的人，再决定接下来做什么。" } });
       const state = database.readInstance(created.summary.id).document.state, player = created.participants[0]!.agentId;
@@ -116,5 +120,5 @@ describe("Fanren demon territories and Tianyuan civil life", () => {
       expect(replaySimulationState(state)).toEqual(state);
       expect(fixture.transport).not.toHaveBeenCalled();
     } finally { database.close(); rmSync(directory, { recursive: true, force: true }); }
-  });
+  }, 60_000);
 });

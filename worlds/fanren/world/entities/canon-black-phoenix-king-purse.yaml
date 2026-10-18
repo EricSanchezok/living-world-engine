@@ -1,0 +1,24 @@
+id: canon-black-phoenix-king-purse
+kind: container
+name: 筱馆的储物袋
+description: 个人旅费与修炼材料，领地公产另置。
+placement: canon-black-phoenix-king
+facts:
+  - id: canon-black-phoenix-king-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-black-phoenix-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 200
+  - definition_id: high-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 15
+ratings: []
+shared_activity_resources: []

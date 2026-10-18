@@ -1,0 +1,28 @@
+id: minghe-fresh-milk
+kind: item
+name: 神池凝乳
+description: 一份达到可采状态的凝乳；取走后池中此份耗尽，新的形成需要时间与条件。
+placement: minghe-collection-brick
+facts:
+  - id: minghe-fresh-milk-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-fresh-milk-use-boundary
+    predicate: use-boundary
+    value:
+      kind: text
+      value: 服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。
+    description: 服用和外涂须真实扣减可分用量；改善吸纳天地元气需体质适用和修行时间，不能视为立刻破境或保证三成收益。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: minghe-milk-dose
+    amount: 1
+ratings: []
+shared_activity_resources: []

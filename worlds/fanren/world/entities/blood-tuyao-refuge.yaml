@@ -1,0 +1,42 @@
+id: blood-tuyao-refuge
+kind: location
+name: 涂咬海岩府
+description: 海底石脊中开出的曲折岩府，外侧深水可容人面蛟本体出入。
+placement: blood-offshore-sea
+facts:
+  - id: blood-tuyao-refuge-review-route-blood-offshore-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-offshore-sea
+    description: review-route-blood-offshore-sea
+    access:
+      kind: public
+  - id: blood-tuyao-refuge-review-route-condition-blood-offshore-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+  - id: blood-tuyao-refuge-review-route-blood-qingjiao-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qingjiao-palace
+    description: review-route-blood-qingjiao-palace
+    access:
+      kind: public
+  - id: blood-tuyao-refuge-review-route-condition-blood-qingjiao-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: ad-mineral-load
+kind: container
+name: 待验血光晶矿料
+description: 20份已采矿料，夹杂空隙，只有16份可用晶质；复验不凭空增加材料。
+placement: ad-bloodcrow-market
+facts:
+  - id: ad-mineral-load-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-market
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

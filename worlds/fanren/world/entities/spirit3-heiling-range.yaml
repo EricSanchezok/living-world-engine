@@ -1,0 +1,26 @@
+id: spirit3-heiling-range
+kind: location
+name: 黑陵山脉
+description: 岩坡与禽巢错落的兽类栖地，通往安远的路程需经过草原与丘陵。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit3-heiling-range-route-to-spirit-anyuan-grassland
+    predicate: route-to-spirit-anyuan-grassland
+    value:
+      kind: entity
+      entityId: spirit-anyuan-grassland
+    description: route-to-spirit-anyuan-grassland
+    access:
+      kind: private
+  - id: spirit3-heiling-range-route-conditions-spirit-anyuan-grassland
+    predicate: route-conditions-spirit-anyuan-grassland
+    value:
+      kind: text
+      value: 沿野外山口与草原长途行进，需补给、导航且可能遭兽，不瞬移。
+    description: 沿野外山口与草原长途行进，需补给、导航且可能遭兽，不瞬移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

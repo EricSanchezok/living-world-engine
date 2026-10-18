@@ -1,0 +1,24 @@
+id: seas-black-spirit-space-offering
+kind: container
+name: 古契约供奉储备
+description: 已送达的一批灵材与灵石，新的召请不自动让它再生。
+placement: seas-black-spirit-space
+facts:
+  - id: seas-black-spirit-space-offering-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-helian-league
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 30
+  - definition_id: herb-packet
+    amount: 20
+  - definition_id: craft-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

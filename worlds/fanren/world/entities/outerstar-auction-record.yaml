@@ -1,0 +1,18 @@
+id: outerstar-auction-record
+kind: item
+name: 避水灯寄售书
+description: 卖家称完好，委托价四十低阶灵石；尚未检验或成交。
+placement: outerstar-mingzhu
+facts:
+  - id: outerstar-auction-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-auctioneer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

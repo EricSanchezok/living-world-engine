@@ -1,0 +1,19 @@
+id: global-chaos-valley
+kind: location
+name: 混沌谷
+description: 灰雾包裹的百余里山谷，山壁地面都蒙着灰色。
+placement: spirit-sunset-border
+facts:
+  - id: global-chaos-valley-route-spirit-sunset-border
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-border
+    description: 深入落日之墓方可抵谷，途中有真实兽类和迷雾危险。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

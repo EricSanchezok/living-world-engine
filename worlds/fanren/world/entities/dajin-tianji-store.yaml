@@ -1,0 +1,18 @@
+id: dajin-tianji-store
+kind: location
+name: 天机阁保管处
+description: 商号器物分格保管，未售物与寄存物分别登记。
+placement: dajin-tianji-shop
+facts:
+  - id: dajin-tianji-store-route-dajin-tianji-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-shop
+    description: 保管处不是对访客开放的无主库房。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

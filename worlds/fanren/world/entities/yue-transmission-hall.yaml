@@ -1,0 +1,18 @@
+id: yue-transmission-hall
+kind: location
+name: 传功阁
+description: 依山而建的石楼，后半延入山腹，廊中有并列石门。
+placement: yue-huangfeng-valley
+facts:
+  - id: yue-transmission-hall-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

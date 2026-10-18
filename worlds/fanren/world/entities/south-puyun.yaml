@@ -1,0 +1,58 @@
+id: south-puyun
+kind: location
+name: 普云府
+description: 山水相间的府地，隐秘古迹尚未扰动当地生活。
+placement: human-south-kunwu
+facts:
+  - id: south-puyun-route-human-south-kunwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-south-kunwu
+    description: route-to
+    access:
+      kind: public
+  - id: south-puyun-condition-human-south-kunwu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿府间道路行旅。
+    description: 沿府间道路行旅。
+    access:
+      kind: public
+  - id: south-puyun-route-south-zhonglou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-zhonglou
+    description: route-to
+    access:
+      kind: public
+  - id: south-puyun-condition-south-zhonglou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两府相邻，仍需实际行路。
+    description: 两府相邻，仍需实际行路。
+    access:
+      kind: public
+  - id: south-puyun-route-south-quiet-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-quiet-lake
+    description: route-to
+    access:
+      kind: public
+  - id: south-puyun-condition-south-quiet-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧岸路通到湖边，路本身不说明湖底秘密。
+    description: 旧岸路通到湖边，路本身不说明湖底秘密。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

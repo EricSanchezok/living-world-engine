@@ -1,0 +1,18 @@
+id: far-lin-boat
+kind: item
+name: 林渡的渡船
+description: 适合近岸摆渡的小船，不是横越未知大洋的远航船。
+placement: far-tiansha-landing
+facts:
+  - id: far-lin-boat-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-lin-du
+    description: 由林渡所有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

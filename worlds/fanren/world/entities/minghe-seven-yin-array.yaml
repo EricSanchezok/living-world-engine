@@ -1,0 +1,28 @@
+id: minghe-seven-yin-array
+kind: item
+name: 七门锁阴阵
+description: 以多个实际阴气节点维持空间阴气平衡的阵器与阵式。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-seven-yin-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-seven-yin-array-observation-boundary
+    predicate: observation-boundary
+    value:
+      kind: text
+      value: 感应阴气强弱与失衡，不能凭读数推断每一件物品和每个人的念头。
+    description: 感应阴气强弱与失衡，不能凭读数推断每一件物品和每个人的念头。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qing-yuan-zi
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

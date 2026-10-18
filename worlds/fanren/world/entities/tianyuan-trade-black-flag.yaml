@@ -1,0 +1,18 @@
+id: tianyuan-trade-black-flag
+kind: item
+name: 太玄现用黑幡
+description: 一面妖族领用黑幡；输入3法力化有限妖雾遮容，与本殿阵相应，离殿收起归还；普通使用不等于掌握制造方法。
+placement: tianyuan-market-demon-clerk
+facts:
+  - id: tianyuan-trade-black-flag-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

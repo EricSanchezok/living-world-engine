@@ -1,0 +1,26 @@
+id: dajin-nanjun
+kind: location
+name: 湳郡
+description: 大晋北部与中部交界的平原水乡，城镇间有书院、寺观和商户。
+placement: human-dajin
+facts:
+  - id: dajin-nanjun-route-dajin-taichang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-taichang
+    description: 郡内陆路与水路须选择具体载具和通行条件。
+    access:
+      kind: public
+  - id: dajin-nanjun-route-dajin-wuguang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-wuguang
+    description: 同郡城市间仍有实际路程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

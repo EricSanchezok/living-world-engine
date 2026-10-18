@@ -1,0 +1,26 @@
+id: blood-xueying-retreat
+kind: location
+name: 血影子静修岩府
+description: 岩壁深处是一室血纹静修坛与石架，封门后外客看不见其中情况。
+placement: blood-north-domain
+facts:
+  - id: blood-xueying-retreat-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-xueying-retreat-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

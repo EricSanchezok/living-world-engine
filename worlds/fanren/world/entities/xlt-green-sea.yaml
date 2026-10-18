@@ -1,0 +1,35 @@
+id: xlt-green-sea
+kind: location
+name: 绿海
+description: 层层古木组成的广阔林海，绿灵聚落散在林冠与林下。
+placement: xlt-realm
+facts:
+  - id: xlt-green-sea-route-xlt-border-pass
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-border-pass
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-green-sea-route-xlt-green-grove
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-green-grove
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-green-sea-route-xlt-inner-thicket
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-inner-thicket
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: discoverable
+      condition: 获得当地路图、向熟悉者询问或实地探查成功。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

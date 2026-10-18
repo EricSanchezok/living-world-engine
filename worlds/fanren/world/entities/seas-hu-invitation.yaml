@@ -1,0 +1,26 @@
+id: seas-hu-invitation
+kind: item
+name: 飞云致胡玉双邀约
+description: 请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。
+placement: canon-hu-yushuang
+facts:
+  - id: seas-hu-invitation-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-hu-yushuang
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-hu-invitation-reply-due-time
+    predicate: reply-due-time
+    value:
+      kind: number
+      value: 20736000
+    description: reply-due-time
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: guanghan-realm
+kind: location
+name: 广寒界
+description: 与灵界分隔的古老界面，当前入口闭合；内部地貌与遗物继续存在。
+placement: spirit-realm
+facts:
+  - id: guanghan-realm-current-access-state
+    predicate: current-access-state
+    value:
+      kind: text
+      value: 入口闭合，当前没有已激发令与可用接引窗口；历史地图和复制令牌都不能替代真实开启。
+    description: 入口闭合，当前没有已激发令与可用接引窗口；历史地图和复制令牌都不能替代真实开启。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: human-weixing-island
+kind: location
+name: 尾星岛
+description: 乱星海西南大岛，有聚落、港口和往返海船。
+placement: human-inner-star-sea
+facts:
+  - id: human-weixing-island-route-innerstar-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-harbor
+    description: route-to
+    access:
+      kind: public
+  - id: human-weixing-island-condition-innerstar-harbor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    description: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    access:
+      kind: public
+  - id: human-weixing-island-route-innerstar-bamboo-islet
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-bamboo-islet
+    description: route-to
+    access:
+      kind: public
+  - id: human-weixing-island-condition-innerstar-bamboo-islet
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 偏僻岛屿上的小宗经营薄田和药圃，镇派旧物不公开示人。
+    description: 偏僻岛屿上的小宗经营薄田和药圃，镇派旧物不公开示人。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

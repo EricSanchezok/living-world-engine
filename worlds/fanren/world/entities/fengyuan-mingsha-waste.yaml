@@ -1,0 +1,42 @@
+id: fengyuan-mingsha-waste
+kind: location
+name: 鸣煞之地
+description: 黑绿土地上阴煞凝滞，风声沿空旷坡地来回传开，通常旅客很少深入。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-mingsha-waste-route-to-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mingsha-waste-route-conditions-fengyuan-continent
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 目的地是广大陆内的阴煞禁地；须实际定位、旅行和抗煞保护，修为不足贸入可能重伤。
+    description: 目的地是广大陆内的阴煞禁地；须实际定位、旅行和抗煞保护，修为不足贸入可能重伤。
+    access:
+      kind: public
+  - id: fengyuan-mingsha-waste-route-to-fengyuan-tianwaitian
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-tianwaitian
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-mingsha-waste-route-conditions-fengyuan-tianwaitian
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需穿过阴煞风海升至浮石；没有普通阶梯通天，不保证弱者靠同伴在场就受保护。
+    description: 需穿过阴煞风海升至浮石；没有普通阶梯通天，不保证弱者靠同伴在场就受保护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

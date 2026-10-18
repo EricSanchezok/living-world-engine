@@ -1,0 +1,18 @@
+id: innerstar-ship-silver-tree
+kind: plant
+name: 青帆号银角树
+description: 银光三角叶的小树，置于舱中改善气闷。
+placement: innerstar-sea-ship
+facts:
+  - id: innerstar-ship-silver-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: 顾汀购置的船舱树。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: south-lake-hamlet
+kind: location
+name: 浅湾渔村
+description: 村民依湖打渔，知道潮水与风向，不知湖底昆吾禁制。
+placement: south-quiet-lake
+facts:
+  - id: south-lake-hamlet-route-south-quiet-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-quiet-lake
+    description: route-to
+    access:
+      kind: public
+  - id: south-lake-hamlet-condition-south-quiet-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿湖堤往浅湾村。
+    description: 沿湖堤往浅湾村。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

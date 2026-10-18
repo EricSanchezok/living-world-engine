@@ -1,0 +1,26 @@
+id: innerstar-kuixing-blue-token-2
+kind: item
+name: 定居蓝色玉佩2
+description: 尚未记名发出的岛务用品，须登记和实际交付。
+placement: innerstar-dengxian-hall
+facts:
+  - id: innerstar-kuixing-blue-token-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 尚属岛务所。
+    access:
+      kind: public
+  - id: innerstar-kuixing-blue-token-2-registration-rule
+    predicate: registration-rule
+    value:
+      kind: text
+      value: 核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。
+    description: 核验保书、登记金册并收回临时牌后才能发放；佩戴有小幅避水效用，不代替抵御强水压或全部水系攻击。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

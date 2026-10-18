@@ -1,0 +1,18 @@
+id: ad-zhenmo-lock
+kind: item
+name: 镇魔锁
+description: 独一混沌封禁宝物，内有层级与危险，不能凭拿在手中就控制被囚者或抽出无尽混沌。
+placement: canon-xue-guang
+facts:
+  - id: ad-zhenmo-lock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xue-guang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

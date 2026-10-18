@@ -1,0 +1,26 @@
+id: human-void-hall
+kind: location
+name: 虚天殿
+description: 尚未在海上显现的上古白玉浮殿，入口受周期封禁。
+placement: human-luanxing-sea
+facts:
+  - id: human-void-hall-cycle-state
+    predicate: cycle-state
+    value:
+      kind: text
+      value: 虚天殿处于关闭段，上一次开启已过约一百年；沿现有周期，距下一次开启约二百年。
+    description: 虚天殿处于关闭段，上一次开启已过约一百年；沿现有周期，距下一次开启约二百年。
+    access:
+      kind: private
+  - id: human-void-hall-cycle-seconds
+    predicate: cycle-seconds
+    value:
+      kind: number
+      value: 9460800000
+    description: cycle-seconds
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

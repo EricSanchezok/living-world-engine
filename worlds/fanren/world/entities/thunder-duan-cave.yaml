@@ -1,0 +1,35 @@
+id: thunder-duan-cave
+kind: location
+name: 段天刃洞府
+description: 粗大的石柱支撑洞厅，试验台留有矿石摩擦的痕迹。内室属于段天刃，来客先在门外通报。
+placement: thunder-baying-peak-2
+facts:
+  - id: thunder-duan-cave-route-thunder-baying-peak-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-baying-peak-2
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-duan-cave-condition-thunder-baying-peak-2
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 来客先在洞外递帖，私闯会受到现有禁制与主人应对。
+    description: 来客先在洞外递帖，私闯会受到现有禁制与主人应对。
+    access:
+      kind: public
+  - id: thunder-duan-cave-root-detail-yuanci-physique
+    predicate: root-detail-yuanci-physique
+    value:
+      kind: text
+      value: 先天元磁之体与后天元磁神光不同；吸收元磁石异力须有相应控制方法，体质本身不附送山形宝物或必然炼化成功。
+    description: 先天元磁之体与后天元磁神光不同；吸收元磁石异力须有相应控制方法，体质本身不附送山形宝物或必然炼化成功。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

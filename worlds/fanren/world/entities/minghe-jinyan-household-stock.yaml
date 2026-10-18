@@ -1,0 +1,24 @@
+id: minghe-jinyan-household-stock
+kind: container
+name: 金焰宫日常预算
+description: 主人核准由金澜管理的日常预算，不包括所有私藏。
+placement: minghe-jinyan-palace
+facts:
+  - id: minghe-jinyan-household-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 300
+  - definition_id: craft-material
+    amount: 10
+  - definition_id: grain
+    amount: 40
+ratings: []
+shared_activity_resources: []

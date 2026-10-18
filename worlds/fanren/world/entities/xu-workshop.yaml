@@ -1,0 +1,18 @@
+id: xu-workshop
+kind: location
+name: 许氏灵材加工坊
+description: 族有工坊，使用真实原料、人工与器具；不归某位长者独有。
+placement: xu-settlement
+facts:
+  - id: xu-workshop-route-xu-settlement
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xu-settlement
+    description: 聚落内有通往工坊的道路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: yue-mo-family-store
+kind: item
+name: 墨府家用库
+description: 米粮、布帛与银钱供当前家用，不能自动变成个人随身财富。
+placement: yue-mo-inner-court
+facts:
+  - id: yue-mo-family-store-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-mo-household
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 80
+  - definition_id: grain
+    amount: 100
+ratings: []
+shared_activity_resources: []

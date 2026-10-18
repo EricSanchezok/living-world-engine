@@ -1,0 +1,20 @@
+id: yue-tainan-guest-key
+kind: item
+name: 东侧客舍通行符
+description: 唐清保管的一张通行符，符纸完整。
+placement: yue-tainan-host
+facts:
+  - id: yue-tainan-guest-key-use
+    predicate: use-method
+    value:
+      kind: text
+      value: 贴于东侧客舍的青光禁制可暂开通行孔，收回后仍可再用；不能开启别处禁制。
+    description: 贴于东侧客舍的青光禁制可暂开通行孔，收回后仍可再用；不能开启别处禁制。
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-host
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

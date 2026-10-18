@@ -1,0 +1,42 @@
+id: dv-wet-basin
+kind: location
+name: 禁飞盆地
+description: 阴湿盆地遍布水坑和灌木，临近白石祭坛的区域连低空漂浮也会招来血雷。
+placement: human-devil-valley
+facts:
+  - id: dv-wet-basin-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-wet-basin-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从山路进入潮湿盆地，临近禁飞地须落地。
+    description: 从山路进入潮湿盆地，临近禁飞地须落地。
+    access:
+      kind: public
+  - id: dv-wet-basin-route-dv-white-altar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-white-altar
+    description: route-to
+    access:
+      kind: public
+  - id: dv-wet-basin-condition-dv-white-altar
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁飞盆地必须徒步与逐段查裂缝；登阶另有重力，不能沿route免除法力与体力代价。
+    description: 禁飞盆地必须徒步与逐段查裂缝；登阶另有重力，不能沿route免除法力与体力代价。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: fengyuan-residence-fengyuan-yellow-robed-nun
+kind: location
+name: 黄袍道姑静修居
+description: 独立院落设有试法空地和收藏静室，门前留一处可坐谈的石台。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-residence-fengyuan-yellow-robed-nun-route-to-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-residence-fengyuan-yellow-robed-nun-route-conditions-fengyuan-continent
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    description: 沿本地道路或实际飞行到院门，入内须居者允许；离族域很远的来客仍需长程旅行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

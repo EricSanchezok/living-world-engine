@@ -1,0 +1,42 @@
+id: blood-gold-silver-corridor
+kind: location
+name: 金银守卫长廊
+description: 长廊尽头一扇淡朱红木门，两具七八丈高金银傀儡守在门前；地上保留古年战痕。
+placement: blood-outer-palaces
+facts:
+  - id: blood-gold-silver-corridor-route-blood-outer-palaces
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-outer-palaces
+    description: route-to
+    access:
+      kind: public
+  - id: blood-gold-silver-corridor-condition-blood-outer-palaces
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先穿过相关分宫禁制并抵达长廊，别区解禁不自动停掉本廊守卫。
+    description: 须先穿过相关分宫禁制并抵达长廊，别区解禁不自动停掉本廊守卫。
+    access:
+      kind: public
+  - id: blood-gold-silver-corridor-route-blood-outer-implement-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-outer-implement-hall
+    description: route-to
+    access:
+      kind: public
+  - id: blood-gold-silver-corridor-condition-blood-outer-implement-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 朱红门在金银傀儡身后，接近会触发守卫；可研究古控制结构或实际突破，不能绕过存在中的身体和巨锤。
+    description: 朱红门在金银傀儡身后，接近会触发守卫；可研究古控制结构或实际突破，不能绕过存在中的身体和巨锤。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

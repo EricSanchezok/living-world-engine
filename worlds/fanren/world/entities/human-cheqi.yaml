@@ -1,0 +1,26 @@
+id: human-cheqi
+kind: location
+name: 车骑国
+description: 天罗与越国之间的国家，边境有往来道路。
+placement: human-tiannan
+facts:
+  - id: human-cheqi-route-human-jiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-jiang
+    description: 沿边境道路往来；无当前战争封路，不保证今后永远开放。
+    access:
+      kind: public
+  - id: human-cheqi-route-tiannan-cheqi-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-cheqi-post
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

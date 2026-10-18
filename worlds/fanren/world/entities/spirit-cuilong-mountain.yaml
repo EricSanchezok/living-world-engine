@@ -1,0 +1,58 @@
+id: spirit-cuilong-mountain
+kind: location
+name: 翠泷山
+description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+placement: tianyuan-city
+facts:
+  - id: spirit-cuilong-mountain-route-spirit-yuque-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-hall
+    description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+    access:
+      kind: public
+  - id: spirit-cuilong-mountain-route-spirit-cuilong-south-line
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-cuilong-south-line
+    description: 两块旧界石间有一条引水细阵，石面沾着苔痕。
+    access:
+      kind: public
+  - id: spirit-cuilong-mountain-route-tianyuan-vacant-cave-a
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-vacant-cave-a
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-cuilong-mountain-condition-tianyuan-vacant-cave-a
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 带小药圃的空置洞府，基础防护尚可，水渠需清理。
+    description: 带小药圃的空置洞府，基础防护尚可，水渠需清理。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-cuilong-mountain-route-to-tianyuan-hinterland-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-hinterland-village
+    description: route-to-tianyuan-hinterland-village
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-cuilong-mountain-route-conditions-tianyuan-hinterland-village
+    predicate: route-conditions-tianyuan-hinterland-village
+    value:
+      kind: text
+      value: 沿山脚村路往返，搬运须有实际体力、工具与路程时间。
+    description: 沿山脚村路往返，搬运须有实际体力、工具与路程时间。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

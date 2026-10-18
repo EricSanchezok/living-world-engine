@@ -1,0 +1,26 @@
+id: spirit3-capital-library-petition
+kind: item
+name: 圣城阅书开放呈文
+description: 宋砚台请求开放一段公用读书时段，先以4高阶灵石试行；需皇府决定，尚未招募或收费。
+placement: spirit3-tianyuan-hall
+facts:
+  - id: spirit3-capital-library-petition-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-capital-library-petition-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: spirit-capital-postmaster
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

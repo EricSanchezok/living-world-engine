@@ -1,0 +1,42 @@
+id: dv-polar-cave
+kind: location
+name: 北极元光山洞
+description: 七八丈宽的洞口后，银白光丝绵延十余里；洞壁亦受古禁保护，掘旁洞并非免费绕行。
+placement: human-devil-valley
+facts:
+  - id: dv-polar-cave-route-dv-polar-path
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-polar-path
+    description: route-to
+    access:
+      kind: public
+  - id: dv-polar-cave-condition-dv-polar-path
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石道内部普通移动，须防古兽与两侧血禁；不需要破界。
+    description: 石道内部普通移动，须防古兽与两侧血禁；不需要破界。
+    access:
+      kind: public
+  - id: dv-polar-cave-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-polar-cave-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 十余里元光段须持续持有并驱动阴环等真实适用防护，普通护身罩不足；队伍超出护持范围者另判。
+    description: 十余里元光段须持续持有并驱动阴环等真实适用防护，普通护身罩不足；队伍超出护持范围者另判。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

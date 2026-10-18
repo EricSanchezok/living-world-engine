@@ -1,0 +1,42 @@
+id: seas-jiatun-domain
+kind: location
+name: 甲豚族域
+description: 本族居民与修行地，公开疆域不等于任何外来者可读取其秘密。
+placement: fengyuan-continent
+facts:
+  - id: seas-jiatun-domain-route-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: seas-jiatun-domain-condition-fengyuan-border-exchange
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循跨族商路远行，通关需得到实际守卫承认。
+    description: 循跨族商路远行，通关需得到实际守卫承认。
+    access:
+      kind: public
+  - id: seas-jiatun-domain-route-seas-jiatun-array-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiatun-array-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-jiatun-domain-condition-seas-jiatun-array-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按本族禁地规则获准入殿。
+    description: 按本族禁地规则获准入殿。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

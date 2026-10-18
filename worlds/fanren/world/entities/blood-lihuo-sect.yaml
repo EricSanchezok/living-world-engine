@@ -1,0 +1,34 @@
+id: blood-lihuo-sect
+kind: social-group
+name: 离火宗
+description: 在山地经营药地与修行场所的宗门，按年向上宗供养，遇强敌时可依约请求庇护。
+placement: blood-lihuo-domain
+facts:
+  - id: blood-lihuo-sect-obligation-creditor
+    predicate: obligation-creditor
+    value:
+      kind: entity
+      entityId: blood-lihuo-upper-sect
+    description: obligation-creditor
+    access:
+      kind: private
+  - id: blood-lihuo-sect-current-payment-due
+    predicate: current-payment-due
+    value:
+      kind: number
+      value: 10368000
+    description: current-payment-due
+    access:
+      kind: private
+  - id: blood-lihuo-sect-current-payment
+    predicate: current-payment
+    value:
+      kind: text
+      value: 到期须交24高阶灵石；可按已有回函用已验药材逐份抵扣，但实际收供前债务不消失。
+    description: 到期须交24高阶灵石；可按已有回函用已验药材逐份抵扣，但实际收供前债务不消失。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

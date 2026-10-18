@@ -1,0 +1,20 @@
+id: kunwu-yaksha-ore
+kind: item
+name: 夜叉特殊金矿
+description: 用于长期炼出有限金遁灵力的特殊矿物，现存十二份。
+placement: south-yaksha-prison
+facts:
+  - id: kunwu-yaksha-ore-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-silver-wing-yaksha
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: global-fu-clinic
+kind: location
+name: 符氏针医舍
+description: 一间设诊榻和洗针案的医舍。
+placement: spirit-tianyuan-domain
+facts:
+  - id: global-fu-clinic-route-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: 人族道路可至医舍；问诊与取药需约定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

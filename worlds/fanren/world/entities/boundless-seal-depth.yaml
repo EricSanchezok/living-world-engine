@@ -1,0 +1,42 @@
+id: boundless-seal-depth
+kind: location
+name: 海底封禁外层
+description: 深海中的上古封禁，海水和禁制共同遮挡内部。
+placement: human-boundless
+facts:
+  - id: boundless-seal-depth-route-boundless-deep-water
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-deep-water
+    description: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    access:
+      kind: public
+  - id: boundless-seal-depth-travel-boundless-deep-water
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    description: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    access:
+      kind: public
+  - id: boundless-seal-depth-route-boundless-abyss
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-abyss
+    description: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    access:
+      kind: public
+  - id: boundless-seal-depth-travel-boundless-abyss
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    description: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

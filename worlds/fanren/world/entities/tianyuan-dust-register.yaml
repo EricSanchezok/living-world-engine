@@ -1,0 +1,35 @@
+id: tianyuan-dust-register
+kind: item
+name: 飞升者领丹簿
+description: 领药前记录实际身份、诊察、服药时间和下次复核。
+placement: tianyuan-dust-dispensary
+facts:
+  - id: tianyuan-dust-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-dust-register-fengyuan-entry
+    predicate: fengyuan-entry
+    value:
+      kind: text
+      value: 冯原已登记到来，未诊察、未领药、未服药；无已完成年度计数。
+    description: 冯原已登记到来，未诊察、未领药、未服药；无已完成年度计数。
+    access:
+      kind: discoverable
+      condition: 本人获准查看自己的条目，或丹房/长老会授权查阅。
+  - id: tianyuan-dust-register-annual-rule
+    predicate: annual-rule
+    value:
+      kind: text
+      value: 同一人一次成功用药只增加一次疗程记录；下一次常规复核为本次真实用药后31536000全局秒，不能靠反复领药刷掉三百年。
+    description: 同一人一次成功用药只增加一次疗程记录；下一次常规复核为本次真实用药后31536000全局秒，不能靠反复领药刷掉三百年。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: ad-disciple-court
+kind: location
+name: 六极宫外修行院
+description: 带独立修室的小院，当前属六极，由文书约定使用权后才能移交。
+placement: ad-liuji-palace
+facts:
+  - id: ad-disciple-court-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-liu-ji
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-disciple-court-route-ad-liuji-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-liuji-palace
+    description: route-to
+    access:
+      kind: public
+  - id: ad-disciple-court-condition-ad-liuji-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 宫内步行可达的独立院落，取得使用许可才可自行迁入。
+    description: 宫内步行可达的独立院落，取得使用许可才可自行迁入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

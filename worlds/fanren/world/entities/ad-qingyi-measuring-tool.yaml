@@ -1,0 +1,18 @@
+id: ad-qingyi-measuring-tool
+kind: item
+name: 公用测矿器
+description: 测地层回波的低阶器物，有一处松动需一份修补料和实际调校；不会直接报出所有地下宝物。
+placement: ad-qingyi-su
+facts:
+  - id: ad-qingyi-measuring-tool-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-qingyi-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

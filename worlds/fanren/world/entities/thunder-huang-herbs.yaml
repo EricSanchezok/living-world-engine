@@ -1,0 +1,20 @@
+id: thunder-huang-herbs
+kind: container
+name: 皇长老本轮试药
+description: 已备的三包基础药材，先做药性比较而非许诺炼成高阶丹。
+placement: canon-wangu-huang-elder
+facts:
+  - id: thunder-huang-herbs-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wangu-huang-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 3
+ratings: []
+shared_activity_resources: []

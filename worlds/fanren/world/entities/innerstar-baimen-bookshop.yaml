@@ -1,0 +1,26 @@
+id: innerstar-baimen-bookshop
+kind: location
+name: 白门阁
+description: 经营已整理海兽资料与书册的书铺，未识物种仍须调查。
+placement: innerstar-market
+facts:
+  - id: innerstar-baimen-bookshop-route-innerstar-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-market
+    description: 沿城中街路通往天星坊市
+    access:
+      kind: public
+  - id: innerstar-baimen-bookshop-access-innerstar-market
+    predicate: access-innerstar-market
+    value:
+      kind: text
+      value: 需要实际行至门口并按接待情况进入。
+    description: 需要实际行至门口并按接待情况进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

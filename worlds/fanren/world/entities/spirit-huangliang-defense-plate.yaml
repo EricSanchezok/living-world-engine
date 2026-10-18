@@ -1,0 +1,18 @@
+id: spirit-huangliang-defense-plate
+kind: item
+name: 黄粱护身阵盘
+description: 配合法力展开短时护身屏障的自用阵盘，并非无人可破。
+placement: canon-huangliang-lingjun
+facts:
+  - id: spirit-huangliang-defense-plate-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huangliang-lingjun
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

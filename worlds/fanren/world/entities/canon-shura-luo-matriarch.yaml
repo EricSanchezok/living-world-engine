@@ -1,0 +1,156 @@
+id: canon-shura-luo-matriarch
+kind: person
+name: 罗族母
+description: 天蛛城主持者，维护本族利益，愿意交易，也认为强邻的服从理所当然。
+placement: fengyuan-shura-council
+facts:
+  - id: canon-shura-luo-matriarch-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-shura-luo-matriarch-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 修罗蛛本体、丝网、有限时间之力与大乘防护；晶核受损会伤及自身，不能任意回溯别人全部经历。
+    description: 修罗蛛本体、丝网、有限时间之力与大乘防护；晶核受损会伤及自身，不能任意回溯别人全部经历。
+    access:
+      kind: private
+meters:
+  - id: canon-shura-luo-matriarch-health
+    definition_id: health
+    current: 100
+  - id: canon-shura-luo-matriarch-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-shura-luo-matriarch-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-shura-luo-matriarch-force
+    definition_id: force
+    value: 8
+  - id: canon-shura-luo-matriarch-craft
+    definition_id: craft
+    value: 6
+  - id: canon-shura-luo-matriarch-perception
+    definition_id: perception
+    value: 8
+  - id: canon-shura-luo-matriarch-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-shura-luo-matriarch
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 天蛛城主持者，维护本族利益，愿意交易，也认为强邻的服从理所当然。
+      voice: 语气慢而有压迫感，承诺之前会问清对方能拿出什么；遇到威胁时不会马上丢下全部筹码。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 等岑足带回空鱼来意与实物，再衡量对方能给城中带来什么；自己的族群利益始终放在前面。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 罗族母
+        description: 天蛛城主持者，维护本族利益，愿意交易，也认为强邻的服从理所当然。
+        status: observed
+      - id: location
+        name: 天蛛城内殿
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-canon-shura-luo-matriarch-private-stock
+        name: 罗族母私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-silk-steward
+        name: 丝蘅
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-courier
+        name: 岑足
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-ancestral-cores
+        name: 天蛛旧核匣
+        description: 两枚已经离体、来自去世成年同族的旧核，家族保管约定限制出售；不是当前族人的身体器官。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-city-material
+        name: 天蛛城维护公料
+        description: 现有工料和高阶石供局部补禁；复杂空间工艺仍需懂得的人来做。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-cold-pool
+        name: 封藏寒潭
+        description: 知道雪岛寒潭有古老空间宝物，当前探测手段不能深入到底。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-louling-stone
+        name: 潭底空间石
+        description: 已从旧刻文和探测中知道一块空间石仍在深潭；不知道另一个隐匿更深的珠体。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 修罗蛛本体、丝网、有限时间之力与大乘防护；晶核受损会伤及自身，不能任意回溯别人全部经历。
+        description: 修罗蛛本体、丝网、有限时间之力与大乘防护；晶核受损会伤及自身，不能任意回溯别人全部经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-shura-luo-matriarch
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-shura-council
+      - local_entity_id: fengyuan-review-canon-shura-luo-matriarch-private-stock
+        canonical_entity_ids:
+          - canon-shura-luo-matriarch-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-shura-silk-steward
+        canonical_entity_ids:
+          - fengyuan-shura-silk-steward
+      - local_entity_id: fengyuan-review-fengyuan-shura-courier
+        canonical_entity_ids:
+          - fengyuan-shura-courier
+      - local_entity_id: fengyuan-review-fengyuan-shura-ancestral-cores
+        canonical_entity_ids:
+          - fengyuan-shura-ancestral-cores
+      - local_entity_id: fengyuan-review-fengyuan-shura-city-material
+        canonical_entity_ids:
+          - fengyuan-shura-city-material
+      - local_entity_id: fengyuan-review-fengyuan-shura-cold-pool
+        canonical_entity_ids:
+          - fengyuan-shura-cold-pool
+      - local_entity_id: fengyuan-review-fengyuan-shura-louling-stone
+        canonical_entity_ids:
+          - fengyuan-shura-louling-stone

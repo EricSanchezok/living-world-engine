@@ -1,0 +1,18 @@
+id: dajin-fangjian-mountain
+kind: location
+name: 方尖山
+description: 修仙者往来的山地，山居与通路须实际辨认。
+placement: human-dajin
+facts:
+  - id: dajin-fangjian-mountain-route-human-dajin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-dajin
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

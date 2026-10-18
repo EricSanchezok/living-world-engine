@@ -1,0 +1,35 @@
+id: guanghan-garden
+kind: location
+name: 紫殿药园
+description: 古药成熟生长，五柱雷禁守护药圃。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-garden-route-guanghan-rear-rooms
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-rear-rooms
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-garden-condition-guanghan-rear-rooms
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-garden-barrier-condition
+    predicate: barrier-condition
+    value:
+      kind: text
+      value: 当前五柱完好，光幕完整；须实际处理供能与柱阵的联动，不能隔幕宣告采收。
+    description: 当前五柱完好，光幕完整；须实际处理供能与柱阵的联动，不能隔幕宣告采收。
+    access:
+      kind: discoverable
+      condition: 接近并勘察屏障、柱身与修复反应。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

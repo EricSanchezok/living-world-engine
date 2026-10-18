@@ -1,0 +1,18 @@
+id: innerstar-haiyuan-cage
+kind: container
+name: 海猿木笼
+description: 锁住笼门的木笼，普通工具可实际打开，不能阻挡所有法术。
+placement: innerstar-haiyuan-market
+facts:
+  - id: innerstar-haiyuan-cage-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-trader
+    description: 邱舟的木笼。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

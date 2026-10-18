@@ -1,0 +1,18 @@
+id: seas-qingxu-request
+kind: item
+name: 青序转职申请
+description: 请求转到商砚阵务工坊，愿先试刻一符，保留个人工钱与拒绝被送作私人侍役的主张。
+placement: seas-adult-attendant
+facts:
+  - id: seas-qingxu-request-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-adult-attendant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

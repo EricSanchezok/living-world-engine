@@ -1,0 +1,42 @@
+id: thunder-wangu-crisis-exit
+kind: location
+name: 云城外密阵石室
+description: 荒岩内室只有一座传送台和通向荒野的门，外部路程不能由室内视线看尽。
+placement: thunder-tianyun
+facts:
+  - id: thunder-wangu-crisis-exit-route-to-thunder-cloud-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-gate
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-exit-travel-condition-thunder-cloud-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。
+    description: 须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-exit-route-to-thunder-wangu-crisis-entry
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wangu-crisis-entry
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-exit-travel-condition-thunder-wangu-crisis-entry
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。
+    description: 当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

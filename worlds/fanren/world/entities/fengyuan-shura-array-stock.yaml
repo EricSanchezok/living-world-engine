@@ -1,0 +1,20 @@
+id: fengyuan-shura-array-stock
+kind: container
+name: 旧阵封存极品石
+description: 正好足够本期一次启动的实际极品灵石，不能与其他私库重复计数。
+placement: fengyuan-shura-array-room
+facts:
+  - id: fengyuan-shura-array-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ling-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: top-stone
+    amount: 120
+ratings: []
+shared_activity_resources: []

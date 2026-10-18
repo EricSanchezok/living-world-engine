@@ -1,0 +1,26 @@
+id: yue-yuejing-west
+kind: location
+name: 西城区
+description: 杂役、小贩与普通住户生活的街巷。
+placement: yue-yuejing
+facts:
+  - id: yue-yuejing-west-route-yue-yuejing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-west-route-yue-wu-lodging
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-wu-lodging
+    description: 沿西城巷道到院门，入宅先问主人。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

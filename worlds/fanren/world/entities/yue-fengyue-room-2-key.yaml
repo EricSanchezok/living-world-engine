@@ -1,0 +1,26 @@
+id: yue-fengyue-room-2-key
+kind: item
+name: 风悦房钥2
+description: 只能打开对应房门的铜钥。
+placement: yue-fengyue-keeper
+facts:
+  - id: yue-fengyue-room-2-key-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-fengyue-room-2-key-opens
+    predicate: opens-location
+    value:
+      kind: entity
+      entityId: yue-fengyue-room-2
+    description: 将钥匙插入对应门锁实际转动才能开门；持钥不是房屋所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

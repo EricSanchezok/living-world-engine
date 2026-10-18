@@ -1,0 +1,20 @@
+id: tianyuan-practice-stock
+kind: container
+name: 广武本期试练用石
+description: 十二枚中阶石，开启屏障须真实扣减。
+placement: tianyuan-guangwu-hall
+facts:
+  - id: tianyuan-practice-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

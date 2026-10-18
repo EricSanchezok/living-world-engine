@@ -1,0 +1,18 @@
+id: blood-sponsor-cart
+kind: item
+name: 栾砚的轻型货车
+description: 可由熟练修士牵引的轻车，载重有限，当前停在市场外沿。
+placement: blood-market
+facts:
+  - id: blood-sponsor-cart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-sponsor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

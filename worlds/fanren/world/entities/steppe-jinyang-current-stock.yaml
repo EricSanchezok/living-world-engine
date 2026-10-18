@@ -1,0 +1,32 @@
+id: steppe-jinyang-current-stock
+kind: item
+name: 金阳当期轮值储备
+description: 用于现有井坡巡守的有限物资。
+placement: steppe-jinyang-store
+facts:
+  - id: steppe-jinyang-current-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-jinyang-tribe-reference
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-jinyang-current-stock-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-su-ran
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 100
+  - definition_id: craft-material
+    amount: 16
+  - definition_id: low-stone
+    amount: 28
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: innerstar-inn-ledger
+kind: container
+name: 隆兴经营款匣
+description: 隆兴住宿收支公款。
+placement: innerstar-longxing-inn
+facts:
+  - id: innerstar-inn-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-longxing-inn
+    description: 经营公账，不能混作个人钱袋。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 90
+ratings: []
+shared_activity_resources: []

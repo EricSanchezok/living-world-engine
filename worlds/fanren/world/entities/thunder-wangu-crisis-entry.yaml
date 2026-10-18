@@ -1,0 +1,42 @@
+id: thunder-wangu-crisis-entry
+kind: location
+name: 万古危急阵内室
+description: 门后石阶向下，旧禁制遮住小型阵台；入口不对普通访客开放。
+placement: thunder-greenlight-office
+facts:
+  - id: thunder-wangu-crisis-entry-route-to-thunder-greenlight-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-office
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-entry-travel-condition-thunder-greenlight-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。
+    description: 元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-entry-route-to-thunder-wangu-crisis-exit
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wangu-crisis-exit
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-wangu-crisis-entry-travel-condition-thunder-wangu-crisis-exit
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。
+    description: 当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: innerstar-island-spare
+kind: container
+name: 葛岚的阵枢备用件
+description: 一块完好的低阶阵枢片，属于葛岚本人，并未赠给村里。
+placement: innerstar-array-keeper
+facts:
+  - id: innerstar-island-spare-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-array-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 1
+ratings: []
+shared_activity_resources: []

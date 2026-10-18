@@ -1,0 +1,18 @@
+id: guanghan-gold-disc
+kind: item
+name: 星阵巨型金盘
+description: 古阵的关键构件，当前完好；损坏会影响阵力和空间稳定。
+placement: guanghan-star-platform
+facts:
+  - id: guanghan-gold-disc-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

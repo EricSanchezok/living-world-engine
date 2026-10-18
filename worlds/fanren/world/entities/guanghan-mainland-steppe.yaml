@@ -1,0 +1,74 @@
+id: guanghan-mainland-steppe
+kind: location
+name: 暗林外草原
+description: 无边青草地接着暗林边缘，湖泊与孤山散布其间。
+placement: guanghan-realm
+facts:
+  - id: guanghan-mainland-steppe-route-guanghan-dark-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-dark-forest
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-condition-guanghan-dark-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-route-guanghan-steppe-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-steppe-lake
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-condition-guanghan-steppe-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-route-guanghan-steppe-hill
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-steppe-hill
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-condition-guanghan-steppe-hill
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-route-guanghan-barren-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-barren-plain
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mainland-steppe-condition-guanghan-barren-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

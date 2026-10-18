@@ -1,0 +1,274 @@
+id: canon-qin-yan
+kind: person
+name: 秦言
+description: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+placement: yue-qin-hall
+facts:
+  - id: canon-qin-yan-age
+    predicate: age
+    value:
+      kind: text
+      value: 40岁
+    description: 40岁
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-yan
+  - id: canon-qin-yan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-yan
+  - id: canon-qin-yan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+    description: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qin-yan
+  - id: canon-qin-yan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根
+    description: 无灵根
+    access:
+      kind: discoverable
+      condition: 实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。
+  - id: canon-qin-yan-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 秦家家人或受雇办事者，公产仍属家族。
+    access:
+      kind: public
+  - id: canon-qin-yan-spouse
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: yue-qin-first-wife
+    description: 夫妻关系，私人交往不等共享所有隐秘。
+    access:
+      kind: public
+meters:
+  - id: canon-qin-yan-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: silver
+    amount: 3
+ratings:
+  - id: canon-qin-yan-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-qin-yan-craft
+    definition_id: craft
+    value: 1
+  - id: canon-qin-yan-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-qin-yan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+      voice: 待客温和，遇到家中私事会先请旁人退出。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与二弟核对一批铜料的交货日期，先保住信誉与周转。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 秦言
+        description: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+        status: observed
+      - id: location
+        name: 秦宅客厅
+        description: 自己日常生活或当值之处。
+        status: observed
+      - id: known-canon-qin-yan-pouch
+        name: 秦言的日用包
+        description: 自己的日用品与口粮，不是公家的账。
+        status: observed
+      - id: known-yue-qin-second-brother
+        name: 秦家二爷
+        description: 秦言二弟，负责铜料采购与交货验收。
+        status: observed
+      - id: known-yue-qin-third-brother
+        name: 秦家三爷
+        description: 秦言三弟，管理账目和商户结算。
+        status: observed
+      - id: known-canon-qin-zhi
+        name: 秦知
+        description: 秦言长子，正在跟三叔学习账务，尚不独掌全城生意。
+        status: observed
+      - id: known-yue-qin-second-son
+        name: 秦家二公子
+        description: 秦言次子，读书识字，也帮家中整理来往信件。
+        status: observed
+      - id: known-yue-qin-first-wife
+        name: 秦夫人
+        description: 自己的配偶，家务与开支常要商量。
+        status: observed
+      - id: known-canon-qin-gui
+        name: 秦贵
+        description: 秦家门房，能读普通帖子，分辨来客所找的人。
+        status: observed
+      - id: known-canon-qin-ping
+        name: 秦平
+        description: 秦家少年学役，认得宅内各院，跟老仆学跑腿与接客。
+        status: observed
+      - id: known-yue-qin-warehouse
+        name: 秦家铜料仓
+        description: 铜料入库须验收并记账，进出需管事许可。
+        status: observed
+      - id: known-yue-qin-accounts
+        name: 秦家账房
+        description: 公账、采购单和结算凭据分别存放。
+        status: observed
+      - id: known-canon-li-huayuan
+        name: 李化元
+        description: 幼时随父见过的李仙师，曾照拂家中；父亲嘱咐若遇无法处理的大难可设法求助。
+        status: observed
+      - id: known-yue-qin-cashbox
+        name: 秦家公银匣
+        description: 家族经营公款，不是某一人的随身银钱。
+        status: observed
+      - id: known-yue-qin-secret-room
+        name: 秦宅密室
+        description: 自己知道偏厅古瓶的开门机关，可在内室谈私事。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的生活、修学、交往及已见记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: age
+        subjectId: self
+        predicate: age
+        value:
+          kind: text
+          value: 40岁
+        description: 40岁
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 凡人
+        description: 凡人
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+        description: 秦家当家人，熟悉铜料买卖、家族账目和商人往来。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己未经过可靠验灵，不知道是否有灵根。
+        description: 自己未经过可靠验灵，不知道是否有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 与二弟核对一批铜料的交货日期，先保住信誉与周转。
+        description: 与二弟核对一批铜料的交货日期，先保住信誉与周转。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-qin-yan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-qin-hall
+      - local_entity_id: known-canon-qin-yan-pouch
+        canonical_entity_ids:
+          - canon-qin-yan-pouch
+      - local_entity_id: known-yue-qin-second-brother
+        canonical_entity_ids:
+          - yue-qin-second-brother
+      - local_entity_id: known-yue-qin-third-brother
+        canonical_entity_ids:
+          - yue-qin-third-brother
+      - local_entity_id: known-canon-qin-zhi
+        canonical_entity_ids:
+          - canon-qin-zhi
+      - local_entity_id: known-yue-qin-second-son
+        canonical_entity_ids:
+          - yue-qin-second-son
+      - local_entity_id: known-yue-qin-first-wife
+        canonical_entity_ids:
+          - yue-qin-first-wife
+      - local_entity_id: known-canon-qin-gui
+        canonical_entity_ids:
+          - canon-qin-gui
+      - local_entity_id: known-canon-qin-ping
+        canonical_entity_ids:
+          - canon-qin-ping
+      - local_entity_id: known-yue-qin-warehouse
+        canonical_entity_ids:
+          - yue-qin-warehouse
+      - local_entity_id: known-yue-qin-accounts
+        canonical_entity_ids:
+          - yue-qin-accounts
+      - local_entity_id: known-canon-li-huayuan
+        canonical_entity_ids:
+          - canon-li-huayuan
+      - local_entity_id: known-yue-qin-cashbox
+        canonical_entity_ids:
+          - yue-qin-cashbox
+      - local_entity_id: known-yue-qin-secret-room
+        canonical_entity_ids:
+          - yue-qin-secret-room

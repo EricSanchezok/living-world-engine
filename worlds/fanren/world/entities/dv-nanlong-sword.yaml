@@ -1,0 +1,18 @@
+id: dv-nanlong-sword
+kind: item
+name: 南陇金剑
+description: 自己持有的普通本命金剑，仍需继续培炼。
+placement: canon-nanlong-hou
+facts:
+  - id: dv-nanlong-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nanlong-hou
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

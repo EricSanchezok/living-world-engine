@@ -1,0 +1,42 @@
+id: thunder-fengyuan-relay
+kind: location
+name: 风元远行接应阵院
+description: 天云远行者使用的有限接应阵院，受本地接应人员管理；并非直达任意城池。
+placement: fengyuan-continent
+facts:
+  - id: thunder-fengyuan-relay-route-thunder-fujiao-secret-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fujiao-secret-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-fengyuan-relay-condition-thunder-fujiao-secret-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须获得联盟授权、两端确认完好并接应、消耗两枚本阵配套阵芯及二十四枚极品灵石；当前材料只够一次，实际运送至多六位普通人形及合理行李。普通高阶灵石不能替代极品灵石，费用是本次配置而非所有跨洲阵统一价。
+    description: 须获得联盟授权、两端确认完好并接应、消耗两枚本阵配套阵芯及二十四枚极品灵石；当前材料只够一次，实际运送至多六位普通人形及合理行李。普通高阶灵石不能替代极品灵石，费用是本次配置而非所有跨洲阵统一价。
+    access:
+      kind: public
+  - id: thunder-fengyuan-relay-route-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-fengyuan-relay-condition-fengyuan-border-exchange
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阵院外仍是蛮荒商路，须有路线、补给和实际行旅能力才能到折枝边市；跨洲落地不等于安全回到人妖族域。
+    description: 阵院外仍是蛮荒商路，须有路线、补给和实际行旅能力才能到折枝边市；跨洲落地不等于安全回到人妖族域。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: thunder-scorpion-tail-settlement
+kind: location
+name: 蝎尾住区
+description: 近邻海岛的临湾浅滩上排着舟架，潮湿石壁开凿存盐的小窖。
+placement: thunder-firecoral-islands
+facts:
+  - id: thunder-scorpion-tail-settlement-route-to-thunder-sharp-tooth-settlement
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-sharp-tooth-settlement
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-scorpion-tail-settlement-route-conditions-thunder-sharp-tooth-settlement
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。
+    description: 近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

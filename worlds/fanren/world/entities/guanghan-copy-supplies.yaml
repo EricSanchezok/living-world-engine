@@ -1,0 +1,20 @@
+id: guanghan-copy-supplies
+kind: container
+name: 抄写用玉片与墨
+description: 现存六份抄写材料。
+placement: guanghan-ink-study
+facts:
+  - id: guanghan-copy-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: guanghan-copyist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

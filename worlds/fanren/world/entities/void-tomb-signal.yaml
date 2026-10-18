@@ -1,0 +1,18 @@
+id: void-tomb-signal
+kind: item
+name: 守墓传讯盘
+description: 与极阴内院一盘配对，一次消耗一低阶灵石，不自动全知。
+placement: void-tomb-warden
+facts:
+  - id: void-tomb-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ji-yin
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

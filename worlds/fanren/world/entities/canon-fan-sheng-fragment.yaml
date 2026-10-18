@@ -1,0 +1,26 @@
+id: canon-fan-sheng-fragment
+kind: item
+name: 梵圣真片
+description: 海族世传残片，仅有残缺法诀图文，不是完整可直接入门功法。
+placement: outerstar-suanni-vault
+facts:
+  - id: canon-fan-sheng-fragment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-suanni-elder
+    description: owned-by
+    access:
+      kind: private
+  - id: canon-fan-sheng-fragment-unique-identity
+    predicate: unique-identity
+    value:
+      kind: text
+      value: 这一片祖传功法载体只有一个，不因复述历史复制。
+    description: 这一片祖传功法载体只有一个，不因复述历史复制。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

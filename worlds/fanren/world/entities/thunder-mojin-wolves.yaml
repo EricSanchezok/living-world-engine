@@ -1,0 +1,26 @@
+id: thunder-mojin-wolves
+kind: creature-group
+name: 魔金赤目狼群
+description: 栖息于魔气环境的有限兽群，会护食、逃避强者并对闯入者作反应。
+placement: thunder-mojin-mountains
+facts:
+  - id: thunder-mojin-wolves-division-boundary
+    predicate: division-boundary
+    value:
+      kind: text
+      value: 分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。
+    description: 分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。
+    access:
+      kind: private
+meters:
+  - id: thunder-mojin-wolves-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: thunder-creature-count
+    amount: 9
+ratings:
+  - id: thunder-mojin-wolves-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

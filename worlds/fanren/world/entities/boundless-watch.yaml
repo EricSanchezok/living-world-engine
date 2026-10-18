@@ -1,0 +1,26 @@
+id: boundless-watch
+kind: location
+name: 海岸望棚
+description: 沿岸观察风浪的木棚，不能凭此看清深海。
+placement: boundless-shore
+facts:
+  - id: boundless-watch-route-boundless-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-shore
+    description: 沿礁岸石阶上望棚，湿滑时须小心。
+    access:
+      kind: public
+  - id: boundless-watch-travel-boundless-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿礁岸石阶上望棚，湿滑时须小心。
+    description: 沿礁岸石阶上望棚，湿滑时须小心。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

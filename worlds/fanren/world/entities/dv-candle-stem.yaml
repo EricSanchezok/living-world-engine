@@ -1,0 +1,27 @@
+id: dv-candle-stem
+kind: item
+name: 灵烛果植株
+description: 湖泥中独立生长的灵烛果植株，移植会损毁；枝上结着成熟灵果。
+placement: dv-oasis
+facts:
+  - id: dv-candle-stem-harvest-rule
+    predicate: harvest-rule
+    value:
+      kind: text
+      value: 采摘后须在半个人界日内入鼎炼药；超过半日效力大减，超过三个人界日效力全失。合适木器仅能短时保存，不能取消时限。需完整造化丹配方、辅材与炉火；普通储放不自动成丹，断茎移植会损药。
+    description: 采摘后须在半个人界日内入鼎炼药；超过半日效力大减，超过三个人界日效力全失。合适木器仅能短时保存，不能取消时限。需完整造化丹配方、辅材与炉火；普通储放不自动成丹，断茎移植会损药。
+    access:
+      kind: private
+  - id: dv-candle-stem-pill-boundary
+    predicate: medicine-boundary
+    value:
+      kind: text
+      value: 造化丹须真实配方和材料；服丹可能经历幻境并获得修炼体会，幻境里的法术不等于已掌握技能。药效、突破与族类适配须按实际修为和身体判断，不能承诺立即进阶。
+    description: 造化丹须真实配方和材料；服丹可能经历幻境并获得修炼体会，幻境里的法术不等于已掌握技能。药效、突破与族类适配须按实际修为和身体判断，不能承诺立即进阶。
+    access:
+      kind: discoverable
+      condition: 实际研究相应药典配方、服药经历或获得有依据的传授；只见果实不获完整炼法。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

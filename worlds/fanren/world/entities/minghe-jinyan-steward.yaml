@@ -1,0 +1,196 @@
+id: minghe-jinyan-steward
+kind: person
+name: 金澜
+description: 金焰岛管事，主持清洁与酒藏出入。
+placement: minghe-jinyan-palace
+facts:
+  - id: minghe-jinyan-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - minghe-jinyan-steward
+  - id: minghe-jinyan-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚法力、禁制通行与库存核验。
+    description: 炼虚法力、禁制通行与库存核验。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-jinyan-steward
+  - id: minghe-jinyan-steward-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 长期修行，准确血脉未由外人辨明。
+    description: 长期修行，准确血脉未由外人辨明。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-jinyan-steward
+  - id: minghe-jinyan-steward-manages-for
+    predicate: manages-for
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: manages-for
+    access:
+      kind: private
+  - id: minghe-jinyan-steward-assigns-duty
+    predicate: assigns-duty
+    value:
+      kind: entity
+      entityId: minghe-gold-guard
+    description: assigns-duty
+    access:
+      kind: private
+meters:
+  - id: minghe-jinyan-steward-health
+    definition_id: health
+    current: 100
+  - id: minghe-jinyan-steward-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings:
+  - id: minghe-jinyan-steward-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: minghe-jinyan-steward-force
+    definition_id: force
+    value: 6
+  - id: minghe-jinyan-steward-craft
+    definition_id: craft
+    value: 5
+  - id: minghe-jinyan-steward-perception
+    definition_id: perception
+    value: 6
+  - id: minghe-jinyan-steward-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: minghe-jinyan-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 金焰岛管事，主持清洁与酒藏出入。
+      voice: 客气却有自己的底线，提到主人的金饰习惯会会心一笑。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对本轮客用开支，并和盘垣说清私用灯罩修补应由谁出钱。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 金澜
+        description: 金焰岛管事，主持清洁与酒藏出入。
+        status: observed
+      - id: location
+        name: 金焰宫
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-jin-yan-hou
+        name: 金焰候
+        description: 长期管理居所，管事知道核准开支，不全知主人私事。
+        status: observed
+      - id: known-minghe-gold-guard
+        name: 盘垣
+        description: 当轮守卫与管事认识，灯罩损坏可当面核对。
+        status: observed
+      - id: known-minghe-jinyan-household-stock
+        name: 金焰宫日常预算
+        description: 自己有权按已核准日常用途支出的有限预算。
+        status: observed
+      - id: known-minghe-jinyan-wine
+        name: 金焰候一壶碧灵酒
+        description: 主人仅存一壶成熟碧灵酒，领用要另问主人。
+        status: observed
+      - id: minghe-review-minghe-ancient-ice-block
+        name: 酒窟万年玄冰
+        description: 酒窟实际用来醇酒的冰块，移动和凿取须报主人。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚法力、禁制通行与库存核验。
+        description: 炼虚法力、禁制通行与库存核验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 长期修行，准确血脉未由外人辨明。
+        description: 长期修行，准确血脉未由外人辨明。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - minghe-jinyan-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-jinyan-palace
+      - local_entity_id: known-canon-jin-yan-hou
+        canonical_entity_ids:
+          - canon-jin-yan-hou
+      - local_entity_id: known-minghe-gold-guard
+        canonical_entity_ids:
+          - minghe-gold-guard
+      - local_entity_id: known-minghe-jinyan-household-stock
+        canonical_entity_ids:
+          - minghe-jinyan-household-stock
+      - local_entity_id: known-minghe-jinyan-wine
+        canonical_entity_ids:
+          - minghe-jinyan-wine
+      - local_entity_id: minghe-review-minghe-ancient-ice-block
+        canonical_entity_ids:
+          - minghe-ancient-ice-block

@@ -1,0 +1,98 @@
+id: innerstar-qingyun-mountain
+kind: location
+name: 青云山
+description: 三主峰及众多小峰构成岛上修士灵地，灵气和住用权不是同一件事。
+placement: human-kuixing-island
+facts:
+  - id: innerstar-qingyun-mountain-route-human-kuixing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-condition-human-kuixing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 三主峰及众多小峰构成岛上修士灵地，灵气和住用权不是同一件事。
+    description: 三主峰及众多小峰构成岛上修士灵地，灵气和住用权不是同一件事。
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-route-innerstar-tianzhu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-tianzhu
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-condition-innerstar-tianzhu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青云山三主峰之一，有修炼洞府与禁制。
+    description: 青云山三主峰之一，有修炼洞府与禁制。
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-route-innerstar-tianxiao
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-tianxiao
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-condition-innerstar-tianxiao
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青云山三主峰之一，有修炼洞府与禁制。
+    description: 青云山三主峰之一，有修炼洞府与禁制。
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-route-innerstar-tianmen
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-tianmen
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-condition-innerstar-tianmen
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青云山三主峰之一，有修炼洞府与禁制。
+    description: 青云山三主峰之一，有修炼洞府与禁制。
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-route-innerstar-dengxian-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-dengxian-hall
+    description: 通往登仙阁
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-condition-innerstar-dengxian-hall
+    predicate: condition-innerstar-dengxian-hall
+    value:
+      kind: text
+      value: 沿青云山中道路前往登仙阁办理岛内事务。
+    description: 沿青云山中道路前往登仙阁办理岛内事务。
+    access:
+      kind: public
+  - id: innerstar-qingyun-mountain-land-selection
+    predicate: land-selection
+    value:
+      kind: text
+      value: 三主峰外有367小峰；36处优质峰十年一争。筑基可按登记选普通峰，炼气可申请洞谷。已有住用权与空地须查册，不凭修为自动占有他人洞府。
+    description: 三主峰外有367小峰；36处优质峰十年一争。筑基可按登记选普通峰，炼气可申请洞谷。已有住用权与空地须查册，不凭修为自动占有他人洞府。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,76 @@
+id: demon-nine-immortal-mountain
+kind: location
+name: 九仙山
+description: 九座灵峰横在妖狐之地与玄武境之间，两族共同守护；寻药和开采均须获得管理者许可。
+placement: spirit-human-demon-territory
+facts:
+  - id: demon-nine-immortal-mountain-route-demon-fox-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-fox-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-condition-demon-fox-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 九座灵峰横在妖狐之地与玄武境之间，两族共同守护；寻药和开采均须获得管理者许可。
+    description: 九座灵峰横在妖狐之地与玄武境之间，两族共同守护；寻药和开采均须获得管理者许可。
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-route-spirit-xuanwu-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-domain
+    description: route-to
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-condition-spirit-xuanwu-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 玄武境与九仙山之间的边路，按地形、交通工具与护卫速度行进。
+    description: 玄武境与九仙山之间的边路，按地形、交通工具与护卫速度行进。
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-route-demon-nine-immortal-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-market
+    description: route-to
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-condition-demon-nine-immortal-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两族获准交易药材与器物的市坪；没有常年无限供应的万宝大会。
+    description: 两族获准交易药材与器物的市坪；没有常年无限供应的万宝大会。
+    access:
+      kind: public
+  - id: demon-nine-immortal-mountain-route-to-root-feixian-peak
+    predicate: route-to-root-feixian-peak
+    value:
+      kind: entity
+      entityId: root-feixian-peak
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: demon-nine-immortal-mountain-travel-condition-root-feixian-peak
+    predicate: travel-condition-root-feixian-peak
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

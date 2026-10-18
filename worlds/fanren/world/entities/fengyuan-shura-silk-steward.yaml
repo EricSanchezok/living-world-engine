@@ -1,0 +1,156 @@
+id: fengyuan-shura-silk-steward
+kind: person
+name: 丝蘅
+description: 修罗蛛族中负责城内储藏的合体执事，对每一枚旧晶核的来历都很慎重。
+placement: fengyuan-shura-tianzhu-city
+facts:
+  - id: fengyuan-shura-silk-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: private
+  - id: fengyuan-shura-silk-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 成年修罗蛛丝法、有限时间迟滞、仓储与白莲现阵操作；失晶核会重伤。
+    description: 成年修罗蛛丝法、有限时间迟滞、仓储与白莲现阵操作；失晶核会重伤。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-shura-silk-steward-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-shura-silk-steward-mana
+    definition_id: mana
+    current: 1260
+quantities: []
+ratings:
+  - id: fengyuan-shura-silk-steward-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: fengyuan-shura-silk-steward-force
+    definition_id: force
+    value: 7
+  - id: fengyuan-shura-silk-steward-craft
+    definition_id: craft
+    value: 5
+  - id: fengyuan-shura-silk-steward-perception
+    definition_id: perception
+    value: 7
+  - id: fengyuan-shura-silk-steward-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: fengyuan-shura-silk-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 修罗蛛族中负责城内储藏的合体执事，对每一枚旧晶核的来历都很慎重。
+      voice: 先把物件来历说清楚，再谈价值；反感把族人遗物说成随手可取的货。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否允许用一枚祖辈遗核交换能修好城防薄弱处的材料，先确认族母与遗物保管约定。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 丝蘅
+        description: 修罗蛛族中负责城内储藏的合体执事，对每一枚旧晶核的来历都很慎重。
+        status: observed
+      - id: location
+        name: 天蛛城
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-silk-steward-private-stock
+        name: 丝蘅私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-canon-shura-luo-matriarch
+        name: 罗族母
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-ancestral-cores
+        name: 天蛛旧核匣
+        description: 两枚已经离体、来自去世成年同族的旧核，家族保管约定限制出售；不是当前族人的身体器官。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-city-material
+        name: 天蛛城维护公料
+        description: 现有工料和高阶石供局部补禁；复杂空间工艺仍需懂得的人来做。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-old-box-1
+        name: 天蛛族旧小匣1
+        description: 自己保管并清点过的现有小匣，需要评估维护的收益。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-old-box-2
+        name: 天蛛族旧小匣2
+        description: 自己保管并清点过的现有小匣，需要评估维护的收益。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-old-box-3
+        name: 天蛛族旧小匣3
+        description: 自己保管并清点过的现有小匣，需要评估维护的收益。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 成年修罗蛛丝法、有限时间迟滞、仓储与白莲现阵操作；失晶核会重伤。
+        description: 成年修罗蛛丝法、有限时间迟滞、仓储与白莲现阵操作；失晶核会重伤。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-shura-silk-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-shura-tianzhu-city
+      - local_entity_id: fengyuan-review-fengyuan-shura-silk-steward-private-stock
+        canonical_entity_ids:
+          - fengyuan-shura-silk-steward-private-stock
+      - local_entity_id: fengyuan-review-canon-shura-luo-matriarch
+        canonical_entity_ids:
+          - canon-shura-luo-matriarch
+      - local_entity_id: fengyuan-review-fengyuan-shura-ancestral-cores
+        canonical_entity_ids:
+          - fengyuan-shura-ancestral-cores
+      - local_entity_id: fengyuan-review-fengyuan-shura-city-material
+        canonical_entity_ids:
+          - fengyuan-shura-city-material
+      - local_entity_id: fengyuan-review-fengyuan-shura-old-box-1
+        canonical_entity_ids:
+          - fengyuan-shura-old-box-1
+      - local_entity_id: fengyuan-review-fengyuan-shura-old-box-2
+        canonical_entity_ids:
+          - fengyuan-shura-old-box-2
+      - local_entity_id: fengyuan-review-fengyuan-shura-old-box-3
+        canonical_entity_ids:
+          - fengyuan-shura-old-box-3

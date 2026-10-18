@@ -1,0 +1,74 @@
+id: fengyuan-burial-desert
+kind: location
+name: 葬骨沙漠
+description: 干旱沙漠，风沙改变地表足迹，旅行者要保管饮水与路线标识。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-burial-desert-route-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-condition-spirit-wilderness-fringe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 干旱沙漠，风沙改变地表足迹，旅行者要保管饮水与路线标识。
+    description: 干旱沙漠，风沙改变地表足迹，旅行者要保管饮水与路线标识。
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-route-fengyuan-lingtian-fortress
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-lingtian-fortress
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-condition-fengyuan-lingtian-fortress
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天然山墙后高峰上建有棱形塔楼，负责一处出入灵域的通道。
+    description: 天然山墙后高峰上建有棱形塔楼，负责一处出入灵域的通道。
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-route-fengyuan-yaksha-crag-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-crag-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-condition-fengyuan-yaksha-crag-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 夜叉来往的崖城，兵器铺、居所和公共石台由阶路连接。
+    description: 夜叉来往的崖城，兵器铺、居所和公共石台由阶路连接。
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-route-feiling-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-territory
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-burial-desert-condition-feiling-territory
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨越广大蛮荒需可靠路线、补给与多年远行准备；此连接只说明地理可达，并非一日直达。
+    description: 跨越广大蛮荒需可靠路线、补给与多年远行准备；此连接只说明地理可达，并非一日直达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

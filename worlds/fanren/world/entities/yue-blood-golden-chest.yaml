@@ -1,0 +1,27 @@
+id: yue-blood-golden-chest
+kind: item
+name: 地下金色巨箱
+description: 古禁覆盖的金色巨箱，箱盖闭合，需解除封印才能检查里面。
+placement: yue-blood-jade-pavilion
+facts:
+  - id: yue-blood-golden-chest-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-blood-golden-chest-contents-boundary
+    predicate: contents-state
+    value:
+      kind: text
+      value: 箱内有一块进入中心古塔的禁制令牌，表面刻着与塔门相应的古纹。
+    description: 箱内有一块进入中心古塔的禁制令牌，表面刻着与塔门相应的古纹。
+    access:
+      kind: discoverable
+      condition: 实际解除金箱封禁并打开箱盖，检查箱内。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

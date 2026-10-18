@@ -1,0 +1,19 @@
+id: guanghan-palace-space
+kind: location
+name: 紫殿封闭空间
+description: 白石山与紫殿所在的独立空间，当前禁制完整。
+placement: guanghan-realm
+facts:
+  - id: guanghan-palace-space-flight-restraint
+    predicate: flight-restraint
+    value:
+      kind: text
+      value: 禁空之力随离地高度迅速增加，也影响飞行法器；低空短跃、步行与攀阶所承受的作用不同。
+    description: 禁空之力随离地高度迅速增加，也影响飞行法器；低空短跃、步行与攀阶所承受的作用不同。
+    access:
+      kind: discoverable
+      condition: 实际试探高度并观察反应，或读取可靠旧记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

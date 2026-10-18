@@ -1,0 +1,20 @@
+id: yue-craft-toolkit
+kind: item
+name: 赵鸣的修补工具
+description: 小锉、夹具和校尺，工具仍归本人。
+placement: yue-craft-worker
+facts:
+  - id: yue-craft-toolkit-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-craft-worker
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

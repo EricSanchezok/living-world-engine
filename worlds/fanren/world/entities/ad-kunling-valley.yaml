@@ -1,0 +1,42 @@
+id: ad-kunling-valley
+kind: location
+name: 困灵谷
+description: 岛中两绿峰之间的谷地，保护通往池中空间的入口。
+placement: associated-demon-realm
+facts:
+  - id: ad-kunling-valley-route-ad-kuling-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kuling-island
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kunling-valley-condition-ad-kuling-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-kunling-valley-route-ad-wash-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-wash-space
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kunling-valley-condition-ad-wash-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 通过完整谷底阵往返；须突破或获得守卫许可，魔族被空间拒绝，入内者按修为与实际压迫判断停留；即使有足够法力也不能无限逗留。
+    description: 通过完整谷底阵往返；须突破或获得守卫许可，魔族被空间拒绝，入内者按修为与实际压迫判断停留；即使有足够法力也不能无限逗留。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

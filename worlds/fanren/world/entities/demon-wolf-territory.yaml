@@ -1,0 +1,26 @@
+id: demon-wolf-territory
+kind: location
+name: 狼族之地
+description: 银月狼族与其他狼族共同生活的地域，王庭政令和各支宗族并非同一回事。
+placement: spirit-human-demon-territory
+facts:
+  - id: tianyuan-review-demon-wolf-territory-route-to-tianyuan-yinguang-residence
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-yinguang-residence
+    description: route-to-tianyuan-yinguang-residence
+    access:
+      kind: private
+  - id: tianyuan-review-demon-wolf-territory-route-conditions-tianyuan-yinguang-residence
+    predicate: route-conditions-tianyuan-yinguang-residence
+    value:
+      kind: text
+      value: 妖狼域内部沿溪寻路；静舍须获居者同意才能入内。
+    description: 妖狼域内部沿溪寻路；静舍须获居者同意才能入内。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

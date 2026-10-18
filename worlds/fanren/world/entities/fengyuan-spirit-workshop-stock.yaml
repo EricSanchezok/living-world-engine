@@ -1,0 +1,22 @@
+id: fengyuan-spirit-workshop-stock
+kind: container
+name: 翠烟修器坊材料架
+description: 工具与材料归共同工坊，器灵居民不是待售器物。
+placement: fengyuan-spirit-crafts-square
+facts:
+  - id: fengyuan-spirit-workshop-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-spirit-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 20
+  - definition_id: low-stone
+    amount: 200
+ratings: []
+shared_activity_resources: []

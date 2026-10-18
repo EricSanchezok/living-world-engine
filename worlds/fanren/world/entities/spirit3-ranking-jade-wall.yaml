@@ -1,0 +1,26 @@
+id: spirit3-ranking-jade-wall
+kind: item
+name: 混沌万灵榜玉壁
+description: 玉壁反映特定灵物排序，并不显出持宝者坐标；读懂变化需现场观察与文识。
+placement: spirit3-ranking-island
+facts:
+  - id: spirit3-ranking-jade-wall-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianling-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-ranking-jade-wall-read-boundary
+    predicate: read-boundary
+    value:
+      kind: text
+      value: 玉壁上的可见符文须现场辨读；现有观测册只收局部摹片，不能从一张抄页得出完整榜目。
+    description: 玉壁上的可见符文须现场辨读；现有观测册只收局部摹片，不能从一张抄页得出完整榜目。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

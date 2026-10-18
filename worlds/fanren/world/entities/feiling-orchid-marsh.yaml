@@ -1,0 +1,26 @@
+id: feiling-orchid-marsh
+kind: location
+name: 毒兰沼泽
+description: 淡绿薄雾浮在腐草和毒兰上，毒蜂在花间筑巢，安全落脚处随积水变化。
+placement: feiling-abyss-1
+facts:
+  - id: feiling-orchid-marsh-route-to-feiling-abyss-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-1
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-orchid-marsh-route-conditions-feiling-abyss-1
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需防薄雾毒性、陷脚积水和护花蜂。
+    description: 需防薄雾毒性、陷脚积水和护花蜂。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

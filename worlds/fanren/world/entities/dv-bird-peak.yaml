@@ -1,0 +1,42 @@
+id: dv-bird-peak
+kind: location
+name: 飞鸟状山峰
+description: 山峰侧影如鸟，鸟喙方向可作寻路参照；山体完整。
+placement: human-devil-valley
+facts:
+  - id: dv-bird-peak-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-bird-peak-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 行进须实地勘察裂隙，峰形可供定位，不保证其他旧标记仍在。
+    description: 行进须实地勘察裂隙，峰形可供定位，不保证其他旧标记仍在。
+    access:
+      kind: public
+  - id: dv-bird-peak-route-dv-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-desert
+    description: route-to
+    access:
+      kind: public
+  - id: dv-bird-peak-condition-dv-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿鸟喙所指方向前进，沙地庞大，须辨位和补给。
+    description: 沿鸟喙所指方向前进，沙地庞大，须辨位和补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

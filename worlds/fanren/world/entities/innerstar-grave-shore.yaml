@@ -1,0 +1,26 @@
+id: innerstar-grave-shore
+kind: location
+name: 墓岛石岸
+description: 潮水拍打石岸，荒径通往岛内谷地。
+placement: innerstar-beast-grave-island
+facts:
+  - id: innerstar-grave-shore-route-innerstar-beast-grave-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-beast-grave-island
+    description: 沿岛岸地面往来，出海另需舟船或相应御行能力。
+    access:
+      kind: public
+  - id: innerstar-grave-shore-route-innerstar-grave-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-grave-valley
+    description: 沿荒径步行穿过石地，实际消耗路程与时间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

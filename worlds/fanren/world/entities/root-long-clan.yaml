@@ -1,0 +1,28 @@
+id: root-long-clan
+kind: organization
+name: 灵界陇家
+description: 以血脉及传承维系的修仙家族，族产和私人资产分账。
+placement: root-long-estate
+facts:
+  - id: root-long-clan-lineage
+    predicate: lineage
+    value:
+      kind: text
+      value: 真龙血脉
+    description: 真龙血脉
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-long-clan-root-detail-long-bloodline
+    predicate: root-detail-long-bloodline
+    value:
+      kind: text
+      value: 真龙血脉激发、半龙化及入族庇护按本家资质与族规；变化不生成第二身体，族产不能由每个成员任意处分。
+    description: 真龙血脉激发、半龙化及入族庇护按本家资质与族规；变化不生成第二身体，族产不能由每个成员任意处分。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

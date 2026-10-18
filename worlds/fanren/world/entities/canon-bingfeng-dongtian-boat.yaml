@@ -1,0 +1,28 @@
+id: canon-bingfeng-dongtian-boat
+kind: item
+name: 洞天舟凝炼中胚体
+description: 冰凤以自身寒元长期凝炼的唯一舟体；当前未完工，不具备完整防御能力。
+placement: north-bingfeng-retreat
+facts:
+  - id: canon-bingfeng-dongtian-boat-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bingfeng
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-bingfeng-dongtian-boat-craft-state
+    predicate: craft-state
+    value:
+      kind: text
+      value: 尚在封养凝炼，最终祭炼未完成；成器不能因一句要求瞬时完成。
+    description: 尚在封养凝炼，最终祭炼未完成；成器不能因一句要求瞬时完成。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingfeng
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

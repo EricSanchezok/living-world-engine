@@ -1,0 +1,206 @@
+id: spirit-anyuan-trainer
+kind: person
+name: 冯棠
+description: 安远城凡人炼体守卫，闲时教街坊基础防身。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit-anyuan-trainer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 低阶炼体、长矛、队列和草原兽迹辨识；没有修士法力。
+    description: 低阶炼体、长矛、队列和草原兽迹辨识；没有修士法力。
+    access:
+      kind: agents
+      agentIds:
+        - spirit-anyuan-trainer
+  - id: spirit-anyuan-trainer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 未修仙法
+    description: 未修仙法
+    access:
+      kind: agents
+      agentIds:
+        - spirit-anyuan-trainer
+  - id: spirit-anyuan-trainer-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: member-of
+    access:
+      kind: private
+  - id: spirit-anyuan-trainer-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根
+    description: 无灵根
+    access:
+      kind: discoverable
+      condition: 具备适当检测手段者经许可实际检测该人的灵根，或本人主动陈述自己已有的可信检测结果。
+meters:
+  - id: spirit-anyuan-trainer-health
+    definition_id: health
+    current: 100
+  - id: spirit-anyuan-trainer-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: low-stone
+    amount: 35
+ratings:
+  - id: spirit-anyuan-trainer-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: spirit-anyuan-trainer-force
+    definition_id: force
+    value: 3
+  - id: spirit-anyuan-trainer-craft
+    definition_id: craft
+    value: 2
+  - id: spirit-anyuan-trainer-perception
+    definition_id: perception
+    value: 1
+  - id: spirit-anyuan-trainer-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: spirit-anyuan-trainer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 安远城凡人炼体守卫，闲时教街坊基础防身。
+      voice: 带着街坊式的热络，讲防身时习惯让人做给自己看；与城里修士说话也不卑怯。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 先巡查水井道路，再处理学徒练力的请求。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 冯棠
+        description: 安远城凡人炼体守卫，闲时教街坊基础防身。
+        status: observed
+      - id: location
+        name: 安远城草原门
+        description: 自己目前所在的地方。
+        status: observed
+      - id: known-spirit-anyuan-watch
+        name: 安远城守备
+        description: 自己任职的机构及其日常权限。
+        status: observed
+      - id: review-spirit3-iron-heavy-blade
+        name: 守备乌铁刀
+        description: 厚重普通乌铁刀，可劈砍但强度有限。
+        status: observed
+      - id: review-spirit3-bone-armor
+        name: 守备骨片甲
+        description: 普通兽骨缝制护甲，接缝易受损，不自动产生护罩。
+        status: observed
+      - id: review-spirit3-anyuan-crossbow
+        name: 安远草原门巨弩
+        description: 自己负责教守备实际装填和检查。
+        status: observed
+      - id: review-spirit3-anyuan-bolts
+        name: 门弩现用长矢
+        description: 当前十二支，先把训练回收矢和可用矢分开。
+        status: observed
+      - id: review-spirit3-cart-driver
+        name: 曹砚
+        description: 熟识的车夫，轮轴工具已借给他到明日。
+        status: observed
+      - id: review-spirit3-anyuan-budget-petition
+        name: 安远教习补料呈文
+        description: 冯棠请求本期拨8高阶灵石用于守备教习和购矢，尚未批准；现存十二支矢不因申请而增加。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 实际生活、训练和任职经历。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时亲历当地入夜；此后依据实际经过的时间和新见闻判断时段。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 低阶炼体、长矛、队列和草原兽迹辨识；没有修士法力。
+        description: 低阶炼体、长矛、队列和草原兽迹辨识；没有修士法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-spiritual-root
+        subjectId: self
+        predicate: known-spiritual-root
+        value:
+          kind: text
+          value: 无灵根，这是本人曾经检测的结果。
+        description: 无灵根，这是本人曾经检测的结果。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 开篇时此地已入夜。
+        description: 记得入场时当地已入夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - spirit-anyuan-trainer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit-anyuan-gate
+      - local_entity_id: known-spirit-anyuan-watch
+        canonical_entity_ids:
+          - spirit-anyuan-watch
+      - local_entity_id: review-spirit3-iron-heavy-blade
+        canonical_entity_ids:
+          - spirit3-iron-heavy-blade
+      - local_entity_id: review-spirit3-bone-armor
+        canonical_entity_ids:
+          - spirit3-bone-armor
+      - local_entity_id: review-spirit3-anyuan-crossbow
+        canonical_entity_ids:
+          - spirit3-anyuan-crossbow
+      - local_entity_id: review-spirit3-anyuan-bolts
+        canonical_entity_ids:
+          - spirit3-anyuan-bolts
+      - local_entity_id: review-spirit3-cart-driver
+        canonical_entity_ids:
+          - spirit3-cart-driver
+      - local_entity_id: review-spirit3-anyuan-budget-petition
+        canonical_entity_ids:
+          - spirit3-anyuan-budget-petition

@@ -1,0 +1,18 @@
+id: yue-blood-tower-upper-room
+kind: location
+name: 古塔上层残室
+description: 石架上封存功法、阵图和一件旧护腕；侧面禁制中困着一具衣袍残骸。
+placement: yue-blood-ancient-tower
+facts:
+  - id: yue-blood-tower-upper-room-route-yue-blood-ancient-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-ancient-tower
+    description: 需先解除外门古禁并进入塔内，沿实际石阶到对应室内。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

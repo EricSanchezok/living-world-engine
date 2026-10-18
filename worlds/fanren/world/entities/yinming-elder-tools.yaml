@@ -1,0 +1,18 @@
+id: yinming-elder-tools
+kind: item
+name: 石衡的个人器具
+description: 记忆旧村规、核对库存与协调邻村。所需的有限工具，不包含无限兽晶。
+placement: yinming-elder
+facts:
+  - id: yinming-elder-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: spirit-tianling-capital
+kind: location
+name: 天灵城
+description: 建于擎天灵树上的主城，平台和桥路联结各处居所与市肆。
+placement: spirit-heaven-tree
+facts:
+  - id: spirit-tianling-capital-route-spirit-tianling-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianling-market
+    description: 来往人群交易、问路和核验通行文书的地方，贵重货物由各自持有人保管。
+    access:
+      kind: public
+  - id: spirit-tianling-capital-route-to-spirit3-ranking-island
+    predicate: route-to-spirit3-ranking-island
+    value:
+      kind: entity
+      entityId: spirit3-ranking-island
+    description: route-to-spirit3-ranking-island
+    access:
+      kind: private
+  - id: spirit-tianling-capital-route-conditions-spirit3-ranking-island
+    predicate: route-conditions-spirit3-ranking-island
+    value:
+      kind: text
+      value: 须有真实飞行手段往返高空浮岛，克服罡风且获入岛许可；普通步行不能到达。
+    description: 须有真实飞行手段往返高空浮岛，克服罡风且获入岛许可；普通步行不能到达。
+    access:
+      kind: private
+  - id: spirit-tianling-capital-route-to-spirit3-tianling-hall
+    predicate: route-to-spirit3-tianling-hall
+    value:
+      kind: entity
+      entityId: spirit3-tianling-hall
+    description: route-to-spirit3-tianling-hall
+    access:
+      kind: private
+  - id: spirit-tianling-capital-route-conditions-spirit3-tianling-hall
+    predicate: route-conditions-spirit3-tianling-hall
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

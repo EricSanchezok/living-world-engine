@@ -1,0 +1,22 @@
+id: ad-duty-fund
+kind: container
+name: 守院轮值预算
+description: 双方工钱按已履行时段结算，尚未提前支付的真实公库。
+placement: ad-seal-outer-post
+facts:
+  - id: ad-duty-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-three-progenitors
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 160
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

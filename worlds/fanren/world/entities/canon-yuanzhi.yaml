@@ -1,0 +1,238 @@
+id: canon-yuanzhi
+kind: person
+name: 元智
+description: 元智在此修学与处理日常职责，做决定先看自己掌握的消息。
+placement: dajin-leiyin-court
+facts:
+  - id: canon-yuanzhi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴初期
+    description: 元婴初期
+    access:
+      kind: agents
+      agentIds:
+        - canon-yuanzhi
+  - id: canon-yuanzhi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。
+    description: 明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yuanzhi
+  - id: canon-yuanzhi-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yuanzhi
+  - id: dajin-yuan-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-leiyin-sect
+    description: 佛宗修士的师承职责。
+    access:
+      kind: public
+  - id: dajin-yuan-junior
+    predicate: junior-fellow
+    value:
+      kind: entity
+      entityId: canon-yanzhu
+    description: 焰竹为同门师弟。
+    access:
+      kind: public
+meters:
+  - id: canon-yuanzhi-health
+    definition_id: health
+    current: 100
+  - id: canon-yuanzhi-mana
+    definition_id: mana
+    current: 600
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: canon-yuanzhi-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-yuanzhi-force
+    definition_id: force
+    value: 3
+  - id: canon-yuanzhi-craft
+    definition_id: craft
+    value: 2
+  - id: canon-yuanzhi-perception
+    definition_id: perception
+    value: 4
+  - id: canon-yuanzhi-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-yuanzhi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 元智在此修学与处理日常职责，做决定先看自己掌握的消息。
+      voice: 按自身经历交谈，重视代价、师承和权限。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 静修锻体，并审看师弟的修学进度。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 元智
+        description: 元智在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-dajin-leiyin-sect
+        name: 雷音宗
+        description: 四大佛宗之一，修法与职位须经历实际传授与修行。
+        status: observed
+      - id: known-dajin-leiyin-court
+        name: 雷音宗修行院
+        description: 雷音寺的一处修行院。
+        status: observed
+      - id: known-dajin-leiyin-library
+        name: 雷音功法阁
+        description: 保存锻体和佛门法术典籍，查阅与传授须按师承和许可。
+        status: observed
+      - id: known-canon-yanzhu
+        name: 焰竹
+        description: 焰竹在此修学与处理日常职责，做决定先看自己掌握的消息。
+        status: observed
+      - id: known-canon-yuanzhi-practice-tool
+        name: 修习用器
+        description: 个人练习器具，不能凭名称视为后期顶阶法宝。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人生活、修学和亲见的当前关系。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: knows-own-canon-yuanzhi-practice-tool
+        subjectId: known-canon-yuanzhi-practice-tool
+        predicate: owned-by
+        value:
+          kind: local_entity
+          localEntityId: self
+        description: 本人持有的个人修习器物。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-yuanzhi-cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 元婴初期
+        description: 元婴初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-yuanzhi-learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。
+        description: 明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-canon-yuanzhi-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 有修炼资格，根系细分未设定。
+        description: 有修炼资格，根系细分未设定。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-dajin-yuan-member
+        subjectId: self
+        predicate: member-of
+        value:
+          kind: local_entity
+          localEntityId: known-dajin-leiyin-sect
+        description: 佛宗修士的师承职责。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: knows-dajin-yuan-junior
+        subjectId: self
+        predicate: junior-fellow
+        value:
+          kind: local_entity
+          localEntityId: known-canon-yanzhu
+        description: 焰竹为同门师弟。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yuanzhi
+      - local_entity_id: known-dajin-leiyin-sect
+        canonical_entity_ids:
+          - dajin-leiyin-sect
+      - local_entity_id: known-dajin-leiyin-court
+        canonical_entity_ids:
+          - dajin-leiyin-court
+      - local_entity_id: known-dajin-leiyin-library
+        canonical_entity_ids:
+          - dajin-leiyin-library
+      - local_entity_id: known-canon-yanzhu
+        canonical_entity_ids:
+          - canon-yanzhu
+      - local_entity_id: known-canon-yuanzhi-practice-tool
+        canonical_entity_ids:
+          - canon-yuanzhi-practice-tool

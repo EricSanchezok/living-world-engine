@@ -1,0 +1,22 @@
+id: blood-lihuo-steward-review-stock
+kind: container
+name: 陆衡自用储备
+description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+placement: blood-lihuo-steward
+facts:
+  - id: blood-lihuo-steward-review-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

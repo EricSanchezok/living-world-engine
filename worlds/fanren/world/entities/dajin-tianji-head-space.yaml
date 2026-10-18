@@ -1,0 +1,26 @@
+id: dajin-tianji-head-space
+kind: location
+name: 天机总殿空间
+description: 十余里宽、数百丈高的游离空间；玉门、悬梯和碧殿分列其内，地面有楼阁。
+placement: human-realm
+facts:
+  - id: dajin-tianji-mobile-entrance
+    predicate: entrance-motion
+    value:
+      kind: text
+      value: 每数年会变换入口，具体下一次时刻未定；当前连接玉州僻巷，变更后须重查位置并改变连通状态。
+    description: 入口变换不使内部所有人同时获得外界新坐标。
+    access:
+      kind: public
+  - id: dajin-tianji-flight-limit
+    predicate: flight-restriction
+    value:
+      kind: text
+      value: 本地禁空通常使元婴以下不能离地三尺；有出殿者不受限的实例，实际有力抵抗者也有例外，不能推广到空间外。
+    description: 施法者仍须以实际能力或授权穿过本地禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

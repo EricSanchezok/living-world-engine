@@ -1,0 +1,18 @@
+id: kunwu-xumi-wall
+kind: item
+name: 须弥五行壁
+description: 须弥宗镇宗宝，能用于防护，当前没有借给毒圣门。
+placement: south-xumi-court
+facts:
+  - id: kunwu-xumi-wall-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-xumi-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

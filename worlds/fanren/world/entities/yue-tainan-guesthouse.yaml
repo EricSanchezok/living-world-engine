@@ -1,0 +1,35 @@
+id: yue-tainan-guesthouse
+kind: location
+name: 太南谷东侧客舍
+description: 谷内东侧的客舍，门外有一方供来客停步的石阶。
+placement: yue-tainan-valley
+facts:
+  - id: yue-tainan-guesthouse-state
+    predicate: occupancy
+    value:
+      kind: text
+      value: 屋内现无人居住，由唐清负责接待安排。
+    description: 屋内现无人居住，由唐清负责接待安排。
+    access:
+      kind: public
+  - id: yue-tainan-guesthouse-ward
+    predicate: entry-condition
+    value:
+      kind: text
+      value: 青光禁制会弹拒闯入；相配通行符贴上后可暂开孔，移符入内后孔自行弥合。
+    description: 青光禁制会弹拒闯入；相配通行符贴上后可暂开孔，移符入内后孔自行弥合。
+    access:
+      kind: discoverable
+      condition: 实际施展能看见该禁制的天眼术，或触探并验证门禁，再由持符人演示相配通行符。
+  - id: yue-tainan-guesthouse-route-yue-tainan-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-valley
+    description: 从客舍出入谷内同样需相配通行符或实际解除禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

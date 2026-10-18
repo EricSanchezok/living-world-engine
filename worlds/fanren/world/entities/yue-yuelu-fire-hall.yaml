@@ -1,0 +1,314 @@
+id: yue-yuelu-fire-hall
+kind: location
+name: 岳麓地火厅
+description: 三十六间独立地火室沿通道分列，领到相应牌钥才可占用。
+placement: yue-yuelu-hall
+facts:
+  - id: yue-yuelu-fire-hall-route-yue-yuelu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-hall
+    description: 按实际通道行走，内室使用仍须对应管理许可。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-booking
+    predicate: service-rule
+    value:
+      kind: text
+      value: 当前各室按使用日期登记，日租一低阶灵石，未占用期间不收使用费；额外耗材另核。入内闭关者的门牌不得转租他人。
+    description: 当前各室按使用日期登记，日租一低阶灵石，未占用期间不收使用费；额外耗材另核。入内闭关者的门牌不得转租他人。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-01
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-01
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-02
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-02
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-03
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-03
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-04
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-04
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-05
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-05
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-06
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-06
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-07
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-07
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-08
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-08
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-09
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-09
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-10
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-10
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-11
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-11
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-12
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-12
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-13
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-13
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-14
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-14
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-15
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-15
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-16
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-16
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-17
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-17
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-18
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-18
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-19
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-19
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-20
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-20
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-21
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-21
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-22
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-22
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-23
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-23
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-24
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-24
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-25
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-25
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-26
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-26
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-27
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-27
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-28
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-28
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-29
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-29
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-30
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-30
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-31
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-31
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-32
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-32
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-33
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-33
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-34
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-34
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-35
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-35
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-yuelu-fire-hall-route-yue-fire-room-36
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-fire-room-36
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

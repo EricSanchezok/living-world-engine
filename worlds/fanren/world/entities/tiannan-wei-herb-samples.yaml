@@ -1,0 +1,20 @@
+id: tiannan-wei-herb-samples
+kind: item
+name: 魏无涯待检毒草
+description: 四份独立封装的毒草样本，气味与毒性须实检；只供本人试药，售出需另行谈妥。
+placement: tiannan-wei-retreat
+facts:
+  - id: tiannan-wei-herb-samples-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wei-wuya
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 4
+ratings: []
+shared_activity_resources: []

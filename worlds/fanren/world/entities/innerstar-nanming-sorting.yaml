@@ -1,0 +1,26 @@
+id: innerstar-nanming-sorting
+kind: location
+name: 药铺分拣间
+description: 窄木架和干燥案台，药材与包纸放在各自匣内。
+placement: innerstar-nanming-herbshop
+facts:
+  - id: innerstar-nanming-sorting-route-innerstar-nanming-herbshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-herbshop
+    description: 柜侧小门可通，搬货和检查需实际走入。
+    access:
+      kind: public
+  - id: innerstar-nanming-sorting-managed-by
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: innerstar-nanming-fan
+    description: 樊若泉经营管理，检查货物先讲明来意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: innerstar-tea-ledger
+kind: container
+name: 清河经营款匣
+description: 清河日常收支公款。
+placement: innerstar-qinghe-teahouse
+facts:
+  - id: innerstar-tea-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-qinghe-teahouse
+    description: 经营公账，不能混作个人钱袋。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 60
+ratings: []
+shared_activity_resources: []

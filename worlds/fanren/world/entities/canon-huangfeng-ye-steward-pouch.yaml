@@ -1,0 +1,20 @@
+id: canon-huangfeng-ye-steward-pouch
+kind: item
+name: 叶管事的私用行囊
+description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+placement: canon-huangfeng-ye-steward
+facts:
+  - id: canon-huangfeng-ye-steward-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huangfeng-ye-steward
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+ratings: []
+shared_activity_resources: []

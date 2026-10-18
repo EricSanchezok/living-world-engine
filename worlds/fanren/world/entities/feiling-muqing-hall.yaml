@@ -1,0 +1,26 @@
+id: feiling-muqing-hall
+kind: location
+name: 木仙殿
+description: 木仙谷的青木殿堂，主座旁金花幽亮，廊外黑雾林拱卫。
+placement: feiling-muxian-valley
+facts:
+  - id: feiling-muqing-hall-route-feiling-muxian-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muxian-valley
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-muqing-hall-condition-feiling-muxian-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木青在金花座上接见下属与来客。
+    description: 木青在金花座上接见下属与来客。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: minghe-green-lake-fish
+kind: group
+name: 翠湖妖鱼群
+description: 九尾巨型妖鱼在深水活动，平时不浮出；水中自有食物，不能无偿转成旅人坐骑。
+placement: minghe-green-lake
+facts:
+  - id: minghe-green-lake-fish-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters:
+  - id: minghe-green-lake-fish-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 9
+ratings:
+  - id: minghe-green-lake-fish-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

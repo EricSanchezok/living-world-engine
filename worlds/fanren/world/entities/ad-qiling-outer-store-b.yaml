@@ -1,0 +1,18 @@
+id: ad-qiling-outer-store-b
+kind: location
+name: 泣灵外层西阁
+description: 另一小库，先前取走一阁物品不会复制另一阁物品。
+placement: ad-qiling-maze
+facts:
+  - id: ad-qiling-outer-store-b-route-to-ad-qiling-maze
+    predicate: route-to-ad-qiling-maze
+    value:
+      kind: entity
+      entityId: ad-qiling-maze
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

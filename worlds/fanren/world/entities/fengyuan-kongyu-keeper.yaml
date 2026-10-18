@@ -1,0 +1,163 @@
+id: fengyuan-kongyu-keeper
+kind: person
+name: 流阙
+description: 本期空鱼支群的圣痕保管者，既记得祖训，也要替眼前族人的生活拿主意。
+placement: fengyuan-shura-kongyu-village
+facts:
+  - id: fengyuan-kongyu-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: fengyuan-kongyu-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 空鱼空间小术、现用居住光幕维护与祖传祭法的一部分；修为不足以独自炼化山海珠。
+    description: 空鱼空间小术、现用居住光幕维护与祖传祭法的一部分；修为不足以独自炼化山海珠。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-kongyu-keeper-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-kongyu-keeper-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: fengyuan-kongyu-keeper-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: fengyuan-kongyu-keeper-force
+    definition_id: force
+    value: 6
+  - id: fengyuan-kongyu-keeper-craft
+    definition_id: craft
+    value: 4
+  - id: fengyuan-kongyu-keeper-perception
+    definition_id: perception
+    value: 6
+  - id: fengyuan-kongyu-keeper-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: fengyuan-kongyu-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 本期空鱼支群的圣痕保管者，既记得祖训，也要替眼前族人的生活拿主意。
+      voice: 请求别人帮助时先拿出具体能做的事，谈祖训时声音会压低。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 让修罗蛛接受以空间工艺代替部分索取的提议，同时保住族中圣物的秘密。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 流阙
+        description: 本期空鱼支群的圣痕保管者，既记得祖训，也要替眼前族人的生活拿主意。
+        status: observed
+      - id: location
+        name: 乾火池下空鱼聚落
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-keeper-private-stock
+        name: 流阙私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-crafter
+        name: 环汀
+        description: 当前已实际共事或往来的人，知道其公开分工，未自动知道其全部秘密。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-trial-box
+        name: 空鱼试作小匣
+        description: 环汀用已有旧匣修好的演示器，可容下三件杯碗大小死物，不装活人；每次存取耗操作者2法力。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-trade-letter
+        name: 空鱼交换呈书
+        description: 流阙提议按次维护城中三个旧小匣，换取一段不索族人血食的约定；没有已获同意，也不替所有未来族人许终身奴契。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-craft-stock
+        name: 空鱼修器公料
+        description: 可再修三个同规格小匣的材料预算，每件实耗两份料、三中阶石，工匠也须工作一日本地时长。
+        status: observed
+      - id: fengyuan-review-fengyuan-kongyu-ancestral-tablet
+        name: 空鱼圣物遗训简
+        description: 自己接手保管的祖训，掌握有限祭法而实力尚不足。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-shanhai-pearl
+        name: 山海珠
+        description: 祖训所述的圣物，据传在雪岛封藏，自己的圣痕在近距离才有感应；尚未亲眼见过珠体。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-old-box-1
+        name: 天蛛族旧小匣1
+        description: 上次获准查看过的一只旧匣，了解其规格，不能因此知道对方库中其他物品。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 空鱼空间小术、现用居住光幕维护与祖传祭法的一部分；修为不足以独自炼化山海珠。
+        description: 空鱼空间小术、现用居住光幕维护与祖传祭法的一部分；修为不足以独自炼化山海珠。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-kongyu-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-shura-kongyu-village
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-keeper-private-stock
+        canonical_entity_ids:
+          - fengyuan-kongyu-keeper-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-crafter
+        canonical_entity_ids:
+          - fengyuan-kongyu-crafter
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-trial-box
+        canonical_entity_ids:
+          - fengyuan-kongyu-trial-box
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-trade-letter
+        canonical_entity_ids:
+          - fengyuan-kongyu-trade-letter
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-craft-stock
+        canonical_entity_ids:
+          - fengyuan-kongyu-craft-stock
+      - local_entity_id: fengyuan-review-fengyuan-kongyu-ancestral-tablet
+        canonical_entity_ids:
+          - fengyuan-kongyu-ancestral-tablet
+      - local_entity_id: fengyuan-review-fengyuan-shura-shanhai-pearl
+        canonical_entity_ids:
+          - fengyuan-shura-shanhai-pearl
+      - local_entity_id: fengyuan-review-fengyuan-shura-old-box-1
+        canonical_entity_ids:
+          - fengyuan-shura-old-box-1

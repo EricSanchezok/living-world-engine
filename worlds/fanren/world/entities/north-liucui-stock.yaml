@@ -1,0 +1,22 @@
+id: north-liucui-stock
+kind: item
+name: 柳翠派当期公用物资
+description: 当前公用粮料与灵石，不是龙夫人的私人行囊。
+placement: north-liucui-seat
+facts:
+  - id: north-liucui-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-liucui-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 30
+  - definition_id: low-stone
+    amount: 80
+ratings: []
+shared_activity_resources: []

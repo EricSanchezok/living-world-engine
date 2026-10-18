@@ -1,0 +1,22 @@
+id: tianyuan-elder-yesui-personal-tools
+kind: container
+name: 夜穗的随身行囊
+description: 个人修行与出行材料，不是议事公库。
+placement: tianyuan-elder-yesui
+facts:
+  - id: tianyuan-elder-yesui-personal-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-elder-yesui
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

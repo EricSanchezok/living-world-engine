@@ -1,0 +1,20 @@
+id: seas-dragon-memory-2
+kind: container
+name: 渡劫真麟留影2
+description: 记录不同真龙飞升尝试的消耗载体，含成功与失败经验；每完整观一次减少一次，零次毁去。所得体验不使外族立刻掌握相同肉身。
+placement: seas-golden-boat
+facts:
+  - id: seas-dragon-memory-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-golden-dragon-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: dragon-memory-use
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: tianyuan-elder-wenshu-personal-tools
+kind: container
+name: 闻枢的随身行囊
+description: 个人修行与出行材料，不是议事公库。
+placement: tianyuan-elder-wenshu
+facts:
+  - id: tianyuan-elder-wenshu-personal-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-elder-wenshu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

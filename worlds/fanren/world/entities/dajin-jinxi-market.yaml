@@ -1,0 +1,42 @@
+id: dajin-jinxi-market
+kind: location
+name: 晋西坊市
+description: 城西一段被隐匿法阵遮掩的商街，街内各家商号分立经营。
+placement: dajin-jinjing
+facts:
+  - id: dajin-jinxi-market-route-dajin-jinjing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjing
+    description: 坊市有隐匿禁制，不知入口的凡人不会仅凭路过自动入内。
+    access:
+      kind: public
+  - id: dajin-jinxi-market-route-dajin-baoguang-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-baoguang-hall
+    description: 商街通殿门，但参加拍卖须实际资格与开场。
+    access:
+      kind: public
+  - id: dajin-jinxi-market-route-dajin-tianji-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-shop
+    description: 商楼开门接待，贵客资格仍需核实。
+    access:
+      kind: public
+  - id: dajin-jinxi-market-route-dajin-shuling-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-shuling-shop
+    description: 正常商街往来，不含尚未批准的传送旁路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: seas-fruit-notes
+kind: item
+name: 木循物候笔记
+description: 本人多年记录，只愿交换其中遮光与风向部分，不包括族中果树核心培育法。
+placement: seas-fruit-custodian
+facts:
+  - id: seas-fruit-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fruit-custodian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

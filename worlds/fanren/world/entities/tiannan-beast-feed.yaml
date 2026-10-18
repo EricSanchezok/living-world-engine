@@ -1,0 +1,20 @@
+id: tiannan-beast-feed
+kind: item
+name: 石璟的兽粮
+description: 幼兽当前可食干粮，按喂食实际扣减。
+placement: tiannan-yuling-court
+facts:
+  - id: tiannan-beast-feed-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-shi-jing
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

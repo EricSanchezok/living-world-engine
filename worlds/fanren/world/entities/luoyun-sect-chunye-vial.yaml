@@ -1,0 +1,20 @@
+id: luoyun-sect-chunye-vial
+kind: item
+name: 旧存醇液瓶
+description: 本派上一期留存四滴；同一滴被取走或炼制后不再在瓶中。
+placement: tiannan-luoyun-mountain
+facts:
+  - id: luoyun-sect-chunye-vial-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: luoyun-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: tiannan-chunye-drop
+    amount: 4
+ratings: []
+shared_activity_resources: []

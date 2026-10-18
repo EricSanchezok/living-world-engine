@@ -1,0 +1,142 @@
+id: kunwu-shadow-snakes
+kind: animal-group
+name: 乌影蛇群
+description: 依阴影潜伏的毒蛇，能喷暗影毒砂；没有无限重生机制。
+placement: kunwu-tower-six
+facts:
+  - id: kunwu-shadow-snakes-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-shadow-snakes
+  - id: kunwu-shadow-snakes-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 自身毒性、藏身与近距袭击。
+    description: 自身毒性、藏身与近距袭击。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-shadow-snakes
+  - id: kunwu-shadow-snakes-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 兽类血脉与本能，不是修士双灵根。
+    description: 兽类血脉与本能，不是修士双灵根。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-shadow-snakes
+  - id: kunwu-shadow-snakes-living-members
+    predicate: living-members
+    value:
+      kind: number
+      value: 36
+    description: living-members
+    access:
+      kind: private
+meters:
+  - id: kunwu-shadow-snakes-health
+    definition_id: health
+    current: 100
+  - id: kunwu-shadow-snakes-mana
+    definition_id: mana
+    current: 220
+quantities:
+  - definition_id: grain
+    amount: 8
+ratings:
+  - id: kunwu-shadow-snakes-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: kunwu-shadow-snakes-force
+    definition_id: force
+    value: 2
+  - id: kunwu-shadow-snakes-craft
+    definition_id: craft
+    value: 4
+  - id: kunwu-shadow-snakes-perception
+    definition_id: perception
+    value: 1
+  - id: kunwu-shadow-snakes-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: kunwu-shadow-snakes
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 依阴影潜伏的毒蛇，能喷暗影毒砂；没有无限重生机制。
+      voice: 以躯体与气味反应，不说人类对白。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 维持栖息、觅食与避险，对逼近的威胁作有界反应。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 乌影蛇群
+        description: 依阴影潜伏的毒蛇，能喷暗影毒砂；没有无限重生机制。
+        status: observed
+      - id: location
+        name: 镇魔塔六层
+        description: 自己当前所在之处。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 自身毒性、藏身与近距袭击。
+        description: 自身毒性、藏身与近距袭击。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 兽类血脉与本能，不是修士双灵根。
+        description: 兽类血脉与本能，不是修士双灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - kunwu-shadow-snakes
+      - local_entity_id: location
+        canonical_entity_ids:
+          - kunwu-tower-six

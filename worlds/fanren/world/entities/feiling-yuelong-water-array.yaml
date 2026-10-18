@@ -1,0 +1,29 @@
+id: feiling-yuelong-water-array
+kind: item
+name: 澄水承力盘
+description: 越隆自制的水属承力盘，盘内水纹随灵流转动，专用于他熟悉的小炉合炼；盘纹裂损时须停炉修复。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-water-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: 越隆个人所有。
+    access:
+      kind: private
+  - id: feiling-yuelong-water-array-operating-boundary
+    predicate: operating-boundary
+    value:
+      kind: text
+      value: 水属小炉每次供入2高阶灵石，计入作业册总耗；由越隆引导并持续供法，失稳须中止，不能自行产晶、改引金木或用水盘替代金风柱。
+    description: 专用水属小炉，须真实供石、施法和维护。
+    access:
+      kind: private
+meters:
+  - id: feiling-yuelong-water-array-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

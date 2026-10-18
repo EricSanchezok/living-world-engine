@@ -1,0 +1,42 @@
+id: thunder-hengshui-city
+kind: location
+name: 横水城
+description: 与金甲城邻近的重要城邑，水陆商路在此交汇。
+placement: thunder-tianyun
+facts:
+  - id: thunder-hengshui-city-route-thunder-jinjia-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jinjia-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-hengshui-city-condition-thunder-jinjia-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-hengshui-city-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-hengshui-city-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

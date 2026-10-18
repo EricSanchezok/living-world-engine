@@ -1,0 +1,34 @@
+id: blood-bone-butterfly-swarm
+kind: creature-group
+name: 血狱吞骨蝶群
+description: 栖在血狱的一群危险骨蝶，进入者会惊动，数量非无限。
+placement: blood-blood-prison
+facts:
+  - id: blood-bone-butterfly-swarm-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 12000
+    description: individual-count
+    access:
+      kind: private
+  - id: blood-bone-butterfly-swarm-distinct-from-blood-skulls
+    predicate: distinct-from-blood-skulls
+    value:
+      kind: entity
+      entityId: blood-prison-skeletal-swarm
+    description: distinct-from-blood-skulls
+    access:
+      kind: private
+  - id: blood-bone-butterfly-swarm-actual-attacks
+    predicate: actual-attacks
+    value:
+      kind: text
+      value: 吞骨蝶为白骨怪蝶，吐滚滚绿焰并分食目标；同区血色飞颅则喷血箭，不能互相复制两群数量。
+    description: 吞骨蝶为白骨怪蝶，吐滚滚绿焰并分食目标；同区血色飞颅则喷血箭，不能互相复制两群数量。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

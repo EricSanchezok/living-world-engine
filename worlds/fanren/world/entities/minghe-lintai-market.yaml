@@ -1,0 +1,90 @@
+id: minghe-lintai-market
+kind: location
+name: 翎苔集
+description: 外来商客可按许可停留的边地集镇，虫粮、药材与器具交易常见。
+placement: minghe-fuyou-territory
+facts:
+  - id: minghe-lintai-market-route-minghe-fuyou-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-fuyou-territory
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-lintai-market-condition-minghe-fuyou-territory
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外来商客可按许可停留的边地集镇，虫粮、药材与器具交易常见。
+    description: 外来商客可按许可停留的边地集镇，虫粮、药材与器具交易常见。
+    access:
+      kind: public
+  - id: minghe-lintai-market-route-minghe-inspection-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inspection-court
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-lintai-market-condition-minghe-inspection-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 办理圣地外务、检查许可和运送物资的院落。
+    description: 办理圣地外务、检查许可和运送物资的院落。
+    access:
+      kind: public
+  - id: minghe-lintai-market-route-minghe-xuling-insectarium
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-xuling-insectarium
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-lintai-market-condition-minghe-xuling-insectarium
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封闭育虫院与炼丹静室，珍虫和饲料分开保存。
+    description: 封闭育虫院与炼丹静室，珍虫和饲料分开保存。
+    access:
+      kind: public
+  - id: minghe-lintai-market-route-minghe-medicine-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-medicine-garden
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-lintai-market-condition-minghe-medicine-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 为普通虫粮和药用植物而设的小片圃地。
+    description: 为普通虫粮和药用植物而设的小片圃地。
+    access:
+      kind: public
+  - id: minghe-lintai-market-route-minghe-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-workshop
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-lintai-market-condition-minghe-workshop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 能修理低阶封盒与灵灯的小棚，老板按工序报价。
+    description: 能修理低阶封盒与灵灯的小棚，老板按工序报价。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

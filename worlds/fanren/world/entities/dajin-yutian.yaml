@@ -1,0 +1,34 @@
+id: dajin-yutian
+kind: location
+name: 玉田山
+description: 太昌城外十余峰相连的灵山，四季温和，灵植和泉脉有在地生态条件。
+placement: dajin-nanjun
+facts:
+  - id: dajin-yutian-route-dajin-taichang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-taichang
+    description: 从城外进山，登山与负重耗时须按实际能力处理。
+    access:
+      kind: public
+  - id: dajin-yutian-route-dajin-huanyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huanyun
+    description: 山道通往幻云峰。
+    access:
+      kind: public
+  - id: dajin-yutian-route-dajin-huangqing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing
+    description: 玉田山不同峰间须沿路或使用确有能力的飞行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

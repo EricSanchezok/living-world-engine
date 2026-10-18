@@ -1,0 +1,174 @@
+id: thunder-cave-registrar
+kind: person
+name: 澄牍
+description: 八云山租契登记者，面对高阶租客也会把范围逐项念完。
+placement: thunder-baying-mountains
+facts:
+  - id: thunder-cave-registrar-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - thunder-cave-registrar
+  - id: thunder-cave-registrar-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹修行、地契核验和洞府禁制交接。
+    description: 结丹修行、地契核验和洞府禁制交接。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-cave-registrar
+  - id: thunder-cave-registrar-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    description: 依本族法体与已学功法修行，具体已掌握手段见自身修习记录。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-cave-registrar
+  - id: thunder-cave-registrar-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: affiliation
+    access:
+      kind: public
+meters:
+  - id: thunder-cave-registrar-health
+    definition_id: health
+    current: 100
+  - id: thunder-cave-registrar-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: thunder-cave-registrar-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: thunder-cave-registrar-force
+    definition_id: force
+    value: 3
+  - id: thunder-cave-registrar-craft
+    definition_id: craft
+    value: 3
+  - id: thunder-cave-registrar-perception
+    definition_id: perception
+    value: 3
+  - id: thunder-cave-registrar-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: thunder-cave-registrar
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 八云山租契登记者，面对高阶租客也会把范围逐项念完。
+      voice: 念租约时一字一顿，闲聊则爱谈哪座山看云最好。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 促成松窗洞租约，同时保留公用水道检修权。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 澄牍
+        description: 八云山租契登记者，面对高阶租客也会把范围逐项念完。
+        status: observed
+      - id: location
+        name: 八云山
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-thunder-tianyun-alliance
+        name: 天云十三族联盟
+        description: 自己所属的族群或公务机构。
+        status: observed
+      - id: known-thunder-cave-registrar-personal-kit
+        name: 澄牍的私用行囊
+        description: 私人修炼和生活用品，机构资源另行保管。
+        status: observed
+      - id: known-thunder-independent-scholar
+        name: 温砚
+        description: 正在考虑松窗洞的来客，尚未收款。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹修行、地契核验和洞府禁制交接。
+        description: 结丹修行、地契核验和洞府禁制交接。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        description: 自己依本族法体和所学功法修行，修为与各项技艺分别积累。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        description: 按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-cave-registrar
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-baying-mountains
+      - local_entity_id: known-thunder-tianyun-alliance
+        canonical_entity_ids:
+          - thunder-tianyun-alliance
+      - local_entity_id: known-thunder-cave-registrar-personal-kit
+        canonical_entity_ids:
+          - thunder-cave-registrar-personal-kit
+      - local_entity_id: known-thunder-independent-scholar
+        canonical_entity_ids:
+          - thunder-independent-scholar

@@ -1,0 +1,26 @@
+id: dajin-kuzhu-island
+kind: location
+name: 苦竹岛
+description: 近海迷雾环绕的林木岛屿，古阵遮掩内部景物，远观不能直接辨出隐蔽山居。
+placement: human-realm
+facts:
+  - id: dajin-kuzhu-island-route-dajin-kuzhu-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-mist
+    description: 迷雾与古阵阻隔，须获得通行指引或实际破除阻碍。
+    access:
+      kind: public
+  - id: dajin-kuzhu-island-route-dajin-kuzhu-yingfeng-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-yingfeng-hall
+    description: 穿过岛内山林登峰，入殿另须主人许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

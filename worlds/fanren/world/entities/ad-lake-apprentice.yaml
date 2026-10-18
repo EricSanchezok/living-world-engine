@@ -1,0 +1,181 @@
+id: ad-lake-apprentice
+kind: person
+name: 金穗
+description: 成年元婴种植伙伴，自有工钱并记录每次用血，想学独立培育。
+placement: ad-lanpu-lake
+facts:
+  - id: ad-lake-apprentice-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - ad-lake-apprentice
+  - id: ad-lake-apprentice-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴魔法、田圃记录与基础培育；尚未独立种出成熟血牙米。
+    description: 元婴魔法、田圃记录与基础培育；尚未独立种出成熟血牙米。
+    access:
+      kind: agents
+      agentIds:
+        - ad-lake-apprentice
+  - id: ad-lake-apprentice-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-lake-apprentice
+meters:
+  - id: ad-lake-apprentice-health
+    definition_id: health
+    current: 100
+  - id: ad-lake-apprentice-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: ad-lake-apprentice-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: ad-lake-apprentice-force
+    definition_id: force
+    value: 4
+  - id: ad-lake-apprentice-craft
+    definition_id: craft
+    value: 4
+  - id: ad-lake-apprentice-perception
+    definition_id: perception
+    value: 4
+  - id: ad-lake-apprentice-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: ad-lake-apprentice
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 成年元婴种植伙伴，自有工钱并记录每次用血，想学独立培育。
+      voice: 谈试验时语速快，涉及自己的账会逐笔确认；能直接说不愿替别人白做。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与沈黍讨论自己可留一份试种地，愿承担一部分实际成本。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 金穗
+        description: 成年元婴种植伙伴，自有工钱并记录每次用血，想学独立培育。
+        status: observed
+      - id: location
+        name: 蓝瀑湖
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-lake-apprentice-private-stock
+        name: 金穗的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-lake-grower
+        name: 沈黍
+        description: 长期有偿合作，一人出地与种源，一人出劳动并学培育。
+        status: observed
+      - id: known-ad-garden-wage
+        name: 金穗已收工钱
+        description: 本人已挣得且可独立花用的魔石，不是沈黍家产。
+        status: observed
+      - id: known-ad-test-plot-proposal
+        name: 金穗试种约稿
+        description: 请求分出一株苗与四份兽血给自己的试种格，愿付24魔石并自行承担养护；双方尚未同意。
+        status: observed
+      - id: known-ad-blood-feed
+        name: 田用异兽血封罐
+        description: 现存12份是对方财产，需要谈妥才能移给自己。
+        status: observed
+      - id: known-ad-rice-seedling-a
+        name: 血牙米甲苗
+        description: 田里两株未熟苗之一；试种转让尚未谈妥。
+        status: observed
+      - id: known-ad-rice-seedling-b
+        name: 血牙米乙苗
+        description: 田里两株未熟苗之一；试种转让尚未谈妥。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴魔法、田圃记录与基础培育；尚未独立种出成熟血牙米。
+        description: 元婴魔法、田圃记录与基础培育；尚未独立种出成熟血牙米。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-lake-apprentice
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-lanpu-lake
+      - local_entity_id: known-ad-lake-apprentice-private-stock
+        canonical_entity_ids:
+          - ad-lake-apprentice-private-stock
+      - local_entity_id: known-ad-lake-grower
+        canonical_entity_ids:
+          - ad-lake-grower
+      - local_entity_id: known-ad-garden-wage
+        canonical_entity_ids:
+          - ad-garden-wage
+      - local_entity_id: known-ad-test-plot-proposal
+        canonical_entity_ids:
+          - ad-test-plot-proposal
+      - local_entity_id: known-ad-blood-feed
+        canonical_entity_ids:
+          - ad-blood-feed
+      - local_entity_id: known-ad-rice-seedling-a
+        canonical_entity_ids:
+          - ad-rice-seedling-a
+      - local_entity_id: known-ad-rice-seedling-b
+        canonical_entity_ids:
+          - ad-rice-seedling-b

@@ -1,0 +1,20 @@
+id: root-library-income
+kind: container
+name: 天书阁外堂本期收入
+description: 已分账的有限储备，支出后须减少余额。
+placement: root-tianti-shuge
+facts:
+  - id: root-library-income-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-library-office
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 100
+ratings: []
+shared_activity_resources: []

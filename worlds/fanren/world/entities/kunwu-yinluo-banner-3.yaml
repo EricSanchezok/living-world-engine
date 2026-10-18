@@ -1,0 +1,42 @@
+id: kunwu-yinluo-banner-3
+kind: item
+name: 阴罗幡3
+description: 本宗十八幡之一，借出、损毁、炼化和归还须改变这一件物；幽魂受幡法约束，不能任意复制无数魔兵。
+placement: canon-yinluo-xiao
+facts:
+  - id: kunwu-yinluo-banner-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: owned-by
+    access:
+      kind: private
+  - id: kunwu-yinluo-banner-3-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-yinluo-xiao
+    description: custodian
+    access:
+      kind: private
+  - id: kunwu-yinluo-banner-3-bound-spirits
+    predicate: bound-spirits
+    value:
+      kind: number
+      value: 80
+    description: bound-spirits
+    access:
+      kind: private
+  - id: kunwu-yinluo-banner-3-reconstruction
+    predicate: reconstruction
+    value:
+      kind: text
+      value: 重炼须宗门授权、等价魂材与法器材料、工时及实际法力，不因原幡毁掉便刷新。
+    description: 重炼须宗门授权、等价魂材与法器材料、工时及实际法力，不因原幡毁掉便刷新。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

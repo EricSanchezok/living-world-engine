@@ -1,0 +1,26 @@
+id: tiannan-gujian-mountain
+kind: location
+name: 古剑门主脉
+description: 剑修占据的主山脉，练剑崖边常有金石声，门内收藏与外院通行分开。
+placement: tiannan-yunmeng-mountains
+facts:
+  - id: tiannan-gujian-mountain-route-tiannan-yunmeng-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-yunmeng-mountains
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-gujian-mountain-travel-tiannan-yunmeng-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

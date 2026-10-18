@@ -1,0 +1,18 @@
+id: global-true-toad-twin-peaks
+kind: location
+name: 冰峰与紫林双峰
+description: 两座相距十余里的相似山峰，一覆冰雪、一生紫叶树。
+placement: global-true-toad-lakes
+facts:
+  - id: global-true-toad-twin-peaks-route-global-true-toad-lakes
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-true-toad-lakes
+    description: 沿湿林湖岸行走或飞行，实际需应对雾、水与兽类。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

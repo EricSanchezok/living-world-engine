@@ -1,0 +1,35 @@
+id: blood-witch-refuge
+kind: location
+name: 巫灵三圣修行地
+description: 三位巫道同修落脚的山中修行地。共同研读残碑的地方与各自调息的静室分开，同住使商议方便，却不能让三人的意见自动一致。
+placement: blood-qiyun-mountains
+facts:
+  - id: blood-witch-refuge-route-blood-qiyun-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qiyun-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-witch-refuge-condition-blood-qiyun-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-witch-refuge-root-detail-wuling-arts
+    predicate: root-detail-wuling-arts
+    value:
+      kind: text
+      value: 三圣的鬼头牌、青罡风、幽冥水和骨剑各分主体，透换进入目标物有耗损条件；兽像不另成无限坐骑。
+    description: 三圣的鬼头牌、青罡风、幽冥水和骨剑各分主体，透换进入目标物有耗损条件；兽像不另成无限坐骑。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

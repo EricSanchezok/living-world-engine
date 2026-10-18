@@ -1,0 +1,26 @@
+id: thunder-greenlight-array
+kind: location
+name: 绿光旧海外阵室
+description: 旧阵通往火瑚群岛的远端联系已断，不能直接投入灵石便通行。
+placement: thunder-greenlight-city
+facts:
+  - id: thunder-greenlight-array-route-thunder-greenlight-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-array-condition-thunder-greenlight-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧阵通往火瑚群岛的远端联系已断，不能直接投入灵石便通行。
+    description: 旧阵通往火瑚群岛的远端联系已断，不能直接投入灵石便通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

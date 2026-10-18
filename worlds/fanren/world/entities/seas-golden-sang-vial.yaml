@@ -1,0 +1,18 @@
+id: seas-golden-sang-vial
+kind: item
+name: 金长老金桑液
+description: 一瓶万年金桑液，具体炼丹用途需要对应配方与其他材料，不保证渡劫。
+placement: seas-golden-boat
+facts:
+  - id: seas-golden-sang-vial-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-golden-dragon-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

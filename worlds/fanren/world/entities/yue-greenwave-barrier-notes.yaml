@@ -1,0 +1,26 @@
+id: yue-greenwave-barrier-notes
+kind: item
+name: 小禁制笔记
+description: 记录主人所用门禁维护工序，材料与施术人需要到场。
+placement: yue-greenwave-library
+facts:
+  - id: yue-greenwave-barrier-notes-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-li-huayuan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-greenwave-barrier-notes-seal
+    predicate: access-condition
+    value:
+      kind: text
+      value: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    description: 册页受单独封护，仅李化元或李夫人知道解封手法；主人可实际解封后交给获准者阅读。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

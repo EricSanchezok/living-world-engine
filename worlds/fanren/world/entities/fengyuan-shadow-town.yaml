@@ -1,0 +1,42 @@
+id: fengyuan-shadow-town
+kind: location
+name: 曲照集
+description: 影族交游与交换器物的聚落，路面设置不同明暗的标记。
+placement: fengyuan-shadow-domain
+facts:
+  - id: fengyuan-shadow-town-route-fengyuan-fuli-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuli-marsh
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shadow-town-condition-fengyuan-fuli-marsh
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 影族交游与交换器物的聚落，路面设置不同明暗的标记。
+    description: 影族交游与交换器物的聚落，路面设置不同明暗的标记。
+    access:
+      kind: public
+  - id: fengyuan-shadow-town-route-fengyuan-shadow-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shadow-town-condition-fengyuan-shadow-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 高阶影族独处的洞窟，借助光影遮蔽出入口。
+    description: 高阶影族独处的洞窟，借助光影遮蔽出入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

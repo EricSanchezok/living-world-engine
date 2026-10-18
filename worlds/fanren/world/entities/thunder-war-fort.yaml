@@ -1,0 +1,42 @@
+id: thunder-war-fort
+kind: location
+name: 通灵战堡
+description: 万古的大型堡垒设施，内殿需获得接见，库物不对路人开放。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-war-fort-route-thunder-tianxu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianxu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-war-fort-condition-thunder-tianxu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古的大型堡垒设施，内殿需获得接见，库物不对路人开放。
+    description: 万古的大型堡垒设施，内殿需获得接见，库物不对路人开放。
+    access:
+      kind: public
+  - id: thunder-war-fort-route-thunder-tongling-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tongling-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-war-fort-condition-thunder-tongling-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古长老议事与研究的厅堂，来客只能得知被告知的部分。
+    description: 万古长老议事与研究的厅堂，来客只能得知被告知的部分。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

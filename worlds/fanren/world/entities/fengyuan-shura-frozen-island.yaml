@@ -1,0 +1,42 @@
+id: fengyuan-shura-frozen-island
+kind: location
+name: 修罗雪岛
+description: 广阔雪岛上几座山峰围住谷地，越近深谷寒气越重，表面的厚雪会掩盖裂隙。
+placement: fengyuan-shura-island-sea
+facts:
+  - id: fengyuan-shura-frozen-island-route-to-fengyuan-shura-island-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-island-sea
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-frozen-island-route-conditions-fengyuan-shura-island-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿可辨水道或空中绕开残禁到雪岛，普通修士不能以古禁已残为由无视风险。
+    description: 沿可辨水道或空中绕开残禁到雪岛，普通修士不能以古禁已残为由无视风险。
+    access:
+      kind: public
+  - id: fengyuan-shura-frozen-island-route-to-fengyuan-shura-cold-pool
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-cold-pool
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-frozen-island-route-conditions-fengyuan-shura-cold-pool
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从山谷上口到封藏地须抵御寒气；进入深潭还要真正破开冰封和更强护持。
+    description: 从山谷上口到封藏地须抵御寒气；进入深潭还要真正破开冰封和更强护持。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

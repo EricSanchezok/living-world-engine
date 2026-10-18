@@ -1,0 +1,27 @@
+id: spirit-return-slip
+kind: item
+name: 行旅回执
+description: 行旅回执，纸面或封装仍保持交接时的样子。
+placement: spirit-tianyuan-factor
+facts:
+  - id: spirit-return-slip-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-factor
+    description: 归卢惟所有。
+    access:
+      kind: private
+  - id: spirit-return-slip-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 卢惟请石穗在收信后留下回执，供自己向杜观交差。
+    description: 卢惟请石穗在收信后留下回执，供自己向杜观交差。
+    access:
+      kind: discoverable
+      condition: 获得持有人许可后实际查看；封缄内容须拆封或由已读者主动告知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

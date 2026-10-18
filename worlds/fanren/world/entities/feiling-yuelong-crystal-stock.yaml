@@ -1,0 +1,24 @@
+id: feiling-yuelong-crystal-stock
+kind: container
+name: 三属极元晶匣
+description: 三块不同属性的晶砖分别封匣，不能把三者合并记作普通灵石。
+placement: feiling-yuelong-retreat
+facts:
+  - id: feiling-yuelong-crystal-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-jiyuan-water
+    amount: 1
+  - definition_id: feiling-jiyuan-fire
+    amount: 1
+  - definition_id: feiling-jiyuan-earth
+    amount: 1
+ratings: []
+shared_activity_resources: []

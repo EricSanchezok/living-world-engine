@@ -1,0 +1,155 @@
+id: tianyuan-duel-arbiter
+kind: person
+name: 荆砺
+description: 负责本期比斗登记和监督的炼虚修士，重视双方真实准备程度。
+placement: tianyuan-guangwu-hall
+facts:
+  - id: tianyuan-duel-arbiter-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: tianyuan-duel-arbiter-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护体与遁术、广武现阵操作、观察肢体与灵压变化；救人仍需距离和出手时间。
+    description: 炼虚护体与遁术、广武现阵操作、观察肢体与灵压变化；救人仍需距离和出手时间。
+    access:
+      kind: private
+  - id: tianyuan-duel-arbiter-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金土水三属性灵根，已有检测。
+    description: 金土水三属性灵根，已有检测。
+    access:
+      kind: discoverable
+      condition: 经本人同意并实际使用合适检测手段，或获得可信自述。
+meters:
+  - id: tianyuan-duel-arbiter-health
+    definition_id: health
+    current: 100
+  - id: tianyuan-duel-arbiter-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: tianyuan-duel-arbiter-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: tianyuan-duel-arbiter-force
+    definition_id: force
+    value: 6
+  - id: tianyuan-duel-arbiter-craft
+    definition_id: craft
+    value: 5
+  - id: tianyuan-duel-arbiter-perception
+    definition_id: perception
+    value: 6
+  - id: tianyuan-duel-arbiter-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: tianyuan-duel-arbiter
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 负责本期比斗登记和监督的炼虚修士，重视双方真实准备程度。
+      voice: 先请双方自己复述规则；遇到逞强者会问清是否理解认输后果，语气干脆。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把两种练习方案写清楚，等当事人选择隔阵对照演示还是正式比斗。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 荆砺
+        description: 负责本期比斗登记和监督的炼虚修士，重视双方真实准备程度。
+        status: observed
+      - id: location
+        name: 广武殿
+        description: 当前生活或办事之地，今夜已入夜。
+        status: observed
+      - id: review-tianyuan-duel-arbiter-private-stock
+        name: 荆砺私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-tianyuan-practice-options
+        name: 广武本期试练选项
+        description: 自己准备的候场说明，尚未有人接受。
+        status: observed
+      - id: review-tianyuan-practice-seal
+        name: 广武监督阵符
+        description: 本人获授权保管的阵符。
+        status: observed
+      - id: review-tianyuan-practice-stock
+        name: 广武本期试练用石
+        description: 本期公库，只有登记后的场次才能支用。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护体与遁术、广武现阵操作、观察肢体与灵压变化；救人仍需距离和出手时间。
+        description: 炼虚护体与遁术、广武现阵操作、观察肢体与灵压变化；救人仍需距离和出手时间。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root
+        subjectId: self
+        predicate: known-root
+        value:
+          kind: text
+          value: 金土水三属性灵根，已有检测。
+        description: 本人此前检测与修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - tianyuan-duel-arbiter
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tianyuan-guangwu-hall
+      - local_entity_id: review-tianyuan-duel-arbiter-private-stock
+        canonical_entity_ids:
+          - tianyuan-duel-arbiter-private-stock
+      - local_entity_id: review-tianyuan-practice-options
+        canonical_entity_ids:
+          - tianyuan-practice-options
+      - local_entity_id: review-tianyuan-practice-seal
+        canonical_entity_ids:
+          - tianyuan-practice-seal
+      - local_entity_id: review-tianyuan-practice-stock
+        canonical_entity_ids:
+          - tianyuan-practice-stock

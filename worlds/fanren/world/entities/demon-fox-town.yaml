@@ -1,0 +1,90 @@
+id: demon-fox-town
+kind: location
+name: 溪照集
+description: 多支妖狐聚居的地域，商旅在经许可的集市落脚。城门或码头按当日记录核验来客。
+placement: demon-fox-territory
+facts:
+  - id: demon-fox-town-route-demon-fox-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-fox-court
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-town-condition-demon-fox-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-fox-town-route-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-town-condition-spirit-demon-ward-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    description: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    access:
+      kind: public
+  - id: demon-fox-town-route-demon-tianhu-ridge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-tianhu-ridge
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-town-condition-demon-tianhu-ridge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 妖狐势力的重要山岭，内山有护持禁制。
+    description: 妖狐势力的重要山岭，内山有护持禁制。
+    access:
+      kind: public
+  - id: demon-fox-town-route-demon-nine-immortal-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-town-condition-demon-nine-immortal-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 九座灵峰横在妖狐之地与玄武境之间，两族共同守护；寻药和开采均须获得管理者许可。
+    description: 九座灵峰横在妖狐之地与玄武境之间，两族共同守护；寻药和开采均须获得管理者许可。
+    access:
+      kind: public
+  - id: demon-fox-town-route-demon-sunset-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-sunset-city
+    description: route-to
+    access:
+      kind: public
+  - id: demon-fox-town-condition-demon-sunset-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 妖族侧的边境城池，与人族同名城隔着广大边界地带。
+    description: 妖族侧的边境城池，与人族同名城隔着广大边界地带。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

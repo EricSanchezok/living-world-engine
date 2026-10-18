@@ -1,0 +1,26 @@
+id: guanghan-steppe-hill
+kind: location
+name: 青色孤山
+description: 灵气较浓的小山，山腰有狼兽栖息的天然洞穴。
+placement: guanghan-mainland-steppe
+facts:
+  - id: guanghan-steppe-hill-route-guanghan-mainland-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mainland-steppe
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-steppe-hill-condition-guanghan-mainland-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

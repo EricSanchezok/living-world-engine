@@ -1,0 +1,42 @@
+id: feiling-black-desert
+kind: location
+name: 门后黑地
+description: 灰白雾海压着寸草不生的黑地；狭窄空隙里邪风回响，远处才是向下的地渊巨口。
+placement: feiling-territory
+facts:
+  - id: feiling-black-desert-route-to-feiling-silver-door
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-silver-door
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-black-desert-route-conditions-feiling-silver-door
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 门获准开启后才能通过；已关闭时须再获许可或实际攻破禁制。
+    description: 门获准开启后才能通过；已关闭时须再获许可或实际攻破禁制。
+    access:
+      kind: private
+  - id: feiling-black-desert-route-to-feiling-abyss-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-gate
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-black-desert-route-conditions-feiling-abyss-gate
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需跨越万里黑地与邪风雾海，实际耗时随修为、交通和避险而变，不可一步跨越。
+    description: 需跨越万里黑地与邪风雾海，实际耗时随修为、交通和避险而变，不可一步跨越。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

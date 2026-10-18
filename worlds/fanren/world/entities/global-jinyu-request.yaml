@@ -1,0 +1,26 @@
+id: global-jinyu-request
+kind: item
+name: 访潭申请
+description: 由董箐代询一次浸潭条件的信札，尚无批准印。
+placement: global-jinyu-court
+facts:
+  - id: global-jinyu-request-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-material-dealer
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-jinyu-request-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。
+    description: 申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: global-qilin-doublepupil-rat
+kind: creature
+name: 兽栏双瞳鼠
+description: 一只褐毛双瞳鼠，待在带扣的专用笼具中。
+placement: yue-qilin-beast-pens
+facts:
+  - id: global-qilin-doublepupil-rat-ability
+    predicate: species-ability
+    value:
+      kind: text
+      value: 可察雾中灵气并寻附近较浓灵地，硬牙利爪能掘土石；不是全知探宝，对障碍、疲劳和实际感知仍有边界。
+    description: 可察雾中灵气并寻附近较浓灵地，硬牙利爪能掘土石；不是全知探宝，对障碍、疲劳和实际感知仍有边界。
+    access:
+      kind: discoverable
+      condition: 检查兽栏交接牌或询问当值饲养者。
+  - id: global-qilin-doublepupil-rat-custody
+    predicate: custody
+    value:
+      kind: text
+      value: 黄枫门中公有，由陶冬喂养并管交接；可按兽栏公示租例有限期出借，需实际许可、押金和演示控制，不自动归承租者永久所有。
+    description: 黄枫门中公有，由陶冬喂养并管交接；可按兽栏公示租例有限期出借，需实际许可、押金和演示控制，不自动归承租者永久所有。
+    access:
+      kind: discoverable
+      condition: 检查兽栏交接牌或询问当值饲养者。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

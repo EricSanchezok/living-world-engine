@@ -1,0 +1,18 @@
+id: spirit3-cart-fare-board
+kind: item
+name: 兽车行价牌
+description: 当前街市至草原门每位2铜钱；包车需曹砚另议，满载上限四人。
+placement: spirit3-anyuan-cart-shed
+facts:
+  - id: spirit3-cart-fare-board-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-cart-driver
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

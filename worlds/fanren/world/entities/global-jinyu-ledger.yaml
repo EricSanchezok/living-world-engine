@@ -1,0 +1,26 @@
+id: global-jinyu-ledger
+kind: item
+name: 九玄潭入潭簿
+description: 记载获准入潭者及实际洗浴日期的厚簿。
+placement: global-jinyu-court
+facts:
+  - id: global-jinyu-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-spirit3-jinyu-sect
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-jinyu-ledger-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。
+    description: 记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

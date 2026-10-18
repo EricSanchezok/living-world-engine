@@ -1,0 +1,26 @@
+id: spirit3-anyuan-budget-petition
+kind: item
+name: 安远教习补料呈文
+description: 冯棠请求本期拨8高阶灵石用于守备教习和购矢，尚未批准；现存十二支矢不因申请而增加。
+placement: spirit3-tianyuan-hall
+facts:
+  - id: spirit3-anyuan-budget-petition-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-anyuan-budget-petition-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-trainer
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

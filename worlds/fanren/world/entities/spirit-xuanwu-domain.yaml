@@ -1,0 +1,26 @@
+id: spirit-xuanwu-domain
+kind: location
+name: 玄武境
+description: 人族生活的一方广大境域，城池与道路相距遥远，离开主路须自行解决引路、补给和防护。
+placement: spirit-human-demon-territory
+facts:
+  - id: spirit-xuanwu-domain-route-demon-nine-immortal-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-xuanwu-domain-condition-demon-nine-immortal-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 玄武境与九仙山之间的边路，按地形、交通工具与护卫速度行进。
+    description: 玄武境与九仙山之间的边路，按地形、交通工具与护卫速度行进。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

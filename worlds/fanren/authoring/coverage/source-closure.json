@@ -1,0 +1,741 @@
+{
+  "formatVersion": 1,
+  "status": "source-and-candidate-evidence-complete",
+  "approvedForRuntime": false,
+  "sourceComplete": true,
+  "semanticComplete": true,
+  "candidateComplete": true,
+  "counts": {
+    "chapters": 2451,
+    "batches": 398,
+    "verifiedBatches": 398,
+    "candidates": 53818,
+    "dispositionBoundCandidates": 53818,
+    "findings": 8370,
+    "resolvedFindings": 8370,
+    "checkedResolutionAnchors": 43573
+  },
+  "inputHash": "5d9bf4fdca4be102ebfc895e9e0d86ab550f3f09b3e6646058c73706023b42e5",
+  "evidence": {
+    "inputPins": [
+      {
+        "path": "coverage/regional-queues/associated-demon.json",
+        "hash": "64cd042c428da98f54fe25c24cca9bd0a95d00ae4c9c8553fd44d00a76464a8f"
+      },
+      {
+        "path": "coverage/regional-queues/associated-guanghan.json",
+        "hash": "f558c49b4f8a10ed289756e71c707a3fd5cc8d06cb4cc11941c42f9af3185579"
+      },
+      {
+        "path": "coverage/regional-queues/associated-immortal.json",
+        "hash": "93bd2399f9d1ea16f96b1e34877cff0ec0aaa7b2f585fb2813cbbfc7ec1865b5"
+      },
+      {
+        "path": "coverage/regional-queues/associated-reported.json",
+        "hash": "d41dca5ea42d08541c53d863ce9c522cb734b964058a15569fd1af4e5c9b4fea"
+      },
+      {
+        "path": "coverage/regional-queues/associated-xiaolingtian.json",
+        "hash": "5ba39860c42520632ff0f6feca7fac6cab8ac0a6e50ac273871f594d1dbf725a"
+      },
+      {
+        "path": "coverage/regional-queues/associated-yinming.json",
+        "hash": "b97ba157a7bbda507d7efe1578732efa5e8baa822cae6063dbe57ce74883c36d"
+      },
+      {
+        "path": "coverage/regional-queues/human-boundless.json",
+        "hash": "e4d866565767433ae6b239da0c218844e6c7ee634d441c0bd35ed4349d1479f6"
+      },
+      {
+        "path": "coverage/regional-queues/human-dajin.json",
+        "hash": "348c28273abbfde933cb9f637988575d050f103aa26d44f0e13b5152db98df09"
+      },
+      {
+        "path": "coverage/regional-queues/human-devil-valley.json",
+        "hash": "7dcc0637a133f48aedfaea77c1abd2c9db095756e666a758c8b3e887f8eb640e"
+      },
+      {
+        "path": "coverage/regional-queues/human-far-seas.json",
+        "hash": "a1864672c58190dc238bde6400b8f1e68c8423a56ece8f31b1f5ab82e68b33db"
+      },
+      {
+        "path": "coverage/regional-queues/human-inner-star.json",
+        "hash": "5baa2dca3cb7bc4a3d6cae0f6dcd46bc42818e693910224464583f034648c62d"
+      },
+      {
+        "path": "coverage/regional-queues/human-local.json",
+        "hash": "8c312d430a5630c79ff5640445ae263f662a0640830bb89333fd86badac2e253"
+      },
+      {
+        "path": "coverage/regional-queues/human-north.json",
+        "hash": "bfd5937a59c60788b7bcf70ae19c681641406e12eaac60fb6295322e7f37142e"
+      },
+      {
+        "path": "coverage/regional-queues/human-outer-star.json",
+        "hash": "1bb1a831021d309b109540601088567c40cb25ea8acb9f86e18d46c4a801b63f"
+      },
+      {
+        "path": "coverage/regional-queues/human-south-kunwu.json",
+        "hash": "26bf862fc6f6dd5ea65b9a8451f3b56f64e89317a2fb0aa48b39d402a3c3d19b"
+      },
+      {
+        "path": "coverage/regional-queues/human-steppe.json",
+        "hash": "bc498b82197ef5872d1a22ec3e8219b84884fcc36e1ee5508684937856326482"
+      },
+      {
+        "path": "coverage/regional-queues/human-ten-thousand.json",
+        "hash": "9e0095f4f9dd1df1ac3af62767d7873be11687954cf8e41653dd48220234489e"
+      },
+      {
+        "path": "coverage/regional-queues/human-tiannan.json",
+        "hash": "475c0564c3cfb213b61bfa5ef8dca18dea77ca187f60d9a851f5e92e2edc22c3"
+      },
+      {
+        "path": "coverage/regional-queues/human-void-hall.json",
+        "hash": "6fb779d1d67eee9c91147bedadb79452e68bb87d4dcec7005d94e13f21ae67fc"
+      },
+      {
+        "path": "coverage/regional-queues/human-yue.json",
+        "hash": "64a5ac820a70606b90646a03b321f12112dbd379e0996752b29fd235b66e7069"
+      },
+      {
+        "path": "coverage/regional-queues/shared-foundations.json",
+        "hash": "deac7e966c30a6a509ec27f6de587ed0632bb4a16ec54dff46af4626f2af06ed"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-blood.json",
+        "hash": "bbd9c944e4572db74f804bafb725d3049235f70a1f652950ac1c0d97f07f27c7"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-demon-seven.json",
+        "hash": "7a72b4013d697e719be801998887eb8bad0149e690f4835e7a0213fff1d759a1"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-feiling.json",
+        "hash": "bea0853a6e89e786a56addb5dd3cd40e997c19de043b19eb9068227080b40587"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-fengyuan.json",
+        "hash": "8e61d0b5e293fb560867c510aaad2a5a9dcd51625fa1c7403939a93ddfc9216a"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-human-three.json",
+        "hash": "c1818cdb903abec5f466a1c2980dd8a8bf35864df22af70994fb1ce7edd7573d"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-minghe.json",
+        "hash": "5d47a084e425150db95c43a625c46556328ab64db727e508445cad3fd105f5f2"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-seas.json",
+        "hash": "8a8df866e7189addc4a49aa25c71faac6cf5efb67a28ce642f1525c6dd3e5bb3"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-thunder.json",
+        "hash": "6764052ebece840ed80a9ee5ba8f0ca9003a6c40c4d206bd215b3c448da947ba"
+      },
+      {
+        "path": "coverage/regional-queues/spirit-tianyuan.json",
+        "hash": "abcd5a7feb7f79bb5111d476625bf877053a8cfc43c6c673117a9092d3d9434d"
+      },
+      {
+        "path": "regions/associated-demon/candidate-dispositions.json",
+        "hash": "15bde7e01d3138a98a2ddd36d52f3cb0fc76fc44ba1dbb00f314f0e0ba5f2df6"
+      },
+      {
+        "path": "regions/associated-guanghan/candidate-dispositions.json",
+        "hash": "fa7bed0bd112a69b5e8e90de83a95abc763b87e0e7ada01e508057aa2547016d"
+      },
+      {
+        "path": "regions/associated-immortal/candidate-dispositions.json",
+        "hash": "f61f241415a842a543b827c6e28a25fe757d46506847e292834f3224e0823269"
+      },
+      {
+        "path": "regions/associated-reported/candidate-dispositions.json",
+        "hash": "f8d78535b5c7e468fac225dc69974dc701f3c81d404e07699389ca23b000a908"
+      },
+      {
+        "path": "regions/associated-xiaolingtian/candidate-dispositions.json",
+        "hash": "d63b18637b13af2548aede0bedaba1d456e3113f7c08fb10c0b4353744322b77"
+      },
+      {
+        "path": "regions/associated-yinming/candidate-dispositions.json",
+        "hash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f"
+      },
+      {
+        "path": "regions/human-boundless/candidate-dispositions.json",
+        "hash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e"
+      },
+      {
+        "path": "regions/human-dajin/candidate-dispositions.json",
+        "hash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2"
+      },
+      {
+        "path": "regions/human-devil-valley/candidate-dispositions.json",
+        "hash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400"
+      },
+      {
+        "path": "regions/human-far-seas/candidate-dispositions.json",
+        "hash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e"
+      },
+      {
+        "path": "regions/human-inner-star/candidate-dispositions.json",
+        "hash": "7f78d9f8d6e94f654ec373a00f35ec9133b0003ea6a2bb3c9f23e9ec67987b19"
+      },
+      {
+        "path": "regions/human-local/candidate-dispositions.json",
+        "hash": "e1a739a89f54ccd4e046eae41cc8b538c701758bf7e2498f42cd7099fd99e50e"
+      },
+      {
+        "path": "regions/human-north/candidate-dispositions.json",
+        "hash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4"
+      },
+      {
+        "path": "regions/human-outer-star/candidate-dispositions.json",
+        "hash": "c759b61896443fd0b526307fda0cc173dcb483c6fb2f2fea06fbdfadae00f1df"
+      },
+      {
+        "path": "regions/human-south-kunwu/candidate-dispositions.json",
+        "hash": "3d4d2f474a1a249ead16db7092b3547f5042f4f05795b19bb9ceebdf8cb5efcf"
+      },
+      {
+        "path": "regions/human-steppe/candidate-dispositions.json",
+        "hash": "5c89a25c02cfe25c7ae00ab02445f9ac89a4d683facc48878852714dd3f313fc"
+      },
+      {
+        "path": "regions/human-ten-thousand/candidate-dispositions.json",
+        "hash": "4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940"
+      },
+      {
+        "path": "regions/human-tiannan/candidate-dispositions.json",
+        "hash": "9880b5f9f641ea8948cc4aeae7f0ee18b8cb3236b36a96a5b4d605d8a112bc5a"
+      },
+      {
+        "path": "regions/human-void-hall/candidate-dispositions.json",
+        "hash": "209e637a06e852f3126b19c7134a7a007611e24cc010257460b482dd8fbc0b9e"
+      },
+      {
+        "path": "regions/human-yue/candidate-dispositions.json",
+        "hash": "2df6471795d23a4c3864495b18cf1de3b7fd19de78066825cf41f4816921ef54"
+      },
+      {
+        "path": "regions/shared-foundations/candidate-dispositions.json",
+        "hash": "460e7bce8cada1b313b6ff76805d2c2d67df783b0f0495967f6486ece18ddb1e"
+      },
+      {
+        "path": "regions/spirit-blood/candidate-dispositions.json",
+        "hash": "008c8b48beb1a04021855ededce4c3faf4b32399bf0851223bea52c9325f4806"
+      },
+      {
+        "path": "regions/spirit-demon-seven/candidate-dispositions.json",
+        "hash": "05e8b123bfa229ebafb95a860f365258324730170ff97ab21acf1e5a0048fdfd"
+      },
+      {
+        "path": "regions/spirit-feiling/candidate-dispositions.json",
+        "hash": "38f99eddf50a686735439f30b41a47f4d1db13bd1a2f313871c6f28c292cfc50"
+      },
+      {
+        "path": "regions/spirit-fengyuan/candidate-dispositions.json",
+        "hash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f"
+      },
+      {
+        "path": "regions/spirit-human-three/candidate-dispositions.json",
+        "hash": "6c6f25c645a52a35a4f011380fdf2e0b305e80175fe47e785b6ba2b5d10bef86"
+      },
+      {
+        "path": "regions/spirit-minghe/candidate-dispositions.json",
+        "hash": "7ab7016fd0e3e71cab29cddd635f83447e7b9c6f67c365fa18d863e3d53730eb"
+      },
+      {
+        "path": "regions/spirit-seas/candidate-dispositions.json",
+        "hash": "249f79b0d208034b5e9195c2900d8c30160dcfb0fca6330409c3528692449138"
+      },
+      {
+        "path": "regions/spirit-thunder/candidate-dispositions.json",
+        "hash": "9920be524382398595519186d6050651c7badc14461f23079259a21cc756af82"
+      },
+      {
+        "path": "regions/spirit-tianyuan/candidate-dispositions.json",
+        "hash": "b49382f484cdba733c844136d9e068601f36905a91a404ead5c673e1c55d452f"
+      },
+      {
+        "path": "reviews/source-alias-ambiguous-resolutions.json",
+        "hash": "e2671b55fb02ccc49e13aa29d417087fdba41bd046ebd0fbab9dfdb8a5935251"
+      },
+      {
+        "path": "reviews/source-alias-unsupported-resolutions.json",
+        "hash": "9b10495e96146e4e76a400d357598940c9d12be43625061cf381468163aeee78"
+      },
+      {
+        "path": "reviews/source-ambiguity-resolutions.json",
+        "hash": "f27cf5cee0a782a5c1295490f8e84e3420053ee22d57d2d7387765abc8402d72"
+      },
+      {
+        "path": "reviews/source-identity-resolutions.json",
+        "hash": "2f823135c41985c0c7a58e083a575efa354be07be3f3ad80678dafcc03f9d0cb"
+      },
+      {
+        "path": "reviews/source-issue-head-resolutions.json",
+        "hash": "6ffe0ca2f67a582ce7a4e04a0617d78b02c0cfaab8b91cd9be7852fa6940844e"
+      },
+      {
+        "path": "reviews/source-issue-reuse-resolutions.json",
+        "hash": "a5cb1f4af1300851eee2d4f270e9e3fe70591e5088315d9c64eae509ca576142"
+      },
+      {
+        "path": "reviews/source-issue-root-final-resolutions.json",
+        "hash": "b4aaec1d14f388ce63575b0d3ee70e830d4a656b3daf135665252ff74f7c64a7"
+      },
+      {
+        "path": "reviews/source-issue-root-resolutions.json",
+        "hash": "c57319d6a44d52b561545bbc1d6a6998bf4d4e6969602ca08272ea143214c473"
+      },
+      {
+        "path": "reviews/source-issue-tail-resolutions.json",
+        "hash": "48e7a5d05490463ee3cd1cbe7c85d0f20898a82498605b1b16df3b726be15c7e"
+      },
+      {
+        "path": "reviews/source-issue-world-resolutions.json",
+        "hash": "ad69edd8e58f4171c1b4c489eaf82c7e1831c8ea5bbf24a0a82094d0b616e716"
+      },
+      {
+        "path": "reviews/source-omission-resolutions.json",
+        "hash": "f191da94f4d86d2f9a359ae979542995fb7ee22e29a4cf0121731384a8b03b38"
+      },
+      {
+        "path": "reviews/source-unsupported-resolutions.json",
+        "hash": "82b43e88c641d4fc511361fa54572e3bb7202d7fa215e21aa2e48ee19dab078e"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-candidate-manifest.json",
+        "hash": "eae535f9ecba667d1e2b8b606ee872fb778e5db28b8e1553a9dac9b1f97828d9"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-candidate-unbound-source-first3000.json",
+        "hash": "22222a226fc555f377c86f4c41c11ff5113295b0936b9e896231dc82ecac2a99"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-candidate-unbound-source-first3000.proofs.json",
+        "hash": "992940377d481162eb91b0596811778a3a647742df5b871e60f8e70d21bbe58b"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-candidate-unbound-source-first3000.queue.json",
+        "hash": "a164c1a80934d1d03d3019b0b138b15037b1be411955a5be4e6896ed50303cf8"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-names.json",
+        "hash": "c6571dad4b9535c55133904655c3cf59d9a8d0f98c2acc7ec66d66d1d251b6e6"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-names.proofs.json",
+        "hash": "54af058f999c322e099ffe4c9b9e7b8fe7cbd47147d8e11c1763b7e9a138e907"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-names.queue.json",
+        "hash": "f36e4f637ef8bd9149a650281d2bb2093baf3855fb0c610f46961252793437bc"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-source-only.json",
+        "hash": "f905e154858987abedd0271fe0cfd6f83116159e700a494c892d98635ab69c30"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-source-only.proofs.json",
+        "hash": "ee5563c2372adc15199cac51360e34b7463655f20fb5b365b4ecd8c15796df6f"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-integration-source-only.queue.json",
+        "hash": "af09f2f9d5f60d106fa7f71d6d265e6a77192084fc4e40c8ae5b48c7ffa936cc"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-difference-dispositions.json",
+        "hash": "15ab5611a9731b699a5426fff1066a4a05db7c68d75318c8008492b0d3c3afba"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-difference-dispositions.proofs.json",
+        "hash": "cd69feb646122ec1b0046f27dd66fbeed4f56a0ebf900f348c68903905907c98"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-difference-queue.json",
+        "hash": "358b724692814d5675644ddb4f7a7c33d69ef4ef7d604dbfc23e595aad47b551"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-future-1000.json",
+        "hash": "f71e4ef857392f344c0b6579982c70368e8c7ebbfdcc475c1d6d7e8271fb7c36"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-future-1000.proofs.json",
+        "hash": "38f4015b2a89ddea0eb9a5fbc0344d510aae9a80fa409e44bed00d21a7654124"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-future-1000.queue.json",
+        "hash": "c85e047ddc66588b78b0b6e732b17430dbb8c280aad7fcaaefc232a78f4debb6"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-unbound-3112.json",
+        "hash": "ad23d0a793c6227dfc9fb5e6f2091b5ecc7a7bf768ff7caaf4ae1a41b005f7c9"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-unbound-3112.proofs.json",
+        "hash": "1027b20b92d1d9838de982293780c02fe727847c536b2b11c78656ef749e180e"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-root-unbound-3112.queue.json",
+        "hash": "c4d433c7fb14c4b1faf99011d6292c2023260a4ce4bdec6363600f4f0e2d45a8"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-event-archives.json",
+        "hash": "057445f01e1324e1ab8cc92829621ea0d44a4fd9455925cc148b39507a8ecf36"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-event-archives.proofs.json",
+        "hash": "aae8a1f94bbe646cd5eac29d77931970634fba0251b63ae28a1a236125f65ae1"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-event-archives.queue.json",
+        "hash": "183224f672afe16fc3b001e7fc25965b9c24e5cf5f964bec19ad95270b7640c5"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-exact-review.json",
+        "hash": "c27512344f36213796a77f8531959c4f7574c9147f3e0a326451d0b51e5d77a1"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-exact-review.proofs.json",
+        "hash": "af0b924911ef27913b2d9b4af6cdc39fa47cde76b7ed677d2606f568daa0190d"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-exact-review.queue.json",
+        "hash": "564a3a1e63734bc77c694e642d6662be5c1f668a6bcf3f954a5c981b6574c097"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-han-group.json",
+        "hash": "79541be236e236a8c6453e301465dac5e75002088bce575152e55acbfde88254"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-han-group.proofs.json",
+        "hash": "b3fdad029d6a23b92291a7f9959ce842a4f5a8ac23aec7fffbb1ca2db819416e"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-han-group.queue.json",
+        "hash": "aad7dc39c0869bc2dfd2cb69d6002115d475e0e981a4fc2bdc55c8cc955ec4fe"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-linked-issues.json",
+        "hash": "eb767f2e09a7e13d1fec069af1a88ab1ca3cdefe67340c20771f7ab18831c4a7"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-linked-issues.proofs.json",
+        "hash": "7448fea800c1462211802a3548f07e5779a80773724aeae581b9cbcc2a1c8f91"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-linked-issues.queue.json",
+        "hash": "7175a1d02f24ca2093fb817a52125771c9c85b564db2e2dfdff5bdcacd813a41"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-manual-future.json",
+        "hash": "f720048562527afac9ae82bfb787fdec930da3dfa9e962e4bcc5188037628c4f"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-manual-future.proofs.json",
+        "hash": "fd4cdbcee30fcffbb2b2c6e09de1650ac21a3ef44c20aabe81d3c5f85115fec3"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-manual-future.queue.json",
+        "hash": "49659b265d190af217cc213f7569126d9e2662106ccef56ddf6c12b37f6af0c3"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-person-states.json",
+        "hash": "a18f030fbe2c1abd65d0e798c060dfa217107921d004a51daeceb27ad96a8a63"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-person-states.proofs.json",
+        "hash": "7cfdc2faf80a08773568c2d90833add923cc6dd9ed988c69d285d32302b292e8"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-person-states.queue.json",
+        "hash": "9558563fdc59475aa31525f0ac6bad704dd2c728bec96e4aaaf2636c40d4eb63"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-resolved-issues.json",
+        "hash": "d236ea6d9c447ec71fcb89baa179a80250e31600ac19284f4cd517fc4ef83bcb"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-resolved-issues.proofs.json",
+        "hash": "6445d880eff98f4968e4549dd6f01197ec1890c0eda3813492a06c3d15db2c97"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-resolved-issues.queue.json",
+        "hash": "226c2a765a3829bf7e79346e394237358e7e9ad40b4d188cdd8cc4a9fc1a64df"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-temporal-groups.json",
+        "hash": "32195e65debb4053b6c65b3a6ff8308ec62449687ead575e518dde2968001463"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-temporal-groups.proofs.json",
+        "hash": "6da32e19ac3d50f0b3c97440dbe9be29d1a7a0497f993e452a5849bc86085631"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/global-world-temporal-groups.queue.json",
+        "hash": "b716718f7abec0b0b0ba02a25acfab929aa39571839a9144fef0320abf8ad4ed"
+      }
+    ],
+    "referencedArtifacts": [
+      {
+        "path": "worlds/fanren/authoring/regions/associated-demon/candidate-dispositions.json",
+        "hash": "15bde7e01d3138a98a2ddd36d52f3cb0fc76fc44ba1dbb00f314f0e0ba5f2df6"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-demon/claims.json",
+        "hash": "651a48e2a26bdf596fcf0f27a39735ad60a922855c34af6ee12c3e22cfc594c8"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-guanghan/candidate-dispositions.json",
+        "hash": "fa7bed0bd112a69b5e8e90de83a95abc763b87e0e7ada01e508057aa2547016d"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-guanghan/claims.json",
+        "hash": "c8fc031394a641560a27a425cba6f0e6c471cde4695f0e9325459ab04f512e91"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-immortal/candidate-dispositions.json",
+        "hash": "f61f241415a842a543b827c6e28a25fe757d46506847e292834f3224e0823269"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-immortal/claims.json",
+        "hash": "6a1e14be19361577b2dbd1a2966d31dc7800d4db6c2b14e40f4a2c541e500d49"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-reported/candidate-dispositions.json",
+        "hash": "f8d78535b5c7e468fac225dc69974dc701f3c81d404e07699389ca23b000a908"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-reported/claims.json",
+        "hash": "202d493573f0a85ad3b6d0d76c3cd09e734d609aeec1a53062895ad11d23232f"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-xiaolingtian/candidate-dispositions.json",
+        "hash": "d63b18637b13af2548aede0bedaba1d456e3113f7c08fb10c0b4353744322b77"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-xiaolingtian/claims.json",
+        "hash": "afbbda0dcaabc65770f3bb8cf8eaf5674d0ea6e7275e41527f4ef38be2708e16"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-yinming/candidate-dispositions.json",
+        "hash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/associated-yinming/claims.json",
+        "hash": "7428360e029bfa8bb4193aab4271d18db75958f916d00e7f9444b8c9f4d460c7"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-boundless/claims.json",
+        "hash": "60db34a1696367d8a5287f6a0d45bc05aa6555283ee393baf07d7adfe2fcb1aa"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-dajin/candidate-dispositions.json",
+        "hash": "f4c4b9e6afc5d5b10928d51a15c8dd90f5105bdf0a649cf4f50de7b470ce01c2"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-dajin/claims.json",
+        "hash": "eaa3e65ebd60e7611ce727f06e4372638f076e1fc6a58c6775171f88151dbc35"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-devil-valley/candidate-dispositions.json",
+        "hash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-devil-valley/claims.json",
+        "hash": "c55f79196dc0798e2c84f426990c2cf92f404188f61c4275fa180020c205d3b2"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-far-seas/candidate-dispositions.json",
+        "hash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-far-seas/claims.json",
+        "hash": "26737af7690c6c5b889e1554904b953ab4d59cc8faf4c989c87844f7fc26697d"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-inner-star/candidate-dispositions.json",
+        "hash": "7f78d9f8d6e94f654ec373a00f35ec9133b0003ea6a2bb3c9f23e9ec67987b19"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-inner-star/claims.json",
+        "hash": "bd38661c035f5a989caaeaf65284b306e1e02629f8b2b358d4bcb8c379bf89eb"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-local/candidate-dispositions.json",
+        "hash": "e1a739a89f54ccd4e046eae41cc8b538c701758bf7e2498f42cd7099fd99e50e"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-local/claims.json",
+        "hash": "3eb1d030334307a41cb315de84faf6c61188e69a9c2d5fa7725a877408d2c822"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-north/candidate-dispositions.json",
+        "hash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-north/claims.json",
+        "hash": "fb7fbc437a2c6128750bf60d8388c9f9863d4104ccdf3b70c202495f08bc7860"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-outer-star/candidate-dispositions.json",
+        "hash": "c759b61896443fd0b526307fda0cc173dcb483c6fb2f2fea06fbdfadae00f1df"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-outer-star/claims.json",
+        "hash": "834a6b585948d343a127d5527de9d9a1042d8b87ed0b56c5402a3c82dca5bd93"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-south-kunwu/candidate-dispositions.json",
+        "hash": "3d4d2f474a1a249ead16db7092b3547f5042f4f05795b19bb9ceebdf8cb5efcf"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-south-kunwu/claims.json",
+        "hash": "196ba9ad964e8d85a5ae1b8a46b1bda66519bf8a26f4d167832e8012731c19a6"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-steppe/candidate-dispositions.json",
+        "hash": "5c89a25c02cfe25c7ae00ab02445f9ac89a4d683facc48878852714dd3f313fc"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-steppe/claims.json",
+        "hash": "d3911b71f229fe2c1fd2d5c7bb8336bd65a93215c4f5a5f3c8cb858e901b72bd"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-ten-thousand/candidate-dispositions.json",
+        "hash": "4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-ten-thousand/claims.json",
+        "hash": "4307f356e2248e34c7c086400bdb7f37b0fbfc4dede39e328e8f4b16da8f267b"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-tiannan/candidate-dispositions.json",
+        "hash": "9880b5f9f641ea8948cc4aeae7f0ee18b8cb3236b36a96a5b4d605d8a112bc5a"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-tiannan/claims.json",
+        "hash": "8ad7a422f97f5c829ed3f6e0df678f0c4e982f10710241d468387e9c1393986e"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-void-hall/candidate-dispositions.json",
+        "hash": "209e637a06e852f3126b19c7134a7a007611e24cc010257460b482dd8fbc0b9e"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-void-hall/claims.json",
+        "hash": "66424c48adf4f87ae663a7d527fb2a60685333a92615858efe0650aa0d834cad"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-yue/candidate-dispositions.json",
+        "hash": "2df6471795d23a4c3864495b18cf1de3b7fd19de78066825cf41f4816921ef54"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/human-yue/claims.json",
+        "hash": "cd6985b2e61c60d20414c71c162fbfbc7aa81af1cfceb21e7117204cc0a408c1"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/shared-foundations/candidate-dispositions.json",
+        "hash": "460e7bce8cada1b313b6ff76805d2c2d67df783b0f0495967f6486ece18ddb1e"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/shared-foundations/claims.json",
+        "hash": "565d23b2e78c56131abf81729bb142d9b560fd4b730195e8ca9665a3986eeb88"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-blood/candidate-dispositions.json",
+        "hash": "008c8b48beb1a04021855ededce4c3faf4b32399bf0851223bea52c9325f4806"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-blood/claims.json",
+        "hash": "816bb329f6ea6249a29d747571a507820d0f3c20cede0f32fd421135a3dacd87"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-demon-seven/candidate-dispositions.json",
+        "hash": "05e8b123bfa229ebafb95a860f365258324730170ff97ab21acf1e5a0048fdfd"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-demon-seven/claims.json",
+        "hash": "fa49e2c6ecf1f2dee6683c3c33103093a54fa2873e90204ff7c0cac2fc6dbead"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-feiling/candidate-dispositions.json",
+        "hash": "38f99eddf50a686735439f30b41a47f4d1db13bd1a2f313871c6f28c292cfc50"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-feiling/claims.json",
+        "hash": "959aa9ddc580fe7127af6058c71eb3c912847edd4324f9efada56d42189db441"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-fengyuan/candidate-dispositions.json",
+        "hash": "dee2747a680088821c601787a80c5bdc07d1104caad4a4069beb8844798f967f"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-fengyuan/claims.json",
+        "hash": "08454153fc63b3b05e2c09c0f9a7d9faf90ca696b957f9078bc6b123c49d48e7"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-human-three/candidate-dispositions.json",
+        "hash": "6c6f25c645a52a35a4f011380fdf2e0b305e80175fe47e785b6ba2b5d10bef86"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-human-three/claims.json",
+        "hash": "1ebc74982ee64d83ba9e107c85a5345bf8a96fd262a19fb8741843fff9db2e8a"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-minghe/candidate-dispositions.json",
+        "hash": "7ab7016fd0e3e71cab29cddd635f83447e7b9c6f67c365fa18d863e3d53730eb"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-minghe/claims.json",
+        "hash": "a8b6e999134ce74f94309280d87f478ae44da3f07d6a0385003c7405cc625841"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-seas/candidate-dispositions.json",
+        "hash": "249f79b0d208034b5e9195c2900d8c30160dcfb0fca6330409c3528692449138"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-seas/claims.json",
+        "hash": "c5882e681f9031a9c0eaea4750acce9903dd06dc17a9660a4782811923ca361b"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-thunder/candidate-dispositions.json",
+        "hash": "9920be524382398595519186d6050651c7badc14461f23079259a21cc756af82"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-thunder/claims.json",
+        "hash": "bfa2a0b2b49cf001f42b2bc6ab52f0cc1df10f6162f405ba798811121fa4387d"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-tianyuan/candidate-dispositions.json",
+        "hash": "b49382f484cdba733c844136d9e068601f36905a91a404ead5c673e1c55d452f"
+      },
+      {
+        "path": "worlds/fanren/authoring/regions/spirit-tianyuan/claims.json",
+        "hash": "10b692e693d76413d08ec39855bdc6d5863a000731692efcddd081f4e8f6a5fc"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/source-alias-ambiguous-resolutions.json",
+        "hash": "e2671b55fb02ccc49e13aa29d417087fdba41bd046ebd0fbab9dfdb8a5935251"
+      },
+      {
+        "path": "worlds/fanren/authoring/reviews/source-alias-unsupported-resolutions.json",
+        "hash": "9b10495e96146e4e76a400d357598940c9d12be43625061cf381468163aeee78"
+      }
+    ],
+    "sourcePassesHash": "8a0fd500f0b3c3b7fa34b181ece9b3eeff8727d876ac075e8443ab08aa477784",
+    "resolutionBindingsHash": "cb62aee3dccdb78f10b4e41409e491e3c5159f47e4ad3d201404952169c7e974",
+    "candidateBindingsHash": "9ee1846a08c3b2b2c31ae929c748e9a857acad278a9bafbe3c38a791b0e40ed2"
+  },
+  "residual": {
+    "missingExtractions": [],
+    "missingAdjudications": [],
+    "incompleteChapters": [],
+    "unresolvedFindings": [],
+    "unassignedCandidates": [],
+    "pendingDispositions": []
+  },
+  "interpretation": "完整正文输入、来源语义处置、全部候选归属分开复验。该证据不替代地区正文与运行审签、存活/知识/资源一致性或真实游玩验收。"
+}

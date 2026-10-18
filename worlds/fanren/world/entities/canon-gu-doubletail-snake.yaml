@@ -1,0 +1,51 @@
+id: canon-gu-doubletail-snake
+kind: creature
+name: 双尾翡翠蛇
+description: 一条翠色双尾灵蛇，蜷在温湿兽栏里。受惊会警戒或吐毒，熟悉谷双蒲的喂养手势。
+placement: steppe-gu-reed-house
+facts:
+  - id: canon-gu-doubletail-snake-keeper
+    predicate: keeper
+    value:
+      kind: entity
+      entityId: canon-gu-shuangpu
+    description: keeper
+    access:
+      kind: public
+  - id: canon-gu-doubletail-snake-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-gu-shuangpu
+    description: owned-by
+    access:
+      kind: public
+  - id: canon-gu-doubletail-snake-level
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 二级妖蛇。
+    description: 二级妖蛇。
+    access:
+      kind: agents
+      agentIds:
+        - canon-gu-shuangpu
+  - id: canon-gu-doubletail-snake-poison
+    predicate: capability
+    value:
+      kind: text
+      value: 可在受威胁时吐毒或咬伤，需要真实接触和毒液；伤害受修为、护体、解毒手段影响，不见元婴必死。
+    description: 可在受威胁时吐毒或咬伤，需要真实接触和毒液；伤害受修为、护体、解毒手段影响，不见元婴必死。
+    access:
+      kind: discoverable
+      condition: 实际观察灵蛇行动、接触毒伤痕迹或从知情者得知。
+meters:
+  - id: canon-gu-doubletail-snake-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: canon-gu-doubletail-snake-force
+    definition_id: force
+    value: 2
+shared_activity_resources: []

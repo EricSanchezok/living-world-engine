@@ -1,0 +1,34 @@
+id: tianyuan-dust-stock
+kind: item
+name: 灭尘丹封存箱
+description: 双锁药箱，现有六份灭尘丹，每份独立封装。
+placement: tianyuan-dust-dispensary
+facts:
+  - id: tianyuan-dust-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-dust-stock-dual-custody
+    predicate: dual-custody
+    value:
+      kind: text
+      value: 周砚丹负责气息诊察，吕慎负责验封，二人共同登记发放；有适用理由可以由长老会调整，不是物理上永远打不开。
+    description: 周砚丹负责气息诊察，吕慎负责验封，二人共同登记发放；有适用理由可以由长老会调整，不是物理上永远打不开。
+    access:
+      kind: public
+  - id: tianyuan-dust-stock-lock-state
+    predicate: lock-state
+    value:
+      kind: text
+      value: 内锁已闭，需内锁钥匙或实际破坏对应锁与禁制；破坏造成痕迹并触及公物责任。
+    description: 内锁已闭，需内锁钥匙或实际破坏对应锁与禁制；破坏造成痕迹并触及公物责任。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: kunwu-sensing-pearl
+kind: item
+name: 感灵珠
+description: 感应飞仙石封印相关变化，当前安静，不自动提供全山地图。
+placement: south-du-sheng-ancestral
+facts:
+  - id: kunwu-sensing-pearl-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-du-sheng-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

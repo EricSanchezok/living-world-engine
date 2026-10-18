@@ -1,0 +1,18 @@
+id: xlt-letter
+kind: item
+name: 林圃回信
+description: 写给顾寻的回信：可商议借拓，罡木须另谈，承印者不会先允诺护送出界。
+placement: xlt-tai
+facts:
+  - id: xlt-letter-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-cang
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

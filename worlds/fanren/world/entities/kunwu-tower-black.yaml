@@ -1,0 +1,26 @@
+id: kunwu-tower-black
+kind: location
+name: 第八层狼身囚室
+description: 千余铜镜放光照住血链所缚双首银狼，四壁隔开另一囚室。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-tower-black-sealed-neighbor
+    predicate: sealed-neighbor
+    value:
+      kind: entity
+      entityId: kunwu-tower-white
+    description: sealed-neighbor
+    access:
+      kind: private
+  - id: kunwu-tower-black-barrier
+    predicate: barrier
+    value:
+      kind: text
+      value: 与另一第八层囚室之间障壁完整，不能普通步行穿过。
+    description: 与另一第八层囚室之间障壁完整，不能普通步行穿过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

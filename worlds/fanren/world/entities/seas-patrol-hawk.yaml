@@ -1,0 +1,40 @@
+id: seas-patrol-hawk
+kind: creature
+name: 巡哨黑翼灵鹰
+description: 已训练的黑翼妖禽，脚环与巡哨鹰架匹配；会受伤、饥饿和疲倦，不具真灵血脉神通。
+placement: seas-patrol-post
+facts:
+  - id: seas-patrol-hawk-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-patrol-hawk-trained-response
+    predicate: trained-response
+    value:
+      kind: text
+      value: 接受严照熟悉的短哨和手势，可载其按巡线飞行；不凭陌生人口令无条件换主。
+    description: 接受严照熟悉的短哨和手势，可载其按巡线飞行；不凭陌生人口令无条件换主。
+    access:
+      kind: private
+  - id: seas-patrol-hawk-patrol-cost
+    predicate: patrol-cost
+    value:
+      kind: text
+      value: 一次环峰巡线需骑者持续约20法力并消耗本鹰15法力；受伤、逆风和载重会增加负担，休息和进食须实际发生。
+    description: 一次环峰巡线需骑者持续约20法力并消耗本鹰15法力；受伤、逆风和载重会增加负担，休息和进食须实际发生。
+    access:
+      kind: private
+meters:
+  - id: seas-patrol-hawk-health
+    definition_id: health
+    current: 100
+  - id: seas-patrol-hawk-mana
+    definition_id: mana
+    current: 80
+quantities: []
+ratings: []
+shared_activity_resources: []

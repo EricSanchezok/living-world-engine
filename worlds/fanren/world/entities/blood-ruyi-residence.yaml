@@ -1,0 +1,26 @@
+id: blood-ruyi-residence
+kind: location
+name: 如意静院
+description: 血骨门辖地的一处独立静院，案上有待定交易书与术法笔记，外院可接见获准访客。
+placement: blood-bone-domain
+facts:
+  - id: blood-ruyi-residence-route-blood-bone-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-bone-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-ruyi-residence-condition-blood-bone-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-icesha-glacier
+kind: location
+name: 冰煞黑冰川
+description: 黑冰覆盖谷底，寒气凝聚成冰煞；过路者需足够防寒和辨认活动痕迹。
+placement: feiling-abyss-2
+facts:
+  - id: feiling-icesha-glacier-route-to-feiling-abyss-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-2
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-icesha-glacier-route-conditions-feiling-abyss-2
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 黑冰寒气有损躯风险，避开冰煞活动区。
+    description: 黑冰寒气有损躯风险，避开冰煞活动区。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

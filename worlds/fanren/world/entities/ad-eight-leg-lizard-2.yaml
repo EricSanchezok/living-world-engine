@@ -1,0 +1,21 @@
+id: ad-eight-leg-lizard-2
+kind: creature
+name: 闻沙八足魔蜥2
+description: 适应幻啸沙漠的真实坐骑，幼兽只作成长养护，不能投入长途强租。
+placement: ad-huanye-city
+facts:
+  - id: ad-eight-leg-lizard-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-dune-handler
+    description: owned-by
+    access:
+      kind: private
+meters:
+  - id: ad-eight-leg-lizard-2-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

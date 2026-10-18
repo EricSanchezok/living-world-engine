@@ -1,0 +1,27 @@
+id: innerstar-reef-egg
+kind: item
+name: 礁缝兽卵
+description: 一枚尚未孵化的卵，隐在巢口里侧，非日常航道可见。
+placement: innerstar-near-reef
+facts:
+  - id: innerstar-reef-egg-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-reef-beast
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-reef-egg-visibility
+    predicate: visibility
+    value:
+      kind: text
+      value: 要实际靠近并查看礁缝才能发现；保护幼卵是海兽戒备的原因。
+    description: 要实际靠近并查看礁缝才能发现；保护幼卵是海兽戒备的原因。
+    access:
+      kind: discoverable
+      condition: 实际检查内侧礁缝，未被海兽阻止且具备可见条件。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

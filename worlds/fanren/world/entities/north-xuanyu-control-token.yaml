@@ -1,0 +1,18 @@
+id: north-xuanyu-control-token
+kind: item
+name: 冰麒麟纹玄玉令牌
+description: 调动玄玉洞的专用令牌，须有法诀、承受力与蓄积寒气，完整发动会封洞。
+placement: canon-hanli-shangren
+facts:
+  - id: north-xuanyu-control-token-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

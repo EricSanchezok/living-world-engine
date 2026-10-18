@@ -1,0 +1,18 @@
+id: blood-xuesha-note
+kind: item
+name: 化身温养札
+description: 记载每次主动操纵的法力损耗与停用时刻，可供本人比较，不等于复制新化身的完整配方。
+placement: blood-xuesha-cave
+facts:
+  - id: blood-xuesha-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-xue-sha
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

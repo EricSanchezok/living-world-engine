@@ -1,0 +1,20 @@
+id: south-herbalist-purse
+kind: container
+name: 何松年的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-herbalist
+facts:
+  - id: south-herbalist-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-herbalist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 50
+ratings: []
+shared_activity_resources: []

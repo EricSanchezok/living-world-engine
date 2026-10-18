@@ -1,0 +1,22 @@
+id: thunder-record-keeper-personal-kit
+kind: container
+name: 荔册的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: thunder-record-keeper
+facts:
+  - id: thunder-record-keeper-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-record-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 5
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

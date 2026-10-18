@@ -1,0 +1,26 @@
+id: blood-wood-garden
+kind: location
+name: 天鼎鬼木花圃
+description: 鬼面树与魔头幻花的禁区，幻景不是可直接食用的普通花木。
+placement: blood-tianding-palace
+facts:
+  - id: blood-wood-garden-route-blood-outer-palaces
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-outer-palaces
+    description: route-to
+    access:
+      kind: public
+  - id: blood-wood-garden-condition-blood-outer-palaces
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    description: 路径有对应分区光幕和阵法；须逐区实际处理，破某区不解除全宫。旧地图只能提供线索。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

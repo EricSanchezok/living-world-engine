@@ -1,0 +1,27 @@
+id: tianyuan-mo-visit-letter
+kind: item
+name: 敖啸的询访短笺
+description: 敖啸的询访短笺，交接痕迹清楚可辨。
+placement: tianyuan-mo-attendant
+facts:
+  - id: tianyuan-mo-visit-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-jian-li
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-mo-visit-letter-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 敖啸询问莫简离近期是否方便见面，想交换修行近况并谈一谈跨界旧闻；未约定必见日期，没有可靠的玲珑下落。
+    description: 敖啸询问莫简离近期是否方便见面，想交换修行近况并谈一谈跨界旧闻；未约定必见日期，没有可靠的玲珑下落。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

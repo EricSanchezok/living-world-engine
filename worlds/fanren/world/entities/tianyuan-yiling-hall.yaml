@@ -1,0 +1,26 @@
+id: tianyuan-yiling-hall
+kind: location
+name: 异灵堂
+description: 内设接收案与有限收押室，尚无在押者；看守须核实身份与羁押理由，交接后仍须记录实物和人员。
+placement: tianyuan-city
+facts:
+  - id: tianyuan-yiling-hall-route-to-tianyuan-guard-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-guard-yard
+    description: route-to-tianyuan-guard-yard
+    access:
+      kind: private
+  - id: tianyuan-yiling-hall-route-conditions-tianyuan-guard-yard
+    predicate: route-conditions-tianyuan-guard-yard
+    value:
+      kind: text
+      value: 城内军务道路，押送需要实际控制俘虏而不能凭报功搬运他人。
+    description: 城内军务道路，押送需要实际控制俘虏而不能凭报功搬运他人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

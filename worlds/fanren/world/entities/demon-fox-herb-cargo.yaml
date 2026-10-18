@@ -1,0 +1,29 @@
+id: demon-fox-herb-cargo
+kind: container
+name: 胡秋绒的药材箱
+description: 三箱药材，其中一箱底部潮湿，数量与药效须分开检查。
+placement: demon-nine-immortal-market
+facts:
+  - id: demon-fox-herb-cargo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-fox-herbalist
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-fox-herb-cargo-actual-damage
+    predicate: actual-damage
+    value:
+      kind: text
+      value: 一箱六包药中两包受潮，清点有十八包，损伤品仍存在，不能把坏药凭空删除成失窃。
+    description: 一箱六包药中两包受潮，清点有十八包，损伤品仍存在，不能把坏药凭空删除成失窃。
+    access:
+      kind: discoverable
+      condition: 药师或获授权者逐包开箱、查看湿痕并检验药材。
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 18
+ratings: []
+shared_activity_resources: []

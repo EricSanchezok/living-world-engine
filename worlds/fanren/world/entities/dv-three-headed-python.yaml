@@ -1,0 +1,130 @@
+id: dv-three-headed-python
+kind: creature
+name: 三首古蟒
+description: 没有肉翅的三头古蟒，物种未确证为三首乌蛇；在此附近栖息。
+placement: dv-polar-path
+facts:
+  - id: dv-three-headed-python-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - dv-three-headed-python
+  - id: dv-three-headed-python-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。
+    description: 灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。
+    access:
+      kind: agents
+      agentIds:
+        - dv-three-headed-python
+  - id: dv-three-headed-python-cultivation-path
+    predicate: cultivation-path
+    value:
+      kind: text
+      value: 古兽血脉与长久积累，没有人族木水双灵根设定。
+    description: 古兽血脉与长久积累，没有人族木水双灵根设定。
+    access:
+      kind: private
+meters:
+  - id: dv-three-headed-python-health
+    definition_id: health
+    current: 100
+  - id: dv-three-headed-python-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: dv-three-headed-python-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: dv-three-headed-python-force
+    definition_id: force
+    value: 4
+  - id: dv-three-headed-python-craft
+    definition_id: craft
+    value: 1
+  - id: dv-three-headed-python-perception
+    definition_id: perception
+    value: 4
+  - id: dv-three-headed-python-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: dv-three-headed-python
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 没有肉翅的三头古蟒，物种未确证为三首乌蛇；在此附近栖息。
+      voice: 以身体、叫声与姿态表达警戒和欲求，没有凭空流利的人族语言。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 守住栖地、取食并避开足以致命的威胁。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 三首古蟒
+        description: 没有肉翅的三头古蟒，物种未确证为三首乌蛇；在此附近栖息。
+        status: observed
+      - id: location
+        name: 幻蔽石道
+        description: 自己当前所在之处。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。
+        description: 灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: body-sense
+        subjectId: self
+        predicate: body-sense
+        value:
+          kind: text
+          value: 以巢穴、食物、气味和受威胁的经历形成认知，不知道人类后续剧情。
+        description: 以巢穴、食物、气味和受威胁的经历形成认知，不知道人类后续剧情。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - dv-three-headed-python
+      - local_entity_id: location
+        canonical_entity_ids:
+          - dv-polar-path

@@ -1,0 +1,18 @@
+id: ad-bao-yulei-sign
+kind: item
+name: 御雷签
+description: 宝花旧有御雷宝物，可在相应准备和实际消耗下辅助抵御雷劫，不能免除所有天劫。
+placement: canon-bao-hua
+facts:
+  - id: ad-bao-yulei-sign-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bao-hua
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

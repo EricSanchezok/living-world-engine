@@ -1,0 +1,18 @@
+id: yue-chen-courier-letter
+kind: item
+name: 陈芙的外院请教信
+description: 一封尚未送出的信，向黄枫王接引请教外院借阅手续，尚无答复。
+placement: yue-chen-aunt
+facts:
+  - id: yue-chen-courier-letter-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-chen-aunt
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-trade-hall
+kind: location
+name: 天鹏交易大殿
+description: 山壁拱门后分层殿堂，居民在各层交换器物、灵药和手艺。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-trade-hall-route-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-trade-hall-condition-feiling-tianpeng-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山壁拱门后分层殿堂，居民在各层交换器物、灵药和手艺。
+    description: 山壁拱门后分层殿堂，居民在各层交换器物、灵药和手艺。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

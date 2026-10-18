@@ -1,0 +1,28 @@
+id: global-xuanye-tomb
+kind: location
+name: 炫烨陵
+description: 隐在雪陵山深处的古墓，入口被遮掩。
+placement: dajin-xueling-range
+facts:
+  - id: global-xuanye-tomb-route-dajin-xueling-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-xueling-range
+    description: 须实地辨认隐藏墓口及禁制。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+  - id: global-xuanye-tomb-route-global-xuanye-main-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-xuanye-main-room
+    description: 穿越墓道和真实禁制才能到达主室。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

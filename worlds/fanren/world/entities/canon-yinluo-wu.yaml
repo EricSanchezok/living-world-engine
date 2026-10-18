@@ -1,0 +1,394 @@
+id: canon-yinluo-wu
+kind: person
+name: 阴罗吴长老
+description: 阴罗宗长老，与乾老魔和萧长老有同门往来；不属毒圣。
+placement: south-yinluo-inner
+facts:
+  - id: canon-yinluo-wu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-wu
+  - id: canon-yinluo-wu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期阴罗法术、幡术与巡守。
+    description: 元婴初期阴罗法术、幡术与巡守。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-wu
+  - id: canon-yinluo-wu-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 金、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 金、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yinluo-wu
+  - id: canon-yinluo-wu-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-yinluo-wu-sect-elder-under-canon-qian-laomo
+    predicate: sect-elder-under
+    value:
+      kind: entity
+      entityId: canon-qian-laomo
+    description: sect-elder-under
+    access:
+      kind: private
+  - id: canon-yinluo-wu-sect-colleague-canon-yinluo-xiao
+    predicate: sect-colleague
+    value:
+      kind: entity
+      entityId: canon-yinluo-xiao
+    description: sect-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: member-of
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-6
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-6
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-7
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-7
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-8
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-8
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-9
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-9
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-10
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-10
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-11
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-11
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-12
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-12
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-13
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-13
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-14
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-14
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-15
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-15
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-16
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-16
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-17
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-17
+    description: duty-colleague
+    access:
+      kind: private
+  - id: canon-yinluo-wu-duty-colleague-south-yinluo-custodian-18
+    predicate: duty-colleague
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-18
+    description: duty-colleague
+    access:
+      kind: private
+meters:
+  - id: canon-yinluo-wu-health
+    definition_id: health
+    current: 100
+  - id: canon-yinluo-wu-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-yinluo-wu-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-yinluo-wu-force
+    definition_id: force
+    value: 5
+  - id: canon-yinluo-wu-craft
+    definition_id: craft
+    value: 4
+  - id: canon-yinluo-wu-perception
+    definition_id: perception
+    value: 4
+  - id: canon-yinluo-wu-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-yinluo-wu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 阴罗宗长老，与乾老魔和萧长老有同门往来；不属毒圣。
+      voice: 面对大长老恭谨，私下更关心命令有没有说清边界。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 整理本月护山轮值，核对自己所持幡的损伤。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 阴罗吴长老
+        description: 阴罗宗长老，与乾老魔和萧长老有同门往来；不属毒圣。
+        status: observed
+      - id: location
+        name: 阴罗宗内山
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-yinluo-wu-personal-stock
+        name: 阴罗吴长老的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-canon-qian-laomo
+        name: 乾老魔
+        description: 阴罗同门和上下职务，命令不是思想控制。
+        status: observed
+      - id: known-canon-yinluo-xiao
+        name: 阴罗萧长老
+        description: 已认识的阴罗同门。
+        status: observed
+      - id: known-dajin-yinluo-sect
+        name: 阴罗宗
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+      - id: known-south-yinluo-custodian-6
+        name: 岑抱元
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-7
+        name: 栾景
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-8
+        name: 杭虚白
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-9
+        name: 胥尘
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-10
+        name: 伏澄
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-11
+        name: 郝云岫
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-12
+        name: 盛漠
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-13
+        name: 尉青
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-14
+        name: 贾旬
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-15
+        name: 何闻朔
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-16
+        name: 费迟
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-17
+        name: 常孤崖
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-south-yinluo-custodian-18
+        name: 隗沉
+        description: 彼此相识的轮值同门，不因此共知私人经历。
+        status: observed
+      - id: known-kunwu-yinluo-banner-2
+        name: 阴罗幡2
+        description: 自己当前受托持有的那面幡。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期阴罗法术、幡术与巡守。
+        description: 元婴初期阴罗法术、幡术与巡守。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 金、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 金、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yinluo-wu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-yinluo-inner
+      - local_entity_id: known-canon-yinluo-wu-personal-stock
+        canonical_entity_ids:
+          - canon-yinluo-wu-personal-stock
+      - local_entity_id: known-canon-qian-laomo
+        canonical_entity_ids:
+          - canon-qian-laomo
+      - local_entity_id: known-canon-yinluo-xiao
+        canonical_entity_ids:
+          - canon-yinluo-xiao
+      - local_entity_id: known-dajin-yinluo-sect
+        canonical_entity_ids:
+          - dajin-yinluo-sect
+      - local_entity_id: known-south-yinluo-custodian-6
+        canonical_entity_ids:
+          - south-yinluo-custodian-6
+      - local_entity_id: known-south-yinluo-custodian-7
+        canonical_entity_ids:
+          - south-yinluo-custodian-7
+      - local_entity_id: known-south-yinluo-custodian-8
+        canonical_entity_ids:
+          - south-yinluo-custodian-8
+      - local_entity_id: known-south-yinluo-custodian-9
+        canonical_entity_ids:
+          - south-yinluo-custodian-9
+      - local_entity_id: known-south-yinluo-custodian-10
+        canonical_entity_ids:
+          - south-yinluo-custodian-10
+      - local_entity_id: known-south-yinluo-custodian-11
+        canonical_entity_ids:
+          - south-yinluo-custodian-11
+      - local_entity_id: known-south-yinluo-custodian-12
+        canonical_entity_ids:
+          - south-yinluo-custodian-12
+      - local_entity_id: known-south-yinluo-custodian-13
+        canonical_entity_ids:
+          - south-yinluo-custodian-13
+      - local_entity_id: known-south-yinluo-custodian-14
+        canonical_entity_ids:
+          - south-yinluo-custodian-14
+      - local_entity_id: known-south-yinluo-custodian-15
+        canonical_entity_ids:
+          - south-yinluo-custodian-15
+      - local_entity_id: known-south-yinluo-custodian-16
+        canonical_entity_ids:
+          - south-yinluo-custodian-16
+      - local_entity_id: known-south-yinluo-custodian-17
+        canonical_entity_ids:
+          - south-yinluo-custodian-17
+      - local_entity_id: known-south-yinluo-custodian-18
+        canonical_entity_ids:
+          - south-yinluo-custodian-18
+      - local_entity_id: known-kunwu-yinluo-banner-2
+        canonical_entity_ids:
+          - kunwu-yinluo-banner-2

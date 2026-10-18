@@ -1,0 +1,22 @@
+id: ad-qingyi-su-purse
+kind: container
+name: 苏翎私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-qingyi-su
+facts:
+  - id: ad-qingyi-su-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-qingyi-su
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

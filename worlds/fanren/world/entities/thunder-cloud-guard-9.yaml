@@ -1,0 +1,34 @@
+id: thunder-cloud-guard-9
+kind: item
+name: 云城之卫第9具
+description: 一具完整云城守卫傀儡，停驻在防御阵位，有自身材料与供能约束。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-cloud-guard-9-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-alliance-seat-9
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-cloud-guard-9-operation
+    predicate: operation
+    value:
+      kind: text
+      value: 本具按所属族授权和城防阵指令行动；当前每次持续作战三千六百秒最多需四块高阶灵石，已装四块，实际消耗须扣减。局部吸金范围约千丈，须真实启动并受目标抵抗、距离与环境影响。
+    description: 本具按所属族授权和城防阵指令行动；当前每次持续作战三千六百秒最多需四块高阶灵石，已装四块，实际消耗须扣减。局部吸金范围约千丈，须真实启动并受目标抵抗、距离与环境影响。
+    access:
+      kind: public
+meters:
+  - id: thunder-cloud-guard-9-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: high-stone
+    amount: 4
+ratings:
+  - id: thunder-cloud-guard-9-force
+    definition_id: force
+    value: 7
+shared_activity_resources: []

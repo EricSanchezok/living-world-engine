@@ -1,0 +1,29 @@
+id: root-feng-public-stock
+kind: container
+name: 丰家当期周转库
+description: 已分账的有限储备，支出后须减少余额。
+placement: root-feng-estate
+facts:
+  - id: root-feng-public-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-feng-clan
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+  - id: root-feng-public-stock-authority
+    predicate: authority
+    value:
+      kind: text
+      value: 本期十八千低阶灵石为族中周转款，负责者可按账支付已同意的小额修护与货款；重大支出需族中议事。
+    description: 本期十八千低阶灵石为族中周转款，负责者可按账支付已同意的小额修护与货款；重大支出需族中议事。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 18000
+ratings: []
+shared_activity_resources: []

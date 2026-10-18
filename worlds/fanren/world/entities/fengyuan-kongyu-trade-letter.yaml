@@ -1,0 +1,26 @@
+id: fengyuan-kongyu-trade-letter
+kind: item
+name: 空鱼交换呈书
+description: 流阙提议按次维护城中三个旧小匣，换取一段不索族人血食的约定；没有已获同意，也不替所有未来族人许终身奴契。
+placement: fengyuan-shura-courier
+facts:
+  - id: fengyuan-kongyu-trade-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-kongyu-trade-letter-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-keeper
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

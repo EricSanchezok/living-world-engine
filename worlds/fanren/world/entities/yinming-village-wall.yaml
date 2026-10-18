@@ -1,0 +1,26 @@
+id: yinming-village-wall
+kind: location
+name: 北垒村
+description: 北侧村落，知道暴风山下部分安全石路。
+placement: yinming-storm-foot
+facts:
+  - id: yinming-village-wall-route-yinming-storm-foot
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-storm-foot
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-wall-condition-yinming-storm-foot
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

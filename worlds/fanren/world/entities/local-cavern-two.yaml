@@ -1,0 +1,34 @@
+id: local-cavern-two
+kind: item
+name: 二号机关
+description: 能松开对应副殿支撑构件的旧装置，当前锁定且未触发。
+placement: local-cavern-control
+facts:
+  - id: local-cavern-two-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+  - id: local-cavern-two-mechanical-state
+    predicate: mechanical-state
+    value:
+      kind: text
+      value: 锁定；需实际解锁并推动整段传动，不接受远程口令自动启动。
+    description: 锁定；需实际解锁并推动整段传动，不接受远程口令自动启动。
+    access:
+      kind: private
+  - id: local-cavern-two-affected-structure
+    predicate: affected-structure
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-2
+    description: 二号机关对应第二偏殿的基础；成功触发会破坏其支撑，并危及殿内的人与物。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

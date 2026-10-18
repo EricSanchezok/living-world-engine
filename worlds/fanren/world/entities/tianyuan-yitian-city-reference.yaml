@@ -1,0 +1,134 @@
+id: tianyuan-yitian-city-reference
+kind: location
+name: 倚天城
+description: 有石城台与内外街市的修士聚城，老城墙保留修补层；城内居民与往来修士各有私产，城务须靠真实人手处理。
+placement: spirit-human-demon-territory
+facts:
+  - id: tianyuan-yitian-city-reference-route-to-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: route-to-spirit-tianyuan-street
+    access:
+      kind: private
+  - id: tianyuan-yitian-city-reference-route-conditions-spirit-tianyuan-street
+    predicate: route-conditions-spirit-tianyuan-street
+    value:
+      kind: text
+      value: 两族领土内部的长途道路，须按实际脚程、飞遁能力与歇息耗时；两城相距遥远，不能同一动作瞬至。
+    description: 两族领土内部的长途道路，须按实际脚程、飞遁能力与歇息耗时；两城相距遥远，不能同一动作瞬至。
+    access:
+      kind: private
+  - id: tianyuan-yitian-city-reference-route-to-root-zhongjian-mountain
+    predicate: route-to-root-zhongjian-mountain
+    value:
+      kind: entity
+      entityId: root-zhongjian-mountain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-travel-condition-root-zhongjian-mountain
+    predicate: travel-condition-root-zhongjian-mountain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-route-to-root-yitian-tianhuang-court
+    predicate: route-to-root-yitian-tianhuang-court
+    value:
+      kind: entity
+      entityId: root-yitian-tianhuang-court
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-travel-condition-root-yitian-tianhuang-court
+    predicate: travel-condition-root-yitian-tianhuang-court
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-route-to-root-yitian-yitian-court
+    predicate: route-to-root-yitian-yitian-court
+    value:
+      kind: entity
+      entityId: root-yitian-yitian-court
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-travel-condition-root-yitian-yitian-court
+    predicate: travel-condition-root-yitian-yitian-court
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-route-to-root-yitian-jiuxing-court
+    predicate: route-to-root-yitian-jiuxing-court
+    value:
+      kind: entity
+      entityId: root-yitian-jiuxing-court
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-travel-condition-root-yitian-jiuxing-court
+    predicate: travel-condition-root-yitian-jiuxing-court
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-route-to-root-yitian-fourth-court
+    predicate: route-to-root-yitian-fourth-court
+    value:
+      kind: entity
+      entityId: root-yitian-fourth-court
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-travel-condition-root-yitian-fourth-court
+    predicate: travel-condition-root-yitian-fourth-court
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: tianyuan-yitian-city-reference-root-detail-yitian-solar-array
+    predicate: root-detail-yitian-solar-array
+    value:
+      kind: text
+      value: 九阳罡日阵须九处地火及持续吸纳炙阳之力，五阳化月会令相应供能不足；布设维护须实料，天象不强迫双方开战。
+    description: 九阳罡日阵须九处地火及持续吸纳炙阳之力，五阳化月会令相应供能不足；布设维护须实料，天象不强迫双方开战。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: tianyuan-yitian-city-reference-root-detail-yitian-defense-craft
+    predicate: root-detail-yitian-defense-craft
+    value:
+      kind: text
+      value: 铜甲傀儡、巨砖补墙、雷网和多层禁制依材料供能。合息属四凶而非真灵，血符有限控制会耗精血；信号解封须真实符与操作者。
+    description: 铜甲傀儡、巨砖补墙、雷网和多层禁制依材料供能。合息属四凶而非真灵，血符有限控制会耗精血；信号解封须真实符与操作者。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

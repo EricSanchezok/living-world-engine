@@ -1,0 +1,18 @@
+id: canon-longmeng-soul
+kind: soul-component
+name: 珑梦魂源
+description: 当前与元刹分魂融合，以其意识为主；不是另一个能同时自行离体行动的完整人物。
+placement: canon-linglong-body
+facts:
+  - id: canon-longmeng-soul-separated-other-soul
+    predicate: separated-other-soul
+    value:
+      kind: entity
+      entityId: canon-xueling-soul
+    description: separated-other-soul
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

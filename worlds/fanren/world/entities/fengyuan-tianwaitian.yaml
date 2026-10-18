@@ -1,0 +1,26 @@
+id: fengyuan-tianwaitian
+kind: location
+name: 天外天
+description: 高空黑白天色之间漂着巨石，残存的楼台沿石面起伏；登临必须有真实飞行与护持能力。
+placement: fengyuan-mingsha-waste
+facts:
+  - id: fengyuan-tianwaitian-route-to-fengyuan-mingsha-waste
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mingsha-waste
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-tianwaitian-route-conditions-fengyuan-mingsha-waste
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需穿过阴煞风海升至浮石；没有普通阶梯通天，不保证弱者靠同伴在场就受保护。
+    description: 需穿过阴煞风海升至浮石；没有普通阶梯通天，不保证弱者靠同伴在场就受保护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

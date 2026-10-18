@@ -1,0 +1,250 @@
+id: canon-di-xue
+kind: person
+name: 地血
+description: 血袍妖修，热衷傀儡与分神，算交易细而爱笑。
+placement: feiling-dixue-workshop
+facts:
+  - id: canon-di-xue-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-di-xue
+  - id: canon-di-xue-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体血道、分神与傀儡炼制；双形施法共用自己的资源和意志。
+    description: 合体血道、分神与傀儡炼制；双形施法共用自己的资源和意志。
+    access:
+      kind: agents
+      agentIds:
+        - canon-di-xue
+  - id: canon-di-xue-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 独立妖修主体；显化形体不是另一个有独立库存的人。
+    description: 独立妖修主体；显化形体不是另一个有独立库存的人。
+    access:
+      kind: agents
+      agentIds:
+        - canon-di-xue
+  - id: canon-di-xue-contact-canon-mu-qing
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: regional-acquaintance
+    access:
+      kind: private
+  - id: canon-di-xue-contact-canon-blue-ghost-woman
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-blue-ghost-woman
+    description: regional-acquaintance
+    access:
+      kind: private
+  - id: canon-di-xue-contact-canon-abyss-zhu-king
+    predicate: regional-acquaintance
+    value:
+      kind: entity
+      entityId: canon-abyss-zhu-king
+    description: regional-acquaintance
+    access:
+      kind: private
+meters:
+  - id: canon-di-xue-health
+    definition_id: health
+    current: 100
+  - id: canon-di-xue-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-di-xue-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-di-xue-force
+    definition_id: force
+    value: 7
+  - id: canon-di-xue-craft
+    definition_id: craft
+    value: 4
+  - id: canon-di-xue-perception
+    definition_id: perception
+    value: 7
+  - id: canon-di-xue-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-di-xue
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血袍妖修，热衷傀儡与分神，算交易细而爱笑。
+      voice: 笑着讨价还价，谈实验时忽然专注，喜欢把小事也算作交换。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 试成一具更节省材料的傀儡，换来自己缺少的灵材。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 地血
+        description: 血袍妖修，热衷傀儡与分神，算交易细而爱笑。
+        status: observed
+      - id: location
+        name: 地血炼制室
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-di-xue-private-stock
+        name: 地血私用储备
+        description: 个人维护与修炼材料，不能充当全族公库。
+        status: observed
+      - id: known-canon-mu-qing
+        name: 木青
+        description: 知道对方在地渊经营自己的居所，偶有材料交易，只知道对方主动谈过的事情。
+        status: observed
+      - id: known-canon-blue-ghost-woman
+        name: 蓝鬼婆
+        description: 知道对方在地渊经营自己的居所，偶有材料交易，只知道对方主动谈过的事情。
+        status: observed
+      - id: known-feiling-dixue-workbench
+        name: 地血傀儡试作台
+        description: 尚未完成的一具木制傀儡骨架，没有行动能力；完成须耗用已持材料和实际施法。
+        status: observed
+      - id: known-canon-abyss-zhu-king
+        name: 朱姓妖王
+        description: 地渊高阶邻居，知道其居所大概方向，曾有材料交换。
+        status: observed
+      - id: feiling-review-feiling-dixue-second-body
+        name: 地血双煞第二躯
+        description: 自己见过或参与管理的对象，知道它的实际所在和许可边界。
+        status: observed
+      - id: feiling-review-feiling-chungui
+        name: 杶龟兽
+        description: 自己见过或参与管理的对象，知道它的实际所在和许可边界。
+        status: observed
+      - id: feiling-review-feiling-dixue-yellow-bell
+        name: 杶龟引路铃
+        description: 自己见过或参与管理的对象，知道它的实际所在和许可边界。
+        status: observed
+      - id: feiling-review-feiling-spirit-attendant-one
+        name: 青羽灵侍
+        description: 自己见过或参与管理的对象，知道它的实际所在和许可边界。
+        status: observed
+      - id: feiling-review-feiling-spirit-attendant-two
+        name: 白衣灵侍
+        description: 自己见过或参与管理的对象，知道它的实际所在和许可边界。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体血道、分神与傀儡炼制；双形施法共用自己的资源和意志。
+        description: 合体血道、分神与傀儡炼制；双形施法共用自己的资源和意志。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 独立妖修主体；显化形体不是另一个有独立库存的人。
+        description: 独立妖修主体；显化形体不是另一个有独立库存的人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: puppet-project
+        subjectId: self
+        predicate: puppet-project
+        value:
+          kind: text
+          value: 试作骨架尚缺五份材料和三块中阶灵石加工，自己的储备足够但需要花时间试验。
+        description: 试作骨架尚缺五份材料和三块中阶灵石加工，自己的储备足够但需要花时间试验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        description: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-di-xue
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-dixue-workshop
+      - local_entity_id: known-canon-di-xue-private-stock
+        canonical_entity_ids:
+          - canon-di-xue-private-stock
+      - local_entity_id: known-canon-mu-qing
+        canonical_entity_ids:
+          - canon-mu-qing
+      - local_entity_id: known-canon-blue-ghost-woman
+        canonical_entity_ids:
+          - canon-blue-ghost-woman
+      - local_entity_id: known-feiling-dixue-workbench
+        canonical_entity_ids:
+          - feiling-dixue-workbench
+      - local_entity_id: known-canon-abyss-zhu-king
+        canonical_entity_ids:
+          - canon-abyss-zhu-king
+      - local_entity_id: feiling-review-feiling-dixue-second-body
+        canonical_entity_ids:
+          - feiling-dixue-second-body
+      - local_entity_id: feiling-review-feiling-chungui
+        canonical_entity_ids:
+          - feiling-chungui
+      - local_entity_id: feiling-review-feiling-dixue-yellow-bell
+        canonical_entity_ids:
+          - feiling-dixue-yellow-bell
+      - local_entity_id: feiling-review-feiling-spirit-attendant-one
+        canonical_entity_ids:
+          - feiling-spirit-attendant-one
+      - local_entity_id: feiling-review-feiling-spirit-attendant-two
+        canonical_entity_ids:
+          - feiling-spirit-attendant-two

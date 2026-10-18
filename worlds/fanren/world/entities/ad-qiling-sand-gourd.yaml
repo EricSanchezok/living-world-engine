@@ -1,0 +1,18 @@
+id: ad-qiling-sand-gourd
+kind: item
+name: 烈煞金罡沙葫芦
+description: 淡黄葫芦与炼过的晶沙相连，驱沙耗操作者法力；损失的沙不会无条件再生。
+placement: ad-qiling-treasury
+facts:
+  - id: ad-qiling-sand-gourd-finite-sand
+    predicate: finite-sand
+    value:
+      kind: text
+      value: 现有一葫晶沙，驱散范围受真实数量、控制与对抗限制；先记录损失再谈补充，不把称海比喻当无限物质。
+    description: 现有一葫晶沙，驱散范围受真实数量、控制与对抗限制；先记录损失再谈补充，不把称海比喻当无限物质。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

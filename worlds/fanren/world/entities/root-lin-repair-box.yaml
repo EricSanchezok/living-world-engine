@@ -1,0 +1,27 @@
+id: root-lin-repair-box
+kind: item
+name: 林家待修符匣
+description: 开合禁制磨损的符匣，修好需补两块适用符木并耗法施作。
+placement: root-lin-estate
+facts:
+  - id: root-lin-repair-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-lin-clan
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+  - id: root-lin-repair-box-repair-requirements
+    predicate: repair-requirements
+    value:
+      kind: text
+      value: 已懂此匣结构者实际投入两块符木、十点法力和半小时可尝试修复；未检验不能保证更深处完好。
+    description: 已懂此匣结构者实际投入两块符木、十点法力和半小时可尝试修复；未检验不能保证更深处完好。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

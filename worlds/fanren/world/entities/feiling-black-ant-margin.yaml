@@ -1,0 +1,26 @@
+id: feiling-black-ant-margin
+kind: location
+name: 黑渊飞蚁巢缘
+description: 碎岩中遍布蚁孔，移动光源容易惊动群虫；绕路要付出时间和补给。
+placement: feiling-abyss-1
+facts:
+  - id: feiling-black-ant-margin-route-to-feiling-abyss-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-1
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-black-ant-margin-route-conditions-feiling-abyss-1
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 蚁群护巢，应避光源与突然震动。
+    description: 蚁群护巢，应避光源与突然震动。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

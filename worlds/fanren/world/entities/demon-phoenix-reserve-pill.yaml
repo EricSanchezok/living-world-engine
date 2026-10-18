@@ -1,0 +1,36 @@
+id: demon-phoenix-reserve-pill
+kind: container
+name: 筱馆旧炼黑炎丹
+description: 以封符锁住的一枚黑色丹丸，瓶塞可见旧炼标记；服用需先辨识和评估自身修行。
+placement: canon-black-phoenix-king-purse
+facts:
+  - id: demon-phoenix-reserve-pill-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-black-phoenix-king
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-reserve-pill-medicine-identity
+    predicate: medicine-identity
+    value:
+      kind: text
+      value: 仅一颗黑炎丹；消耗后为空瓶，无按日补货。
+    description: 仅一颗黑炎丹；消耗后为空瓶，无按日补货。
+    access:
+      kind: public
+  - id: demon-phoenix-reserve-pill-purpose
+    predicate: purpose
+    value:
+      kind: text
+      value: 可辅助具备冲击炼虚条件的修士，不替代五行合一、功法、修行积累或突破过程。
+    description: 可辅助具备冲击炼虚条件的修士，不替代五行合一、功法、修行积累或突破过程。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: black-flame-pill-dose
+    amount: 1
+ratings: []
+shared_activity_resources: []

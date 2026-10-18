@@ -1,0 +1,18 @@
+id: blood-core-gold-tower
+kind: item
+name: 天鼎玲珑金塔
+description: 有反射光幕与雕像补给的储宝器，当前未被控制。
+placement: blood-treasure-room
+facts:
+  - id: blood-core-gold-tower-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

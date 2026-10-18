@@ -1,0 +1,20 @@
+id: south-repair-wood
+kind: container
+name: 小舟修缮剩料
+description: 修船剩下的木料和绳，可改作其他用途。
+placement: south-market-landing
+facts:
+  - id: south-repair-wood-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-boatkeeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

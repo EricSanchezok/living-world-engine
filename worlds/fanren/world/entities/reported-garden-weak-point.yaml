@@ -1,0 +1,26 @@
+id: reported-garden-weak-point
+kind: item
+name: 残园游走薄弱点
+description: 极小、需要精细探测的空间薄弱处，目前在半廊上方约三丈，可能缓慢游走；不是肉眼可见的常开门。
+placement: associated-lingmiao-remnant
+facts:
+  - id: reported-garden-weak-point-opening-state
+    predicate: opening-state
+    value:
+      kind: text
+      value: 当前闭合；通过需定位、相容的足够力量和对面落点安全条件。空间扰动可能改变位置，观察过一次不等于永远知道坐标。
+    description: 当前闭合；通过需定位、相容的足够力量和对面落点安全条件。空间扰动可能改变位置，观察过一次不等于永远知道坐标。
+    access:
+      kind: private
+  - id: reported-garden-weak-point-exit-target
+    predicate: exit-target
+    value:
+      kind: text
+      value: 通向人界的实际落点取决于开启时对应关系，需实际核定。
+    description: 通向人界的实际落点取决于开启时对应关系，需实际核定。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

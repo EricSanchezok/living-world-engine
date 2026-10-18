@@ -1,0 +1,18 @@
+id: local-cavern-control
+kind: location
+name: 山腹机关室
+description: 独立操作处，控制杆与承重构件相连，当前保持锁定。
+placement: local-sunset-cavern
+facts:
+  - id: local-cavern-control-route-local-sunset-cavern
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-sunset-cavern
+    description: 沿实际窄道进入操作室，锁钥与守卫不因知道地名消失。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

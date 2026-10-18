@@ -1,0 +1,177 @@
+id: canon-helian-elder-2
+kind: person
+name: 商盟未具名第2长老
+description: 四位常驻合研大乘之一，有独立住处、判断与资源。
+placement: seas-elders-court
+facts:
+  - id: canon-helian-elder-2-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-elder-2
+  - id: canon-helian-elder-2-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘护体、合阵协同与各自已修术法。
+    description: 大乘护体、合阵协同与各自已修术法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-elder-2
+  - id: canon-helian-elder-2-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-elder-2
+  - id: canon-helian-elder-2-council-member
+    predicate: council-member
+    value:
+      kind: entity
+      entityId: seas-helian-council
+    description: council-member
+    access:
+      kind: private
+meters:
+  - id: canon-helian-elder-2-health
+    definition_id: health
+    current: 100
+  - id: canon-helian-elder-2-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-helian-elder-2-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-helian-elder-2-force
+    definition_id: force
+    value: 8
+  - id: canon-helian-elder-2-craft
+    definition_id: craft
+    value: 7
+  - id: canon-helian-elder-2-perception
+    definition_id: perception
+    value: 8
+  - id: canon-helian-elder-2-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-helian-elder-2
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 四位常驻合研大乘之一，有独立住处、判断与资源。
+      voice: 说话缓慢，常先问最坏情形如何退出。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成自己负责的合练环节，同时审视同伴提出的接待安排。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 商盟未具名第2长老
+        description: 四位常驻合研大乘之一，有独立住处、判断与资源。
+        status: observed
+      - id: location
+        name: 四长老合研院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-helian-elder-2-private-stock
+        name: 商盟未具名第2长老的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-helian-jia
+        name: 贾姓长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-canon-helian-elder-3
+        name: 商盟未具名第3长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-canon-helian-elder-4
+        name: 商盟未具名第4长老
+        description: 长期合练同僚，各自承担不同的神识与法力负担。
+        status: observed
+      - id: known-seas-four-study-notes
+        name: 四长老合练札记
+        description: 参与记录的真实研究，不将愿望当已成神通。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘护体、合阵协同与各自已修术法。
+        description: 大乘护体、合阵协同与各自已修术法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-helian-elder-2
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-elders-court
+      - local_entity_id: known-canon-helian-elder-2-private-stock
+        canonical_entity_ids:
+          - canon-helian-elder-2-private-stock
+      - local_entity_id: known-canon-helian-jia
+        canonical_entity_ids:
+          - canon-helian-jia
+      - local_entity_id: known-canon-helian-elder-3
+        canonical_entity_ids:
+          - canon-helian-elder-3
+      - local_entity_id: known-canon-helian-elder-4
+        canonical_entity_ids:
+          - canon-helian-elder-4
+      - local_entity_id: known-seas-four-study-notes
+        canonical_entity_ids:
+          - seas-four-study-notes

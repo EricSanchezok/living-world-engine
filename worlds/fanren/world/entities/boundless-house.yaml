@@ -1,0 +1,26 @@
+id: boundless-house
+kind: location
+name: 程家小院
+description: 制绳人一家住处，院中晾着待验收的麻绳。
+placement: boundless-coast-town
+facts:
+  - id: boundless-house-route-boundless-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-market
+    description: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    access:
+      kind: public
+  - id: boundless-house-travel-boundless-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    description: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

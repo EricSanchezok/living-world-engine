@@ -1,0 +1,90 @@
+id: south-yin-forks
+kind: location
+name: 阴阳窟岔道
+description: 浅处风尚可抵御，深入几百丈后惊魄阴风开始伤害魂魄。
+placement: south-yin-mouth
+facts:
+  - id: south-yin-forks-route-south-yin-mouth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-mouth
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-forks-condition-south-yin-mouth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 越深惊魄阴风越强，没有合适护魂与防御会受伤。
+    description: 越深惊魄阴风越强，没有合适护魂与防御会受伤。
+    access:
+      kind: public
+  - id: south-yin-forks-route-south-yin-ice
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-ice
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-forks-condition-south-yin-ice
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 冰滑与阴风并存，须真实行进和护持。
+    description: 冰滑与阴风并存，须真实行进和护持。
+    access:
+      kind: public
+  - id: south-yin-forks-route-south-yin-wind
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-wind
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-forks-condition-south-yin-wind
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 强风穴口的幻蛾与风力同在，不是安全穿越道。
+    description: 强风穴口的幻蛾与风力同在，不是安全穿越道。
+    access:
+      kind: public
+  - id: south-yin-forks-route-south-yin-warm
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-warm
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-forks-condition-south-yin-warm
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐岔道需现场探索，路标不是完整地图。
+    description: 隐岔道需现场探索，路标不是完整地图。
+    access:
+      kind: public
+  - id: south-yin-forks-route-south-yaksha-prison
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yaksha-prison
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-forks-condition-south-yaksha-prison
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 走近法阵会被其中尸灵察觉，穿越光幕另需处理禁制。
+    description: 走近法阵会被其中尸灵察觉，穿越光幕另需处理禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

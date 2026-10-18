@@ -1,0 +1,34 @@
+id: innerstar-sea-ship
+kind: item
+name: 青帆海船
+description: 顾汀经营的大型凡俗海船，船身可承货，船底最近修补完整。
+placement: innerstar-harbor
+facts:
+  - id: innerstar-sea-ship-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-sea-ship-capacity
+    predicate: capacity
+    value:
+      kind: text
+      value: 普通货物总量当前最多再装十只标准货箱与十二名乘客；已有六箱普通布货。人数、体积和载重须按实际装载核对。
+    description: 普通货物总量当前最多再装十只标准货箱与十二名乘客；已有六箱普通布货。人数、体积和载重须按实际装载核对。
+    access:
+      kind: public
+  - id: innerstar-sea-ship-scheduled-destination
+    predicate: scheduled-destination
+    value:
+      kind: text
+      value: 船主原定前往魁星岛，航路至少六个人界日；实际海况、风向和航行能力影响用时，未开航不会自动到达。
+    description: 船主原定前往魁星岛，航路至少六个人界日；实际海况、风向和航行能力影响用时，未开航不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

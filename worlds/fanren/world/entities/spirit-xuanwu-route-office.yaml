@@ -1,0 +1,34 @@
+id: spirit-xuanwu-route-office
+kind: location
+name: 三境行旅公所
+description: 核对长途车队、海港接驳和分段传送权限的行旅处。
+placement: tianyuan-city
+facts:
+  - id: spirit-xuanwu-route-office-route-spirit-joint-checkpoint
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-joint-checkpoint
+    description: 核对长途车队、海港接驳和分段传送权限的行旅处。
+    access:
+      kind: public
+  - id: spirit-xuanwu-route-office-route-spirit-xuanwu-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-harbor
+    description: 须持实际行程票并逐段乘用沿线交通；路线指向远方终点，不构成瞬移。
+    access:
+      kind: public
+  - id: spirit-xuanwu-route-office-route-spirit-tianling-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianling-market
+    description: 须持实际行程票并逐段乘用沿线交通；路线指向远方终点，不构成瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

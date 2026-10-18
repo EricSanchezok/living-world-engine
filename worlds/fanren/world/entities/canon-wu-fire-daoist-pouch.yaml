@@ -1,0 +1,20 @@
+id: canon-wu-fire-daoist-pouch
+kind: item
+name: 吴道人的日用包
+description: 随身普通衣物、餐具与个人口粮。
+placement: canon-wu-fire-daoist
+facts:
+  - id: canon-wu-fire-daoist-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wu-fire-daoist
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+ratings: []
+shared_activity_resources: []

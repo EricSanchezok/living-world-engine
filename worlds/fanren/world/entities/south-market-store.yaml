@@ -1,0 +1,26 @@
+id: south-market-store
+kind: location
+name: 宋家杂货铺
+description: 仓架按草药与毒虫饲料分开，外间可验货，内库由主人保管。
+placement: south-market
+facts:
+  - id: south-market-store-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-store-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

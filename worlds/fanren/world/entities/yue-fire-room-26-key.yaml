@@ -1,0 +1,26 @@
+id: yue-fire-room-26-key
+kind: item
+name: 第26地火室牌钥
+description: 只对应本室门禁，不通其他火室。
+placement: yue-yuelu-fire-keeper
+facts:
+  - id: yue-fire-room-26-key-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权与保管、借用分别处理。
+    access:
+      kind: public
+  - id: yue-fire-room-26-key-opens
+    predicate: opens-location
+    value:
+      kind: entity
+      entityId: yue-fire-room-26
+    description: 本室对应牌钥，借用不转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

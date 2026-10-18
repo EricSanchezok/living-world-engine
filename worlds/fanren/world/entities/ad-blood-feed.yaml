@@ -1,0 +1,20 @@
+id: ad-blood-feed
+kind: container
+name: 田用异兽血封罐
+description: 已经合法取得的相容兽血；每次现有田地养护消耗一份，30共同日一轮不等于立即催熟。
+placement: ad-rice-field
+facts:
+  - id: ad-blood-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-grower
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: sacred-beast-blood
+    amount: 12
+ratings: []
+shared_activity_resources: []

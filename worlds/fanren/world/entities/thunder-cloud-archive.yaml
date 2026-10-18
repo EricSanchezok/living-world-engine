@@ -1,0 +1,53 @@
+id: thunder-cloud-archive
+kind: location
+name: 云族誊录间
+description: 隔窗留光的誊录间保存少量公开地理簿和借阅凭条，密术不陈列于外案。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-cloud-archive-route-to-thunder-cloud-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-gate
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-cloud-archive-route-conditions-thunder-cloud-gate
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经公开街巷，入档案内室另需借阅许可。
+    description: 经公开街巷，入档案内室另需借阅许可。
+    access:
+      kind: private
+  - id: thunder-cloud-archive-root-detail-pill-materials
+    predicate: root-detail-pill-materials
+    value:
+      kind: text
+      value: 天罗丹以青罗果为主料，可配黑炎丹助突破；血杏换血炼体需配套方法。芝龙果三万年成熟，腾龙丹木主土金辅，适上族七八阶，九阶收益大减。琉璃天火液由天外火提炼；生服一滴省年许苦修是流传介绍，不保证各体同效。
+    description: 天罗丹以青罗果为主料，可配黑炎丹助突破；血杏换血炼体需配套方法。芝龙果三万年成熟，腾龙丹木主土金辅，适上族七八阶，九阶收益大减。琉璃天火液由天外火提炼；生服一滴省年许苦修是流传介绍，不保证各体同效。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: thunder-cloud-archive-root-detail-qianbian-mask
+    predicate: root-detail-qianbian-mask
+    value:
+      kind: text
+      value: 千变幻面需相应皮料、目标材料和口诀。遮形不保证气息、攻击或特殊探察也永不暴露；读懂部分银文不等掌握整套制法。
+    description: 千变幻面需相应皮料、目标材料和口诀。遮形不保证气息、攻击或特殊探察也永不暴露；读懂部分银文不等掌握整套制法。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: thunder-cloud-archive-root-detail-thunderwood
+    predicate: root-detail-thunderwood
+    value:
+      kind: text
+      value: 天雷木不同于金雷竹；雷纹凝炼术须由纹理实际参悟或学习，持木不自动掌握法门。
+    description: 天雷木不同于金雷竹；雷纹凝炼术须由纹理实际参悟或学习，持木不自动掌握法门。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

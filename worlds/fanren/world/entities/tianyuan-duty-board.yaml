@@ -1,0 +1,34 @@
+id: tianyuan-duty-board
+kind: item
+name: 近界轮值告示
+description: 近期工作包括桥路勘查、药房补给护送与外院文书递交，领取任务不等于已经完成。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-duty-board-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-duty-board-bridge-offer
+    predicate: bridge-offer
+    value:
+      kind: text
+      value: 愿意调查断桥、确认失联者并提交可核记录的合适人员，可申请四十低阶灵石；实际修桥另需四份材料、七千二百秒与施工能力，追加四十报酬。
+    description: 愿意调查断桥、确认失联者并提交可核记录的合适人员，可申请四十低阶灵石；实际修桥另需四份材料、七千二百秒与施工能力，追加四十报酬。
+    access:
+      kind: public
+  - id: tianyuan-duty-board-participation
+    predicate: participation
+    value:
+      kind: text
+      value: 外来人可自愿协助，经领队确认能力后接任务；拒绝不触发追杀或强制入伍。
+    description: 外来人可自愿协助，经领队确认能力后接任务；拒绝不触发追杀或强制入伍。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

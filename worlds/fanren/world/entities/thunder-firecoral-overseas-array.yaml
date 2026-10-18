@@ -1,0 +1,58 @@
+id: thunder-firecoral-overseas-array
+kind: location
+name: 火瑚古阵残台
+description: 海边岩台断裂，旧槽空着，通往大陆的灵纹已不能构成回路。
+placement: thunder-firecloud-island
+facts:
+  - id: thunder-firecoral-overseas-array-route-to-thunder-fireyang-settlement
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fireyang-settlement
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-firecoral-overseas-array-route-conditions-thunder-fireyang-settlement
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿海岸到残台；海风无遮蔽，残台本身不能传送。
+    description: 沿海岸到残台；海风无遮蔽，残台本身不能传送。
+    access:
+      kind: private
+  - id: thunder-firecoral-overseas-array-route-to-thunder-firecoral-deepwater
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-firecoral-deepwater
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-firecoral-overseas-array-route-conditions-thunder-firecoral-deepwater
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。
+    description: 从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。
+    access:
+      kind: private
+  - id: thunder-firecoral-overseas-array-paired-array
+    predicate: paired-array
+    value:
+      kind: entity
+      entityId: thunder-firecoral-old-array
+    description: paired-array
+    access:
+      kind: private
+  - id: thunder-firecoral-overseas-array-status
+    predicate: status
+    value:
+      kind: text
+      value: 核心槽空缺、灵纹断裂；两端校准、真实阵核和材料未备齐时不能传送。
+    description: 核心槽空缺、灵纹断裂；两端校准、真实阵核和材料未备齐时不能传送。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

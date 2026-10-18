@@ -1,0 +1,18 @@
+id: qixuan-elders
+kind: organization
+name: 长老会
+description: 七玄门内部机构；具体当夜库存及行政流程以已写入的状态为准。
+placement: qixuan-elders-hall
+facts:
+  - id: qixuan-elders-part-of
+    predicate: part-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 属于七玄门，不另立独立宗门。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

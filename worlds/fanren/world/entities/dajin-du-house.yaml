@@ -1,0 +1,34 @@
+id: dajin-du-house
+kind: location
+name: 杜家住屋
+description: 田边两间朴素住屋，院内晾着农具；粮箱与屋舍属于住户。
+placement: dajin-guanning
+facts:
+  - id: dajin-du-house-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-dajin-du-cheng
+    description: 住屋是杜家的实际家产。
+    access:
+      kind: public
+  - id: dajin-du-house-route-dajin-feng-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-estate
+    description: 沿当地田间路往来，要实际行走。
+    access:
+      kind: public
+  - id: dajin-du-house-route-dajin-feng-tenant-field
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-tenant-field
+    description: 沿当地田间路往来，要实际行走。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

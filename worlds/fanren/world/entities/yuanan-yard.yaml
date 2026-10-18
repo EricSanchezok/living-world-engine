@@ -1,0 +1,18 @@
+id: yuanan-yard
+kind: location
+name: 远安镖队驻院
+description: 镜州普通商路边的驻院，货箱、驮马和人员正在准备明晨出发。
+placement: human-realm
+facts:
+  - id: yuanan-yard-route-yuanan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yuanan-road
+    description: 院门通向驿路，走出院门不等于已经完成远程护送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

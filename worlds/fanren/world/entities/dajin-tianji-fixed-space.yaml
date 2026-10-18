@@ -1,0 +1,18 @@
+id: dajin-tianji-fixed-space
+kind: location
+name: 天机阁试器空间
+description: 一处固定的灰白碎石空间，无天然灵气和草木；往来须依传送阵，不是可携带袋子。
+placement: human-realm
+facts:
+  - id: dajin-tianji-fixed-space-teleport-dajin-tianji-backyard
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-backyard
+    description: 固定传送阵相连；需阵法完好、供能和通行许可，不能徒步跨越空间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

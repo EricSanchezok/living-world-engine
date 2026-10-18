@@ -1,0 +1,26 @@
+id: yuanan-road
+kind: location
+name: 驻院外驿路
+description: 商路路段，夜行须照明并留意路况。
+placement: human-realm
+facts:
+  - id: yuanan-road-route-yuanan-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yuanan-yard
+    description: 院门通向驿路，走出院门不等于已经完成远程护送。
+    access:
+      kind: public
+  - id: yuanan-road-route-qingniu-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-town
+    description: 商路与青牛镇相通，赶路需要时间，不瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: dv-polar-crystal-deposit
+kind: container
+name: 地下北极元晶矿体
+description: 元光山峰深处的矿体，目前可开采120份；采掘可能改变山体与光丝分布。
+placement: dv-polar-cave
+facts:
+  - id: dv-polar-crystal-deposit-mining-condition
+    predicate: mining-condition
+    value:
+      kind: text
+      value: 须穿透山体及禁制，承受元光并有真实采炼能力；不因知道地名就收入囊中。当前未开采，无地面巨坑。
+    description: 须穿透山体及禁制，承受元光并有真实采炼能力；不因知道地名就收入囊中。当前未开采，无地面巨坑。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: polar-crystal-portion
+    amount: 120
+ratings: []
+shared_activity_resources: []

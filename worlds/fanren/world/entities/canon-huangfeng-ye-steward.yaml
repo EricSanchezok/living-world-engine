@@ -1,0 +1,361 @@
+id: canon-huangfeng-ye-steward
+kind: person
+name: 叶管事
+description: 年长的筑基管事，关心亲族晚辈，不代表所有叶姓家族。
+placement: yue-huangfeng-hall
+facts:
+  - id: canon-huangfeng-ye-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - canon-huangfeng-ye-steward
+  - id: canon-huangfeng-ye-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基法力、御器、门派日常事务。
+    description: 筑基法力、御器、门派日常事务。
+    access:
+      kind: agents
+      agentIds:
+        - canon-huangfeng-ye-steward
+  - id: canon-huangfeng-ye-steward-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金木火三属性灵根
+    description: 金木火三属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-huangfeng-ye-steward-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 自己长期所属门派，公产与私人库存不同。
+    access:
+      kind: public
+  - id: canon-huangfeng-ye-steward-work-allocation
+    predicate: work-allocation
+    value:
+      kind: text
+      value: 低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。
+    description: 低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。
+    access:
+      kind: public
+meters:
+  - id: canon-huangfeng-ye-steward-health
+    definition_id: health
+    current: 100
+  - id: canon-huangfeng-ye-steward-mana
+    definition_id: mana
+    current: 180
+quantities:
+  - definition_id: low-stone
+    amount: 70
+ratings:
+  - id: canon-huangfeng-ye-steward-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: canon-huangfeng-ye-steward-force
+    definition_id: force
+    value: 2
+  - id: canon-huangfeng-ye-steward-craft
+    definition_id: craft
+    value: 1
+  - id: canon-huangfeng-ye-steward-perception
+    definition_id: perception
+    value: 2
+  - id: canon-huangfeng-ye-steward-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-huangfeng-ye-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 年长的筑基管事，关心亲族晚辈，不代表所有叶姓家族。
+      voice: 说到亲族容易急，碰到明白的规矩仍会讨价还价。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取把更多时间留给修炼，减少本期名册核验差事。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 叶管事
+        description: 年长的筑基管事，关心亲族晚辈，不代表所有叶姓家族。
+        status: observed
+      - id: location
+        name: 黄枫谷议事殿
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-huangfeng-ye-steward-pouch
+        name: 叶管事的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-huangfeng-sect
+        name: 黄枫谷
+        description: 自己长期所属门派，公产与私人库存不同。
+        status: observed
+      - id: known-canon-zhong-lingdao
+        name: 钟灵道
+        description: 长期宗务往来中认识，未公开的私事仍不知。
+        status: observed
+      - id: known-canon-murong-shan
+        name: 慕容衫
+        description: 长期宗务往来中认识，未公开的私事仍不知。
+        status: observed
+      - id: known-canon-huangfeng-wu-steward
+        name: 吴管事
+        description: 长期宗务往来中认识，未公开的私事仍不知。
+        status: observed
+      - id: known-canon-huangfeng-wang-guide
+        name: 王接引
+        description: 长期宗务往来中认识，未公开的私事仍不知。
+        status: observed
+      - id: known-canon-huangfeng-ma-gardener
+        name: 马园主
+        description: 长期宗务往来中认识，未公开的私事仍不知。
+        status: observed
+      - id: known-yue-baiji-hall
+        name: 百机堂
+        description: 自己日常接触并认识的事物。
+        status: observed
+      - id: known-yue-yuelu-keeper
+        name: 徐照
+        description: 门内当值执事，其职责与报酬需按实际履行核对。
+        status: observed
+      - id: known-yue-yuelu-fire-keeper
+        name: 沈砚石
+        description: 门内当值执事，其职责与报酬需按实际履行核对。
+        status: observed
+      - id: known-yue-yuelu-guard-a
+        name: 程谷
+        description: 门内当值执事，其职责与报酬需按实际履行核对。
+        status: observed
+      - id: known-yue-yuelu-guard-b
+        name: 方简
+        description: 门内当值执事，其职责与报酬需按实际履行核对。
+        status: observed
+      - id: known-yue-beast-keeper
+        name: 陶冬
+        description: 门内当值执事，其职责与报酬需按实际履行核对。
+        status: observed
+      - id: known-yue-market-wanbao-keeper
+        name: 苏瑞
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-qiqiao-keeper
+        name: 柳衡
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-yinfeng-keeper
+        name: 常弦
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-wuxing-keeper
+        name: 林书
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-tiangong-keeper
+        name: 郑砺
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-guesthouse-keeper
+        name: 温衡
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-market-restaurant-keeper
+        name: 姜安
+        description: 坊市当前经营者，有租务往来而非无条件听令。
+        status: observed
+      - id: known-yue-huangfeng-market
+        name: 黄枫坊市
+        description: 自己安排弟子杂务时使用的实际工作地点。
+        status: observed
+      - id: known-yue-old-mine
+        name: 荒原灵石矿
+        description: 自己安排弟子杂务时使用的实际工作地点。
+        status: observed
+      - id: known-yue-huangfeng-garden
+        name: 百药园
+        description: 自己安排弟子杂务时使用的实际工作地点。
+        status: observed
+      - id: known-yue-qilin-beast-pens
+        name: 麒麟阁兽栏
+        description: 自己安排弟子杂务时使用的实际工作地点。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基法力、御器、门派日常事务。
+        description: 筑基法力、御器、门派日常事务。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 争取把更多时间留给修炼，减少本期名册核验差事。
+        description: 争取把更多时间留给修炼，减少本期名册核验差事。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-work-property
+        subjectId: self
+        predicate: current-responsibility
+        value:
+          kind: text
+          value: 我负责在百机堂分配谷中杂务，实际工作和领料要核对。
+        description: 我负责在百机堂分配谷中杂务，实际工作和领料要核对。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是金木火三属性灵根。
+        description: 自己曾经验灵，知道自身是金木火三属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: work-allocation
+        subjectId: self
+        predicate: work-allocation
+        value:
+          kind: text
+          value: 低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。
+        description: 低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-huangfeng-ye-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-huangfeng-hall
+      - local_entity_id: known-canon-huangfeng-ye-steward-pouch
+        canonical_entity_ids:
+          - canon-huangfeng-ye-steward-pouch
+      - local_entity_id: known-huangfeng-sect
+        canonical_entity_ids:
+          - huangfeng-sect
+      - local_entity_id: known-canon-zhong-lingdao
+        canonical_entity_ids:
+          - canon-zhong-lingdao
+      - local_entity_id: known-canon-murong-shan
+        canonical_entity_ids:
+          - canon-murong-shan
+      - local_entity_id: known-canon-huangfeng-wu-steward
+        canonical_entity_ids:
+          - canon-huangfeng-wu-steward
+      - local_entity_id: known-canon-huangfeng-wang-guide
+        canonical_entity_ids:
+          - canon-huangfeng-wang-guide
+      - local_entity_id: known-canon-huangfeng-ma-gardener
+        canonical_entity_ids:
+          - canon-huangfeng-ma-gardener
+      - local_entity_id: known-yue-baiji-hall
+        canonical_entity_ids:
+          - yue-baiji-hall
+      - local_entity_id: known-yue-yuelu-keeper
+        canonical_entity_ids:
+          - yue-yuelu-keeper
+      - local_entity_id: known-yue-yuelu-fire-keeper
+        canonical_entity_ids:
+          - yue-yuelu-fire-keeper
+      - local_entity_id: known-yue-yuelu-guard-a
+        canonical_entity_ids:
+          - yue-yuelu-guard-a
+      - local_entity_id: known-yue-yuelu-guard-b
+        canonical_entity_ids:
+          - yue-yuelu-guard-b
+      - local_entity_id: known-yue-beast-keeper
+        canonical_entity_ids:
+          - yue-beast-keeper
+      - local_entity_id: known-yue-market-wanbao-keeper
+        canonical_entity_ids:
+          - yue-market-wanbao-keeper
+      - local_entity_id: known-yue-market-qiqiao-keeper
+        canonical_entity_ids:
+          - yue-market-qiqiao-keeper
+      - local_entity_id: known-yue-market-yinfeng-keeper
+        canonical_entity_ids:
+          - yue-market-yinfeng-keeper
+      - local_entity_id: known-yue-market-wuxing-keeper
+        canonical_entity_ids:
+          - yue-market-wuxing-keeper
+      - local_entity_id: known-yue-market-tiangong-keeper
+        canonical_entity_ids:
+          - yue-market-tiangong-keeper
+      - local_entity_id: known-yue-market-guesthouse-keeper
+        canonical_entity_ids:
+          - yue-market-guesthouse-keeper
+      - local_entity_id: known-yue-market-restaurant-keeper
+        canonical_entity_ids:
+          - yue-market-restaurant-keeper
+      - local_entity_id: known-yue-huangfeng-market
+        canonical_entity_ids:
+          - yue-huangfeng-market
+      - local_entity_id: known-yue-old-mine
+        canonical_entity_ids:
+          - yue-old-mine
+      - local_entity_id: known-yue-huangfeng-garden
+        canonical_entity_ids:
+          - yue-huangfeng-garden
+      - local_entity_id: known-yue-qilin-beast-pens
+        canonical_entity_ids:
+          - yue-qilin-beast-pens

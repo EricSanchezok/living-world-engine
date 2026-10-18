@@ -1,0 +1,42 @@
+id: thunder-jiaochi-frontier
+kind: location
+name: 角蚩界口
+description: 路口设有检查站，来往行旅在界碑前停步。越过站外荒野有别的路径，也有巡察与未知危险。
+placement: thunder-jiaochi
+facts:
+  - id: thunder-jiaochi-frontier-route-thunder-jiaochi-research
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-research
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jiaochi-frontier-condition-thunder-jiaochi-research
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城关验明身份后才能循内道前往研武院。
+    description: 城关验明身份后才能循内道前往研武院。
+    access:
+      kind: public
+  - id: thunder-jiaochi-frontier-route-to-thunder-gailing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-gailing-city
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-jiaochi-frontier-route-conditions-thunder-gailing-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。
+    description: 长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

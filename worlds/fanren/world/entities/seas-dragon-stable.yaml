@@ -1,0 +1,26 @@
+id: seas-dragon-stable
+kind: location
+name: 狞马驿院
+description: 饲养和教导狞马的院落，栏中每匹马都是实际生灵。
+placement: seas-dragon-island
+facts:
+  - id: seas-dragon-stable-route-seas-island-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-town
+    description: route-to
+    access:
+      kind: public
+  - id: seas-dragon-stable-condition-seas-island-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

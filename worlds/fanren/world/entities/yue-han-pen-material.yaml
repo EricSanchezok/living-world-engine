@@ -1,0 +1,20 @@
+id: yue-han-pen-material
+kind: item
+name: 菡祺笔具材料
+description: 可供整理低阶笔具的毛料与笔杆，当前四份。
+placement: yue-han-craft-cottage
+facts:
+  - id: yue-han-pen-material-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-han-uncle
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

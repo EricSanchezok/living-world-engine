@@ -1,0 +1,26 @@
+id: fengyuan-immortal-seabed-palace
+kind: location
+name: 隐海凝躯宫
+description: 深海石层内的旧宫室，狭长暗道尽头是一间有护壁的凝躯室，外墙刻着阻窥的细纹。
+placement: fengyuan-thunder-crossing-sea
+facts:
+  - id: fengyuan-immortal-seabed-palace-route-to-fengyuan-thunder-crossing-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-thunder-crossing-sea
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-immortal-seabed-palace-route-conditions-fengyuan-thunder-crossing-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 入口没有公开航标，须先实际定位再承受深海环境并破开或获准通过护壁。
+    description: 入口没有公开航标，须先实际定位再承受深海环境并破开或获准通过护壁。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: seas-thunder-relay-hall
+kind: location
+name: 雷鸣商盟传送厅
+description: 雷鸣总堂后院的方形阵厅，出入台阶与装芯通道分开，值守者能核对两端接应。
+placement: seas-thunder-headquarters
+facts:
+  - id: seas-thunder-relay-hall-route-seas-thunder-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-thunder-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: seas-thunder-relay-hall-condition-seas-thunder-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只在获准时进入阵厅，步行入厅不消耗传送石。
+    description: 只在获准时进入阵厅，步行入厅不消耗传送石。
+    access:
+      kind: public
+  - id: seas-thunder-relay-hall-route-seas-fengyuan-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-fengyuan-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-thunder-relay-hall-condition-seas-fengyuan-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    description: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    access:
+      kind: public
+  - id: seas-thunder-relay-hall-route-seas-blood-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-blood-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-thunder-relay-hall-condition-seas-blood-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    description: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

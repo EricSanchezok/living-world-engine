@@ -1,0 +1,22 @@
+id: canon-jiu-huan-elder-private-stock
+kind: container
+name: 九幻老怪私用储备
+description: 当前有限材料与行路用石。
+placement: canon-jiu-huan-elder
+facts:
+  - id: canon-jiu-huan-elder-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jiu-huan-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: canon-qin-ping-pouch
+kind: item
+name: 秦平的日用包
+description: 随身普通衣物、餐具与个人口粮。
+placement: canon-qin-ping
+facts:
+  - id: canon-qin-ping-pouch-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qin-ping
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+ratings: []
+shared_activity_resources: []

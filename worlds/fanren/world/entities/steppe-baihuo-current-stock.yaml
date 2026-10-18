@@ -1,0 +1,32 @@
+id: steppe-baihuo-current-stock
+kind: item
+name: 拜火火棚料箱
+description: 赤宁受托保管的干柴工料、普通干药和值守粮食。
+placement: steppe-baihuo-store
+facts:
+  - id: steppe-baihuo-current-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-baihuo-tribe-reference
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-baihuo-current-stock-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-chi-ning
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 32
+  - definition_id: grain
+    amount: 80
+  - definition_id: herb-packet
+    amount: 6
+ratings: []
+shared_activity_resources: []

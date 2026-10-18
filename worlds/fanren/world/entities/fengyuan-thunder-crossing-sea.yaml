@@ -1,0 +1,58 @@
+id: fengyuan-thunder-crossing-sea
+kind: location
+name: 风雷交界海域
+description: 隔开风元与雷鸣部分海岸的深远海域，水下暗流和隐谷使航线选择影响实际旅程。
+placement: spirit-realm
+facts:
+  - id: fengyuan-thunder-crossing-sea-route-to-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-thunder-crossing-sea-route-conditions-fengyuan-continent
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿实际海岸出海，跨陆航行须方向、补给和持续行动，不以两点关系跳过海程。
+    description: 沿实际海岸出海，跨陆航行须方向、补给和持续行动，不以两点关系跳过海程。
+    access:
+      kind: public
+  - id: fengyuan-thunder-crossing-sea-route-to-thunder-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-continent
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-thunder-crossing-sea-route-conditions-thunder-continent
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。
+    description: 从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。
+    access:
+      kind: public
+  - id: fengyuan-thunder-crossing-sea-route-to-fengyuan-immortal-seabed-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-immortal-seabed-palace
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-thunder-crossing-sea-route-conditions-fengyuan-immortal-seabed-palace
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 入口没有公开航标，须先实际定位再承受深海环境并破开或获准通过护壁。
+    description: 入口没有公开航标，须先实际定位再承受深海环境并破开或获准通过护壁。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

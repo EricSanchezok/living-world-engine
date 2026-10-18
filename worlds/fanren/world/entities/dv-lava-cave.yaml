@@ -1,0 +1,58 @@
+id: dv-lava-cave
+kind: location
+name: 火蟾熔岩洞
+description: 赤峰下的巨大山洞内有熔岩湖，热浪扭曲视线；对岸石台置古骸。
+placement: human-devil-valley
+facts:
+  - id: dv-lava-cave-route-dv-scorpion-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-scorpion-peak
+    description: route-to
+    access:
+      kind: public
+  - id: dv-lava-cave-condition-dv-scorpion-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿越古蝎活动范围后沿赤峰前进，古兽可能追逐，不能自动判诱引成功。
+    description: 穿越古蝎活动范围后沿赤峰前进，古兽可能追逐，不能自动判诱引成功。
+    access:
+      kind: public
+  - id: dv-lava-cave-route-dv-hidden-rifts
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-hidden-rifts
+    description: route-to
+    access:
+      kind: public
+  - id: dv-lava-cave-condition-dv-hidden-rifts
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 绕过本段裂缝后进入赤峰，须各人持续知道安全落脚点。
+    description: 绕过本段裂缝后进入赤峰，须各人持续知道安全落脚点。
+    access:
+      kind: public
+  - id: dv-lava-cave-route-dv-lava-platform
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-lava-platform
+    description: route-to
+    access:
+      kind: public
+  - id: dv-lava-cave-condition-dv-lava-platform
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨熔岩湖须相应能力并承担火蟾干预；石台本身不是常开传送点。
+    description: 跨熔岩湖须相应能力并承担火蟾干预；石台本身不是常开传送点。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

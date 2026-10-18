@@ -1,0 +1,29 @@
+id: ad-boat-beast-1
+kind: creature
+name: 沐舟拉舟兽1
+description: 受训练的近岸海兽，能牵引小舟，也会饥饿、疲倦和受惊。
+placement: ad-moyuan-port
+facts:
+  - id: ad-boat-beast-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-sea-pilot
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-boat-beast-1-feeding
+    predicate: feeding
+    value:
+      kind: text
+      value: 两兽每共同日合耗1份饲料，食用必须从真实补给扣减；连续六时辰牵引后须歇息一时辰。
+    description: 两兽每共同日合耗1份饲料，食用必须从真实补给扣减；连续六时辰牵引后须歇息一时辰。
+    access:
+      kind: private
+meters:
+  - id: ad-boat-beast-1-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

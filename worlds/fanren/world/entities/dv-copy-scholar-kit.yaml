@@ -1,0 +1,22 @@
+id: dv-copy-scholar-kit
+kind: container
+name: 徐抄云的工具包
+description: 当前个人工具与路粮，不是无限材料库。
+placement: dv-copy-scholar
+facts:
+  - id: dv-copy-scholar-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-copy-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 4
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

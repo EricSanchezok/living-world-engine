@@ -1,0 +1,27 @@
+id: blood-bingpo-soul-bottle
+kind: item
+name: 冰魄血魂瓶
+description: 仍受保护封符约束的一只鲜红小瓶，另一只配对瓶属许家传承。
+placement: blood-bingpo-soul-box
+facts:
+  - id: blood-bingpo-soul-bottle-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bingpo
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-bingpo-soul-bottle-unsealing-risk
+    predicate: unsealing-risk
+    value:
+      kind: text
+      value: 本尊或相应血脉按封符方法开启；强行撕符可毁物。封存过久的血魂解封后须及时举行合适唤醒仪式、足够法力与血躯材料，否则有消散风险。
+    description: 本尊或相应血脉按封符方法开启；强行撕符可毁物。封存过久的血魂解封后须及时举行合适唤醒仪式、足够法力与血躯材料，否则有消散风险。
+    access:
+      kind: discoverable
+      condition: 阅读对应封符说明或由掌握血魂法的人实际检查。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

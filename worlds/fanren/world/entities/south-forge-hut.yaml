@@ -1,0 +1,26 @@
+id: south-forge-hut
+kind: location
+name: 火口工棚
+description: 共用地火口旁的隔热石棚，各人的材料与炉次分开登记。
+placement: south-volcano
+facts:
+  - id: south-forge-hut-route-south-volcano
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-volcano
+    description: route-to
+    access:
+      kind: public
+  - id: south-forge-hut-condition-south-volcano
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可到工棚门外询问炉位。
+    description: 可到工棚门外询问炉位。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

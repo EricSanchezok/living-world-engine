@@ -1,0 +1,36 @@
+id: spirit-current-land-register
+kind: item
+name: 玉阙阁现用地册
+description: 登记当下地块与居用凭证，申请人可查相关公开页。
+placement: spirit-yuque-upper
+facts:
+  - id: spirit-current-land-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-current-land-register-public-tenure
+    predicate: public-tenure
+    value:
+      kind: text
+      value: 听泉静室为持有效旧凭证者的独立住处；没有登记变更就不能转给后来索取者。周边灵山不随静室一起归私人。新增洞府须查空置、边界和申请资格。
+    description: 听泉静室为持有效旧凭证者的独立住处；没有登记变更就不能转给后来索取者。周边灵山不随静室一起归私人。新增洞府须查空置、边界和申请资格。
+    access:
+      kind: discoverable
+      condition: 本人或获授权者实际提出查档请求，办事者核验后展示相关页。
+  - id: spirit-current-land-register-hearing-case
+    predicate: hearing-case
+    value:
+      kind: text
+      value: 翠泷山南麓两处旧界标间有一条灌溉水线需复勘；调查奖励由灵地署预算支付，须先接任务并提交实测结果，不能凭自述领酬。
+    description: 翠泷山南麓两处旧界标间有一条灌溉水线需复勘；调查奖励由灵地署预算支付，须先接任务并提交实测结果，不能凭自述领酬。
+    access:
+      kind: discoverable
+      condition: 实际阅读对外委托页或听值员说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: ad-qiling-icefield
+kind: location
+name: 泣灵秘藏外冰原
+description: 远荒冰原，湖泊坐标需要实际地图与地形核验。
+placement: associated-demon-realm
+facts:
+  - id: ad-qiling-icefield-route-to-ad-western-wastes
+    predicate: route-to-ad-western-wastes
+    value:
+      kind: entity
+      entityId: ad-western-wastes
+    description: 须从实际获知的地图寻找冰原，长程飞行需要法力补给与定向。
+    access:
+      kind: public
+  - id: ad-qiling-icefield-route-to-ad-qiling-warm-lake
+    predicate: route-to-ad-qiling-warm-lake
+    value:
+      kind: entity
+      entityId: ad-qiling-warm-lake
+    description: 冰原内按真实位置寻找暖湖。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

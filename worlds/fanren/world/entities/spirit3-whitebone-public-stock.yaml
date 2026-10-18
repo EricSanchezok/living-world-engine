@@ -1,0 +1,22 @@
+id: spirit3-whitebone-public-stock
+kind: container
+name: 白骨门教习公库
+description: 用于门内教习的有限石料，需有具体门务批准。
+placement: spirit3-whitebone-mountain
+facts:
+  - id: spirit3-whitebone-public-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-whitebone-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 18
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

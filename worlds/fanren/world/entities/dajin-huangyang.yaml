@@ -1,0 +1,18 @@
+id: dajin-huangyang
+kind: location
+name: 皇阳观
+description: 三皇观之一，由男修主持；进入须取得本观接待。
+placement: human-dajin
+facts:
+  - id: dajin-huangyang-branch-of
+    predicate: branch-of
+    value:
+      kind: entity
+      entityId: dajin-sanhuang
+    description: 三皇观分支。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

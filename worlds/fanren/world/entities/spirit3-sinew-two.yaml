@@ -1,0 +1,18 @@
+id: spirit3-sinew-two
+kind: item
+name: 地蛟筋乙
+description: 另一条未经鞣制的地蛟筋，需检查受损和弹性。
+placement: spirit-repair-yard
+facts:
+  - id: spirit3-sinew-two-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

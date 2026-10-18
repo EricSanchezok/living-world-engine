@@ -1,0 +1,27 @@
+id: ad-chaotian-peak
+kind: location
+name: 朝天峰
+description: 万花山障眼法内盆地中央高峰。
+placement: associated-demon-realm
+facts:
+  - id: ad-chaotian-peak-route-to-ad-xielian-mountain
+    predicate: route-to-ad-xielian-mountain
+    value:
+      kind: entity
+      entityId: ad-xielian-mountain
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-chaotian-peak-root-detail-huangsha-terrain
+    predicate: root-detail-huangsha-terrain
+    value:
+      kind: text
+      value: 土乾卫依沙土和施术力量，离地失土气会减弱，修复需真实补充；朝天峰传阵有固定接续，不随愿望选终点。
+    description: 土乾卫依沙土和施术力量，离地失土气会减弱，修复需真实补充；朝天峰传阵有固定接续，不随愿望选终点。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

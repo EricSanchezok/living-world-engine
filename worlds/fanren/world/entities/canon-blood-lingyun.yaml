@@ -1,0 +1,150 @@
+id: canon-blood-lingyun
+kind: person
+name: 灵云夫人
+description: 万蛊山大乘女修，衣上霞色随动作变换，对虫群生息与山中自主权十分在意。
+placement: blood-wangu-mountain
+facts:
+  - id: canon-blood-lingyun-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-blood-lingyun-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘修法、护身遁行与已养灵虫的约束；需要有限饲料和实际虫群，不能从万蛊名号凭空召万虫。
+    description: 大乘修法、护身遁行与已养灵虫的约束；需要有限饲料和实际虫群，不能从万蛊名号凭空召万虫。
+    access:
+      kind: private
+  - id: canon-blood-lingyun-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    description: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    access:
+      kind: private
+meters:
+  - id: canon-blood-lingyun-health
+    definition_id: health
+    current: 100
+  - id: canon-blood-lingyun-mana
+    definition_id: mana
+    current: 1800
+quantities: []
+ratings:
+  - id: canon-blood-lingyun-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-blood-lingyun-force
+    definition_id: force
+    value: 8
+  - id: canon-blood-lingyun-craft
+    definition_id: craft
+    value: 7
+  - id: canon-blood-lingyun-perception
+    definition_id: perception
+    value: 8
+  - id: canon-blood-lingyun-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-blood-lingyun
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 万蛊山大乘女修，衣上霞色随动作变换，对虫群生息与山中自主权十分在意。
+      voice: 语气平缓，谈别人鲁莽时会停一下再下判断；关心损失是否能补回。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 判断是否值得借观天镜继续核查光照与虫鸣的联系，决定是否将自己的观察札借给何大先生。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 灵云夫人
+        description: 万蛊山大乘女修，衣上霞色随动作变换，对虫群生息与山中自主权十分在意。
+        status: observed
+      - id: location
+        name: 万蛊山
+        description: 自己当前居处。
+        status: observed
+      - id: review-canon-blood-lingyun-review-stock
+        name: 灵云夫人自用储备
+        description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+        status: observed
+      - id: review-blood-lingyun-insect-colony
+        name: 灵云自养蛊群
+        description: 虫箱中共有六十只鸣虫，用于研究光照与鸣声；由虫室长期培育，需防逃和定期饲喂。
+        status: observed
+      - id: review-blood-lingyun-observation-note
+        name: 万蛊山虫鸣札
+        description: 札记写明：本箱鸣虫遇侧面青光时暂歇、遮光后复鸣，连续观察三次；正面白光无同样反应。虫种与光强仍需复测，尚无证据与落天谷光带同因。
+        status: observed
+      - id: review-blood-lingyun-insect-feed
+        name: 万蛊山当用饲料
+        description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+        status: observed
+      - id: review-canon-blood-he-daxiansheng
+        name: 何大先生
+        description: 已有真实往来的同阶修士，知道其公开身份，不知道对方私藏和心中打算。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身修行、亲历和已读记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘修法、护身遁行与已养灵虫的约束；需要有限饲料和实际虫群，不能从万蛊名号凭空召万虫。
+        description: 大乘修法、护身遁行与已养灵虫的约束；需要有限饲料和实际虫群，不能从万蛊名号凭空召万虫。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-blood-lingyun
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-wangu-mountain
+      - local_entity_id: review-canon-blood-lingyun-review-stock
+        canonical_entity_ids:
+          - canon-blood-lingyun-review-stock
+      - local_entity_id: review-blood-lingyun-insect-colony
+        canonical_entity_ids:
+          - blood-lingyun-insect-colony
+      - local_entity_id: review-blood-lingyun-observation-note
+        canonical_entity_ids:
+          - blood-lingyun-observation-note
+      - local_entity_id: review-blood-lingyun-insect-feed
+        canonical_entity_ids:
+          - blood-lingyun-insect-feed
+      - local_entity_id: review-canon-blood-he-daxiansheng
+        canonical_entity_ids:
+          - canon-blood-he-daxiansheng

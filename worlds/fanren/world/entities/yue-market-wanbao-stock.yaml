@@ -1,0 +1,38 @@
+id: yue-market-wanbao-stock
+kind: item
+name: 万宝楼货柜
+description: 本柜售普通低阶铜件与矿材，单份二低阶灵石；高阶法器须另询货源。
+placement: yue-market-wanbao
+facts:
+  - id: yue-market-wanbao-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-wanbao-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-wanbao-stock-terms
+    predicate: sale-terms
+    value:
+      kind: text
+      value: 本柜售普通低阶铜件与矿材，单份二低阶灵石；高阶法器须另询货源。
+    description: 本柜售普通低阶铜件与矿材，单份二低阶灵石；高阶法器须另询货源。
+    access:
+      kind: public
+  - id: yue-market-wanbao-stock-authorize
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    description: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 10
+  - definition_id: low-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

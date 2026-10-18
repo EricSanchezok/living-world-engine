@@ -1,0 +1,142 @@
+id: kunwu-iron-scorpions
+kind: animal-group
+name: 铁尾蝎群
+description: 普通铁尾蝎，野外捕捉要分辨毒性，不是后来那只二级变异虫。
+placement: south-scorpion
+facts:
+  - id: kunwu-iron-scorpions-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-iron-scorpions
+  - id: kunwu-iron-scorpions-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 自身毒性、藏身与近距袭击。
+    description: 自身毒性、藏身与近距袭击。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-iron-scorpions
+  - id: kunwu-iron-scorpions-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 兽类血脉与本能，不是修士双灵根。
+    description: 兽类血脉与本能，不是修士双灵根。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-iron-scorpions
+  - id: kunwu-iron-scorpions-living-members
+    predicate: living-members
+    value:
+      kind: number
+      value: 80
+    description: living-members
+    access:
+      kind: private
+meters:
+  - id: kunwu-iron-scorpions-health
+    definition_id: health
+    current: 100
+  - id: kunwu-iron-scorpions-mana
+    definition_id: mana
+    current: 220
+quantities:
+  - definition_id: grain
+    amount: 8
+ratings:
+  - id: kunwu-iron-scorpions-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: kunwu-iron-scorpions-force
+    definition_id: force
+    value: 2
+  - id: kunwu-iron-scorpions-craft
+    definition_id: craft
+    value: 4
+  - id: kunwu-iron-scorpions-perception
+    definition_id: perception
+    value: 1
+  - id: kunwu-iron-scorpions-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: kunwu-iron-scorpions
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 普通铁尾蝎，野外捕捉要分辨毒性，不是后来那只二级变异虫。
+      voice: 以躯体与气味反应，不说人类对白。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 维持栖息、觅食与避险，对逼近的威胁作有界反应。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 铁尾蝎群
+        description: 普通铁尾蝎，野外捕捉要分辨毒性，不是后来那只二级变异虫。
+        status: observed
+      - id: location
+        name: 双蝎山
+        description: 自己当前所在之处。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 自身毒性、藏身与近距袭击。
+        description: 自身毒性、藏身与近距袭击。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 兽类血脉与本能，不是修士双灵根。
+        description: 兽类血脉与本能，不是修士双灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - kunwu-iron-scorpions
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-scorpion

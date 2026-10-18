@@ -1,0 +1,20 @@
+id: seas-stable-payment
+kind: container
+name: 驿院采购预留
+description: 本人经营驿院预留货款，与岛族公产分开。
+placement: seas-dragon-stable
+facts:
+  - id: seas-stable-payment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

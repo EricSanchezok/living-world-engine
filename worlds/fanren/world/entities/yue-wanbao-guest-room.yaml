@@ -1,0 +1,18 @@
+id: yue-wanbao-guest-room
+kind: location
+name: 万宝楼贵宾室
+description: 二楼小室设桌椅供商谈，柜角的香炉当前未点燃；出入由当班人引领。
+placement: yue-market-wanbao
+facts:
+  - id: yue-wanbao-guest-room-route-yue-market-wanbao
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-wanbao
+    description: 沿楼梯通行；进入接待室需店家同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

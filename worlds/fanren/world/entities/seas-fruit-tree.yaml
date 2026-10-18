@@ -1,0 +1,42 @@
+id: seas-fruit-tree
+kind: item
+name: 广灵道果树
+description: 岛族维护的真实果树，当前150枚未成熟果，需要持续生长与养护；摘青果不能自动取得成熟道果效果。
+placement: seas-fruit-garden
+facts:
+  - id: seas-fruit-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-people
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-fruit-tree-unripe-fruit-count
+    predicate: unripe-fruit-count
+    value:
+      kind: number
+      value: 150
+    description: unripe-fruit-count
+    access:
+      kind: private
+  - id: seas-fruit-tree-ripening-condition
+    predicate: ripening-condition
+    value:
+      kind: text
+      value: 持续积累生长条件并经掌园者实际查验，未有当前确定大会期；灵药加速若实际施用亦需原有规则和代价。
+    description: 持续积累生长条件并经掌园者实际查验，未有当前确定大会期；灵药加速若实际施用亦需原有规则和代价。
+    access:
+      kind: private
+  - id: seas-fruit-tree-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: seas-fruit-custodian
+    description: custodian
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

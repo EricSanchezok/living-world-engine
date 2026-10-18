@@ -1,0 +1,27 @@
+id: dajin-tianji-jade-gate
+kind: location
+name: 天机玉门
+description: 巨玉门前有轮值者和机关卫，进入须取得许可。
+placement: dajin-tianji-head-space
+facts:
+  - id: dajin-tianji-jade-gate-route-dajin-tianji-head-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-head-hall
+    description: 沿悬浮玉阶而行，未经许可且能力不足者受禁空约束。
+    access:
+      kind: public
+  - id: dajin-tianji-jade-gate-route-dajin-tianji-current-entrance
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-current-entrance
+    description: 须确认当前相连出口，再通过禁制返回。
+    access:
+      kind: discoverable
+      condition: 实际取得当前入口/方位并通过相应禁制或主人许可。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

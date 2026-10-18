@@ -1,0 +1,18 @@
+id: kunwu-demon-rings
+kind: item
+name: 五禁魔环
+description: 五只配套翠环约束魔躯，强魔化等条件会改变效力，不能只凭宝名必胜。
+placement: south-tianmo-vault
+facts:
+  - id: kunwu-demon-rings-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianmo-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

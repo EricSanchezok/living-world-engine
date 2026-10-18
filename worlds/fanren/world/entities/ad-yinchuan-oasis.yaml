@@ -1,0 +1,34 @@
+id: ad-yinchuan-oasis
+kind: location
+name: 银川绿洲
+description: 有小湖与沙石屋的绿洲。
+placement: associated-demon-realm
+facts:
+  - id: ad-yinchuan-oasis-route-ad-huanxiao-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-huanxiao-desert
+    description: route-to
+    access:
+      kind: public
+  - id: ad-yinchuan-oasis-condition-ad-huanxiao-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-yinchuan-oasis-route-to-ad-firecloud-mine
+    predicate: route-to-ad-firecloud-mine
+    value:
+      kind: entity
+      entityId: ad-firecloud-mine
+    description: 同行修士约半日的路程可作参考；实际行旅依个人能力、补给与道路状况决定，凡人未必能走得一样快。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

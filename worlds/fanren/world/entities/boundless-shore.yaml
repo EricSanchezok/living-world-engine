@@ -1,0 +1,58 @@
+id: boundless-shore
+kind: location
+name: 小城北岸
+description: 礁岸下是浑水，风浪会侵蚀石阶，沿岸陆路比出海稳妥。
+placement: boundless-coast-town
+facts:
+  - id: boundless-shore-route-boundless-coast-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-coast-town
+    description: 沿北门外坡路到海岸，步行约半个时辰。
+    access:
+      kind: public
+  - id: boundless-shore-travel-boundless-coast-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿北门外坡路到海岸，步行约半个时辰。
+    description: 沿北门外坡路到海岸，步行约半个时辰。
+    access:
+      kind: public
+  - id: boundless-shore-route-boundless-watch
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-watch
+    description: 沿礁岸石阶上望棚，湿滑时须小心。
+    access:
+      kind: public
+  - id: boundless-shore-travel-boundless-watch
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿礁岸石阶上望棚，湿滑时须小心。
+    description: 沿礁岸石阶上望棚，湿滑时须小心。
+    access:
+      kind: public
+  - id: boundless-shore-route-boundless-deep-water
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-deep-water
+    description: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    access:
+      kind: public
+  - id: boundless-shore-travel-boundless-deep-water
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    description: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

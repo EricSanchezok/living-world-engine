@@ -1,0 +1,324 @@
+id: innerstar-star-array-clerk
+kind: person
+name: 闻衡
+description: 星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。
+placement: innerstar-star-hall
+facts:
+  - id: innerstar-star-array-clerk-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基中期
+    description: 筑基中期
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-star-array-clerk
+  - id: innerstar-star-array-clerk-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。
+    description: 能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-star-array-clerk
+  - id: innerstar-star-array-clerk-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 水木土三灵根。
+    description: 水木土三灵根。
+    access:
+      kind: discoverable
+      condition: 有能力者取得同意并实际验根。
+  - id: innerstar-star-array-clerk-service-authority
+    predicate: service-authority
+    value:
+      kind: text
+      value: 可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。
+    description: 可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-star-array-clerk
+  - id: innerstar-star-array-clerk-employer
+    predicate: employed-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: 星宫受雇当值，不拥有公库。
+    access:
+      kind: public
+meters:
+  - id: innerstar-star-array-clerk-health
+    definition_id: health
+    current: 100
+  - id: innerstar-star-array-clerk-mana
+    definition_id: mana
+    current: 50
+quantities:
+  - definition_id: low-stone
+    amount: 7
+ratings:
+  - id: innerstar-star-array-clerk-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: innerstar-star-array-clerk-force
+    definition_id: force
+    value: 2
+  - id: innerstar-star-array-clerk-craft
+    definition_id: craft
+    value: 2
+  - id: innerstar-star-array-clerk-perception
+    definition_id: perception
+    value: 2
+  - id: innerstar-star-array-clerk-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-star-array-clerk
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。
+      voice: 按实际库存、手续与能力回答，能做就落实，条件不足说明具体缺口。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 闻衡
+        description: 星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。
+        status: observed
+      - id: location
+        name: 星空殿
+        description: 熟悉的工作地点。
+        status: observed
+      - id: known-innerstar-transit-supply
+        name: 星空殿供能公库
+        description: 用于启阵的有限中阶石与收费款分账，属于星宫。
+        status: observed
+      - id: known-innerstar-transit-receipts
+        name: 星空殿收费匣
+        description: 尚未收取新旅费的空公款匣，收费后才增加余额。
+        status: observed
+      - id: known-innerstar-star-hall
+        name: 星空殿
+        description: 圣山第五十层的白石大殿，各阵前石碑标示目的地，由星宫阵吏轮值。
+        status: observed
+      - id: known-star-palace
+        name: 星宫
+        description: 统治者、执事与卫队分工处理海域事务，个人私财与星宫公库分别存在。
+        status: observed
+      - id: known-innerstar-transit-charm-1
+        name: 星空殿护身传送符1
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-2
+        name: 星空殿护身传送符2
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-3
+        name: 星空殿护身传送符3
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-4
+        name: 星空殿护身传送符4
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-5
+        name: 星空殿护身传送符5
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-6
+        name: 星空殿护身传送符6
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-7
+        name: 星空殿护身传送符7
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-8
+        name: 星空殿护身传送符8
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-9
+        name: 星空殿护身传送符9
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-10
+        name: 星空殿护身传送符10
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-11
+        name: 星空殿护身传送符11
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-12
+        name: 星空殿护身传送符12
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-13
+        name: 星空殿护身传送符13
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-innerstar-transit-charm-14
+        name: 星空殿护身传送符14
+        description: 本班公库的一次护符。
+        status: observed
+      - id: known-outerstar-ningcui-array
+        name: 凝翠传送石屋
+        description: 既定外海接收阵口，启用前需核对可用状态。
+        status: observed
+      - id: known-outerstar-qiyuan-array
+        name: 奇渊传送石屋
+        description: 另一既定接收阵口；不能把目的地任选改成未知地区。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 生活、学艺及已有职务经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: rank
+        subjectId: self
+        predicate: rank
+        value:
+          kind: text
+          value: 筑基中期，水木土三灵根，已知自身根骨。
+        description: 筑基中期，水木土三灵根，已知自身根骨。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: skill
+        subjectId: self
+        predicate: skill
+        value:
+          kind: text
+          value: 能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。
+        description: 能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: goal
+        subjectId: self
+        predicate: goal
+        value:
+          kind: text
+          value: 先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。
+        description: 先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此前值勤时亲见夜色；之后时段随实际时间变化。
+        description: 此前值勤时亲见夜色；之后时段随实际时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: service-authority
+        subjectId: self
+        predicate: service-authority
+        value:
+          kind: text
+          value: 可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。
+        description: 可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-star-array-clerk
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-star-hall
+      - local_entity_id: known-innerstar-transit-supply
+        canonical_entity_ids:
+          - innerstar-transit-supply
+      - local_entity_id: known-innerstar-transit-receipts
+        canonical_entity_ids:
+          - innerstar-transit-receipts
+      - local_entity_id: known-innerstar-star-hall
+        canonical_entity_ids:
+          - innerstar-star-hall
+      - local_entity_id: known-star-palace
+        canonical_entity_ids:
+          - star-palace
+      - local_entity_id: known-innerstar-transit-charm-1
+        canonical_entity_ids:
+          - innerstar-transit-charm-1
+      - local_entity_id: known-innerstar-transit-charm-2
+        canonical_entity_ids:
+          - innerstar-transit-charm-2
+      - local_entity_id: known-innerstar-transit-charm-3
+        canonical_entity_ids:
+          - innerstar-transit-charm-3
+      - local_entity_id: known-innerstar-transit-charm-4
+        canonical_entity_ids:
+          - innerstar-transit-charm-4
+      - local_entity_id: known-innerstar-transit-charm-5
+        canonical_entity_ids:
+          - innerstar-transit-charm-5
+      - local_entity_id: known-innerstar-transit-charm-6
+        canonical_entity_ids:
+          - innerstar-transit-charm-6
+      - local_entity_id: known-innerstar-transit-charm-7
+        canonical_entity_ids:
+          - innerstar-transit-charm-7
+      - local_entity_id: known-innerstar-transit-charm-8
+        canonical_entity_ids:
+          - innerstar-transit-charm-8
+      - local_entity_id: known-innerstar-transit-charm-9
+        canonical_entity_ids:
+          - innerstar-transit-charm-9
+      - local_entity_id: known-innerstar-transit-charm-10
+        canonical_entity_ids:
+          - innerstar-transit-charm-10
+      - local_entity_id: known-innerstar-transit-charm-11
+        canonical_entity_ids:
+          - innerstar-transit-charm-11
+      - local_entity_id: known-innerstar-transit-charm-12
+        canonical_entity_ids:
+          - innerstar-transit-charm-12
+      - local_entity_id: known-innerstar-transit-charm-13
+        canonical_entity_ids:
+          - innerstar-transit-charm-13
+      - local_entity_id: known-innerstar-transit-charm-14
+        canonical_entity_ids:
+          - innerstar-transit-charm-14
+      - local_entity_id: known-outerstar-ningcui-array
+        canonical_entity_ids:
+          - outerstar-ningcui-array
+      - local_entity_id: known-outerstar-qiyuan-array
+        canonical_entity_ids:
+          - outerstar-qiyuan-array

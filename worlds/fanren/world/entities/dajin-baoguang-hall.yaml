@@ -1,0 +1,18 @@
+id: dajin-baoguang-hall
+kind: location
+name: 宝光殿
+description: 坊市内举办大型拍卖的殿堂，入场资格和开场时间依当期公告与实际接待。
+placement: dajin-jinxi-market
+facts:
+  - id: dajin-baoguang-hall-route-dajin-jinxi-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinxi-market
+    description: 商街通殿门，但参加拍卖须实际资格与开场。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

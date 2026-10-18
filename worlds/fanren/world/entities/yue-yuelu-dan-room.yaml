@@ -1,0 +1,26 @@
+id: yue-yuelu-dan-room
+kind: location
+name: 岳麓丹屋
+description: 长柜后有旧货架，书室石梯须由管理者以令牌启用。
+placement: yue-yuelu-hall
+facts:
+  - id: yue-yuelu-dan-room-route-yue-yuelu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-hall
+    description: 按实际通道行走，内室使用仍须对应管理许可。
+    access:
+      kind: public
+  - id: yue-yuelu-dan-room-route-yue-yuelu-book-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-book-room
+    description: 管理者以对应令牌开启石梯后方可上下。炼气来客先取得筑基修士担保；资格每次核验，原件不得擅带。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

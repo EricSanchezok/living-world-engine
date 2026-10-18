@@ -1,0 +1,20 @@
+id: qixuan-sect-funds
+kind: container
+name: 七玄门日用银库
+description: 储放在此的现有物资，取用需经持有人授权。
+placement: qixuan-main-hall
+facts:
+  - id: qixuan-sect-funds-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 物资属于记载主体。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 1800
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: yue-blood-central-garden
+kind: location
+name: 中心区外层花园
+description: 石墙与四铜门围着环形花园，奇花多为观赏，不能见花就当灵丹主药。
+placement: yue-blood-forbidden
+facts:
+  - id: yue-blood-central-garden-route-yue-blood-forbidden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    access:
+      kind: public
+  - id: yue-blood-central-garden-travel-yue-blood-forbidden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    description: 须实际找到四铜门之一并穿越外围地形；没有强制别派伏杀刷新。
+    access:
+      kind: public
+  - id: yue-blood-central-garden-route-yue-blood-ring-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-ring-range
+    description: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    access:
+      kind: public
+  - id: yue-blood-central-garden-travel-yue-blood-ring-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    description: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    access:
+      kind: public
+  - id: yue-blood-central-garden-route-yue-blood-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-one-sky
+    description: 离开中心花园铜门后沿山路退往一线天峡道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

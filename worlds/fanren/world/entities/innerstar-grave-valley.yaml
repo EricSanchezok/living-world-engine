@@ -1,0 +1,27 @@
+id: innerstar-grave-valley
+kind: location
+name: 墓岛阴谷
+description: 低洼谷地积着阴气，四周岩壁遮去一部分天光。
+placement: innerstar-beast-grave-island
+facts:
+  - id: innerstar-grave-valley-route-innerstar-grave-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-grave-shore
+    description: 沿荒径步行穿过石地，实际消耗路程与时间。
+    access:
+      kind: public
+  - id: innerstar-grave-valley-yin-condition
+    predicate: local-qi
+    value:
+      kind: text
+      value: 谷地阴气浓重，是否适用于某种秘术仍须核对该术条件与现场。
+    description: 可经现场查验辨明的阴气状态。
+    access:
+      kind: discoverable
+      condition: 实际在谷地以相应灵气感知能力查验，不因听过地名就知其强弱与用途。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

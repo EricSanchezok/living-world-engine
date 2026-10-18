@@ -1,0 +1,20 @@
+id: void-pool-tools
+kind: container
+name: 清渠工具与滤料
+description: 用于实地清渠的当期物资。
+placement: void-tianyuan-pool
+facts:
+  - id: void-pool-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tian-yuanzi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

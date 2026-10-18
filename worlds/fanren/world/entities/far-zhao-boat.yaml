@@ -1,0 +1,26 @@
+id: far-zhao-boat
+kind: item
+name: 赵家近岸木舟
+description: 船板一处渗水，修补并验漏后才能放心载货。
+placement: far-luwan
+facts:
+  - id: far-zhao-boat-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-zhao-chuan
+    description: 由赵川所有。
+    access:
+      kind: public
+  - id: far-zhao-boat-hull
+    predicate: hull-condition
+    value:
+      kind: text
+      value: 船板接缝渗水
+    description: 一处船板接缝渗水。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

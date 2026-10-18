@@ -1,0 +1,26 @@
+id: tianyuan-patrol-transport
+kind: item
+name: 巡检金庭舟
+description: 供获授权巡检者使用的舟体，当前绑定城内与近界巡察哨的两处阵位。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-patrol-transport-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-patrol-transport-transport-rule
+    predicate: transport-rule
+    value:
+      kind: text
+      value: 每次传送必须在绑定阵位内、目的阵完好、驾驶者获授权并消耗两块高阶灵石；舟上人员和物品一并转移，不能生成副本。
+    description: 每次传送必须在绑定阵位内、目的阵完好、驾驶者获授权并消耗两块高阶灵石；舟上人员和物品一并转移，不能生成副本。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

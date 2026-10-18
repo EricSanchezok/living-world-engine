@@ -1,0 +1,42 @@
+id: ad-moke-rift-valley
+kind: location
+name: 摩柯破界对应深谷
+description: 魔界一处深谷，与摩柯附近存在可寻找的破界对应，当前无常开门户。
+placement: associated-demon-realm
+facts:
+  - id: ad-moke-rift-valley-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moke-rift-valley-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循真正勘定的长程路线寻找深谷，精确坐标并非普通居民已有知识。
+    description: 循真正勘定的长程路线寻找深谷，精确坐标并非普通居民已有知识。
+    access:
+      kind: public
+  - id: ad-moke-rift-valley-route-seas-moke-approach
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-moke-approach
+    description: route-to
+    access:
+      kind: public
+  - id: ad-moke-rift-valley-condition-seas-moke-approach
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须已获得摩柯附近坐标和破界手段，保护同行者并实际消耗法力；普通海船不能沿海面驶入界间虚空。
+    description: 须已获得摩柯附近坐标和破界手段，保护同行者并实际消耗法力；普通海船不能沿海面驶入界间虚空。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

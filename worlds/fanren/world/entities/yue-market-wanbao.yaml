@@ -1,0 +1,42 @@
+id: yue-market-wanbao
+kind: location
+name: 万宝楼
+description: 法器买卖铺，红桐柜台陈列实际货物，二楼有接待室；交易须实看、议价与交割。
+placement: yue-huangfeng-market
+facts:
+  - id: yue-market-wanbao-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-market-wanbao-property-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-wanbao-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-wanbao-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-wanbao-route-yue-wanbao-guest-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-wanbao-guest-room
+    description: 沿楼梯通行；进入接待室需店家同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

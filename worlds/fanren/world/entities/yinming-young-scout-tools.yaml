@@ -1,0 +1,18 @@
+id: yinming-young-scout-tools
+kind: item
+name: 孟寻的个人器具
+description: 基础武技、搬运和记路；尚无独自对付大兽的经验。所需的有限工具，不包含无限兽晶。
+placement: yinming-young-scout
+facts:
+  - id: yinming-young-scout-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-young-scout
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

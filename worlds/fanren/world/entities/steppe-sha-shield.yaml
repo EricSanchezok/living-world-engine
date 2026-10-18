@@ -1,0 +1,18 @@
+id: steppe-sha-shield
+kind: item
+name: 沙坚的土纹盾
+description: 结丹法士能以法力驱使的防御法器，需要持续供法；盾体能损坏，不能借名成为镇族圣器。
+placement: steppe-sha-jian
+facts:
+  - id: steppe-sha-shield-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-sha-jian
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

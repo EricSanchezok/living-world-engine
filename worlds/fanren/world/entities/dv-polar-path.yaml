@@ -1,0 +1,42 @@
+id: dv-polar-path
+kind: location
+name: 幻蔽石道
+description: 苍坤旧幻术遮住石道入口，路径两侧被血色禁光夹住，深入通向黄色石壁。
+placement: human-devil-valley
+facts:
+  - id: dv-polar-path-route-dv-blood-boundary
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-blood-boundary
+    description: route-to
+    access:
+      kind: public
+  - id: dv-polar-path-condition-dv-blood-boundary
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须发现并破解苍坤旧幻术或获对应法诀；不能只按地图名字穿入。
+    description: 须发现并破解苍坤旧幻术或获对应法诀；不能只按地图名字穿入。
+    access:
+      kind: public
+  - id: dv-polar-path-route-dv-polar-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-polar-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-polar-path-condition-dv-polar-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石道内部普通移动，须防古兽与两侧血禁；不需要破界。
+    description: 石道内部普通移动，须防古兽与两侧血禁；不需要破界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

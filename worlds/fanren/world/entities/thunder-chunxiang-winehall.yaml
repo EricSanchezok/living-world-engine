@@ -1,0 +1,26 @@
+id: thunder-chunxiang-winehall
+kind: location
+name: 醇香阁
+description: 晶族彩流罂的酿酒与会客处，入阁不等于获准取走珍酒。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-chunxiang-winehall-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-chunxiang-winehall-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 晶族彩流罂的酿酒与会客处，入阁不等于获准取走珍酒。
+    description: 晶族彩流罂的酿酒与会客处，入阁不等于获准取走珍酒。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

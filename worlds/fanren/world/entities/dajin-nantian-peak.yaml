@@ -1,0 +1,26 @@
+id: dajin-nantian-peak
+kind: location
+name: 南天峰
+description: 岳阳宫山门所在；来客须取得准入。
+placement: dajin-tianyue-range
+facts:
+  - id: dajin-nantian-peak-route-dajin-tianyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianyue-range
+    description: 接近山门需通报，不因陌生即强制开战。
+    access:
+      kind: public
+  - id: dajin-nantian-peak-travel-dajin-tianyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接近山门需通报，不因陌生即强制开战。
+    description: 接近山门需通报，不因陌生即强制开战。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

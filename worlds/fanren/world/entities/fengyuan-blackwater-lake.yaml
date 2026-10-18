@@ -1,0 +1,26 @@
+id: fengyuan-blackwater-lake
+kind: location
+name: 黑水湖
+description: 有毒雾与异常力场的险地，许多飞行器在此减速，水中生活着玄蜍兽。
+placement: fengyuan-spirit-domain
+facts:
+  - id: fengyuan-blackwater-lake-route-fengyuan-lingtian-fortress
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-lingtian-fortress
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-blackwater-lake-condition-fengyuan-lingtian-fortress
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有毒雾与异常力场的险地，许多飞行器在此减速，水中生活着玄蜍兽。
+    description: 有毒雾与异常力场的险地，许多飞行器在此减速，水中生活着玄蜍兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

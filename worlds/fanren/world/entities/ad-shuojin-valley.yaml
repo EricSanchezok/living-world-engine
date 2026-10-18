@@ -1,0 +1,26 @@
+id: ad-shuojin-valley
+kind: location
+name: 烁金河谷
+description: 城外河谷，无遮蔽航线保证，亦非必发战场。
+placement: associated-demon-realm
+facts:
+  - id: ad-shuojin-valley-route-to-ad-feicui-city
+    predicate: route-to-ad-feicui-city
+    value:
+      kind: entity
+      entityId: ad-feicui-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-shuojin-valley-route-to-ad-chenshui-town
+    predicate: route-to-ad-chenshui-town
+    value:
+      kind: entity
+      entityId: ad-chenshui-town
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

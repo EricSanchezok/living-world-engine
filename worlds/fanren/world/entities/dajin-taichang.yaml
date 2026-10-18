@@ -1,0 +1,26 @@
+id: dajin-taichang
+kind: location
+name: 太昌城
+description: 太昌府的府城，书院与商铺分布于城中，不同宅院和店铺各有主人。
+placement: dajin-nanjun
+facts:
+  - id: dajin-taichang-route-dajin-nanjun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-nanjun
+    description: 郡内陆路与水路须选择具体载具和通行条件。
+    access:
+      kind: public
+  - id: dajin-taichang-route-dajin-yutian
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yutian
+    description: 从城外进山，登山与负重耗时须按实际能力处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

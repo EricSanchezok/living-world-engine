@@ -1,0 +1,20 @@
+id: blood-student-fuel
+kind: container
+name: 幻镜灵石袋
+description: 每轮三千六百秒试演耗用两低阶石，当前可用八枚。
+placement: blood-huanxin-student
+facts:
+  - id: blood-student-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-huanxin-student
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

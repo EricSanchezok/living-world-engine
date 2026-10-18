@@ -1,0 +1,35 @@
+id: tianyuan-mo-retreat
+kind: location
+name: 莫简离清修居所
+description: 对外来函由守居人转交，内室受防护禁制隔绝。
+placement: spirit-tianyuan-domain
+facts:
+  - id: tianyuan-mo-retreat-route-spirit-tianyuan-capital
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-capital
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-mo-retreat-condition-spirit-tianyuan-capital
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 对外来函由守居人转交，内室受防护禁制隔绝。
+    description: 对外来函由守居人转交，内室受防护禁制隔绝。
+    access:
+      kind: public
+  - id: tianyuan-mo-retreat-root-detail-silver-spider-banner
+    predicate: root-detail-silver-spider-banner
+    value:
+      kind: text
+      value: 盘丝幡的银罡蛛器灵可有限感应强蛛，不是银罡子本人；知器名不等持有实物。
+    description: 盘丝幡的银罡蛛器灵可有限感应强蛛，不是银罡子本人；知器名不等持有实物。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

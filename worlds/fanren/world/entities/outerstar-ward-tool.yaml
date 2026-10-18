@@ -1,0 +1,18 @@
+id: outerstar-ward-tool
+kind: item
+name: 顾榆探土尺
+description: 低阶土法器，能查浅层裂缝，无法贯穿整片岛岭。
+placement: outerstar-mine-ward
+facts:
+  - id: outerstar-ward-tool-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-mine-ward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

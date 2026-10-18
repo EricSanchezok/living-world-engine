@@ -1,0 +1,26 @@
+id: fengyuan-sacred-tree-enclosure
+kind: location
+name: 通灵圣树旧禁地
+description: 古树树冠覆住谷口，细根盘成层叠坡台；树旁有养护用的浅渠和封闭石室。边界由木族管理，来访者先在外廊等待。
+placement: fengyuan-wood-domain
+facts:
+  - id: fengyuan-sacred-tree-enclosure-route-to-fengyuan-mumian-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-mumian-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-sacred-tree-enclosure-route-conditions-fengyuan-mumian-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 木棉城到旧禁地须跨林谷飞行；入内需要现守护者许可，接待廊之外有实际防护。
+    description: 木棉城到旧禁地须跨林谷飞行；入内需要现守护者许可，接待廊之外有实际防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

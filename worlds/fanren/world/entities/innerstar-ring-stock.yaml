@@ -1,0 +1,18 @@
+id: innerstar-ring-stock
+kind: item
+name: 城门未发身份环匣
+description: 城门待登记身份环，尚无来客认主。
+placement: innerstar-gate
+facts:
+  - id: innerstar-ring-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

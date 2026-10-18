@@ -1,0 +1,26 @@
+id: innerstar-xiaohuan-mountain
+kind: location
+name: 小寰山
+description: 小寰岛的山地，未因访客入山就改变住用权。
+placement: human-xiaohuan-island
+facts:
+  - id: innerstar-xiaohuan-mountain-route-human-xiaohuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-xiaohuan-island
+    description: 通往小寰岛
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-mountain-travel-human-xiaohuan-island
+    predicate: travel-human-xiaohuan-island
+    value:
+      kind: text
+      value: 沿山路出入，另建洞府需现场勘察与登记。
+    description: 沿山路出入，另建洞府需现场勘察与登记。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: ad-qingyi-qian-purse
+kind: container
+name: 钱珂私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-qingyi-qian
+facts:
+  - id: ad-qingyi-qian-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-qingyi-qian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

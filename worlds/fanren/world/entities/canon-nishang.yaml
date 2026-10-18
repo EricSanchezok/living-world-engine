@@ -1,0 +1,199 @@
+id: canon-nishang
+kind: person
+name: 霓裳仙子
+description: 掩月宗结丹修士，与南宫婉相识。
+placement: yue-yanyue-court
+facts:
+  - id: canon-nishang-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - canon-nishang
+  - id: canon-nishang-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹法力、御器与本门防护功法。
+    description: 结丹法力、御器与本门防护功法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-nishang
+  - id: canon-nishang-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根
+    description: 木水两属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-nishang-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yanyue-sect
+    description: 自己长期所属门派，公产与私人库存不同。
+    access:
+      kind: public
+  - id: canon-nishang-known-colleague
+    predicate: known-colleague
+    value:
+      kind: entity
+      entityId: canon-nangong-wan
+    description: 同门旧识，关心彼此但不知全部隐秘。
+    access:
+      kind: public
+meters:
+  - id: canon-nishang-health
+    definition_id: health
+    current: 100
+  - id: canon-nishang-mana
+    definition_id: mana
+    current: 400
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-nishang-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: canon-nishang-force
+    definition_id: force
+    value: 3
+  - id: canon-nishang-craft
+    definition_id: craft
+    value: 2
+  - id: canon-nishang-perception
+    definition_id: perception
+    value: 3
+  - id: canon-nishang-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-nishang
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 掩月宗结丹修士，与南宫婉相识。
+      voice: 谈话从容带笑，遇门人安危会显出急切。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与南宫商量近期来客接待，争取不挤掉自己的练功时间。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 霓裳仙子
+        description: 掩月宗结丹修士，与南宫婉相识。
+        status: observed
+      - id: location
+        name: 掩月宗接引外院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-nishang-pouch
+        name: 霓裳仙子的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yanyue-sect
+        name: 掩月宗
+        description: 自己长期所属门派，公产与私人库存不同。
+        status: observed
+      - id: known-canon-nangong-wan
+        name: 南宫婉
+        description: 同门旧识，关心彼此但不知全部隐秘。
+        status: observed
+      - id: known-yue-nishang-silk
+        name: 霓裳练法绸带
+        description: 普通防护法器，适合练习与接引辅助，适合辅助防护。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹法力、御器与本门防护功法。
+        description: 结丹法力、御器与本门防护功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 与南宫商量近期来客接待，争取不挤掉自己的练功时间。
+        description: 与南宫商量近期来客接待，争取不挤掉自己的练功时间。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是结丹修士。
+        description: 自己是结丹修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是木水两属性灵根。
+        description: 自己曾经验灵，知道自身是木水两属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-nishang
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-yanyue-court
+      - local_entity_id: known-canon-nishang-pouch
+        canonical_entity_ids:
+          - canon-nishang-pouch
+      - local_entity_id: known-yanyue-sect
+        canonical_entity_ids:
+          - yanyue-sect
+      - local_entity_id: known-canon-nangong-wan
+        canonical_entity_ids:
+          - canon-nangong-wan
+      - local_entity_id: known-yue-nishang-silk
+        canonical_entity_ids:
+          - yue-nishang-silk

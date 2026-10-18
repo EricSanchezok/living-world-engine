@@ -1,0 +1,250 @@
+id: spirit-caravan-master
+kind: person
+name: 石穗
+description: 结丹行旅掌柜，掌握当前接驳安排，宁愿延期也不出售虚假的安全保证。
+placement: spirit-xuanwu-route-office
+facts:
+  - id: spirit-caravan-master-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹遁行、线路核验、货物封存、车畜照料与低阶防护。
+    description: 结丹遁行、线路核验、货物封存、车畜照料与低阶防护。
+    access:
+      kind: agents
+      agentIds:
+        - spirit-caravan-master
+  - id: spirit-caravan-master-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - spirit-caravan-master
+  - id: spirit-caravan-master-works-with-spirit-xuanwu-pilot
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-pilot
+    description: 向港方核验位置与船次。
+    access:
+      kind: private
+  - id: spirit-caravan-master-works-with-spirit-capital-postmaster
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: spirit-capital-postmaster
+    description: 互通天元境车队货签。
+    access:
+      kind: private
+  - id: spirit-caravan-master-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: spirit-caravan-service
+    description: member-of
+    access:
+      kind: private
+  - id: spirit-caravan-master-native-origin
+    predicate: native-origin
+    value:
+      kind: text
+      value: 出生并成长于灵界；没有下界飞升气息。
+    description: 出生并成长于灵界；没有下界飞升气息。
+    access:
+      kind: agents
+      agentIds:
+        - spirit-caravan-master
+  - id: spirit-caravan-master-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木、火、土三属性灵根
+    description: 木、火、土三属性灵根
+    access:
+      kind: discoverable
+      condition: 具备适当检测手段者经许可实际检测该人的灵根，或本人主动陈述自己已有的可信检测结果。
+meters:
+  - id: spirit-caravan-master-health
+    definition_id: health
+    current: 100
+  - id: spirit-caravan-master-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 600
+ratings:
+  - id: spirit-caravan-master-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: spirit-caravan-master-force
+    definition_id: force
+    value: 3
+  - id: spirit-caravan-master-craft
+    definition_id: craft
+    value: 3
+  - id: spirit-caravan-master-perception
+    definition_id: perception
+    value: 3
+  - id: spirit-caravan-master-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: spirit-caravan-master
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 结丹行旅掌柜，掌握当前接驳安排，宁愿延期也不出售虚假的安全保证。
+      voice: 说话爽利，先把日期和价钱讲清；听见新路况会立刻追问细节。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 筹齐下一趟车队补给，核验玄武港方位回函。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 石穗
+        description: 结丹行旅掌柜，掌握当前接驳安排，宁愿延期也不出售虚假的安全保证。
+        status: observed
+      - id: location
+        name: 三境行旅公所
+        description: 自己目前所在的地方。
+        status: observed
+      - id: known-spirit-xuanwu-pilot
+        name: 程海笙
+        description: 向港方核验位置与船次。
+        status: observed
+      - id: known-spirit-capital-postmaster
+        name: 宋砚台
+        description: 互通天元境车队货签。
+        status: observed
+      - id: known-spirit-caravan-service
+        name: 远汀行旅行
+        description: 自己任职的机构及其日常权限。
+        status: observed
+      - id: known-spirit-wharf
+        name: 城中转运货场
+        description: 知道这个地方与公开用途；不了解其中未向自己展示的私人物件或秘密。
+        status: observed
+      - id: known-spirit-three-domain-atlas
+        name: 三境行路图册
+        description: 有主城和商路的普通图册，不能当作全部私密阵图。
+        status: observed
+      - id: known-spirit-current-harbor-letter
+        name: 玄武港现位回函
+        description: 只确认当前港口接驳条件的来函。
+        status: observed
+      - id: known-spirit-caravan-supply
+        name: 远汀出行补给
+        description: 有限出行物资须按合同核销。
+        status: observed
+      - id: known-spirit-caravan-itinerary
+        name: 远汀行程与收费簿
+        description: 报价和接驳按当前簿册安排。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 实际生活、训练和任职经历。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时亲历当地入夜；此后依据实际经过的时间和新见闻判断时段。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹遁行、线路核验、货物封存、车畜照料与低阶防护。
+        description: 结丹遁行、线路核验、货物封存、车畜照料与低阶防护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: native-origin
+        subjectId: self
+        predicate: native-origin
+        value:
+          kind: text
+          value: 出生并成长于灵界，不是下界飞升者。
+        description: 出生并成长于灵界，不是下界飞升者。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-spiritual-root
+        subjectId: self
+        predicate: known-spiritual-root
+        value:
+          kind: text
+          value: 木、火、土三属性灵根，这是本人曾经检测的结果。
+        description: 木、火、土三属性灵根，这是本人曾经检测的结果。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 开篇时此地已入夜。
+        description: 记得入场时当地已入夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - spirit-caravan-master
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit-xuanwu-route-office
+      - local_entity_id: known-spirit-xuanwu-pilot
+        canonical_entity_ids:
+          - spirit-xuanwu-pilot
+      - local_entity_id: known-spirit-capital-postmaster
+        canonical_entity_ids:
+          - spirit-capital-postmaster
+      - local_entity_id: known-spirit-caravan-service
+        canonical_entity_ids:
+          - spirit-caravan-service
+      - local_entity_id: known-spirit-wharf
+        canonical_entity_ids:
+          - spirit-wharf
+      - local_entity_id: known-spirit-three-domain-atlas
+        canonical_entity_ids:
+          - spirit-three-domain-atlas
+      - local_entity_id: known-spirit-current-harbor-letter
+        canonical_entity_ids:
+          - spirit-current-harbor-letter
+      - local_entity_id: known-spirit-caravan-supply
+        canonical_entity_ids:
+          - spirit-caravan-supply
+      - local_entity_id: known-spirit-caravan-itinerary
+        canonical_entity_ids:
+          - spirit-caravan-itinerary

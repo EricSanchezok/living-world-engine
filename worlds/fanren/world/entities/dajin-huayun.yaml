@@ -1,0 +1,42 @@
+id: dajin-huayun
+kind: location
+name: 华云州
+description: 东部沿海州域，港口和坊市连接海外修士。
+placement: human-dajin
+facts:
+  - id: dajin-huayun-route-dajin-coast-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-coast-wharf
+    description: 州内道路到海港，依实际距离和方式计算。
+    access:
+      kind: public
+  - id: dajin-huayun-travel-dajin-coast-wharf
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 州内道路到海港，依实际距离和方式计算。
+    description: 州内道路到海港，依实际距离和方式计算。
+    access:
+      kind: public
+  - id: dajin-huayun-route-dajin-kaijiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kaijiang
+    description: 距海二百余里的内陆镇路，不能一瞬抵达。
+    access:
+      kind: public
+  - id: dajin-huayun-travel-dajin-kaijiang
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 距海二百余里的内陆镇路，不能一瞬抵达。
+    description: 距海二百余里的内陆镇路，不能一瞬抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

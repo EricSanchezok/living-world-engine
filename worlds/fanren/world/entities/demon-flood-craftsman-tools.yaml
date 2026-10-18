@@ -1,0 +1,22 @@
+id: demon-flood-craftsman-tools
+kind: container
+name: 赤砚的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-flood-craftsman
+facts:
+  - id: demon-flood-craftsman-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-flood-craftsman
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

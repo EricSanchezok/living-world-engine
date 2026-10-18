@@ -1,0 +1,18 @@
+id: dajin-qianguang-temple
+kind: location
+name: 千光寺院址
+description: 冯家先祖修学过的寺院院址；建筑的通行与保管需实际确认。
+placement: dajin-guanning
+facts:
+  - id: dajin-qianguang-temple-route-dajin-guanning
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-guanning
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

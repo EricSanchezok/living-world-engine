@@ -1,0 +1,18 @@
+id: innerstar-kuixing-trade-register
+kind: item
+name: 大岛行商资格册
+description: 记载十户行商资格和挑战结果；当前经营户姓名另依实际登记核定。
+placement: human-dongshi-city
+facts:
+  - id: innerstar-kuixing-trade-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 魁星岛务所公物，使用不等于取得私有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

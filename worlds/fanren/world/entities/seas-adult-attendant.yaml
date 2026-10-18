@@ -1,0 +1,197 @@
+id: seas-adult-attendant
+kind: person
+name: 青序
+description: 二十八岁的成年元婴侍役，幼时入盟修行，如今能独立刻写低阶接引符。
+placement: seas-guest-court
+facts:
+  - id: seas-adult-attendant-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - seas-adult-attendant
+  - id: seas-adult-attendant-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴修行、基础接引符刻写与礼仪，尚未掌握跨洲大阵。
+    description: 元婴修行、基础接引符刻写与礼仪，尚未掌握跨洲大阵。
+    access:
+      kind: agents
+      agentIds:
+        - seas-adult-attendant
+  - id: seas-adult-attendant-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-adult-attendant
+meters:
+  - id: seas-adult-attendant-health
+    definition_id: health
+    current: 100
+  - id: seas-adult-attendant-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-adult-attendant-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: seas-adult-attendant-force
+    definition_id: force
+    value: 4
+  - id: seas-adult-attendant-craft
+    definition_id: craft
+    value: 4
+  - id: seas-adult-attendant-perception
+    definition_id: perception
+    value: 4
+  - id: seas-adult-attendant-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: seas-adult-attendant
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 二十八岁的成年元婴侍役，幼时入盟修行，如今能独立刻写低阶接引符。
+      voice: 待客时礼貌，谈自己打算会仔细咬字；被说成礼物时眼神会冷下来。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 申请转入阵务工坊做有报酬的学徒，争取保留自己已经挣得的工钱。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 青序
+        description: 二十八岁的成年元婴侍役，幼时入盟修行，如今能独立刻写低阶接引符。
+        status: observed
+      - id: location
+        name: 商盟贵宾院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-adult-attendant-private-stock
+        name: 青序的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-fei-yun
+        name: 飞云仙子
+        description: 接待负责人和受约束的成年侍役，本次已有转职申请。
+        status: observed
+      - id: known-seas-array-tutor
+        name: 商砚
+        description: 已亲手递过试艺请求，尚未成为正式学徒。
+        status: observed
+      - id: known-seas-qingxu-request
+        name: 青序转职申请
+        description: 请求转到商砚阵务工坊，愿先试刻一符，保留个人工钱与拒绝被送作私人侍役的主张。
+        status: observed
+      - id: known-seas-qingxu-earned
+        name: 青序已挣工钱
+        description: 已经实际交付本人，任何转职不自动清零。
+        status: observed
+      - id: known-seas-qingxu-draft
+        name: 青序未完成接引符
+        description: 已写大半的符胚，有一处回路尚空；可检查和学习，不保证第一次成功。
+        status: observed
+      - id: known-seas-qingxu-contract
+        name: 青序役务契据
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-apprentice-offer
+        name: 商砚试艺条件
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+      - id: known-seas-apprentice-fund
+        name: 阵务学徒预算
+        description: 已就转职与试艺交换过的具体文书，仍待达成新的约定。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴修行、基础接引符刻写与礼仪，尚未掌握跨洲大阵。
+        description: 元婴修行、基础接引符刻写与礼仪，尚未掌握跨洲大阵。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-adult-attendant
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-guest-court
+      - local_entity_id: known-seas-adult-attendant-private-stock
+        canonical_entity_ids:
+          - seas-adult-attendant-private-stock
+      - local_entity_id: known-canon-fei-yun
+        canonical_entity_ids:
+          - canon-fei-yun
+      - local_entity_id: known-seas-array-tutor
+        canonical_entity_ids:
+          - seas-array-tutor
+      - local_entity_id: known-seas-qingxu-request
+        canonical_entity_ids:
+          - seas-qingxu-request
+      - local_entity_id: known-seas-qingxu-earned
+        canonical_entity_ids:
+          - seas-qingxu-earned
+      - local_entity_id: known-seas-qingxu-draft
+        canonical_entity_ids:
+          - seas-qingxu-draft
+      - local_entity_id: known-seas-qingxu-contract
+        canonical_entity_ids:
+          - seas-qingxu-contract
+      - local_entity_id: known-seas-apprentice-offer
+        canonical_entity_ids:
+          - seas-apprentice-offer
+      - local_entity_id: known-seas-apprentice-fund
+        canonical_entity_ids:
+          - seas-apprentice-fund

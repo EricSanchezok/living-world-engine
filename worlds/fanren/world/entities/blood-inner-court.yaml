@@ -1,0 +1,42 @@
+id: blood-inner-court
+kind: location
+name: 冰魄受困庭院
+description: 四周白墙掩成山景，只有损坏阵路连接外界，冰魄在此苦修研究。
+placement: blood-core-stela
+facts:
+  - id: blood-inner-court-route-blood-core-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-core-hall
+    description: route-to
+    access:
+      kind: public
+  - id: blood-inner-court-condition-blood-core-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 唯一已知连接为损坏的古传送阵；须实际修复纹路和供能，内侧没有现成材料自动修好外侧。不能从墙上任意开普通门离开。
+    description: 唯一已知连接为损坏的古传送阵；须实际修复纹路和供能，内侧没有现成材料自动修好外侧。不能从墙上任意开普通门离开。
+    access:
+      kind: public
+  - id: blood-inner-court-route-blood-treasure-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-treasure-room
+    description: route-to
+    access:
+      kind: public
+  - id: blood-inner-court-condition-blood-treasure-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 庭院中既有隐门可由冰魄打开，但藏宝塔另受强禁制；进入房间不等于得到宝物。
+    description: 庭院中既有隐门可由冰魄打开，但藏宝塔另受强禁制；进入房间不等于得到宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

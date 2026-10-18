@@ -1,0 +1,34 @@
+id: steppe-liuting-well
+kind: location
+name: 柳汀水井
+description: 井口垒着旧石，短槽接水给驮畜，长绳挂在支架上。井旁泥地可辨昨夜的车印与蹄迹。
+placement: steppe-liuting-camp
+facts:
+  - id: steppe-liuting-well-route-steppe-liuting-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-camp
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-well-travel-steppe-liuting-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-well-water
+    predicate: water-source
+    value:
+      kind: text
+      value: 自然浅井，供本营当前人数与畜群日常取水；长期干旱、大量抽取或污染会改变水量水质，验水不生产水。
+    description: 自然浅井，供本营当前人数与畜群日常取水；长期干旱、大量抽取或污染会改变水量水质，验水不生产水。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

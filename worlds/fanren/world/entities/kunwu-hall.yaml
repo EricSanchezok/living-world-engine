@@ -1,0 +1,42 @@
+id: kunwu-hall
+kind: location
+name: 昆吾殿
+description: 上百柱放北极元光，另有幻阵与后堂。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-hall-route-kunwu-magnetic-grove
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-magnetic-grove
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-hall-condition-kunwu-magnetic-grove
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 重力和降魔咒可同时作用，不能一概凭土遁绕过。
+    description: 重力和降魔咒可同时作用，不能一概凭土遁绕过。
+    access:
+      kind: public
+  - id: kunwu-hall-route-kunwu-rear-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-rear-hall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-hall-condition-kunwu-rear-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 北极元光、幻阵与绿桌罩各须处理。
+    description: 北极元光、幻阵与绿桌罩各须处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

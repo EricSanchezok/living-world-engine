@@ -1,0 +1,30 @@
+id: global-mo-wang-wife-dragon-ring-powder
+kind: item
+name: 黑色现形药粉
+description: 夹层中保存的一份干燥粉末。
+placement: global-mo-wang-wife-dragon-ring
+facts:
+  - id: global-mo-wang-wife-dragon-ring-powder-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-wang-wife
+    description: 戒内一份药粉，用去后不会自然复原。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-wang-wife
+  - id: global-mo-wang-wife-dragon-ring-powder-measure
+    predicate: remaining-use
+    value:
+      kind: text
+      value: 一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。
+    description: 一份现形用药粉，仅够与其他三份合调一次，需实际倒出混合。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-wang-wife
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

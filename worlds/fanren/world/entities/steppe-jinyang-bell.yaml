@@ -1,0 +1,26 @@
+id: steppe-jinyang-bell
+kind: item
+name: 井坡警铃符
+description: 布在井边的单枚低阶警铃符，受触动可鸣响，不能辨来人真实身份；损坏需材料修理。
+placement: steppe-jinyang-camp
+facts:
+  - id: steppe-jinyang-bell-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-jinyang-tribe-reference
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-jinyang-bell-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-a-luo
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

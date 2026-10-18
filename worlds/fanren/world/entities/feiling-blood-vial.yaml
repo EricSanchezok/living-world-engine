@@ -1,0 +1,28 @@
+id: feiling-blood-vial
+kind: item
+name: 天鹏传承真血封瓶
+description: 一份有限封存真血；是否适合某个受试者须查验，不能反复无损给所有来客融合。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-blood-vial-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-blood-vial-finite-dose
+    predicate: finite-dose
+    value:
+      kind: number
+      value: 1
+    description: finite-dose
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-sacred-blood-dose
+    amount: 2
+ratings: []
+shared_activity_resources: []

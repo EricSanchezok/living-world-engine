@@ -1,0 +1,58 @@
+id: yue-tainan-valley
+kind: location
+name: 太南谷
+description: 北侧迷雾遮护的谷地，入谷要接引或具备实际破阵手段。
+placement: yue-tainan-mountain
+facts:
+  - id: yue-tainan-valley-route-yue-tainan-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-square
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-valley-travel-yue-tainan-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-valley-route-yue-tainan-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-mountain
+    description: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    access:
+      kind: public
+  - id: yue-tainan-valley-travel-yue-tainan-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    description: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    access:
+      kind: public
+  - id: yue-tainan-valley-layout
+    predicate: physical-layout
+    value:
+      kind: text
+      value: 谷地三面环山，迷雾坡通往谷外；内有上百亩土地、宫殿式楼阁与青砖交易广场。
+    description: 谷地三面环山，迷雾坡通往谷外；内有上百亩土地、宫殿式楼阁与青砖交易广场。
+    access:
+      kind: public
+  - id: yue-tainan-valley-route-yue-tainan-guesthouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-guesthouse
+    description: 从谷内步行可到东侧客舍门外，入内须通过门禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

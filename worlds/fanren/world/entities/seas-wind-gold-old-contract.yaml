@@ -1,0 +1,26 @@
+id: seas-wind-gold-old-contract
+kind: item
+name: 驿院风精金旧约
+description: 驿院订20斤风精金，约价40中阶石，三本地日后交接；未预收货款，买卖双方可协商延期但须通知。
+placement: seas-dragon-trader
+facts:
+  - id: seas-wind-gold-old-contract-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-dragon-trader
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-wind-gold-old-contract-due-time
+    predicate: due-time
+    value:
+      kind: number
+      value: 1036800
+    description: due-time
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

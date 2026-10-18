@@ -1,0 +1,240 @@
+id: canon-mu-jiao
+kind: person
+name: 木姣
+description: 木族修士，观察细致，喜欢辨别外表相近的植株。
+placement: fengyuan-wood-rest-grove
+facts:
+  - id: canon-mu-jiao-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - canon-mu-jiao
+  - id: canon-mu-jiao-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚木法与青灵慧眼；慧眼所见受修为、禁制和对象隐蔽影响。
+    description: 炼虚木法与青灵慧眼；慧眼所见受修为、禁制和对象隐蔽影响。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mu-jiao
+  - id: canon-mu-jiao-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木族法体与木灵修炼体系。
+    description: 木族法体与木灵修炼体系。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mu-jiao
+  - id: canon-mu-jiao-reports-to
+    predicate: reports-to
+    value:
+      kind: entity
+      entityId: canon-wood-grand-elder
+    description: reports-to
+    access:
+      kind: private
+  - id: canon-mu-jiao-garden-offer
+    predicate: garden-offer
+    value:
+      kind: text
+      value: 能查明原因并与青梢完成恢复者，可建议公库支付三十低阶灵石，并允许抄录一篇木族基础养植笔记；不是直接赠送黑灵花。
+    description: 能查明原因并与青梢完成恢复者，可建议公库支付三十低阶灵石，并允许抄录一篇木族基础养植笔记；不是直接赠送黑灵花。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mu-jiao
+  - id: canon-mu-jiao-works-with
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: canon-mu-jun
+    description: 长期共同照料圣地。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mu-jiao
+meters:
+  - id: canon-mu-jiao-health
+    definition_id: health
+    current: 100
+  - id: canon-mu-jiao-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-mu-jiao-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: canon-mu-jiao-force
+    definition_id: force
+    value: 6
+  - id: canon-mu-jiao-craft
+    definition_id: craft
+    value: 4
+  - id: canon-mu-jiao-perception
+    definition_id: perception
+    value: 6
+  - id: canon-mu-jiao-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-mu-jiao
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 木族修士，观察细致，喜欢辨别外表相近的植株。
+      voice: 语气轻，常先指出自己确实看见的细节，再说可能的原因。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查明一片幼枝变色原因，不让照料者互相甩责。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 木姣
+        description: 木族修士，观察细致，喜欢辨别外表相近的植株。
+        status: observed
+      - id: location
+        name: 青枝修养林
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-mu-jiao-supplies
+        name: 木姣的私用储备
+        description: 自身修炼和出行费用，与族域公产分开。
+        status: observed
+      - id: known-canon-wood-grand-elder
+        name: 木族大长老
+        description: 当前共同照料圣树，大长老认可木姣观察植物的能力。
+        status: observed
+      - id: known-fengyuan-basic-gardening-notes
+        name: 木姣的基础养植笔记
+        description: 记录引水、土质与观察根床的做法，可在获准后抄录，用于相应环境下的养植实践。
+        status: observed
+      - id: known-fengyuan-seedling-bed
+        name: 青梢负责的幼枝圃
+        description: 共同照料的幼枝圃，靠溪两处叶尖变黄。
+        status: observed
+      - id: known-fengyuan-clean-soil
+        name: 圣地备用净土
+        description: 圣地留下的两袋净土，须按养护安排取用。
+        status: observed
+      - id: known-fengyuan-wood-public-reserve
+        name: 木族圣地养护储备
+        description: 公共养护物资，报酬与领料需由负责人员核准。
+        status: observed
+      - id: known-canon-mu-jun
+        name: 木君
+        description: 多年共事的同僚，常因照料方法争论，却都爱惜幼枝。
+        status: observed
+      - id: known-fengyuan-wood-gardener
+        name: 青梢
+        description: 负责幼枝圃的青梢，自己曾指导他取样。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚木法与青灵慧眼；慧眼所见受修为、禁制和对象隐蔽影响。
+        description: 炼虚木法与青灵慧眼；慧眼所见受修为、禁制和对象隐蔽影响。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木族法体与木灵修炼体系。
+        description: 木族法体与木灵修炼体系。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: garden-offer
+        subjectId: self
+        predicate: garden-offer
+        value:
+          kind: text
+          value: 查清并修好幼枝问题后，可提请三十低阶灵石和基础养植笔记抄录许可。
+        description: 查清并修好幼枝问题后，可提请三十低阶灵石和基础养植笔记抄录许可。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        description: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-mu-jiao
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-wood-rest-grove
+      - local_entity_id: known-canon-mu-jiao-supplies
+        canonical_entity_ids:
+          - canon-mu-jiao-supplies
+      - local_entity_id: known-canon-wood-grand-elder
+        canonical_entity_ids:
+          - canon-wood-grand-elder
+      - local_entity_id: known-fengyuan-basic-gardening-notes
+        canonical_entity_ids:
+          - fengyuan-basic-gardening-notes
+      - local_entity_id: known-fengyuan-seedling-bed
+        canonical_entity_ids:
+          - fengyuan-seedling-bed
+      - local_entity_id: known-fengyuan-clean-soil
+        canonical_entity_ids:
+          - fengyuan-clean-soil
+      - local_entity_id: known-fengyuan-wood-public-reserve
+        canonical_entity_ids:
+          - fengyuan-wood-public-reserve
+      - local_entity_id: known-canon-mu-jun
+        canonical_entity_ids:
+          - canon-mu-jun
+      - local_entity_id: known-fengyuan-wood-gardener
+        canonical_entity_ids:
+          - fengyuan-wood-gardener

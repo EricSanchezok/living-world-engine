@@ -1,0 +1,67 @@
+id: fengyuan-fuling-mountain
+kind: location
+name: 伏灵山
+description: 灵王所在的圣山；三万里内的进入资格与山腰以上权限分别管理。
+placement: fengyuan-spirit-domain
+facts:
+  - id: fengyuan-fuling-mountain-route-fengyuan-cuiyan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-cuiyan-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-fuling-mountain-condition-fengyuan-cuiyan-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵王所在的圣山；三万里内的进入资格与山腰以上权限分别管理。
+    description: 灵王所在的圣山；三万里内的进入资格与山腰以上权限分别管理。
+    access:
+      kind: public
+  - id: fengyuan-fuling-mountain-route-fengyuan-purple-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-purple-hall
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-fuling-mountain-condition-fengyuan-purple-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵王会见获准来客的阁楼，周围有受照料的花树。
+    description: 灵王会见获准来客的阁楼，周围有受照料的花树。
+    access:
+      kind: public
+  - id: fengyuan-fuling-mountain-route-to-fengyuan-shura-array-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-array-room
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-fuling-mountain-route-conditions-fengyuan-shura-array-room
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 山内到侧室须灵王许可并开启房门，进入房间本身不触发跨界。
+    description: 山内到侧室须灵王许可并开启房门，进入房间本身不触发跨界。
+    access:
+      kind: private
+  - id: fengyuan-fuling-mountain-root-detail-yuanhun-lamp
+    predicate: root-detail-yuanhun-lamp
+    value:
+      kind: text
+      value: 元魂灯滋养分魂与特定元魂化身法配合，区别于普通寄魂器久置衰弱；仍有损伤与分化代价，不无限复制全实力。
+    description: 元魂灯滋养分魂与特定元魂化身法配合，区别于普通寄魂器久置衰弱；仍有损伤与分化代价，不无限复制全实力。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: stone-garden
+kind: location
+name: 小石潭药圃
+description: 洞府附属小药圃，只有少量现有药草，生长与收获需要时间。
+placement: stone-pond
+facts:
+  - id: stone-garden-route-stone-pond
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: stone-pond
+    description: 洞府与药圃有步道相连。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

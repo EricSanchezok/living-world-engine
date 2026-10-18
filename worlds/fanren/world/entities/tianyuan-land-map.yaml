@@ -1,0 +1,18 @@
+id: tianyuan-land-map
+kind: item
+name: 玉阙阁现用报名屏图
+description: 显示现用地册中甲乙两处空洞与报名记录；只标已受理申请，不自动探知其他人的心思。
+placement: spirit-yuque-hall
+facts:
+  - id: tianyuan-land-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

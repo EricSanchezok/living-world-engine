@@ -1,0 +1,58 @@
+id: minghe-jinyan-island
+kind: location
+name: 金焰岛
+description: 湖中岛屿，金色建筑映照水面，外有防护禁制。
+placement: minghe-green-lake
+facts:
+  - id: minghe-jinyan-island-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-jinyan-island-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 湖中岛屿，金色建筑映照水面，外有防护禁制。
+    description: 湖中岛屿，金色建筑映照水面，外有防护禁制。
+    access:
+      kind: public
+  - id: minghe-jinyan-island-route-minghe-jinyan-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-jinyan-palace
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-jinyan-island-condition-minghe-jinyan-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 金焰候会客与日常居住之处，金饰与收藏分室保管。
+    description: 金焰候会客与日常居住之处，金饰与收藏分室保管。
+    access:
+      kind: public
+  - id: minghe-jinyan-island-route-to-minghe-green-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-green-lake
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-jinyan-island-route-conditions-minghe-green-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。
+    description: 穿过湖面后仍受岛屿白幕与守卫检查，得到主人许可才能进宫；湖中深鱼并不主动替任何旅人护航。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

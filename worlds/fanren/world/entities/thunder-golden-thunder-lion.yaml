@@ -1,0 +1,37 @@
+id: thunder-golden-thunder-lion
+kind: creature-group
+name: 幼生黄金雷狮
+description: 金色幼狮体表偶有雷弧，受惊会吐出短促雷光，尚未长成。
+placement: thunder-thunder-lion-den
+facts:
+  - id: thunder-golden-thunder-lion-capability
+    predicate: capability
+    value:
+      kind: text
+      value: 天生御雷，当前可作近身短距放电，成长和修为积累仍需食物与时间。
+    description: 天生御雷，当前可作近身短距放电，成长和修为积累仍需食物与时间。
+    access:
+      kind: private
+  - id: thunder-golden-thunder-lion-ecology
+    predicate: ecology
+    value:
+      kind: text
+      value: 饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。
+    description: 饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。
+    access:
+      kind: private
+meters:
+  - id: thunder-golden-thunder-lion-health
+    definition_id: health
+    current: 100
+  - id: thunder-golden-thunder-lion-mana
+    definition_id: mana
+    current: 540
+quantities:
+  - definition_id: thunder-creature-count
+    amount: 1
+ratings:
+  - id: thunder-golden-thunder-lion-force
+    definition_id: force
+    value: 3
+shared_activity_resources: []

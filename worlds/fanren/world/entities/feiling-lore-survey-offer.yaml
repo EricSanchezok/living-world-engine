@@ -1,0 +1,18 @@
+id: feiling-lore-survey-offer
+kind: item
+name: 旧图核路委托
+description: 竹翎愿从私储支付12低阶灵石，交换入口到石檐岔路的实地记录；不要求冒险下到二层。
+placement: feiling-lore-clerk
+facts:
+  - id: feiling-lore-survey-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-lore-clerk
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

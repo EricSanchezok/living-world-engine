@@ -1,0 +1,26 @@
+id: south-yin-warm
+kind: location
+name: 暖玉沙洞
+description: 风较弱的偏洞有温润细沙和玉质岩面，阴芝马与尸狼长期藏息。
+placement: south-yin-forks
+facts:
+  - id: south-yin-warm-route-south-yin-forks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-forks
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-warm-condition-south-yin-forks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐岔道需现场探索，路标不是完整地图。
+    description: 隐岔道需现场探索，路标不是完整地图。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,90 @@
+id: void-garden
+kind: location
+name: 草原药地
+description: 真实的小空间草原与远山，不是外海幻景。
+placement: human-void-hall
+facts:
+  - id: void-garden-route-void-pavilions
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-pavilions
+    description: route-to
+    access:
+      kind: public
+  - id: void-garden-condition-void-pavilions
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-garden-route-void-ice
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-ice
+    description: route-to
+    access:
+      kind: public
+  - id: void-garden-condition-void-ice
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-garden-route-void-fire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-fire
+    description: route-to
+    access:
+      kind: public
+  - id: void-garden-condition-void-fire
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-garden-route-void-ginseng-hill
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-ginseng-hill
+    description: route-to
+    access:
+      kind: public
+  - id: void-garden-condition-void-ginseng-hill
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-garden-daylight
+    predicate: daylight
+    value:
+      kind: text
+      value: day
+    description: 草原空间的天空明亮。
+    access:
+      kind: public
+  - id: void-garden-illumination
+    predicate: illumination
+    value:
+      kind: text
+      value: 当地保持明亮天空与草原景象，外海昼夜不能直接代替这里的光照。
+    description: 当地保持明亮天空与草原景象，外海昼夜不能直接代替这里的光照。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

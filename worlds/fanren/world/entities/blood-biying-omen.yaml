@@ -1,0 +1,18 @@
+id: blood-biying-omen
+kind: item
+name: 碧影祭炼圆盘
+description: 长期精血祭炼的预兆宝物，当前完好无裂纹；预兆不能替代事件的真实原因。
+placement: canon-bi-ying
+facts:
+  - id: blood-biying-omen-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bi-ying
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: blood-qingjiao-council-note
+kind: item
+name: 青蛟殿水路议簿
+description: 两殿主只同意先问涂咬水情，尚未批准开航。公库拟拨8高阶灵石勘验，须两人会签后支付。
+placement: blood-qingjiao-palace
+facts:
+  - id: blood-qingjiao-council-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-qingjiao-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: dajin-xunyun
+kind: location
+name: 隼云镇
+description: 黄土街道连接简朴民居的凡俗小镇，镇外能远望山系。
+placement: dajin-guanning
+facts:
+  - id: dajin-xunyun-route-dajin-guanning
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-guanning
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

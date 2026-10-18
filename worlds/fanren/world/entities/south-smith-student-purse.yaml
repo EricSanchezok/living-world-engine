@@ -1,0 +1,22 @@
+id: south-smith-student-purse
+kind: container
+name: 陆荻的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-smith-student
+facts:
+  - id: south-smith-student-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-smith-student
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,37 @@
+id: root-huatian-sect
+kind: location
+name: 华天宗山门
+description: 人族宗门的山地驻地，门内有讲法与办事院。
+placement: spirit-human-demon-territory
+facts:
+  - id: root-huatian-sect-route-to-spirit-human-demon-territory
+    predicate: route-to-spirit-human-demon-territory
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huatian-sect-travel-condition-spirit-human-demon-territory
+    predicate: travel-condition-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huatian-sect-root-detail-human-regional-sects
+    predicate: root-detail-human-regional-sects
+    value:
+      kind: text
+      value: 华天宗、卫云城与千寰山是独立地方社会，宗门辖地和人口可随实际经营与冲突变化。
+    description: 华天宗、卫云城与千寰山是独立地方社会，宗门辖地和人口可随实际经营与冲突变化。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: void-black-sand
+kind: location
+name: 黑沙漠
+description: 大群铁火蚁栖息的黑色沙地。
+placement: void-fire
+facts:
+  - id: void-black-sand-route-void-fire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-fire
+    description: route-to
+    access:
+      kind: public
+  - id: void-black-sand-condition-void-fire
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

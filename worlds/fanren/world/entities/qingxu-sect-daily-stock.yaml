@@ -1,0 +1,22 @@
+id: qingxu-sect-daily-stock
+kind: item
+name: 清虚门外院储备
+description: 外院真实日常灵石和材料，支出须由当值人员同意。
+placement: yue-qingxu-court
+facts:
+  - id: qingxu-sect-daily-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qingxu-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 90
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

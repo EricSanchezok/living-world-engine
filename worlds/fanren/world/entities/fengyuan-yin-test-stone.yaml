@@ -1,0 +1,18 @@
+id: fengyuan-yin-test-stone
+kind: item
+name: 银罡子的护石试件
+description: 一块已购护石，未测最大承受力；一次过强打击会留下裂痕或毁坏，不会测试后自动复原。
+placement: canon-yin-gangzi
+facts:
+  - id: fengyuan-yin-test-stone-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yin-gangzi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

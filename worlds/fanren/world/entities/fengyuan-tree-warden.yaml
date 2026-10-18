@@ -1,0 +1,156 @@
+id: fengyuan-tree-warden
+kind: person
+name: 槐叙
+description: 照看通灵古树的木族合体修士，对季候和树根旧伤记得很细。
+placement: fengyuan-sacred-tree-enclosure
+facts:
+  - id: fengyuan-tree-warden-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: private
+  - id: fengyuan-tree-warden-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 木灵修炼、根系养护、限定范围的护木阵与灵酒酿制；取汁会消耗树体储备。
+    description: 木灵修炼、根系养护、限定范围的护木阵与灵酒酿制；取汁会消耗树体储备。
+    access:
+      kind: private
+meters:
+  - id: fengyuan-tree-warden-health
+    definition_id: health
+    current: 100
+  - id: fengyuan-tree-warden-mana
+    definition_id: mana
+    current: 1260
+quantities: []
+ratings:
+  - id: fengyuan-tree-warden-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: fengyuan-tree-warden-force
+    definition_id: force
+    value: 7
+  - id: fengyuan-tree-warden-craft
+    definition_id: craft
+    value: 5
+  - id: fengyuan-tree-warden-perception
+    definition_id: perception
+    value: 7
+  - id: fengyuan-tree-warden-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: fengyuan-tree-warden
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 照看通灵古树的木族合体修士，对季候和树根旧伤记得很细。
+      voice: 话不多，愿把现场痕迹指给对方看；遇到急着索取树汁的人会先谈树的承受力。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定今季有限树汁留给幼株、边地幼枝护理还是酿酒，先看阵学模型和木岑的具体请领用途。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 槐叙
+        description: 照看通灵古树的木族合体修士，对季候和树根旧伤记得很细。
+        status: observed
+      - id: location
+        name: 通灵圣树旧禁地
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-fengyuan-tree-warden-private-stock
+        name: 槐叙私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-fengyuan-sap-allocation
+        name: 今季树汁用途议案
+        description: 自己起草的分配议案，尚未签成既定支出。
+        status: observed
+      - id: fengyuan-review-fengyuan-sap-store
+        name: 禁地今季留存树汁
+        description: 已清点六瓶，族产由自己保管。
+        status: observed
+      - id: fengyuan-review-fengyuan-wine-store
+        name: 旧酿仙叶酒
+        description: 三瓶旧酿，可以议价但须为族中留下凭据。
+        status: observed
+      - id: fengyuan-review-fengyuan-array-scholar
+        name: 榆砚
+        description: 曾讨论借活树试验，自己愿先看模型效果。
+        status: observed
+      - id: fengyuan-review-fengyuan-wood-trader
+        name: 木岑
+        description: 曾协商边地供给的行商，近日请领一瓶树汁，自己尚未批准。
+        status: observed
+      - id: fengyuan-review-fengyuan-trader-sap-request
+        name: 木岑树汁请领函
+        description: 收到并读过的来函，尚未答复。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 木灵修炼、根系养护、限定范围的护木阵与灵酒酿制；取汁会消耗树体储备。
+        description: 木灵修炼、根系养护、限定范围的护木阵与灵酒酿制；取汁会消耗树体储备。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - fengyuan-tree-warden
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-sacred-tree-enclosure
+      - local_entity_id: fengyuan-review-fengyuan-tree-warden-private-stock
+        canonical_entity_ids:
+          - fengyuan-tree-warden-private-stock
+      - local_entity_id: fengyuan-review-fengyuan-sap-allocation
+        canonical_entity_ids:
+          - fengyuan-sap-allocation
+      - local_entity_id: fengyuan-review-fengyuan-sap-store
+        canonical_entity_ids:
+          - fengyuan-sap-store
+      - local_entity_id: fengyuan-review-fengyuan-wine-store
+        canonical_entity_ids:
+          - fengyuan-wine-store
+      - local_entity_id: fengyuan-review-fengyuan-array-scholar
+        canonical_entity_ids:
+          - fengyuan-array-scholar
+      - local_entity_id: fengyuan-review-fengyuan-wood-trader
+        canonical_entity_ids:
+          - fengyuan-wood-trader
+      - local_entity_id: fengyuan-review-fengyuan-trader-sap-request
+        canonical_entity_ids:
+          - fengyuan-trader-sap-request

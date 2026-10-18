@@ -1,0 +1,28 @@
+id: outerstar-array-fuel
+kind: container
+name: 陆芩布阵用石
+description: 目前布阵余料。
+placement: outerstar-array-hunter
+facts:
+  - id: outerstar-array-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-array-hunter
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-array-fuel-array-use
+    predicate: array-use
+    value:
+      kind: text
+      value: 四旗齐备并布于适当地形，持续一时辰耗八低阶灵石；破旗或断供会改变阵势。
+    description: 四旗齐备并布于适当地形，持续一时辰耗八低阶灵石；破旗或断供会改变阵势。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

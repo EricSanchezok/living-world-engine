@@ -1,0 +1,58 @@
+id: thunder-jiaochi-compass
+kind: item
+name: 研武院天玄罗盘
+description: 一具需要冷却的探测盘，目标条件和遮蔽会影响结果；不能看遍全世界或把猜测当真。
+placement: thunder-jiaochi-research
+facts:
+  - id: thunder-jiaochi-compass-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-jiaochi-compass-scan-rule
+    predicate: scan-rule
+    value:
+      kind: text
+      value: 本轮以经确认的一份靶物气息为引；可对研武院周边一百里内相符气息作一次探测，可能受遮蔽影响；需操作者法力及一块高阶灵石，使用后至少等待三灵界本地日1036800共同秒。范围与耗量为本具当前额定值。
+    description: 本轮以经确认的一份靶物气息为引；可对研武院周边一百里内相符气息作一次探测，可能受遮蔽影响；需操作者法力及一块高阶灵石，使用后至少等待三灵界本地日1036800共同秒。范围与耗量为本具当前额定值。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiaochi-yin
+        - canon-jiaochi-tu
+        - canon-jiaochi-ning
+  - id: thunder-jiaochi-compass-ready
+    predicate: ready
+    value:
+      kind: number
+      value: 1
+    description: ready
+    access:
+      kind: agents
+      agentIds:
+        - canon-jiaochi-yin
+        - canon-jiaochi-tu
+        - canon-jiaochi-ning
+  - id: thunder-jiaochi-compass-next-use-time
+    predicate: next-use-time
+    value:
+      kind: number
+      value: 0
+    description: next-use-time
+    access:
+      kind: private
+  - id: thunder-jiaochi-compass-clock-rule
+    predicate: clock-rule
+    value:
+      kind: text
+      value: 成功施用后按实际世界时间将next-use-time设为当前时间加1036800秒，同时ready置0；到时只解除冷却，仍须靶物、法力和实际供能。
+    description: 成功施用后按实际世界时间将next-use-time设为当前时间加1036800秒，同时ready置0；到时只解除冷却，仍须靶物、法力和实际供能。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

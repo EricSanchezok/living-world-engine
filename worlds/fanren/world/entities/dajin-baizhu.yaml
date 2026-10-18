@@ -1,0 +1,26 @@
+id: dajin-baizhu
+kind: location
+name: 白竹山
+description: 低矮山地上有天符门传承，灵脉有限。
+placement: dajin-huayun
+facts:
+  - id: dajin-baizhu-route-dajin-kaijiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kaijiang
+    description: 山道通行，入天符门须经门人许可。
+    access:
+      kind: public
+  - id: dajin-baizhu-travel-dajin-kaijiang
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道通行，入天符门须经门人许可。
+    description: 山道通行，入天符门须经门人许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

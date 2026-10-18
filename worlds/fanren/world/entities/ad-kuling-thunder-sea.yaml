@@ -1,0 +1,42 @@
+id: ad-kuling-thunder-sea
+kind: location
+name: 苦灵岛雷海
+description: 黄金蟹长期节能栖息的雷海区，电击与强灵压真实存在。
+placement: associated-demon-realm
+facts:
+  - id: ad-kuling-thunder-sea-route-ad-ape-reef
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-ape-reef
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kuling-thunder-sea-condition-ad-ape-reef
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-kuling-thunder-sea-route-ad-kuling-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kuling-island
+    description: route-to
+    access:
+      kind: public
+  - id: ad-kuling-thunder-sea-condition-ad-kuling-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

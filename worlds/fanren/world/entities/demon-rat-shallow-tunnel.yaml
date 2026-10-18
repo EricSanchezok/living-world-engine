@@ -1,0 +1,35 @@
+id: demon-rat-shallow-tunnel
+kind: location
+name: 伏渠浅层运道
+description: 供矿车与搬运人通行的地道，一段渗水压住了轨道。
+placement: demon-rat-territory
+facts:
+  - id: demon-rat-shallow-tunnel-route-demon-rat-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-rat-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-rat-shallow-tunnel-condition-demon-rat-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 供矿车与搬运人通行的地道，一段渗水压住了轨道。
+    description: 供矿车与搬运人通行的地道，一段渗水压住了轨道。
+    access:
+      kind: public
+  - id: demon-rat-shallow-tunnel-seepage-cause
+    predicate: seepage-cause
+    value:
+      kind: text
+      value: 旧导水槽被落石堵塞，水由侧壁裂隙渗入；没有隐藏的必然袭击者。
+    description: 旧导水槽被落石堵塞，水由侧壁裂隙渗入；没有隐藏的必然袭击者。
+    access:
+      kind: discoverable
+      condition: 顺渗水方向勘察并清理可见的槽口落石。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: wanyao-gate
+kind: location
+name: 万妖谷外谷
+description: 外谷入口，通报来意可争取有限交易与会面。
+placement: human-wanyao-valley
+facts:
+  - id: wanyao-gate-route-human-wanyao-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanyao-valley
+    description: 外围山路，陌生者需通报来意。
+    access:
+      kind: public
+  - id: wanyao-gate-travel-human-wanyao-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外围山路，陌生者需通报来意。
+    description: 外围山路，陌生者需通报来意。
+    access:
+      kind: public
+  - id: wanyao-gate-route-wanyao-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: wanyao-workshop
+    description: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    access:
+      kind: public
+  - id: wanyao-gate-travel-wanyao-workshop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    description: 交换与修器区允许被接待者进入，不能由此自动进入核心。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-tea-yard
+kind: location
+name: 许家茶院
+description: 晒架上分开摊着新叶与旧茶，锅炉旁放着待交货的木箱。
+placement: xlt-lakeside
+facts:
+  - id: xlt-tea-yard-route-xlt-lakeside
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-lakeside
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

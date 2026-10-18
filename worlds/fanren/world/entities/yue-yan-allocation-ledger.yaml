@@ -1,0 +1,26 @@
+id: yue-yan-allocation-ledger
+kind: item
+name: 燕家当期领料簿
+description: 同一批两份修墙石材被分别记在预留栏和领取栏，尚未真正领走。需要核对库位和经手者才能撤销重记。
+placement: canon-yan-xuanye
+facts:
+  - id: yue-yan-allocation-ledger-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-yan-allocation-ledger-stock-source
+    predicate: recorded-stock
+    value:
+      kind: text
+      value: 预留修墙石材折为燕家公共库中的两份craft-material，尚未转移或支付；两栏记的是同一批。
+    description: 预留修墙石材折为燕家公共库中的两份craft-material，尚未转移或支付；两栏记的是同一批。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: guanghan-side-hall
+kind: location
+name: 西侧偏殿
+description: 存有半成品古宝、蒲团与古香的殿室。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-side-hall-route-guanghan-palace-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-palace-court
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-side-hall-condition-guanghan-palace-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    description: 沿实际建筑通路行进；禁空、阶上吸力、广场幻阵和门扉按所在区段分别生效。
+    access:
+      kind: public
+  - id: guanghan-side-hall-route-guanghan-disciples-quarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-disciples-quarters
+    description: 沿偏殿原有走廊进出，具体密室须另行处理其隔音防窥门禁。
+    access:
+      kind: public
+  - id: guanghan-side-hall-route-guanghan-practice-chambers
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-practice-chambers
+    description: 沿偏殿原有走廊进出，具体密室须另行处理其隔音防窥门禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

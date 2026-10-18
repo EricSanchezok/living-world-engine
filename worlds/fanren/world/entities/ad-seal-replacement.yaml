@@ -1,0 +1,178 @@
+id: ad-seal-replacement
+kind: person
+name: 温甲
+description: 炼虚自愿应募守卫，想积累阵法经验也重自己的报酬。
+placement: ad-seal-outer-post
+facts:
+  - id: ad-seal-replacement-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-replacement
+  - id: ad-seal-replacement-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护阵、基础魔焰与勘查。
+    description: 炼虚护阵、基础魔焰与勘查。
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-replacement
+  - id: ad-seal-replacement-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-seal-replacement
+meters:
+  - id: ad-seal-replacement-health
+    definition_id: health
+    current: 100
+  - id: ad-seal-replacement-mana
+    definition_id: mana
+    current: 1320
+quantities: []
+ratings:
+  - id: ad-seal-replacement-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: ad-seal-replacement-force
+    definition_id: force
+    value: 6
+  - id: ad-seal-replacement-craft
+    definition_id: craft
+    value: 6
+  - id: ad-seal-replacement-perception
+    definition_id: perception
+    value: 6
+  - id: ad-seal-replacement-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: ad-seal-replacement
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 炼虚自愿应募守卫，想积累阵法经验也重自己的报酬。
+      voice: 年轻但不是鲁莽，喜欢一边问一边把路线画下来。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否接受石瘦换班，要求教会那条安全巡视路。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 温甲
+        description: 炼虚自愿应募守卫，想积累阵法经验也重自己的报酬。
+        status: observed
+      - id: location
+        name: 始印外围守院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-seal-replacement-private-stock
+        name: 温甲的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-seal-veteran
+        name: 石瘦
+        description: 已经讨论代班，尚待本人接受与领队批准。
+        status: observed
+      - id: known-ad-duty-register
+        name: 守院轮班簿
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+      - id: known-ad-veteran-request
+        name: 石瘦轮换申请
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+      - id: known-ad-duty-fund
+        name: 守院轮值预算
+        description: 当前可查阅和议定的实际轮值文书或预算。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护阵、基础魔焰与勘查。
+        description: 炼虚护阵、基础魔焰与勘查。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: duty-wage-ledger
+        subjectId: self
+        predicate: duty-wage-ledger
+        value:
+          kind: text
+          value: 本轮每日4魔石；石瘦已做12共同日、尚欠48，余两日由实际值守人计薪，支付要同步记账。
+        description: 本轮每日4魔石；石瘦已做12共同日、尚欠48，余两日由实际值守人计薪，支付要同步记账。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-seal-replacement
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-seal-outer-post
+      - local_entity_id: known-ad-seal-replacement-private-stock
+        canonical_entity_ids:
+          - ad-seal-replacement-private-stock
+      - local_entity_id: known-ad-seal-veteran
+        canonical_entity_ids:
+          - ad-seal-veteran
+      - local_entity_id: known-ad-duty-register
+        canonical_entity_ids:
+          - ad-duty-register
+      - local_entity_id: known-ad-veteran-request
+        canonical_entity_ids:
+          - ad-veteran-request
+      - local_entity_id: known-ad-duty-fund
+        canonical_entity_ids:
+          - ad-duty-fund

@@ -1,0 +1,26 @@
+id: demon-phoenix-lava-ground
+kind: location
+name: 黑凤熔岩养虫地
+description: 赤黑岩池上层层热浪滚动，沿池设窄石台观察火虫，落脚区与禁采区以岩标分开。
+placement: demon-phoenix-territory
+facts:
+  - id: demon-phoenix-lava-ground-route-to-demon-phoenix-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-town
+    description: route-to-demon-phoenix-town
+    access:
+      kind: public
+  - id: demon-phoenix-lava-ground-condition-demon-phoenix-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。
+    description: 沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: dajin-sanyuan-market
+kind: location
+name: 三元坊市
+description: 由三家小宗共同经营的坊市，各类摊位和收益依约分配。
+placement: dajin-huayun
+facts:
+  - id: dajin-sanyuan-managed-dajin-tianfu
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: dajin-tianfu
+    description: 共同打理不等于各自可独吞所有库存和全部收入。
+    access:
+      kind: public
+  - id: dajin-sanyuan-managed-dajin-jinxia-sect
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: dajin-jinxia-sect
+    description: 共同打理不等于各自可独吞所有库存和全部收入。
+    access:
+      kind: public
+  - id: dajin-sanyuan-managed-dajin-mingyang-sect
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: dajin-mingyang-sect
+    description: 共同打理不等于各自可独吞所有库存和全部收入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

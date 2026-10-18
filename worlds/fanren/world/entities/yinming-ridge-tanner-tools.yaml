@@ -1,0 +1,18 @@
+id: yinming-ridge-tanner-tools
+kind: item
+name: 灰岚的个人器具
+description: 裁皮、缝合、有限保暖经验。所需的有限工具，不包含无限兽晶。
+placement: yinming-ridge-tanner
+facts:
+  - id: yinming-ridge-tanner-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-ridge-tanner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

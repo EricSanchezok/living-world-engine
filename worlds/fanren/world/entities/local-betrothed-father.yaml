@@ -1,0 +1,118 @@
+id: local-betrothed-father
+kind: person
+name: 女孩父亲
+description: 曾与王家议亲的家长。
+placement: betrothed-family-home
+facts:
+  - id: local-betrothed-father-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通劳作、算账与本地往来。
+    description: 普通劳作、算账与本地往来。
+    access:
+      kind: agents
+      agentIds:
+        - local-betrothed-father
+  - id: local-betrothed-father-parent-of
+    predicate: parent-of
+    value:
+      kind: entity
+      entityId: local-betrothed-girl
+    description: 亲子关系。
+    access:
+      kind: private
+meters:
+  - id: local-betrothed-father-health
+    definition_id: health
+    current: 100
+  - id: local-betrothed-father-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 5
+ratings:
+  - id: local-betrothed-father-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: local-betrothed-father-perception
+    definition_id: perception
+    value: 2
+  - id: local-betrothed-father-craft
+    definition_id: craft
+    value: 2
+  - id: local-betrothed-father-influence
+    definition_id: influence
+    value: 2
+  - id: local-betrothed-father-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: local-betrothed-father
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 重视家计与亲戚往来，关心女儿的生活。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 整理家庭收支，处理邻里托付。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 女孩父亲
+        description: 重视家计与亲戚往来，关心女儿的生活。
+        status: observed
+      - id: location
+        name: 邻镇女孩家
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-local-betrothed-girl
+        name: 邻镇女孩
+        description: 自己的女儿。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通劳作、算账与本地往来。
+        description: 普通劳作、算账与本地往来。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - local-betrothed-father
+      - local_entity_id: location
+        canonical_entity_ids:
+          - betrothed-family-home
+      - local_entity_id: known-local-betrothed-girl
+        canonical_entity_ids:
+          - local-betrothed-girl

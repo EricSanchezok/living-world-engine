@@ -1,0 +1,18 @@
+id: thunder-vacant-key
+kind: item
+name: 松窗洞钥符
+description: 交付合法租客后允许其操纵本洞入口，不能控制整座八云山。
+placement: thunder-cave-registrar
+facts:
+  - id: thunder-vacant-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

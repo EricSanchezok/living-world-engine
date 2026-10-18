@@ -1,0 +1,20 @@
+id: yue-garden-herb-stock
+kind: item
+name: 药园养护用草药
+description: 当期可用普通灵草及养护材料，非无穷年药材。
+placement: yue-huangfeng-garden
+facts:
+  - id: yue-garden-herb-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 20
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: kunwu-white-array
+kind: item
+name: 七层白色传送阵
+description: 通第八魂匣宫，未被空间封锁；需真实启用。
+placement: kunwu-tower-seven
+facts:
+  - id: kunwu-white-array-paired-array
+    predicate: paired-array
+    value:
+      kind: entity
+      entityId: kunwu-white-receiver
+    description: paired-array
+    access:
+      kind: private
+  - id: kunwu-white-array-activation-rule
+    predicate: activation-rule
+    value:
+      kind: text
+      value: 阵体完整、空间未被封锁，注入有效灵力并支付本阵十刻储能，一次最多4人；物品随乘员移动不复制。
+    description: 阵体完整、空间未被封锁，注入有效灵力并支付本阵十刻储能，一次最多4人；物品随乘员移动不复制。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: kunwu-array-charge
+    amount: 300
+ratings: []
+shared_activity_resources: []

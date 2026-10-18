@@ -1,0 +1,26 @@
+id: tiannan-lu-letter
+kind: item
+name: 吕洛的小会邀约草稿
+description: 邀请程天坤、温芷和两名已相识三派同道参加小规模经验交换；尚未发出，不使收信者自动知晓。
+placement: tiannan-lu-retreat
+facts:
+  - id: tiannan-lu-letter-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-lu-luo
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: tiannan-lu-letter-recipients
+    predicate: document-content
+    value:
+      kind: text
+      value: 拟邀请程天坤、温芷、杜宁、梁适；时间拟定七共同日后，须实际交付和对方答复。
+    description: 拟邀请程天坤、温芷、杜宁、梁适；时间拟定七共同日后，须实际交付和对方答复。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

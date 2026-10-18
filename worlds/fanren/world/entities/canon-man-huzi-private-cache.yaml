@@ -1,0 +1,24 @@
+id: canon-man-huzi-private-cache
+kind: container
+name: 蛮胡子的私库
+description: 个人留用的有限物资，不能代表整个门派或无尽财富。
+placement: void-man-cave
+facts:
+  - id: canon-man-huzi-private-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-man-huzi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 120
+  - definition_id: high-stone
+    amount: 4
+  - definition_id: craft-material
+    amount: 18
+ratings: []
+shared_activity_resources: []

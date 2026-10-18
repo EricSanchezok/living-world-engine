@@ -1,0 +1,27 @@
+id: yue-blood-jade-fungus
+kind: item
+name: 药沟玉髓芝
+description: 岩隙中一株尚在生长的玉髓芝，采走后不会原位再生成。
+placement: yue-blood-herb-gully
+facts:
+  - id: yue-blood-jade-fungus-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-blood-jade-fungus-maturity
+    predicate: maturity
+    value:
+      kind: text
+      value: 当前药性约四百年；须辨药并安全采下，不能只凭知道名字取得。
+    description: 当前药性约四百年；须辨药并安全采下，不能只凭知道名字取得。
+    access:
+      kind: discoverable
+      condition: 实际抵达药沟，近察这株灵药并有相应辨药知识。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

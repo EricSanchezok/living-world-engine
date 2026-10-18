@@ -1,0 +1,34 @@
+id: innerstar-nanming-port
+kind: location
+name: 南明港
+description: 泊舟卸货的港口，坊市小城在近处。
+placement: human-nanming-island
+facts:
+  - id: innerstar-nanming-port-route-human-nanming-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-nanming-island
+    description: 沿岸路往来港口和岛内。
+    access:
+      kind: public
+  - id: innerstar-nanming-port-route-innerstar-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-harbor
+    description: 沿近海航线前往天星港，须船、御器或相应通行能力，海况和给养实际核定。
+    access:
+      kind: public
+  - id: innerstar-nanming-port-route-innerstar-nanming-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-market
+    description: 沿小城和港口相连街道步行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

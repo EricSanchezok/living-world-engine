@@ -1,0 +1,20 @@
+id: spirit-anyuan-herb-stock
+kind: container
+name: 安远药铺现药
+description: 现有普通护筋药材，可按真实病情和成交数出售。
+placement: spirit-anyuan-market
+facts:
+  - id: spirit-anyuan-herb-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-herbalist
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 20
+ratings: []
+shared_activity_resources: []

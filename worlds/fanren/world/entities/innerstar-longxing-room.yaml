@@ -1,0 +1,26 @@
+id: innerstar-longxing-room
+kind: location
+name: 隆兴二层空客房
+description: 一间当前未出租的普通客房，门窗、木床和蒲席齐备。
+placement: innerstar-longxing-inn
+facts:
+  - id: innerstar-longxing-room-route-innerstar-longxing-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-longxing-inn
+    description: 沿楼梯进入二层，须经店家安排。
+    access:
+      kind: public
+  - id: innerstar-longxing-room-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-tea-keeper
+    description: 叶岑经营管理，租借或出售须实际协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

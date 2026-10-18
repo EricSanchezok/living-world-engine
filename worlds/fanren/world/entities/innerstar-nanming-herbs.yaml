@@ -1,0 +1,29 @@
+id: innerstar-nanming-herbs
+kind: container
+name: 待售普通药材匣
+description: 包扎好的普通药材，表层两包纸边微潮，须开包才见内部药材。
+placement: innerstar-nanming-sorting
+facts:
+  - id: innerstar-nanming-herbs-interior-condition
+    predicate: interior-condition
+    value:
+      kind: text
+      value: 最外两包包装纸边受潮，包内药材仍干燥且未霉变；其余包装正常。
+    description: 最外两包包装纸边受潮，包内药材仍干燥且未霉变；其余包装正常。
+    access:
+      kind: discoverable
+      condition: 取得检查许可后到药材匣旁实际打开相关包纸并检查药材。
+  - id: innerstar-nanming-herbs-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-nanming-herbshop
+    description: 药铺经营财物，不等于店主个人随身钱财。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 24
+ratings: []
+shared_activity_resources: []

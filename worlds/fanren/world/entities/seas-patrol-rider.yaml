@@ -1,0 +1,156 @@
+id: seas-patrol-rider
+kind: person
+name: 严照
+description: 商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。
+placement: seas-patrol-post
+facts:
+  - id: seas-patrol-rider-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - seas-patrol-rider
+  - id: seas-patrol-rider-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修法、御鹰、辨识本盟通行纹记、巡线示警；不知长老私室和外陆秘情。
+    description: 炼虚修法、御鹰、辨识本盟通行纹记、巡线示警；不知长老私室和外陆秘情。
+    access:
+      kind: agents
+      agentIds:
+        - seas-patrol-rider
+  - id: seas-patrol-rider-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-patrol-rider
+meters:
+  - id: seas-patrol-rider-health
+    definition_id: health
+    current: 100
+  - id: seas-patrol-rider-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-patrol-rider-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: seas-patrol-rider-force
+    definition_id: force
+    value: 6
+  - id: seas-patrol-rider-craft
+    definition_id: craft
+    value: 6
+  - id: seas-patrol-rider-perception
+    definition_id: perception
+    value: 6
+  - id: seas-patrol-rider-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: seas-patrol-rider
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。
+      voice: 问话短，习惯让来客把令牌翻过来；认错人会先更正登记，不用官腔掩饰。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成这班巡线，并与柯衡核对职务通行和外客接引记录。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 严照
+        description: 商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。
+        status: observed
+      - id: location
+        name: 黑焦巡哨
+        description: 自己当前值守的岩台。
+        status: observed
+      - id: reviewed-seas-patrol-hawk
+        name: 巡哨黑翼灵鹰
+        description: 已训练的黑翼妖禽，脚环与巡哨鹰架匹配；会受伤、饥饿和疲倦，不具真灵血脉神通。
+        status: observed
+      - id: reviewed-seas-patrol-ledger
+        name: 巡哨查验簿
+        description: 写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。
+        status: observed
+      - id: reviewed-seas-hawk-provisions
+        name: 鹰架饲料袋
+        description: 干肉与饲料按巡哨份额封装，开袋后需登记消耗。
+        status: observed
+      - id: reviewed-seas-pass-clerk
+        name: 柯衡
+        description: 商盟炼虚登记员，记人名和条款很准，对临时改签很头疼。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 任职和实际巡哨训练所得。
+        sourceId: null
+        step: 0
+      - id: reviewed-current-duty
+        kind: observation
+        description: 实际值班、御鹰训练和与接引员交接。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修法、御鹰、辨识本盟通行纹记、巡线示警。
+        description: 自己实际练过的巡骑手艺。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-patrol-rider
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-patrol-post
+      - local_entity_id: reviewed-seas-patrol-hawk
+        canonical_entity_ids:
+          - seas-patrol-hawk
+      - local_entity_id: reviewed-seas-patrol-ledger
+        canonical_entity_ids:
+          - seas-patrol-ledger
+      - local_entity_id: reviewed-seas-hawk-provisions
+        canonical_entity_ids:
+          - seas-hawk-provisions
+      - local_entity_id: reviewed-seas-pass-clerk
+        canonical_entity_ids:
+          - seas-pass-clerk

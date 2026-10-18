@@ -1,0 +1,42 @@
+id: void-tianyuan-seat
+kind: location
+name: 天缘子道院
+description: 天缘子与同门往来的当期道院，地名和布局为补写。
+placement: human-inner-star-sea
+facts:
+  - id: void-tianyuan-seat-route-void-tianyuan-pool
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tianyuan-pool
+    description: route-to
+    access:
+      kind: public
+  - id: void-tianyuan-seat-condition-void-tianyuan-pool
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+  - id: void-tianyuan-seat-route-human-tianxing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-island
+    description: route-to
+    access:
+      kind: public
+  - id: void-tianyuan-seat-condition-human-tianxing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经已知海路远行，海况、距离、本人遁速与补给决定耗时，非相邻门口或无条件传送。
+    description: 经已知海路远行，海况、距离、本人遁速与补给决定耗时，非相邻门口或无条件传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

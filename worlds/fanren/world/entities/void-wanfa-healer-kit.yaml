@@ -1,0 +1,22 @@
+id: void-wanfa-healer-kit
+kind: container
+name: 闻葭的随身器具
+description: 低阶炼丹、外伤处置，不能保证救治所有伤。所需的个人日常器具。
+placement: void-wanfa-healer
+facts:
+  - id: void-wanfa-healer-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-wanfa-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

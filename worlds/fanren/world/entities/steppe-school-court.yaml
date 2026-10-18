@@ -1,0 +1,26 @@
+id: steppe-school-court
+kind: location
+name: 分殿讲习庭
+description: 平整沙地可练习引气与小法术，三面石墙挡风，旧桌上有一份收徒分派名册。
+placement: steppe-tianlan-school
+facts:
+  - id: steppe-school-court-route-steppe-tianlan-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianlan-school
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-school-court-travel-steppe-tianlan-school
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

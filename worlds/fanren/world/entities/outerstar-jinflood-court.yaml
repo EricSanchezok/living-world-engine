@@ -1,0 +1,26 @@
+id: outerstar-jinflood-court
+kind: location
+name: 金蛟潜宫
+description: 海底洞府以蛟族纹饰辨认门户，外来访客先在石台等待。
+placement: human-outer-star-sea
+facts:
+  - id: outerstar-jinflood-court-route-human-outer-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-outer-star-sea
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-jinflood-court-condition-human-outer-star-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海底洞府以蛟族纹饰辨认门户，外来访客先在石台等待。
+    description: 海底洞府以蛟族纹饰辨认门户，外来访客先在石台等待。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

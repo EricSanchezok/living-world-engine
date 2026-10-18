@@ -1,0 +1,22 @@
+id: void-boat-mate-kit
+kind: container
+name: 阿棠的随身器具
+description: 操帆与验绳，无灵根。所需的个人日常器具。
+placement: void-boat-mate
+facts:
+  - id: void-boat-mate-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-boat-mate
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

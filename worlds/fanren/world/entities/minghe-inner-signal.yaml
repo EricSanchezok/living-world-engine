@@ -1,0 +1,18 @@
+id: minghe-inner-signal
+kind: item
+name: 内岸传讯盘
+description: 只与外巡院配对盘互通简短信息，每次实际耗一低阶灵石。
+placement: minghe-inner-keeper
+facts:
+  - id: minghe-inner-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

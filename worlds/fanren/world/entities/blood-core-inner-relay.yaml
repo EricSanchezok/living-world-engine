@@ -1,0 +1,18 @@
+id: blood-core-inner-relay
+kind: item
+name: 庭院内侧古阵
+description: 内侧阵仍在，但外侧坏掉前不能单独完成安全外传。
+placement: blood-inner-court
+facts:
+  - id: blood-core-inner-relay-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

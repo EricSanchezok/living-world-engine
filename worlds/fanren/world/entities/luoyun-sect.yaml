@@ -1,0 +1,18 @@
+id: luoyun-sect
+kind: organization
+name: 落云宗
+description: 落云宗的宗门或联盟共同体，职分、成员与公产分开；与陌生人交涉须由实际掌事者决定。
+placement: tiannan-luoyun-mountain
+facts:
+  - id: luoyun-sect-stock-keeper
+    predicate: stock-keeper
+    value:
+      kind: entity
+      entityId: tiannan-wen-zhi
+    description: 本期库存保管职责。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: dv-dayan-guards
+kind: container
+name: 密室守卫傀儡列
+description: 120具旧守卫按护室指令行动，没有独立的人类人格；大衍失去原肉身法力后无法召动它们。
+placement: dv-dayan-secret-room
+facts:
+  - id: dv-dayan-guards-defense-boundary
+    predicate: defense-boundary
+    value:
+      kind: text
+      value: 守卫只在古阵触发时按防御路径活动；每具主要为结丹以下机械战力，不能把120数目理解为120个元婴修士。毁坏会减少可用具数，不能无限刷新。
+    description: 守卫只在古阵触发时按防御路径活动；每具主要为结丹以下机械战力，不能把120数目理解为120个元婴修士。毁坏会减少可用具数，不能无限刷新。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: guard-puppet-unit
+    amount: 120
+ratings: []
+shared_activity_resources: []

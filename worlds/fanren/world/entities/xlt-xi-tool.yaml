@@ -1,0 +1,18 @@
+id: xlt-xi-tool
+kind: item
+name: 细翼的称货盘
+description: 称货盘可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-xi
+facts:
+  - id: xlt-xi-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-xi
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,224 @@
+id: root-long-steward
+kind: person
+name: 陇绍
+description: 族中经手日常账务的当期族人，熟悉家产，不能独自决定所有重大事项。
+placement: root-long-estate
+facts:
+  - id: root-long-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚初期
+    description: 炼虚初期
+    access:
+      kind: agents
+      agentIds:
+        - root-long-steward
+  - id: root-long-steward-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 先天木、火、土三属性灵根；已炼入金、水丹灵根，五行已全。
+    description: 先天木、火、土三属性灵根；已炼入金、水丹灵根，五行已全。
+    access:
+      kind: agents
+      agentIds:
+        - root-long-steward
+  - id: root-long-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 御器、护身、验物和族库出入账；会修补普通阵禁，不掌握所有祖传秘术。
+    description: 御器、护身、验物和族库出入账；会修补普通阵禁，不掌握所有祖传秘术。
+    access:
+      kind: agents
+      agentIds:
+        - root-long-steward
+  - id: root-long-steward-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: root-long-clan
+    description: 本家成员，不等于可任意支配全部族产。
+    access:
+      kind: agents
+      agentIds:
+        - root-long-steward
+        - root-long-cadet
+meters:
+  - id: root-long-steward-health
+    definition_id: health
+    current: 100
+  - id: root-long-steward-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: root-long-steward-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: root-long-steward-force
+    definition_id: force
+    value: 6
+  - id: root-long-steward-craft
+    definition_id: craft
+    value: 5
+  - id: root-long-steward-perception
+    definition_id: perception
+    value: 6
+  - id: root-long-steward-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: root-long-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 族中经手日常账务的当期族人，熟悉家产，不能独自决定所有重大事项。
+      voice: 说话具体，先讲眼前能确定的事；意见受自身经历与利益影响。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 处理一份延迟交货的铜料契约。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陇绍
+        description: 族中经手日常账务的当期族人，熟悉家产，不能独自决定所有重大事项。
+        status: observed
+      - id: location
+        name: 灵界陇家居地
+        description: 当前生活与工作所在。
+        status: observed
+      - id: known-root-long-clan
+        name: 灵界陇家
+        description: 自己的家族；公库开支要留记录。
+        status: observed
+      - id: known-root-long-cadet
+        name: 陇澄
+        description: 常来请教修补的本家晚辈；这次对资源安排有自己的意见。
+        status: observed
+      - id: known-root-long-public-stock
+        name: 陇家当期周转库
+        description: 这是本家公款，不能当作自己的私袋。
+        status: observed
+      - id: known-root-long-repair-box
+        name: 陇家待修符匣
+        description: 亲自验过匣扣禁制磨损，尚未完成修复。
+        status: observed
+      - id: known-root-long-wood-stock
+        name: 陇家符木
+        description: 库边还留四块符木，修匣需两块。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 此前亲自修习、生活与往来的记忆。
+        sourceId: null
+        step: 0
+    claims:
+      - id: self-training
+        subjectId: self
+        predicate: self-training
+        value:
+          kind: text
+          value: 炼虚初期；先天木、火、土三属性灵根；已炼入金、水丹灵根，五行已全。御器、护身、验物和族库出入账；会修补普通阵禁，不掌握所有祖传秘术。
+        description: 自己已具的根基与所学。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root-long-clan-1
+        subjectId: known-root-long-clan
+        predicate: prior-acquaintance
+        value:
+          kind: text
+          value: 自己的家族；公库开支要留记录。
+        description: 自己的家族；公库开支要留记录。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root-long-cadet-2
+        subjectId: known-root-long-cadet
+        predicate: prior-acquaintance
+        value:
+          kind: text
+          value: 常来请教修补的本家晚辈；这次对资源安排有自己的意见。
+        description: 常来请教修补的本家晚辈；这次对资源安排有自己的意见。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root-long-public-stock-3
+        subjectId: known-root-long-public-stock
+        predicate: prior-acquaintance
+        value:
+          kind: text
+          value: 这是本家公款，不能当作自己的私袋。
+        description: 这是本家公款，不能当作自己的私袋。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root-long-repair-box-4
+        subjectId: known-root-long-repair-box
+        predicate: prior-acquaintance
+        value:
+          kind: text
+          value: 亲自验过匣扣禁制磨损，尚未完成修复。
+        description: 亲自验过匣扣禁制磨损，尚未完成修复。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root-long-wood-stock-5
+        subjectId: known-root-long-wood-stock
+        predicate: prior-acquaintance
+        value:
+          kind: text
+          value: 库边还留四块符木，修匣需两块。
+        description: 库边还留四块符木，修匣需两块。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - root-long-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - root-long-estate
+      - local_entity_id: known-root-long-clan
+        canonical_entity_ids:
+          - root-long-clan
+      - local_entity_id: known-root-long-cadet
+        canonical_entity_ids:
+          - root-long-cadet
+      - local_entity_id: known-root-long-public-stock
+        canonical_entity_ids:
+          - root-long-public-stock
+      - local_entity_id: known-root-long-repair-box
+        canonical_entity_ids:
+          - root-long-repair-box
+      - local_entity_id: known-root-long-wood-stock
+        canonical_entity_ids:
+          - root-long-wood-stock

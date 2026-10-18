@@ -1,0 +1,20 @@
+id: blood-lingyun-insect-feed
+kind: container
+name: 万蛊山当用饲料
+description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+placement: blood-wangu-mountain
+facts:
+  - id: blood-lingyun-insect-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-lingyun
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 8
+ratings: []
+shared_activity_resources: []

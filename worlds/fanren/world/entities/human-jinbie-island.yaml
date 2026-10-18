@@ -1,0 +1,26 @@
+id: human-jinbie-island
+kind: location
+name: 金鳖岛
+description: 有修士隐居的海岛，具体洞府归属须核。
+placement: human-inner-star-sea
+facts:
+  - id: human-jinbie-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 通往内星海
+    access:
+      kind: public
+  - id: human-jinbie-island-travel-human-inner-star-sea
+    predicate: travel-human-inner-star-sea
+    value:
+      kind: text
+      value: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    description: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

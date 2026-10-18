@@ -1,0 +1,42 @@
+id: kunwu-tower-six
+kind: location
+name: 镇魔塔六层
+description: 乌影蛇可借阴影袭近并喷暗影毒砂。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-tower-six-route-kunwu-tower-five
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-five
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-six-condition-kunwu-tower-five
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+  - id: kunwu-tower-six-route-kunwu-tower-seven
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-seven
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-six-condition-kunwu-tower-seven
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

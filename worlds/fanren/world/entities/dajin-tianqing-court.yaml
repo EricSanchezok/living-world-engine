@@ -1,0 +1,18 @@
+id: dajin-tianqing-court
+kind: location
+name: 天清院
+description: 皇清观内的一处院落，出入由观内管理。
+placement: dajin-huangqing
+facts:
+  - id: dajin-tianqing-court-route-dajin-huangqing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing
+    description: 内院接待与外观活动范围不同。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

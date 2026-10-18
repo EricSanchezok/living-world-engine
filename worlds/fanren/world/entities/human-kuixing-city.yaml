@@ -1,0 +1,66 @@
+id: human-kuixing-city
+kind: location
+name: 魁星城
+description: 岛上大城，城外禁空禁制对不同修为影响不同。
+placement: human-kuixing-island
+facts:
+  - id: human-kuixing-city-route-human-kuixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-city-condition-human-kuixing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛上大城，城外禁空禁制对不同修为影响不同。
+    description: 岛上大城，城外禁空禁制对不同修为影响不同。
+    access:
+      kind: public
+  - id: human-kuixing-city-route-innerstar-tiandu-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-tiandu-market
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-city-condition-innerstar-tiandu-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。
+    description: 护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。
+    access:
+      kind: public
+  - id: human-kuixing-city-route-innerstar-qingyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-qingyun-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: human-kuixing-city-condition-innerstar-qingyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 三主峰及众多小峰构成岛上修士灵地，灵气和住用权不是同一件事。
+    description: 三主峰及众多小峰构成岛上修士灵地，灵气和住用权不是同一件事。
+    access:
+      kind: public
+  - id: human-kuixing-city-flight-restraint
+    predicate: flight-restraint
+    value:
+      kind: text
+      value: 城外禁制使飞行法器沉重；足够修为可付出额外法力继续飞行，仍须面对岛内规制。
+    description: 城外禁制使飞行法器沉重；足够修为可付出额外法力继续飞行，仍须面对岛内规制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

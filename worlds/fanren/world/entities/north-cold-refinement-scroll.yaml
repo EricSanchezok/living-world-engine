@@ -1,0 +1,18 @@
+id: north-cold-refinement-scroll
+kind: item
+name: 寒焰精炼诀传承卷
+description: 针对实际已炼化寒焰的精炼知识，阅读与掌握不是同一时刻。
+placement: north-stockroom
+facts:
+  - id: north-cold-refinement-scroll-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

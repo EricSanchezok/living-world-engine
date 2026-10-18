@@ -1,0 +1,24 @@
+id: tianyuan-patrol-scout-travel-kit
+kind: container
+name: 方既明的行囊
+description: 行路口粮与小量灵石、材料。
+placement: tianyuan-patrol-scout
+facts:
+  - id: tianyuan-patrol-scout-travel-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-scout
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 6
+  - definition_id: low-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,214 @@
+id: steppe-sha-jian
+kind: person
+name: 沙坚
+description: 黄沙部结丹守库人，常先看借据再听口头保证；他希望族中年轻法士学会独立处理事务，而不是凡事搬出圣幡。
+placement: steppe-yellow-sand-store
+facts:
+  - id: steppe-sha-jian-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - steppe-sha-jian
+  - id: steppe-sha-jian-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹初期；土属性防御、检验封库灵纹、御器守库。
+    description: 结丹初期；土属性防御、检验封库灵纹、御器守库。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-sha-jian
+  - id: steppe-sha-jian-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    description: 金、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-sha-jian
+  - id: steppe-sha-jian-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: mulan-yellow-sand-tribe
+    description: 自己所属的部落或传承共同体，公库与私人财物分开。
+    access:
+      kind: public
+  - id: steppe-sha-jian-language
+    predicate: known-language
+    value:
+      kind: text
+      value: 慕兰口语；对不熟悉的其他语言需学习、文书或翻译。
+    description: 慕兰口语；对不熟悉的其他语言需学习、文书或翻译。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-sha-jian
+meters:
+  - id: steppe-sha-jian-health
+    definition_id: health
+    current: 100
+  - id: steppe-sha-jian-mana
+    definition_id: mana
+    current: 400
+quantities:
+  - definition_id: low-stone
+    amount: 100
+ratings:
+  - id: steppe-sha-jian-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: steppe-sha-jian-force
+    definition_id: force
+    value: 3
+  - id: steppe-sha-jian-craft
+    definition_id: craft
+    value: 2
+  - id: steppe-sha-jian-perception
+    definition_id: perception
+    value: 3
+  - id: steppe-sha-jian-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: steppe-sha-jian
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 黄沙部结丹守库人，常先看借据再听口头保证；他希望族中年轻法士学会独立处理事务，而不是凡事搬出圣幡。
+      voice: 说话硬朗，爱问“哪一笔、谁领、何时还”，谈年轻人进步时会笑。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核准一次普通练法材料领用，保住三十六圣幡的封存。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 沙坚
+        description: 黄沙部结丹守库人，常先看借据再听口头保证；他希望族中年轻法士学会独立处理事务，而不是凡事搬出圣幡。
+        status: observed
+      - id: location
+        name: 黄沙部圣幡库
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-steppe-sha-jian-pouch
+        name: 沙坚的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-mulan-yellow-sand-tribe
+        name: 黄沙部
+        description: 自己所属的部落或传承共同体，公库与私人财物分开。
+        status: observed
+      - id: known-canon-yellow-sand-mochen-banners
+        name: 黄沙三十六魔尘幡
+        description: 三十六杆构成一套的镇族器物；动用可能损伤与反噬，祖训限制的是部族行为，不使外人永远无法破禁。
+        status: observed
+      - id: known-steppe-yellow-stock
+        name: 黄沙当期护库料箱
+        description: 普通封纹修补与练法材料，沙坚可受托发放；圣幡不在普通消耗料中。
+        status: observed
+      - id: known-steppe-sha-shield
+        name: 沙坚的土纹盾
+        description: 结丹法士能以法力驱使的防御法器，需要持续供法；盾体能损坏，不能借名成为镇族圣器。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+      - id: personal-cultivation-examination
+        kind: observation
+        description: 自己过去的检测、修行及反复施术经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹初期；土属性防御、检验封库灵纹、御器守库。
+        description: 结丹初期；土属性防御、检验封库灵纹、御器守库。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 核准一次普通练法材料领用，保住三十六圣幡的封存。
+        description: 核准一次普通练法材料领用，保住三十六圣幡的封存。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是结丹修士。
+        description: 自己是结丹修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-fixed-spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 金、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        description: 金、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - personal-cultivation-examination
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - steppe-sha-jian
+      - local_entity_id: location
+        canonical_entity_ids:
+          - steppe-yellow-sand-store
+      - local_entity_id: known-steppe-sha-jian-pouch
+        canonical_entity_ids:
+          - steppe-sha-jian-pouch
+      - local_entity_id: known-mulan-yellow-sand-tribe
+        canonical_entity_ids:
+          - mulan-yellow-sand-tribe
+      - local_entity_id: known-canon-yellow-sand-mochen-banners
+        canonical_entity_ids:
+          - canon-yellow-sand-mochen-banners
+      - local_entity_id: known-steppe-yellow-stock
+        canonical_entity_ids:
+          - steppe-yellow-stock
+      - local_entity_id: known-steppe-sha-shield
+        canonical_entity_ids:
+          - steppe-sha-shield

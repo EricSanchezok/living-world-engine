@@ -1,0 +1,42 @@
+id: south-ye-estate
+kind: location
+name: 叶家修士内院
+description: 修仙世家内院独立于朝廷公库，藏图处只少数长辈知道。
+placement: dajin-jinjing
+facts:
+  - id: south-ye-estate-route-dajin-jinjing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinjing
+    description: route-to
+    access:
+      kind: public
+  - id: south-ye-estate-condition-dajin-jinjing
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 家族内院须被引入，朝廷身份不自动打开族库。
+    description: 家族内院须被引入，朝廷身份不自动打开族库。
+    access:
+      kind: public
+  - id: south-ye-estate-route-south-ye-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-ye-archive
+    description: route-to
+    access:
+      kind: public
+  - id: south-ye-estate-condition-south-ye-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

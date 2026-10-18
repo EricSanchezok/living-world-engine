@@ -1,0 +1,27 @@
+id: steppe-gu-reed-house
+kind: location
+name: 芦沟兽舍
+description: 离主要牧路有一段距离，低墙围着温湿兽栏；谷双蒲在此调配喂食和处理外伤。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-gu-reed-house-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    access:
+      kind: discoverable
+      condition: 沿水沟实际探查、向当地知路者问路或由其引路；不能只凭远方地名获坐标。
+  - id: steppe-gu-reed-house-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    description: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

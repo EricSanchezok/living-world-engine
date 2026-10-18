@@ -1,0 +1,34 @@
+id: ad-qiling-firehall
+kind: location
+name: 泣灵火晶殿
+description: 火元晶巨门后有赤晶石火海与器物守卫。
+placement: ad-qiling-maze
+facts:
+  - id: ad-qiling-firehall-route-to-ad-qiling-maze
+    predicate: route-to-ad-qiling-maze
+    value:
+      kind: entity
+      entityId: ad-qiling-maze
+    description: 须破或绕过柱林幻兽与隐藏机关。
+    access:
+      kind: public
+  - id: ad-qiling-firehall-route-to-ad-qiling-treasury
+    predicate: route-to-ad-qiling-treasury
+    value:
+      kind: entity
+      entityId: ad-qiling-treasury
+    description: 须通过真实火海与守卫，不能忽略赤晶石供能。
+    access:
+      kind: public
+  - id: ad-qiling-firehall-route-to-ad-qiling-puppet-store
+    predicate: route-to-ad-qiling-puppet-store
+    value:
+      kind: entity
+      entityId: ad-qiling-puppet-store
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

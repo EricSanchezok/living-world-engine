@@ -1,0 +1,170 @@
+id: kunwu-square
+kind: location
+name: 白玉广场
+description: 百亩白玉地，兽雕玉柱围边，十余石阶分向不同古建筑。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-square-route-kunwu-stone-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-stone-hall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-stone-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 广场禁空与沿途石兽阵分别生效。
+    description: 广场禁空与沿途石兽阵分别生效。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-stone-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-stone-forest
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-stone-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往昆吾殿依次处理石林。
+    description: 前往昆吾殿依次处理石林。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-tower-trench
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-trench
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-tower-trench
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿镇魔塔石阶下到沟内。
+    description: 沿镇魔塔石阶下到沟内。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-metal-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-metal-house
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-metal-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-cloud-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-cloud-house
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-cloud-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-spirit-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-spirit-yard
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-spirit-yard
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-huiming
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-huiming
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-huiming
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-jade-pool
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-jade-pool
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-jade-pool
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-forge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-forge
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-forge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+  - id: kunwu-square-route-kunwu-treasure-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-treasure-house
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-square-condition-kunwu-treasure-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

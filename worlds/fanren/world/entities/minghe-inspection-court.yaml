@@ -1,0 +1,42 @@
+id: minghe-inspection-court
+kind: location
+name: 圣地外巡院
+description: 办理圣地外务、检查许可和运送物资的院落。
+placement: minghe-fuyou-territory
+facts:
+  - id: minghe-inspection-court-route-minghe-lintai-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-lintai-market
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inspection-court-condition-minghe-lintai-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 办理圣地外务、检查许可和运送物资的院落。
+    description: 办理圣地外务、检查许可和运送物资的院落。
+    access:
+      kind: public
+  - id: minghe-inspection-court-route-minghe-outer-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-outer-gate
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-inspection-court-condition-minghe-outer-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封闭阵室，进入空间需要真实阵器、双方条件与授权。
+    description: 封闭阵室，进入空间需要真实阵器、双方条件与授权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

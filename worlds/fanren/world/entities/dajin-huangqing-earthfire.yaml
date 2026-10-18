@@ -1,0 +1,26 @@
+id: dajin-huangqing-earthfire
+kind: location
+name: 皇清观地火殿
+description: 三层地火设施，分别承担材料存放、提炼及地下炼制；操作火源须有技术和权限。
+placement: dajin-huangqing-workshop
+facts:
+  - id: dajin-huangqing-earthfire-source
+    predicate: environment
+    value:
+      kind: text
+      value: 地火池接通地火，地下层有一缕地火之精；火源不因进入而被取走或占有。
+    description: 炼制仍须实际工具、原料和控制能力。
+    access:
+      kind: public
+  - id: dajin-huangqing-earthfire-route-dajin-huangqing-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing-workshop
+    description: 进入炼制场所须核对火源、器物及借用权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

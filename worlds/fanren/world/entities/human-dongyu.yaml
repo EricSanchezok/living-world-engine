@@ -1,0 +1,42 @@
+id: human-dongyu
+kind: location
+name: 东裕国
+description: 正、魔及其他修仙门派交错的资源大国。各宗按自己的产业与人情交涉。
+placement: human-tiannan
+facts:
+  - id: human-dongyu-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-dongyu-travel-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-dongyu-route-dongyu-changzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dongyu-changzhou
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-dongyu-travel-dongyu-changzhou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

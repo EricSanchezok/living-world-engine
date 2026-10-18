@@ -1,0 +1,34 @@
+id: local-cavern-other
+kind: item
+name: 旧总控联动
+description: 联系其余承重结构的机关，各处保养不同；真正全开会危及山体，但受损或被堵处不能凭口令保证同样响应。
+placement: local-cavern-control
+facts:
+  - id: local-cavern-other-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+  - id: local-cavern-other-maintenance-state
+    predicate: maintenance-state
+    value:
+      kind: text
+      value: 一处销轴磨损，其余已知传动封存；未完成勘验前不能声称知道全山立即坍塌的全部后果。
+    description: 一处销轴磨损，其余已知传动封存；未完成勘验前不能声称知道全山立即坍塌的全部后果。
+    access:
+      kind: private
+  - id: local-cavern-other-repair
+    predicate: repair
+    value:
+      kind: text
+      value: 需1份相容木铁料、熟悉机关的匠人和半日细作更换销轴，验收前仍保持锁定。
+    description: 需1份相容木铁料、熟悉机关的匠人和半日细作更换销轴，验收前仍保持锁定。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

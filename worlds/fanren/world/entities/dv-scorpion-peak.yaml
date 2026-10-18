@@ -1,0 +1,42 @@
+id: dv-scorpion-peak
+kind: location
+name: 乌紫蝎峰
+description: 山石缝隙中有坚硬蜕壳，乌紫古蝎在背阴岩缝栖伏；另一侧是隐形裂缝密集地。
+placement: human-devil-valley
+facts:
+  - id: dv-scorpion-peak-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-scorpion-peak-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山间行进需防裂隙与古蝎，靠毒饵引走也要真实饵料与诱引路径。
+    description: 山间行进需防裂隙与古蝎，靠毒饵引走也要真实饵料与诱引路径。
+    access:
+      kind: public
+  - id: dv-scorpion-peak-route-dv-lava-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-lava-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-scorpion-peak-condition-dv-lava-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿越古蝎活动范围后沿赤峰前进，古兽可能追逐，不能自动判诱引成功。
+    description: 穿越古蝎活动范围后沿赤峰前进，古兽可能追逐，不能自动判诱引成功。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

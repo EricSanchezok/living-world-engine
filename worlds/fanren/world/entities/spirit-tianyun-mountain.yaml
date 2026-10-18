@@ -1,0 +1,66 @@
+id: spirit-tianyun-mountain
+kind: location
+name: 天韵山
+description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+placement: tianyuan-city
+facts:
+  - id: spirit-tianyun-mountain-route-spirit-yuque-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-hall
+    description: 城辖灵山的一部分，灵脉、地形与既有住户限制可用洞府位置。
+    access:
+      kind: public
+  - id: spirit-tianyun-mountain-route-tianyuan-vacant-cave-b
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-vacant-cave-b
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-tianyun-mountain-condition-tianyuan-vacant-cave-b
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有安静石室的小洞府，灵气较均匀，没有现成药圃。
+    description: 有安静石室的小洞府，灵气较均匀，没有现成药圃。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-tianyun-mountain-route-to-tianyuan-ming-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-ming-workshop
+    description: route-to-tianyuan-ming-workshop
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyun-mountain-route-conditions-tianyuan-ming-workshop
+    predicate: route-conditions-tianyuan-ming-workshop
+    value:
+      kind: text
+      value: 沿现用山路到试法居外，入室需居者许可或实际破禁。
+    description: 沿现用山路到试法居外，入室需居者许可或实际破禁。
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyun-mountain-route-to-tianyuan-old-study-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-old-study-yard
+    description: route-to-tianyuan-old-study-yard
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyun-mountain-route-conditions-tianyuan-old-study-yard
+    predicate: route-conditions-tianyuan-old-study-yard
+    value:
+      kind: text
+      value: 沿山道抵院外，公共露台须主人或居者引入，私室另查钥牌。
+    description: 沿山道抵院外，公共露台须主人或居者引入，私室另查钥牌。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

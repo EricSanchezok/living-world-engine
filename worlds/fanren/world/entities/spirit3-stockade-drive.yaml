@@ -1,0 +1,18 @@
+id: spirit3-stockade-drive
+kind: item
+name: 石溪护臂灵具
+description: 内嵌石槽的防护臂，装入并实耗1低阶石可维持一次不超过600秒的减震护持；不会代替本人盾法。
+placement: spirit3-stockade-teacher
+facts:
+  - id: spirit3-stockade-drive-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-stockade-teacher
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

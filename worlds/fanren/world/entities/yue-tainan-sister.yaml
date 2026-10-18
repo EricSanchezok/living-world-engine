@@ -1,0 +1,173 @@
+id: yue-tainan-sister
+kind: person
+name: 孟苗
+description: 随姐姐学制符的年轻修士，不愿只替人抄价格。
+placement: yue-tainan-square
+facts:
+  - id: yue-tainan-sister-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-sister
+  - id: yue-tainan-sister-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 初学火弹术与书写，尚不会稳定成符。
+    description: 初学火弹术与书写，尚不会稳定成符。
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-sister
+  - id: yue-tainan-sister-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根，已经检验。
+    description: 木水两属性灵根，已经检验。
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-sister
+meters:
+  - id: yue-tainan-sister-health
+    definition_id: health
+    current: 100
+  - id: yue-tainan-sister-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings:
+  - id: yue-tainan-sister-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-tainan-sister-force
+    definition_id: force
+    value: 1
+  - id: yue-tainan-sister-craft
+    definition_id: craft
+    value: 1
+  - id: yue-tainan-sister-perception
+    definition_id: perception
+    value: 1
+  - id: yue-tainan-sister-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-tainan-sister
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 随姐姐学制符的年轻修士，不愿只替人抄价格。
+      voice: 好奇，遇难处会直接承认不会。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 请求用一张纸亲自试符，愿承担材料成本。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 孟苗
+        description: 随姐姐学制符的年轻修士，不愿只替人抄价格。
+        status: observed
+      - id: location
+        name: 太南谷青砖广场
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-tainan-sister-pouch
+        name: 孟苗的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-tainan-seller
+        name: 孟竹
+        description: 亲姐妹，一起谋生，学艺安排可以商量。
+        status: observed
+      - id: known-yue-market-paper
+        name: 孟竹的符纸
+        description: 姐姐的符纸，自己可申请用一张受潮纸练笔。
+        status: observed
+      - id: known-yue-paper-charcoal-pen
+        name: 孟竹的制符笔
+        description: 姐姐平日使用的笔，借用需先开口。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 初学火弹术与书写，尚不会稳定成符。
+        description: 初学火弹术与书写，尚不会稳定成符。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 请求用一张纸亲自试符，愿承担材料成本。
+        description: 请求用一张纸亲自试符，愿承担材料成本。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-tainan-sister
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-tainan-square
+      - local_entity_id: known-yue-tainan-sister-pouch
+        canonical_entity_ids:
+          - yue-tainan-sister-pouch
+      - local_entity_id: known-yue-tainan-seller
+        canonical_entity_ids:
+          - yue-tainan-seller
+      - local_entity_id: known-yue-market-paper
+        canonical_entity_ids:
+          - yue-market-paper
+      - local_entity_id: known-yue-paper-charcoal-pen
+        canonical_entity_ids:
+          - yue-paper-charcoal-pen

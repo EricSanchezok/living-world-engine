@@ -1,0 +1,28 @@
+id: north-yinwater-vessel
+kind: item
+name: 地灵阴气汇聚器
+description: 古祖留下的汇聚器，已有两滴阴水；当前凝聚进度四年，完整十年才能形成下一滴。
+placement: north-xuanyu-cave
+facts:
+  - id: north-yinwater-vessel-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: north-yinwater-vessel-progress
+    predicate: condensation-progress
+    value:
+      kind: text
+      value: 共同开篇已凝聚四年，连续正常汇聚再六年才有下一滴。取用已有阴水不重置或复制已经凝聚的时间。
+    description: 共同开篇已凝聚四年，连续正常汇聚再六年才有下一滴。取用已有阴水不重置或复制已经凝聚的时间。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: north-yinwater-drop
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: ad-crab-damaged-converter
+kind: item
+name: 伪仙儡转化部件
+description: 本体内部受损部件，限制供物处理速度，不能堆放千滴便瞬时获得千月修复。
+placement: canon-xie-daoren
+facts:
+  - id: ad-crab-damaged-converter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xie-daoren
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

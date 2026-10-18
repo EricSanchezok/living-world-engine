@@ -1,0 +1,23 @@
+id: ad-qiling-stored-puppet-2
+kind: creature
+name: 封存魔晶傀儡2
+description: 封存未激活的古傀儡；必须研究控制结构、完成祭炼和供能方可执行有效指令。
+placement: ad-qiling-puppet-store
+facts:
+  - id: ad-qiling-stored-puppet-2-activation
+    predicate: activation
+    value:
+      kind: text
+      value: 当前未受任何在世人物控制；有效驱动每个共同战斗时段耗1现有魔石，移动也须相应供能。原有构造损毁不会扣钱自动修复。
+    description: 当前未受任何在世人物控制；有效驱动每个共同战斗时段耗1现有魔石，移动也须相应供能。原有构造损毁不会扣钱自动修复。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 12
+ratings:
+  - id: ad-qiling-stored-puppet-2-force
+    definition_id: force
+    value: 3
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: local-iron-spear-yard
+kind: location
+name: 铁枪会堂院
+description: 小会日常议事与存放器具的地方。
+placement: jingzhou
+facts:
+  - id: local-iron-spear-yard-route-jingzhou-capital
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: jingzhou-capital
+    description: 沿城郊小路步行往来。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

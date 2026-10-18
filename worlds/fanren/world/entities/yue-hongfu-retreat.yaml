@@ -1,0 +1,26 @@
+id: yue-hongfu-retreat
+kind: location
+name: 红拂居处
+description: 山中静院，与门派日常事务保持联系。
+placement: yue-taiyue-range
+facts:
+  - id: yue-hongfu-retreat-route-yue-taiyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-taiyue-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-hongfu-retreat-travel-yue-taiyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

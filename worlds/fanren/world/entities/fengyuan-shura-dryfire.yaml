@@ -1,0 +1,42 @@
+id: fengyuan-shura-dryfire
+kind: location
+name: 乾火池
+description: 地下熔岩湖持续散出热气，熔岩下方另有空鱼居民维持的居住光幕。
+placement: fengyuan-minor-shura-realm
+facts:
+  - id: fengyuan-shura-dryfire-route-to-fengyuan-shura-whitewood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-whitewood
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-dryfire-route-conditions-fengyuan-shura-whitewood
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿林地到地下热岩入口，再向熔岩湖下行；持续热气需防护。
+    description: 沿林地到地下热岩入口，再向熔岩湖下行；持续热气需防护。
+    access:
+      kind: public
+  - id: fengyuan-shura-dryfire-route-to-fengyuan-shura-kongyu-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-kongyu-village
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-dryfire-route-conditions-fengyuan-shura-kongyu-village
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 须实际穿过热熔岩并获光幕通路，空鱼生活适应不自动传给异族。
+    description: 须实际穿过热熔岩并获光幕通路，空鱼生活适应不自动传给异族。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

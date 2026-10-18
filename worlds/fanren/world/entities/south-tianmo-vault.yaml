@@ -1,0 +1,26 @@
+id: south-tianmo-vault
+kind: location
+name: 天魔宗传承器库
+description: 存放不在个人身上的宗门传承器物。
+placement: dajin-motuo
+facts:
+  - id: south-tianmo-vault-route-dajin-motuo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-motuo
+    description: route-to
+    access:
+      kind: public
+  - id: south-tianmo-vault-condition-dajin-motuo
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

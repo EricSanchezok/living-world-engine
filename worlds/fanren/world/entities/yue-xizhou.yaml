@@ -1,0 +1,18 @@
+id: yue-xizhou
+kind: location
+name: 溪州
+description: 越国较小的州郡，与建州接壤，太岳山脉延及其地。
+placement: human-yue
+facts:
+  - id: yue-xizhou-route-yue-jianzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jianzhou
+    description: 沿州际道路跨越两州边界，所需时间取决于实际起止点和交通。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

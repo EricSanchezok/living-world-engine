@@ -1,0 +1,18 @@
+id: dv-cangkun-break-pearl
+kind: item
+name: 旧藏破界珠
+description: 唯一破界珠存于画轴芥子寄体；可消耗打开特定裂隙，不是无限门户。
+placement: dv-cangkun-scroll
+facts:
+  - id: dv-cangkun-break-pearl-consumption
+    predicate: consumption
+    value:
+      kind: text
+      value: 祭炼激发后本珠被消耗，仍需足够持续法力稳定通路；无形魂体须寄体防护。
+    description: 祭炼激发后本珠被消耗，仍需足够持续法力稳定通路；无形魂体须寄体防护。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

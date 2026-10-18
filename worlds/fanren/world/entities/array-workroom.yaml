@@ -1,0 +1,18 @@
+id: array-workroom
+kind: location
+name: 听泉阵室
+description: 案台、测绘架和有界限的试验空间；不自带无限材料或完整古阵。
+placement: listening-spring
+facts:
+  - id: array-workroom-route-listening-spring
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: listening-spring
+    description: 静室与阵室相邻，取用资料需实际进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

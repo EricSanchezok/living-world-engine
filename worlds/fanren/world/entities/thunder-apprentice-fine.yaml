@@ -1,0 +1,34 @@
+id: thunder-apprentice-fine
+kind: item
+name: 岑音的细纹机关鸟
+description: 微构机关鸟，可短途带一张纸，却不适合暴雨和重物。
+placement: thunder-apprentice
+facts:
+  - id: thunder-apprentice-fine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-apprentice
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-apprentice-fine-trial-capability
+    predicate: trial-capability
+    value:
+      kind: text
+      value: 装一低阶灵石可在无强风时带一张纸飞行三百秒，不能载人。
+    description: 装一低阶灵石可在无强风时带一张纸飞行三百秒，不能载人。
+    access:
+      kind: public
+  - id: thunder-apprentice-fine-loaded-stones
+    predicate: loaded-stones
+    value:
+      kind: number
+      value: 0
+    description: loaded-stones
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

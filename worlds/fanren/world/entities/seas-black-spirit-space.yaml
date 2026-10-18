@@ -1,0 +1,26 @@
+id: seas-black-spirit-space
+kind: location
+name: 黑猊真灵栖地
+description: 商盟供奉的四位真灵居住的隐蔽空间，各有休养区域。
+placement: spirit-realm
+facts:
+  - id: seas-black-spirit-space-route-seas-meeting-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-meeting-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-black-spirit-space-condition-seas-meeting-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须盟中持约者及真灵同意，接引仪式、空间条件与供奉均真实满足；当前未准备大型战地召灵。
+    description: 须盟中持约者及真灵同意，接引仪式、空间条件与供奉均真实满足；当前未准备大型战地召灵。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

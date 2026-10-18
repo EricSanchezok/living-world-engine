@@ -1,0 +1,18 @@
+id: minghe-food-receipt
+kind: item
+name: 虫粮进货记录
+description: 记录甲乙两批用途、原批号与领用日期，可和箱底标记核对。
+placement: minghe-xuling-feeder
+facts:
+  - id: minghe-food-receipt-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

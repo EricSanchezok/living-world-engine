@@ -1,0 +1,42 @@
+id: seas-island-lake
+kind: location
+name: 龙岛内湖
+description: 金色长舟停靠的内湖。
+placement: seas-dragon-island
+facts:
+  - id: seas-island-lake-route-seas-island-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-town
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-lake-condition-seas-island-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+  - id: seas-island-lake-route-seas-golden-boat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-golden-boat
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-lake-condition-seas-golden-boat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需获舟中接见或登舟许可。
+    description: 需获舟中接见或登舟许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

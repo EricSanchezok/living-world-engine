@@ -1,0 +1,26 @@
+id: steppe-holy-ding-vault
+kind: location
+name: 分殿内库
+description: 厚石门锁住内库，门内有一座低石台和验封记录；进入须取得保管者许可或实际突破门禁。
+placement: steppe-tianlan-school
+facts:
+  - id: steppe-holy-ding-vault-route-steppe-tianlan-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianlan-school
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-holy-ding-vault-travel-steppe-tianlan-school
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

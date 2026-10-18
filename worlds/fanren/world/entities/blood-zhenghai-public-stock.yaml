@@ -1,0 +1,22 @@
+id: blood-zhenghai-public-stock
+kind: container
+name: 镇海宫测绘公库
+description: 本项组织事务的独立实存，未经授权不得转入个人袋；已收与待收分别记账。
+placement: blood-zhenghai-palace
+facts:
+  - id: blood-zhenghai-public-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-zhenghai-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

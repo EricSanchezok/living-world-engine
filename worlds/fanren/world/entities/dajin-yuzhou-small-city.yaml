@@ -1,0 +1,27 @@
+id: dajin-yuzhou-small-city
+kind: location
+name: 玉州山边小城
+description: 青石街巷中有民居商铺，普通行人不知隐在巷后的空间入口。
+placement: dajin-yuzhou
+facts:
+  - id: dajin-yuzhou-small-city-route-dajin-yuzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yuzhou
+    description: 州内道路有实际距离。
+    access:
+      kind: public
+  - id: dajin-yuzhou-small-city-route-dajin-tianji-current-entrance
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-current-entrance
+    description: 找到当前僻巷障眼墙，不知情凡人不会自动看出入口。
+    access:
+      kind: discoverable
+      condition: 实际取得当前入口/方位并通过相应禁制或主人许可。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

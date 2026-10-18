@@ -1,0 +1,26 @@
+id: dajin-tianji-palace-token
+kind: item
+name: 天机府白玉令
+description: 可用于控制配套天机府光幕的白玉令牌，持有不等于成为洞府主人。
+placement: dajin-tianji-store
+facts:
+  - id: dajin-tianji-palace-token-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianji-guild
+    description: 本商号所存配套器物，转让须获所有者授权。
+    access:
+      kind: public
+  - id: dajin-tianji-token-controls
+    predicate: controls
+    value:
+      kind: entity
+      entityId: dajin-tianji-display-palace
+    description: 配套令牌用于光幕控制，不替代所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

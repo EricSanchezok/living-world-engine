@@ -1,0 +1,42 @@
+id: kunwu-thunder-wall
+kind: location
+name: 青狮雷壁
+description: 两青铜狮与雷光壁阻挡通殿。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-thunder-wall-route-kunwu-stone-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-stone-forest
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-thunder-wall-condition-kunwu-stone-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石像与雷墙尚完整。
+    description: 石像与雷墙尚完整。
+    access:
+      kind: public
+  - id: kunwu-thunder-wall-route-kunwu-magnetic-grove
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-magnetic-grove
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-thunder-wall-condition-kunwu-magnetic-grove
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须过雷壁再进入金磁灵木范围。
+    description: 须过雷壁再进入金磁灵木范围。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

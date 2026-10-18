@@ -1,0 +1,18 @@
+id: outerstar-leader-blade
+kind: item
+name: 沈泊青潮剑
+description: 个人温养的结丹法宝，水行剑法须实耗法力。
+placement: outerstar-leader
+facts:
+  - id: outerstar-leader-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-leader
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

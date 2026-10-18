@@ -1,0 +1,50 @@
+id: outerstar-small-mine
+kind: location
+name: 白汀石矿
+description: 村外岛岭间的浅层小矿，现只开两条短巷。
+placement: outerstar-baiting-island
+facts:
+  - id: outerstar-small-mine-route-human-outer-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-outer-star-sea
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-small-mine-condition-human-outer-star-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 村外岛岭间的浅层小矿，现只开两条短巷。
+    description: 村外岛岭间的浅层小矿，现只开两条短巷。
+    access:
+      kind: public
+  - id: outerstar-small-mine-route-outerstar-reef-village
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-reef-village
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-small-mine-condition-outerstar-reef-village
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿村外石路步行约半个时辰；滑坡、修路及不同速度会改变实际时间。
+    description: 沿村外石路步行约半个时辰；滑坡、修路及不同速度会改变实际时间。
+    access:
+      kind: public
+  - id: outerstar-small-mine-structural-fault
+    predicate: structural-fault
+    value:
+      kind: text
+      value: 东巷支木下泥土被渗水软化。继续重载可能坍落，当前未塌；需要先查水源和支撑。
+    description: 东巷支木下泥土被渗水软化。继续重载可能坍落，当前未塌；需要先查水源和支撑。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: void-array-regulator
+kind: item
+name: 阵屋调灵器
+description: 四份材料可整修，也可先用三份完好料临修一轮并降低负荷。
+placement: void-wanfa-court
+facts:
+  - id: void-array-regulator-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanfa-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

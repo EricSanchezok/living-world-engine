@@ -1,0 +1,22 @@
+id: ad-qingyi-tool-store
+kind: container
+name: 青翼公用工具库
+description: 钱珂负责借还，公有修补料不可归个人。
+placement: ad-cangling-pavilion
+facts:
+  - id: ad-qingyi-tool-store-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-qingyi-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 9
+  - definition_id: demon-stone
+    amount: 36
+ratings: []
+shared_activity_resources: []

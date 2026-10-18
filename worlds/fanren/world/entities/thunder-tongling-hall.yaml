@@ -1,0 +1,26 @@
+id: thunder-tongling-hall
+kind: location
+name: 通灵殿
+description: 万古长老议事与研究的厅堂，来客只能得知被告知的部分。
+placement: thunder-war-fort
+facts:
+  - id: thunder-tongling-hall-route-thunder-war-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-war-fort
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-tongling-hall-condition-thunder-war-fort
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万古长老议事与研究的厅堂，来客只能得知被告知的部分。
+    description: 万古长老议事与研究的厅堂，来客只能得知被告知的部分。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

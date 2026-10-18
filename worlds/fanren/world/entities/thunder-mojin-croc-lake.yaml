@@ -1,0 +1,28 @@
+id: thunder-mojin-croc-lake
+kind: location
+name: 黑渊深潭
+description: 深潭水面黝黑，岸边留着巨大爬痕。潭底的岩隙属于黑渊鳄，附近兽类很少久留。
+placement: thunder-mojin-mountains
+facts:
+  - id: thunder-mojin-croc-lake-route-thunder-mojin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-mountains
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-croc-lake-condition-thunder-mojin-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从深山实际找到黑渊潭，路上魔气浓重，潭主可能察觉来者。
+    description: 从深山实际找到黑渊潭，路上魔气浓重，潭主可能察觉来者。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

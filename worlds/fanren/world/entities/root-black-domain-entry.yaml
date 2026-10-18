@@ -1,0 +1,42 @@
+id: root-black-domain-entry
+kind: location
+name: 黑域当前接引暗室
+description: 藏在市坪外侧一间旧库房的地下，只有得到接引者才知道用途。
+placement: demon-nine-immortal-market
+facts:
+  - id: root-black-domain-entry-route-to-demon-nine-immortal-market
+    predicate: route-to-demon-nine-immortal-market
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-market
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-black-domain-entry-travel-condition-demon-nine-immortal-market
+    predicate: travel-condition-demon-nine-immortal-market
+    value:
+      kind: text
+      value: 需先找到库房暗门并取得管理者许可或实际破门；没有公开招牌。
+    description: 需先找到库房暗门并取得管理者许可或实际破门；没有公开招牌。
+    access:
+      kind: private
+  - id: root-black-domain-entry-route-to-root-black-domain-fog
+    predicate: route-to-root-black-domain-fog
+    value:
+      kind: entity
+      entityId: root-black-domain-fog
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-black-domain-entry-travel-condition-root-black-domain-fog
+    predicate: travel-condition-root-black-domain-fog
+    value:
+      kind: text
+      value: 需两端接引阵完整、核验本处信物并由值守者启动，每送一批至多三人消耗接引库一块高阶灵石和操作者二十法力。当前锚点可被撤去，不能永久锁定此路。
+    description: 需两端接引阵完整、核验本处信物并由值守者启动，每送一批至多三人消耗接引库一块高阶灵石和操作者二十法力。当前锚点可被撤去，不能永久锁定此路。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

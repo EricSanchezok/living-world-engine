@@ -1,0 +1,42 @@
+id: innerstar-rental-cave-a
+kind: location
+name: 听潮洞
+description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+placement: innerstar-holy-mountain
+facts:
+  - id: innerstar-rental-cave-a-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-rental-cave-a-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+  - id: innerstar-rental-cave-a-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: public
+  - id: innerstar-rental-cave-a-lease-terms
+    predicate: lease-terms
+    value:
+      kind: text
+      value: 百年住用权费用2400低阶灵石，承租前可获准查看。授予的是这一洞府住用权，不是圣山所有权。
+    description: 百年住用权费用2400低阶灵石，承租前可获准查看。授予的是这一洞府住用权，不是圣山所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

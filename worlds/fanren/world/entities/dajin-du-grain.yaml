@@ -1,0 +1,20 @@
+id: dajin-du-grain
+kind: item
+name: 杜家粮箱
+description: 已收存的粮食，交租与自用都从箱中实际取走。
+placement: dajin-du-house
+facts:
+  - id: dajin-du-grain-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-dajin-du-cheng
+    description: 粮食是杜家的收成，租额未支付前仍在箱内。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 16
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: yue-lanzhou
+kind: location
+name: 岚州
+description: 越国州域，南部城镇靠山临水。
+placement: human-yue
+facts:
+  - id: yue-lanzhou-route-yue-guanggui
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-guanggui
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-lanzhou-travel-yue-guanggui
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-lanzhou-route-yue-jiayuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-lanzhou-travel-yue-jiayuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-lanzhou-water-and-produce
+    predicate: regional-economy
+    value:
+      kind: text
+      value: 水道湖泊与运河众多，稻作兴盛；岚州面积居十三州第八，富足仅次于辛州。
+    description: 水道湖泊与运河众多，稻作兴盛；岚州面积居十三州第八，富足仅次于辛州。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

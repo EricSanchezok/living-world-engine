@@ -1,0 +1,34 @@
+id: thunder-debate-notice
+kind: item
+name: 问艺台本轮论题
+description: 本轮讨论：低耗精细构造与厚重耐用构造分别适合什么任务。
+placement: thunder-public-debate
+facts:
+  - id: thunder-debate-notice-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-debate-notice-trial-protocol
+    predicate: trial-protocol
+    value:
+      kind: text
+      value: 自愿报名者须先说明适用场景；搬两份重料和传一张纸是不同试验，不能拿一种结果宣布另一派全面无用。拒绝公开秘传可只演示成品。
+    description: 自愿报名者须先说明适用场景；搬两份重料和传一张纸是不同试验，不能拿一种结果宣布另一派全面无用。拒绝公开秘传可只演示成品。
+    access:
+      kind: public
+  - id: thunder-debate-notice-reward
+    predicate: reward
+    value:
+      kind: text
+      value: 主持人可付二十低阶灵石给完成可核记录的助手；彩流罂自愿考虑给有价值的论证一小杯九香酒，须本人同意，未承诺自动赠整坛。
+    description: 主持人可付二十低阶灵石给完成可核记录的助手；彩流罂自愿考虑给有价值的论证一小杯九香酒，须本人同意，未承诺自动赠整坛。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

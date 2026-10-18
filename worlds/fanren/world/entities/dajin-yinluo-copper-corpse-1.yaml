@@ -1,0 +1,18 @@
+id: dajin-yinluo-copper-corpse-1
+kind: item
+name: 铜甲尸具1
+description: 低阶铜甲尸具，未培养成尸王，操纵与养护需要真实法力和材料。
+placement: dajin-yinluo-corpse-yard
+facts:
+  - id: dajin-yinluo-copper-corpse-1-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: 宗门资产，不是周简私有。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

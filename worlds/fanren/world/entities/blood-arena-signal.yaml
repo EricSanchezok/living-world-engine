@@ -1,0 +1,18 @@
+id: blood-arena-signal
+kind: item
+name: 较技场止斗铃
+description: 由执事使用，表示已经约定的终止信号；声音不是物理上强制双方服从。
+placement: blood-arena
+facts:
+  - id: blood-arena-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-arena-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

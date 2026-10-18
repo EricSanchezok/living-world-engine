@@ -1,0 +1,34 @@
+id: yue-yuejing-north
+kind: location
+name: 皇城
+description: 皇室所在的北部城域，官差在门口核验通行。
+placement: yue-yuejing
+facts:
+  - id: yue-yuejing-north-route-yue-yuejing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-north-route-yue-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-palace
+    description: 至宫门核验皇室或官署许可；无许可不得擅入，守卫可拦阻。
+    access:
+      kind: public
+  - id: yue-yuejing-north-sect-ban
+    predicate: social-rule
+    value:
+      kind: text
+      value: 七派约定门下弟子不得擅入皇城，防止一家挟持皇室。违者可能被追责；紧急处置与责任须有关人物实际判断。
+    description: 七派约定门下弟子不得擅入皇城，防止一家挟持皇室。违者可能被追责；紧急处置与责任须有关人物实际判断。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

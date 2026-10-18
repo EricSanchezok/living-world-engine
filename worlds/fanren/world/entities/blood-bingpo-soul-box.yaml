@@ -1,0 +1,18 @@
+id: blood-bingpo-soul-box
+kind: item
+name: 冰魄血魂封盒
+description: 由翁姓保管的冰魄旧后手，尚未委托他人转送。
+placement: canon-weng-thunder-elder
+facts:
+  - id: blood-bingpo-soul-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bingpo
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

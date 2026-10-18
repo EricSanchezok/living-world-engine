@@ -1,0 +1,55 @@
+id: tiannan-moyan-sealed-crate
+kind: item
+name: 待验的炉料木箱
+description: 一箱尚未验收的普通炉料，箱口封签撕开一道缺口，箱板完好。
+placement: tiannan-moyan-outer-court
+facts:
+  - id: tiannan-moyan-sealed-crate-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-shenbing-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-moyan-sealed-crate-sender
+    predicate: sent-by
+    value:
+      kind: entity
+      entityId: original-tiannan-meng-pan
+    description: 孟磐代表神兵外院送来，罗翊暂管。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-moyan-sealed-crate-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-luo-yi
+    description: 验收前不转入魔焰库存。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+  - id: tiannan-moyan-sealed-crate-seal
+    predicate: seal-condition
+    value:
+      kind: text
+      value: 送出时封签完整；运输中封签边角勾裂，未开盖，现有炉料仍为五份。
+    description: 客观原因未自动进入罗翊认知。
+    access:
+      kind: private
+  - id: tiannan-moyan-sealed-crate-inspection
+    predicate: inspection-state
+    value:
+      kind: text
+      value: 尚未开箱核数；随箱单据记五份炉料，暂未付款。
+    description: 开验须检查实际库存，不凭封签破损推断偷窃。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+ratings: []
+shared_activity_resources: []

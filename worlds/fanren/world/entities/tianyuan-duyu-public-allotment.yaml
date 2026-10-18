@@ -1,0 +1,20 @@
+id: tianyuan-duyu-public-allotment
+kind: container
+name: 杜宇本期待领供给
+description: 两份经岛中同意预留的工料，仍在公库；杜宇接受后才真实交割，不从私人包重复增加。
+placement: spirit-holy-island
+facts:
+  - id: tianyuan-duyu-public-allotment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

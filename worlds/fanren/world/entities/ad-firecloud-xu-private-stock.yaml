@@ -1,0 +1,22 @@
+id: ad-firecloud-xu-private-stock
+kind: container
+name: 许铎自用储备
+description: 已存的有限个人资源；秘宝与机构财产另记。
+placement: ad-firecloud-xu
+facts:
+  - id: ad-firecloud-xu-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-firecloud-xu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 18
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

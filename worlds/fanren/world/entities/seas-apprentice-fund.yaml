@@ -1,0 +1,22 @@
+id: seas-apprentice-fund
+kind: container
+name: 阵务学徒预算
+description: 已获准支付前三个月学徒工钱的公库。
+placement: seas-fengyuan-relay-hall
+facts:
+  - id: seas-apprentice-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

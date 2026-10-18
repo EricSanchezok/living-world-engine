@@ -1,0 +1,26 @@
+id: innerstar-daughter-net
+kind: item
+name: 罗小满的待修渔网
+description: 她答应今晚补完的自家渔网，缺口可用已有麻线修好。
+placement: innerstar-xiaohuan-village
+facts:
+  - id: innerstar-daughter-net-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-fisher-daughter
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-daughter-net-repair
+    predicate: repair
+    value:
+      kind: text
+      value: 有一团已在网边的麻线，熟悉织网者约一时辰能补好；这不会替她决定是否出海。
+    description: 有一团已在网边的麻线，熟悉织网者约一时辰能补好；这不会替她决定是否出海。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

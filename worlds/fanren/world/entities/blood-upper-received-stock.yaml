@@ -1,0 +1,22 @@
+id: blood-upper-received-stock
+kind: container
+name: 上宗离火年供收讫库
+description: 本项组织事务的独立实存，未经授权不得转入个人袋；已收与待收分别记账。
+placement: blood-upper-court
+facts:
+  - id: blood-upper-received-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-upper-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 0
+  - definition_id: herb-packet
+    amount: 0
+ratings: []
+shared_activity_resources: []

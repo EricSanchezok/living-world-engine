@@ -1,0 +1,20 @@
+id: innerstar-transit-supply
+kind: container
+name: 星空殿供能公库
+description: 用于启阵的有限中阶石与收费款分账，属于星宫。
+placement: innerstar-star-hall
+facts:
+  - id: innerstar-transit-supply-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

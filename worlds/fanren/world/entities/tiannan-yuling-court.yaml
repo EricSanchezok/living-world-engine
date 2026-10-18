@@ -1,0 +1,26 @@
+id: tiannan-yuling-court
+kind: location
+name: 御灵宗山门内院
+description: 笼舍、虫室和议事房相隔，灵兽有自己的状态，未经驯养不能仅凭门人名义使唤。
+placement: tiannan-qiling-mountains
+facts:
+  - id: tiannan-yuling-court-route-tiannan-qiling-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-qiling-mountains
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-yuling-court-travel-tiannan-qiling-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

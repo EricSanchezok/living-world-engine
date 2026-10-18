@@ -1,0 +1,26 @@
+id: seas-jiatun-return-energy
+kind: item
+name: 甲豚雷鸣端空供能库
+description: 此端当前无极品石与阵芯，若从此端返回需提前真实运来24极品石和两匹配阵芯。
+placement: seas-jiatun-thunder-counterpart
+facts:
+  - id: seas-jiatun-return-energy-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain-people
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-jiatun-return-energy-top-stone-inventory
+    predicate: top-stone-inventory
+    value:
+      kind: number
+      value: 0
+    description: top-stone-inventory
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

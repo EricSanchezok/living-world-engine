@@ -1,0 +1,201 @@
+id: south-merchant
+kind: person
+name: 宋之行
+description: 乡市店主，供日用品、绳索和普通药具，与阮家长期往来。
+placement: south-market-store
+facts:
+  - id: south-merchant-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - south-merchant
+  - id: south-merchant-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 凡俗算账、货品辨识和议价。
+    description: 凡俗算账、货品辨识和议价。
+    access:
+      kind: agents
+      agentIds:
+        - south-merchant
+  - id: south-merchant-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+    description: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+    access:
+      kind: agents
+      agentIds:
+        - south-merchant
+  - id: south-merchant-regular-customer-south-boatkeeper
+    predicate: regular-customer
+    value:
+      kind: entity
+      entityId: south-boatkeeper
+    description: regular-customer
+    access:
+      kind: private
+  - id: south-merchant-sells-supplies-to-south-healer
+    predicate: sells-supplies-to
+    value:
+      kind: entity
+      entityId: south-healer
+    description: sells-supplies-to
+    access:
+      kind: private
+meters:
+  - id: south-merchant-health
+    definition_id: health
+    current: 100
+  - id: south-merchant-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: south-merchant-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: south-merchant-force
+    definition_id: force
+    value: 1
+  - id: south-merchant-craft
+    definition_id: craft
+    value: 4
+  - id: south-merchant-perception
+    definition_id: perception
+    value: 1
+  - id: south-merchant-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: south-merchant
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 乡市店主，供日用品、绳索和普通药具，与阮家长期往来。
+      voice: 喜欢边摆物边报用途，熟客可讲情分，承诺前会看看自己有没有货。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 选几样容易携带的货送去明早集市，向船家借一段载货位置。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 宋之行
+        description: 乡市店主，供日用品、绳索和普通药具，与阮家长期往来。
+        status: observed
+      - id: location
+        name: 宋家杂货铺
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-south-merchant-purse
+        name: 宋之行的小袋
+        description: 本人随身钱物，不含家产或宗门库。
+        status: observed
+      - id: known-south-boatkeeper
+        name: 葛满
+        description: 互相认识的店主与船家，可协商具体这一趟运输。
+        status: observed
+      - id: known-south-healer
+        name: 阮青禾
+        description: 日常供货往来，未发生玩家未经历的救命大恩。
+        status: observed
+      - id: known-south-trade-stock
+        name: 乡店货柜
+        description: 绳、布、盐与小工具等可供取验的现货。
+        status: observed
+      - id: known-south-market
+        name: 回溪药市
+        description: 从自己的日常往来知道此处或物，不因此取得所有权。
+        status: observed
+      - id: known-south-market-landing
+        name: 回溪埠
+        description: 从自己的日常往来知道此处或物，不因此取得所有权。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 凡俗算账、货品辨识和议价。
+        description: 凡俗算账、货品辨识和议价。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+        description: 无灵根，凡俗技能来自学习；没有自动补根机缘。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-work
+        subjectId: self
+        predicate: opening-work
+        value:
+          kind: text
+          value: 选几样容易携带的货送去明早集市，向船家借一段载货位置。
+        description: 选几样容易携带的货送去明早集市，向船家借一段载货位置。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - south-merchant
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-market-store
+      - local_entity_id: known-south-merchant-purse
+        canonical_entity_ids:
+          - south-merchant-purse
+      - local_entity_id: known-south-boatkeeper
+        canonical_entity_ids:
+          - south-boatkeeper
+      - local_entity_id: known-south-healer
+        canonical_entity_ids:
+          - south-healer
+      - local_entity_id: known-south-trade-stock
+        canonical_entity_ids:
+          - south-trade-stock
+      - local_entity_id: known-south-market
+        canonical_entity_ids:
+          - south-market
+      - local_entity_id: known-south-market-landing
+        canonical_entity_ids:
+          - south-market-landing

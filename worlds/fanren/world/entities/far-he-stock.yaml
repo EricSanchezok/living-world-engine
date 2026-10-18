@@ -1,0 +1,28 @@
+id: far-he-stock
+kind: item
+name: 药栈待验药包
+description: 四包普通草药，交付前需要分拣验收。
+placement: far-tiansha-store
+facts:
+  - id: far-he-stock-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-he-sui
+    description: 由何穗所有。
+    access:
+      kind: public
+  - id: far-he-stock-condition
+    predicate: goods-condition
+    value:
+      kind: text
+      value: 一包边角受潮，其余药包尚待逐包验收。
+    description: 药包中有一包边角受潮，尚未完成逐包验收。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 4
+ratings: []
+shared_activity_resources: []

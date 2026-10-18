@@ -1,0 +1,26 @@
+id: fengyuan-shura-shanhai-pearl
+kind: item
+name: 山海珠
+description: 另一件较小古圣物封在极寒晶壳中，旧祭炼痕迹与掩饰尚存；内部洞天未向外开放。
+placement: fengyuan-shura-cold-pool
+facts:
+  - id: fengyuan-shura-shanhai-pearl-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-shura-shanhai-pearl-entry-control
+    predicate: entry-control
+    value:
+      kind: text
+      value: 要取得出入控制须满足其真实旧印记、特殊祭法与力量条件；仅触摸宝珠或拥有别人的口头承诺无效。
+    description: 要取得出入控制须满足其真实旧印记、特殊祭法与力量条件；仅触摸宝珠或拥有别人的口头承诺无效。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

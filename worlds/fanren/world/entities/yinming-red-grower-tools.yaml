@@ -1,0 +1,18 @@
+id: yinming-red-grower-tools
+kind: item
+name: 黎稷的个人器具
+description: 薄土耕作、排沟与种粮保存。所需的有限工具，不包含无限兽晶。
+placement: yinming-red-grower
+facts:
+  - id: yinming-red-grower-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-red-grower
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: dv-tianji-apprentice-kit
+kind: container
+name: 陆缃的工具包
+description: 当前个人工具与路粮，不是无限材料库。
+placement: dv-tianji-apprentice
+facts:
+  - id: dv-tianji-apprentice-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-tianji-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 4
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

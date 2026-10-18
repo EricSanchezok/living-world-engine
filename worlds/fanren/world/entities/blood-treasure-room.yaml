@@ -1,0 +1,26 @@
+id: blood-treasure-room
+kind: location
+name: 天鼎末藏宝殿
+description: 雕像与金塔相辅护持的藏宝处，当前禁制完整。
+placement: blood-inner-court
+facts:
+  - id: blood-treasure-room-route-blood-inner-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-inner-court
+    description: route-to
+    access:
+      kind: public
+  - id: blood-treasure-room-condition-blood-inner-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 庭院中既有隐门可由冰魄打开，但藏宝塔另受强禁制；进入房间不等于得到宝物。
+    description: 庭院中既有隐门可由冰魄打开，但藏宝塔另受强禁制；进入房间不等于得到宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

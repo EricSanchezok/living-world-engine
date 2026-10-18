@@ -1,0 +1,26 @@
+id: innerstar-bamboo-garden
+kind: location
+name: 留竹内圃
+description: 小宗封闭内圃，外人需先获准，护持竹盆的阵纹仍完整。
+placement: innerstar-bamboo-islet
+facts:
+  - id: innerstar-bamboo-garden-route-innerstar-bamboo-islet
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-bamboo-islet
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-bamboo-garden-condition-innerstar-bamboo-islet
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 小宗封闭内圃，外人需先获准，护持竹盆的阵纹仍完整。
+    description: 小宗封闭内圃，外人需先获准，护持竹盆的阵纹仍完整。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tiannan-wei-retreat
+kind: location
+name: 魏无涯丹毒静室
+description: 隐修处，毒材柜和会客房有隔离禁制；来客不应接触未知药气。
+placement: human-yu
+facts:
+  - id: tiannan-wei-retreat-route-human-yu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yu
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-wei-retreat-travel-human-yu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

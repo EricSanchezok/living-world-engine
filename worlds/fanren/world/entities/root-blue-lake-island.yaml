@@ -1,0 +1,37 @@
+id: root-blue-lake-island
+kind: location
+name: 蓝湖冰岛
+description: 火瑚南部海域的冰岛，磁性与内外温差使勘察需谨慎。
+placement: thunder-firecoral-islands
+facts:
+  - id: root-blue-lake-island-route-to-thunder-firecoral-deepwater
+    predicate: route-to-thunder-firecoral-deepwater
+    value:
+      kind: entity
+      entityId: thunder-firecoral-deepwater
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-blue-lake-island-travel-condition-thunder-firecoral-deepwater
+    predicate: travel-condition-thunder-firecoral-deepwater
+    value:
+      kind: text
+      value: 须由南部海域实际航行、辨位与登陆；海图方向不消除路程和磁性干扰。
+    description: 须由南部海域实际航行、辨位与登陆；海图方向不消除路程和磁性干扰。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-blue-lake-island-root-detail-blue-lake-island
+    predicate: root-detail-blue-lake-island
+    value:
+      kind: text
+      value: 当地外寒内热、近地磁性干扰神识，强弱随施术者和具体区域变化。蓝湖冰岛不同于魔界蓝湖城。
+    description: 当地外寒内热、近地磁性干扰神识，强弱随施术者和具体区域变化。蓝湖冰岛不同于魔界蓝湖城。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

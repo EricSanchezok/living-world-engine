@@ -1,0 +1,19 @@
+id: void-spirit-spring
+kind: item
+name: 内殿灵眼之泉
+description: 泉水留在灵眼附近灵气充沛，离开后会很快变普通水，非可无限装瓶的灵乳。
+placement: void-spring
+facts:
+  - id: void-spirit-spring-detached-water
+    predicate: detached-water
+    value:
+      kind: text
+      value: 离池的泉水很快失去异香和灵气，化为普通清水；浸泡与取水带走不是同种收益。
+    description: 离池的泉水很快失去异香和灵气，化为普通清水；浸泡与取水带走不是同种收益。
+    access:
+      kind: discoverable
+      condition: 实际取少量泉水观察变化，或在泉中进行真实恢复。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

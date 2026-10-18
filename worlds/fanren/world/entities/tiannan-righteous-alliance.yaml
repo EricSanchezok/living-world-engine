@@ -1,0 +1,18 @@
+id: tiannan-righteous-alliance
+kind: organization
+name: 正道盟
+description: 正道盟的宗门或联盟共同体，职分、成员与公产分开；与陌生人交涉须由实际掌事者决定。
+placement: human-fengdu
+facts:
+  - id: tiannan-righteous-alliance-member-taizhen-sect
+    predicate: member-organization
+    value:
+      kind: entity
+      entityId: taizhen-sect
+    description: 组织共同体与参加宗门独立存在；共同利益不等所有资源混成一个库。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

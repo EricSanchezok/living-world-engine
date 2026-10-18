@@ -1,0 +1,66 @@
+id: human-yuanwu
+kind: location
+name: 元武国
+description: 越国以北的修仙国家，家族、坊市与门派各有自己的传承和资产。
+placement: human-tiannan
+facts:
+  - id: human-yuanwu-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-yuanwu-travel-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-yuanwu-route-tiannan-jinma-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-jinma-city
+    description: 从元武干道转入金马城街道，西郊丘陵另有私人地界。
+    access:
+      kind: public
+  - id: human-yuanwu-route-tiannan-panlong-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-panlong-river
+    description: 由元武官道转入蟠龙江险滩；水势、船载和船工判断决定能否渡过，不能自动安全通航。
+    access:
+      kind: public
+  - id: human-yuanwu-route-tiannan-tianxing-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-market
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+  - id: human-yuanwu-route-tiannan-shenbing-workyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-shenbing-workyard
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+  - id: human-yuanwu-route-tiannan-wanmiao-counter
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-wanmiao-counter
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

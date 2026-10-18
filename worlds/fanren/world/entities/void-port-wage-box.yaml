@@ -1,0 +1,20 @@
+id: void-port-wage-box
+kind: container
+name: 海埠工钱箱
+description: 按真实运货支付的公钱。
+placement: void-jiyin-port
+facts:
+  - id: void-port-wage-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-jiyin-administration
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 2400
+ratings: []
+shared_activity_resources: []

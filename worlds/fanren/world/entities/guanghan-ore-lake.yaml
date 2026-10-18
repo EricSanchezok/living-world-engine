@@ -1,0 +1,42 @@
+id: guanghan-ore-lake
+kind: location
+name: 双峰矿岛巨湖
+description: 宽广湖面包围双峰岛，水下鱼群对闯入者保持警戒。
+placement: guanghan-realm
+facts:
+  - id: guanghan-ore-lake-route-guanghan-arrival-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-arrival-sea
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ore-lake-condition-guanghan-arrival-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-ore-lake-route-guanghan-ore-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-ore-island
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-ore-lake-condition-guanghan-ore-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,200 @@
+id: boundless-cheng-yun
+kind: person
+name: 程芸
+description: 程家的成年女儿，想学行商，又舍不得丢下家中手艺。
+placement: boundless-house
+facts:
+  - id: boundless-cheng-yun-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - boundless-cheng-yun
+  - id: boundless-cheng-yun-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 识字、制绳与步行赶路经验。
+    description: 识字、制绳与步行赶路经验。
+    access:
+      kind: agents
+      agentIds:
+        - boundless-cheng-yun
+  - id: boundless-cheng-yun-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根的凡人。
+    description: 无灵根的凡人。
+    access:
+      kind: agents
+      agentIds:
+        - boundless-cheng-yun
+  - id: boundless-cheng-yun-parent-boundless-cheng-ji
+    predicate: parent
+    value:
+      kind: entity
+      entityId: boundless-cheng-ji
+    description: parent
+    access:
+      kind: public
+  - id: boundless-cheng-yun-parent-boundless-lin-zhen
+    predicate: parent
+    value:
+      kind: entity
+      entityId: boundless-lin-zhen
+    description: parent
+    access:
+      kind: public
+meters:
+  - id: boundless-cheng-yun-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 70
+ratings:
+  - id: boundless-cheng-yun-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: boundless-cheng-yun-force
+    definition_id: force
+    value: 0
+  - id: boundless-cheng-yun-craft
+    definition_id: craft
+    value: 1
+  - id: boundless-cheng-yun-perception
+    definition_id: perception
+    value: 0
+  - id: boundless-cheng-yun-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: boundless-cheng-yun
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 程家的成年女儿，想学行商，又舍不得丢下家中手艺。
+      voice: 说话简洁，遇到所关心的事情会详细解释自己的理由。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 替父亲做一份交货记录，试着争取随商队去州府。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 程芸
+        description: 程家的成年女儿，想学行商，又舍不得丢下家中手艺。
+        status: observed
+      - id: location
+        name: 程家小院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-boundless-cheng-yun-pouch
+        name: 程芸的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-boundless-cheng-ji
+        name: 程济
+        description: 开篇前相识的家人或实际交易对象。
+        status: observed
+      - id: known-boundless-lin-zhen
+        name: 林贞
+        description: 开篇前相识的家人或实际交易对象。
+        status: observed
+      - id: known-boundless-market
+        name: 小城南市
+        description: 自己走过的城内地点。
+        status: observed
+      - id: known-boundless-house
+        name: 程家小院
+        description: 自己走过的城内地点。
+        status: observed
+      - id: known-boundless-inn
+        name: 临街客舍
+        description: 自己走过的城内地点。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 识字、制绳与步行赶路经验。
+        description: 识字、制绳与步行赶路经验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 替父亲做一份交货记录，试着争取随商队去州府。
+        description: 替父亲做一份交货记录，试着争取随商队去州府。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - boundless-cheng-yun
+      - local_entity_id: location
+        canonical_entity_ids:
+          - boundless-house
+      - local_entity_id: known-boundless-cheng-yun-pouch
+        canonical_entity_ids:
+          - boundless-cheng-yun-pouch
+      - local_entity_id: known-boundless-cheng-ji
+        canonical_entity_ids:
+          - boundless-cheng-ji
+      - local_entity_id: known-boundless-lin-zhen
+        canonical_entity_ids:
+          - boundless-lin-zhen
+      - local_entity_id: known-boundless-market
+        canonical_entity_ids:
+          - boundless-market
+      - local_entity_id: known-boundless-house
+        canonical_entity_ids:
+          - boundless-house
+      - local_entity_id: known-boundless-inn
+        canonical_entity_ids:
+          - boundless-inn

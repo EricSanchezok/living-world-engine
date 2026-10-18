@@ -1,0 +1,18 @@
+id: dajin-shuling-shop
+kind: location
+name: 漱灵斋
+description: 独立私人商楼，阵法用品与接待各有安排；来访不自动知道店主私人交往。
+placement: dajin-jinxi-market
+facts:
+  - id: dajin-shuling-shop-route-dajin-jinxi-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinxi-market
+    description: 正常商街往来，不含尚未批准的传送旁路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

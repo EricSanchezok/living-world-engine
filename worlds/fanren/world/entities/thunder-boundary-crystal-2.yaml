@@ -1,0 +1,18 @@
+id: thunder-boundary-crystal-2
+kind: item
+name: 跨洲配对阵芯2
+description: 本次所配跨洲阵使用的一枚配对阵芯，随本次启动损耗；只是这一配置的耗材，不说明所有跨洲阵都需这种阵芯。
+placement: thunder-fujiao-secret-hall
+facts:
+  - id: thunder-boundary-crystal-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

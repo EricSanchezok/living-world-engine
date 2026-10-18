@@ -1,0 +1,18 @@
+id: ad-first-disciple-deed
+kind: item
+name: 大弟子洞府议案
+description: 请划一处既有修行院供独立用度，每30共同日向师门交20魔石，可自营剩余产出；目前仍是请求，不能当已获产权。
+placement: ad-liuji-first-disciple
+facts:
+  - id: ad-first-disciple-deed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-liuji-first-disciple
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: tianyuan-guard-yard
+kind: location
+name: 天渊卫备勤院
+description: 轮值人员检修器械、领取口粮并交接记录的院落。
+placement: spirit-guard-tower
+facts:
+  - id: tianyuan-guard-yard-route-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-guard-yard-condition-spirit-guard-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 轮值人员检修器械、领取口粮并交接记录的院落。
+    description: 轮值人员检修器械、领取口粮并交接记录的院落。
+    access:
+      kind: public
+  - id: tianyuan-guard-yard-route-to-tianyuan-transport-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-transport-hall
+    description: route-to-tianyuan-transport-hall
+    access:
+      kind: private
+  - id: tianyuan-guard-yard-route-conditions-tianyuan-transport-hall
+    predicate: route-conditions-tianyuan-transport-hall
+    value:
+      kind: text
+      value: 军用通廊到备勤院，需当值或访客许可，步行本身不耗传送灵石。
+    description: 军用通廊到备勤院，需当值或访客许可，步行本身不耗传送灵石。
+    access:
+      kind: private
+  - id: tianyuan-guard-yard-route-to-tianyuan-yiling-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-yiling-hall
+    description: route-to-tianyuan-yiling-hall
+    access:
+      kind: private
+  - id: tianyuan-guard-yard-route-conditions-tianyuan-yiling-hall
+    predicate: route-conditions-tianyuan-yiling-hall
+    value:
+      kind: text
+      value: 城内军务道路，押送需要实际控制俘虏而不能凭报功搬运他人。
+    description: 城内军务道路，押送需要实际控制俘虏而不能凭报功搬运他人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

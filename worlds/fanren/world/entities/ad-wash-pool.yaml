@@ -1,0 +1,28 @@
+id: ad-wash-pool
+kind: container
+name: 洗灵池
+description: 银色液化灵水与特殊改造能量深池，水压与神识屏障真实存在。
+placement: ad-wash-space
+facts:
+  - id: ad-wash-pool-one-treatment-cost
+    predicate: one-treatment-cost
+    value:
+      kind: text
+      value: 一次完整人形洗髓需要20份池中灵液，结果取决于身体、莲瓣和承受状态；完成洗髓并不等于进阶。
+    description: 一次完整人形洗髓需要20份池中灵液，结果取决于身体、莲瓣和承受状态；完成洗髓并不等于进阶。
+    access:
+      kind: private
+  - id: ad-wash-pool-out-of-space-limit
+    predicate: out-of-space-limit
+    value:
+      kind: text
+      value: 池水离开池塘即失去原有改造效用；普通容器收水不能带走这项效果。
+    description: 池水离开池塘即失去原有改造效用；普通容器收水不能带走这项效果。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: wash-potency
+    amount: 100
+ratings: []
+shared_activity_resources: []

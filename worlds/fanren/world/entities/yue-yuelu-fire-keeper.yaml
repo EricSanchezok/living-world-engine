@@ -1,0 +1,683 @@
+id: yue-yuelu-fire-keeper
+kind: person
+name: 沈砚石
+description: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+placement: yue-yuelu-fire-hall
+facts:
+  - id: yue-yuelu-fire-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - yue-yuelu-fire-keeper
+  - id: yue-yuelu-fire-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+    description: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+    access:
+      kind: agents
+      agentIds:
+        - yue-yuelu-fire-keeper
+  - id: yue-yuelu-fire-keeper-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木火土三属性灵根
+    description: 木火土三属性灵根
+    access:
+      kind: agents
+      agentIds:
+        - yue-yuelu-fire-keeper
+  - id: yue-yuelu-fire-keeper-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 承担门内实际值班职责。
+    access:
+      kind: public
+meters:
+  - id: yue-yuelu-fire-keeper-health
+    definition_id: health
+    current: 100
+  - id: yue-yuelu-fire-keeper-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 15
+ratings:
+  - id: yue-yuelu-fire-keeper-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: yue-yuelu-fire-keeper-craft
+    definition_id: craft
+    value: 1
+  - id: yue-yuelu-fire-keeper-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-yuelu-fire-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+      voice: 说明具体手续和已见情况，不用空泛承诺敷衍来客。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 检查十八号室龙首的阀口，确定无人使用后再拆洗。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 沈砚石
+        description: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+        status: observed
+      - id: location
+        name: 岳麓地火厅
+        description: 自己当值所在。
+        status: observed
+      - id: known-canon-huangfeng-ye-steward
+        name: 叶管事
+        description: 分派和值班往来中认识的管事。
+        status: observed
+      - id: known-yue-yuelu-fire-materials
+        name: 地火厅维护料箱
+        description: 工作中实际接触的公产或场所，授权与数量需如实登记。
+        status: observed
+      - id: known-yue-yuelu-fees
+        name: 岳麓公费匣
+        description: 工作中实际接触的公产或场所，授权与数量需如实登记。
+        status: observed
+      - id: known-yue-fire-room-01
+        name: 第1地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-01-key
+        name: 第1地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-02
+        name: 第2地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-02-key
+        name: 第2地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-03
+        name: 第3地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-03-key
+        name: 第3地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-04
+        name: 第4地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-04-key
+        name: 第4地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-05
+        name: 第5地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-05-key
+        name: 第5地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-06
+        name: 第6地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-06-key
+        name: 第6地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-07
+        name: 第7地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-07-key
+        name: 第7地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-08
+        name: 第8地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-08-key
+        name: 第8地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-09
+        name: 第9地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-09-key
+        name: 第9地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-10
+        name: 第10地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-10-key
+        name: 第10地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-11
+        name: 第11地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-11-key
+        name: 第11地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-12
+        name: 第12地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-12-key
+        name: 第12地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-13
+        name: 第13地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-13-key
+        name: 第13地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-14
+        name: 第14地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-14-key
+        name: 第14地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-15
+        name: 第15地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-15-key
+        name: 第15地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-16
+        name: 第16地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-16-key
+        name: 第16地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-17
+        name: 第17地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-17-key
+        name: 第17地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-18
+        name: 第18地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-18-key
+        name: 第18地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-19
+        name: 第19地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-19-key
+        name: 第19地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-20
+        name: 第20地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-20-key
+        name: 第20地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-21
+        name: 第21地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-21-key
+        name: 第21地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-22
+        name: 第22地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-22-key
+        name: 第22地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-23
+        name: 第23地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-23-key
+        name: 第23地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-24
+        name: 第24地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-24-key
+        name: 第24地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-25
+        name: 第25地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-25-key
+        name: 第25地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-26
+        name: 第26地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-26-key
+        name: 第26地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-27
+        name: 第27地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-27-key
+        name: 第27地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-28
+        name: 第28地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-28-key
+        name: 第28地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-29
+        name: 第29地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-29-key
+        name: 第29地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-30
+        name: 第30地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-30-key
+        name: 第30地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-31
+        name: 第31地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-31-key
+        name: 第31地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-32
+        name: 第32地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-32-key
+        name: 第32地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-33
+        name: 第33地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-33-key
+        name: 第33地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-34
+        name: 第34地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-34-key
+        name: 第34地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-35
+        name: 第35地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-35-key
+        name: 第35地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+      - id: known-yue-fire-room-36
+        name: 第36地火室
+        description: 自己管理的独立火室。
+        status: observed
+      - id: known-yue-fire-room-36-key
+        name: 第36地火室牌钥
+        description: 负责保管的房牌，借还时逐项记录。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的修学和工作经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: cultivation-state
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 炼气
+        description: 炼气
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+        description: 炼气执事，熟悉地火开闭、牌钥借还和室内器具清点。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: spiritual-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 木火土三属性灵根
+        description: 木火土三属性灵根
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 检查十八号室龙首的阀口，确定无人使用后再拆洗。
+        description: 检查十八号室龙首的阀口，确定无人使用后再拆洗。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-yuelu-fire-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-yuelu-fire-hall
+      - local_entity_id: known-canon-huangfeng-ye-steward
+        canonical_entity_ids:
+          - canon-huangfeng-ye-steward
+      - local_entity_id: known-yue-yuelu-fire-materials
+        canonical_entity_ids:
+          - yue-yuelu-fire-materials
+      - local_entity_id: known-yue-yuelu-fees
+        canonical_entity_ids:
+          - yue-yuelu-fees
+      - local_entity_id: known-yue-fire-room-01
+        canonical_entity_ids:
+          - yue-fire-room-01
+      - local_entity_id: known-yue-fire-room-01-key
+        canonical_entity_ids:
+          - yue-fire-room-01-key
+      - local_entity_id: known-yue-fire-room-02
+        canonical_entity_ids:
+          - yue-fire-room-02
+      - local_entity_id: known-yue-fire-room-02-key
+        canonical_entity_ids:
+          - yue-fire-room-02-key
+      - local_entity_id: known-yue-fire-room-03
+        canonical_entity_ids:
+          - yue-fire-room-03
+      - local_entity_id: known-yue-fire-room-03-key
+        canonical_entity_ids:
+          - yue-fire-room-03-key
+      - local_entity_id: known-yue-fire-room-04
+        canonical_entity_ids:
+          - yue-fire-room-04
+      - local_entity_id: known-yue-fire-room-04-key
+        canonical_entity_ids:
+          - yue-fire-room-04-key
+      - local_entity_id: known-yue-fire-room-05
+        canonical_entity_ids:
+          - yue-fire-room-05
+      - local_entity_id: known-yue-fire-room-05-key
+        canonical_entity_ids:
+          - yue-fire-room-05-key
+      - local_entity_id: known-yue-fire-room-06
+        canonical_entity_ids:
+          - yue-fire-room-06
+      - local_entity_id: known-yue-fire-room-06-key
+        canonical_entity_ids:
+          - yue-fire-room-06-key
+      - local_entity_id: known-yue-fire-room-07
+        canonical_entity_ids:
+          - yue-fire-room-07
+      - local_entity_id: known-yue-fire-room-07-key
+        canonical_entity_ids:
+          - yue-fire-room-07-key
+      - local_entity_id: known-yue-fire-room-08
+        canonical_entity_ids:
+          - yue-fire-room-08
+      - local_entity_id: known-yue-fire-room-08-key
+        canonical_entity_ids:
+          - yue-fire-room-08-key
+      - local_entity_id: known-yue-fire-room-09
+        canonical_entity_ids:
+          - yue-fire-room-09
+      - local_entity_id: known-yue-fire-room-09-key
+        canonical_entity_ids:
+          - yue-fire-room-09-key
+      - local_entity_id: known-yue-fire-room-10
+        canonical_entity_ids:
+          - yue-fire-room-10
+      - local_entity_id: known-yue-fire-room-10-key
+        canonical_entity_ids:
+          - yue-fire-room-10-key
+      - local_entity_id: known-yue-fire-room-11
+        canonical_entity_ids:
+          - yue-fire-room-11
+      - local_entity_id: known-yue-fire-room-11-key
+        canonical_entity_ids:
+          - yue-fire-room-11-key
+      - local_entity_id: known-yue-fire-room-12
+        canonical_entity_ids:
+          - yue-fire-room-12
+      - local_entity_id: known-yue-fire-room-12-key
+        canonical_entity_ids:
+          - yue-fire-room-12-key
+      - local_entity_id: known-yue-fire-room-13
+        canonical_entity_ids:
+          - yue-fire-room-13
+      - local_entity_id: known-yue-fire-room-13-key
+        canonical_entity_ids:
+          - yue-fire-room-13-key
+      - local_entity_id: known-yue-fire-room-14
+        canonical_entity_ids:
+          - yue-fire-room-14
+      - local_entity_id: known-yue-fire-room-14-key
+        canonical_entity_ids:
+          - yue-fire-room-14-key
+      - local_entity_id: known-yue-fire-room-15
+        canonical_entity_ids:
+          - yue-fire-room-15
+      - local_entity_id: known-yue-fire-room-15-key
+        canonical_entity_ids:
+          - yue-fire-room-15-key
+      - local_entity_id: known-yue-fire-room-16
+        canonical_entity_ids:
+          - yue-fire-room-16
+      - local_entity_id: known-yue-fire-room-16-key
+        canonical_entity_ids:
+          - yue-fire-room-16-key
+      - local_entity_id: known-yue-fire-room-17
+        canonical_entity_ids:
+          - yue-fire-room-17
+      - local_entity_id: known-yue-fire-room-17-key
+        canonical_entity_ids:
+          - yue-fire-room-17-key
+      - local_entity_id: known-yue-fire-room-18
+        canonical_entity_ids:
+          - yue-fire-room-18
+      - local_entity_id: known-yue-fire-room-18-key
+        canonical_entity_ids:
+          - yue-fire-room-18-key
+      - local_entity_id: known-yue-fire-room-19
+        canonical_entity_ids:
+          - yue-fire-room-19
+      - local_entity_id: known-yue-fire-room-19-key
+        canonical_entity_ids:
+          - yue-fire-room-19-key
+      - local_entity_id: known-yue-fire-room-20
+        canonical_entity_ids:
+          - yue-fire-room-20
+      - local_entity_id: known-yue-fire-room-20-key
+        canonical_entity_ids:
+          - yue-fire-room-20-key
+      - local_entity_id: known-yue-fire-room-21
+        canonical_entity_ids:
+          - yue-fire-room-21
+      - local_entity_id: known-yue-fire-room-21-key
+        canonical_entity_ids:
+          - yue-fire-room-21-key
+      - local_entity_id: known-yue-fire-room-22
+        canonical_entity_ids:
+          - yue-fire-room-22
+      - local_entity_id: known-yue-fire-room-22-key
+        canonical_entity_ids:
+          - yue-fire-room-22-key
+      - local_entity_id: known-yue-fire-room-23
+        canonical_entity_ids:
+          - yue-fire-room-23
+      - local_entity_id: known-yue-fire-room-23-key
+        canonical_entity_ids:
+          - yue-fire-room-23-key
+      - local_entity_id: known-yue-fire-room-24
+        canonical_entity_ids:
+          - yue-fire-room-24
+      - local_entity_id: known-yue-fire-room-24-key
+        canonical_entity_ids:
+          - yue-fire-room-24-key
+      - local_entity_id: known-yue-fire-room-25
+        canonical_entity_ids:
+          - yue-fire-room-25
+      - local_entity_id: known-yue-fire-room-25-key
+        canonical_entity_ids:
+          - yue-fire-room-25-key
+      - local_entity_id: known-yue-fire-room-26
+        canonical_entity_ids:
+          - yue-fire-room-26
+      - local_entity_id: known-yue-fire-room-26-key
+        canonical_entity_ids:
+          - yue-fire-room-26-key
+      - local_entity_id: known-yue-fire-room-27
+        canonical_entity_ids:
+          - yue-fire-room-27
+      - local_entity_id: known-yue-fire-room-27-key
+        canonical_entity_ids:
+          - yue-fire-room-27-key
+      - local_entity_id: known-yue-fire-room-28
+        canonical_entity_ids:
+          - yue-fire-room-28
+      - local_entity_id: known-yue-fire-room-28-key
+        canonical_entity_ids:
+          - yue-fire-room-28-key
+      - local_entity_id: known-yue-fire-room-29
+        canonical_entity_ids:
+          - yue-fire-room-29
+      - local_entity_id: known-yue-fire-room-29-key
+        canonical_entity_ids:
+          - yue-fire-room-29-key
+      - local_entity_id: known-yue-fire-room-30
+        canonical_entity_ids:
+          - yue-fire-room-30
+      - local_entity_id: known-yue-fire-room-30-key
+        canonical_entity_ids:
+          - yue-fire-room-30-key
+      - local_entity_id: known-yue-fire-room-31
+        canonical_entity_ids:
+          - yue-fire-room-31
+      - local_entity_id: known-yue-fire-room-31-key
+        canonical_entity_ids:
+          - yue-fire-room-31-key
+      - local_entity_id: known-yue-fire-room-32
+        canonical_entity_ids:
+          - yue-fire-room-32
+      - local_entity_id: known-yue-fire-room-32-key
+        canonical_entity_ids:
+          - yue-fire-room-32-key
+      - local_entity_id: known-yue-fire-room-33
+        canonical_entity_ids:
+          - yue-fire-room-33
+      - local_entity_id: known-yue-fire-room-33-key
+        canonical_entity_ids:
+          - yue-fire-room-33-key
+      - local_entity_id: known-yue-fire-room-34
+        canonical_entity_ids:
+          - yue-fire-room-34
+      - local_entity_id: known-yue-fire-room-34-key
+        canonical_entity_ids:
+          - yue-fire-room-34-key
+      - local_entity_id: known-yue-fire-room-35
+        canonical_entity_ids:
+          - yue-fire-room-35
+      - local_entity_id: known-yue-fire-room-35-key
+        canonical_entity_ids:
+          - yue-fire-room-35-key
+      - local_entity_id: known-yue-fire-room-36
+        canonical_entity_ids:
+          - yue-fire-room-36
+      - local_entity_id: known-yue-fire-room-36-key
+        canonical_entity_ids:
+          - yue-fire-room-36-key

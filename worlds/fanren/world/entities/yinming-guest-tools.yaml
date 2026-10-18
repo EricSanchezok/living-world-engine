@@ -1,0 +1,18 @@
+id: yinming-guest-tools
+kind: item
+name: 方霁的个人器具
+description: 织网、挑水、凡俗舟船与粗浅包扎，无灵根。所需的有限工具，不包含无限兽晶。
+placement: yinming-guest
+facts:
+  - id: yinming-guest-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-guest
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

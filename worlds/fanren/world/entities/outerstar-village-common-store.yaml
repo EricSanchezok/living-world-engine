@@ -1,0 +1,26 @@
+id: outerstar-village-common-store
+kind: container
+name: 白汀公仓
+description: 公共修船、道路与护矿预算，桑平不能据为己有。
+placement: outerstar-reef-village
+facts:
+  - id: outerstar-village-common-store-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-village-community
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 1200
+  - definition_id: low-stone
+    amount: 90
+  - definition_id: craft-material
+    amount: 20
+  - definition_id: grain
+    amount: 40
+ratings: []
+shared_activity_resources: []

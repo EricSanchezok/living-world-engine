@@ -1,0 +1,20 @@
+id: dajin-yinluo-corpse-yard
+kind: location
+name: 阴罗炼尸院
+description: 炼养尸体与维持禁制的专用场所，材料与尸具必须真实存在。
+placement: dajin-yinluo-main-hall
+facts:
+  - id: dajin-yinluo-corpse-yard-route-dajin-yinluo-main-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yinluo-main-hall
+    description: 炼尸场所须识防护和规程。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: maintenance-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: yinming-wall-weaver-tools
+kind: item
+name: 曲苇的个人器具
+description: 皮绳编织、结扣、搬运和基础攀援。所需的有限工具，不包含无限兽晶。
+placement: yinming-wall-weaver
+facts:
+  - id: yinming-wall-weaver-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-wall-weaver
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

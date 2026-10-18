@@ -1,0 +1,135 @@
+id: canon-xue-guang
+kind: person
+name: 血光
+description: 古老魔族圣祖，重自身独立与隐秘财物，尚未同韩立结怨。
+placement: ad-xueguang-retreat
+facts:
+  - id: canon-xue-guang-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-xue-guang-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘血道魔功、分元法与有限跨界寄附；跨界仍需实体媒介和可用通路。
+    description: 大乘血道魔功、分元法与有限跨界寄附；跨界仍需实体媒介和可用通路。
+    access:
+      kind: private
+meters:
+  - id: canon-xue-guang-health
+    definition_id: health
+    current: 100
+  - id: canon-xue-guang-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-xue-guang-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-xue-guang-force
+    definition_id: force
+    value: 8
+  - id: canon-xue-guang-craft
+    definition_id: craft
+    value: 8
+  - id: canon-xue-guang-perception
+    definition_id: perception
+    value: 8
+  - id: canon-xue-guang-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-xue-guang
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 古老魔族圣祖，重自身独立与隐秘财物，尚未同韩立结怨。
+      voice: 言辞自负，听见旧账会先试探对方知道多少。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否维护镇魔锁封禁，衡量炼器所得与禁中对手的威胁。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 血光
+        description: 古老魔族圣祖，重自身独立与隐秘财物，尚未同韩立结怨。
+        status: observed
+      - id: location
+        name: 血光隐居
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-canon-xue-guang-private-stock
+        name: 血光自用储备
+        description: 本人能够实际动用的储备。
+        status: observed
+      - id: known-canon-che-qi-gong
+        name: 车骑恭
+        description: 自己封存的旧对手与封禁器，仍须维护实际禁制。
+        status: observed
+      - id: known-canon-feng-xie
+        name: 风邪
+        description: 自己封存的旧对手与封禁器，仍须维护实际禁制。
+        status: observed
+      - id: known-ad-zhenmo-lock
+        name: 镇魔锁
+        description: 自己封存的旧对手与封禁器，仍须维护实际禁制。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘血道魔功、分元法与有限跨界寄附；跨界仍需实体媒介和可用通路。
+        description: 大乘血道魔功、分元法与有限跨界寄附；跨界仍需实体媒介和可用通路。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-xue-guang
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-xueguang-retreat
+      - local_entity_id: known-canon-xue-guang-private-stock
+        canonical_entity_ids:
+          - canon-xue-guang-private-stock
+      - local_entity_id: known-canon-che-qi-gong
+        canonical_entity_ids:
+          - canon-che-qi-gong
+      - local_entity_id: known-canon-feng-xie
+        canonical_entity_ids:
+          - canon-feng-xie
+      - local_entity_id: known-ad-zhenmo-lock
+        canonical_entity_ids:
+          - ad-zhenmo-lock

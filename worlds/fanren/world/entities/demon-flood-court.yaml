@@ -1,0 +1,26 @@
+id: demon-flood-court
+kind: location
+name: 离火蛟族之地议事处
+description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+placement: demon-flood-territory
+facts:
+  - id: demon-flood-court-route-demon-flood-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-flood-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-flood-court-condition-demon-flood-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

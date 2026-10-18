@@ -1,0 +1,26 @@
+id: kunwu-hualing
+kind: location
+name: 化灵殿
+description: 地下火池沿赤蛟柱持续温炼巨大朱红炉鼎。
+placement: kunwu-forge
+facts:
+  - id: kunwu-hualing-route-kunwu-forge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-forge
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-hualing-condition-kunwu-forge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地火温度与炼鼎禁制各自存在。
+    description: 地火温度与炼鼎禁制各自存在。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

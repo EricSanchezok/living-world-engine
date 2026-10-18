@@ -1,0 +1,26 @@
+id: outerstar-redcoral-bed
+kind: location
+name: 红瑚浅礁
+description: 珊瑚簇间有十三叶的异草，潮沟处有觅食的海兽。
+placement: human-red-coral-island
+facts:
+  - id: outerstar-redcoral-bed-route-human-red-coral-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-red-coral-island
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-redcoral-bed-condition-human-red-coral-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 珊瑚簇间有十三叶的异草，潮沟处有觅食的海兽。
+    description: 珊瑚簇间有十三叶的异草，潮沟处有觅食的海兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

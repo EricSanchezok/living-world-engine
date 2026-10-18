@@ -1,0 +1,18 @@
+id: ad-qiling-outer-store-a
+kind: location
+name: 泣灵外层东阁
+description: 古藏外层一间小库，非主藏宝殿，所存器物必须实际检验。
+placement: ad-qiling-maze
+facts:
+  - id: ad-qiling-outer-store-a-route-to-ad-qiling-maze
+    predicate: route-to-ad-qiling-maze
+    value:
+      kind: entity
+      entityId: ad-qiling-maze
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

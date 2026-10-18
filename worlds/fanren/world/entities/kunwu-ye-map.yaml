@@ -1,0 +1,18 @@
+id: kunwu-ye-map
+kind: item
+name: 叶家探查簿
+description: 记录数代寻访与水下禁制观察，不记尚未发生的破封成果。
+placement: south-ye-archive
+facts:
+  - id: kunwu-ye-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-ye-family
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

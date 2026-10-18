@@ -1,0 +1,22 @@
+id: ad-niu-cun-purse
+kind: container
+name: 牛存私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-niu-cun
+facts:
+  - id: ad-niu-cun-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-niu-cun
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 9
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

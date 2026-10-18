@@ -1,0 +1,26 @@
+id: yinming-main-school
+kind: location
+name: 习武院
+description: 教年轻人步法、结伴警戒和盾矛配合。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-school-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-school-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 教年轻人步法、结伴警戒和盾矛配合。
+    description: 教年轻人步法、结伴警戒和盾矛配合。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

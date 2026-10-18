@@ -1,0 +1,122 @@
+id: human-tianxing-city
+kind: location
+name: 天星城
+description: 街道沿圣山展开，凡俗商铺与修仙坊市并存，星宫执行城内禁斗规矩。
+placement: human-tianxing-island
+facts:
+  - id: human-tianxing-city-route-innerstar-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-harbor
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-harbor
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海船装卸货物、核对乘客与船期的港口。
+    description: 海船装卸货物、核对乘客与船期的港口。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-beast-bay
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-beast-bay
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-beast-bay
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 大型海兽停泊处，主人须自己看管和给养。
+    description: 大型海兽停泊处，主人须自己看管和给养。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-gate
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 登记身份环与来客资格的入口。
+    description: 登记身份环与来客资格的入口。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-market
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 丹药、法器、材料和修理铺各有自己的货物与经营者。
+    description: 丹药、法器、材料和修理铺各有自己的货物与经营者。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-mortal-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-mortal-street
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-mortal-street
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 饭铺、布店、修船铺相连的凡俗街区。
+    description: 饭铺、布店、修船铺相连的凡俗街区。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-cave-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-cave-office
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-cave-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 办理洞府范围、租期、交接和维护事项的小院。
+    description: 办理洞府范围、租期、交接和维护事项的小院。
+    access:
+      kind: public
+  - id: human-tianxing-city-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: human-tianxing-city-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从外来修士居住层逐渐上升至星宫内层和圣宫。
+    description: 从外来修士居住层逐渐上升至星宫内层和圣宫。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

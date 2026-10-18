@@ -1,0 +1,20 @@
+id: south-sect-herbs
+kind: container
+name: 毒圣雨季药架
+description: 六份普通毒药草正在晾晒，湿气来自背墙积水，搬架可改善但不保证全部成材。
+placement: south-du-sheng-court
+facts:
+  - id: south-sect-herbs-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-du-sheng-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 6
+ratings: []
+shared_activity_resources: []

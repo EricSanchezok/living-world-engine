@@ -1,0 +1,122 @@
+id: feiling-territory
+kind: location
+name: 飞灵族域
+description: 众多有翼族支居住的陆地与沿海，族支间有边界和通行约定。
+placement: fengyuan-continent
+facts:
+  - id: feiling-territory-route-fengyuan-burial-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-burial-desert
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-territory-condition-fengyuan-burial-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨越广大蛮荒需可靠路线、补给与多年远行准备；此连接只说明地理可达，并非一日直达。
+    description: 跨越广大蛮荒需可靠路线、补给与多年远行准备；此连接只说明地理可达，并非一日直达。
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-territory-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 联席长老会议事与各族接待所在的高峰。
+    description: 联席长老会议事与各族接待所在的高峰。
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-guimian-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-guimian-domain
+    description: 长程族域通路
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-dujiu-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-dujiu-domain
+    description: 长程族域通路
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-yelv-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yelv-domain
+    description: 长程族域通路
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-heiling-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-heiling-domain
+    description: 长程族域通路
+    access:
+      kind: public
+  - id: feiling-territory-condition-guimian
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往鬼面族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    description: 前往鬼面族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    access:
+      kind: public
+  - id: feiling-territory-condition-dujiu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往毒鸠族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    description: 前往毒鸠族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    access:
+      kind: public
+  - id: feiling-territory-condition-yelv
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往夜绿族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    description: 前往夜绿族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    access:
+      kind: public
+  - id: feiling-territory-condition-heiling
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往黑灵族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    description: 前往黑灵族地须有该支族接洽与可靠路线，跨族域远行按实际距离、飞行能力、停歇和补给计时；这条地理联系不等于即时传送。
+    access:
+      kind: public
+  - id: feiling-territory-route-feiling-nanlong-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-nanlong-domain
+    description: 跨族域的长程通路。
+    access:
+      kind: public
+  - id: feiling-territory-condition-nanlong
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨族域远行须有路线、补给与接待许可，按飞行能力与实际行程计时，不构成即时传送。
+    description: 跨族域远行须有路线、补给与接待许可，按飞行能力与实际行程计时，不构成即时传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: blood-survey-fund
+kind: container
+name: 落潮路线调查预算
+description: 完成南段实测并记录兽群与水位后可付六十中阶石，另有二十备用，未承诺无限援助。
+placement: blood-tianma-office
+facts:
+  - id: blood-survey-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 80
+ratings: []
+shared_activity_resources: []

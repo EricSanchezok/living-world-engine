@@ -1,0 +1,42 @@
+id: dajin-wuyue
+kind: location
+name: 雾月山脉
+description: 大晋西北两州交界的广大险峻山脉。
+placement: human-dajin
+facts:
+  - id: dajin-wuyue-route-dajin-motuo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-motuo
+    description: 险山与魔宫禁制，须具备到达手段并获准。
+    access:
+      kind: public
+  - id: dajin-wuyue-travel-dajin-motuo
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 险山与魔宫禁制，须具备到达手段并获准。
+    description: 险山与魔宫禁制，须具备到达手段并获准。
+    access:
+      kind: public
+  - id: dajin-wuyue-route-dajin-wind-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-wind-retreat
+    description: 山间隐修小径需确切引路，地点认知不自动共享。
+    access:
+      kind: public
+  - id: dajin-wuyue-travel-dajin-wind-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山间隐修小径需确切引路，地点认知不自动共享。
+    description: 山间隐修小径需确切引路，地点认知不自动共享。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

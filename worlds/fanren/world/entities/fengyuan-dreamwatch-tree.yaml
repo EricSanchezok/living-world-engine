@@ -1,0 +1,34 @@
+id: fengyuan-dreamwatch-tree
+kind: plant
+name: 黑叶梦罗灵树
+description: 扎根林中的梦罗树，借相连树木传递局部异常；一侧被石脊遮断，未联根的树木不在它本期可感范围。
+placement: fengyuan-black-leaf-forest
+facts:
+  - id: fengyuan-dreamwatch-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-dreamwatch-tree-current-monitoring
+    predicate: current-monitoring
+    value:
+      kind: text
+      value: 当前只连通林缘东侧八株树木，覆盖约十里；能反馈明显灵压与枝根扰动，不直接识别名字、全部境界或隐秘心思。持续感应需树体灵力；重创联根或烧毁树体会降低或失去能力。
+    description: 当前只连通林缘东侧八株树木，覆盖约十里；能反馈明显灵压与枝根扰动，不直接识别名字、全部境界或隐秘心思。持续感应需树体灵力；重创联根或烧毁树体会降低或失去能力。
+    access:
+      kind: private
+  - id: fengyuan-dreamwatch-tree-current-reader
+    predicate: current-reader
+    value:
+      kind: entity
+      entityId: canon-mu-rui
+    description: current-reader
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

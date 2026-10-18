@@ -1,0 +1,20 @@
+id: guanghan-collector-fund
+kind: container
+name: 闻璞书籍预算
+description: 个人有限藏书预算，未签约前仍属于闻璞。
+placement: guanghan-collector
+facts:
+  - id: guanghan-collector-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: guanghan-collector
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 45
+ratings: []
+shared_activity_resources: []

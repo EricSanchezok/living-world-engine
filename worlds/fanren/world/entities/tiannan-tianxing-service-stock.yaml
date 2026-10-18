@@ -1,0 +1,30 @@
+id: tiannan-tianxing-service-stock
+kind: item
+name: 天星登记亭公款
+description: 有限库存，有单独账目；保管人只可按已约定用途支用。
+placement: tiannan-tianxing-register
+facts:
+  - id: tiannan-tianxing-service-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-sect
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-tianxing-service-stock-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-gu-nan
+    description: 实际保管人；保管不等于归个人所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 80
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

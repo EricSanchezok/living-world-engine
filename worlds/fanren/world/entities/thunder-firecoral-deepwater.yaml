@@ -1,0 +1,103 @@
+id: thunder-firecoral-deepwater
+kind: location
+name: 群岛外深水
+description: 深水中流向多变，远处偶有巨大背影破浪，不能由岸上看到海底全部物事。
+placement: thunder-firecoral-islands
+facts:
+  - id: thunder-firecoral-deepwater-route-to-thunder-firecoral-overseas-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-firecoral-overseas-array
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-conditions-thunder-firecoral-overseas-array
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。
+    description: 从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-to-thunder-wuluo-hidden-bay
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wuluo-hidden-bay
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-conditions-thunder-wuluo-hidden-bay
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。
+    description: 长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-to-thunder-greenlight-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-city
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-conditions-thunder-greenlight-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。
+    description: 跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。
+    access:
+      kind: private
+  - id: thunder-firecoral-deepwater-route-to-root-blue-lake-island
+    predicate: route-to-root-blue-lake-island
+    value:
+      kind: entity
+      entityId: root-blue-lake-island
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-firecoral-deepwater-travel-condition-root-blue-lake-island
+    predicate: travel-condition-root-blue-lake-island
+    value:
+      kind: text
+      value: 须由南部海域实际航行、辨位与登陆；海图方向不消除路程和磁性干扰。
+    description: 须由南部海域实际航行、辨位与登陆；海图方向不消除路程和磁性干扰。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-firecoral-deepwater-route-to-root-ziwei-sea
+    predicate: route-to-root-ziwei-sea
+    value:
+      kind: entity
+      entityId: root-ziwei-sea
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-firecoral-deepwater-travel-condition-root-ziwei-sea
+    predicate: travel-condition-root-ziwei-sea
+    value:
+      kind: text
+      value: 属于跨海长途方向；完整航线不预先授予，须逐段勘航并承担真实时间、补给和天气风险。
+    description: 属于跨海长途方向；完整航线不预先授予，须逐段勘航并承担真实时间、补给和天气风险。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-firecoral-deepwater-root-detail-sea-risk
+    predicate: root-detail-sea-risk
+    value:
+      kind: text
+      value: 海兽种类、数量、路线和天气决定实际航行风险；普通海鱼不因同居深海便有高阶巨兽能力。
+    description: 海兽种类、数量、路线和天气决定实际航行风险；普通海鱼不因同居深海便有高阶巨兽能力。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

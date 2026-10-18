@@ -1,0 +1,26 @@
+id: yue-market-guest-room-2
+kind: location
+name: 坊市客栈客房2
+description: 当前空房，木床、被褥和水盆齐备。
+placement: yue-market-guesthouse
+facts:
+  - id: yue-market-guest-room-2-occupancy
+    predicate: occupancy-state
+    value:
+      kind: text
+      value: 当前空置，未分配旅客。
+    description: 当前空置，未分配旅客。
+    access:
+      kind: public
+  - id: yue-market-guest-room-2-route-yue-market-guesthouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-guesthouse
+    description: 沿客栈内走道进出房间；入住须掌柜确认空房并交付钥匙，门锁关闭时需对应钥匙开启。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

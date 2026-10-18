@@ -1,0 +1,22 @@
+id: fengyuan-yaksha-forge-stock
+kind: container
+name: 伏刃的炉房储备
+description: 本人购买的炉材与工具，不属于领主个人库。
+placement: fengyuan-yaksha-crag-city
+facts:
+  - id: fengyuan-yaksha-forge-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: low-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: innerstar-saint-palace
+kind: location
+name: 圣宫
+description: 圣山最高层的内宫，外院接函，内室未经许可不得进入。
+placement: innerstar-holy-mountain
+facts:
+  - id: innerstar-saint-palace-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-saint-palace-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 圣山最高层的内宫，外院接函，内室未经许可不得进入。
+    description: 圣山最高层的内宫，外院接函，内室未经许可不得进入。
+    access:
+      kind: public
+  - id: innerstar-saint-palace-route-innerstar-magnetic-cavern
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-magnetic-cavern
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-saint-palace-condition-innerstar-magnetic-cavern
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 双圣研修元磁神光的封闭洞窟，磁力影响五行法器运转。
+    description: 双圣研修元磁神光的封闭洞窟，磁力影响五行法器运转。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

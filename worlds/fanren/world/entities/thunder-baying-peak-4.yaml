@@ -1,0 +1,26 @@
+id: thunder-baying-peak-4
+kind: location
+name: 八云山第4峰
+description: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+placement: thunder-baying-mountains
+facts:
+  - id: thunder-baying-peak-4-route-thunder-baying-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-baying-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-baying-peak-4-condition-thunder-baying-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+    description: 灵脉支撑的山峰，已租洞与空洞按登记分别管理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

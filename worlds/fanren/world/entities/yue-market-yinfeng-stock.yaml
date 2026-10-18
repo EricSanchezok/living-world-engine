@@ -1,0 +1,40 @@
+id: yue-market-yinfeng-stock
+kind: item
+name: 引风斋货柜
+description: 完好低阶符纸每五张一低阶灵石，丹砂每两份一低阶灵石；无现成高阶符宝。
+placement: yue-market-yinfeng
+facts:
+  - id: yue-market-yinfeng-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-yinfeng-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-yinfeng-stock-terms
+    predicate: sale-terms
+    value:
+      kind: text
+      value: 完好低阶符纸每五张一低阶灵石，丹砂每两份一低阶灵石；无现成高阶符宝。
+    description: 完好低阶符纸每五张一低阶灵石，丹砂每两份一低阶灵石；无现成高阶符宝。
+    access:
+      kind: public
+  - id: yue-market-yinfeng-stock-authorize
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    description: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-blank-paper
+    amount: 30
+  - definition_id: low-stone
+    amount: 60
+  - definition_id: yue-cinnabar-use
+    amount: 20
+ratings: []
+shared_activity_resources: []

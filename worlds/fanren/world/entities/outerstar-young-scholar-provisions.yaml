@@ -1,0 +1,22 @@
+id: outerstar-young-scholar-provisions
+kind: container
+name: 程素的随身食药
+description: 自己的食物和药材，不包含公家库存。
+placement: outerstar-young-scholar
+facts:
+  - id: outerstar-young-scholar-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-young-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: kunwu-black-blood-blade
+kind: item
+name: 黑血刃
+description: 叶家祖传惩叛血刃，不同于万年尸熊那柄仿魔龙刃。
+placement: south-ye-archive
+facts:
+  - id: kunwu-black-blood-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-ye-family
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

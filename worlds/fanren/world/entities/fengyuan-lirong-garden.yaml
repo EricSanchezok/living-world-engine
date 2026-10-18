@@ -1,0 +1,20 @@
+id: fengyuan-lirong-garden
+kind: container
+name: 李蓉石庵药圃
+description: 一小片耐阴药草，当前可采两包；尚未成熟植株需继续养护。
+placement: fengyuan-lirong-hidden-cave
+facts:
+  - id: fengyuan-lirong-garden-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-li-rong
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

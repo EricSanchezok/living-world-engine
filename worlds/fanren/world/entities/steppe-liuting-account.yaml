@@ -1,0 +1,18 @@
+id: steppe-liuting-account
+kind: item
+name: 柳汀领用布册
+description: 记现有共库90份粮、22枚灵石；陶赫提议十二枚灵石换六次验水，阿冉尚未承诺。
+placement: steppe-liuting-store
+facts:
+  - id: steppe-liuting-account-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-liuting-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

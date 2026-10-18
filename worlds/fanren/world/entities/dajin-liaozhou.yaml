@@ -1,0 +1,42 @@
+id: dajin-liaozhou
+kind: location
+name: 辽州
+description: 严寒而地广的州域，人口稀少，沿江聚落依赖航运。
+placement: human-dajin
+facts:
+  - id: dajin-liaozhou-route-dajin-shun-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-shun-river
+    description: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    access:
+      kind: public
+  - id: dajin-liaozhou-travel-dajin-shun-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    description: 州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。
+    access:
+      kind: public
+  - id: dajin-liaozhou-route-dajin-guanning
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-guanning
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+  - id: dajin-liaozhou-route-dajin-wuyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-wuyuan
+    description: 沿当地实际道路/山路往来，距离和耗时据行走能力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

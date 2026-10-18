@@ -1,0 +1,26 @@
+id: human-yinsha-island
+kind: location
+name: 银鲨岛
+description: 海路与传送往来的补给岛，停留者需要分别安排食宿。
+placement: human-outer-star-sea
+facts:
+  - id: human-yinsha-island-route-human-qiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-qiyuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: human-yinsha-island-condition-human-qiyuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    description: 须按已掌握海图、遁速或船速经过广大海域，并承担沿途补给、天气和妖兽风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

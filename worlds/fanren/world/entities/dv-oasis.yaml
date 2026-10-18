@@ -1,0 +1,26 @@
+id: dv-oasis
+kind: location
+name: 幻阵绿洲
+description: 阵影把湖水、淤泥和灵草遮得像周围沙地，细查灵气与实物能察其差异。
+placement: human-devil-valley
+facts:
+  - id: dv-oasis-route-dv-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-desert
+    description: route-to
+    access:
+      kind: public
+  - id: dv-oasis-condition-dv-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须识破绿洲幻阵或有真实已核方位，湖底守兽仍在。
+    description: 须识破绿洲幻阵或有真实已核方位，湖底守兽仍在。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

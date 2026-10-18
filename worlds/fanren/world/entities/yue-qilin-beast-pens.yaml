@@ -1,0 +1,26 @@
+id: yue-qilin-beast-pens
+kind: location
+name: 麒麟阁兽栏
+description: 租借与寄养灵兽的栏舍，取兽须核身份、许可和看管能力。
+placement: yue-qishou-mountain
+facts:
+  - id: yue-qilin-beast-pens-route-yue-qishou-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qishou-mountain
+    description: 经过兽栏门道，未获许可不能牵走他人寄养灵兽。
+    access:
+      kind: public
+  - id: yue-qilin-beast-pens-rent
+    predicate: service-rule
+    value:
+      kind: text
+      value: 土鼠每只每日一低阶灵石，押十低阶灵石，安稳归还并核查健康后退押金；交接前由饲养者演示控制，寄养高阶灵兽不属于租借名单。
+    description: 土鼠每只每日一低阶灵石，押十低阶灵石，安稳归还并核查健康后退押金；交接前由饲养者演示控制，寄养高阶灵兽不属于租借名单。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

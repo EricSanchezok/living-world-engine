@@ -1,0 +1,20 @@
+id: qixuan-food-stock
+kind: container
+name: 大厨房粮袋
+description: 储放在此的现有物资，取用需经持有人授权。
+placement: qixuan-kitchen
+facts:
+  - id: qixuan-food-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 物资属于记载主体。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 240
+ratings: []
+shared_activity_resources: []

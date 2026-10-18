@@ -1,0 +1,26 @@
+id: fengyuan-xihe-main-city
+kind: location
+name: 细禾主城
+description: 道路在薄光幕间绕行，门户有不同的折光记号；外人可在门前问路，贸然循倒影可能走错巷道。
+placement: fengyuan-xihe-domain
+facts:
+  - id: fengyuan-xihe-main-city-route-to-fengyuan-xihe-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-xihe-domain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-xihe-main-city-route-conditions-fengyuan-xihe-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 通过现用门检进入街区，幻幕可辨但需观察实际记号，不能靠名字瞬移。
+    description: 通过现用门检进入街区，幻幕可辨但需观察实际记号，不能靠名字瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

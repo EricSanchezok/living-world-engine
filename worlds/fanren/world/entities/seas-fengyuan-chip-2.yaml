@@ -1,0 +1,18 @@
+id: seas-fengyuan-chip-2
+kind: item
+name: 商盟配套阵芯2
+description: 一枚当前完好的消耗阵芯，一次使用后须移除或记为失效，不能重复投入。
+placement: seas-fengyuan-relay-hall
+facts:
+  - id: seas-fengyuan-chip-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

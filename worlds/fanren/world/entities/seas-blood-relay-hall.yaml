@@ -1,0 +1,58 @@
+id: seas-blood-relay-hall
+kind: location
+name: 血天商盟传送厅
+description: 血鹤城外一片青石地围住巨型阵台，侧屋收存耗材和接应记录；到访者要先向分盟登记。
+placement: blood-crane-city
+facts:
+  - id: seas-blood-relay-hall-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: route-to
+    access:
+      kind: public
+  - id: seas-blood-relay-hall-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城中行走至盟属阵厅，入阵需获准。
+    description: 城中行走至盟属阵厅，入阵需获准。
+    access:
+      kind: public
+  - id: seas-blood-relay-hall-route-seas-fengyuan-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-fengyuan-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-blood-relay-hall-condition-seas-fengyuan-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    description: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    access:
+      kind: public
+  - id: seas-blood-relay-hall-route-seas-thunder-relay-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-thunder-relay-hall
+    description: route-to
+    access:
+      kind: public
+  - id: seas-blood-relay-hall-condition-seas-thunder-relay-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    description: 仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

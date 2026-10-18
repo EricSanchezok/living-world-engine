@@ -1,0 +1,26 @@
+id: tiannan-tianxing-beast-court
+kind: location
+name: 天星坊灵兽院
+description: 临街接待处连着围栏内院，待售妖兽关在各自笼舍中。
+placement: tiannan-tianxing-market
+facts:
+  - id: tiannan-tianxing-beast-court-route-to-tiannan-tianxing-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-market
+    description: 店门通向坊市街道；笼舍和制符案后须取得店家许可。
+    access:
+      kind: public
+  - id: tiannan-tianxing-beast-court-operated-by
+    predicate: operated-by
+    value:
+      kind: entity
+      entityId: tiannan-beast-business
+    description: 该商号在此经营，店物不可直接视作个人随身财物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

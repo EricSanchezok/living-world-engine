@@ -1,0 +1,18 @@
+id: spirit-tianling-gardener-equipment
+kind: item
+name: 颜木青的引水阵盘
+description: 控制自家园圃引水细阵的法盘，不能操纵整个擎天灵树。
+placement: spirit-tianling-gardener
+facts:
+  - id: spirit-tianling-gardener-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianling-gardener
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

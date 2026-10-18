@@ -1,0 +1,177 @@
+id: canon-du-sheng-yuan
+kind: person
+name: 毒圣元长老
+description: 毒圣门元姓修士，粗豪而重实利，与同门有旧交。
+placement: south-du-sheng-court
+facts:
+  - id: canon-du-sheng-yuan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-yuan
+  - id: canon-du-sheng-yuan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期护身、毒法与药草辨识。
+    description: 元婴初期护身、毒法与药草辨识。
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-yuan
+  - id: canon-du-sheng-yuan-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、土双灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 木、土双灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-du-sheng-yuan
+  - id: canon-du-sheng-yuan-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-du-sheng-yuan-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: south-du-sheng-sect
+    description: member-of
+    access:
+      kind: private
+  - id: canon-du-sheng-yuan-sect-senior-south-du-sheng-gardener
+    predicate: sect-senior
+    value:
+      kind: entity
+      entityId: south-du-sheng-gardener
+    description: sect-senior
+    access:
+      kind: private
+meters:
+  - id: canon-du-sheng-yuan-health
+    definition_id: health
+    current: 100
+  - id: canon-du-sheng-yuan-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-du-sheng-yuan-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-du-sheng-yuan-force
+    definition_id: force
+    value: 5
+  - id: canon-du-sheng-yuan-craft
+    definition_id: craft
+    value: 4
+  - id: canon-du-sheng-yuan-perception
+    definition_id: perception
+    value: 4
+  - id: canon-du-sheng-yuan-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-du-sheng-yuan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 毒圣门元姓修士，粗豪而重实利，与同门有旧交。
+      voice: 句子直接，谈报酬时会把自己的风险说清楚。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对本次练毒所需药草，先弄清药棚潮湿原因。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 毒圣元长老
+        description: 毒圣门元姓修士，粗豪而重实利，与同门有旧交。
+        status: observed
+      - id: location
+        name: 毒圣门山门
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-du-sheng-yuan-personal-stock
+        name: 毒圣元长老的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-south-du-sheng-sect
+        name: 毒圣门
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+      - id: known-south-du-sheng-gardener
+        name: 白沂
+        description: 有日常请示往来，但长老尚未亲眼见药架现状。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期护身、毒法与药草辨识。
+        description: 元婴初期护身、毒法与药草辨识。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、土双灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 木、土双灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-du-sheng-yuan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-du-sheng-court
+      - local_entity_id: known-canon-du-sheng-yuan-personal-stock
+        canonical_entity_ids:
+          - canon-du-sheng-yuan-personal-stock
+      - local_entity_id: known-south-du-sheng-sect
+        canonical_entity_ids:
+          - south-du-sheng-sect
+      - local_entity_id: known-south-du-sheng-gardener
+        canonical_entity_ids:
+          - south-du-sheng-gardener

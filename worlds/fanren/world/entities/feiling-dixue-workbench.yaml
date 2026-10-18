@@ -1,0 +1,28 @@
+id: feiling-dixue-workbench
+kind: item
+name: 地血傀儡试作台
+description: 尚未完成的一具木制傀儡骨架，没有行动能力；完成须耗用已持材料和实际施法。
+placement: feiling-dixue-workshop
+facts:
+  - id: feiling-dixue-workbench-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-dixue-workbench-craft-requirement
+    predicate: craft-requirement
+    value:
+      kind: text
+      value: 还需五份材料、三块中阶灵石和一次完整试验；不能直接当成已经完工的傀儡军队。
+    description: 还需五份材料、三块中阶灵石和一次完整试验；不能直接当成已经完工的傀儡军队。
+    access:
+      kind: agents
+      agentIds:
+        - canon-di-xue
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

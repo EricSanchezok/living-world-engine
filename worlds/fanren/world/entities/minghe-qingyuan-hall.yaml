@@ -1,0 +1,58 @@
+id: minghe-qingyuan-hall
+kind: location
+name: 白沙厅
+description: 普通青石通道尽头铺着白色细沙，数盆矮花木散出浓郁草木气息，桌椅不多。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-qingyuan-hall-route-to-minghe-qingyuan-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-cave
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-hall-route-conditions-minghe-qingyuan-cave
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经青石通道入厅须得到主人许可。
+    description: 经青石通道入厅须得到主人许可。
+    access:
+      kind: private
+  - id: minghe-qingyuan-hall-route-to-minghe-seven-platform-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-seven-platform-room
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-hall-route-conditions-minghe-seven-platform-room
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。
+    description: 从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。
+    access:
+      kind: private
+  - id: minghe-qingyuan-hall-route-to-minghe-qingyuan-guest-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-guest-court
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-hall-route-conditions-minghe-qingyuan-guest-court
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经偏厅到客院，尚未受邀者不能当作公共客栈。
+    description: 经偏厅到客院，尚未受邀者不能当作公共客栈。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

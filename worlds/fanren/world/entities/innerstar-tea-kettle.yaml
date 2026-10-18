@@ -1,0 +1,20 @@
+id: innerstar-tea-kettle
+kind: item
+name: 清河水壶
+description: 装有刚烧好可饮热水的铜壶，当前四杯量；后续取水、加热需要实际条件。
+placement: innerstar-qinghe-teahouse
+facts:
+  - id: innerstar-tea-kettle-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-tea-keeper
+    description: 叶岑经营管理，租借或出售须实际协商。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: innerstar-water-cup
+    amount: 4
+ratings: []
+shared_activity_resources: []

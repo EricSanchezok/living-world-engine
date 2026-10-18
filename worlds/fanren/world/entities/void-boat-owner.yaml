@@ -1,0 +1,200 @@
+id: void-boat-owner
+kind: person
+name: 沈棹
+description: 凡俗船主，在极阴岛送货，靠工钱养家。
+placement: void-jiyin-port
+facts:
+  - id: void-boat-owner-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - void-boat-owner
+  - id: void-boat-owner-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 识潮行船、凡俗记账，无灵根。
+    description: 识潮行船、凡俗记账，无灵根。
+    access:
+      kind: agents
+      agentIds:
+        - void-boat-owner
+  - id: void-boat-owner-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根。
+    description: 无灵根。
+    access:
+      kind: agents
+      agentIds:
+        - void-boat-owner
+  - id: void-boat-owner-contract-with
+    predicate: contract-with
+    value:
+      kind: entity
+      entityId: void-island-steward
+    description: contract-with
+    access:
+      kind: private
+  - id: void-boat-owner-works-with
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: void-boat-mate
+    description: works-with
+    access:
+      kind: private
+meters:
+  - id: void-boat-owner-health
+    definition_id: health
+    current: 100
+  - id: void-boat-owner-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 180
+ratings:
+  - id: void-boat-owner-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: void-boat-owner-force
+    definition_id: force
+    value: 1
+  - id: void-boat-owner-craft
+    definition_id: craft
+    value: 3
+  - id: void-boat-owner-perception
+    definition_id: perception
+    value: 1
+  - id: void-boat-owner-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: void-boat-owner
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 凡俗船主，在极阴岛送货，靠工钱养家。
+      voice: 平日爱讲潮汐，遇欠账会咬紧具体数字。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取补发被记错的一段工钱，也考虑换另一条航路。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 沈棹
+        description: 凡俗船主，在极阴岛送货，靠工钱养家。
+        status: observed
+      - id: location
+        name: 极阴岛海埠
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-void-boat-owner-kit
+        name: 沈棹的随身器具
+        description: 识潮行船、凡俗记账，无灵根。所需的个人日常器具。
+        status: observed
+      - id: known-void-island-steward
+        name: 乌汀
+        description: 这一趟送货约定按实搬运结算，不是主人奴仆关系。
+        status: observed
+      - id: known-void-boat-mate
+        name: 阿棠
+        description: 多年的船上伙伴，知道各自家庭及这趟货数。
+        status: observed
+      - id: known-void-port-receipt
+        name: 十二箱交接单
+        description: 十二个收货记号，其中最后一个印在纸背，须实际展开核对。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 识潮行船、凡俗记账，无灵根。
+        description: 识潮行船、凡俗记账，无灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间，后续按实际天时行动。
+        description: 当地此时为夜间，后续按实际天时行动。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 经过检测，自己无灵根。
+        description: 经过检测，自己无灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: cargo-wages
+        subjectId: self
+        predicate: cargo-wages
+        value:
+          kind: text
+          value: 我和阿棠搬了十二箱，只拿三百三十铜钱。每箱三十，想让执事查原交接单。
+        description: 我和阿棠搬了十二箱，只拿三百三十铜钱。每箱三十，想让执事查原交接单。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - void-boat-owner
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-jiyin-port
+      - local_entity_id: known-void-boat-owner-kit
+        canonical_entity_ids:
+          - void-boat-owner-kit
+      - local_entity_id: known-void-island-steward
+        canonical_entity_ids:
+          - void-island-steward
+      - local_entity_id: known-void-boat-mate
+        canonical_entity_ids:
+          - void-boat-mate
+      - local_entity_id: known-void-port-receipt
+        canonical_entity_ids:
+          - void-port-receipt

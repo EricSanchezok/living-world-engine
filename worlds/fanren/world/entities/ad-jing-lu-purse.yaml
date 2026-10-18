@@ -1,0 +1,22 @@
+id: ad-jing-lu-purse
+kind: container
+name: 景鹭私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-jing-lu
+facts:
+  - id: ad-jing-lu-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-jing-lu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 85
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

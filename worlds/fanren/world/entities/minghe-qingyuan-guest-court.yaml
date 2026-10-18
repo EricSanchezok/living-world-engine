@@ -1,0 +1,26 @@
+id: minghe-qingyuan-guest-court
+kind: location
+name: 洞府石屋院
+description: 大小石屋围成安静院落，屋内青石桌床齐备；是否留宿要先得到主人许可。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-qingyuan-guest-court-route-to-minghe-qingyuan-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-hall
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-guest-court-route-conditions-minghe-qingyuan-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经偏厅到客院，尚未受邀者不能当作公共客栈。
+    description: 经偏厅到客院，尚未受邀者不能当作公共客栈。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: ad-divination-board
+kind: container
+name: 蓝氏卜盘
+description: 有实际刻纹和可用材料的占卜器具，只辅助本人已学术法。
+placement: ad-guangyuan-house
+facts:
+  - id: ad-divination-board-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-guangyuan-grandmother
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: ad-bloodcrow-city
+kind: location
+name: 血鸦城
+description: 血光晶矿旁的城池，低空巡逻另有许可，城内没有固定传送法阵。
+placement: associated-demon-realm
+facts:
+  - id: ad-bloodcrow-city-route-to-ad-bloodstone-mountains
+    predicate: route-to-ad-bloodstone-mountains
+    value:
+      kind: entity
+      entityId: ad-bloodstone-mountains
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-bloodcrow-city-route-to-ad-bloodlight-mine
+    predicate: route-to-ad-bloodlight-mine
+    value:
+      kind: entity
+      entityId: ad-bloodlight-mine
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-bloodcrow-city-route-to-ad-yexiu-city
+    predicate: route-to-ad-yexiu-city
+    value:
+      kind: entity
+      entityId: ad-yexiu-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-bloodcrow-city-route-to-ad-kuyes-forest
+    predicate: route-to-ad-kuyes-forest
+    value:
+      kind: entity
+      entityId: ad-kuyes-forest
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-bloodcrow-city-route-to-ad-bloodcrow-market
+    predicate: route-to-ad-bloodcrow-market
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-market
+    description: 经城门往返，载货须按实清点，禁空不免查验。
+    access:
+      kind: public
+  - id: ad-bloodcrow-city-no-fixed-transporter
+    predicate: no-fixed-transporter
+    value:
+      kind: text
+      value: 城中没有固定传送阵；巡逻飞行许可不扩展到普通来客。
+    description: 城中没有固定传送阵；巡逻飞行许可不扩展到普通来客。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

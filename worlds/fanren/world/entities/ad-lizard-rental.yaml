@@ -1,0 +1,18 @@
+id: ad-lizard-rental
+kind: item
+name: 魔蜥短租约稿
+description: 仅成年兽可在约定绿洲路段租用，每共同日8魔石，先留50魔石押金，双方清点伤损后退还余款；拒绝出借幼兽。
+placement: ad-dune-handler
+facts:
+  - id: ad-lizard-rental-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-dune-handler
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

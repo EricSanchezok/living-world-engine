@@ -1,0 +1,26 @@
+id: dv-natural-grotto
+kind: location
+name: 天然双石窟
+description: 大小相连的天然石窟，当前空置。
+placement: dv-natural-tunnel
+facts:
+  - id: dv-natural-grotto-route-dv-natural-tunnel
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-natural-tunnel
+    description: route-to
+    access:
+      kind: public
+  - id: dv-natural-grotto-condition-dv-natural-tunnel
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然隧道前行数里再爬升，检查地形与热气；不需跨界珠。
+    description: 沿天然隧道前行数里再爬升，检查地形与热气；不需跨界珠。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

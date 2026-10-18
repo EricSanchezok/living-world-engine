@@ -1,0 +1,18 @@
+id: tiannan-city-array-key
+kind: item
+name: 阗天值守阵钥
+description: 余清受托保管的门禁阵钥，允许调整城门通行口，不授予一人发动全城大战阵的权限。
+placement: tiannan-yu-qing
+facts:
+  - id: tiannan-city-array-key-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: nine-nations-alliance
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

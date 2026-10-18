@@ -1,0 +1,22 @@
+id: outerstar-cunjin-keeper-provisions
+kind: container
+name: 岑槐的随身食药
+description: 自己的食物和药材，不包含公家库存。
+placement: outerstar-cunjin-keeper
+facts:
+  - id: outerstar-cunjin-keeper-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-cunjin-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

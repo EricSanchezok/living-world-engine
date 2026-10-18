@@ -1,0 +1,22 @@
+id: feiling-yuelong-feed-stock
+kind: container
+name: 炼晶备料
+description: 越隆已配好的三属合炼材料，只有十八份；料性标在匣上，未写金木两属成法。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-feed-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-jiyuan-feed
+    amount: 18
+  - definition_id: high-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

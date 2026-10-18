@@ -1,0 +1,36 @@
+id: spirit-damaged-lift
+kind: item
+name: 货场待修提吊座
+description: 货场送修的提吊座，外壳封签完整，运转时发出不匀的低鸣。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-damaged-lift-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yard-steward
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-damaged-lift-hidden-defect
+    predicate: hidden-defect
+    value:
+      kind: text
+      value: 内侧第三道引流铜线被潮气侵蚀而断续接触。只有拆下内盖、清理粉尘并检查线路后可证实；外壳封签无破损，不能由此推出有人盗拆。
+    description: 内侧第三道引流铜线被潮气侵蚀而断续接触。只有拆下内盖、清理粉尘并检查线路后可证实；外壳封签无破损，不能由此推出有人盗拆。
+    access:
+      kind: discoverable
+      condition: 得到检修授权后实际拆内盖、清理粉尘并逐线检查。
+  - id: spirit-damaged-lift-repair-method
+    predicate: repair-method
+    value:
+      kind: text
+      value: 用一份已制备材料补绝缘层、一股连接丝替换第三道引流线，在修造台上检查接点；具有低阶灵具修补能力者需1800秒。随后用一枚低阶灵石完成一次标准负载验收，才能把故障状态改为修复。
+    description: 用一份已制备材料补绝缘层、一股连接丝替换第三道引流线，在修造台上检查接点；具有低阶灵具修补能力者需1800秒。随后用一枚低阶灵石完成一次标准负载验收，才能把故障状态改为修复。
+    access:
+      kind: discoverable
+      condition: 有低阶灵具修补知识者得到授权后实际拆盖检查第三道引流线，才能据实确定此修法适用。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: far-he-grain
+kind: item
+name: 药栈家用米粮
+description: 留作日常生活的粮食。
+placement: far-tiansha-store
+facts:
+  - id: far-he-grain-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-he-sui
+    description: 由何穗所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 10
+ratings: []
+shared_activity_resources: []

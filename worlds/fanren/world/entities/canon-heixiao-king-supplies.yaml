@@ -1,0 +1,22 @@
+id: canon-heixiao-king-supplies
+kind: container
+name: 黑枭王的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-heixiao-king
+facts:
+  - id: canon-heixiao-king-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-heixiao-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

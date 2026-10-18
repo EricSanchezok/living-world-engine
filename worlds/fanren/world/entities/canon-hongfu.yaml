@@ -1,0 +1,227 @@
+id: canon-hongfu
+kind: person
+name: 红拂
+description: 黄枫谷结丹女修，护短、严厉，关心自己看重的人。
+placement: yue-hongfu-retreat
+facts:
+  - id: canon-hongfu-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - canon-hongfu
+  - id: canon-hongfu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹法力、御物、防护与已学功法传授。
+    description: 结丹法力、御物、防护与已学功法传授。
+    access:
+      kind: agents
+      agentIds:
+        - canon-hongfu
+  - id: canon-hongfu-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木火两属性灵根
+    description: 木火两属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-hongfu-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 自己长期所属门派，公产与私人库存不同。
+    access:
+      kind: public
+  - id: canon-hongfu-family-canon-dong-xuaner
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: canon-dong-xuaner
+    description: 照看者与幼年女孩，彼此熟悉日常功课和脾气。
+    access:
+      kind: public
+meters:
+  - id: canon-hongfu-health
+    definition_id: health
+    current: 100
+  - id: canon-hongfu-mana
+    definition_id: mana
+    current: 400
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-hongfu-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: canon-hongfu-force
+    definition_id: force
+    value: 3
+  - id: canon-hongfu-craft
+    definition_id: craft
+    value: 2
+  - id: canon-hongfu-perception
+    definition_id: perception
+    value: 3
+  - id: canon-hongfu-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: canon-hongfu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 黄枫谷结丹女修，护短、严厉，关心自己看重的人。
+      voice: 话少且冷，认可时很简短，对欺瞒则直接追问。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 安排自己今日的修炼与养育晚辈的时间。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 红拂
+        description: 黄枫谷结丹女修，护短、严厉，关心自己看重的人。
+        status: observed
+      - id: location
+        name: 红拂居处
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-hongfu-pouch
+        name: 红拂的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-huangfeng-sect
+        name: 黄枫谷
+        description: 自己长期所属门派，公产与私人库存不同。
+        status: observed
+      - id: known-yue-hongfu-personal-ribbon
+        name: 红拂护身绫
+        description: 当前护身法宝，擅护持与收束，非无限控制人物心志的器物。
+        status: observed
+      - id: known-canon-dong-xuaner
+        name: 董萱儿
+        description: 照看者与幼年女孩，彼此熟悉日常功课和脾气。
+        status: observed
+      - id: known-canon-zhong-lingdao
+        name: 钟灵道
+        description: 同门长期相识，知道对方在宗内的身份；闭关安排和私人资源要当面询问。
+        status: observed
+      - id: known-canon-li-huayuan
+        name: 李化元
+        description: 同门长期相识，知道对方在宗内的身份；闭关安排和私人资源要当面询问。
+        status: observed
+      - id: known-canon-lei-wanhe
+        name: 雷万鹤
+        description: 同门长期相识，知道对方在宗内的身份；闭关安排和私人资源要当面询问。
+        status: observed
+      - id: known-canon-linghu-laozu
+        name: 令狐老祖
+        description: 同门长期相识，知道对方在宗内的身份；闭关安排和私人资源要当面询问。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹法力、御物、防护与已学功法传授。
+        description: 结丹法力、御物、防护与已学功法传授。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 安排自己今日的修炼与养育晚辈的时间。
+        description: 安排自己今日的修炼与养育晚辈的时间。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是结丹修士。
+        description: 自己是结丹修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是木火两属性灵根。
+        description: 自己曾经验灵，知道自身是木火两属性灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-hongfu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-hongfu-retreat
+      - local_entity_id: known-canon-hongfu-pouch
+        canonical_entity_ids:
+          - canon-hongfu-pouch
+      - local_entity_id: known-huangfeng-sect
+        canonical_entity_ids:
+          - huangfeng-sect
+      - local_entity_id: known-yue-hongfu-personal-ribbon
+        canonical_entity_ids:
+          - yue-hongfu-personal-ribbon
+      - local_entity_id: known-canon-dong-xuaner
+        canonical_entity_ids:
+          - canon-dong-xuaner
+      - local_entity_id: known-canon-zhong-lingdao
+        canonical_entity_ids:
+          - canon-zhong-lingdao
+      - local_entity_id: known-canon-li-huayuan
+        canonical_entity_ids:
+          - canon-li-huayuan
+      - local_entity_id: known-canon-lei-wanhe
+        canonical_entity_ids:
+          - canon-lei-wanhe
+      - local_entity_id: known-canon-linghu-laozu
+        canonical_entity_ids:
+          - canon-linghu-laozu

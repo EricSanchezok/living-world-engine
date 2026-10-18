@@ -1,0 +1,18 @@
+id: ad-seal-repair-plan
+kind: item
+name: 外围两裂隙测绘
+description: 目前两处可接近裂隙每处修补需4材料与20魔石，须完成实际查验后施工；不说明全部内层封印状态。
+placement: ad-seal-captain
+facts:
+  - id: ad-seal-repair-plan-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-three-progenitors
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

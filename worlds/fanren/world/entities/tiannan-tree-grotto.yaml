@@ -1,0 +1,26 @@
+id: tiannan-tree-grotto
+kind: location
+name: 灵眼之树守护洞
+description: 古树根脉深入灵地，根部承液浅槽与守护阵分开；进入须三派当前守护者共同许可。
+placement: tiannan-yunmeng-mountains
+facts:
+  - id: tiannan-tree-grotto-route-tiannan-yunmeng-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-yunmeng-mountains
+    description: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    access:
+      kind: public
+  - id: tiannan-tree-grotto-travel-tiannan-yunmeng-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    description: 需确知洞口且取得三派当前守护许可，阵眼仍须由守护者实操，知道古树存在不等于知道入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

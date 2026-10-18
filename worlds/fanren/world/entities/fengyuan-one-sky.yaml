@@ -1,0 +1,82 @@
+id: fengyuan-one-sky
+kind: location
+name: 南艮一线天
+description: 南艮大沙漠横在通路上，风沙强弱不定，两侧分别延伸向太兽山脉和蛟渊大峡谷；隐匿穿行与远程绕行都有真实时间和风险。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-one-sky-route-fengyuan-fuli-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuli-marsh
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-one-sky-condition-fengyuan-fuli-marsh
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 狭长通行地带，离开主路需重新核对地势。
+    description: 狭长通行地带，离开主路需重新核对地势。
+    access:
+      kind: public
+  - id: fengyuan-one-sky-route-fengyuan-black-leaf-forest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-black-leaf-forest
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-one-sky-condition-fengyuan-black-leaf-forest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木族边境林海，外来人不能把每棵树都视为无主木材。
+    description: 木族边境林海，外来人不能把每棵树都视为无主木材。
+    access:
+      kind: public
+  - id: fengyuan-one-sky-alias
+    predicate: alias
+    value:
+      kind: text
+      value: 南艮大沙漠
+    description: 南艮大沙漠
+    access:
+      kind: private
+  - id: fengyuan-one-sky-route-to-fengyuan-taishou-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-taishou-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-one-sky-route-conditions-fengyuan-taishou-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    description: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    access:
+      kind: public
+  - id: fengyuan-one-sky-route-to-fengyuan-jiaoyuan-canyon
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-jiaoyuan-canyon
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-one-sky-route-conditions-fengyuan-jiaoyuan-canyon
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    description: 从沙漠侧缘可转入邻地；这只是地理连通，不是安全捷径或固定速度的传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

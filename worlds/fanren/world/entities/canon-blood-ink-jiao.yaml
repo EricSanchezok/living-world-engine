@@ -1,0 +1,30 @@
+id: canon-blood-ink-jiao
+kind: creature
+name: 禁地墨蛟
+description: 黑鳞幼蛟，居地下沼泽，以黑水与墨雾护身；附近人对其黑麟蟒称呼并不改变实际物种。
+placement: yue-blood-under-swamp
+facts:
+  - id: canon-blood-ink-jiao-ability
+    predicate: natural-capability
+    value:
+      kind: text
+      value: 黑水喷吐、鳞甲与护体墨雾；蜕皮脱困会损伤本身状态，不能每次无损刷新。
+    description: 黑水喷吐、鳞甲与护体墨雾；蜕皮脱困会损伤本身状态，不能每次无损刷新。
+    access:
+      kind: public
+meters:
+  - id: canon-blood-ink-jiao-health
+    definition_id: health
+    current: 100
+  - id: canon-blood-ink-jiao-mana
+    definition_id: mana
+    current: 180
+quantities: []
+ratings:
+  - id: canon-blood-ink-jiao-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: canon-blood-ink-jiao-force
+    definition_id: force
+    value: 2
+shared_activity_resources: []

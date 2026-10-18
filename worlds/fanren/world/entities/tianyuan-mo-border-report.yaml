@@ -1,0 +1,27 @@
+id: tianyuan-mo-border-report
+kind: item
+name: 近界巡值简报
+description: 近界巡值简报，交接痕迹清楚可辨。
+placement: tianyuan-mo-attendant
+facts:
+  - id: tianyuan-mo-border-report-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-jian-li
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-mo-border-report-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 天渊城报上本轮近界值守人员轮换和信号盘检修安排。落款时没有失踪报告；不含后来尚未送达的断桥消息。请莫简离阅后评议，未请求其立即出征。
+    description: 天渊城报上本轮近界值守人员轮换和信号盘检修安排。落款时没有失踪报告；不含后来尚未送达的断桥消息。请莫简离阅后评议，未请求其立即出征。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

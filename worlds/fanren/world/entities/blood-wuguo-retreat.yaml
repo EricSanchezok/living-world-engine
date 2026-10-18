@@ -1,0 +1,26 @@
+id: blood-wuguo-retreat
+kind: location
+name: 无垢华西同居洞府
+description: 无垢与华西共同居住的洞府。会客和议事共用一处厅室，两人各有修行静室；下一轮闭关如何安排，尚未谈妥。
+placement: blood-north-domain
+facts:
+  - id: blood-wuguo-retreat-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-wuguo-retreat-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

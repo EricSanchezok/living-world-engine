@@ -1,0 +1,106 @@
+id: south-market
+kind: location
+name: 回溪药市
+description: 沿溪小市，毒草、解毒药和常用山行工具分铺售卖。
+placement: south-chaoyun
+facts:
+  - id: south-market-route-south-chaoyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-chaoyun
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-chaoyun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿溪进市。
+    description: 沿溪进市。
+    access:
+      kind: public
+  - id: south-market-route-south-scorpion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-scorpion
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-scorpion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 出市入山，须预备防瘴和辨识虫踪。
+    description: 出市入山，须预备防瘴和辨识虫踪。
+    access:
+      kind: public
+  - id: south-market-route-south-market-landing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market-landing
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-market-landing
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+  - id: south-market-route-south-market-clinic
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market-clinic
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-market-clinic
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+  - id: south-market-route-south-market-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market-store
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-market-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+  - id: south-market-route-south-market-home
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market-home
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-condition-south-market-home
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

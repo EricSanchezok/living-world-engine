@@ -1,0 +1,26 @@
+id: steppe-yellow-sand-store
+kind: location
+name: 黄沙部圣幡库
+description: 干燥土洞内三十六根幡轴分架封存，门前石牌刻有动用祖训；值守者不会把它们当作普通货物出售。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-yellow-sand-store-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    access:
+      kind: public
+  - id: steppe-yellow-sand-store-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    description: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

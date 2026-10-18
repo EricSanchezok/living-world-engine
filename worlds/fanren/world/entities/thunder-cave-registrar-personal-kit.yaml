@@ -1,0 +1,22 @@
+id: thunder-cave-registrar-personal-kit
+kind: container
+name: 澄牍的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: thunder-cave-registrar
+facts:
+  - id: thunder-cave-registrar-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-cave-registrar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 5
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

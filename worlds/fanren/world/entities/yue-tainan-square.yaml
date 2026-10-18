@@ -1,0 +1,26 @@
+id: yue-tainan-square
+kind: location
+name: 太南谷青砖广场
+description: 交易场和客舍相邻，现有摊位各自定价。
+placement: yue-tainan-valley
+facts:
+  - id: yue-tainan-square-route-yue-tainan-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-valley
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-square-travel-yue-tainan-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

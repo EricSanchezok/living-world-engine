@@ -1,0 +1,26 @@
+id: ad-shiya-city
+kind: location
+name: 狮崖城
+description: 远方交易城池，进城与摆卖遵循当地安排。
+placement: associated-demon-realm
+facts:
+  - id: ad-shiya-city-route-to-ad-chenshui-town
+    predicate: route-to-ad-chenshui-town
+    value:
+      kind: entity
+      entityId: ad-chenshui-town
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-shiya-city-route-to-ad-luanyun-mountain
+    predicate: route-to-ad-luanyun-mountain
+    value:
+      kind: entity
+      entityId: ad-luanyun-mountain
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

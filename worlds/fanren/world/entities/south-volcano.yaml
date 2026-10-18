@@ -1,0 +1,42 @@
+id: south-volcano
+kind: location
+name: 银蛇山火口
+description: 蛇首一端的地火口，附近已有低阶炼器者利用。
+placement: south-silver-snake
+facts:
+  - id: south-volcano-route-south-silver-snake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-silver-snake
+    description: route-to
+    access:
+      kind: public
+  - id: south-volcano-condition-south-silver-snake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地火热度随地点变化，不可直接涉熔岩。
+    description: 地火热度随地点变化，不可直接涉熔岩。
+    access:
+      kind: public
+  - id: south-volcano-route-south-forge-hut
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-forge-hut
+    description: route-to
+    access:
+      kind: public
+  - id: south-volcano-condition-south-forge-hut
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可到工棚门外询问炉位。
+    description: 可到工棚门外询问炉位。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

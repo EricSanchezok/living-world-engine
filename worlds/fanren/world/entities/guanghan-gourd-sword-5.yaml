@@ -1,0 +1,27 @@
+id: guanghan-gourd-sword-5
+kind: item
+name: 葫中金剑胚5
+description: 尚未炼制完全的金属性剑胚，原始结构有力量，仍需炼制。
+placement: guanghan-gold-gourd
+facts:
+  - id: guanghan-gourd-sword-5-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-gourd-sword-5-craft-state
+    predicate: craft-state
+    value:
+      kind: text
+      value: 未炼成；需要研究原法并实际投入相容材料才能完善。改炼五行只是一种后来曾发生的方案。
+    description: 未炼成的剑胚。
+    access:
+      kind: discoverable
+      condition: 实际检查葫内剑体与禁纹。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

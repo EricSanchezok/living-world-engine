@@ -1,0 +1,187 @@
+id: canon-xuehe-body-3
+kind: person
+name: 血合第3体
+description: 同一旧大乘的第3具分身，当前为合体层级，意图让分体共同突破。
+placement: blood-xuehe-retreat
+facts:
+  - id: canon-xuehe-body-3-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体后期，原大乘分魂后阶段。
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-xuehe-body-3
+  - id: canon-xuehe-body-3-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体血道、分魂协作与护体。
+    description: 合体血道、分魂协作与护体。
+    access:
+      kind: agents
+      agentIds:
+        - canon-xuehe-body-3
+  - id: canon-xuehe-body-3-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: canon-xuehe-body-3-shared-origin
+    predicate: shared-origin
+    value:
+      kind: entity
+      entityId: blood-xuehe-identity
+    description: shared-origin
+    access:
+      kind: private
+meters:
+  - id: canon-xuehe-body-3-health
+    definition_id: health
+    current: 100
+  - id: canon-xuehe-body-3-mana
+    definition_id: mana
+    current: 1540
+quantities: []
+ratings:
+  - id: canon-xuehe-body-3-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-xuehe-body-3-force
+    definition_id: force
+    value: 7
+  - id: canon-xuehe-body-3-craft
+    definition_id: craft
+    value: 6
+  - id: canon-xuehe-body-3-perception
+    definition_id: perception
+    value: 7
+  - id: canon-xuehe-body-3-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-xuehe-body-3
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 同一旧大乘的第3具分身，当前为合体层级，意图让分体共同突破。
+      voice: 语气冷而简短，常以共同目标说话，但对眼前所见仍分别作答。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成本轮合练并检视身体负担，不盲目耗尽共享准备。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 血合第3体
+        description: 同一旧大乘的第3具分身，当前为合体层级，意图让分体共同突破。
+        status: observed
+      - id: location
+        name: 血合五体静修地
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-canon-xuehe-body-3-resources
+        name: 血合第3体的个人储备
+        description: 自己随身的空行囊，修炼材料存于共同储备。
+        status: observed
+      - id: known-blood-xuehe-fund
+        name: 血合共同修炼储备
+        description: 五体共同的一份真实库存。
+        status: observed
+      - id: known-canon-xuehe-body-1
+        name: 血合第1体
+        description: 由同一元婴分化的另一体，共处合练但不以未知远方状态冒充当下所见。
+        status: observed
+      - id: known-canon-xuehe-body-2
+        name: 血合第2体
+        description: 由同一元婴分化的另一体，共处合练但不以未知远方状态冒充当下所见。
+        status: observed
+      - id: known-canon-xuehe-body-4
+        name: 血合第4体
+        description: 由同一元婴分化的另一体，共处合练但不以未知远方状态冒充当下所见。
+        status: observed
+      - id: known-canon-xuehe-body-5
+        name: 血合第5体
+        description: 由同一元婴分化的另一体，共处合练但不以未知远方状态冒充当下所见。
+        status: observed
+      - id: known-blood-xuehe-identity
+        name: 血合共同分魂主体
+        description: 五具身体来自同一旧元婴；共同目的不等于看见其他身体的未传信息。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体血道、分魂协作与护体。
+        description: 合体血道、分魂协作与护体。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-xuehe-body-3
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-xuehe-retreat
+      - local_entity_id: known-canon-xuehe-body-3-resources
+        canonical_entity_ids:
+          - canon-xuehe-body-3-resources
+      - local_entity_id: known-blood-xuehe-fund
+        canonical_entity_ids:
+          - blood-xuehe-fund
+      - local_entity_id: known-canon-xuehe-body-1
+        canonical_entity_ids:
+          - canon-xuehe-body-1
+      - local_entity_id: known-canon-xuehe-body-2
+        canonical_entity_ids:
+          - canon-xuehe-body-2
+      - local_entity_id: known-canon-xuehe-body-4
+        canonical_entity_ids:
+          - canon-xuehe-body-4
+      - local_entity_id: known-canon-xuehe-body-5
+        canonical_entity_ids:
+          - canon-xuehe-body-5
+      - local_entity_id: known-blood-xuehe-identity
+        canonical_entity_ids:
+          - blood-xuehe-identity

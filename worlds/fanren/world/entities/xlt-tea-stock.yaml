@@ -1,0 +1,22 @@
+id: xlt-tea-stock
+kind: container
+name: 许家待交干茶
+description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+placement: xlt-tea-yard
+facts:
+  - id: xlt-tea-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-xu-lan
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: xlt-dry-tea
+    amount: 60
+  - definition_id: low-stone
+    amount: 10
+ratings: []
+shared_activity_resources: []

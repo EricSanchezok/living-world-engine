@@ -1,0 +1,28 @@
+id: innerstar-nanming-paper
+kind: container
+name: 干包纸匣
+description: 供分拣换包的四份干净纸料。
+placement: innerstar-nanming-sorting
+facts:
+  - id: innerstar-nanming-paper-packing-use
+    predicate: packing-use
+    value:
+      kind: text
+      value: 每重包一包药材消耗一份干纸料；不能只宣称已整理就增加药材数量。
+    description: 每重包一包药材消耗一份干纸料；不能只宣称已整理就增加药材数量。
+    access:
+      kind: public
+  - id: innerstar-nanming-paper-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-nanming-herbshop
+    description: 药铺经营财物，不等于店主个人随身钱财。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: yinming-village-cove
+kind: location
+name: 藏湾村
+description: 靠近石腹外缘，擅长辨别接落与兽踪。
+placement: yinming-cave
+facts:
+  - id: yinming-village-cove-route-yinming-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-cave
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-cove-condition-yinming-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-village-cove-recent-tracks
+    predicate: recent-tracks
+    value:
+      kind: text
+      value: 外侧的两列新脚印来自昨日藏舟与芦背巡查，无新来人；当事人尚需到现场比对。
+    description: 外侧的两列新脚印来自昨日藏舟与芦背巡查，无新来人；当事人尚需到现场比对。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

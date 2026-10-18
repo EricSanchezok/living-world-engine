@@ -1,0 +1,26 @@
+id: north-fruit-garden
+kind: location
+name: 宫内冰灵果园
+description: 果园中十二粒成熟果实仍挂在枝头。
+placement: north-inner-palace
+facts:
+  - id: north-fruit-garden-route-north-inner-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: 果实属公产，领用需实际批准。
+    access:
+      kind: public
+  - id: north-fruit-garden-travel-north-inner-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 果实属公产，领用需实际批准。
+    description: 果实属公产，领用需实际批准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

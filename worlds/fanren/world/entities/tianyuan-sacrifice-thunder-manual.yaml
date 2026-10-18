@@ -1,0 +1,18 @@
+id: tianyuan-sacrifice-thunder-manual
+kind: item
+name: 圣岛祭雷术下部残卷
+description: 现存残卷记控制驱使神雷的下部法诀；缺少祭出与控制威能的上部，只有对应神雷、完整相关知识和实际修为条件相合时才可能使用，照读不生神雷。
+placement: spirit-holy-island
+facts:
+  - id: tianyuan-sacrifice-thunder-manual-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

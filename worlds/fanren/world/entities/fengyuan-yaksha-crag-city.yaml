@@ -1,0 +1,58 @@
+id: fengyuan-yaksha-crag-city
+kind: location
+name: 玄崖城
+description: 夜叉来往的崖城，兵器铺、居所和公共石台由阶路连接。
+placement: fengyuan-yaksha-domain
+facts:
+  - id: fengyuan-yaksha-crag-city-route-fengyuan-burial-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-burial-desert
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-yaksha-crag-city-condition-fengyuan-burial-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 夜叉来往的崖城，兵器铺、居所和公共石台由阶路连接。
+    description: 夜叉来往的崖城，兵器铺、居所和公共石台由阶路连接。
+    access:
+      kind: public
+  - id: fengyuan-yaksha-crag-city-route-fengyuan-heixiao-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-heixiao-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-yaksha-crag-city-condition-fengyuan-heixiao-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 封闭的崖中洞府，来历不明的黑甲强者在内静修，外院接信。
+    description: 封闭的崖中洞府，来历不明的黑甲强者在内静修，外院接信。
+    access:
+      kind: public
+  - id: fengyuan-yaksha-crag-city-route-fengyuan-yaksha-royal-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-yaksha-royal-court
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-yaksha-crag-city-condition-fengyuan-yaksha-royal-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 两处夜叉领地议定边界与取用的石台，争执可以带来真实冲突。
+    description: 两处夜叉领地议定边界与取用的石台，争执可以带来真实冲突。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

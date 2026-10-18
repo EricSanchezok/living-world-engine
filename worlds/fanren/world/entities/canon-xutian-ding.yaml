@@ -1,0 +1,36 @@
+id: canon-xutian-ding
+kind: container
+name: 虚天鼎
+description: 两耳三足的古鼎，虫鱼山水图案在鼎身上，正封于台下乾蓝冰焰中。
+placement: void-hanli-platform
+facts:
+  - id: canon-xutian-ding-state
+    predicate: state
+    value:
+      kind: text
+      value: 仍封台下，盖闭；获得与认主、开盖、通宝诀层次分别判断。
+    description: 仍封台下，盖闭；获得与认主、开盖、通宝诀层次分别判断。
+    access:
+      kind: private
+  - id: canon-xutian-ding-matched-instruction
+    predicate: matched-instruction
+    value:
+      kind: text
+      value: 鼎身经文指明需炼化其附带冰焰及相配通宝诀；三层分别要求元婴中期、元婴后期和化神。第一层只能借部分威能，器物自行响应与持有者随意开盖不同。
+    description: 鼎身经文指明需炼化其附带冰焰及相配通宝诀；三层分别要求元婴中期、元婴后期和化神。第一层只能借部分威能，器物自行响应与持有者随意开盖不同。
+    access:
+      kind: discoverable
+      condition: 已处理附带冰焰，并实际持续注灵使鼎身经文显现后阅读；或取得已核实的该鼎相配法诀。
+  - id: canon-xutian-ding-key-function
+    predicate: key-function
+    value:
+      kind: text
+      value: 这只鼎也是依金阙秘术炼成的天鼎宫仿制钥匙，具有部分感应与配合破封之用，不能当作原钥匙或任意开门之物。
+    description: 这只鼎也是依金阙秘术炼成的天鼎宫仿制钥匙，具有部分感应与配合破封之用，不能当作原钥匙或任意开门之物。
+    access:
+      kind: discoverable
+      condition: 已取得并核实相应制器秘文、制作者说明或与该鼎对应的天鼎宫钥匙传承；仅见鼎外形或取得鼎不自动知此事。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

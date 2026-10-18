@@ -1,0 +1,26 @@
+id: thunder-jiaochi-bell-hall
+kind: location
+name: 迷天钟殿
+description: 阁楼高层的翠绿玉桌上供着雪白巨钟，重重禁制隔绝外探，值守案离钟座很远。
+placement: thunder-tianjiao-mountain
+facts:
+  - id: thunder-jiaochi-bell-hall-route-to-thunder-tianjiao-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianjiao-mountain
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-jiaochi-bell-hall-route-conditions-thunder-tianjiao-mountain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 内道受禁制守护，仅获准人员可入，破禁另判能力与后果。
+    description: 内道受禁制守护，仅获准人员可入，破禁另判能力与后果。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

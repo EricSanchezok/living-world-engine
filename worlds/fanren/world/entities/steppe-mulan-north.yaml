@@ -1,0 +1,155 @@
+id: steppe-mulan-north
+kind: location
+name: 北部慕兰草场
+description: 长草、低丘和季节水洼延伸向北面的黄土带。慕兰部落迁牧于此，灵石矿和足供闭关的灵地难得。
+placement: human-mulan-steppe
+facts:
+  - id: steppe-mulan-north-route-human-mulan-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-mulan-steppe
+    description: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-human-mulan-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    description: 进入北侧草原需沿真实道路或遁行；不能把整片大陆的父节点当捷径。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-central-marches
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-central-marches
+    description: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-central-marches
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    description: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-liuting-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-camp
+    description: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-liuting-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    description: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-mulan-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-court
+    description: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-mulan-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    description: 教习院在北部一段灵气较好的石丘；访客可在院外求见。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-yellow-sand-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-yellow-sand-store
+    description: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-yellow-sand-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    description: 到黄沙部圣库附近需穿过其牧区，入库须获看守与部族许可或实际破禁。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-tiannan-border-loess
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-border-loess
+    description: 北越黄土荒野可到九国方向；整片荒地近万里，须按实际能力与路径耗时，补给、风沙、巡逻和隐蔽各有影响。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-tiannan-border-loess
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 北越黄土荒野可到九国方向；整片荒地近万里，须按实际能力与路径耗时，补给、风沙、巡逻和隐蔽各有影响。
+    description: 北越黄土荒野可到九国方向；整片荒地近万里，须按实际能力与路径耗时，补给、风沙、巡逻和隐蔽各有影响。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-tianfeng-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-camp
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-tianfeng-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-baihuo-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-baihuo-camp
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-mulan-north-travel-steppe-baihuo-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-mulan-north-route-steppe-gu-reed-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-gu-reed-house
+    description: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    access:
+      kind: discoverable
+      condition: 沿水沟实际探查、向当地知路者问路或由其引路；不能只凭远方地名获坐标。
+  - id: steppe-mulan-north-travel-steppe-gu-reed-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    description: 芦沟兽舍离大路有段距离，须沿水沟辨路或有人带路；伤蛇毒不是可忽视的行程条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

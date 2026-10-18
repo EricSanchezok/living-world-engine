@@ -1,0 +1,18 @@
+id: tianyuan-huan-shield
+kind: item
+name: 寰天奇试用护符
+description: 当前自己制成的防护符，耗30法力触发一次短时护罩，破裂或一次使用后耗去；不能保证挡任何同阶攻击。
+placement: canon-huan-tianqi
+facts:
+  - id: tianyuan-huan-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huan-tianqi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

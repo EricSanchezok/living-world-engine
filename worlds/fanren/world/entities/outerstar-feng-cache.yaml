@@ -1,0 +1,22 @@
+id: outerstar-feng-cache
+kind: container
+name: 风希私用储物
+description: 法器修护和出行的有限材料。
+placement: canon-feng-xi
+facts:
+  - id: outerstar-feng-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-feng-xi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 120
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

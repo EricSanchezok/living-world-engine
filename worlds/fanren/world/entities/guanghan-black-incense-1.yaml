@@ -1,0 +1,27 @@
+id: guanghan-black-incense-1
+kind: item
+name: 黑幽冰香残截1
+description: 仅剩一截的古香，需要足够灵火点燃；焚烧会真实缩短并最终耗尽。
+placement: guanghan-incense-burner-1
+facts:
+  - id: guanghan-black-incense-1-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-black-incense-1-use
+    predicate: use
+    value:
+      kind: text
+      value: 强灵火、适用境界与静修环境下可辅助抵抗心魔，不保证突破；此残截最多供一次持续熏修，重复使用须检查剩余实物。
+    description: 强灵火、适用境界与静修环境下可辅助抵抗心魔，不保证突破；此残截最多供一次持续熏修，重复使用须检查剩余实物。
+    access:
+      kind: discoverable
+      condition: 辨识古香或取得可靠用法，并实际观察燃烧。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

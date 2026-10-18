@@ -1,0 +1,20 @@
+id: boundless-house-grain
+kind: item
+name: 程家粮袋
+description: 家中陆路采购的粮食，非卖货本金。
+placement: boundless-house
+facts:
+  - id: boundless-house-grain-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: boundless-lin-zhen
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 18
+ratings: []
+shared_activity_resources: []

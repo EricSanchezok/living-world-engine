@@ -1,0 +1,24 @@
+id: minghe-sanctuary-supplies
+kind: container
+name: 圣地日常补给
+description: 阵基维护与值勤支付的有限公产。
+placement: minghe-inspection-court
+facts:
+  - id: minghe-sanctuary-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 18
+  - definition_id: low-stone
+    amount: 200
+  - definition_id: grain
+    amount: 30
+ratings: []
+shared_activity_resources: []

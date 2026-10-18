@@ -1,0 +1,18 @@
+id: global-baoling-temple
+kind: location
+name: 宝灵寺
+description: 玉田山一座高峰上的佛寺，晨昏有清远钟声。
+placement: dajin-yutian
+facts:
+  - id: global-baoling-temple-route-dajin-huanyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huanyun
+    description: 两峰之间可循山路往来，崖壁和寺门仍需实际通过。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

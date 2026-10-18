@@ -1,0 +1,175 @@
+id: blood-huanxin-student
+kind: person
+name: 灯见
+description: 幻心门合体后辈，想用幻术讲述自己的见闻，也想争取独立游历。
+placement: blood-huanxin-hall
+facts:
+  - id: blood-huanxin-student-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - blood-huanxin-student
+  - id: blood-huanxin-student-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体幻术、布景与神识护持。
+    description: 合体幻术、布景与神识护持。
+    access:
+      kind: agents
+      agentIds:
+        - blood-huanxin-student
+  - id: blood-huanxin-student-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: blood-huanxin-student-student
+    predicate: student
+    value:
+      kind: entity
+      entityId: canon-wen-xin-feng
+    description: student
+    access:
+      kind: private
+meters:
+  - id: blood-huanxin-student-health
+    definition_id: health
+    current: 100
+  - id: blood-huanxin-student-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-huanxin-student-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: blood-huanxin-student-force
+    definition_id: force
+    value: 7
+  - id: blood-huanxin-student-craft
+    definition_id: craft
+    value: 6
+  - id: blood-huanxin-student-perception
+    definition_id: perception
+    value: 7
+  - id: blood-huanxin-student-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: blood-huanxin-student
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 幻心门合体后辈，想用幻术讲述自己的见闻，也想争取独立游历。
+      voice: 言语有想象力，谈作品会兴奋，面对师长又会努力克制自己抢话。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成一场自愿观看的幻景试演，证明自己能区分迷惑与交流。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 灯见
+        description: 幻心门合体后辈，想用幻术讲述自己的见闻，也想争取独立游历。
+        status: observed
+      - id: location
+        name: 幻心门客堂
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-huanxin-student-resources
+        name: 灯见的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-wen-xin-feng
+        name: 文心凤
+        description: 有实际教学关系，本次弟子希望争取独立外出。
+        status: observed
+      - id: known-blood-student-mirror
+        name: 灯见试演幻镜
+        description: 将自己记住的旅途组合为可退出幻景的练习法器，不产生真实道路或别人记忆。
+        status: observed
+      - id: known-blood-student-consent
+        name: 幻景试演告知页
+        description: 观看自愿，可说停或离开；演出内容是灯见创作，未经确认的山路不能作真地图。
+        status: observed
+      - id: known-blood-student-fuel
+        name: 幻镜灵石袋
+        description: 每轮三千六百秒试演耗用两低阶石，当前可用八枚。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体幻术、布景与神识护持。
+        description: 合体幻术、布景与神识护持。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-huanxin-student
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-huanxin-hall
+      - local_entity_id: known-blood-huanxin-student-resources
+        canonical_entity_ids:
+          - blood-huanxin-student-resources
+      - local_entity_id: known-canon-wen-xin-feng
+        canonical_entity_ids:
+          - canon-wen-xin-feng
+      - local_entity_id: known-blood-student-mirror
+        canonical_entity_ids:
+          - blood-student-mirror
+      - local_entity_id: known-blood-student-consent
+        canonical_entity_ids:
+          - blood-student-consent
+      - local_entity_id: known-blood-student-fuel
+        canonical_entity_ids:
+          - blood-student-fuel

@@ -1,0 +1,29 @@
+id: minghe-xuling-blackwind-pavilion
+kind: item
+name: 黑风阁
+description: 通体乌黑的微型阁楼可随祭炼改变大小，内室供私谈与静修，黑气形成隔探屏障。
+placement: canon-xu-ling
+facts:
+  - id: minghe-xuling-blackwind-pavilion-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xu-ling
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-xuling-blackwind-pavilion-bounded-operation
+    predicate: bounded-operation
+    value:
+      kind: text
+      value: 虚灵启动耗20法力，每个本地时辰维持耗5法力；可邀来客缩形进入，但隔探并非面对一切力量永不破，强攻与特殊探测需实际判断。
+    description: 虚灵启动耗20法力，每个本地时辰维持耗5法力；可邀来客缩形进入，但隔探并非面对一切力量永不破，强攻与特殊探测需实际判断。
+    access:
+      kind: private
+meters:
+  - id: minghe-xuling-blackwind-pavilion-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

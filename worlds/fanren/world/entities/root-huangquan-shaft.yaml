@@ -1,0 +1,37 @@
+id: root-huangquan-shaft
+kind: location
+name: 黄泉第二峰地火坑
+description: 通向地下地火的深坑，需要防护、照明和真实下降路径。
+placement: root-huangquan-peaks
+facts:
+  - id: root-huangquan-shaft-route-to-root-huangquan-peaks
+    predicate: route-to-root-huangquan-peaks
+    value:
+      kind: entity
+      entityId: root-huangquan-peaks
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huangquan-shaft-travel-condition-root-huangquan-peaks
+    predicate: travel-condition-root-huangquan-peaks
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huangquan-shaft-root-detail-huangquan-fire
+    predicate: root-detail-huangquan-fire
+    value:
+      kind: text
+      value: 地下深处地火和压力更险；连通冥界是传闻。梦石成灵须漫长岁月和苛刻条件，入坑不保证有妖晶可取。
+    description: 地下深处地火和压力更险；连通冥界是传闻。梦石成灵须漫长岁月和苛刻条件，入坑不保证有妖晶可取。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

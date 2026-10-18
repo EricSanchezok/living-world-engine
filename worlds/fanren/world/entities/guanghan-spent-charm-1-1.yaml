@@ -1,0 +1,26 @@
+id: guanghan-spent-charm-1-1
+kind: item
+name: 失灵古符
+description: 银蝌文纹样尚存，灵力已散，不能直接当作完好符箓施用。
+placement: guanghan-study-box-1
+facts:
+  - id: guanghan-spent-charm-1-1-remaining-use
+    predicate: remaining-use
+    value:
+      kind: number
+      value: 0
+    description: remaining-use
+    access:
+      kind: private
+  - id: guanghan-spent-charm-1-1-research-value
+    predicate: research-value
+    value:
+      kind: text
+      value: 可逐笔研究符纹与载体；重制需要理解、材料、法力和试验，原符不能凭阅读重新充能。
+    description: 可逐笔研究符纹与载体；重制需要理解、材料、法力和试验，原符不能凭阅读重新充能。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

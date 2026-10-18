@@ -1,0 +1,26 @@
+id: thunder-wuluo-hidden-bay
+kind: location
+name: 无名背浪湾
+description: 背浪岩壁内有隐蔽洞隙，只有熟悉潮位者容易找到靠岸处。
+placement: thunder-firecoral-islands
+facts:
+  - id: thunder-wuluo-hidden-bay-route-to-thunder-firecoral-deepwater
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-firecoral-deepwater
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-wuluo-hidden-bay-route-conditions-thunder-firecoral-deepwater
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。
+    description: 长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

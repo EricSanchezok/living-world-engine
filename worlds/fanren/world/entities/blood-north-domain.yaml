@@ -1,0 +1,138 @@
+id: blood-north-domain
+kind: location
+name: 血天北部
+description: 幻心门等势力的修行与交易地区。
+placement: blood-continent
+facts:
+  - id: blood-north-domain-route-blood-qiyun-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qiyun-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-qiyun-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-huanxin-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-huanxin-hall
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-huanxin-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-wuguo-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wuguo-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-wuguo-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-wanhua-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wanhua-cave
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-wanhua-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-xuehe-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xuehe-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-xuehe-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-xueying-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xueying-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-xueying-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+  - id: blood-north-domain-route-blood-chilei-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-chilei-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-blood-chilei-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+  - id: blood-north-domain-route-seas-hu-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-hu-house
+    description: route-to
+    access:
+      kind: public
+  - id: blood-north-domain-condition-seas-hu-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循北域商路到私宅，需本人愿意见客。
+    description: 循北域商路到私宅，需本人愿意见客。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

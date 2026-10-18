@@ -1,0 +1,42 @@
+id: kunwu-stone-forest
+kind: location
+name: 昆吾殿石林
+description: 符文石林与持兵石像护住上坡路。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-stone-forest-route-kunwu-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-square
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-stone-forest-condition-kunwu-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前往昆吾殿依次处理石林。
+    description: 前往昆吾殿依次处理石林。
+    access:
+      kind: public
+  - id: kunwu-stone-forest-route-kunwu-thunder-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-thunder-wall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-stone-forest-condition-kunwu-thunder-wall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石像与雷墙尚完整。
+    description: 石像与雷墙尚完整。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

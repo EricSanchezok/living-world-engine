@@ -1,0 +1,18 @@
+id: tianyuan-qing-armor
+kind: item
+name: 沈驰现领青冥甲
+description: 本期发给沈驰的青甲，减轻实际打击但可能变形破损；主动护体耗15法力，穿戴本身不授军职。
+placement: tianyuan-patrol-chief
+facts:
+  - id: tianyuan-qing-armor-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

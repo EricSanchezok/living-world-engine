@@ -1,0 +1,42 @@
+id: kunwu-gate
+kind: location
+name: 万修之门
+description: 封住宽石阶的牌楼，登上此门后才是古修洞府区。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-gate-route-kunwu-foot
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-foot
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-gate-condition-kunwu-foot
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万修之门完整禁制须被真实处理。
+    description: 万修之门完整禁制须被真实处理。
+    access:
+      kind: public
+  - id: kunwu-gate-route-kunwu-cloud-stairs
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-cloud-stairs
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-gate-condition-kunwu-cloud-stairs
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 云中幻物可能诱发阵法，摸索须承担实际代价。
+    description: 云中幻物可能诱发阵法，摸索须承担实际代价。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,82 @@
+id: north-hanli-realm
+kind: location
+name: 寒骊秘境
+description: 隐藏山谷中的宫殿与修行场所，外人获邀不等于所有秘密都向其开放。
+placement: north-inner-palace
+facts:
+  - id: north-hanli-realm-route-north-inner-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: 需知道入口并获准，开门禁制由掌管者控制。
+    access:
+      kind: public
+  - id: north-hanli-realm-travel-north-inner-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需知道入口并获准，开门禁制由掌管者控制。
+    description: 需知道入口并获准，开门禁制由掌管者控制。
+    access:
+      kind: public
+  - id: north-hanli-realm-entry-north-xuling-hall-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-hall-one
+    description: 仅进入方向的地下密道；相关钥匙法器、真实法力与议事许可分别判断，不能由入口推出原路自由退出。
+    access:
+      kind: public
+  - id: north-hanli-realm-entry-north-xuling-hall-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-hall-two
+    description: 仅进入方向的地下密道；相关钥匙法器、真实法力与议事许可分别判断，不能由入口推出原路自由退出。
+    access:
+      kind: public
+  - id: north-hanli-realm-entry-north-xuling-hall-three
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-hall-three
+    description: 仅进入方向的地下密道；相关钥匙法器、真实法力与议事许可分别判断，不能由入口推出原路自由退出。
+    access:
+      kind: public
+  - id: north-hanli-realm-route-north-guest-lodges
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-guest-lodges
+    description: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    access:
+      kind: public
+  - id: north-hanli-realm-travel-north-guest-lodges
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    description: 秘境内道路通往山壁旁接待楼，客房分配需实际授权。
+    access:
+      kind: public
+  - id: north-hanli-realm-route-north-shixiang-ice-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-shixiang-ice-hall
+    description: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    access:
+      kind: public
+  - id: north-hanli-realm-travel-north-shixiang-ice-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    description: 经师相允许才能通过寒霜通道入内；未经允许可提出请求或承担闯入后果，寒冷还需实际防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,37 @@
+id: root-leiyun-hall
+kind: location
+name: 雷云阁
+description: 入山事务与资格检查的办事楼阁。
+placement: root-leiyun-town
+facts:
+  - id: root-leiyun-hall-route-to-root-leiyun-town
+    predicate: route-to-root-leiyun-town
+    value:
+      kind: entity
+      entityId: root-leiyun-town
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-hall-travel-condition-root-leiyun-town
+    predicate: travel-condition-root-leiyun-town
+    value:
+      kind: text
+      value: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    description: 从镇中道路进入，受实际当值者和已开启禁制限制。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-leiyun-hall-root-detail-mojin-checkpoint
+    predicate: root-detail-mojin-checkpoint
+    value:
+      kind: text
+      value: 常规入山检查可对上族八九阶豁免测试，其余经幻境或傀儡考核。信物、接引和限期退出依守方制度与可用阵具，违令有社会后果而非强制思想。
+    description: 常规入山检查可对上族八九阶豁免测试，其余经幻境或傀儡考核。信物、接引和限期退出依守方制度与可用阵具，违令有社会后果而非强制思想。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

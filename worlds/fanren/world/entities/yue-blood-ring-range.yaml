@@ -1,0 +1,58 @@
+id: yue-blood-ring-range
+kind: location
+name: 禁地环形山脉
+description: 终年浓雾的环形山，岩穴密谷和妖兽并存，飞越会暴露给空中妖兽。
+placement: yue-blood-forbidden
+facts:
+  - id: yue-blood-ring-range-route-yue-blood-central-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-central-garden
+    description: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    access:
+      kind: public
+  - id: yue-blood-ring-range-travel-yue-blood-central-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    description: 环形山迷雾使辨向困难，月阳宝珠可辅助驱雾但不能消灭妖兽；已知安全小路也须实走。
+    access:
+      kind: public
+  - id: yue-blood-ring-range-route-yue-blood-inner-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-inner-wood
+    description: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    access:
+      kind: public
+  - id: yue-blood-ring-range-travel-yue-blood-inner-wood
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    description: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    access:
+      kind: public
+  - id: yue-blood-ring-range-route-yue-blood-stone-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-stone-hall
+    description: 穿过盆地怪石后可到殿门，青石古禁能挡法器、隔神识，进入者无法把外部扫描当全殿知识。
+    access:
+      kind: public
+  - id: yue-blood-ring-range-travel-yue-blood-stone-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过盆地怪石后可到殿门，青石古禁能挡法器、隔神识，进入者无法把外部扫描当全殿知识。
+    description: 穿过盆地怪石后可到殿门，青石古禁能挡法器、隔神识，进入者无法把外部扫描当全殿知识。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

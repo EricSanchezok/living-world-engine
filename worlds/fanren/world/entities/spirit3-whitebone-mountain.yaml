@@ -1,0 +1,42 @@
+id: spirit3-whitebone-mountain
+kind: location
+name: 白骨门山地
+description: 白色岩岭间分出修行居室与演法台，门规要求演练时避开外来者。
+placement: spirit-xuanwu-domain
+facts:
+  - id: spirit3-whitebone-mountain-route-to-spirit3-xuanwu-stockade
+    predicate: route-to-spirit3-xuanwu-stockade
+    value:
+      kind: entity
+      entityId: spirit3-xuanwu-stockade
+    description: route-to-spirit3-xuanwu-stockade
+    access:
+      kind: private
+  - id: spirit3-whitebone-mountain-route-conditions-spirit3-xuanwu-stockade
+    predicate: route-conditions-spirit3-xuanwu-stockade
+    value:
+      kind: text
+      value: 由溪谷到岩岭的野外长路，山门接待不等于获准进静室。
+    description: 由溪谷到岩岭的野外长路，山门接待不等于获准进静室。
+    access:
+      kind: private
+  - id: spirit3-whitebone-mountain-route-to-spirit3-whitebone-study
+    predicate: route-to-spirit3-whitebone-study
+    value:
+      kind: entity
+      entityId: spirit3-whitebone-study
+    description: route-to-spirit3-whitebone-study
+    access:
+      kind: private
+  - id: spirit3-whitebone-mountain-route-conditions-spirit3-whitebone-study
+    predicate: route-conditions-spirit3-whitebone-study
+    value:
+      kind: text
+      value: 山门内通道，需万骨本人允许。
+    description: 山门内通道，需万骨本人允许。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

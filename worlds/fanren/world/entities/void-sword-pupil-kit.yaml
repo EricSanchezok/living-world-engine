@@ -1,0 +1,22 @@
+id: void-sword-pupil-kit
+kind: container
+name: 宁霜的随身器具
+description: 基础剑术与炼气，尚不会鸾凤剑诀全部。所需的个人日常器具。
+placement: void-sword-pupil
+facts:
+  - id: void-sword-pupil-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-sword-pupil
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

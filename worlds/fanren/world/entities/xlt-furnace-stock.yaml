@@ -1,0 +1,22 @@
+id: xlt-furnace-stock
+kind: container
+name: 焰芒炉料箱
+description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+placement: xlt-wind-volcano
+facts:
+  - id: xlt-furnace-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-yan
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: xlt-core
+    amount: 2
+  - definition_id: xlt-ore
+    amount: 18
+ratings: []
+shared_activity_resources: []

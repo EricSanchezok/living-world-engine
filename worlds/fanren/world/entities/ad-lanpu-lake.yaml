@@ -1,0 +1,83 @@
+id: ad-lanpu-lake
+kind: location
+name: 蓝瀑湖
+description: 与血牙米生产和信息交易有关的湖区。
+placement: associated-demon-realm
+facts:
+  - id: ad-lanpu-lake-route-ad-lanpu-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-lanpu-city
+    description: route-to
+    access:
+      kind: public
+  - id: ad-lanpu-lake-condition-ad-lanpu-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-lanpu-lake-route-ad-rice-field
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-rice-field
+    description: route-to
+    access:
+      kind: public
+  - id: ad-lanpu-lake-condition-ad-rice-field
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿田埂到小田，进栽植地须主人许可，不能踏坏幼苗。
+    description: 沿田埂到小田，进栽植地须主人许可，不能踏坏幼苗。
+    access:
+      kind: public
+  - id: ad-lanpu-lake-route-ad-guangyuan-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-guangyuan-house
+    description: route-to
+    access:
+      kind: public
+  - id: ad-lanpu-lake-condition-ad-guangyuan-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿林路到湖边阁，接待外室与私档各有边界。
+    description: 沿林路到湖边阁，接待外室与私档各有边界。
+    access:
+      kind: public
+  - id: ad-lanpu-lake-route-to-ad-lanpu-retreat
+    predicate: route-to-ad-lanpu-retreat
+    value:
+      kind: entity
+      entityId: ad-lanpu-retreat
+    description: 循主人允许的近湖路段进入，湖内禁空须按个人能力和控制权限处理。
+    access:
+      kind: public
+  - id: ad-lanpu-lake-flight-restriction
+    predicate: flight-restriction
+    value:
+      kind: text
+      value: 湖中深处禁空依已有禁制生效，未超过魔尊的普通来客乘舟；大乘或真实破禁手段另依能力判定，禁止不等于物理绝无例外。
+    description: 湖中深处禁空依已有禁制生效，未超过魔尊的普通来客乘舟；大乘或真实破禁手段另依能力判定，禁止不等于物理绝无例外。
+    access:
+      kind: public
+  - id: ad-lanpu-lake-root-detail-magnetic-light
+    predicate: root-detail-magnetic-light
+    value:
+      kind: text
+      value: 阴阳大五行真光、沾阴矿、磁光兽及炼成晶核分形态来源，发现矿物不定位活兽；矿核兽核不复制同物，炼极山仍需实取炼化。
+    description: 阴阳大五行真光、沾阴矿、磁光兽及炼成晶核分形态来源，发现矿物不定位活兽；矿核兽核不复制同物，炼极山仍需实取炼化。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

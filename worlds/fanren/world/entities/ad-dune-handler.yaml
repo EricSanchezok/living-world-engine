@@ -1,0 +1,167 @@
+id: ad-dune-handler
+kind: person
+name: 闻沙
+description: 化神驯兽者，养两头八足魔蜥，不愿以一次高价耗尽种群。
+placement: ad-huanye-city
+facts:
+  - id: ad-dune-handler-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 化神
+    description: 化神
+    access:
+      kind: agents
+      agentIds:
+        - ad-dune-handler
+  - id: ad-dune-handler-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 化神兽术、沙漠地形和魔蜥饲养。
+    description: 化神兽术、沙漠地形和魔蜥饲养。
+    access:
+      kind: agents
+      agentIds:
+        - ad-dune-handler
+  - id: ad-dune-handler-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - ad-dune-handler
+meters:
+  - id: ad-dune-handler-health
+    definition_id: health
+    current: 100
+  - id: ad-dune-handler-mana
+    definition_id: mana
+    current: 1100
+quantities: []
+ratings:
+  - id: ad-dune-handler-cultivation
+    definition_id: cultivation
+    value: 5
+  - id: ad-dune-handler-force
+    definition_id: force
+    value: 5
+  - id: ad-dune-handler-craft
+    definition_id: craft
+    value: 5
+  - id: ad-dune-handler-perception
+    definition_id: perception
+    value: 5
+  - id: ad-dune-handler-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: ad-dune-handler
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 化神驯兽者，养两头八足魔蜥，不愿以一次高价耗尽种群。
+      voice: 先问走哪段路再谈价，评价人时常用对待坐骑的样子来判断。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 考虑租借一头成年魔蜥护送短程样品，同时保留幼兽的成长。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 闻沙
+        description: 化神驯兽者，养两头八足魔蜥，不愿以一次高价耗尽种群。
+        status: observed
+      - id: location
+        name: 幻夜城
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-ad-dune-handler-private-stock
+        name: 闻沙的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-eight-leg-lizard-1
+        name: 闻沙八足魔蜥1
+        description: 自己长期照管的魔蜥，知道年龄与体力。
+        status: observed
+      - id: known-ad-eight-leg-lizard-2
+        name: 闻沙八足魔蜥2
+        description: 自己长期照管的魔蜥，知道年龄与体力。
+        status: observed
+      - id: known-ad-lizard-feed
+        name: 闻沙饲料库
+        description: 有限饲养与短程行旅物资，每共同日两兽合耗一份，不支持无限长旅。
+        status: observed
+      - id: known-ad-lizard-rental
+        name: 魔蜥短租约稿
+        description: 仅成年兽可在约定绿洲路段租用，每共同日8魔石，先留50魔石押金，双方清点伤损后退还余款；拒绝出借幼兽。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 化神兽术、沙漠地形和魔蜥饲养。
+        description: 化神兽术、沙漠地形和魔蜥饲养。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - ad-dune-handler
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-huanye-city
+      - local_entity_id: known-ad-dune-handler-private-stock
+        canonical_entity_ids:
+          - ad-dune-handler-private-stock
+      - local_entity_id: known-ad-eight-leg-lizard-1
+        canonical_entity_ids:
+          - ad-eight-leg-lizard-1
+      - local_entity_id: known-ad-eight-leg-lizard-2
+        canonical_entity_ids:
+          - ad-eight-leg-lizard-2
+      - local_entity_id: known-ad-lizard-feed
+        canonical_entity_ids:
+          - ad-lizard-feed
+      - local_entity_id: known-ad-lizard-rental
+        canonical_entity_ids:
+          - ad-lizard-rental

@@ -1,0 +1,24 @@
+id: blood-xuehe-fund
+kind: container
+name: 血合共同修炼储备
+description: 五体共同准备的一份储备，取用需要共同知情，不乘五生成。
+placement: blood-xuehe-retreat
+facts:
+  - id: blood-xuehe-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xuehe-identity
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 20
+  - definition_id: mid-stone
+    amount: 100
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

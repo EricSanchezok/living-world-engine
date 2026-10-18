@@ -1,0 +1,20 @@
+id: tianyuan-transport-fuel
+kind: container
+name: 金庭舟巡检用石
+description: 本轮仅有四块高阶灵石，长途调度需另申请。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-transport-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 4
+ratings: []
+shared_activity_resources: []

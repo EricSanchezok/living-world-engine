@@ -1,0 +1,257 @@
+id: original-tiannan-gu-nan
+kind: person
+name: 顾楠
+description: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+placement: tiannan-tianxing-register
+facts:
+  - id: original-tiannan-gu-nan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基初期
+    description: 筑基初期
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-gu-nan
+  - id: original-tiannan-gu-nan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木、火、土三灵根
+    description: 木、火、土三灵根；已检测并为本人所知。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-gu-nan
+  - id: original-tiannan-gu-nan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+    description: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+    access:
+      kind: agents
+      agentIds:
+        - original-tiannan-gu-nan
+  - id: original-tiannan-gu-nan-membership
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-sect
+    description: 目前为该组织办事，个人财产与公产分离。
+    access:
+      kind: public
+  - id: original-tiannan-gu-nan-knows-original-tiannan-meng-pan
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-meng-pan
+    description: 坊市登记与检修业务往来，各自权限不同。
+    access:
+      kind: public
+  - id: original-tiannan-gu-nan-knows-original-tiannan-zhao-heng
+    predicate: acquainted-with
+    value:
+      kind: entity
+      entityId: original-tiannan-zhao-heng
+    description: 曾有普通器材往来，彼此知姓名和职责。
+    access:
+      kind: public
+meters:
+  - id: original-tiannan-gu-nan-health
+    definition_id: health
+    current: 100
+  - id: original-tiannan-gu-nan-mana
+    definition_id: mana
+    current: 160
+quantities:
+  - definition_id: low-stone
+    amount: 32
+ratings:
+  - id: original-tiannan-gu-nan-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: original-tiannan-gu-nan-force
+    definition_id: force
+    value: 2
+  - id: original-tiannan-gu-nan-craft
+    definition_id: craft
+    value: 1
+  - id: original-tiannan-gu-nan-perception
+    definition_id: perception
+    value: 1
+  - id: original-tiannan-gu-nan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: original-tiannan-gu-nan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+      voice: 先翻登记，再讲规矩，语气平稳。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 两份摊位续租都希望靠近街口，需核原登记并征求双方意愿。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 顾楠
+        description: 熟悉坊市登记、基础阵盘检查与筑基修炼。 两份摊位续租都希望靠近街口，需核原登记并征求双方意愿。
+        status: observed
+      - id: location
+        name: 天星坊市登记亭
+        description: 自己当前任事的地方。
+        status: observed
+      - id: known-original-tiannan-gu-nan-pouch
+        name: 顾楠的日用行囊
+        description: 自己的日用物品。
+        status: observed
+      - id: known-tiannan-tianxing-service-stock
+        name: 天星登记亭公款
+        description: 自己负责核数的库存，所有权属于天星宗。
+        status: observed
+      - id: known-tiannan-tianxing-sect
+        name: 天星宗
+        description: 自己需要向该所有者交代出入账。
+        status: observed
+      - id: known-original-tiannan-meng-pan
+        name: 孟磐
+        description: 坊市登记与检修业务往来，各自权限不同。
+        status: observed
+      - id: known-original-tiannan-zhao-heng
+        name: 赵衡
+        description: 在天罗外务接洽时认识的修士，不能代替全宗随意承诺。
+        status: observed
+      - id: known-tiannan-meng-stall-request
+        name: 孟磐的换位申请
+        description: 待协调的申请之一，不能同时将同一时段许给两方。
+        status: observed
+      - id: known-tiannan-yao-stall-request
+        name: 姚蘅的换位申请
+        description: 待协调的申请之一，不能同时将同一时段许给两方。
+        status: observed
+      - id: known-tiannan-market-rent-ledger
+        name: 顾楠保管的摊租登记册
+        description: 自己保管的原登记和新申请，未收新租款。
+        status: observed
+      - id: known-tiannan-market-entry-stall
+        name: 天星街口小摊位
+        description: 需要安排下一期的小摊位。
+        status: observed
+      - id: known-original-tiannan-xie-wenquan
+        name: 谢文泉
+        description: 自己曾核过这家店的经营登记；店家自行负责货物、交割与争议，不是自己的雇员。
+        status: observed
+      - id: known-original-tiannan-liang-shouping
+        name: 梁守平
+        description: 自己曾核过这家店的经营登记；店家自行负责货物、交割与争议，不是自己的雇员。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己亲历的检测、学艺与任事。
+        sourceId: null
+        step: 0
+    claims:
+      - id: own-rank
+        subjectId: self
+        predicate: cultivation-state
+        value:
+          kind: text
+          value: 筑基初期
+        description: 筑基初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-root
+        subjectId: self
+        predicate: spiritual-root
+        value:
+          kind: text
+          value: 木、火、土三灵根，早年检测已知。
+        description: 木、火、土三灵根，早年检测已知。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+        description: 熟悉坊市登记、基础阵盘检查与筑基修炼。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 两份摊位续租都希望靠近街口，需核原登记并征求双方意愿。
+        description: 两份摊位续租都希望靠近街口，需核原登记并征求双方意愿。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - original-tiannan-gu-nan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tiannan-tianxing-register
+      - local_entity_id: known-original-tiannan-gu-nan-pouch
+        canonical_entity_ids:
+          - original-tiannan-gu-nan-pouch
+      - local_entity_id: known-tiannan-tianxing-service-stock
+        canonical_entity_ids:
+          - tiannan-tianxing-service-stock
+      - local_entity_id: known-tiannan-tianxing-sect
+        canonical_entity_ids:
+          - tiannan-tianxing-sect
+      - local_entity_id: known-original-tiannan-meng-pan
+        canonical_entity_ids:
+          - original-tiannan-meng-pan
+      - local_entity_id: known-original-tiannan-zhao-heng
+        canonical_entity_ids:
+          - original-tiannan-zhao-heng
+      - local_entity_id: known-tiannan-meng-stall-request
+        canonical_entity_ids:
+          - tiannan-meng-stall-request
+      - local_entity_id: known-tiannan-yao-stall-request
+        canonical_entity_ids:
+          - tiannan-yao-stall-request
+      - local_entity_id: known-tiannan-market-rent-ledger
+        canonical_entity_ids:
+          - tiannan-market-rent-ledger
+      - local_entity_id: known-tiannan-market-entry-stall
+        canonical_entity_ids:
+          - tiannan-market-entry-stall
+      - local_entity_id: known-original-tiannan-xie-wenquan
+        canonical_entity_ids:
+          - original-tiannan-xie-wenquan
+      - local_entity_id: known-original-tiannan-liang-shouping
+        canonical_entity_ids:
+          - original-tiannan-liang-shouping

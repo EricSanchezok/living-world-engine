@@ -1,0 +1,18 @@
+id: ad-purple-essence
+kind: item
+name: 含紫芸之精玉符
+description: 包含一滴紫芸之精的旧符，本源修复需实际用掉相应资源。
+placement: canon-he-kang
+facts:
+  - id: ad-purple-essence-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-he-kang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

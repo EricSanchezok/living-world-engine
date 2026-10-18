@@ -1,0 +1,27 @@
+id: minghe-five-dragon-blade
+kind: item
+name: 五龙铡
+description: 祭炼至心神相系的至宝，借出仍可由主人依法召回。
+placement: canon-qing-yuan-zi
+facts:
+  - id: minghe-five-dragon-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-five-dragon-blade-usage-boundary
+    predicate: usage-boundary
+    value:
+      kind: text
+      value: 需真实法力神念才能驱动，低修为借用者会有极大负担；五蛟显形为此宝作用，不复制五个独立所有者。
+    description: 需真实法力神念才能驱动，低修为借用者会有极大负担；五蛟显形为此宝作用，不复制五个独立所有者。
+    access:
+      kind: discoverable
+      condition: 持有并辨识，或由青元子说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

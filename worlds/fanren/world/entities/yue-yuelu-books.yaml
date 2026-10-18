@@ -1,0 +1,29 @@
+id: yue-yuelu-books
+kind: item
+name: 岳麓常用丹器书架
+description: 门中公产，使用或领取须记账，不是值班人的私藏。
+placement: yue-yuelu-book-room
+facts:
+  - id: yue-yuelu-books-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权与保管、借用分别处理。
+    access:
+      kind: public
+  - id: yue-yuelu-books-contents
+    predicate: document-content
+    value:
+      kind: text
+      value: 书架上有筑基丹药材配伍与基本地火操作资料、九层青元剑诀抄本及普通丹器养护册。现存抄本纸页需照原件逐份复制，不含失传的青元后四层。
+    description: 书架上有筑基丹药材配伍与基本地火操作资料、九层青元剑诀抄本及普通丹器养护册。现存抄本纸页需照原件逐份复制，不含失传的青元后四层。
+    access:
+      kind: discoverable
+      condition: 获准阅览，实际翻读相应册页并能读懂其中文字。
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

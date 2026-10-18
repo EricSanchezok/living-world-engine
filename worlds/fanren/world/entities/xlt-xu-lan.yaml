@@ -1,0 +1,186 @@
+id: xlt-xu-lan
+kind: person
+name: 许兰
+description: 经营茶院的中年妇人，乐于往来，但不愿白送全家一季收入。
+placement: xlt-tea-yard
+facts:
+  - id: xlt-xu-lan-cultivation
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xu-lan
+  - id: xlt-xu-lan-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炒茶、辨茶、记账
+    description: 炒茶、辨茶、记账
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xu-lan
+  - id: xlt-xu-lan-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 无灵根的凡人，靠炒茶与经验生活，未修成法力。
+    description: 无灵根的凡人，靠炒茶与经验生活，未修成法力。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xu-lan
+  - id: xlt-xu-lan-member-of-xlt-human-community
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: xlt-human-community
+    description: member-of
+    access:
+      kind: public
+  - id: xlt-xu-lan-aunt-of-xlt-xu-he
+    predicate: aunt-of
+    value:
+      kind: entity
+      entityId: xlt-xu-he
+    description: aunt-of
+    access:
+      kind: public
+  - id: xlt-xu-lan-trade-partner-xlt-xi
+    predicate: trade-partner
+    value:
+      kind: entity
+      entityId: xlt-xi
+    description: trade-partner
+    access:
+      kind: public
+meters:
+  - id: xlt-xu-lan-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 700
+ratings:
+  - id: xlt-xu-lan-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: xlt-xu-lan-force
+    definition_id: force
+    value: 1
+  - id: xlt-xu-lan-craft
+    definition_id: craft
+    value: 2
+  - id: xlt-xu-lan-perception
+    definition_id: perception
+    value: 1
+  - id: xlt-xu-lan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: xlt-xu-lan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 经营茶院的中年妇人，乐于往来，但不愿白送全家一季收入。
+      voice: 用自己的经历说话，先回应眼前具体事情，不复述世界百科。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把四十份干茶按约交给细翼，保住给村人的工钱。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 许兰
+        description: 经营茶院的中年妇人，乐于往来，但不愿白送全家一季收入。
+        status: observed
+      - id: location
+        name: 许家茶院
+        description: 自己当前所处之地。
+        status: observed
+      - id: known-xlt-human-community
+        name: 小灵天人族
+        description: 自己所属的群体，但不因此知道其他成员的全部活动。
+        status: observed
+      - id: known-xlt-xu-he
+        name: 许禾
+        description: 这是自己的侄子，从小熟悉茶院和家计。
+        status: observed
+      - id: known-xlt-xi
+        name: 细翼
+        description: 茶叶买主，定金已收，不能把未到的余款当库存。
+        status: observed
+      - id: known-xlt-tea-stock
+        name: 许家待交干茶
+        description: 已分出的实际库存，取用、消耗或交付须减少原处数量。
+        status: observed
+      - id: known-xlt-trade-ledger
+        name: 茶叶订货簿
+        description: 四十份干茶总价三十枚下阶灵石，十枚定金已收，二十枚待实际验货结清；约定交到折岚隘口。
+        status: observed
+      - id: known-xlt-xu-lan-tool
+        name: 许兰的炒茶锅
+        description: 炒茶锅可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+        status: observed
+    evidence:
+      - id: own-life
+        kind: observation
+        description: 本人的修行、职业与日常往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skills
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炒茶、辨茶、记账
+        description: 炒茶、辨茶、记账
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - own-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - xlt-xu-lan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - xlt-tea-yard
+      - local_entity_id: known-xlt-human-community
+        canonical_entity_ids:
+          - xlt-human-community
+      - local_entity_id: known-xlt-xu-he
+        canonical_entity_ids:
+          - xlt-xu-he
+      - local_entity_id: known-xlt-xi
+        canonical_entity_ids:
+          - xlt-xi
+      - local_entity_id: known-xlt-tea-stock
+        canonical_entity_ids:
+          - xlt-tea-stock
+      - local_entity_id: known-xlt-trade-ledger
+        canonical_entity_ids:
+          - xlt-trade-ledger
+      - local_entity_id: known-xlt-xu-lan-tool
+        canonical_entity_ids:
+          - xlt-xu-lan-tool

@@ -1,0 +1,42 @@
+id: minghe-blood-marsh
+kind: location
+name: 血沼
+description: 暗红泥水之间有低矮石脊，夜间常能听到振翅声；干岸与沼内活动范围不同。
+placement: minghe-space
+facts:
+  - id: minghe-blood-marsh-route-to-minghe-bone-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-bone-plain
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-blood-marsh-route-conditions-minghe-bone-plain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。
+    description: 骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。
+    access:
+      kind: private
+  - id: minghe-blood-marsh-route-to-minghe-blue-fog
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-blue-fog
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-blood-marsh-route-conditions-minghe-blue-fog
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。
+    description: 沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

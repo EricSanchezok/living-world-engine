@@ -1,0 +1,22 @@
+id: thunder-offering-stock
+kind: container
+name: 供奉堂备料
+description: 公有供物与维护材料，翕衡负责登记；不是管事私产。
+placement: thunder-offering-hall
+facts:
+  - id: thunder-offering-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 18
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: spirit3-cart-feed
+kind: container
+name: 驮兽干草
+description: 六份现草料，每个本地日一份，吃尽要另购。
+placement: spirit3-anyuan-cart-shed
+facts:
+  - id: spirit3-cart-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-cart-driver
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: spirit3-beast-feed
+    amount: 6
+ratings: []
+shared_activity_resources: []

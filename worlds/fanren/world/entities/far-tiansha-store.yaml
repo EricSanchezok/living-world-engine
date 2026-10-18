@@ -1,0 +1,18 @@
+id: far-tiansha-store
+kind: location
+name: 渡口药栈
+description: 替邻村收晒普通草药的药栈。
+placement: far-tiansha-landing
+facts:
+  - id: far-tiansha-store-route-far-tiansha-landing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: far-tiansha-landing
+    description: 渡口石阶与药栈相连，须实际步行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: demon-seventh-court
+kind: location
+name: 苍泽辖地议事处
+description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+placement: demon-seventh-territory
+facts:
+  - id: demon-seventh-court-route-demon-seventh-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-seventh-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-seventh-court-condition-demon-seventh-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

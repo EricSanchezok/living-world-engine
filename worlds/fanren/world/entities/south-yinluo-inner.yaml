@@ -1,0 +1,42 @@
+id: south-yinluo-inner
+kind: location
+name: 阴罗宗内山
+description: 内山修行、养幡与法会区域，不是对所有外务访客开放。
+placement: dajin-yinluo-hall
+facts:
+  - id: south-yinluo-inner-route-dajin-yinluo-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yinluo-hall
+    description: route-to
+    access:
+      kind: public
+  - id: south-yinluo-inner-condition-dajin-yinluo-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外务馆需引荐才准进入内山。
+    description: 外务馆需引荐才准进入内山。
+    access:
+      kind: public
+  - id: south-yinluo-inner-route-south-yinluo-vault
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yinluo-vault
+    description: route-to
+    access:
+      kind: public
+  - id: south-yinluo-inner-condition-south-yinluo-vault
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

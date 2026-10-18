@@ -1,0 +1,18 @@
+id: blood-archive-key
+kind: item
+name: 藏经柜钥符
+description: 由碧影保管的本阁秘柜钥符；仅能开启相符柜门，借阅许可另须签定范围。
+placement: canon-bi-ying
+facts:
+  - id: blood-archive-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

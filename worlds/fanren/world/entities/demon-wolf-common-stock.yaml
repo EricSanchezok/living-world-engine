@@ -1,0 +1,32 @@
+id: demon-wolf-common-stock
+kind: container
+name: 公库（狼族之地居民）
+description: 公用储备，支付修缮与救急需有记录及授权。
+placement: demon-wolf-town
+facts:
+  - id: demon-wolf-common-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-wolf-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-wolf-common-stock-spending-rule
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 单项支出超过一百低阶灵石须由本地议事处授权，领主个人交易不得直接挪走全库。
+    description: 单项支出超过一百低阶灵石须由本地议事处授权，领主个人交易不得直接挪走全库。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 800
+  - definition_id: grain
+    amount: 200
+  - definition_id: craft-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

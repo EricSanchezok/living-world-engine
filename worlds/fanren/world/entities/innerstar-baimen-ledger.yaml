@@ -1,0 +1,20 @@
+id: innerstar-baimen-ledger
+kind: container
+name: 白门抄录公账
+description: 书铺收支独立记账的公款匣。
+placement: innerstar-baimen-bookshop
+facts:
+  - id: innerstar-baimen-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

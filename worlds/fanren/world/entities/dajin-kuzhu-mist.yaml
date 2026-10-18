@@ -1,0 +1,26 @@
+id: dajin-kuzhu-mist
+kind: location
+name: 苦竹岛外雾海
+description: 连绵海雾使视线与探查受阻，进入须辨认航路与阵法状态。
+placement: dajin-kuzhu-island
+facts:
+  - id: dajin-kuzhu-mist-route-dajin-coast-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-coast-wharf
+    description: 先从可靠航图或沿海修士取得方位，再以实际航行或飞遁抵达，不能仅凭岛名瞬移。
+    access:
+      kind: public
+  - id: dajin-kuzhu-mist-route-dajin-kuzhu-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-island
+    description: 迷雾与古阵阻隔，须获得通行指引或实际破除阻碍。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

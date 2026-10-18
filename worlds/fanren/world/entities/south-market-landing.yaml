@@ -1,0 +1,26 @@
+id: south-market-landing
+kind: location
+name: 回溪埠
+description: 浅底药船靠岸的木埠，需防潮的包裹垫在竹架上。
+placement: south-market
+facts:
+  - id: south-market-landing-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-landing-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

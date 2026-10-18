@@ -1,0 +1,20 @@
+id: steppe-practice-kit
+kind: item
+name: 孟迟练习阵盘
+description: 六枚灵石已放在匣内，尚未装入阵盘。每次小型合施练习消耗一枚，至多三人各耗十点法力；能演示聚光与小水幕，不能化出圣禽。
+placement: steppe-meng-chi
+facts:
+  - id: steppe-practice-kit-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-meng-chi
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 6
+ratings: []
+shared_activity_resources: []

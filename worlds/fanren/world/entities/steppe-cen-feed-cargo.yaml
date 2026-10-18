@@ -1,0 +1,28 @@
+id: steppe-cen-feed-cargo
+kind: item
+name: 岑禾待售饲料
+description: 三份尚未交付的饲料，质量、价格和付款须双方确认。
+placement: steppe-cen-he
+facts:
+  - id: steppe-cen-feed-cargo-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-cen-he
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-cen-feed-cargo-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-cen-he
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+ratings: []
+shared_activity_resources: []

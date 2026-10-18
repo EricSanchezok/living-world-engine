@@ -1,0 +1,22 @@
+id: fengyuan-lirong-repair-kit
+kind: container
+name: 李蓉行囊与修补材料
+description: 用于修复远行器物与采药的有限储备。
+placement: canon-li-rong
+facts:
+  - id: fengyuan-lirong-repair-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-li-rong
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+  - definition_id: mid-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

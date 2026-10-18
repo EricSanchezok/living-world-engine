@@ -1,0 +1,42 @@
+id: innerstar-xiaohuan-village
+kind: location
+name: 小寰渔村
+description: 数百居民以捕鱼和种植为生；村落人口不等同今日在场说话的人数。
+placement: human-xiaohuan-island
+facts:
+  - id: innerstar-xiaohuan-village-route-human-xiaohuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-xiaohuan-island
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-village-condition-human-xiaohuan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 数百居民以捕鱼和种植为生；村落人口不等同今日在场说话的人数。
+    description: 数百居民以捕鱼和种植为生；村落人口不等同今日在场说话的人数。
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-village-route-innerstar-xiaohuan-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-xiaohuan-array
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-xiaohuan-village-condition-innerstar-xiaohuan-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿海设置的有限防护阵，阵枢需要验修和灵石。
+    description: 沿海设置的有限防护阵，阵枢需要验修和灵石。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

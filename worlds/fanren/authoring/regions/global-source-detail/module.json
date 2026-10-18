@@ -378,6 +378,3664 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "global-qilin-doublepupil-rat",
+      "name": "兽栏双瞳鼠",
+      "kind": "creature",
+      "placement": "yue-qilin-beast-pens",
+      "description": "一只褐毛双瞳鼠，待在带扣的专用笼具中。",
+      "facts": [
+        {
+          "id": "global-qilin-doublepupil-rat-ability",
+          "predicate": "species-ability",
+          "value": {
+            "kind": "text",
+            "value": "可察雾中灵气并寻附近较浓灵地，硬牙利爪能掘土石；不是全知探宝，对障碍、疲劳和实际感知仍有边界。"
+          },
+          "description": "可察雾中灵气并寻附近较浓灵地，硬牙利爪能掘土石；不是全知探宝，对障碍、疲劳和实际感知仍有边界。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "检查兽栏交接牌或询问当值饲养者。"
+          }
+        },
+        {
+          "id": "global-qilin-doublepupil-rat-custody",
+          "predicate": "custody",
+          "value": {
+            "kind": "text",
+            "value": "黄枫门中公有，由陶冬喂养并管交接；可按兽栏公示租例有限期出借，需实际许可、押金和演示控制，不自动归承租者永久所有。"
+          },
+          "description": "黄枫门中公有，由陶冬喂养并管交接；可按兽栏公示租例有限期出借，需实际许可、押金和演示控制，不自动归承租者永久所有。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "检查兽栏交接牌或询问当值饲养者。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-qilin-earth-pear-1",
+      "name": "土梨果1",
+      "kind": "item",
+      "placement": "yue-beast-feed",
+      "description": "一枚用于喂养双瞳鼠的土梨果。",
+      "facts": [
+        {
+          "id": "global-qilin-earth-pear-1-use",
+          "predicate": "consumable-use",
+          "value": {
+            "kind": "text",
+            "value": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。"
+          },
+          "description": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "检查兽栏交接牌或询问当值饲养者。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-qilin-earth-pear-2",
+      "name": "土梨果2",
+      "kind": "item",
+      "placement": "yue-beast-feed",
+      "description": "一枚用于喂养双瞳鼠的土梨果。",
+      "facts": [
+        {
+          "id": "global-qilin-earth-pear-2-use",
+          "predicate": "consumable-use",
+          "value": {
+            "kind": "text",
+            "value": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。"
+          },
+          "description": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "检查兽栏交接牌或询问当值饲养者。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-qilin-earth-pear-3",
+      "name": "土梨果3",
+      "kind": "item",
+      "placement": "yue-beast-feed",
+      "description": "一枚用于喂养双瞳鼠的土梨果。",
+      "facts": [
+        {
+          "id": "global-qilin-earth-pear-3-use",
+          "predicate": "consumable-use",
+          "value": {
+            "kind": "text",
+            "value": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。"
+          },
+          "description": "门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "检查兽栏交接牌或询问当值饲养者。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-baoling-temple",
+      "name": "宝灵寺",
+      "kind": "location",
+      "placement": "dajin-yutian",
+      "description": "玉田山一座高峰上的佛寺，晨昏有清远钟声。",
+      "facts": [
+        {
+          "id": "global-baoling-temple-route-dajin-huanyun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huanyun"
+          },
+          "description": "两峰之间可循山路往来，崖壁和寺门仍需实际通过。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "original-baoling-changheng",
+      "name": "常衡",
+      "kind": "person",
+      "placement": "global-baoling-temple",
+      "description": "照看寺钟的僧人，对借物和扰动钟架格外谨慎。",
+      "facts": [
+        {
+          "id": "original-baoling-changheng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-baoling-changheng"
+            ]
+          }
+        },
+        {
+          "id": "original-baoling-changheng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "木、土双属性灵根"
+          },
+          "description": "木、土双属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "original-baoling-changheng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基吐纳、防护、驱动上阶青蝉钟与检查钟架；钟音可使人精神一振而非驱除任意心魔。"
+          },
+          "description": "筑基吐纳、防护、驱动上阶青蝉钟与检查钟架；钟音可使人精神一振而非驱除任意心魔。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-baoling-changheng"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-baoling-changheng-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-baoling-changheng-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-baoling-changheng-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "original-baoling-changheng-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "original-baoling-changheng-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "original-baoling-changheng-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "original-baoling-changheng-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "original-baoling-changheng",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "照看寺钟的僧人，对借物和扰动钟架格外谨慎。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查钟架绳扣，按寺中时刻敲钟；有人求访时先弄清来意。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "常衡",
+              "description": "筑基吐纳、防护、驱动上阶青蝉钟与检查钟架；钟音可使人精神一振而非驱除任意心魔。；固定资质：木、土双属性灵根",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "宝灵寺",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "bell",
+              "name": "青蝉钟",
+              "description": "寺钟为寺产，自己掌握钟诀和每日三鸣安排，未获许可不借离寺。",
+              "status": "observed"
+            },
+            {
+              "id": "rope",
+              "name": "钟架备用绳扣",
+              "description": "钟架有一处磨损绳扣及一条备用绳，可以先检查再换。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-baoling-changheng"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-baoling-temple"
+              ]
+            },
+            {
+              "local_entity_id": "bell",
+              "canonical_entity_ids": [
+                "global-baoling-qingchan-bell"
+              ]
+            },
+            {
+              "local_entity_id": "rope",
+              "canonical_entity_ids": [
+                "global-baoling-rope"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "筑基吐纳、防护、驱动上阶青蝉钟与检查钟架；钟音可使人精神一振而非驱除任意心魔。；固定资质：木、土双属性灵根"
+              },
+              "description": "筑基吐纳、防护、驱动上阶青蝉钟与检查钟架；钟音可使人精神一振而非驱除任意心魔。；固定资质：木、土双属性灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "bell-knowledge",
+              "subjectId": "bell",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "寺钟为寺产，自己掌握钟诀和每日三鸣安排，未获许可不借离寺。"
+              },
+              "description": "寺钟为寺产，自己掌握钟诀和每日三鸣安排，未获许可不借离寺。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "rope-knowledge",
+              "subjectId": "rope",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "钟架有一处磨损绳扣及一条备用绳，可以先检查再换。"
+              },
+              "description": "钟架有一处磨损绳扣及一条备用绳，可以先检查再换。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-baoling-qingchan-bell",
+      "name": "青蝉钟",
+      "kind": "item",
+      "placement": "global-baoling-temple",
+      "description": "悬在钟架上的青色法钟。",
+      "facts": [
+        {
+          "id": "global-baoling-qingchan-bell-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-baoling-temple"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-baoling-qingchan-bell-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "上阶法器，每日三次寺中敲鸣为现行制度；驱动需会钟诀者注入法力。钟声提神，不能治疗任意心神病。"
+          },
+          "description": "上阶法器，每日三次寺中敲鸣为现行制度；驱动需会钟诀者注入法力。钟声提神，不能治疗任意心神病。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-baoling-rope",
+      "name": "钟架备用绳扣",
+      "kind": "item",
+      "placement": "global-baoling-temple",
+      "description": "一套待更换的磨损绳扣与一条备用绳。",
+      "facts": [
+        {
+          "id": "global-baoling-rope-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-baoling-temple"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-baoling-rope-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "绳扣磨损可实查；备用绳一次替换就消耗该备用件，不再作为第二条。"
+          },
+          "description": "绳扣磨损可实查；备用绳一次替换就消耗该备用件，不再作为第二条。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "future-spirit3-jinyu-sect",
+      "name": "金玉宗",
+      "kind": "social-group",
+      "placement": "spirit-tianyuan-domain",
+      "description": "以九玄明玉潭结交炼体修行者的宗门。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-jinyu-court",
+      "name": "金玉宗外院",
+      "kind": "location",
+      "placement": "spirit-tianyuan-domain",
+      "description": "靠山而建的外院，通向内潭的石门有人照管。",
+      "facts": [
+        {
+          "id": "global-jinyu-court-route-spirit-sunset-human-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-human-city"
+          },
+          "description": "可沿人族陆路前往金玉外院；路程需实际安排，内潭不对未经许可者开放。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-court-route-global-jinyu-pond",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-jinyu-pond"
+          },
+          "description": "潭门须执事核许可后通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-jinyu-pond",
+      "name": "九玄明玉潭",
+      "kind": "location",
+      "placement": "global-jinyu-court",
+      "description": "深水带着玉色微光的潭池，岸边立着入潭名册案。",
+      "facts": [
+        {
+          "id": "global-jinyu-pond-effect",
+          "predicate": "body-cultivation-effect",
+          "value": {
+            "kind": "text",
+            "value": "深水只对同一炼体者助突破一次瓶颈，再浸不重复生效；实际能否突破仍取决于其已有基础。对修仙法力进阶用处不大。"
+          },
+          "description": "深水只对同一炼体者助突破一次瓶颈，再浸不重复生效；实际能否突破仍取决于其已有基础。对修仙法力进阶用处不大。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-pond-route-global-jinyu-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-jinyu-court"
+          },
+          "description": "潭门须执事核许可后通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "original-jinyu-xujingcheng",
+      "name": "许静澄",
+      "kind": "person",
+      "placement": "global-jinyu-court",
+      "description": "掌管潭门与入潭簿的金玉执事，愿意听取交换方案，也坚持核对是否用过潭水。",
+      "facts": [
+        {
+          "id": "original-jinyu-xujingcheng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-jinyu-xujingcheng"
+            ]
+          }
+        },
+        {
+          "id": "original-jinyu-xujingcheng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "水、土双属性灵根"
+          },
+          "description": "水、土双属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "original-jinyu-xujingcheng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期吐纳、护体、门禁维护；会核验宗门灵心佩和查入潭记录，不会凭姓名替人洗去旧受效史。"
+          },
+          "description": "结丹初期吐纳、护体、门禁维护；会核验宗门灵心佩和查入潭记录，不会凭姓名替人洗去旧受效史。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-jinyu-xujingcheng"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-jinyu-xujingcheng-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-jinyu-xujingcheng-mana",
+          "definition_id": "mana",
+          "current": 320
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-jinyu-xujingcheng-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "original-jinyu-xujingcheng-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "original-jinyu-xujingcheng-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "original-jinyu-xujingcheng-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "original-jinyu-xujingcheng-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "original-jinyu-xujingcheng",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "掌管潭门与入潭簿的金玉执事，愿意听取交换方案，也坚持核对是否用过潭水。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对董箐转来的访潭申请，再安排一位符合条件者的勘验。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "许静澄",
+              "description": "结丹初期吐纳、护体、门禁维护；会核验宗门灵心佩和查入潭记录，不会凭姓名替人洗去旧受效史。；固定资质：水、土双属性灵根",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "金玉宗外院",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-jinyu-pond",
+              "name": "九玄明玉潭",
+              "description": "深水带着玉色微光的潭池，岸边立着入潭名册案。 潭门须执事核许可后通行。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-jinyu-ledger",
+              "name": "九玄潭入潭簿",
+              "description": "记载获准入潭者及实际洗浴日期的厚簿。 记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-jinyu-request",
+              "name": "访潭申请",
+              "description": "由董箐代询一次浸潭条件的信札，尚无批准印。 申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-jinyu-token-kept",
+              "name": "许静澄留宗灵心佩",
+              "description": "寄存宗门的一枚配对灵心佩。 与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-jinyu-token-carried",
+              "name": "许静澄随身灵心佩",
+              "description": "许静澄携带的另一枚灵心佩。 与留宗佩组成一对，不得复制第二份精魂与无代价补佩。",
+              "status": "observed"
+            },
+            {
+              "id": "dealer",
+              "name": "董箐",
+              "description": "董箐代询入潭条件；自己未批准，需回信说明。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-jinyu-xujingcheng"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-jinyu-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-jinyu-pond",
+              "canonical_entity_ids": [
+                "global-jinyu-pond"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-jinyu-ledger",
+              "canonical_entity_ids": [
+                "global-jinyu-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-jinyu-request",
+              "canonical_entity_ids": [
+                "global-jinyu-request"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-jinyu-token-kept",
+              "canonical_entity_ids": [
+                "global-jinyu-token-kept"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-jinyu-token-carried",
+              "canonical_entity_ids": [
+                "global-jinyu-token-carried"
+              ]
+            },
+            {
+              "local_entity_id": "dealer",
+              "canonical_entity_ids": [
+                "spirit-sunset-material-dealer"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "结丹初期吐纳、护体、门禁维护；会核验宗门灵心佩和查入潭记录，不会凭姓名替人洗去旧受效史。；固定资质：水、土双属性灵根"
+              },
+              "description": "结丹初期吐纳、护体、门禁维护；会核验宗门灵心佩和查入潭记录，不会凭姓名替人洗去旧受效史。；固定资质：水、土双属性灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-jinyu-pond-knowledge",
+              "subjectId": "known-global-jinyu-pond",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "深水带着玉色微光的潭池，岸边立着入潭名册案。 潭门须执事核许可后通行。"
+              },
+              "description": "深水带着玉色微光的潭池，岸边立着入潭名册案。 潭门须执事核许可后通行。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-jinyu-ledger-knowledge",
+              "subjectId": "known-global-jinyu-ledger",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "记载获准入潭者及实际洗浴日期的厚簿。 记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。"
+              },
+              "description": "记载获准入潭者及实际洗浴日期的厚簿。 记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-jinyu-request-knowledge",
+              "subjectId": "known-global-jinyu-request",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "由董箐代询一次浸潭条件的信札，尚无批准印。 申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。"
+              },
+              "description": "由董箐代询一次浸潭条件的信札，尚无批准印。 申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-jinyu-token-kept-knowledge",
+              "subjectId": "known-global-jinyu-token-kept",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "寄存宗门的一枚配对灵心佩。 与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。"
+              },
+              "description": "寄存宗门的一枚配对灵心佩。 与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-jinyu-token-carried-knowledge",
+              "subjectId": "known-global-jinyu-token-carried",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "许静澄携带的另一枚灵心佩。 与留宗佩组成一对，不得复制第二份精魂与无代价补佩。"
+              },
+              "description": "许静澄携带的另一枚灵心佩。 与留宗佩组成一对，不得复制第二份精魂与无代价补佩。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dealer-knowledge",
+              "subjectId": "dealer",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "董箐代询入潭条件；自己未批准，需回信说明。"
+              },
+              "description": "董箐代询入潭条件；自己未批准，需回信说明。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-jinyu-ledger",
+      "name": "九玄潭入潭簿",
+      "kind": "item",
+      "placement": "global-jinyu-court",
+      "description": "记载获准入潭者及实际洗浴日期的厚簿。",
+      "facts": [
+        {
+          "id": "global-jinyu-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "future-spirit3-jinyu-sect"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-ledger-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。"
+          },
+          "description": "记录只是证据，可有错漏；真实受效历史不能仅靠删册重置。现有一张董箐转交的未批准申请。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-jinyu-request",
+      "name": "访潭申请",
+      "kind": "item",
+      "placement": "global-jinyu-court",
+      "description": "由董箐代询一次浸潭条件的信札，尚无批准印。",
+      "facts": [
+        {
+          "id": "global-jinyu-request-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-material-dealer"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-request-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。"
+          },
+          "description": "申请尚未兑现，不产生已经入潭或保证突破的事实；许静澄可回应条件或拒绝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-jinyu-token-kept",
+      "name": "许静澄留宗灵心佩",
+      "kind": "item",
+      "placement": "global-jinyu-court",
+      "description": "寄存宗门的一枚配对灵心佩。",
+      "facts": [
+        {
+          "id": "global-jinyu-token-kept-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-jinyu-xujingcheng"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-token-kept-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。"
+          },
+          "description": "与许静澄随身佩同一精魂联系；可按宗门法门寻其踪迹，毁损会伤许静澄心神，不是感情控制。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-jinyu-token-carried",
+      "name": "许静澄随身灵心佩",
+      "kind": "item",
+      "placement": "original-jinyu-xujingcheng",
+      "description": "许静澄携带的另一枚灵心佩。",
+      "facts": [
+        {
+          "id": "global-jinyu-token-carried-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-jinyu-xujingcheng"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-jinyu-token-carried-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "与留宗佩组成一对，不得复制第二份精魂与无代价补佩。"
+          },
+          "description": "与留宗佩组成一对，不得复制第二份精魂与无代价补佩。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-family",
+      "name": "符氏医家",
+      "kind": "social-group",
+      "placement": "spirit-tianyuan-domain",
+      "description": "保存金针医术的家族，家内授艺有次序。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-clinic",
+      "name": "符氏针医舍",
+      "kind": "location",
+      "placement": "spirit-tianyuan-domain",
+      "description": "一间设诊榻和洗针案的医舍。",
+      "facts": [
+        {
+          "id": "global-fu-clinic-route-spirit-tianyuan-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-tianyuan-market"
+          },
+          "description": "人族道路可至医舍；问诊与取药需约定。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "original-fu-yan",
+      "name": "符延",
+      "kind": "person",
+      "placement": "global-fu-clinic",
+      "description": "符家行医人，先问伤情，再说针疗能做多少。",
+      "facts": [
+        {
+          "id": "original-fu-yan-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "无修仙法力"
+          },
+          "description": "无修仙法力",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-fu-yan"
+            ]
+          }
+        },
+        {
+          "id": "original-fu-yan-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根"
+          },
+          "description": "无灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "original-fu-yan-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "熟练金针刺穴、清创和四肢经脉检查；只会家传基础，不掌握完整玄天九龙金针秘术，也无修仙法力。"
+          },
+          "description": "熟练金针刺穴、清创和四肢经脉检查；只会家传基础，不掌握完整玄天九龙金针秘术，也无修仙法力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-fu-yan"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-fu-yan-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-fu-yan-mana",
+          "definition_id": "mana",
+          "current": 0
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-fu-yan-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "original-fu-yan-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "original-fu-yan-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "original-fu-yan-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "original-fu-yan-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 8
+        }
+      ],
+      "agent": {
+        "id": "original-fu-yan",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "符家行医人，先问伤情，再说针疗能做多少。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "清点现有针具，替闻素所托的一份伤情记录写出有限诊治建议。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "符延",
+              "description": "熟练金针刺穴、清创和四肢经脉检查；只会家传基础，不掌握完整玄天九龙金针秘术，也无修仙法力。；固定资质：无灵根",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "符氏针医舍",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-fu-golden-needles",
+              "name": "医舍金针匣",
+              "description": "十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-fu-tradition-book",
+              "name": "符家金针传习册",
+              "description": "基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-fu-dressing",
+              "name": "医舍净布药包",
+              "description": "每份只处理相应小创，实际使用即减库存；不治一切经脉重伤。",
+              "status": "observed"
+            },
+            {
+              "id": "known-global-fu-consult-note",
+              "name": "闻素问诊记录",
+              "description": "只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。",
+              "status": "observed"
+            },
+            {
+              "id": "physician",
+              "name": "闻素",
+              "description": "认识同行闻素，正在处理她送来的问诊记录。",
+              "status": "observed"
+            },
+            {
+              "id": "dressing-2",
+              "name": "医舍净布药包2",
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "status": "observed"
+            },
+            {
+              "id": "dressing-3",
+              "name": "医舍净布药包3",
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "status": "observed"
+            },
+            {
+              "id": "dressing-4",
+              "name": "医舍净布药包4",
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "status": "observed"
+            },
+            {
+              "id": "dressing-5",
+              "name": "医舍净布药包5",
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "status": "observed"
+            },
+            {
+              "id": "dressing-6",
+              "name": "医舍净布药包6",
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-fu-yan"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-fu-clinic"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-fu-golden-needles",
+              "canonical_entity_ids": [
+                "global-fu-golden-needles"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-fu-tradition-book",
+              "canonical_entity_ids": [
+                "global-fu-tradition-book"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-fu-dressing",
+              "canonical_entity_ids": [
+                "global-fu-dressing"
+              ]
+            },
+            {
+              "local_entity_id": "known-global-fu-consult-note",
+              "canonical_entity_ids": [
+                "global-fu-consult-note"
+              ]
+            },
+            {
+              "local_entity_id": "physician",
+              "canonical_entity_ids": [
+                "spirit-tianyuan-physician"
+              ]
+            },
+            {
+              "local_entity_id": "dressing-2",
+              "canonical_entity_ids": [
+                "global-fu-dressing-2"
+              ]
+            },
+            {
+              "local_entity_id": "dressing-3",
+              "canonical_entity_ids": [
+                "global-fu-dressing-3"
+              ]
+            },
+            {
+              "local_entity_id": "dressing-4",
+              "canonical_entity_ids": [
+                "global-fu-dressing-4"
+              ]
+            },
+            {
+              "local_entity_id": "dressing-5",
+              "canonical_entity_ids": [
+                "global-fu-dressing-5"
+              ]
+            },
+            {
+              "local_entity_id": "dressing-6",
+              "canonical_entity_ids": [
+                "global-fu-dressing-6"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "熟练金针刺穴、清创和四肢经脉检查；只会家传基础，不掌握完整玄天九龙金针秘术，也无修仙法力。；固定资质：无灵根"
+              },
+              "description": "熟练金针刺穴、清创和四肢经脉检查；只会家传基础，不掌握完整玄天九龙金针秘术，也无修仙法力。；固定资质：无灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-fu-golden-needles-knowledge",
+              "subjectId": "known-global-fu-golden-needles",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。"
+              },
+              "description": "十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-fu-tradition-book-knowledge",
+              "subjectId": "known-global-fu-tradition-book",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。"
+              },
+              "description": "基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-fu-dressing-knowledge",
+              "subjectId": "known-global-fu-dressing",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍现有六份分别存放的净布药包，只用于对应小创，用一份少一份。"
+              },
+              "description": "医舍现有六份分别存放的净布药包，只用于对应小创，用一份少一份。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-global-fu-consult-note-knowledge",
+              "subjectId": "known-global-fu-consult-note",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。"
+              },
+              "description": "只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "physician-knowledge",
+              "subjectId": "physician",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "认识同行闻素，正在处理她送来的问诊记录。"
+              },
+              "description": "认识同行闻素，正在处理她送来的问诊记录。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dressing-2-knowledge",
+              "subjectId": "dressing-2",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍的一份有限清创药包，用后即消耗。"
+              },
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dressing-3-knowledge",
+              "subjectId": "dressing-3",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍的一份有限清创药包，用后即消耗。"
+              },
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dressing-4-knowledge",
+              "subjectId": "dressing-4",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍的一份有限清创药包，用后即消耗。"
+              },
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dressing-5-knowledge",
+              "subjectId": "dressing-5",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍的一份有限清创药包，用后即消耗。"
+              },
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "dressing-6-knowledge",
+              "subjectId": "dressing-6",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "医舍的一份有限清创药包，用后即消耗。"
+              },
+              "description": "医舍的一份有限清创药包，用后即消耗。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-fu-golden-needles",
+      "name": "医舍金针匣",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "十二根已清洁金针装在有槽木匣里。",
+      "facts": [
+        {
+          "id": "global-fu-golden-needles-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-golden-needles-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。"
+          },
+          "description": "十二根实针可反复消毒使用，遗失/弯折必须实际处理，不能以针影增加根数。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-tradition-book",
+      "name": "符家金针传习册",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "由医舍保管的家传术册，有基础篇和封存秘篇。",
+      "facts": [
+        {
+          "id": "global-fu-tradition-book-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-tradition-book-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。"
+          },
+          "description": "基础篇可经本人教学学习；封存篇需家族许可且读懂、训练，不因持册即掌握，符延不自称完整会用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing",
+      "name": "医舍净布药包1",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "每份只处理相应小创，实际使用即减库存；不治一切经脉重伤。"
+          },
+          "description": "每份只处理相应小创，实际使用即减库存；不治一切经脉重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-consult-note",
+      "name": "闻素问诊记录",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "闻素转来的一份伤情观察，询问针刺能否辅助恢复活动。",
+      "facts": [
+        {
+          "id": "global-fu-consult-note-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-tianyuan-physician"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-consult-note-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。"
+          },
+          "description": "只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-sunset-watch",
+      "name": "落日入口值守屋",
+      "kind": "location",
+      "placement": "spirit-sunset-border",
+      "description": "靠着峡谷入口的值守屋，旁有控制封锁阵的石台。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-sunset-array",
+      "name": "入口封锁阵石台",
+      "kind": "item",
+      "placement": "global-sunset-watch",
+      "description": "与峡谷两侧封锁阵相连的石台。",
+      "facts": [
+        {
+          "id": "global-sunset-array-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-border"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-sunset-array-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "维持侧路封锁需要阵材和定期维护；正口能通行但有真实监视，不能使整个落日之墓绝对安全。"
+          },
+          "description": "维持侧路封锁需要阵材和定期维护；正口能通行但有真实监视，不能使整个落日之墓绝对安全。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "original-sunset-shenque",
+      "name": "沈阙",
+      "kind": "person",
+      "placement": "global-sunset-watch",
+      "description": "轮值入口的化神修士，重视值守交接和异常动静。",
+      "facts": [
+        {
+          "id": "original-sunset-shenque-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-sunset-shenque"
+            ]
+          }
+        },
+        {
+          "id": "original-sunset-shenque-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "金、火、土三属性灵根"
+          },
+          "description": "金、火、土三属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "original-sunset-shenque-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神初期护体、遁行、神识巡查和现有入口阵维护；只监视覆盖范围，远处与地下超出巡查范围的事情不知情。"
+          },
+          "description": "化神初期护体、遁行、神识巡查和现有入口阵维护；只监视覆盖范围，远处与地下超出巡查范围的事情不知情。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-sunset-shenque"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-sunset-shenque-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-sunset-shenque-mana",
+          "definition_id": "mana",
+          "current": 1000
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-sunset-shenque-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "original-sunset-shenque-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "original-sunset-shenque-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "original-sunset-shenque-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "original-sunset-shenque-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "original-sunset-shenque",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "轮值入口的化神修士，重视值守交接和异常动静。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查一枚读数不稳的阵石，记录进出口动静。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "沈阙",
+              "description": "化神初期护体、遁行、神识巡查和现有入口阵维护；只监视覆盖范围，远处与地下超出巡查范围的事情不知情。；固定资质：金、火、土三属性灵根",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "落日入口值守屋",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "array",
+              "name": "入口封锁阵石台",
+              "description": "自己会控制既有阵台，但需要维护和真实法力；正口守望不是全域全知。",
+              "status": "observed"
+            },
+            {
+              "id": "stone",
+              "name": "读数不稳的阵石",
+              "description": "这块细裂阵石读数不稳，正准备检查。",
+              "status": "observed"
+            },
+            {
+              "id": "supplier",
+              "name": "董箐",
+              "description": "认识董箐，可向她询问修补材料是否有货，未预订也未收货。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-sunset-shenque"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-sunset-watch"
+              ]
+            },
+            {
+              "local_entity_id": "array",
+              "canonical_entity_ids": [
+                "global-sunset-array"
+              ]
+            },
+            {
+              "local_entity_id": "stone",
+              "canonical_entity_ids": [
+                "global-sunset-array-stone"
+              ]
+            },
+            {
+              "local_entity_id": "supplier",
+              "canonical_entity_ids": [
+                "spirit-sunset-material-dealer"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "化神初期护体、遁行、神识巡查和现有入口阵维护；只监视覆盖范围，远处与地下超出巡查范围的事情不知情。；固定资质：金、火、土三属性灵根"
+              },
+              "description": "化神初期护体、遁行、神识巡查和现有入口阵维护；只监视覆盖范围，远处与地下超出巡查范围的事情不知情。；固定资质：金、火、土三属性灵根",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "array-knowledge",
+              "subjectId": "array",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己会控制既有阵台，但需要维护和真实法力；正口守望不是全域全知。"
+              },
+              "description": "自己会控制既有阵台，但需要维护和真实法力；正口守望不是全域全知。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "stone-knowledge",
+              "subjectId": "stone",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "这块细裂阵石读数不稳，正准备检查。"
+              },
+              "description": "这块细裂阵石读数不稳，正准备检查。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "supplier-knowledge",
+              "subjectId": "supplier",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "认识董箐，可向她询问修补材料是否有货，未预订也未收货。"
+              },
+              "description": "认识董箐，可向她询问修补材料是否有货，未预订也未收货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-sunset-array-stone",
+      "name": "读数不稳的阵石",
+      "kind": "item",
+      "placement": "global-sunset-watch",
+      "description": "一枚待校验的阵石，表面有细裂。",
+      "facts": [
+        {
+          "id": "global-sunset-array-stone-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-border"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-sunset-array-stone-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "细裂导致读数不稳，需实查修复或替换，不能只口头宣称完成。"
+          },
+          "description": "细裂导致读数不稳，需实查修复或替换，不能只口头宣称完成。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-chaos-valley",
+      "name": "混沌谷",
+      "kind": "location",
+      "placement": "spirit-sunset-border",
+      "description": "灰雾包裹的百余里山谷，山壁地面都蒙着灰色。",
+      "facts": [
+        {
+          "id": "global-chaos-valley-route-spirit-sunset-border",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-border"
+          },
+          "description": "深入落日之墓方可抵谷，途中有真实兽类和迷雾危险。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-zhiguang-pool",
+      "name": "炙光潭",
+      "kind": "location",
+      "placement": "global-chaos-valley",
+      "description": "谷中央的积水潭，灰雾遮着水面。",
+      "facts": [
+        {
+          "id": "global-zhiguang-pool-body",
+          "predicate": "body-origin",
+          "value": {
+            "kind": "text",
+            "value": "潭水积在独目巨人的眼窝凹处，与其躯体同一位置；外人未调查不自动知道。"
+          },
+          "description": "潭水积在独目巨人的眼窝凹处，与其躯体同一位置；外人未调查不自动知道。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-chaos-one-eye-giant",
+      "name": "混沌谷独目巨人",
+      "kind": "creature",
+      "placement": "global-chaos-valley",
+      "description": "半身埋在地下的受创独目巨人，此刻沉睡，呼吸极缓。",
+      "facts": [
+        {
+          "id": "canon-chaos-one-eye-giant-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼虚初期"
+          },
+          "description": "炼虚初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-chaos-one-eye-giant"
+            ]
+          }
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。"
+          },
+          "description": "古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。"
+          },
+          "description": "强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-chaos-one-eye-giant"
+            ]
+          }
+        },
+        {
+          "id": "global-giant-sleep",
+          "predicate": "current-condition",
+          "value": {
+            "kind": "text",
+            "value": "受伤沉睡、半身埋地。"
+          },
+          "description": "受伤沉睡、半身埋地。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-chaos-one-eye-giant-health",
+          "definition_id": "health",
+          "current": 52
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-mana",
+          "definition_id": "mana",
+          "current": 540
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-chaos-one-eye-giant-cultivation",
+          "definition_id": "cultivation",
+          "value": 6
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-force",
+          "definition_id": "force",
+          "value": 6
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-perception",
+          "definition_id": "perception",
+          "value": 6
+        },
+        {
+          "id": "canon-chaos-one-eye-giant-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "canon-chaos-one-eye-giant",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "半身埋在地下的受创独目巨人，此刻沉睡，呼吸极缓。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "保持沉睡恢复；遇到足以惊醒的实际冲击后依所感应的环境行动。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "混沌谷独目巨人",
+              "description": "强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "混沌谷",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "eye",
+              "name": "炙光潭",
+              "description": "自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。",
+              "status": "observed"
+            },
+            {
+              "id": "staff",
+              "name": "青灵砂石棒",
+              "description": "自己的沉重石棒就在身旁，举用需要自己醒来并有力量。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-chaos-one-eye-giant"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-chaos-valley"
+              ]
+            },
+            {
+              "local_entity_id": "eye",
+              "canonical_entity_ids": [
+                "global-zhiguang-pool"
+              ]
+            },
+            {
+              "local_entity_id": "staff",
+              "canonical_entity_ids": [
+                "global-giant-qingling-staff"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。"
+              },
+              "description": "强大肉躯、独目光丝、吸摄与耗本源再生；目前受伤沉睡，不能无代价痊愈或在未醒时连续执行精细行动。；固定资质：古巨人天赋，不以人族灵根作入门条件；天赋类型固定为独目巨人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "eye-knowledge",
+              "subjectId": "eye",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。"
+              },
+              "description": "自己的独目凹窝积着水，熟悉身体所受压迫与创痛；尚未醒来探查外界。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "staff-knowledge",
+              "subjectId": "staff",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的沉重石棒就在身旁，举用需要自己醒来并有力量。"
+              },
+              "description": "自己的沉重石棒就在身旁，举用需要自己醒来并有力量。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-true-toad-lakes",
+      "name": "蛮荒湖群",
+      "kind": "location",
+      "placement": "fengyuan-continent",
+      "description": "低矮湿林间分布大小湖泊，水下的情况须实探。",
+      "facts": [
+        {
+          "id": "global-true-toad-lakes-route-global-true-toad-twin-peaks",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-true-toad-twin-peaks"
+          },
+          "description": "沿湿林湖岸行走或飞行，实际需应对雾、水与兽类。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-true-toad-lakes-route-global-true-toad-magnetic-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-true-toad-magnetic-mountain"
+          },
+          "description": "穿过湖区可抵巨山，地下路径狭滑。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-true-toad-twin-peaks",
+      "name": "冰峰与紫林双峰",
+      "kind": "location",
+      "placement": "global-true-toad-lakes",
+      "description": "两座相距十余里的相似山峰，一覆冰雪、一生紫叶树。",
+      "facts": [
+        {
+          "id": "global-true-toad-twin-peaks-route-global-true-toad-lakes",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-true-toad-lakes"
+          },
+          "description": "沿湿林湖岸行走或飞行，实际需应对雾、水与兽类。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-true-toad-magnetic-mountain",
+      "name": "灵磁石巨山",
+      "kind": "location",
+      "placement": "global-true-toad-lakes",
+      "description": "巨山中有向地下延伸的湿滑通道。",
+      "facts": [
+        {
+          "id": "global-magnetic-earth-escape",
+          "predicate": "earth-escape-hazard",
+          "value": {
+            "kind": "text",
+            "value": "山内灵磁矿会吸制遁入山石的带灵力存在，不施土遁时不因此自动被吸。"
+          },
+          "description": "山内灵磁矿会吸制遁入山石的带灵力存在，不施土遁时不因此自动被吸。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-true-toad-magnetic-mountain-route-global-true-toad-lakes",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-true-toad-lakes"
+          },
+          "description": "穿过湖区可抵巨山，地下路径狭滑。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-xuanye-tomb",
+      "name": "炫烨陵",
+      "kind": "location",
+      "placement": "dajin-xueling-range",
+      "description": "隐在雪陵山深处的古墓，入口被遮掩。",
+      "facts": [
+        {
+          "id": "global-xuanye-tomb-route-dajin-xueling-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xueling-range"
+          },
+          "description": "须实地辨认隐藏墓口及禁制。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        },
+        {
+          "id": "global-xuanye-tomb-route-global-xuanye-main-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-xuanye-main-room"
+          },
+          "description": "穿越墓道和真实禁制才能到达主室。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-xuanye-main-room",
+      "name": "三棺墓室",
+      "kind": "location",
+      "placement": "global-xuanye-tomb",
+      "description": "宽大的墓室并列三具石棺，四角铜缸燃着阴绿火。",
+      "facts": [
+        {
+          "id": "global-xuanye-main-room-route-global-xuanye-tomb",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-xuanye-tomb"
+          },
+          "description": "穿越墓道和真实禁制才能到达主室。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-xuanye-king",
+      "name": "炫烨王",
+      "kind": "creature",
+      "placement": "global-xuanye-main-room",
+      "description": "久居陵墓的古尸王，重视自己的修炼和墓中亲属。",
+      "facts": [
+        {
+          "id": "canon-xuanye-king-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期"
+          },
+          "description": "元婴初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-king"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-king-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "尸道阴属根基；固定为古尸躯，不以新增人族灵根解释其修行。"
+          },
+          "description": "尸道阴属根基；固定为古尸躯，不以新增人族灵根解释其修行。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "canon-xuanye-king-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "天尸法、墓内阴气运用与尸焰；会已有冥河天尸诀，尚未修成可自由解除家人依墓关系的离魂境界。"
+          },
+          "description": "天尸法、墓内阴气运用与尸焰；会已有冥河天尸诀，尚未修成可自由解除家人依墓关系的离魂境界。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-king"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-king-spouse-of-canon-xuanye-consort",
+          "predicate": "spouse-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-consort"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-xuanye-king-parent-of-canon-xuanye-prince",
+          "predicate": "parent-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-prince"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-xuanye-king-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-xuanye-king-mana",
+          "definition_id": "mana",
+          "current": 650
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-xuanye-king-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-king-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-king-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-king-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-king-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "canon-xuanye-king",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "久居陵墓的古尸王，重视自己的修炼和墓中亲属。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "利用墓中阴气修炼，留意墓口有无闯入。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "炫烨王",
+              "description": "天尸法、墓内阴气运用与尸焰；会已有冥河天尸诀，尚未修成可自由解除家人依墓关系的离魂境界。；固定资质：尸道阴属根基；固定为古尸躯，不以新增人族灵根解释其修行。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "三棺墓室",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-consort",
+              "name": "炫烨王妃",
+              "description": "自己的伴侣，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-prince",
+              "name": "炫烨王儿",
+              "description": "自己的儿子，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "manual",
+              "name": "冥河天尸诀旧册",
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-xuanye-king"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-xuanye-main-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-consort",
+              "canonical_entity_ids": [
+                "canon-xuanye-consort"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-prince",
+              "canonical_entity_ids": [
+                "canon-xuanye-prince"
+              ]
+            },
+            {
+              "local_entity_id": "manual",
+              "canonical_entity_ids": [
+                "global-xuanye-corpse-manual"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "天尸法、墓内阴气运用与尸焰；会已有冥河天尸诀，尚未修成可自由解除家人依墓关系的离魂境界。；固定资质：尸道阴属根基；固定为古尸躯，不以新增人族灵根解释其修行。"
+              },
+              "description": "天尸法、墓内阴气运用与尸焰；会已有冥河天尸诀，尚未修成可自由解除家人依墓关系的离魂境界。；固定资质：尸道阴属根基；固定为古尸躯，不以新增人族灵根解释其修行。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-consort-knowledge",
+              "subjectId": "known-canon-xuanye-consort",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的伴侣，共同居于此墓。"
+              },
+              "description": "自己的伴侣，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-prince-knowledge",
+              "subjectId": "known-canon-xuanye-prince",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的儿子，共同居于此墓。"
+              },
+              "description": "自己的儿子，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "manual-knowledge",
+              "subjectId": "manual",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。"
+              },
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-xuanye-consort",
+      "name": "炫烨王妃",
+      "kind": "creature",
+      "placement": "global-xuanye-main-room",
+      "description": "依附墓室的王妃魂体，说话柔缓，担心儿子躁动误事。",
+      "facts": [
+        {
+          "id": "canon-xuanye-consort-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-consort"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-consort-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "阴属魂体根基；非新生凡人，不重新随机生根。"
+          },
+          "description": "阴属魂体根基；非新生凡人，不重新随机生根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "canon-xuanye-consort-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "墓中魂体感知、阴气维持与安抚王儿；自身元神仍受墓室依附限制。"
+          },
+          "description": "墓中魂体感知、阴气维持与安抚王儿；自身元神仍受墓室依附限制。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-consort"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-consort-spouse-of-canon-xuanye-king",
+          "predicate": "spouse-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-king"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-xuanye-consort-parent-of-canon-xuanye-prince",
+          "predicate": "parent-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-prince"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-xuanye-consort-bound-to-tomb",
+          "predicate": "soul-binding",
+          "value": {
+            "kind": "text",
+            "value": "元神与三棺墓室相联，未有已完成的离魂解脱法。"
+          },
+          "description": "元神与三棺墓室相联，未有已完成的离魂解脱法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-consort",
+              "canon-xuanye-king"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-xuanye-consort-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-xuanye-consort-mana",
+          "definition_id": "mana",
+          "current": 280
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-xuanye-consort-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-consort-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-consort-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-consort-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-consort-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "canon-xuanye-consort",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "依附墓室的王妃魂体，说话柔缓，担心儿子躁动误事。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "照看王儿的修炼状态，避免他任性冲撞禁制。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "炫烨王妃",
+              "description": "墓中魂体感知、阴气维持与安抚王儿；自身元神仍受墓室依附限制。；固定资质：阴属魂体根基；非新生凡人，不重新随机生根。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "三棺墓室",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-king",
+              "name": "炫烨王",
+              "description": "自己的伴侣，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-prince",
+              "name": "炫烨王儿",
+              "description": "自己的儿子，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "manual",
+              "name": "冥河天尸诀旧册",
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-xuanye-consort"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-xuanye-main-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-king",
+              "canonical_entity_ids": [
+                "canon-xuanye-king"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-prince",
+              "canonical_entity_ids": [
+                "canon-xuanye-prince"
+              ]
+            },
+            {
+              "local_entity_id": "manual",
+              "canonical_entity_ids": [
+                "global-xuanye-corpse-manual"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "墓中魂体感知、阴气维持与安抚王儿；自身元神仍受墓室依附限制。；固定资质：阴属魂体根基；非新生凡人，不重新随机生根。"
+              },
+              "description": "墓中魂体感知、阴气维持与安抚王儿；自身元神仍受墓室依附限制。；固定资质：阴属魂体根基；非新生凡人，不重新随机生根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-king-knowledge",
+              "subjectId": "known-canon-xuanye-king",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的伴侣，共同居于此墓。"
+              },
+              "description": "自己的伴侣，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-prince-knowledge",
+              "subjectId": "known-canon-xuanye-prince",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的儿子，共同居于此墓。"
+              },
+              "description": "自己的儿子，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "manual-knowledge",
+              "subjectId": "manual",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。"
+              },
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-xuanye-prince",
+      "name": "炫烨王儿",
+      "kind": "creature",
+      "placement": "global-xuanye-main-room",
+      "description": "仍难完全收敛尸气的王儿，情绪急躁而依赖父母教导。",
+      "facts": [
+        {
+          "id": "canon-xuanye-prince-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-prince"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-prince-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "尸道阴属根基，固定尸躯。"
+          },
+          "description": "尸道阴属根基，固定尸躯。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "适用检测手段经许可实际检测；结果揭示固定资质，不重新生成。"
+          }
+        },
+        {
+          "id": "canon-xuanye-prince-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。"
+          },
+          "description": "冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-prince"
+            ]
+          }
+        },
+        {
+          "id": "canon-xuanye-prince-child-of-canon-xuanye-king",
+          "predicate": "child-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-king"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-xuanye-prince-child-of-canon-xuanye-consort",
+          "predicate": "child-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-consort"
+          },
+          "description": "双方在墓中长期相处的亲属关系。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-xuanye-prince-bound-to-tomb",
+          "predicate": "soul-binding",
+          "value": {
+            "kind": "text",
+            "value": "元神与三棺墓室相联，未有已完成的离魂解脱法。"
+          },
+          "description": "元神与三棺墓室相联，未有已完成的离魂解脱法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xuanye-prince",
+              "canon-xuanye-king"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-xuanye-prince-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-xuanye-prince-mana",
+          "definition_id": "mana",
+          "current": 280
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-xuanye-prince-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-prince-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-prince-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-xuanye-prince-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-xuanye-prince-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "canon-xuanye-prince",
+        "model_profiles": {
+          "decision": "decision-deepseek",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "仍难完全收敛尸气的王儿，情绪急躁而依赖父母教导。",
+            "voice": "按自己确知的经历和职责说话，未知的事情会承认不知。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "在棺内修炼，听父母讲解如何稳住尸气。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "炫烨王儿",
+              "description": "冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "三棺墓室",
+              "description": "自己所在及日常使用的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-king",
+              "name": "炫烨王",
+              "description": "自己的父亲，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xuanye-consort",
+              "name": "炫烨王妃",
+              "description": "自己的母亲，共同居于此墓。",
+              "status": "observed"
+            },
+            {
+              "id": "manual",
+              "name": "冥河天尸诀旧册",
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-xuanye-prince"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "global-xuanye-main-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-king",
+              "canonical_entity_ids": [
+                "canon-xuanye-king"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xuanye-consort",
+              "canonical_entity_ids": [
+                "canon-xuanye-consort"
+              ]
+            },
+            {
+              "local_entity_id": "manual",
+              "canonical_entity_ids": [
+                "global-xuanye-corpse-manual"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修行和实际职责交接所得。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "self-knowledge",
+              "subjectId": "self",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。"
+              },
+              "description": "冥河天尸诀基础、强韧尸躯与简单尸气运用；需要练习稳住尸气。；固定资质：尸道阴属根基，固定尸躯。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "location-knowledge",
+              "subjectId": "location",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己所在及日常使用的地方。"
+              },
+              "description": "自己所在及日常使用的地方。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-king-knowledge",
+              "subjectId": "known-canon-xuanye-king",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的父亲，共同居于此墓。"
+              },
+              "description": "自己的父亲，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "known-canon-xuanye-consort-knowledge",
+              "subjectId": "known-canon-xuanye-consort",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "自己的母亲，共同居于此墓。"
+              },
+              "description": "自己的母亲，共同居于此墓。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "manual-knowledge",
+              "subjectId": "manual",
+              "predicate": "known-condition",
+              "value": {
+                "kind": "text",
+                "value": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。"
+              },
+              "description": "墓中修炼所据旧册，自己只掌握与现有修炼相应部分。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "global-xuanye-corpse-manual",
+      "name": "冥河天尸诀旧册",
+      "kind": "item",
+      "placement": "global-xuanye-main-room",
+      "description": "记着墓中尸修口诀的旧册。",
+      "facts": [
+        {
+          "id": "global-xuanye-corpse-manual-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xuanye-king"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-xuanye-corpse-manual-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "供既有修炼和传授，修受损分神需真正修炼与阴气；不能读一遍立刻恢复或越阶。"
+          },
+          "description": "供既有修炼和传授，修受损分神需真正修炼与阴气；不能读一遍立刻恢复或越阶。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing-2",
+      "name": "医舍净布药包2",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-2-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-2-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。"
+          },
+          "description": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing-3",
+      "name": "医舍净布药包3",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-3-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-3-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。"
+          },
+          "description": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing-4",
+      "name": "医舍净布药包4",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-4-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-4-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。"
+          },
+          "description": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing-5",
+      "name": "医舍净布药包5",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-5-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-5-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。"
+          },
+          "description": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-fu-dressing-6",
+      "name": "医舍净布药包6",
+      "kind": "item",
+      "placement": "global-fu-clinic",
+      "description": "一份净布和普通外伤药。",
+      "facts": [
+        {
+          "id": "global-fu-dressing-6-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-family"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-fu-dressing-6-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。"
+          },
+          "description": "一份用于对应小创的清创包扎，用后消耗；不治一切重伤。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "global-giant-qingling-staff",
+      "name": "青灵砂石棒",
+      "kind": "item",
+      "placement": "global-chaos-valley",
+      "description": "沉在巨人身旁泥土中的巨大石棒。",
+      "facts": [
+        {
+          "id": "global-giant-qingling-staff-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-chaos-one-eye-giant"
+          },
+          "description": "物权与取用许可属于此主体。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "global-giant-qingling-staff-use",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "青灵砂比同体积精铁更重，巨人醒后仍需自身力量才能举用；不是无限化生的普通泥土棒。"
+          },
+          "description": "青灵砂比同体积精铁更重，巨人醒后仍需自身力量才能举用；不是无限化生的普通泥土棒。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -452,6 +4110,21 @@
             "value": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。"
           },
           "description": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-mo-huashi-training",
+          "predicate": "medical-training",
+          "value": {
+            "kind": "text",
+            "value": "掌握华氏金针中的世俗治病与刺激潜力方法，施针需合适病况、部位和实际器具；不能使死者无条件复生，也不能凭针法赋予灵根。"
+          },
+          "description": "掌握华氏金针中的世俗治病与刺激潜力方法，施针需合适病况、部位和实际器具；不能使死者无条件复生，也不能凭针法赋予灵根。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -672,6 +4345,113 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "yue-beast-keeper",
+      "facts": [
+        {
+          "id": "global-detail-doublepupil-duty",
+          "predicate": "current-rental-duty",
+          "value": {
+            "kind": "text",
+            "value": "兽栏有一只另养的双瞳鼠和三枚土梨果。自己知道其寻灵、牙爪掘石特点，能日常喂养、用笼具交接和示范控制；租借按门中有限租例，归还须核健康，不会自动确立他人的永久血契。"
+          },
+          "description": "兽栏有一只另养的双瞳鼠和三枚土梨果。自己知道其寻灵、牙爪掘石特点，能日常喂养、用笼具交接和示范控制；租借按门中有限租例，归还须核健康，不会自动确立他人的永久血契。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-beast-keeper"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "dajin-huanyun",
+      "facts": [
+        {
+          "id": "dajin-huanyun-route-global-baoling-temple",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-baoling-temple"
+          },
+          "description": "两峰之间可循山路往来，崖壁和寺门仍需实际通过。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "spirit-sunset-human-city",
+      "facts": [
+        {
+          "id": "spirit-sunset-human-city-route-global-jinyu-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-jinyu-court"
+          },
+          "description": "可沿人族陆路前往金玉外院；路程需实际安排，内潭不对未经许可者开放。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "spirit-tianyuan-market",
+      "facts": [
+        {
+          "id": "spirit-tianyuan-market-route-global-fu-clinic",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-fu-clinic"
+          },
+          "description": "人族道路可至医舍；问诊与取药需约定。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "spirit-sunset-border",
+      "facts": [
+        {
+          "id": "spirit-sunset-border-route-global-chaos-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-chaos-valley"
+          },
+          "description": "深入落日之墓方可抵谷，途中有真实兽类和迷雾危险。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "dajin-xueling-range",
+      "facts": [
+        {
+          "id": "dajin-xueling-range-route-global-xuanye-tomb",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "global-xuanye-tomb"
+          },
+          "description": "须实地辨认隐藏墓口及禁制。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。"
+          }
+        }
+      ]
     }
   ],
   "placements": [],
@@ -790,6 +4570,21 @@
               "value": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。"
             },
             "description": "掌握萦香丸旧方的香与避蚊用途，知道云翅鸟爱吃黄栗丸。制药须有材料和时间，知道这些方名并不表示药袋已有现货。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-mo-huashi-training",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-huashi-training",
+            "value": {
+              "kind": "text",
+              "value": "掌握华氏金针中的世俗治病与刺激潜力方法，施针需合适病况、部位和实际器具；不能使死者无条件复生，也不能凭针法赋予灵根。"
+            },
+            "description": "掌握华氏金针中的世俗治病与刺激潜力方法，施针需合适病况、部位和实际器具；不能使死者无条件复生，也不能凭针法赋予灵根。",
             "stance": "believed",
             "confidence": 1,
             "evidenceIds": [
@@ -1145,6 +4940,174 @@
           }
         ]
       }
+    },
+    {
+      "agent_id": "yue-beast-keeper",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "known-doublepupil",
+            "name": "兽栏双瞳鼠",
+            "description": "自己饲养并负责租借交接的双瞳鼠。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "known-doublepupil",
+            "canonical_entity_ids": [
+              "global-qilin-doublepupil-rat"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "自己过去学习、生活及交接的知识。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-doublepupil-duty",
+            "subjectId": "self",
+            "predicate": "global-detail-doublepupil-duty",
+            "value": {
+              "kind": "text",
+              "value": "兽栏有一只另养的双瞳鼠和三枚土梨果。自己知道其寻灵、牙爪掘石特点，能日常喂养、用笼具交接和示范控制；租借按门中有限租例，归还须核健康，不会自动确立他人的永久血契。"
+            },
+            "description": "兽栏有一只另养的双瞳鼠和三枚土梨果。自己知道其寻灵、牙爪掘石特点，能日常喂养、用笼具交接和示范控制；租借按门中有限租例，归还须核健康，不会自动确立他人的永久血契。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "spirit-sunset-material-dealer",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "jinyu-clerk",
+            "name": "许静澄",
+            "description": "认识金玉执事许静澄，已向其发出一次访潭条件问询，尚未得到许可。",
+            "status": "observed"
+          },
+          {
+            "id": "watcher",
+            "name": "沈阙",
+            "description": "认识入口当值沈阙，阵材生意须真实询价交付，不是随时免费供应。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "jinyu-clerk",
+            "canonical_entity_ids": [
+              "original-jinyu-xujingcheng"
+            ]
+          },
+          {
+            "local_entity_id": "watcher",
+            "canonical_entity_ids": [
+              "original-sunset-shenque"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-detail-3000-prior-life",
+            "kind": "observation",
+            "description": "实际任职和交往经历。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "jinyu-clerk-knowledge",
+            "subjectId": "jinyu-clerk",
+            "predicate": "known-condition",
+            "value": {
+              "kind": "text",
+              "value": "认识金玉执事许静澄，已向其发出一次访潭条件问询，尚未得到许可。"
+            },
+            "description": "认识金玉执事许静澄，已向其发出一次访潭条件问询，尚未得到许可。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-detail-3000-prior-life"
+            ]
+          },
+          {
+            "id": "watcher-knowledge",
+            "subjectId": "watcher",
+            "predicate": "known-condition",
+            "value": {
+              "kind": "text",
+              "value": "认识入口当值沈阙，阵材生意须真实询价交付，不是随时免费供应。"
+            },
+            "description": "认识入口当值沈阙，阵材生意须真实询价交付，不是随时免费供应。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-detail-3000-prior-life"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "spirit-tianyuan-physician",
+      "belief": {
+        "local_entities": [
+          {
+            "id": "fu-physician",
+            "name": "符延",
+            "description": "认识符延，已请他复核针疗能辅助什么，未认为他能包治重伤。",
+            "status": "observed"
+          }
+        ],
+        "bindings": [
+          {
+            "local_entity_id": "fu-physician",
+            "canonical_entity_ids": [
+              "original-fu-yan"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "global-detail-3000-prior-life",
+            "kind": "observation",
+            "description": "实际任职和交往经历。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "fu-physician-knowledge",
+            "subjectId": "fu-physician",
+            "predicate": "known-condition",
+            "value": {
+              "kind": "text",
+              "value": "认识符延，已请他复核针疗能辅助什么，未认为他能包治重伤。"
+            },
+            "description": "认识符延，已请他复核针疗能辅助什么，未认为他能包治重伤。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-detail-3000-prior-life"
+            ]
+          }
+        ]
+      }
     }
   ],
   "laws": [
@@ -1202,6 +5165,251 @@
       "id": "global-detail-talisman-type-and-charge",
       "text": "金刚符为金属性初级中阶防御符；飞天符为风属性初级上阶飞行符，灵力未散时可再次使用，耗尽不得凭名字自动续航。实际施符仍需会对应方法，防御和逃离不保证成功。基础地刺术属初级中阶，残本、完整五行咒书等是不同传本，持有一本不等掌握全部法术。具体摊位标价不成为全界永久价目。",
       "severity": "hard"
+    },
+    {
+      "id": "global-detail-raw-drug-and-material-limits",
+      "text": "药材、虫卵、鳞片的药用或炼器用途不等已制成成品；年限、品相、配方、技艺和有限材料均须实际满足。大量生吞灵药可留下杂质，不能将临时救急当作长期无代价修炼；清灵散仅按对应药患起效，药名或书名不使读者立即掌握全部方法。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-device-effect-boundary",
+      "text": "融灵符的协作需两名对象各自实际施用；控制、束缚、侵蚀和防护类器符均按目标、防护与能量对抗，单次成功或过往低阶战绩不等绝对克制。踏云靴等增速器与身法可协同，但体力和灵力负担也须兑现；速度残影不能作为真正分身或空间瞬移。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-fauna-and-herb-observation",
+      "text": "已知妖兽习性须限定物种与阶段：石肤不护一切利器，耐火背甲不等腹部无弱点，温顺不等被攻击仍不反抗，探查彩蛾会受寒死亡。紫猴花未熟不可当成熟药材，连根移植需保根与合适生境；知道此规律不等知道所有植株位置或当前年限。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-craft-input-failure-and-range",
+      "text": "炼丹、炼器、制符和造傀儡均消耗真实材料、能量与时间，所需技能和热源不因有配方自动取得；失败残料不得仍作原完好材料。玉盒只按材质/禁制保灵，不能无限保存任意物。傀儡的射程、感知和响应迟滞依具体制作与操纵者能力，不从一个低阶实例推全类上限。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-special-curses-and-artifact-charges",
+      "text": "血咒追踪、魂器约束和煞妖变均须实际施术、媒介、对象及相应代价；普通承诺不是自动受魂器控制。符宝幻化的尺影等仍来自同一有限威能，不可把每个影子当独立宝物库存。定神/迷魂依目标心神和寄魂状况判定，不保证遇到相似外貌就必定有效。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-blood-spell-payment",
+      "text": "血灵钻等血法必须支付真实精血、灵力及所操控鬼物的代价；凝结或重组不能凭空制造独立无限生魂。血遁速度随具体修为、施法与对手器具而变，声称排名不保证追上任何飞舟。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-replenishment-and-transmission-energy",
+      "text": "轮回真诀恢复的是施法者已损真元，不能从“吸补”推导基础修为无上限增长或凡人获灵根。远程古阵需足够灵石能量、真实可用两端和必要防护；低阶石耗空是消耗，不可仍作为充满能量的库存继续使用。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-market-map-and-recipe-limits",
+      "text": "地方市期是交易惯例，必须由实际商户货品形成市场；海图只记录作者已知情况，可以更新也可过时。药名、稀有程度与交易者承诺不等对任意伤病有效；炼器配方中的深海玄晶等材料不能用同名地点、普通晶石或空承诺替代。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-growth-is-species-and-stage-bound",
+      "text": "小瓶绿液催灵植仍受该物种与阶段上限；达到万年阶段的养魂木和天雷竹不能再自动提高年限。噬金虫对霓裳草的繁殖反应随金银/三色阶段变化，不将幼体经验直接移给成熟体，也不能凭资料中的进阶名字跳过真实培育条件。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-attached-soul-and-false-remedy",
+      "text": "附灵法仅按该法适用的低智妖兽施行，不能凭此强行占据其他修士；长期反复附着可能改变意识、缩短存续，不能任意无损拆分回原态。药草外观与传闻不足以证明真伪和疗效，采摘、服用须依真实对象与是否混毒判定。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-ironfire-ant-environment",
+      "text": "铁火蚁须适宜炙热环境与食源；迁出后衰弱，常规御兽认主会使其自爆，不能把捕获等同可控。其他有特殊方法的主张需独立证据，不由名称相似推广。嗅觉、速度与战力分别判定，不能因红狸善嗅就赋予同级杀伤或全知追踪。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-guard-and-frenzy-cost",
+      "text": "古殿守卫、天罡罩与寒焰防护需按对应设施、法力和方法对抗，不因人物称某境才能过就锁死所有其它路径。狂暴术临时增强有时限及后患，不能无限持续；借兽仍需原主授权、动物实际体力与可能损伤。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-beast-healing-and-crafting-cost",
+      "text": "高阶妖兽自愈仍消耗自身能力，特定要害损毁可致命，不能由个体复原推全物种不灭。炼风雷翅等器具需要合适材料、真实火源、阵法与持续法力；防护或神雷封裹只按其实际抵抗范围，不自动解除体内所有异种力量，也不把同一封裹物复制为多件。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-flight-and-recovery-boundaries-rule",
+      "text": "遁法与隐匿均有施展条件、实际代价和反制；不得将逃离一次、假死或虚化当绝对免发现。血影遁耗精血，不能在恢复不足时连续无损使用；解除封印不等治愈原本煞气。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-yinming-gear-and-old-talisman-rule",
+      "text": "降灵符的传授资格是门规，实际炼制仍须方法、相应精魄及辅材；掌门职位不能自动生成符箓。火焰石等护阴风器具只按实物能力抵抗，不能免除全部地形和寒毒危险。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-corpse-fox-and-confined-sound-rule",
+      "text": "封印会耗能，镇压不等消灭。诱兽和困兽须实际对象与匹配器具；幻术、附体、变化与正常妖兽化形分别判断。密室音波可受环境加强，不能把当次增幅复制到任何音攻。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-tree-and-mental-technique-limits-rule",
+      "text": "心魔的主观历时不直接推进外界时钟；定魂丹木只辅助对应风险。分魂化身可以形成不同经历和意志，不能免费无限复制主体。读取、封闭或诱导记忆必须具备实际术法条件并承担相应损害，不从一句询问获得客观全知。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-thunder-bead-and-corpse-traditions-rule",
+      "text": "一次性雷珠用后即消耗；炼制须所需雷力、阴火、材料和技艺。傀儡躯壳与寄附元神的寿命分别结算，坚固耐久不能代替元神滋养。专门收雷器具不能以普通空瓶无条件替代。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-valley-material-and-tradition-limits-rule",
+      "text": "材料、毒物和虫的评价须保留种类、适用目标及见闻范围；历史榜单不是客观永久力量总表。古宝灵料需真实形成条件，知名称不等已掌握炼制，更不能把稀缺或失传传闻当作永不存在。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-tomb-corpse-and-oath-boundaries-rule",
+      "text": "尸道与墓中阴气、魂体依附有关，欲解除依附须实际修成对应法门，不能把计划视为成功。当地正午阴气变化只影响有相应依赖的法门。索要丹药不等取得丹药；誓言须按真正术法或承诺条件裁定。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-academy-bell-and-resource-conditions-rule",
+      "text": "寺钟提神不等治疗任意心魔。门内礼法、学习任务与公用器具权限是机构制度，可由实际负责者依事实执行，不能因入门自动占有全部法器地火或获得无限报酬。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-feather-and-beast-language-rule",
+      "text": "本命羽鳞取用计及原主精元损失，不可无限无损采集。禽语理解可来自明确天赋或已学本领；法器召唤和灵兽认主仍需真实施法、权限和对象，不以境界自动授予全部动物语言。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-exchange-material-properties-rule",
+      "text": "特殊果材的生长、处理与服用条件不能跳过；拍卖价不固定为世界恒价，卖者介绍也不是疗效担保。眩光等感官伤害按对象防护与技能判定。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-late-craft-and-pill-calibration-rule",
+      "text": "防御须区分灵力攻击与实物冲击，预估威力不能代替实测。丹药效力随阶段变化，高阶法器、傀儡和火焰仍受真实材料、法力、神识与炼制时间限制；不能以吸收血肉之说即时无限升级。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-northern-fight-and-method-boundaries-rule",
+      "text": "灵目、音攻、护幕和禁法按双方真实能力及相性裁定；个体在某禁制中不受限不等无视所有禁制。五魔的重聚、合分须沿同一组主体及其实际束缚，不能复制为额外独立魔物。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spirit-material-and-heavenly-draft-rule",
+      "text": "含法则的残材仍须匹配配方、辅材和实际炼制；榜次与称名不自动授予力量。肉躯、元神和法器灵性损伤分开结算，毁其中一者不自动证明全部主体已亡。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-emperor-fluid-and-late-beast-limits-rule",
+      "text": "帝流浆须控制单次吸纳量并遵守存放时限，不能把短暂保存写成无限库存。化界珠可重复使用不等无条件通过节点，其威力与一次性化界石不同；木生珠一次恢复须实际消耗珠。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-evil-tool-and-reusable-pearl-limits-rule",
+      "text": "重复用器或有高境界都不能免除实际能量、魂材、体力与寿元代价。一次性爆器引爆即消耗；威力估量不保证固定杀死任何目标。禁止把普通空间袋当作无条件存活体设施。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-yinyang-fire-environment-rule",
+      "text": "火灵的热寒、灵智和炼化状态分别判断；熔岩可助太阳精火而使太阴需额外抵热。控制和吞噬需要实际力量与时间，不以火名自动免疫所有攻击或复制被吞火灵。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-xuantian-plant-and-script-boundaries-rule",
+      "text": "玄天之物与金阙银蝌文字均需真实对象、知识和修炼制作条件。古记的稀少估计不等世界硬数量上限；拥有载文或种子不能直接取得全文理解、成熟宝物与无限材料。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spirit-caravan-and-skill-boundaries-rule",
+      "text": "灵具操用仍受体力、技能与可用灵石限制，无灵根不因此长出法力。疗法按适应伤患、剂量和代价实施；商业护送、医治和学习都需实际人员和物资。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-fu-needle-tradition-rule",
+      "text": "针刺疗法须实际技艺、针具与适用伤情；有限恢复活动不等伤势痊愈。家族有传承不等每名成员或破门者掌握全套，未经教学也不能凭观察一针学会全部秘术。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spirit-beast-variation-boundaries-rule",
+      "text": "兽群行为和变异需真实种群、环境或控制原因；不能凭兽名套统一境界或无限补兵。灵具和炼体对妖兽的有效性依具体层次、防护和成本，不由无灵根身份预判必败或必胜。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-jinyu-pond-and-token-rule",
+      "text": "九玄明玉潭的助炼体效益按已使用历史只发一次，再浸不得重置；入潭仍需真实许可。金玉灵心佩对同一弟子的精魂建立配对定位，毁佩会伤其心神，不赋予保管人控制其情感或替他同意行动的权力。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-sunset-entry-and-ancient-giant-rule",
+      "text": "边界通行须面对真实门禁、环境与守卫，不按剧情强制放行或遇战。沉睡古巨人的身体、眼窝与所生环境属于同一实体，身体再生和醒转仍须真实状态与代价，不能复制为多个巨人。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-sunset-material-and-mind-pill-rule",
+      "text": "临时增神识药不能等同永久突破或治疗无关奇毒；材料价值随用途变化，变异不必更好。驱动灵具须扣实际晶石能量，耗空后换装真实晶石。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spirit-blood-and-artifact-life-rule",
+      "text": "生命、器灵、精血与器物载体分开结算；点灵和造血体必须扣实际材料和本源。毁掉器灵不能自动抹掉仍在的器物，器物保存也不能自动复活已灭心智。 幻焰蛾千蛾搜寻须扣相应精元，分身不当独立可永久保存的生物库存。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-tianyuan-duel-tool-limits-rule",
+      "text": "拘魂法器的主魂、附魂和载体是不同损失项目；损一不能自动判全部魂灭，也不能凭修补声明生魂。争地斗法的装备消耗、承伤和认输依真实条件执行。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-swamp-beast-and-puppet-boundaries-rule",
+      "text": "傀儡、伪装兽与幻术须辨认具体载体；批量驱使受操纵神识、能量与真实数量限制，损毁不能由改换称呼复原。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-tianyuan-treasure-and-auction-boundaries-rule",
+      "text": "发现、主张所有权、成交与交付分开记账；拍卖广告与估价不保证效果或制造实物。旧址探查要实际进入与解禁，知宝名不等知所有藏点。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-tianyuan-patrol-equipment-boundaries-rule",
+      "text": "巡逻器具只提供实际探测与传递所得；信息可受遮蔽、距离、敌术与设备损坏影响。警报不是全知鉴定，传讯成功才形成收件者对应认知。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spiritwood-and-fruit-trade-rule",
+      "text": "可留种的药果仍须种子、生境、催育资源和配方辅料，果实不等已成丹。碧灵木的轻质与防护按年限处理，不能把材料本身变为完整飞舟；灵舟以实际灵石供能。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-spirit-mission-tools-and-blood-rule",
+      "text": "血脉化形、元神和本命妖丹不可当可无损替换的普通装备；离体、爆毁和炼化须按实际代价处理。现场共处与战利品持有不是未经查证的杀人定论。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-true-toad-lake-and-beast-boundaries-rule",
+      "text": "山体磁力、地下水路和强兽领地是实际行路条件，不能由地图名称跳过。取兽血须面对目标存续与反抗，药方需求不自动生成血液；临时搭建据点不冒充旧常设设施。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-coastal-ecology-and-soul-transfer-rule",
+      "text": "兽类分类是有限经验，不抹个体灵智与交往可能。寄魂与迁体须实际载体、法术条件和对应意识，旧壳、新壳、魂体不能同时算同一完整主体。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-feiling-market-and-thunder-contract-rule",
+      "text": "无限供货广告不生成无限库存或自动履约；天罗丹增加其他药性有概率且不保证。市场地图与介绍只含知情者所得，买卖资格不能替代族内秘密传承权限。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-twelve-transformations-and-script-rule",
+      "text": "变身、译读和祭雷须实际掌握对应篇章、真血与修炼条件；单一原料或残页不授完整体系。品质瑕疵、卖者说法和交付真伪应保留，不凭交易名目抹平。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-feiling-trial-tools-and-beast-boundaries-rule",
+      "text": "试炼竞争允许结盟、回避、救助与拒绝；不要用社会风气强制每个主体作同一决定。傀儡结构与幻影按实际本体计数，消耗材料与被毁载体不能凭重复显像重新生成。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-minghe-guard-and-water-limits-rule",
+      "text": "守卫、傀儡、符箓、神乳与灵木本源都按实际存量和恢复条件运行。首次效益与重复效益分开记账；护甲显像不等新主体，破术须真正相克的技能与能量，不借名字相似替代。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -1214,7 +5422,8 @@
       "global-detail-mixed-poison-conditions",
       "global-detail-seven-ghost-and-soul-cost",
       "global-detail-mo-letter-convention",
-      "global-detail-liu-tianhu-and-mortal-drugs"
+      "global-detail-liu-tianhu-and-mortal-drugs",
+      "global-detail-huangfeng-book-drug-details"
     ],
     "law:global-detail-mortal-herb-supply": [
       "global-detail-herb-economy-and-kinds"
@@ -1402,6 +5611,722 @@
     ],
     "law:global-detail-talisman-type-and-charge": [
       "global-detail-wan-family-and-talisman-types"
+    ],
+    "fact:global-detail-mo-huashi-training": [
+      "global-detail-huangfeng-book-drug-details"
+    ],
+    "law:global-detail-raw-drug-and-material-limits": [
+      "global-detail-huangfeng-book-drug-details"
+    ],
+    "law:global-detail-device-effect-boundary": [
+      "global-detail-blood-device-limits"
+    ],
+    "law:global-detail-fauna-and-herb-observation": [
+      "global-detail-blood-fauna-ranges"
+    ],
+    "law:global-detail-craft-input-failure-and-range": [
+      "global-detail-early-craft-beast-limits"
+    ],
+    "law:global-detail-special-curses-and-artifact-charges": [
+      "global-detail-heisha-tool-limits"
+    ],
+    "law:global-detail-blood-spell-payment": [
+      "global-detail-yan-and-blood-spell-boundaries"
+    ],
+    "law:global-detail-replenishment-and-transmission-energy": [
+      "global-detail-nangong-recovery-and-transport"
+    ],
+    "law:global-detail-market-map-and-recipe-limits": [
+      "global-detail-innersea-local-practices"
+    ],
+    "law:global-detail-growth-is-species-and-stage-bound": [
+      "global-detail-spiritwood-and-insect-growth"
+    ],
+    "law:global-detail-attached-soul-and-false-remedy": [
+      "global-detail-tomb-plant-and-ghost-conditions"
+    ],
+    "law:global-detail-ironfire-ant-environment": [
+      "global-detail-ironfire-ant-habitat"
+    ],
+    "law:global-detail-guard-and-frenzy-cost": [
+      "global-detail-void-inner-guard-limits"
+    ],
+    "law:global-detail-beast-healing-and-crafting-cost": [
+      "global-detail-fengxi-craft-and-body-limits"
+    ],
+    "entity:global-qilin-doublepupil-rat": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-qilin-doublepupil-rat-ability": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-qilin-doublepupil-rat-custody": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "entity:global-qilin-earth-pear-1": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-qilin-earth-pear-1-use": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "entity:global-qilin-earth-pear-2": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-qilin-earth-pear-2-use": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "entity:global-qilin-earth-pear-3": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-qilin-earth-pear-3-use": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "fact:global-detail-doublepupil-duty": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "cognition:yue-beast-keeper": [
+      "global-detail-qilin-doublepupil-current-stock"
+    ],
+    "law:global-detail-flight-and-recovery-boundaries-rule": [
+      "global-detail-flight-and-recovery-boundaries"
+    ],
+    "law:global-detail-yinming-gear-and-old-talisman-rule": [
+      "global-detail-yinming-gear-and-old-talisman"
+    ],
+    "law:global-detail-corpse-fox-and-confined-sound-rule": [
+      "global-detail-corpse-fox-and-confined-sound"
+    ],
+    "law:global-detail-tree-and-mental-technique-limits-rule": [
+      "global-detail-tree-and-mental-technique-limits"
+    ],
+    "law:global-detail-thunder-bead-and-corpse-traditions-rule": [
+      "global-detail-thunder-bead-and-corpse-traditions"
+    ],
+    "law:global-detail-valley-material-and-tradition-limits-rule": [
+      "global-detail-valley-material-and-tradition-limits"
+    ],
+    "law:global-detail-tomb-corpse-and-oath-boundaries-rule": [
+      "global-detail-tomb-corpse-and-oath-boundaries"
+    ],
+    "law:global-detail-academy-bell-and-resource-conditions-rule": [
+      "global-detail-academy-bell-and-resource-conditions"
+    ],
+    "law:global-detail-feather-and-beast-language-rule": [
+      "global-detail-feather-and-beast-language"
+    ],
+    "law:global-detail-exchange-material-properties-rule": [
+      "global-detail-exchange-material-properties"
+    ],
+    "law:global-detail-late-craft-and-pill-calibration-rule": [
+      "global-detail-late-craft-and-pill-calibration"
+    ],
+    "law:global-detail-northern-fight-and-method-boundaries-rule": [
+      "global-detail-northern-fight-and-method-boundaries"
+    ],
+    "law:global-detail-spirit-material-and-heavenly-draft-rule": [
+      "global-detail-spirit-material-and-heavenly-draft"
+    ],
+    "law:global-detail-emperor-fluid-and-late-beast-limits-rule": [
+      "global-detail-emperor-fluid-and-late-beast-limits"
+    ],
+    "law:global-detail-evil-tool-and-reusable-pearl-limits-rule": [
+      "global-detail-evil-tool-and-reusable-pearl-limits"
+    ],
+    "law:global-detail-yinyang-fire-environment-rule": [
+      "global-detail-yinyang-fire-environment"
+    ],
+    "law:global-detail-xuantian-plant-and-script-boundaries-rule": [
+      "global-detail-xuantian-plant-and-script-boundaries"
+    ],
+    "law:global-detail-spirit-caravan-and-skill-boundaries-rule": [
+      "global-detail-spirit-caravan-and-skill-boundaries"
+    ],
+    "law:global-detail-fu-needle-tradition-rule": [
+      "global-detail-fu-needle-tradition"
+    ],
+    "law:global-detail-spirit-beast-variation-boundaries-rule": [
+      "global-detail-spirit-beast-variation-boundaries"
+    ],
+    "law:global-detail-jinyu-pond-and-token-rule": [
+      "global-detail-jinyu-pond-and-token"
+    ],
+    "law:global-detail-sunset-entry-and-ancient-giant-rule": [
+      "global-detail-sunset-entry-and-ancient-giant"
+    ],
+    "law:global-detail-sunset-material-and-mind-pill-rule": [
+      "global-detail-sunset-material-and-mind-pill"
+    ],
+    "law:global-detail-spirit-blood-and-artifact-life-rule": [
+      "global-detail-spirit-blood-and-artifact-life"
+    ],
+    "law:global-detail-tianyuan-duel-tool-limits-rule": [
+      "global-detail-tianyuan-duel-tool-limits"
+    ],
+    "law:global-detail-swamp-beast-and-puppet-boundaries-rule": [
+      "global-detail-swamp-beast-and-puppet-boundaries"
+    ],
+    "law:global-detail-tianyuan-treasure-and-auction-boundaries-rule": [
+      "global-detail-tianyuan-treasure-and-auction-boundaries"
+    ],
+    "law:global-detail-tianyuan-patrol-equipment-boundaries-rule": [
+      "global-detail-tianyuan-patrol-equipment-boundaries"
+    ],
+    "law:global-detail-spiritwood-and-fruit-trade-rule": [
+      "global-detail-spiritwood-and-fruit-trade"
+    ],
+    "law:global-detail-spirit-mission-tools-and-blood-rule": [
+      "global-detail-spirit-mission-tools-and-blood"
+    ],
+    "law:global-detail-true-toad-lake-and-beast-boundaries-rule": [
+      "global-detail-true-toad-lake-and-beast-boundaries"
+    ],
+    "law:global-detail-coastal-ecology-and-soul-transfer-rule": [
+      "global-detail-coastal-ecology-and-soul-transfer"
+    ],
+    "law:global-detail-feiling-market-and-thunder-contract-rule": [
+      "global-detail-feiling-market-and-thunder-contract"
+    ],
+    "law:global-detail-twelve-transformations-and-script-rule": [
+      "global-detail-twelve-transformations-and-script"
+    ],
+    "law:global-detail-feiling-trial-tools-and-beast-boundaries-rule": [
+      "global-detail-feiling-trial-tools-and-beast-boundaries"
+    ],
+    "law:global-detail-minghe-guard-and-water-limits-rule": [
+      "global-detail-minghe-guard-and-water-limits"
+    ],
+    "entity:global-baoling-temple": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-baoling-temple-route-dajin-huanyun": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:dajin-huanyun-route-global-baoling-temple": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "entity:original-baoling-changheng": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-baoling-changheng-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-baoling-changheng-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-baoling-changheng-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-baoling-qingchan-bell": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-baoling-qingchan-bell-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-baoling-qingchan-bell-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-baoling-rope": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-baoling-rope-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-baoling-rope-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:future-spirit3-jinyu-sect": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-court": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-pond": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-pond-effect": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-court-route-spirit-sunset-human-city": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:spirit-sunset-human-city-route-global-jinyu-court": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "fact:global-jinyu-court-route-global-jinyu-pond": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-pond-route-global-jinyu-court": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:original-jinyu-xujingcheng": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-jinyu-xujingcheng-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-jinyu-xujingcheng-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-jinyu-xujingcheng-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-ledger": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-ledger-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-ledger-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-request": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-request-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-request-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-token-kept": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-token-kept-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-token-kept-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-jinyu-token-carried": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-token-carried-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-jinyu-token-carried-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "cognition:spirit-sunset-material-dealer": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "entity:global-fu-family": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-clinic": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-clinic-route-spirit-tianyuan-market": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:spirit-tianyuan-market-route-global-fu-clinic": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "entity:original-fu-yan": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-fu-yan-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-fu-yan-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-fu-yan-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-golden-needles": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-golden-needles-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-golden-needles-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-tradition-book": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-tradition-book-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-tradition-book-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-consult-note": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-consult-note-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-consult-note-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "cognition:spirit-tianyuan-physician": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "entity:global-sunset-watch": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-sunset-array": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-sunset-array-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-sunset-array-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:original-sunset-shenque": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-sunset-shenque-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-sunset-shenque-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:original-sunset-shenque-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-sunset-array-stone": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-sunset-array-stone-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-sunset-array-stone-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-chaos-valley": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:spirit-sunset-border-route-global-chaos-valley": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "fact:global-chaos-valley-route-spirit-sunset-border": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-zhiguang-pool": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-zhiguang-pool-body": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:canon-chaos-one-eye-giant": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-chaos-one-eye-giant-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-chaos-one-eye-giant-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-chaos-one-eye-giant-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-giant-sleep": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-true-toad-lakes": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-true-toad-twin-peaks": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-true-toad-magnetic-mountain": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-magnetic-earth-escape": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-true-toad-lakes-route-global-true-toad-twin-peaks": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-true-toad-twin-peaks-route-global-true-toad-lakes": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-true-toad-lakes-route-global-true-toad-magnetic-mountain": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-true-toad-magnetic-mountain-route-global-true-toad-lakes": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-xuanye-tomb": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-xuanye-tomb-route-dajin-xueling-range": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:dajin-xueling-range-route-global-xuanye-tomb": [
+      "global-detail-current-institutions-and-custody"
+    ],
+    "entity:global-xuanye-main-room": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-xuanye-tomb-route-global-xuanye-main-room": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-xuanye-main-room-route-global-xuanye-tomb": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:canon-xuanye-king": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-king-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-king-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-king-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:canon-xuanye-consort": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:canon-xuanye-prince": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-cultivation-state": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-spiritual-root": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-learned-skill": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-king-spouse-of-canon-xuanye-consort": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-spouse-of-canon-xuanye-king": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-king-parent-of-canon-xuanye-prince": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-parent-of-canon-xuanye-prince": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-child-of-canon-xuanye-king": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-child-of-canon-xuanye-consort": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-consort-bound-to-tomb": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:canon-xuanye-prince-bound-to-tomb": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-xuanye-corpse-manual": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-xuanye-corpse-manual-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-xuanye-corpse-manual-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing-2": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-2-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-2-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing-3": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-3-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-3-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing-4": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-4-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-4-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing-5": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-5-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-5-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-fu-dressing-6": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-6-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-fu-dressing-6-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "entity:global-giant-qingling-staff": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-giant-qingling-staff-owned-by": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
+    ],
+    "fact:global-giant-qingling-staff-use": [
+      "global-detail-current-institutions-and-custody",
+      "global-detail-ancient-current-calibration"
     ]
   }
 }

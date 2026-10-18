@@ -1,0 +1,18 @@
+id: feiling-miner-order
+kind: item
+name: 赤陶的小额供料订单
+description: 向赤禾交付三份合格材料，对方验收后付十八低阶灵石；数量不足可协商延期。
+placement: feiling-miner
+facts:
+  - id: feiling-miner-order-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-miner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

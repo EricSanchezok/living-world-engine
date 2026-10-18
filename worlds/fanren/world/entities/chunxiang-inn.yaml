@@ -1,0 +1,34 @@
+id: chunxiang-inn
+kind: location
+name: 春香酒楼
+description: 七玄门经营的酒楼；三叔在此任掌柜。
+placement: qingniu-town
+facts:
+  - id: chunxiang-inn-route-qingniu-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-town
+    description: 有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+  - id: chunxiang-inn-route-chunxiang-courtyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: chunxiang-courtyard
+    description: 酒楼的偏僻后院，带有供人住宿的厢房。
+    access:
+      kind: public
+  - id: chunxiang-inn-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 酒楼为七玄门产业，三叔任掌柜不等于私人所有。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

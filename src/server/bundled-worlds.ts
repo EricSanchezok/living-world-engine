@@ -7,7 +7,12 @@ import type { WorldImportResult } from "./world-import";
 const BUNDLED_WORLDS = [{
   id: "blackmarsh",
   directory: "blackmarsh/world",
+}, {
+  id: "fanren",
+  directory: "fanren/world",
 }] as const;
+
+export type BundledWorldId = typeof BUNDLED_WORLDS[number]["id"];
 
 interface FreshWorldCatalog {
   readonly created: boolean;
@@ -38,9 +43,16 @@ export function installBundledWorlds(
   catalog: FreshWorldCatalog,
   modelCatalog: ModelCatalog,
   worldsRoot = path.resolve("worlds"),
+  worldIds: readonly BundledWorldId[] = BUNDLED_WORLDS.map(world => world.id),
 ): WorldImportResult[] {
   if (!catalog.created) return [];
-  return BUNDLED_WORLDS.map((world) => catalog.importWorld(
+  if (new Set(worldIds).size !== worldIds.length) throw new Error("duplicate bundled world selection");
+  const worlds = worldIds.map(id => {
+    const world = BUNDLED_WORLDS.find(candidate => candidate.id === id);
+    if (!world) throw new Error(`unknown bundled world: ${id}`);
+    return world;
+  });
+  return worlds.map((world) => catalog.importWorld(
     archiveWorldDirectory(path.join(/* turbopackIgnore: true */ worldsRoot, world.directory)),
     modelCatalog,
     false,

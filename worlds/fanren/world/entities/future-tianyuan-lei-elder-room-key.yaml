@@ -1,0 +1,26 @@
+id: future-tianyuan-lei-elder-room-key
+kind: item
+name: 雷姓老修士客室钥牌
+description: 仅开五松小院本人这一间静室；不通其他居者私室。
+placement: future-tianyuan-lei-elder
+facts:
+  - id: future-tianyuan-lei-elder-room-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-tianyuan-lei-elder
+    description: owned-by
+    access:
+      kind: private
+  - id: future-tianyuan-lei-elder-room-key-controls
+    predicate: controls
+    value:
+      kind: entity
+      entityId: future-tianyuan-lei-elder-room
+    description: controls
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

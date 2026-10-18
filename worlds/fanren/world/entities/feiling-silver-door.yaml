@@ -1,0 +1,42 @@
+id: feiling-silver-door
+kind: location
+name: 守墙银门
+description: 银阵遮住的巨门，值守者验明身份与来由后显门，由统领解锁。
+placement: feiling-abyss-wall
+facts:
+  - id: feiling-silver-door-route-to-feiling-abyss-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-wall
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-silver-door-route-conditions-feiling-abyss-wall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 守墙内部走廊通门楼。入门须守军验牌、核明来由并由有权者开门。
+    description: 守墙内部走廊通门楼。入门须守军验牌、核明来由并由有权者开门。
+    access:
+      kind: private
+  - id: feiling-silver-door-route-to-feiling-black-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-black-desert
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-silver-door-route-conditions-feiling-black-desert
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 门获准开启后才能通过；已关闭时须再获许可或实际攻破禁制。
+    description: 门获准开启后才能通过；已关闭时须再获许可或实际攻破禁制。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

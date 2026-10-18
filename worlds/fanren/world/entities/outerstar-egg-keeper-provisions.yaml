@@ -1,0 +1,22 @@
+id: outerstar-egg-keeper-provisions
+kind: container
+name: 姚汐的随身食药
+description: 自己的食物和药材，不包含公家库存。
+placement: outerstar-egg-keeper
+facts:
+  - id: outerstar-egg-keeper-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-egg-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

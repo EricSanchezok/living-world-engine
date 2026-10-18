@@ -1,0 +1,106 @@
+id: spirit-wilderness-fringe
+kind: location
+name: 天渊城外蛮荒近界
+description: 城外复杂荒野，有旧勘探标记；只在可辨道路上行动也需要防护和返程安排。
+placement: spirit-realm
+facts:
+  - id: spirit-wilderness-fringe-route-spirit-wilderness-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-gate
+    description: 两地通行须查验身份，并实际使用备勤院传送阵与巡察哨传送阵；城墙没有可步穿的门。
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-route-condition-spirit-wilderness-gate
+    predicate: route-condition-spirit-wilderness-gate
+    value:
+      kind: text
+      value: 此路线不是步行通道。须查验并经tianyuan-city-transport-array与tianyuan-post-transport-array实际传送，按阵站当前条件支付真实耗用；任一阵失效、授权欠缺或灵石不足即不能借此出入。到近界后再按真实地形行走。
+    description: 仅限定关检处与蛮荒近界的跨防线通行；城内道路和近界内部步行不受此传送条件约束。
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-route-tianyuan-patrol-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-post
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-condition-tianyuan-patrol-post
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 离城关有半本地日路程的小哨，地势与飞行速度影响实际行程。
+    description: 离城关有半本地日路程的小哨，地势与飞行速度影响实际行程。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-wilderness-fringe-route-to-tianyuan-burial-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-burial-desert
+    description: route-to-tianyuan-burial-desert
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-wilderness-fringe-route-conditions-tianyuan-burial-desert
+    predicate: route-conditions-tianyuan-burial-desert
+    value:
+      kind: text
+      value: 沿蛮荒近界外侧旱路到沙缘，须实际赶路、补水并处理天气；此路径不直接穿城墙。
+    description: 沿蛮荒近界外侧旱路到沙缘，须实际赶路、补水并处理天气；此路径不直接穿城墙。
+    access:
+      kind: private
+  - id: spirit-wilderness-fringe-route-fengyuan-fuli-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuli-marsh
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-condition-fengyuan-fuli-marsh
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 湿地密布，毒沼与可行岸线交错。
+    description: 湿地密布，毒沼与可行岸线交错。
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-route-fengyuan-burial-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-burial-desert
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-condition-fengyuan-burial-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 干旱沙漠，风沙改变地表足迹，旅行者要保管饮水与路线标识。
+    description: 干旱沙漠，风沙改变地表足迹，旅行者要保管饮水与路线标识。
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-route-ad-bloodstone-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-bloodstone-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-wilderness-fringe-condition-ad-bloodstone-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅为空间薄弱区的可能对应关系，当前通道关闭；真实定位、破界与护持、两端状态均须成立。后期战争通道未预生成。
+    description: 仅为空间薄弱区的可能对应关系，当前通道关闭；真实定位、破界与护持、两端状态均须成立。后期战争通道未预生成。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

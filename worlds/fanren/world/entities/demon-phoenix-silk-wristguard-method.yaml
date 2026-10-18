@@ -1,0 +1,27 @@
+id: demon-phoenix-silk-wristguard-method
+kind: item
+name: 晶丝护腕工序册
+description: 筱砚自用工序册，写着如何将晶炎丝嵌入低阶火脉作业护腕。
+placement: demon-phoenix-firekeeper-tools
+facts:
+  - id: demon-phoenix-silk-wristguard-method-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-firekeeper
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-silk-wristguard-method-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 每副护腕需一根完整晶炎丝、两份普通炼器材料、十二时辰连续工序和八十点法力，并须掌握控火、低阶炼器及编丝手法。成品仅提供作业隔热和有限火属适配，非高阶斗法法宝；失败按实际损耗扣材料，不能重用已消耗灵丝。
+    description: 每副护腕需一根完整晶炎丝、两份普通炼器材料、十二时辰连续工序和八十点法力，并须掌握控火、低阶炼器及编丝手法。成品仅提供作业隔热和有限火属适配，非高阶斗法法宝；失败按实际损耗扣材料，不能重用已消耗灵丝。
+    access:
+      kind: discoverable
+      condition: 实际翻阅此册或由筱砚传授。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

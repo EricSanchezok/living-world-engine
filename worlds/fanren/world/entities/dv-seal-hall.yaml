@@ -1,0 +1,26 @@
+id: dv-seal-hall
+kind: location
+name: 血咒地下厅
+description: 门后的短石阶通向七八丈厅室，供桌正处佛门阵纹中央；表象与阵中真物须分别识别。
+placement: human-devil-valley
+facts:
+  - id: dv-seal-hall-route-dv-pool-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-pool-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-seal-hall-condition-dv-pool-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 先安全潜至潭底并识破幻术，再解除血咒之门；古骸精元是已知可行方法之一，任意骨灰无效。
+    description: 先安全潜至潭底并识破幻术，再解除血咒之门；古骸精元是已知可行方法之一，任意骨灰无效。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

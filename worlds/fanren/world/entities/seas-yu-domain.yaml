@@ -1,0 +1,26 @@
+id: seas-yu-domain
+kind: location
+name: 余族居地
+description: 本族居民与修行地，公开疆域不等于任何外来者可读取其秘密。
+placement: fengyuan-continent
+facts:
+  - id: seas-yu-domain-route-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: seas-yu-domain-condition-fengyuan-border-exchange
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 蛮荒长途旅行，贸易关系不代表随时免费开阵。
+    description: 蛮荒长途旅行，贸易关系不代表随时免费开阵。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

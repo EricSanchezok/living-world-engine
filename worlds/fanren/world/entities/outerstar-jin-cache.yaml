@@ -1,0 +1,24 @@
+id: outerstar-jin-cache
+kind: container
+name: 金蛟私库
+description: 个人多年保留的有限可用储备，不能代表全海族财富。
+placement: outerstar-jinflood-court
+facts:
+  - id: outerstar-jin-cache-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-jiao-wang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 12
+  - definition_id: mid-stone
+    amount: 180
+  - definition_id: craft-material
+    amount: 20
+ratings: []
+shared_activity_resources: []

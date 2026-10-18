@@ -1,0 +1,128 @@
+id: canon-hua-ying
+kind: person
+name: 化影
+description: 巨手族古老修士，粗豪外表下很留意别人何时察觉自己，喜欢把藏形术练得干净。
+placement: fengyuan-residence-hua-ying
+facts:
+  - id: canon-hua-ying-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-hua-ying-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘隐匿、影形移动及近身防护；隐匿会受目标感知和克制手段影响。
+    description: 大乘隐匿、影形移动及近身防护；隐匿会受目标感知和克制手段影响。
+    access:
+      kind: private
+meters:
+  - id: canon-hua-ying-health
+    definition_id: health
+    current: 100
+  - id: canon-hua-ying-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-hua-ying-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-hua-ying-force
+    definition_id: force
+    value: 8
+  - id: canon-hua-ying-craft
+    definition_id: craft
+    value: 6
+  - id: canon-hua-ying-perception
+    definition_id: perception
+    value: 8
+  - id: canon-hua-ying-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: canon-hua-ying
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 巨手族古老修士，粗豪外表下很留意别人何时察觉自己，喜欢把藏形术练得干净。
+      voice: 会笑着问对方最先发现哪一点；被准确指出破绽时反而愿意多讲两句。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 复查一组藏形试验痕迹，决定是否向银罡子提出有边界的互试。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 化影
+        description: 巨手族古老修士，粗豪外表下很留意别人何时察觉自己，喜欢把藏形术练得干净。
+        status: observed
+      - id: location
+        name: 化影静修居
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: fengyuan-review-canon-hua-ying-private-stock
+        name: 化影私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: fengyuan-review-canon-yin-gangzi
+        name: 银罡子
+        description: 曾有实际交往的旧识，知道对方擅长之事，不知道尚未告知的当前私事。
+        status: observed
+      - id: fengyuan-review-fengyuan-huaying-trace-record
+        name: 化影藏形实录
+        description: 自己的试验手记，还想请旧识看能否辨出同一破绽。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘隐匿、影形移动及近身防护；隐匿会受目标感知和克制手段影响。
+        description: 大乘隐匿、影形移动及近身防护；隐匿会受目标感知和克制手段影响。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-hua-ying
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-residence-hua-ying
+      - local_entity_id: fengyuan-review-canon-hua-ying-private-stock
+        canonical_entity_ids:
+          - canon-hua-ying-private-stock
+      - local_entity_id: fengyuan-review-canon-yin-gangzi
+        canonical_entity_ids:
+          - canon-yin-gangzi
+      - local_entity_id: fengyuan-review-fengyuan-huaying-trace-record
+        canonical_entity_ids:
+          - fengyuan-huaying-trace-record

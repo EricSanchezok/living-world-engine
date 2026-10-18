@@ -1,0 +1,150 @@
+id: future-tianyuan-yu-elder
+kind: person
+name: 余姓老修士
+description: 在药液与火候上有耐心的老修士，愿意交换手艺，却不肯让别人替自己草率下结论。
+placement: future-tianyuan-yu-elder-room
+facts:
+  - id: future-tianyuan-yu-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: future-tianyuan-yu-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护体、控火、普通凝神药液调制；所持配方只涵盖手中这类材料。
+    description: 炼虚护体、控火、普通凝神药液调制；所持配方只涵盖手中这类材料。
+    access:
+      kind: private
+  - id: future-tianyuan-yu-elder-spiritual-aptitude
+    predicate: spiritual-aptitude
+    value:
+      kind: text
+      value: 具与当前修法相应的资质，具体属性未记录。
+    description: 具与当前修法相应的资质，具体属性未记录。
+    access:
+      kind: private
+meters:
+  - id: future-tianyuan-yu-elder-health
+    definition_id: health
+    current: 100
+  - id: future-tianyuan-yu-elder-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: future-tianyuan-yu-elder-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: future-tianyuan-yu-elder-force
+    definition_id: force
+    value: 6
+  - id: future-tianyuan-yu-elder-craft
+    definition_id: craft
+    value: 5
+  - id: future-tianyuan-yu-elder-perception
+    definition_id: perception
+    value: 6
+  - id: future-tianyuan-yu-elder-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: future-tianyuan-yu-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 在药液与火候上有耐心的老修士，愿意交换手艺，却不肯让别人替自己草率下结论。
+      voice: 先闻材料再说用途，谈条件会给对方一段考虑时间。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核算一炉普通凝神药液的工料，决定是自用还是分出一瓶换取不同火候记录。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 余姓老修士
+        description: 在药液与火候上有耐心的老修士，愿意交换手艺，却不肯让别人替自己草率下结论。
+        status: observed
+      - id: location
+        name: 五松访学小院
+        description: 自己静室所在的五松访学小院，今夜已入夜；静室与院内其他位置各有门道。
+        status: observed
+      - id: review-future-tianyuan-yu-elder-private-stock
+        name: 余姓老修士私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-future-tianyuan-yu-elder-room-key
+        name: 余姓老修士客室钥牌
+        description: 本人钥牌，私室由自己控制。
+        status: observed
+      - id: review-future-tianyuan-yu-elder-study-item
+        name: 普通凝神药液小方
+        description: 需两份现有工料、本人20法力与一枚中阶石煎制；成功可得一份普通安神饮，用于短时减轻疲劳，不能提升境界。
+        status: observed
+      - id: review-future-tianyuan-yu-elder-room
+        name: 余姓老修士静室
+        description: 自己当前使用的独立客室，可关门静修。
+        status: observed
+      - id: review-tianyuan-yu-simmer-stock
+        name: 余氏试药材料
+        description: 当前只够按小方尝试两炉，失败也要扣除已耗材料；未有成品药液。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护体、控火、普通凝神药液调制；所持配方只涵盖手中这类材料。
+        description: 炼虚护体、控火、普通凝神药液调制；所持配方只涵盖手中这类材料。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - future-tianyuan-yu-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tianyuan-old-study-yard
+      - local_entity_id: review-future-tianyuan-yu-elder-private-stock
+        canonical_entity_ids:
+          - future-tianyuan-yu-elder-private-stock
+      - local_entity_id: review-future-tianyuan-yu-elder-room-key
+        canonical_entity_ids:
+          - future-tianyuan-yu-elder-room-key
+      - local_entity_id: review-future-tianyuan-yu-elder-study-item
+        canonical_entity_ids:
+          - future-tianyuan-yu-elder-study-item
+      - local_entity_id: review-future-tianyuan-yu-elder-room
+        canonical_entity_ids:
+          - future-tianyuan-yu-elder-room
+      - local_entity_id: review-tianyuan-yu-simmer-stock
+        canonical_entity_ids:
+          - tianyuan-yu-simmer-stock

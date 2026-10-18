@@ -1,0 +1,42 @@
+id: minghe-bone-plain
+kind: location
+name: 白骨原
+description: 黑黄草地逐渐稀疏，异形骨骼层层散落，阴风卷起腐气；灰骨堆中偶有细微碰撞。
+placement: minghe-space
+facts:
+  - id: minghe-bone-plain-route-to-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-bone-plain-route-conditions-minghe-inner-shore
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。
+    description: 沿黑黄草地走向骨原；阴气和活动骨群需防护，可停步或绕行。
+    access:
+      kind: private
+  - id: minghe-bone-plain-route-to-minghe-blood-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-blood-marsh
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-bone-plain-route-conditions-minghe-blood-marsh
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。
+    description: 骨原外支路通到血沼干岸，越过沼泽须辨石脊并防人面血蝠，不是无害官道。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

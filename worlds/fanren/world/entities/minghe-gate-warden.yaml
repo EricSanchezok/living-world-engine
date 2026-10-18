@@ -1,0 +1,238 @@
+id: minghe-gate-warden
+kind: person
+name: 羽衍
+description: 蜉蝣族接引值守，习惯把许可期限写在纸上。
+placement: minghe-inspection-court
+facts:
+  - id: minghe-gate-warden-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - minghe-gate-warden
+  - id: minghe-gate-warden-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚法力、接引阵操纵与印记核验。
+    description: 炼虚法力、接引阵操纵与印记核验。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-gate-warden
+  - id: minghe-gate-warden-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 蜉蝣族修行。
+    description: 蜉蝣族修行。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-gate-warden
+  - id: minghe-gate-warden-dispatches-to
+    predicate: dispatches-to
+    value:
+      kind: entity
+      entityId: minghe-inner-keeper
+    description: dispatches-to
+    access:
+      kind: private
+  - id: minghe-gate-warden-milk-seal-training
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。
+    description: 已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。
+    access:
+      kind: agents
+      agentIds:
+        - minghe-gate-warden
+meters:
+  - id: minghe-gate-warden-health
+    definition_id: health
+    current: 100
+  - id: minghe-gate-warden-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings:
+  - id: minghe-gate-warden-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: minghe-gate-warden-force
+    definition_id: force
+    value: 6
+  - id: minghe-gate-warden-craft
+    definition_id: craft
+    value: 5
+  - id: minghe-gate-warden-perception
+    definition_id: perception
+    value: 6
+  - id: minghe-gate-warden-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: minghe-gate-warden
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 蜉蝣族接引值守，习惯把许可期限写在纸上。
+      voice: 先把日期读一遍，再请对方说清要带谁同行。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核准一批补料并等内岸收件人回执。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 羽衍
+        description: 蜉蝣族接引值守，习惯把许可期限写在纸上。
+        status: observed
+      - id: location
+        name: 圣地外巡院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-minghe-inner-keeper
+        name: 槐宁
+        description: 外巡接引与内岸验收工作，信件和传讯实际送达才知对方新消息。
+        status: observed
+      - id: known-minghe-sanctuary-supplies
+        name: 圣地日常补给
+        description: 阵基维护与值勤支付的有限公产。
+        status: observed
+      - id: known-minghe-gate-fuel
+        name: 接引阵用石
+        description: 本轮仅有四块高阶灵石，耗尽需真实补给。
+        status: observed
+      - id: known-minghe-current-transit-writ
+        name: 本次送材许可
+        description: 准许经羽衍核验的一组至多三人将六份补料送至内岸槐宁，三本地日内有效；不包括深入神池和魔坟。
+        status: observed
+      - id: known-minghe-outer-gate
+        name: 蜉蝣圣地接引阵
+        description: 封闭阵室，进入空间需要真实阵器、双方条件与授权。
+        status: observed
+      - id: minghe-review-minghe-milk-extraction-seal
+        name: 取乳密符
+        description: 自己保管的封符，只有长老专门许可方可发出；本次送材许可不准取乳。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚法力、接引阵操纵与印记核验。
+        description: 炼虚法力、接引阵操纵与印记核验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 蜉蝣族修行。
+        description: 蜉蝣族修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-delivery
+        subjectId: self
+        predicate: current-delivery
+        value:
+          kind: text
+          value: 自己可核验三人以内送材许可，六份补料验收后三十灵石从公产付；内岸还需真实回信配合接引。
+        description: 自己可核验三人以内送材许可，六份补料验收后三十灵石从公产付；内岸还需真实回信配合接引。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: rare-window
+        subjectId: self
+        predicate: rare-window
+        value:
+          kind: text
+          value: 本轮筹备完成，仅余一次六百秒开放额度，四块高阶灵石只在开启时消耗一次；双方需协调送材和槐宁撤回。下轮至少再准备六个当地月，且须补足高阶主持与材料。
+        description: 本轮筹备完成，仅余一次六百秒开放额度，四块高阶灵石只在开启时消耗一次；双方需协调送材和槐宁撤回。下轮至少再准备六个当地月，且须补足高阶主持与材料。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: milk-seal-training
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。
+        description: 已受取乳密符的有限操作训练，知道须实际到池边并获许可，不能凭外巡院职务隔空取乳。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - minghe-gate-warden
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-inspection-court
+      - local_entity_id: known-minghe-inner-keeper
+        canonical_entity_ids:
+          - minghe-inner-keeper
+      - local_entity_id: known-minghe-sanctuary-supplies
+        canonical_entity_ids:
+          - minghe-sanctuary-supplies
+      - local_entity_id: known-minghe-gate-fuel
+        canonical_entity_ids:
+          - minghe-gate-fuel
+      - local_entity_id: known-minghe-current-transit-writ
+        canonical_entity_ids:
+          - minghe-current-transit-writ
+      - local_entity_id: known-minghe-outer-gate
+        canonical_entity_ids:
+          - minghe-outer-gate
+      - local_entity_id: minghe-review-minghe-milk-extraction-seal
+        canonical_entity_ids:
+          - minghe-milk-extraction-seal

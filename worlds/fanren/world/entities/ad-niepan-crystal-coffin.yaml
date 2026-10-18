@@ -1,0 +1,18 @@
+id: ad-niepan-crystal-coffin
+kind: item
+name: 涅槃静养晶棺
+description: 本体静养所用晶棺与护持装置，不是已死尸棺。
+placement: ad-niepan-retreat
+facts:
+  - id: ad-niepan-crystal-coffin-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nie-pan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

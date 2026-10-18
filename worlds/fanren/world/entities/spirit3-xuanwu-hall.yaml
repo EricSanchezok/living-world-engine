@@ -1,0 +1,26 @@
+id: spirit3-xuanwu-hall
+kind: location
+name: 玄武霸皇理事院
+description: 龟背宫院临海敞开宽台，海图与港位灯牌置于廊下，内厅用于议事。
+placement: spirit-xuanwu-capital
+facts:
+  - id: spirit3-xuanwu-hall-route-to-spirit-xuanwu-capital
+    predicate: route-to-spirit-xuanwu-capital
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-capital
+    description: route-to-spirit-xuanwu-capital
+    access:
+      kind: private
+  - id: spirit3-xuanwu-hall-route-conditions-spirit-xuanwu-capital
+    predicate: route-conditions-spirit-xuanwu-capital
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

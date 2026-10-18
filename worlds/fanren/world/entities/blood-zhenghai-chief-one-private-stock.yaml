@@ -1,0 +1,22 @@
+id: blood-zhenghai-chief-one-private-stock
+kind: container
+name: 镇海宫大宫主私用石料
+description: 本人私用储备，公款另存，不能代偿组织已定支出。
+placement: blood-zhenghai-chief-one
+facts:
+  - id: blood-zhenghai-chief-one-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-zhenghai-chief-one
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

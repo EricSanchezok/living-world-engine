@@ -1,0 +1,26 @@
+id: feiling-city-guesthouse
+kind: location
+name: 圣山贵宾馆
+description: 供获准宾客暂住的楼馆，访客从入境柱登记后领取住所。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-city-guesthouse-route-to-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-city-guesthouse-route-conditions-feiling-tianpeng-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

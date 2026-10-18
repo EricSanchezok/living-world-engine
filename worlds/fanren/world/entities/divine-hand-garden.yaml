@@ -1,0 +1,18 @@
+id: divine-hand-garden
+kind: location
+name: 神手谷药园
+description: 谷左药园种着常用药草，采摘、晾晒和炮制须由医者安排。
+placement: divine-hand-valley
+facts:
+  - id: divine-hand-garden-route-divine-hand-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: divine-hand-valley
+    description: 谷左药园种着常用药草，采摘、晾晒和炮制须由医者安排。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

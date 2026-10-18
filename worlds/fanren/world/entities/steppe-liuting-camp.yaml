@@ -1,0 +1,74 @@
+id: steppe-liuting-camp
+kind: location
+name: 柳汀部营地
+description: 半圈牛皮帐背靠低岗，晾肉架和车辙之间留出羊群过道；白日人们按各家的牲口分配水槽。
+placement: steppe-mulan-north
+facts:
+  - id: steppe-liuting-camp-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    description: 到达营地须走到低岗旁的车辙入口，若牵畜带货需耗用真实行程。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-route-steppe-liuting-well
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-well
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-travel-steppe-liuting-well
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-route-steppe-liuting-pasture
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-pasture
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-travel-steppe-liuting-pasture
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-route-steppe-liuting-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-store
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-camp-travel-steppe-liuting-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: tiannan-tianxing-talisman-shop
+kind: location
+name: 天星坊制符店
+description: 临街接受低阶符箓订制的铺面，柜后是制符案与材料架。
+placement: tiannan-tianxing-market
+facts:
+  - id: tiannan-tianxing-talisman-shop-route-to-tiannan-tianxing-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-market
+    description: 店门通向坊市街道；笼舍和制符案后须取得店家许可。
+    access:
+      kind: public
+  - id: tiannan-tianxing-talisman-shop-operated-by
+    predicate: operated-by
+    value:
+      kind: entity
+      entityId: tiannan-talisman-business
+    description: 该商号在此经营，店物不可直接视作个人随身财物。
+    access:
+      kind: public
+  - id: tiannan-tianxing-talisman-shop-service-terms
+    predicate: service-terms
+    value:
+      kind: text
+      value: 现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。
+    description: 现成普通护身符每张六低阶灵石。订制同类符先验材料，议定一张完好符纸和一份丹砂及材料折价，工费三低阶灵石，需两个时辰。失败消耗材料，按入账材料价从商号资金赔付等额灵石，不是双倍赔付；工费和交期须事先说明，不能售出未成符。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

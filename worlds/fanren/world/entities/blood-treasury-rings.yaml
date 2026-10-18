@@ -1,0 +1,20 @@
+id: blood-treasury-rings
+kind: container
+name: 环索器组
+description: 环、索形器具，有束缚或牵引用途，须辨清原阵纹后使用。
+placement: blood-outer-implement-hall
+facts:
+  - id: blood-treasury-rings-withdrawal-accounting
+    predicate: withdrawal-accounting
+    value:
+      kind: text
+      value: 取一件须从本组减少一件，再建立该具体物的持有与已鉴性质；未经鉴定不由角色任意指定高阶威能。合计1060件，不能同时把整库与已取件重复入账。
+    description: 取一件须从本组减少一件，再建立该具体物的持有与已鉴性质；未经鉴定不由角色任意指定高阶威能。合计1060件，不能同时把整库与已取件重复入账。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: tianding-implement-unit
+    amount: 210
+ratings: []
+shared_activity_resources: []

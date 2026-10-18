@@ -1,0 +1,20 @@
+id: tianyuan-cave-toolbox
+kind: container
+name: 玉阙阁借用工具
+description: 清渠与修门工具，借用需登记归还。
+placement: spirit-yuque-hall
+facts:
+  - id: tianyuan-cave-toolbox-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: tiannan-ferry-boat
+kind: item
+name: 苏沁的木渡舟
+description: 可载船工外四名常人体重乘客；货重和水情须实际评估，不具自动避险法阵。
+placement: tiannan-panlong-ferry
+facts:
+  - id: tiannan-ferry-boat-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-su-qin
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

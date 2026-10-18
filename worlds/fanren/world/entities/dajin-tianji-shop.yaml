@@ -1,0 +1,34 @@
+id: dajin-tianji-shop
+kind: location
+name: 天机阁晋京商楼
+description: 经营空间器物的三层商楼，普通柜台与大额交易接待分区，寄存货物另记权利人。
+placement: dajin-jinxi-market
+facts:
+  - id: dajin-tianji-shop-route-dajin-jinxi-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-jinxi-market
+    description: 商楼开门接待，贵客资格仍需核实。
+    access:
+      kind: public
+  - id: dajin-tianji-shop-route-dajin-tianji-backyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-backyard
+    description: 穿过商号禁制须有许可。
+    access:
+      kind: public
+  - id: dajin-tianji-shop-route-dajin-tianji-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-store
+    description: 保管处不是对访客开放的无主库房。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: kunwu-cloud-stairs
+kind: location
+name: 云雾石阶
+description: 云雾掩着诱人灵草幻象，禁制须逐段处理。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-cloud-stairs-route-kunwu-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-gate
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-cloud-stairs-condition-kunwu-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 云中幻物可能诱发阵法，摸索须承担实际代价。
+    description: 云中幻物可能诱发阵法，摸索须承担实际代价。
+    access:
+      kind: public
+  - id: kunwu-cloud-stairs-route-kunwu-stone-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-stone-hall
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-cloud-stairs-condition-kunwu-stone-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石兽与四阵尚在，不能按章节自动解开。
+    description: 石兽与四阵尚在，不能按章节自动解开。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

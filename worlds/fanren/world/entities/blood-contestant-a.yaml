@@ -1,0 +1,203 @@
+id: blood-contestant-a
+kind: person
+name: 平鹭
+description: 以身法见长的低阶散修，想靠公开斗技获得资助。
+placement: blood-market
+facts:
+  - id: blood-contestant-a-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - blood-contestant-a
+  - id: blood-contestant-a-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹风步、短刃和护身术。
+    description: 结丹风步、短刃和护身术。
+    access:
+      kind: agents
+      agentIds:
+        - blood-contestant-a
+  - id: blood-contestant-a-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: blood-contestant-a-prospective-opponent
+    predicate: prospective-opponent
+    value:
+      kind: entity
+      entityId: blood-contestant-b
+    description: prospective-opponent
+    access:
+      kind: private
+meters:
+  - id: blood-contestant-a-health
+    definition_id: health
+    current: 100
+  - id: blood-contestant-a-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-contestant-a-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: blood-contestant-a-force
+    definition_id: force
+    value: 3
+  - id: blood-contestant-a-craft
+    definition_id: craft
+    value: 3
+  - id: blood-contestant-a-perception
+    definition_id: perception
+    value: 3
+  - id: blood-contestant-a-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: blood-contestant-a
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 以身法见长的低阶散修，想靠公开斗技获得资助。
+      voice: 说话有青年锐气，提自己本领很自信，遇含糊生死条款会认真追问。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取保留点到为止条款，同时赢得一位观战者认可。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 平鹭
+        description: 以身法见长的低阶散修，想靠公开斗技获得资助。
+        status: observed
+      - id: location
+        name: 血鹤城交易广场
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-contestant-a-resources
+        name: 平鹭的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-blood-contestant-b
+        name: 桑铸
+        description: 已见面商议竞技，尚无杀身仇怨。
+        status: observed
+      - id: known-blood-a-blade
+        name: 平鹭短刃
+        description: 熟悉的防身短刃，不能凭空换成高阶法宝。
+        status: observed
+      - id: known-blood-arena-proposal
+        name: 平鹭与桑铸斗技草约
+        description: 已讨论的草拟条件，仍可商议或拒绝。
+        status: observed
+      - id: known-blood-sponsor-offers
+        name: 栾砚两种护送邀约
+        description: 已讨论的草拟条件，仍可商议或拒绝。
+        status: observed
+      - id: known-blood-sponsor-letter
+        name: 栾砚的申报封信
+        description: 栾砚拟聘护送的真实物件，尚未移交给未接约者。
+        status: observed
+      - id: known-blood-sponsor-cart
+        name: 栾砚的轻型货车
+        description: 栾砚拟聘护送的真实物件，尚未移交给未接约者。
+        status: observed
+      - id: known-blood-sponsor-cargo
+        name: 送血骨门的灵材箱
+        description: 栾砚拟聘护送的真实物件，尚未移交给未接约者。
+        status: observed
+      - id: known-blood-sponsor
+        name: 栾砚
+        description: 商议护送工作的材料铺主，是否接约尚可自择。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹风步、短刃和护身术。
+        description: 结丹风步、短刃和护身术。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-contestant-a
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-market
+      - local_entity_id: known-blood-contestant-a-resources
+        canonical_entity_ids:
+          - blood-contestant-a-resources
+      - local_entity_id: known-blood-contestant-b
+        canonical_entity_ids:
+          - blood-contestant-b
+      - local_entity_id: known-blood-a-blade
+        canonical_entity_ids:
+          - blood-a-blade
+      - local_entity_id: known-blood-arena-proposal
+        canonical_entity_ids:
+          - blood-arena-proposal
+      - local_entity_id: known-blood-sponsor-offers
+        canonical_entity_ids:
+          - blood-sponsor-offers
+      - local_entity_id: known-blood-sponsor-letter
+        canonical_entity_ids:
+          - blood-sponsor-letter
+      - local_entity_id: known-blood-sponsor-cart
+        canonical_entity_ids:
+          - blood-sponsor-cart
+      - local_entity_id: known-blood-sponsor-cargo
+        canonical_entity_ids:
+          - blood-sponsor-cargo
+      - local_entity_id: known-blood-sponsor
+        canonical_entity_ids:
+          - blood-sponsor

@@ -1,0 +1,35 @@
+id: blood-xu-ancestral-chamber
+kind: location
+name: 许氏祖庙密室
+description: 共有旧器的封存室，平时由两位管理者共同开启。
+placement: blood-xu-ancestral-estate
+facts:
+  - id: blood-xu-ancestral-chamber-route-blood-xu-ancestral-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xu-ancestral-estate
+    description: route-to
+    access:
+      kind: public
+  - id: blood-xu-ancestral-chamber-condition-blood-xu-ancestral-estate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 族中管理者核对申请并共同开封，强闯会触动禁制及家族反应。
+    description: 族中管理者核对申请并共同开封，强闯会触动禁制及家族反应。
+    access:
+      kind: public
+  - id: blood-xu-ancestral-chamber-root-detail-xu-bloodsoul
+    predicate: root-detail-xu-bloodsoul
+    value:
+      kind: text
+      value: 祖庙血魂传承须特定灵物、精血、法阵和施术者。血魂与本体同源但载体、记忆和伤势分开，祖庙存在不等任何仪式已经布好。
+    description: 祖庙血魂传承须特定灵物、精血、法阵和施术者。血魂与本体同源但载体、记忆和伤势分开，祖庙存在不等任何仪式已经布好。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

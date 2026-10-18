@@ -1,0 +1,29 @@
+id: guanghan-silver-guardian-4
+kind: item
+name: 银甲守台傀儡4
+description: 九甲阵列一具，持银戈并依古阵联动，没有独立人类记忆。
+placement: guanghan-star-platform
+facts:
+  - id: guanghan-silver-guardian-4-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-silver-guardian-4-linked-control
+    predicate: linked-control
+    value:
+      kind: text
+      value: 受到古阵结构控制；强行摄取可能触发危险联动与毁坏，不能只凭接触改成效忠玩家。
+    description: 受到古阵结构控制；强行摄取可能触发危险联动与毁坏，不能只凭接触改成效忠玩家。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings:
+  - id: guanghan-silver-guardian-4-force
+    definition_id: force
+    value: 7
+shared_activity_resources: []

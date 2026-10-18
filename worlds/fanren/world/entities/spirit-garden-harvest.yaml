@@ -1,0 +1,20 @@
+id: spirit-garden-harvest
+kind: container
+name: 枝台园圃成药料
+description: 颜木青培育到采收期的普通炼气辅助药料，非凭空增加的千年药。
+placement: spirit-tianling-market
+facts:
+  - id: spirit-garden-harvest-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianling-gardener
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 16
+ratings: []
+shared_activity_resources: []

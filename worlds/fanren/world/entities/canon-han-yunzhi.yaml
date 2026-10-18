@@ -1,0 +1,207 @@
+id: canon-han-yunzhi
+kind: person
+name: 菡云芝
+description: 菡家九岁女孩，爱看灵兽与笔墨，见生人略拘谨。
+placement: yue-han-craft-cottage
+facts:
+  - id: canon-han-yunzhi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - canon-han-yunzhi
+  - id: canon-han-yunzhi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 识字、照料家中植物与初学吐纳；尚未独立修炼成法力。
+    description: 识字、照料家中植物与初学吐纳；尚未独立修炼成法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-han-yunzhi
+  - id: canon-han-yunzhi-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木水两属性灵根
+    description: 木水两属性灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-han-yunzhi-age
+    predicate: age-at-opening
+    value:
+      kind: number
+      value: 9
+    description: age-at-opening
+    access:
+      kind: public
+  - id: canon-han-yunzhi-family-yue-han-uncle
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: yue-han-uncle
+    description: 叔父与侄女，平日一起整理笔具。
+    access:
+      kind: public
+meters:
+  - id: canon-han-yunzhi-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 20
+ratings:
+  - id: canon-han-yunzhi-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-han-yunzhi-force
+    definition_id: force
+    value: 0
+  - id: canon-han-yunzhi-craft
+    definition_id: craft
+    value: 1
+  - id: canon-han-yunzhi-perception
+    definition_id: perception
+    value: 0
+  - id: canon-han-yunzhi-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-han-yunzhi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 菡家九岁女孩，爱看灵兽与笔墨，见生人略拘谨。
+      voice: 小声但认真，谈自己做过的事会慢慢放开。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 照着长辈的字帖描写，盼能自己做出一件有用的东西。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 菡云芝
+        description: 菡家九岁女孩，爱看灵兽与笔墨，见生人略拘谨。
+        status: observed
+      - id: location
+        name: 菡家小院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-han-yunzhi-pouch
+        name: 菡云芝的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-yue-han-uncle
+        name: 菡祺
+        description: 叔父与侄女，平日一起整理笔具。
+        status: observed
+      - id: known-yue-han-pen-material
+        name: 菡祺笔具材料
+        description: 叔父教自己分辨的笔毛和笔杆。
+        status: observed
+      - id: known-canon-jinzhu-brush
+        name: 家传符笔
+        description: 自己日常接触并认识的事物。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 识字、照料家中植物与初学吐纳；尚未独立修炼成法力。
+        description: 识字、照料家中植物与初学吐纳；尚未独立修炼成法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 照着长辈的字帖描写，盼能自己做出一件有用的东西。
+        description: 照着长辈的字帖描写，盼能自己做出一件有用的东西。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-work-property
+        subjectId: self
+        predicate: current-responsibility
+        value:
+          kind: text
+          value: 家里有一支金黄色的祖传符笔，现由菡祺保管。
+        description: 家里有一支金黄色的祖传符笔，现由菡祺保管。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        description: 自己还没有接受过可靠的验灵，不知道能否修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-han-yunzhi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-han-craft-cottage
+      - local_entity_id: known-canon-han-yunzhi-pouch
+        canonical_entity_ids:
+          - canon-han-yunzhi-pouch
+      - local_entity_id: known-yue-han-uncle
+        canonical_entity_ids:
+          - yue-han-uncle
+      - local_entity_id: known-yue-han-pen-material
+        canonical_entity_ids:
+          - yue-han-pen-material
+      - local_entity_id: known-canon-jinzhu-brush
+        canonical_entity_ids:
+          - canon-jinzhu-brush

@@ -1,0 +1,42 @@
+id: yue-jianzhou
+kind: location
+name: 建州
+description: 北部多丘陵山川，与元武国相邻。
+placement: human-yue
+facts:
+  - id: yue-jianzhou-route-yue-taiyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-taiyue-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-jianzhou-travel-yue-taiyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-jianzhou-yuanwu-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yuanwu
+    description: 北境通元武的方向，仍须实际穿越山地边界。
+    access:
+      kind: public
+  - id: yue-jianzhou-route-yue-xizhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-xizhou
+    description: 沿州际道路跨越两州边界，所需时间取决于实际起止点和交通。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

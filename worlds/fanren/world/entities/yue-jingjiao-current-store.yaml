@@ -1,0 +1,22 @@
+id: yue-jingjiao-current-store
+kind: item
+name: 惊蛟会当期公用账库
+description: 当前可支会务银两，与组织所有人口和远地分舵总财产不同。
+placement: yue-mo-office
+facts:
+  - id: yue-jingjiao-current-store-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: jingjiao-guild
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 240
+  - definition_id: grain
+    amount: 120
+ratings: []
+shared_activity_resources: []

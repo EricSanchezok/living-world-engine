@@ -1,0 +1,26 @@
+id: tiannan-jinma-city
+kind: location
+name: 金马城
+description: 元武小城，西面是黄绿色丘陵。
+placement: human-yuanwu
+facts:
+  - id: tiannan-jinma-city-route-human-yuanwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yuanwu
+    description: 从元武干道转入金马城街道，西郊丘陵另有私人地界。
+    access:
+      kind: public
+  - id: tiannan-jinma-city-route-tiannan-jinma-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-jinma-inn
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

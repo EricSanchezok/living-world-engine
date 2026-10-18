@@ -1,0 +1,20 @@
+id: tianyuan-grain-budget
+kind: container
+name: 备勤院本期粮款
+description: 本笔询购预留十二低阶石；若未成交可重新议价，不与维护预算混记。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-grain-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-spirit-attendant-two
+kind: item
+name: 白衣灵侍
+description: 负责把有限器材放到指定架位的灵体傀儡，不会自己推演新功法。
+placement: feiling-yinhuo-hall
+facts:
+  - id: feiling-spirit-attendant-two-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-spirit-attendant-two-instruction-boundary
+    predicate: instruction-boundary
+    value:
+      kind: text
+      value: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    description: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

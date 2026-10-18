@@ -1,0 +1,20 @@
+id: outerstar-egg-wages
+kind: container
+name: 养兽预留工钱
+description: 给姚汐任务的既定预算。
+placement: outerstar-cunjin
+facts:
+  - id: outerstar-egg-wages-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-cunjin-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 24
+ratings: []
+shared_activity_resources: []

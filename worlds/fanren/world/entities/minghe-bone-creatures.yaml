@@ -1,0 +1,34 @@
+id: minghe-bone-creatures
+kind: creature-group
+name: 枯林白骨生物
+description: 依林地阴气活动的六具白骨生物，离开枯林会快速衰败。
+placement: minghe-withered-wood
+facts:
+  - id: minghe-bone-creatures-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    description: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    access:
+      kind: private
+  - id: minghe-bone-creatures-habitat-dependence
+    predicate: habitat-dependence
+    value:
+      kind: text
+      value: 只有残骨落在枯林中且阴气仍在才可重聚；残骨带到林外被击碎化灰后，该个体扣除，不得再次生成。
+    description: 只有残骨落在枯林中且阴气仍在才可重聚；残骨带到林外被击碎化灰后，该个体扣除，不得再次生成。
+    access:
+      kind: private
+meters:
+  - id: minghe-bone-creatures-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 6
+ratings:
+  - id: minghe-bone-creatures-force
+    definition_id: force
+    value: 5
+shared_activity_resources: []

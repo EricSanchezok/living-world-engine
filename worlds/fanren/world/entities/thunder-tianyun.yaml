@@ -1,0 +1,28 @@
+id: thunder-tianyun
+kind: location
+name: 天云十三族辖域
+description: 十三族共同协调的重要疆域，族内事务与联盟公务各有权限。
+placement: thunder-continent
+facts:
+  - id: thunder-tianyun-route-to-root-leiyun-town
+    predicate: route-to-root-leiyun-town
+    value:
+      kind: entity
+      entityId: root-leiyun-town
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: thunder-tianyun-travel-condition-root-leiyun-town
+    predicate: travel-condition-root-leiyun-town
+    value:
+      kind: text
+      value: 沿联盟区域的远近路径行进，未知支路需打听或查图，不作瞬移。
+    description: 沿联盟区域的远近路径行进，未知支路需打听或查图，不作瞬移。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

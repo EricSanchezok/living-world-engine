@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { stringify } from "yaml";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { projectAgentPerspective } from "../../src/engine/cognition/agent-perspective";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { quantityId } from "../../src/engine/runtime/runtime-id";
@@ -33,6 +33,10 @@ function archive(): Buffer {
 }
 
 describe("Fanren spirit human territories", () => {
+  let worldArchive: Buffer;
+  // Reuse only immutable input bytes; each case still imports into its own fresh database.
+  beforeAll(() => { worldArchive = archive(); }, 60_000);
+
   it("keeps historical structures, explicit original lives and exact editorial approvals separate", () => {
     const region = read("regions/spirit-human-three/module.json"), claims = read("regions/spirit-human-three/claims.json"), review = read("regions/spirit-human-three/review.json");
     expect(review.moduleHash).toBe(contentHash(region));
@@ -40,7 +44,15 @@ describe("Fanren spirit human territories", () => {
     const all = parseWorldTemplate(assembled().module.template).entities;
     expect(all.find(entity => entity.id === "spirit-tianyuan-capital")?.name).toBe("天元城");
     expect(all.find(entity => entity.id === "tianyuan-city")?.name).toBe("天渊城");
-    expect(all.some(entity => /^(canon-zhang-kui|tiandong-firm|future-spirit3)/.test(entity.id))).toBe(false);
+    const laterNamedEntities = all.filter(entity => /^(canon-zhang-kui|tiandong-firm|future-spirit3)/.test(entity.id));
+    expect(laterNamedEntities.map(entity => entity.id)).toEqual(["future-spirit3-jinyu-sect"]);
+    expect(laterNamedEntities[0]?.kind).toBe("social-group");
+    expect(laterNamedEntities[0]?.agent).toBeUndefined();
+    const supplement = read("regions/global-source-detail/module.json");
+    const supplementClaims = read("regions/global-source-detail/claims.json");
+    expect(supplement.provenance["entity:future-spirit3-jinyu-sect"]).toContain("global-detail-current-institutions-and-custody");
+    expect(supplementClaims.find((claim: { id: string }) => claim.id === "global-detail-current-institutions-and-custody"))
+      .toEqual(expect.objectContaining({ classification: "original", validAtOpening: true, status: "reviewed" }));
     for (const entity of region.entities as typeof all) {
       expect(entity.description).not.toMatch(/原著|原文|原创|标定|T0|第[一二三四五六七八九十]+章/);
       expect(region.provenance[`entity:${entity.id}`]?.length).toBeGreaterThan(0);
@@ -60,7 +72,7 @@ describe("Fanren spirit human territories", () => {
     const directory = mkdtempSync(path.join(tmpdir(), "fanren-spirit-"));
     const database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false });
     try {
-      const imported = database.importWorld(archive(), fixture.catalog);
+      const imported = database.importWorld(Buffer.from(worldArchive), fixture.catalog);
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: fixture.gateway });
       const created = await host.createInstance({ worldId: imported.id, start: { kind: "origin", originId, displayName: originId === "han-li" ? "韩立" : "归客", appearance: "", motivation: originId === "han-li" ? "" : "看看周围真实生活，自己决定以后。" } });
       const state = database.readInstance(created.summary.id).document.state, player = created.participants[0]!.agentId;
@@ -96,5 +108,5 @@ describe("Fanren spirit human territories", () => {
       expect(replaySimulationState(state)).toEqual(state);
       expect(fixture.transport).not.toHaveBeenCalled();
     } finally { database.close(); rmSync(directory, { recursive: true, force: true }); }
-  });
+  }, 60_000);
 });

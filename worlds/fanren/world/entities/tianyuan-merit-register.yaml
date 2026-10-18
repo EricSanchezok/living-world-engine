@@ -1,0 +1,18 @@
+id: tianyuan-merit-register
+kind: item
+name: 本期功绩核验册
+description: 罗同尘按已收的巡哨交接签据登记；方既明当前救助过程尚待补证，未给本次确定功分。
+placement: tianyuan-council-clerk
+facts:
+  - id: tianyuan-merit-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

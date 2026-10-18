@@ -1,0 +1,46 @@
+id: fengyuan-spirit-domain
+kind: location
+name: 灵族灵域
+description: 天地之灵与器物成灵者共同居住的广大地域，分支各有生活习惯。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-spirit-domain-route-to-root-zuyun-mountain
+    predicate: route-to-root-zuyun-mountain
+    value:
+      kind: entity
+      entityId: root-zuyun-mountain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: fengyuan-spirit-domain-travel-condition-root-zuyun-mountain
+    predicate: travel-condition-root-zuyun-mountain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: fengyuan-spirit-domain-route-to-root-huashi-innersea
+    predicate: route-to-root-huashi-innersea
+    value:
+      kind: entity
+      entityId: root-huashi-innersea
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: fengyuan-spirit-domain-travel-condition-root-huashi-innersea
+    predicate: travel-condition-root-huashi-innersea
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

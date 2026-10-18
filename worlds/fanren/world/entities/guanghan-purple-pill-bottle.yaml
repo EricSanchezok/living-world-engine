@@ -1,0 +1,18 @@
+id: guanghan-purple-pill-bottle
+kind: item
+name: 紫金丹瓶
+description: 封存三枚虚灵丹，丹出瓶可显金火鸟形；丹药显形不额外生成生命或丹药。
+placement: guanghan-gold-tripod
+facts:
+  - id: guanghan-purple-pill-bottle-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

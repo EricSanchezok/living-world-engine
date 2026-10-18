@@ -1,0 +1,42 @@
+id: yue-guanggui
+kind: location
+name: 广贵城
+description: 三面环山、一面临湖的小城，有当地果品。
+placement: yue-lanzhou
+facts:
+  - id: yue-guanggui-route-yue-lanzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-lanzhou
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-guanggui-travel-yue-lanzhou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-guanggui-route-yue-tainan-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-mountain
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-guanggui-travel-yue-tainan-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

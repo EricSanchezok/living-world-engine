@@ -1,0 +1,58 @@
+id: feiling-abyss-wall
+kind: location
+name: 地渊巨墙
+description: 高墙和符纹玉柱守住地渊入口，守军在附近圆楼驻扎。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-wall-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-wall-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 高墙和符纹玉柱守住地渊入口，守军在附近圆楼驻扎。
+    description: 高墙和符纹玉柱守住地渊入口，守军在附近圆楼驻扎。
+    access:
+      kind: public
+  - id: feiling-abyss-wall-route-feiling-guard-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-guard-yard
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-wall-condition-feiling-guard-yard
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 换岗、检修和训练之处，入渊许可在此核验。
+    description: 换岗、检修和训练之处，入渊许可在此核验。
+    access:
+      kind: public
+  - id: feiling-abyss-wall-route-to-feiling-silver-door
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-silver-door
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-abyss-wall-route-conditions-feiling-silver-door
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 守墙内部走廊通门楼。入门须守军验牌、核明来由并由有权者开门。
+    description: 守墙内部走廊通门楼。入门须守军验牌、核明来由并由有权者开门。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

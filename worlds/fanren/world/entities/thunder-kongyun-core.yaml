@@ -1,0 +1,29 @@
+id: thunder-kongyun-core
+kind: item
+name: 海兽腹内空云晶
+description: 巨兽早年吞下的古阵核心，坚硬晶层未消化；现处活体腹内，归属主张不等于占有。
+placement: thunder-firecoral-core-beast
+facts:
+  - id: thunder-kongyun-core-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-washi-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-kongyun-core-access-condition
+    predicate: access-condition
+    value:
+      kind: text
+      value: 取出必须实际接触腹内或令巨兽吐出，取得后从巨兽腹内移出；普通攻击难毁，空间力量仍可损伤。修阵还需两端知识及材料，不由一块核心自动成功。
+    description: 取出必须实际接触腹内或令巨兽吐出，取得后从巨兽腹内移出；普通攻击难毁，空间力量仍可损伤。修阵还需两端知识及材料，不由一块核心自动成功。
+    access:
+      kind: private
+meters:
+  - id: thunder-kongyun-core-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

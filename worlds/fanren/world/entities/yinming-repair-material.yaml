@@ -1,0 +1,20 @@
+id: yinming-repair-material
+kind: container
+name: 门轴修缮料
+description: 绳索、硬木与固定石的有限余料。
+placement: yinming-main-gate
+facts:
+  - id: yinming-repair-material-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

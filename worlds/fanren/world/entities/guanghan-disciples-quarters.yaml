@@ -1,0 +1,26 @@
+id: guanghan-disciples-quarters
+kind: location
+name: 弟子厢房区
+description: 十余间原弟子房舍，客厅有桌椅茶具，里间有玉床与书桌；门窗当前完整。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-disciples-quarters-room-count
+    predicate: room-count
+    value:
+      kind: number
+      value: 14
+    description: room-count
+    access:
+      kind: private
+  - id: guanghan-disciples-quarters-route-guanghan-side-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-side-hall
+    description: 沿偏殿原有走廊进出，具体密室须另行处理其隔音防窥门禁。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

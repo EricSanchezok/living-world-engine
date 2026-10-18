@@ -1,0 +1,42 @@
+id: feiling-yuelong-retreat
+kind: location
+name: 越隆居所
+description: 来访须经门外通传的高阶修士洞府。
+placement: feiling-territory
+facts:
+  - id: feiling-yuelong-retreat-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-yuelong-retreat-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 来访须经门外通传的高阶修士洞府。
+    description: 来访须经门外通传的高阶修士洞府。
+    access:
+      kind: public
+  - id: feiling-yuelong-retreat-route-to-feiling-yuelong-refining-ground
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuelong-refining-ground
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-yuelong-retreat-route-conditions-feiling-yuelong-refining-ground
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 居所通炼场的山道；引天地力时封场，须主人许可进入。
+    description: 居所通炼场的山道；引天地力时封场，须主人许可进入。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

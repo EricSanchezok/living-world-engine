@@ -1,0 +1,27 @@
+id: demon-nine-delivery-record
+kind: item
+name: 药材交接记录
+description: 记录十八包实收、一箱受雨；尾款五十四低阶灵石，运费十二，其中四为已付定金。
+placement: demon-nine-immortal-market
+facts:
+  - id: demon-nine-delivery-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-nine-market-notary
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-nine-delivery-record-settlement
+    predicate: settlement
+    value:
+      kind: text
+      value: 买方若接受十六包合格药材按每包三低阶灵石支付四十八；两包损品仍归卖方，是否折价由双方协商。运输工钱八未付，责任需查遮雨安排，不能自动没收。
+    description: 买方若接受十六包合格药材按每包三低阶灵石支付四十八；两包损品仍归卖方，是否折价由双方协商。运输工钱八未付，责任需查遮雨安排，不能自动没收。
+    access:
+      kind: discoverable
+      condition: 经记录员允许阅读账页。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

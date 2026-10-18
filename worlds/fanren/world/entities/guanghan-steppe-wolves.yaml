@@ -1,0 +1,32 @@
+id: guanghan-steppe-wolves
+kind: creature-group
+name: 青山灰狼群
+description: 低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。
+placement: guanghan-steppe-hill
+facts:
+  - id: guanghan-steppe-wolves-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 6
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-steppe-wolves-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。
+    description: 低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。
+    access:
+      kind: private
+meters:
+  - id: guanghan-steppe-wolves-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-steppe-wolves-force
+    definition_id: force
+    value: 2
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: spirit3-xuanwu-stockade
+kind: location
+name: 玄武石溪寨
+description: 依岩溪而建的小寨，外有练盾坡，内有住屋和共同草料棚。
+placement: spirit-xuanwu-domain
+facts:
+  - id: spirit3-xuanwu-stockade-route-to-spirit-xuanwu-harbor
+    predicate: route-to-spirit-xuanwu-harbor
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-harbor
+    description: route-to-spirit-xuanwu-harbor
+    access:
+      kind: private
+  - id: spirit3-xuanwu-stockade-route-conditions-spirit-xuanwu-harbor
+    predicate: route-conditions-spirit-xuanwu-harbor
+    value:
+      kind: text
+      value: 连接移动海港与岸上溪寨，港位会变；海段须船与引航，陆段沿实地道路并备补给。
+    description: 连接移动海港与岸上溪寨，港位会变；海段须船与引航，陆段沿实地道路并备补给。
+    access:
+      kind: private
+  - id: spirit3-xuanwu-stockade-route-to-spirit3-whitebone-mountain
+    predicate: route-to-spirit3-whitebone-mountain
+    value:
+      kind: entity
+      entityId: spirit3-whitebone-mountain
+    description: route-to-spirit3-whitebone-mountain
+    access:
+      kind: private
+  - id: spirit3-xuanwu-stockade-route-conditions-spirit3-whitebone-mountain
+    predicate: route-conditions-spirit3-whitebone-mountain
+    value:
+      kind: text
+      value: 由溪谷到岩岭的野外长路，山门接待不等于获准进静室。
+    description: 由溪谷到岩岭的野外长路，山门接待不等于获准进静室。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

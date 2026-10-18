@@ -1,0 +1,122 @@
+id: human-south-kunwu
+kind: location
+name: 南疆
+description: 湿热山地与河谷间分布府县、门派和小型市镇，雷雨常见。
+placement: human-dajin
+facts:
+  - id: human-south-kunwu-route-south-chaoyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-chaoyun
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-chaoyun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿府间道路行旅，有距离、负重与雷雨影响。
+    description: 沿府间道路行旅，有距离、负重与雷雨影响。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-puyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-puyun
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-puyun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿府间道路行旅。
+    description: 沿府间道路行旅。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-silver-snake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-silver-snake
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-silver-snake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入山脉需沿已知路径。
+    description: 进入山脉需沿已知路径。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-poison-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-poison-valley
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-poison-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷内有毒雾虫群及禁空，飞行不能跳过实际防护。
+    description: 谷内有毒雾虫群及禁空，飞行不能跳过实际防护。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-du-sheng-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-du-sheng-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-du-sheng-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山门外可访，内部需说明来意和获许可。
+    description: 山门外可访，内部需说明来意和获许可。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-huaxian-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-huaxian-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-huaxian-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循传信或已知山路到外院，半隐门规不是无条件杀访客。
+    description: 循传信或已知山路到外院，半隐门规不是无条件杀访客。
+    access:
+      kind: public
+  - id: human-south-kunwu-route-south-xumi-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-xumi-court
+    description: route-to
+    access:
+      kind: public
+  - id: human-south-kunwu-condition-south-xumi-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山路通外院，阵库另行保护。
+    description: 山路通外院，阵库另行保护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: north-xuanyu-cave
+kind: location
+name: 玄玉洞
+description: 古修布置的玄玉矿洞，矿脉与宝玉凝为一体。
+placement: north-xuling-hall-one
+facts:
+  - id: north-xuanyu-cave-route-north-xuling-hall-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-hall-one
+    description: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    access:
+      kind: public
+  - id: north-xuanyu-cave-travel-north-xuling-hall-one
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    description: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    access:
+      kind: public
+  - id: north-xuanyu-cave-overdraw-cost
+    predicate: known-device-cost
+    value:
+      kind: text
+      value: 调动全洞寒气后千年封闭，是掌管者共同告知的装置代价；当前未发动，不能重复免费抽取。
+    description: 调动全洞寒气后千年封闭，是掌管者共同告知的装置代价；当前未发动，不能重复免费抽取。
+    access:
+      kind: public
+  - id: north-xuanyu-cave-route-north-solar-stone-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-solar-stone-room
+    description: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    access:
+      kind: public
+  - id: north-xuanyu-cave-travel-north-solar-stone-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    description: 洞内行路须先抵御玄玉寒气，到达石屋后才受其隔寒作用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: dajin-du-farm-tools
+kind: item
+name: 杜家农具
+description: 一把锄头与修补用木柄组成的普通农具套具，不是法器。
+placement: dajin-du-house
+facts:
+  - id: dajin-du-farm-tools-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-dajin-du-cheng
+    description: 杜诚日常劳作器具。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

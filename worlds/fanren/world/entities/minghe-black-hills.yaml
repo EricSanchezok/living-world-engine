@@ -1,0 +1,42 @@
+id: minghe-black-hills
+kind: location
+name: 黑气林丘
+description: 阴气凝于灰色灌木和暗色高树之间，许多丘陵有茂密枝叶覆盖，山腹并非天然都有洞府。
+placement: minghe-space
+facts:
+  - id: minghe-black-hills-route-to-minghe-mist-island-waters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-mist-island-waters
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-black-hills-route-conditions-minghe-mist-island-waters
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。
+    description: 林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。
+    access:
+      kind: private
+  - id: minghe-black-hills-route-to-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-black-hills-route-conditions-minghe-inner-shore
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。
+    description: 经荒地可到黑气林丘，地形不固定提供藏身洞，需要自己寻找或开凿。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

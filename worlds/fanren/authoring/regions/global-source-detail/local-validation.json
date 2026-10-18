@@ -1,38 +1,40 @@
 {
   "status": "source-and-schema-passed-not-full-world-acceptance",
-  "moduleHash": "63c5f9c7f094a08a514809a8fa8822ebf670cfeed54d29623530f6af098e35fb",
-  "claimsHash": "65779728376dda297a393faa4a8782bbb70bfc8ba2295898bf73856f12e1b252",
-  "anchors": 127,
+  "moduleHash": "d81d361ee4d829350eae6671704666454aed7c914f2aac0aa3b84772cb1e68a2",
+  "claimsHash": "5eb1ad71a7401d50819ec02c72b7f4f0042f659527104860dc09f158e16ae85f",
+  "anchors": 977,
   "dispositions": {
     "moduleId": "global-candidate-closure",
-    "candidates": 300,
+    "candidates": 3000,
     "counts": {
-      "adopted": 134,
-      "corrected": 76,
-      "history-only": 11,
-      "later-only": 55,
-      "bounded-uncertainty": 24,
+      "adopted": 2277,
+      "corrected": 338,
+      "history-only": 12,
+      "later-only": 347,
+      "bounded-uncertainty": 26,
       "transferred": 0,
       "pending": 0
     },
-    "completed": 300,
+    "completed": 3000,
     "unresolved": 0,
-    "boundedUncertainty": 24,
+    "boundedUncertainty": 26,
     "approvedForRuntime": false,
-    "reportHash": "8bca63d7326e64cacbc132d9c27c21b26c3d711aac1b4caa606da70124053e8b"
+    "reportHash": "22222a226fc555f377c86f4c41c11ff5113295b0936b9e896231dc82ecac2a99"
   },
   "fullWorldAssembly": {
     "status": "assembly-passed-not-full-world-acceptance",
-    "modules": 34,
-    "entities": 4976,
-    "agents": 811,
-    "sourceDetailModuleHash": "4e839d4089e69d1ab41d92f5eadbd0d6d3a4dadc6997148b120903b8d3ed487f",
-    "sourceDetailClaimsHash": "65779728376dda297a393faa4a8782bbb70bfc8ba2295898bf73856f12e1b252",
+    "modules": 35,
+    "entities": 5164,
+    "agents": 846,
+    "sourceDetailModuleHash": "ae078381964ffe39afb2a0275164fffda43cf0de810f5591cafcb8753a6e2d25",
+    "sourceDetailClaimsHash": "5eb1ad71a7401d50819ec02c72b7f4f0042f659527104860dc09f158e16ae85f",
     "apiCalls": 0
   },
-  "rootReview": {
-    "scope": "all new claims, entities, facts and cognition; 33 key source anchors cross-read",
-    "entities": 4976,
-    "modelCalls": 0
+  "postAssemblyTextCorrection": {
+    "beforeModuleHash": "ae078381964ffe39afb2a0275164fffda43cf0de810f5591cafcb8753a6e2d25",
+    "moduleHash": "d81d361ee4d829350eae6671704666454aed7c914f2aac0aa3b84772cb1e68a2",
+    "change": "炫烨王儿自身描述只留当前能力；沈阙只知巡查范围；巨人状态只留受伤沉睡半身埋地。8新增agent认知定向核对，无作者未来否定句或以否定泄露后期秘密。",
+    "schemaPassed": true,
+    "fullAssemblyRepeated": false
   }
 }

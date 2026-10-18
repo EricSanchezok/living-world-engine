@@ -1,0 +1,20 @@
+id: outerstar-survey-purse
+kind: container
+name: 测绘委托钱袋
+description: 为实测暗礁预留二十低阶灵石。
+placement: outerstar-map-shop
+facts:
+  - id: outerstar-survey-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-mapmaker
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

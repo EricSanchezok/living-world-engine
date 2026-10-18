@@ -1,0 +1,26 @@
+id: ad-yexiu-city
+kind: location
+name: 夜修城
+description: 荒野另一侧的远城；长途行程依实路与能力。
+placement: associated-demon-realm
+facts:
+  - id: ad-yexiu-city-route-to-ad-bloodcrow-city
+    predicate: route-to-ad-bloodcrow-city
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-yexiu-city-route-to-ad-kuji-city
+    predicate: route-to-ad-kuji-city
+    value:
+      kind: entity
+      entityId: ad-kuji-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

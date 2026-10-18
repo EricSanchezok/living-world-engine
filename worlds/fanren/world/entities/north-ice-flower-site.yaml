@@ -1,0 +1,26 @@
+id: north-ice-flower-site
+kind: location
+name: 冰海玄冰药点
+description: 已勘定药点，两朵玄冰花附生万年玄冰，严寒和妖修活动影响采集。
+placement: human-ice-sea
+facts:
+  - id: north-ice-flower-site-route-human-ice-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-ice-sea
+    description: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    access:
+      kind: public
+  - id: north-ice-flower-site-travel-human-ice-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    description: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

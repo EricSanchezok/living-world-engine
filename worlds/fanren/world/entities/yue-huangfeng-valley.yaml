@@ -1,0 +1,178 @@
+id: yue-huangfeng-valley
+kind: location
+name: 黄枫谷山门
+description: 大阵掩护楼台殿宇，凡眼所见山林不等于没有建筑。
+placement: yue-taiyue-range
+facts:
+  - id: yue-huangfeng-valley-route-yue-taiyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-taiyue-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-taiyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-hall
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-huangfeng-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-guest
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-guest
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-huangfeng-guest
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-garden
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-huangfeng-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-workyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-workyard
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-huangfeng-workyard
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-treasury
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-treasury
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-travel-yue-huangfeng-treasury
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-baiji-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-baiji-hall
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-transmission-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-transmission-hall
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-xuankun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-xuankun-mountain
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-new-disciple-houses
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-new-disciple-houses
+    description: 可循门内山路或实际御器来往，室内和授课区域仍需核准通行。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-wujun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-wujun-mountain
+    description: 经门内山路到巫钧山守卫处，来客须先说明事由，不能越过查验直入殿内。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-huangfeng-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-market
+    description: 沿太岳东北方向实际行路或御器；坊市五里内禁止飞行是需守卫执行的规章。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-qishou-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qishou-mountain
+    description: 循门内山路到兽栏管理处，借兽需要许可和看管责任。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-tianzhi-library
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tianzhi-library
+    description: 沿门内道路进阁，来客须在柜台登记，阅本不得擅自带出。
+    access:
+      kind: public
+  - id: yue-huangfeng-valley-route-yue-tianshi-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tianshi-peak
+    description: 沿现存道路或适用遁行抵达，仍需实际路程和通行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

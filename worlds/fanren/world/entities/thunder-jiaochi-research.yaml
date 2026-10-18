@@ -1,0 +1,26 @@
+id: thunder-jiaochi-research
+kind: location
+name: 角蚩边防研武院
+description: 试验台和隔障分列庭院两侧，边防图挂在内厅。器具领取与归还都有当值者记下。
+placement: thunder-jiaochi
+facts:
+  - id: thunder-jiaochi-research-route-thunder-jiaochi-frontier
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-frontier
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jiaochi-research-condition-thunder-jiaochi-frontier
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城关验明身份后才能循内道前往研武院。
+    description: 城关验明身份后才能循内道前往研武院。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

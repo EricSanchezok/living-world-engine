@@ -1,0 +1,20 @@
+id: yinming-seed-bin
+kind: container
+name: 薄田种粮箱
+description: 留作下一播种的二十份种粮；吃掉种子会影响下一季。
+placement: yinming-village-field
+facts:
+  - id: yinming-seed-bin-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-field
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 20
+ratings: []
+shared_activity_resources: []

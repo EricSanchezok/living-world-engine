@@ -1,0 +1,20 @@
+id: minghe-yellow-leaves
+kind: container
+name: 发黄的虫粮叶
+description: 三包可收但暂未合格的叶料，须查明养护问题再决定用途。
+placement: minghe-medicine-garden
+facts:
+  - id: minghe-yellow-leaves-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-young-gardener
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 3
+ratings: []
+shared_activity_resources: []

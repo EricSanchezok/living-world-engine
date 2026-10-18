@@ -1,0 +1,26 @@
+id: global-fu-dressing
+kind: item
+name: 医舍净布药包1
+description: 一份净布和普通外伤药。
+placement: global-fu-clinic
+facts:
+  - id: global-fu-dressing-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-fu-family
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-fu-dressing-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 每份只处理相应小创，实际使用即减库存；不治一切经脉重伤。
+    description: 每份只处理相应小创，实际使用即减库存；不治一切经脉重伤。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

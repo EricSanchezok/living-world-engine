@@ -1,0 +1,26 @@
+id: spirit3-ranking-petition
+kind: item
+name: 榜碑摹录呈文
+description: 乔缄申请4份工料重制两张容易混笔的摹片，希望保留原件供对照，尚未用去公库材料。
+placement: spirit3-tianling-hall
+facts:
+  - id: spirit3-ranking-petition-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianling-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-ranking-petition-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: spirit3-ranking-custodian
+    description: authored-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

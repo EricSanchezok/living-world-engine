@@ -1,0 +1,26 @@
+id: south-jintu
+kind: location
+name: 金图山
+description: 风景秀丽的山岭，山亭供旅人歇脚。
+placement: south-zhonglou
+facts:
+  - id: south-jintu-route-south-zhonglou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-zhonglou
+    description: route-to
+    access:
+      kind: public
+  - id: south-jintu-condition-south-zhonglou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿山路登亭。
+    description: 沿山路登亭。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

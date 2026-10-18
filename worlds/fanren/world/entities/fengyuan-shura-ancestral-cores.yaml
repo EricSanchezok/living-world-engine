@@ -1,0 +1,20 @@
+id: fengyuan-shura-ancestral-cores
+kind: container
+name: 天蛛旧核匣
+description: 两枚已经离体、来自去世成年同族的旧核，家族保管约定限制出售；不是当前族人的身体器官。
+placement: fengyuan-shura-council
+facts:
+  - id: fengyuan-shura-ancestral-cores-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-shura-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-shura-retained-core
+    amount: 2
+ratings: []
+shared_activity_resources: []

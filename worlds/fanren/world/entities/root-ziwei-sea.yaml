@@ -1,0 +1,37 @@
+id: root-ziwei-sea
+kind: location
+name: 紫薇海
+description: 灵界海域，广阔水面中须按真实能力、补给和可得地图行路。
+placement: spirit-realm
+facts:
+  - id: root-ziwei-sea-route-to-thunder-firecoral-deepwater
+    predicate: route-to-thunder-firecoral-deepwater
+    value:
+      kind: entity
+      entityId: thunder-firecoral-deepwater
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-ziwei-sea-travel-condition-thunder-firecoral-deepwater
+    predicate: travel-condition-thunder-firecoral-deepwater
+    value:
+      kind: text
+      value: 属于跨海长途方向；完整航线不预先授予，须逐段勘航并承担真实时间、补给和天气风险。
+    description: 属于跨海长途方向；完整航线不预先授予，须逐段勘航并承担真实时间、补给和天气风险。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-ziwei-sea-root-detail-renmian-family
+    predicate: root-detail-renmian-family
+    value:
+      kind: text
+      value: 海域广阔，远航须具路线、交通能力与补给；当地住民关系和所知不因同在一片海便互通。
+    description: 海域广阔，远航须具路线、交通能力与补给；当地住民关系和所知不因同在一片海便互通。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

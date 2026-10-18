@@ -1,0 +1,24 @@
+id: tianyuan-holy-steward-travel-kit
+kind: container
+name: 阮澄的行囊
+description: 行路口粮与小量灵石、材料。
+placement: tianyuan-holy-steward
+facts:
+  - id: tianyuan-holy-steward-travel-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-holy-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 6
+  - definition_id: low-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 3
+ratings: []
+shared_activity_resources: []

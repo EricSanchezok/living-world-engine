@@ -1,0 +1,26 @@
+id: thunder-wangu-study-offer
+kind: item
+name: 岑音的万古试学邀书
+description: 十二本地月试学：每本地月二十低阶灵石补助，先学耐用机关；允许第三本地月后评议退出，已领生活补助不追债。
+placement: thunder-wangu-teacher
+facts:
+  - id: thunder-wangu-study-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-teacher
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-wangu-study-offer-acceptance
+    predicate: acceptance
+    value:
+      kind: text
+      value: 邀请尚未接受，必须岑音本人同意；外人不能代她拜师，也可协商新的具体条件。
+    description: 邀请尚未接受，必须岑音本人同意；外人不能代她拜师，也可协商新的具体条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,21 @@
+id: ad-eight-leg-lizard-1
+kind: creature
+name: 闻沙八足魔蜥1
+description: 适应幻啸沙漠的真实坐骑，成年可短途出行。
+placement: ad-huanye-city
+facts:
+  - id: ad-eight-leg-lizard-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-dune-handler
+    description: owned-by
+    access:
+      kind: private
+meters:
+  - id: ad-eight-leg-lizard-1-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings: []
+shared_activity_resources: []

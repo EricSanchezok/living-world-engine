@@ -1,0 +1,18 @@
+id: void-port-receipt
+kind: item
+name: 十二箱交接单
+description: 十二个收货记号，其中最后一个印在纸背，须实际展开核对。
+placement: void-boat-mate
+facts:
+  - id: void-port-receipt-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-boat-owner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: void-pavilions
+kind: location
+name: 外殿玉亭
+description: 几座玉亭围着中转石板，传送纹路现在黯淡。
+placement: human-void-hall
+facts:
+  - id: void-pavilions-route-void-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-mist
+    description: route-to
+    access:
+      kind: public
+  - id: void-pavilions-condition-void-mist
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-pavilions-route-void-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-garden
+    description: route-to
+    access:
+      kind: public
+  - id: void-pavilions-condition-void-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

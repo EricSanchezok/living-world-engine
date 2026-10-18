@@ -1,0 +1,32 @@
+id: guanghan-blood-butterflies
+kind: creature-group
+name: 化血蝶群
+description: 绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。
+placement: guanghan-mountain-chain
+facts:
+  - id: guanghan-blood-butterflies-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 600
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-blood-butterflies-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。
+    description: 绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。
+    access:
+      kind: private
+meters:
+  - id: guanghan-blood-butterflies-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-blood-butterflies-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

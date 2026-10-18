@@ -1,0 +1,18 @@
+id: fengyuan-greenlimb-flower
+kind: plant
+name: 圣晶之花
+description: 谷内护养的一株晶色圣花，与周围供养设施相接；摘取会改变植株和族群生活条件。
+placement: fengyuan-greenlimb-refuge
+facts:
+  - id: fengyuan-greenlimb-flower-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-greenlimb-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

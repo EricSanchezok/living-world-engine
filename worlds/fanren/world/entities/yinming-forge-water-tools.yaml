@@ -1,0 +1,18 @@
+id: yinming-forge-water-tools
+kind: item
+name: 澄甫的个人器具
+description: 辨沉水、分批浸养、净水与工具清洁。所需的有限工具，不包含无限兽晶。
+placement: yinming-forge-water
+facts:
+  - id: yinming-forge-water-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-forge-water
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

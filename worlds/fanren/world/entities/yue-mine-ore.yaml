@@ -1,0 +1,20 @@
+id: yue-mine-ore
+kind: item
+name: 矿壁灵石原矿
+description: 尚在岩体中的灵石原矿，须实际开采、筛选与切取。
+placement: yue-old-mine
+facts:
+  - id: yue-mine-ore-yield
+    predicate: processing-condition
+    value:
+      kind: text
+      value: 每份原矿可在合适工具与完整切取后得到一枚低阶灵石，同时消耗对应原矿；失败碎损同样扣原矿，不能把矿藏数量直接当可付钱币。
+    description: 每份原矿可在合适工具与完整切取后得到一枚低阶灵石，同时消耗对应原矿；失败碎损同样扣原矿，不能把矿藏数量直接当可付钱币。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-raw-spirit-ore
+    amount: 200
+ratings: []
+shared_activity_resources: []

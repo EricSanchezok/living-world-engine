@@ -1,0 +1,28 @@
+id: yue-fire-room-22-sand
+kind: item
+name: 第22室火星砂葫芦组
+description: 四个壁挂葫芦装着可增强地火的火星砂，余量有限。
+placement: yue-fire-room-22
+facts:
+  - id: yue-fire-room-22-sand-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-fire-room-22-sand-use
+    predicate: equipment-capability
+    value:
+      kind: text
+      value: 投入一份火星砂可暂时提升该室地火强度，消耗后不会自行补满；须依炉具、药物耐热程度操作。
+    description: 投入一份火星砂可暂时提升该室地火强度，消耗后不会自行补满；须依炉具、药物耐热程度操作。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-fire-sand-use
+    amount: 4
+ratings: []
+shared_activity_resources: []

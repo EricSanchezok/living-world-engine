@@ -1,0 +1,35 @@
+id: spirit3-whitebone-study
+kind: location
+name: 万骨静室
+description: 桌上是骨法修习手录与来徒请益帖，外院留有演法余地。
+placement: spirit3-whitebone-mountain
+facts:
+  - id: spirit3-whitebone-study-route-to-spirit3-whitebone-mountain
+    predicate: route-to-spirit3-whitebone-mountain
+    value:
+      kind: entity
+      entityId: spirit3-whitebone-mountain
+    description: route-to-spirit3-whitebone-mountain
+    access:
+      kind: private
+  - id: spirit3-whitebone-study-route-conditions-spirit3-whitebone-mountain
+    predicate: route-conditions-spirit3-whitebone-mountain
+    value:
+      kind: text
+      value: 山门内通道，需万骨本人允许。
+    description: 山门内通道，需万骨本人允许。
+    access:
+      kind: private
+  - id: spirit3-whitebone-study-root-detail-human-demon-oldwars
+    predicate: root-detail-human-demon-oldwars
+    value:
+      kind: text
+      value: 此处可询问万骨所经历或听闻的两族旧史；口述年代和传闻须与已知事实分别核对。
+    description: 此处可询问万骨所经历或听闻的两族旧史；口述年代和传闻须与已知事实分别核对。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

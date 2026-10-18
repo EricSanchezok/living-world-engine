@@ -1,0 +1,26 @@
+id: outerstar-lodging-office
+kind: location
+name: 黑石居留所
+description: 凡人求职者暂住在相连石屋，登记册记下雇主与去处。
+placement: outerstar-blackstone-city
+facts:
+  - id: outerstar-lodging-office-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-lodging-office-condition-outerstar-blackstone-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 凡人求职者暂住在相连石屋，登记册记下雇主与去处。
+    description: 凡人求职者暂住在相连石屋，登记册记下雇主与去处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

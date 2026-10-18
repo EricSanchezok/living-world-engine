@@ -1,0 +1,26 @@
+id: tianyuan-yinguang-residence
+kind: location
+name: 银光临水静舍
+description: 沿溪石阶通到两间静室，临水窗用于练习凝神与察看细小灵光；门内是居者私地。
+placement: demon-wolf-territory
+facts:
+  - id: tianyuan-yinguang-residence-route-to-demon-wolf-territory
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-wolf-territory
+    description: route-to-demon-wolf-territory
+    access:
+      kind: private
+  - id: tianyuan-yinguang-residence-route-conditions-demon-wolf-territory
+    predicate: route-conditions-demon-wolf-territory
+    value:
+      kind: text
+      value: 妖狼域内部沿溪寻路；静舍须获居者同意才能入内。
+    description: 妖狼域内部沿溪寻路；静舍须获居者同意才能入内。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: tiannan-cheqi-post
+kind: location
+name: 车骑南篱驿
+description: 边路车马换歇处，收取实际食宿与牲畜照料费用。
+placement: human-cheqi
+facts:
+  - id: tiannan-cheqi-post-route-human-cheqi
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-cheqi
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

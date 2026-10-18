@@ -1,0 +1,51 @@
+id: feiling-abyss-7
+kind: location
+name: 地渊第7层
+description: 地下第7层。阴气、地形和居民各异；不同层次通道须实际辨认。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-7-route-feiling-abyss-6
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-6
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-7-condition-feiling-abyss-6
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-7-route-feiling-liuzu-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-liuzu-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-7-condition-feiling-liuzu-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地渊深处隐蔽的洞窟，外侧设有观察来路的禁制。
+    description: 地渊深处隐蔽的洞窟，外侧设有观察来路的禁制。
+    access:
+      kind: public
+  - id: feiling-abyss-7-hidden-rift-clue
+    predicate: hidden-rift-clue
+    value:
+      kind: text
+      value: 偏西裂岩带偶有不同于普通阴风的空间扰动，需深入勘察和足够感知才能分辨。
+    description: 偏西裂岩带偶有不同于普通阴风的空间扰动，需深入勘察和足够感知才能分辨。
+    access:
+      kind: discoverable
+      condition: 在深层裂岩带进行有针对性的空间观测。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

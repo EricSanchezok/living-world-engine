@@ -1,0 +1,28 @@
+id: root-yitian-yitian-court
+kind: location
+name: 倚天门事务院
+description: 当前处理本宗在城中修护与往来的事务院。
+placement: tianyuan-yitian-city-reference
+facts:
+  - id: root-yitian-yitian-court-route-to-tianyuan-yitian-city-reference
+    predicate: route-to-tianyuan-yitian-city-reference
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-city-reference
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-yitian-yitian-court-travel-condition-tianyuan-yitian-city-reference
+    predicate: travel-condition-tianyuan-yitian-city-reference
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

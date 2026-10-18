@@ -1,0 +1,187 @@
+id: blood-upper-collector
+kind: person
+name: 上宗收供使
+description: 受上宗授权核对离火宗本期年供的炼虚修士，拿到符合约定的实物才开具收讫。
+placement: blood-upper-court
+facts:
+  - id: blood-upper-collector-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: blood-lihuo-upper-sect
+    description: member-of
+    access:
+      kind: private
+  - id: blood-upper-collector-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: blood-upper-collector-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护体遁行、药材验收与贡约账目核对
+    description: 炼虚护体遁行、药材验收与贡约账目核对
+    access:
+      kind: private
+  - id: blood-upper-collector-collection-authority
+    predicate: collection-authority
+    value:
+      kind: text
+      value: 可依已发回函收24高阶灵石或18高阶灵石加6份已验药材，收讫入公库并减对应欠项；不能单方豁免、改期或重复收款。
+    description: 可依已发回函收24高阶灵石或18高阶灵石加6份已验药材，收讫入公库并减对应欠项；不能单方豁免、改期或重复收款。
+    access:
+      kind: private
+  - id: blood-upper-collector-received-stock
+    predicate: received-stock
+    value:
+      kind: entity
+      entityId: blood-upper-received-stock
+    description: received-stock
+    access:
+      kind: private
+meters:
+  - id: blood-upper-collector-health
+    definition_id: health
+    current: 100
+  - id: blood-upper-collector-mana
+    definition_id: mana
+    current: 600
+quantities: []
+ratings:
+  - id: blood-upper-collector-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: blood-upper-collector-force
+    definition_id: force
+    value: 6
+  - id: blood-upper-collector-craft
+    definition_id: craft
+    value: 5
+  - id: blood-upper-collector-perception
+    definition_id: perception
+    value: 6
+  - id: blood-upper-collector-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: blood-upper-collector
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受上宗授权核对离火宗本期年供的炼虚修士，拿到符合约定的实物才开具收讫。
+      voice: 先核函印和份数，遇请求分期会说明自己能受理、尚须上报的部分。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 等离火宗答复抵款方案，按实际交付开收据；若需改期，递交上宗复议。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 上宗收供使
+        description: 受上宗授权核对离火宗本期年供的炼虚修士，拿到符合约定的实物才开具收讫。
+        status: observed
+      - id: location
+        name: 上宗通事院
+        description: 当前所在地与日常事务所在。
+        status: observed
+      - id: closeout-blood-upper-collector-private-stock
+        name: 上宗收供使私用石料
+        description: 本人私用储备，公款另存，不能代偿组织已定支出。
+        status: observed
+      - id: closeout-blood-lihuo-upper-sect
+        name: 离火宗所依上宗
+        description: 自己任职的宫属，知道当前公开议事规则与账目分工。
+        status: observed
+      - id: closeout-blood-upper-collector-defense
+        name: 上宗收供使护身鳞佩
+        description: 相合水中护体的鳞佩，需本人主动实耗法力催动，受击会损坏。
+        status: observed
+      - id: closeout-blood-lihuo-steward
+        name: 陆衡
+        description: 已有面对面往来，知道对方的身份与议事分工；不能直接知道对方未透露的打算。
+        status: observed
+      - id: closeout-blood-upper-reply
+        name: 上宗收供回函
+        description: 允许申请用6份已验药材抵6枚高阶灵石，但须实际交付并验收；是否分期另议，未授权执事挪用私人款。
+        status: observed
+      - id: closeout-blood-upper-receipt-book
+        name: 上宗本期收供簿
+        description: 离火宗本期应交24高阶灵石；现收讫为零。依已发回函可收6份已验药材抵6枚，实际入库后逐笔登记。
+        status: observed
+      - id: closeout-blood-upper-received-stock
+        name: 上宗离火年供收讫库
+        description: 本项组织事务的独立实存，未经授权不得转入个人袋；已收与待收分别记账。
+        status: observed
+      - id: closeout-blood-lihuo-ledger
+        name: 离火宗年供账
+        description: 本期应交上宗24高阶灵石，30个本地日后到期；公库已备18。可申请延期或接受已约定等价药材，未经双方同意不算结清。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 亲历、修习和本人已经参与的议事。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护体遁行、药材验收与贡约账目核对
+        description: 炼虚护体遁行、药材验收与贡约账目核对
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-upper-collector
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-upper-court
+      - local_entity_id: closeout-blood-upper-collector-private-stock
+        canonical_entity_ids:
+          - blood-upper-collector-private-stock
+      - local_entity_id: closeout-blood-lihuo-upper-sect
+        canonical_entity_ids:
+          - blood-lihuo-upper-sect
+      - local_entity_id: closeout-blood-upper-collector-defense
+        canonical_entity_ids:
+          - blood-upper-collector-defense
+      - local_entity_id: closeout-blood-lihuo-steward
+        canonical_entity_ids:
+          - blood-lihuo-steward
+      - local_entity_id: closeout-blood-upper-reply
+        canonical_entity_ids:
+          - blood-upper-reply
+      - local_entity_id: closeout-blood-upper-receipt-book
+        canonical_entity_ids:
+          - blood-upper-receipt-book
+      - local_entity_id: closeout-blood-upper-received-stock
+        canonical_entity_ids:
+          - blood-upper-received-stock
+      - local_entity_id: closeout-blood-lihuo-ledger
+        canonical_entity_ids:
+          - blood-lihuo-ledger

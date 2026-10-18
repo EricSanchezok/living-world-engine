@@ -1,0 +1,24 @@
+id: north-relocation-energy
+kind: item
+name: 古阵封存灵石
+description: 仅供阵体的机构能源，未经许可不能当长老个人灵石；领走会减少后续供能能力。
+placement: north-hall-relocation-array
+facts:
+  - id: north-relocation-energy-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 500
+  - definition_id: mid-stone
+    amount: 2500
+  - definition_id: high-stone
+    amount: 12
+ratings: []
+shared_activity_resources: []

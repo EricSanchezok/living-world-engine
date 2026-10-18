@@ -1,0 +1,28 @@
+id: yue-market-cinnabar
+kind: item
+name: 孟竹的丹砂
+description: 一小瓶用妖兽血调制的低阶丹砂，可供十次练符。
+placement: yue-tainan-square
+facts:
+  - id: yue-market-cinnabar-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-tainan-seller
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: yue-market-cinnabar-uses
+    predicate: remaining-uses
+    value:
+      kind: number
+      value: 10
+    description: remaining-uses
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-cinnabar-use
+    amount: 10
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: thunder-yunxiang-auction
+kind: location
+name: 云祥拍卖场
+description: 另一处交易场，不与云意拍卖场混为一处。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-yunxiang-auction-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-yunxiang-auction-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 另一处交易场，不与云意拍卖场混为一处。
+    description: 另一处交易场，不与云意拍卖场混为一处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

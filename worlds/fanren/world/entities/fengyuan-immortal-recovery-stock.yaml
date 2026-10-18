@@ -1,0 +1,22 @@
+id: fengyuan-immortal-recovery-stock
+kind: container
+name: 凝躯宫留存灵料
+description: 八份现存灵料与二十高阶石，按当前凝躯方案一轮耗两份料四枚石；只稳固小段组织，不立即恢复完整仙躯。
+placement: fengyuan-immortal-seabed-palace
+facts:
+  - id: fengyuan-immortal-recovery-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: future-fengyuan-imprisoned-immortal
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: high-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

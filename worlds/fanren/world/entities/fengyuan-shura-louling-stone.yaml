@@ -1,0 +1,18 @@
+id: fengyuan-shura-louling-stone
+kind: item
+name: 镂灵石
+description: 淡蓝色的古圣物沉在深潭中，可供有能力者参悟空间之力；取得它需要突破封藏和严寒。
+placement: fengyuan-shura-cold-pool
+facts:
+  - id: fengyuan-shura-louling-stone-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

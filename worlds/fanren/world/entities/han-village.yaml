@@ -1,0 +1,26 @@
+id: han-village
+kind: location
+name: 五里沟
+description: 韩家居住的山边小村，位于五六里大小的山沟内，泥屋与农田依山分布。
+placement: human-realm
+facts:
+  - id: han-village-route-village-path
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: village-path
+    description: 有普通道路通往村边小路；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+  - id: han-village-route-qingniu-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-town
+    description: 有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

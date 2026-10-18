@@ -1,0 +1,42 @@
+id: dv-subsurface-lava-basin
+kind: location
+name: 地下洞窟熔岩盆地
+description: 黑红荒地环绕赤红熔岩湖；这是另一处地表盆地，不能与古火蟾洞里的熔岩湖合并。
+placement: dv-inner
+facts:
+  - id: dv-subsurface-lava-basin-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-subsurface-lava-basin-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行内谷至盆地，需要实际勘察路线和应对局部古禁。
+    description: 穿行内谷至盆地，需要实际勘察路线和应对局部古禁。
+    access:
+      kind: public
+  - id: dv-subsurface-lava-basin-route-dv-natural-tunnel
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-natural-tunnel
+    description: route-to
+    access:
+      kind: public
+  - id: dv-subsurface-lava-basin-condition-dv-natural-tunnel
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入须承受深层熔岩的热压、找到隐蔽入口并穿过蓝色隔岩光幕；需要相应防护。
+    description: 进入须承受深层熔岩的热压、找到隐蔽入口并穿过蓝色隔岩光幕；需要相应防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: human-huaming-island
+kind: location
+name: 化鸣岛
+description: 内星海一座岛屿，船航与御器均需实际行程。
+placement: human-inner-star-sea
+facts:
+  - id: human-huaming-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 通往内星海
+    access:
+      kind: public
+  - id: human-huaming-island-travel-human-inner-star-sea
+    predicate: travel-human-inner-star-sea
+    value:
+      kind: text
+      value: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    description: 航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

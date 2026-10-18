@@ -1,0 +1,18 @@
+id: blood-chilei-offer
+kind: item
+name: 雷法散手报价函
+description: 赤雷提出六十高阶灵石换一份私用抄本，禁止转售；如意要求先看真实试演，目前未成约也未支付。
+placement: canon-blood-ruyi
+facts:
+  - id: blood-chilei-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-ruyi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,37 @@
+id: canon-fang-yinluo-soul-lamp
+kind: item
+name: 房姓宗主的元神灯
+description: 灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。
+placement: dajin-yinluo-lamp-room
+facts:
+  - id: canon-fang-yinluo-soul-lamp-subject
+    predicate: linked-to
+    value:
+      kind: entity
+      entityId: canon-fang-yinluo
+    description: 该灯与此主体有实际联系。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fang-yinluo
+        - canon-lu-yinluo
+  - id: canon-fang-yinluo-soul-lamp-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-yinluo-sect
+    description: 宗门秘室保管的实际灯具。
+    access:
+      kind: public
+  - id: canon-fang-yinluo-soul-lamp-state
+    predicate: lamp-state
+    value:
+      kind: text
+      value: 当前主体存活，灯焰正常。
+    description: 灯况须依实际生命与联系状态改变。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

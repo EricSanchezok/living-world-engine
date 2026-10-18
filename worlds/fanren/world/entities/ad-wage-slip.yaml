@@ -1,0 +1,34 @@
+id: ad-wage-slip
+kind: item
+name: 牛存支护工单
+description: 已完成前半段，矿方尚欠3魔石；后半段完成再得3，付款从货场公款扣除并记已付。
+placement: ad-lu-yan
+facts:
+  - id: ad-wage-slip-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-niu-cun
+    description: owned-by
+    access:
+      kind: private
+  - id: ad-wage-slip-unpaid-earned
+    predicate: unpaid-earned
+    value:
+      kind: number
+      value: 3
+    description: "3"
+    access:
+      kind: private
+  - id: ad-wage-slip-unearned-on-completion
+    predicate: unearned-on-completion
+    value:
+      kind: number
+      value: 3
+    description: "3"
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

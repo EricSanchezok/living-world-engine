@@ -1,0 +1,22 @@
+id: feiling-healer-kit
+kind: container
+name: 羽珩药箱
+description: 有限药材与绷带，可治疗轻中度翼伤，不能令断翼立刻重生。
+placement: feiling-wing-healer
+facts:
+  - id: feiling-healer-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-wing-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 4
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

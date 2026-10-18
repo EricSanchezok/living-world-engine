@@ -1,0 +1,18 @@
+id: yinming-cove-scout-tools
+kind: item
+name: 藏舟的个人器具
+description: 辨足迹、避兽、绳索和短矛。所需的有限工具，不包含无限兽晶。
+placement: yinming-cove-scout
+facts:
+  - id: yinming-cove-scout-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-cove-scout
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

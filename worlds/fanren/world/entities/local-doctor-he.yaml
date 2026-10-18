@@ -1,0 +1,135 @@
+id: local-doctor-he
+kind: person
+name: 何大夫
+description: 地方凡俗生活者，有自己有限资产、职责与选择。
+placement: local-common-clinic
+facts:
+  - id: local-doctor-he-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 凡俗内科问诊、普通汤剂，药性和剂量需辨证。
+    description: 凡俗内科问诊、普通汤剂，药性和剂量需辨证。
+    access:
+      kind: private
+meters:
+  - id: local-doctor-he-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: local-doctor-he-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: local-doctor-he-force
+    definition_id: force
+    value: 1
+  - id: local-doctor-he-craft
+    definition_id: craft
+    value: 2
+  - id: local-doctor-he-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: local-doctor-he
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地方凡俗生活者，有自己有限资产、职责与选择。
+      voice: 言语缓慢，愿解释为什么仍须等药效。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-life
+        description: 向厨房核实何时有洁净热水可供医舍，再与罗大夫核对现有药材。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 何大夫
+        description: 地方凡俗生活者，有自己有限资产、职责与选择。
+        status: observed
+      - id: location
+        name: 门内常用医舍
+        description: 本人日常所在。
+        status: observed
+      - id: known-local-doctor-he-purse
+        name: 何大夫私囊
+        description: 本人实际支配的积蓄。
+        status: observed
+      - id: known-local-doctor-luo
+        name: 罗大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-doctor-qiu
+        name: 邱大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-clinic-stock
+        name: 医舍药柜
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-cook
+        name: 孙灶头
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-canon-mo-juren
+        name: 墨大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的学习、工作与生活经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 凡俗内科问诊、普通汤剂，药性和剂量需辨证。
+        description: 凡俗内科问诊、普通汤剂，药性和剂量需辨证。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - local-doctor-he
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-common-clinic
+      - local_entity_id: known-local-doctor-he-purse
+        canonical_entity_ids:
+          - local-doctor-he-purse
+      - local_entity_id: known-local-doctor-luo
+        canonical_entity_ids:
+          - local-doctor-luo
+      - local_entity_id: known-local-doctor-qiu
+        canonical_entity_ids:
+          - local-doctor-qiu
+      - local_entity_id: known-local-clinic-stock
+        canonical_entity_ids:
+          - local-clinic-stock
+      - local_entity_id: known-local-cook
+        canonical_entity_ids:
+          - local-cook
+      - local_entity_id: known-canon-mo-juren
+        canonical_entity_ids:
+          - canon-mo-juren

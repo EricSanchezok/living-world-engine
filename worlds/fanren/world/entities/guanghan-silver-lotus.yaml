@@ -1,0 +1,35 @@
+id: guanghan-silver-lotus
+kind: plant
+name: 银色莲蓬与莲藕
+description: 银色莲蓬连着泉中数截莲藕，是同株灵物；根须不扎泥，可连同泉水移取。
+placement: guanghan-silver-lotus-spring
+facts:
+  - id: guanghan-silver-lotus-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-silver-lotus-transfer-condition
+    predicate: transfer-condition
+    value:
+      kind: text
+      value: 普通剑丝难以斩断并会遭反震；以足够水法、完整容器与阵法连泉水移取可保持完整。没有相应能力时不能只说装进瓶便成功。
+    description: 普通剑丝难以斩断并会遭反震；以足够水法、完整容器与阵法连泉水移取可保持完整。没有相应能力时不能只说装进瓶便成功。
+    access:
+      kind: discoverable
+      condition: 勘察根须和泉水，或从实际试验得到方法。
+  - id: guanghan-silver-lotus-immortal-body-use
+    predicate: immortal-body-use
+    value:
+      kind: text
+      value: 足够成熟时可助凝固真仙之躯；当前成熟程度须依实物检查，不能仅因古老就断言可用。
+    description: 足够成熟时可助凝固真仙之躯；当前成熟程度须依实物检查，不能仅因古老就断言可用。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

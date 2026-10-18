@@ -1,0 +1,18 @@
+id: local-metalworks
+kind: location
+name: 门内打铁房
+description: 小炉、铁砧和工具放在通风处，铁料和炭料分开储放。
+placement: caixia-mountain
+facts:
+  - id: local-metalworks-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 小炉、铁砧和工具放在通风处，铁料和炭料分开储放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,34 @@
+id: blood-upper-reply
+kind: item
+name: 上宗收供回函
+description: 允许申请用6份已验药材抵6枚高阶灵石，但须实际交付并验收；是否分期另议，未授权执事挪用私人款。
+placement: blood-lihuo-office
+facts:
+  - id: blood-upper-reply-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-sect
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-upper-reply-authored-by
+    predicate: authored-by
+    value:
+      kind: entity
+      entityId: blood-upper-collector
+    description: authored-by
+    access:
+      kind: private
+  - id: blood-upper-reply-authorized-recipient
+    predicate: authorized-recipient
+    value:
+      kind: entity
+      entityId: blood-upper-collector
+    description: authorized-recipient
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

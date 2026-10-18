@@ -1,0 +1,30 @@
+id: global-mo-yan-wife-dragon-ring
+kind: item
+name: 严氏的龙纹戒
+description: 一枚带龙纹的戒指。
+placement: canon-mo-yan-wife
+facts:
+  - id: global-mo-yan-wife-dragon-ring-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mo-yan-wife
+    description: 本人保管的旧信物，持有不自动授权其他家产或暗舵。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-yan-wife
+  - id: global-mo-yan-wife-dragon-ring-use
+    predicate: signal-use
+    value:
+      kind: text
+      value: 龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。
+    description: 龙纹可用于核对旧信物；此戒的隐藏夹层由本人开启。其中保管一份白色现形药粉。
+    access:
+      kind: agents
+      agentIds:
+        - canon-mo-yan-wife
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

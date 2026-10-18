@@ -1,0 +1,34 @@
+id: spirit-joint-checkpoint
+kind: location
+name: 天渊城内境关口
+description: 商旅从三境七地到城中时登记货单、身份和来路；军用传送阵另有权限。
+placement: tianyuan-city
+facts:
+  - id: spirit-joint-checkpoint-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 商旅从三境七地到城中时登记货单、身份和来路；军用传送阵另有权限。
+    access:
+      kind: public
+  - id: spirit-joint-checkpoint-route-spirit-inner-caravan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: 沿实际商路或经许可的分段运输来到城关，需要相应行程与补给。
+    access:
+      kind: public
+  - id: spirit-joint-checkpoint-route-spirit-xuanwu-route-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-route-office
+    description: 核对长途车队、海港接驳和分段传送权限的行旅处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

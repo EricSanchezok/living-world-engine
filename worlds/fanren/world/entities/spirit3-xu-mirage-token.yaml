@@ -1,0 +1,26 @@
+id: spirit3-xu-mirage-token
+kind: item
+name: 许氏现用幻阵控制牌
+description: 许含章按家族事务保管的当前控制牌，使用须核对已获授权。牌侧刻有当前保管人的验印记。
+placement: blood-xu-keeper
+facts:
+  - id: spirit3-xu-mirage-token-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-xu-mirage-token-controls
+    predicate: controls
+    value:
+      kind: entity
+      entityId: spirit3-xu-mirage-array
+    description: controls
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

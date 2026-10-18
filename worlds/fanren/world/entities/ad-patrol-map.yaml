@@ -1,0 +1,18 @@
+id: ad-patrol-map
+kind: item
+name: 石瘦手绘巡路图
+description: 只记录外围已走路线与两处可观察裂隙，不标内层祭坛和虫母真身。
+placement: ad-seal-veteran
+facts:
+  - id: ad-patrol-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-seal-veteran
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

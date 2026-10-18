@@ -1,0 +1,20 @@
+id: tianyuan-dust-replenishment-fund
+kind: container
+name: 丹房补给预算
+description: 目前只有补给预算和采购权限，未到货的丹药不能发给来客。
+placement: tianyuan-dust-dispensary
+facts:
+  - id: tianyuan-dust-replenishment-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 80
+ratings: []
+shared_activity_resources: []

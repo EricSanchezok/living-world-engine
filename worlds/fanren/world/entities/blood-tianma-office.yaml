@@ -1,0 +1,26 @@
+id: blood-tianma-office
+kind: location
+name: 天马城商盟分处
+description: 商盟在天马城接洽行旅的分处。岑舟的路线草图留下了尚未实测的南段，调查经费由分处留存，等核验工作后结算。
+placement: blood-tianma-city
+facts:
+  - id: blood-tianma-office-route-blood-tianma-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tianma-city
+    description: route-to
+    access:
+      kind: public
+  - id: blood-tianma-office-condition-blood-tianma-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

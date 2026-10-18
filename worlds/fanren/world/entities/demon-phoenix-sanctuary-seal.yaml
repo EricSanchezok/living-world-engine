@@ -1,0 +1,26 @@
+id: demon-phoenix-sanctuary-seal
+kind: item
+name: 秘禁地启门符
+description: 一枚刻有黑羽纹的石符，与秘禁地阵门匹配。
+placement: canon-black-phoenix-king-purse
+facts:
+  - id: demon-phoenix-sanctuary-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-sanctuary-seal-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: canon-black-phoenix-king
+    description: custodian
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

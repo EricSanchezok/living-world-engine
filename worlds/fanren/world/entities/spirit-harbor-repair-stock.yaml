@@ -1,0 +1,22 @@
+id: spirit-harbor-repair-stock
+kind: container
+name: 玄武港信标备料
+description: 用于现有近港信标的维护料与灵石。
+placement: spirit-xuanwu-harbor
+facts:
+  - id: spirit-harbor-repair-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-pilot
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: maintenance-material
+    amount: 6
+  - definition_id: low-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

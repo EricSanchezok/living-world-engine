@@ -1,0 +1,18 @@
+id: tiannan-yi-cold-seal
+kind: item
+name: 易姓长老寒魔印
+description: 个人法宝，增幅既有阴寒法力，不能无限生出魔气。
+placement: canon-hehuan-yi-elder
+facts:
+  - id: tiannan-yi-cold-seal-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-hehuan-yi-elder
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

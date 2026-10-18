@@ -1,0 +1,26 @@
+id: seas-suyin-domain
+kind: location
+name: 素阴族隐居地
+description: 本族居民与修行地，公开疆域不等于任何外来者可读取其秘密。
+placement: thunder-continent
+facts:
+  - id: seas-suyin-domain-route-thunder-greenlight-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-domain
+    description: route-to
+    access:
+      kind: public
+  - id: seas-suyin-domain-condition-thunder-greenlight-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有获得本地线索并越过隐蔽路径才可到达，普通地图仅知大概区域。
+    description: 只有获得本地线索并越过隐蔽路径才可到达，普通地图仅知大概区域。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

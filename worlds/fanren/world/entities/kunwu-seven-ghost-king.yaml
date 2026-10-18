@@ -1,0 +1,140 @@
+id: kunwu-seven-ghost-king
+kind: ghost
+name: 塔内鬼王
+description: 灰珠真体与数个同源分身在第七层活动；分身并非互不相干的八个鬼王。
+placement: kunwu-tower-seven
+facts:
+  - id: kunwu-seven-ghost-king-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-seven-ghost-king
+  - id: kunwu-seven-ghost-king-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 分身缠斗与阴气重聚；本体被毁或同时压制各身会改变再生条件。
+    description: 分身缠斗与阴气重聚；本体被毁或同时压制各身会改变再生条件。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-seven-ghost-king
+  - id: kunwu-seven-ghost-king-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    access:
+      kind: agents
+      agentIds:
+        - kunwu-seven-ghost-king
+  - id: kunwu-seven-ghost-king-manifestation-count
+    predicate: manifestation-count
+    value:
+      kind: number
+      value: 8
+    description: manifestation-count
+    access:
+      kind: private
+meters:
+  - id: kunwu-seven-ghost-king-health
+    definition_id: health
+    current: 100
+  - id: kunwu-seven-ghost-king-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: kunwu-seven-ghost-king-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: kunwu-seven-ghost-king-force
+    definition_id: force
+    value: 5
+  - id: kunwu-seven-ghost-king-craft
+    definition_id: craft
+    value: 4
+  - id: kunwu-seven-ghost-king-perception
+    definition_id: perception
+    value: 4
+  - id: kunwu-seven-ghost-king-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: kunwu-seven-ghost-king
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 灰珠真体与数个同源分身在第七层活动；分身并非互不相干的八个鬼王。
+      voice: 声音像从数处传来，主要以恐吓和驱逐表达意图。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 警戒本层封域，不越过禁制离塔。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 塔内鬼王
+        description: 灰珠真体与数个同源分身在第七层活动；分身并非互不相干的八个鬼王。
+        status: observed
+      - id: location
+        name: 镇魔塔七层
+        description: 自己当前所在之处。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 分身缠斗与阴气重聚；本体被毁或同时压制各身会改变再生条件。
+        description: 分身缠斗与阴气重聚；本体被毁或同时压制各身会改变再生条件。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - kunwu-seven-ghost-king
+      - local_entity_id: location
+        canonical_entity_ids:
+          - kunwu-tower-seven

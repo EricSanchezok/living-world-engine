@@ -1,0 +1,18 @@
+id: ad-immortal-message-talisman
+kind: item
+name: 何康传讯宝符
+description: 唯一未激活的宝符，需特殊强大神识才能向既定仙界友人传一次消息；不形成可探索仙界传送门。
+placement: canon-he-kang
+facts:
+  - id: ad-immortal-message-talisman-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-he-kang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: void-tower-guardian-5
+kind: automaton
+name: 第5层守卫傀儡
+description: 关闭期守卫静止，实际启阵或触发机关才行动；不是活人。
+placement: void-tower-five
+facts:
+  - id: void-tower-guardian-5-condition
+    predicate: condition
+    value:
+      kind: text
+      value: 机关保持完整，尚未受损。
+    description: 机关保持完整，尚未受损。
+    access:
+      kind: private
+  - id: void-tower-guardian-5-capability
+    predicate: capability
+    value:
+      kind: text
+      value: 可依既有机关感知本层侵入，不能跨层全知或无损复生。
+    description: 可依既有机关感知本层侵入，不能跨层全知或无损复生。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

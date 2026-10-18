@@ -1,0 +1,34 @@
+id: spirit-wilderness-gate
+kind: location
+name: 蛮荒出入关检处
+description: 城内办理蛮荒出入查验的关检处，外向巨墙没有供人步行穿越的城门；通过查验后还须实际使用可用传送阵。
+placement: tianyuan-city
+facts:
+  - id: spirit-wilderness-gate-route-spirit-guard-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-guard-tower
+    description: 正常出入蛮荒的城关，需核对身份与警戒；关外风险不会因持有地图而消失。
+    access:
+      kind: public
+  - id: spirit-wilderness-gate-route-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: 两地通行须查验身份，并实际使用备勤院传送阵与巡察哨传送阵；城墙没有可步穿的门。
+    access:
+      kind: public
+  - id: spirit-wilderness-gate-route-condition-spirit-wilderness-fringe
+    predicate: route-condition-spirit-wilderness-fringe
+    value:
+      kind: text
+      value: 此路线不是步行通道。须查验并经tianyuan-city-transport-array与tianyuan-post-transport-array实际传送，按阵站当前条件支付真实耗用；任一阵失效、授权欠缺或灵石不足即不能借此出入。到近界后再按真实地形行走。
+    description: 仅限定关检处与蛮荒近界的跨防线通行；城内道路和近界内部步行不受此传送条件约束。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

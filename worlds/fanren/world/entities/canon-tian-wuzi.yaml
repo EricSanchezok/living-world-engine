@@ -1,0 +1,227 @@
+id: canon-tian-wuzi
+kind: person
+name: 天悟子
+description: 正道老修，与天缘子为同门师兄弟。
+placement: void-tianyuan-seat
+facts:
+  - id: canon-tian-wuzi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴初期
+    description: 元婴初期
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-wuzi
+  - id: canon-tian-wuzi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期法力、正道法术与符器运用。
+    description: 元婴初期法力、正道法术与符器运用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-wuzi
+  - id: canon-tian-wuzi-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-wuzi
+  - id: canon-tian-wuzi-junior-fellow-of
+    predicate: junior-fellow-of
+    value:
+      kind: entity
+      entityId: canon-tian-yuanzi
+    description: junior-fellow-of
+    access:
+      kind: private
+meters:
+  - id: canon-tian-wuzi-health
+    definition_id: health
+    current: 100
+  - id: canon-tian-wuzi-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-tian-wuzi-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-tian-wuzi-force
+    definition_id: force
+    value: 6
+  - id: canon-tian-wuzi-craft
+    definition_id: craft
+    value: 3
+  - id: canon-tian-wuzi-perception
+    definition_id: perception
+    value: 4
+  - id: canon-tian-wuzi-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-tian-wuzi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 正道老修，与天缘子为同门师兄弟。
+      voice: 礼数周到，担心时说得细，会承认没有把握。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 与师兄商量一处修缮需要，保留自己的修炼时间。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 天悟子
+        description: 正道老修，与天缘子为同门师兄弟。
+        status: observed
+      - id: location
+        name: 天缘子道院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-tian-yuanzi
+        name: 天缘子
+        description: 同门师兄弟，离龟借用须另谈。
+        status: observed
+      - id: known-canon-ji-yin
+        name: 极阴祖师
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-qing-yi
+        name: 青易居士
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-man-huzi
+        name: 蛮胡子
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wen-furen
+        name: 白壁山温夫人
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wan-tianming
+        name: 万天明
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wan-sangu
+        name: 万三姑
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-liudao-jisheng
+        name: 六道极圣
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-tian-wuzi-private-cache
+        name: 天悟子的私库
+        description: 个人留用的有限物资，不能代表整个门派或无尽财富。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期法力、正道法术与符器运用。
+        description: 元婴初期法力、正道法术与符器运用。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间。后续依据天时和实际经过时间判断。
+        description: 当地此时为夜间。后续依据天时和实际经过时间判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-cultivation
+        subjectId: self
+        predicate: own-cultivation
+        value:
+          kind: text
+          value: 元婴初期
+        description: 元婴初期
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-tian-wuzi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-tianyuan-seat
+      - local_entity_id: known-canon-tian-yuanzi
+        canonical_entity_ids:
+          - canon-tian-yuanzi
+      - local_entity_id: known-canon-ji-yin
+        canonical_entity_ids:
+          - canon-ji-yin
+      - local_entity_id: known-canon-qing-yi
+        canonical_entity_ids:
+          - canon-qing-yi
+      - local_entity_id: known-canon-man-huzi
+        canonical_entity_ids:
+          - canon-man-huzi
+      - local_entity_id: known-canon-wen-furen
+        canonical_entity_ids:
+          - canon-wen-furen
+      - local_entity_id: known-canon-wan-tianming
+        canonical_entity_ids:
+          - canon-wan-tianming
+      - local_entity_id: known-canon-wan-sangu
+        canonical_entity_ids:
+          - canon-wan-sangu
+      - local_entity_id: known-canon-liudao-jisheng
+        canonical_entity_ids:
+          - canon-liudao-jisheng
+      - local_entity_id: known-canon-tian-wuzi-private-cache
+        canonical_entity_ids:
+          - canon-tian-wuzi-private-cache

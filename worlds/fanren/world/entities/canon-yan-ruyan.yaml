@@ -1,0 +1,185 @@
+id: canon-yan-ruyan
+kind: person
+name: 燕如嫣
+description: 燕家十岁天灵根晚辈，受长辈重视，仍在学习如何判断别人的话。
+placement: yue-yanling-fort
+facts:
+  - id: canon-yan-ruyan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - canon-yan-ruyan
+  - id: canon-yan-ruyan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼气三层基础法力和家族常识。
+    description: 炼气三层基础法力和家族常识。
+    access:
+      kind: agents
+      agentIds:
+        - canon-yan-ruyan
+  - id: canon-yan-ruyan-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 单一水属性天灵根
+    description: 单一水属性天灵根。
+    access:
+      kind: discoverable
+      condition: 实际以适用的验灵手段检查此人的资质，或取得可信的既有验灵记录；普通外观、身份和功法不能替代检测。
+  - id: canon-yan-ruyan-age
+    predicate: age-at-opening
+    value:
+      kind: number
+      value: 10
+    description: age-at-opening
+    access:
+      kind: public
+  - id: canon-yan-ruyan-family-canon-yan-family-ancestor
+    predicate: family-or-care-relation
+    value:
+      kind: entity
+      entityId: canon-yan-family-ancestor
+    description: 老祖与玄孙女，长辈正在指导她修学。
+    access:
+      kind: public
+meters:
+  - id: canon-yan-ruyan-health
+    definition_id: health
+    current: 100
+  - id: canon-yan-ruyan-mana
+    definition_id: mana
+    current: 80
+quantities:
+  - definition_id: low-stone
+    amount: 5
+ratings:
+  - id: canon-yan-ruyan-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: canon-yan-ruyan-force
+    definition_id: force
+    value: 1
+  - id: canon-yan-ruyan-craft
+    definition_id: craft
+    value: 1
+  - id: canon-yan-ruyan-perception
+    definition_id: perception
+    value: 1
+  - id: canon-yan-ruyan-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-yan-ruyan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 燕家十岁天灵根晚辈，受长辈重视，仍在学习如何判断别人的话。
+      voice: 礼貌而好奇，习惯追问一个说法为何可靠。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 完成今日修炼后向老祖问几个不明白的问题。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 燕如嫣
+        description: 燕家十岁天灵根晚辈，受长辈重视，仍在学习如何判断别人的话。
+        status: observed
+      - id: location
+        name: 燕翎堡
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-yan-ruyan-pouch
+        name: 燕如嫣的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-yan-family-ancestor
+        name: 燕家老祖
+        description: 老祖与玄孙女，长辈正在指导她修学。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼气三层基础法力和家族常识。
+        description: 炼气三层基础法力和家族常识。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 完成今日修炼后向老祖问几个不明白的问题。
+        description: 完成今日修炼后向老祖问几个不明白的问题。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是炼气修士。
+        description: 自己是炼气修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: root-knowledge
+        subjectId: self
+        predicate: root-knowledge
+        value:
+          kind: text
+          value: 自己曾经验灵，知道自身是单一水属性天灵根。
+        description: 自己曾经验灵，知道自身是单一水属性天灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-yan-ruyan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-yanling-fort
+      - local_entity_id: known-canon-yan-ruyan-pouch
+        canonical_entity_ids:
+          - canon-yan-ruyan-pouch
+      - local_entity_id: known-canon-yan-family-ancestor
+        canonical_entity_ids:
+          - canon-yan-family-ancestor

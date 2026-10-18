@@ -1,0 +1,35 @@
+id: demon-ao-retreat
+kind: location
+name: 银月静修地
+description: 敖啸使用的一处幽静修炼居所，外院接收函件，内院有禁制。
+placement: demon-wolf-territory
+facts:
+  - id: demon-ao-retreat-route-demon-wolf-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-wolf-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-ao-retreat-condition-demon-wolf-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 敖啸使用的一处幽静修炼居所，外院接收函件，内院有禁制。
+    description: 敖啸使用的一处幽静修炼居所，外院接收函件，内院有禁制。
+    access:
+      kind: public
+  - id: demon-ao-retreat-root-detail-liaoying-soul-contract
+    predicate: root-detail-liaoying-soul-contract
+    value:
+      kind: text
+      value: 獠影与敖啸有救援旧缘及十万年魂契，余约转移需符合契约和族规、至少合体等条件，不因口头指定即变更。
+    description: 獠影与敖啸有救援旧缘及十万年魂契，余约转移需符合契约和族规、至少合体等条件，不因口头指定即变更。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

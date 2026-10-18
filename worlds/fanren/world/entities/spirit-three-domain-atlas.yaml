@@ -1,0 +1,35 @@
+id: spirit-three-domain-atlas
+kind: item
+name: 三境行路图册
+description: 标注主城、安远附近商路和天渊办事区的图册，旧版本不保证每段路线今天畅通。
+placement: spirit-record-shop
+facts:
+  - id: spirit-three-domain-atlas-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-bookkeeper
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-three-domain-atlas-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 天元城依圣山、玄武城随古龟移动、天灵城依巨树；天渊城另在两族通往蛮荒的边界。图上不含军阵密码、私人洞府禁制或确定安全的境外生根药地点。
+    description: 天元城依圣山、玄武城随古龟移动、天灵城依巨树；天渊城另在两族通往蛮荒的边界。图上不含军阵密码、私人洞府禁制或确定安全的境外生根药地点。
+    access:
+      kind: discoverable
+      condition: 实际获得图册后阅读相应图页，识读能力不足时请人讲解。
+  - id: spirit-three-domain-atlas-asking-price
+    predicate: asking-price
+    value:
+      kind: number
+      value: 2
+    description: 书铺当前售价为两枚低阶灵石，可议价但须由双方同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

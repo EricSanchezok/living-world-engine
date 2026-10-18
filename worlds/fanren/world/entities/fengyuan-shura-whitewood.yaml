@@ -1,0 +1,58 @@
+id: fengyuan-shura-whitewood
+kind: location
+name: 修罗白木林
+description: 白色树干间生着低矮灌木，林下有异兽行迹；受毒气影响的草叶会变黄枯萎。
+placement: fengyuan-minor-shura-realm
+facts:
+  - id: fengyuan-shura-whitewood-route-to-fengyuan-shura-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-whitewood-route-conditions-fengyuan-shura-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 穿越白林与山脚，须避开实际毒气和巡行者；不能把空旷外观当无主安全区。
+    description: 穿越白林与山脚，须避开实际毒气和巡行者；不能把空旷外观当无主安全区。
+    access:
+      kind: public
+  - id: fengyuan-shura-whitewood-route-to-fengyuan-shura-dryfire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-dryfire
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-whitewood-route-conditions-fengyuan-shura-dryfire
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿林地到地下热岩入口，再向熔岩湖下行；持续热气需防护。
+    description: 沿林地到地下热岩入口，再向熔岩湖下行；持续热气需防护。
+    access:
+      kind: public
+  - id: fengyuan-shura-whitewood-route-to-fengyuan-shura-array-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-array-room
+    description: route-to
+    access:
+      kind: private
+  - id: fengyuan-shura-whitewood-route-conditions-fengyuan-shura-array-room
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 这条关系是跨界而非步行：去程须获阵室控制、完整护心、返程坐标、120极品石及200法力；启动真实扣库存。回程须身在此界、佩戴仍有余量的同一护心并主动捏碎，落到实际预设坐标附近，不能无条件回此房间。
+    description: 这条关系是跨界而非步行：去程须获阵室控制、完整护心、返程坐标、120极品石及200法力；启动真实扣库存。回程须身在此界、佩戴仍有余量的同一护心并主动捏碎，落到实际预设坐标附近，不能无条件回此房间。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

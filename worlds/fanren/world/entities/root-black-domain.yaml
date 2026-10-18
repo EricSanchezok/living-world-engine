@@ -1,0 +1,64 @@
+id: root-black-domain
+kind: location
+name: 黑域
+description: 移动须弥空间，内部与普通山路不直接相通。
+placement: spirit-realm
+facts:
+  - id: root-black-domain-route-to-root-black-domain-fog
+    predicate: route-to-root-black-domain-fog
+    value:
+      kind: entity
+      entityId: root-black-domain-fog
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-travel-condition-root-black-domain-fog
+    predicate: travel-condition-root-black-domain-fog
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-route-to-root-black-domain-blue
+    predicate: route-to-root-black-domain-blue
+    value:
+      kind: entity
+      entityId: root-black-domain-blue
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-travel-condition-root-black-domain-blue
+    predicate: travel-condition-root-black-domain-blue
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-route-to-root-black-domain-pavilions
+    predicate: route-to-root-black-domain-pavilions
+    value:
+      kind: entity
+      entityId: root-black-domain-pavilions
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-travel-condition-root-black-domain-pavilions
+    predicate: travel-condition-root-black-domain-pavilions
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

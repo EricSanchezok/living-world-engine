@@ -1,0 +1,18 @@
+id: void-pearl-necklace
+kind: item
+name: 梅家旧珠链
+description: 旧珠链含两颗古信息珠，梅屿只当家传旧饰请人修线。
+placement: void-map-workshop
+facts:
+  - id: void-pearl-necklace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-map-customer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: blood-observing-mirror
+kind: item
+name: 观天镜
+description: 古镜置铜架，可按已知位置观察远处；遮蔽、反击和未知目标会使它失败。
+placement: blood-yu-tower
+facts:
+  - id: blood-observing-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-blood-yu-elder
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-observing-mirror-use-boundary
+    predicate: use-boundary
+    value:
+      kind: text
+      value: 一次观测耗持有人80法力，目标需具体地标与已知范围；未穿透的禁制或空间无法显示，过强反制可能损伤镜本体。不得把未见之处自动补成实景。
+    description: 一次观测耗持有人80法力，目标需具体地标与已知范围；未穿透的禁制或空间无法显示，过强反制可能损伤镜本体。不得把未见之处自动补成实景。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

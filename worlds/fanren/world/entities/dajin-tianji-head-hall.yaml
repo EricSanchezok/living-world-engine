@@ -1,0 +1,34 @@
+id: dajin-tianji-head-hall
+kind: location
+name: 天机殿
+description: 碧绿色大殿悬于空中，玉阶连通玉门，内有议事偏厅。
+placement: dajin-tianji-head-space
+facts:
+  - id: dajin-tianji-head-hall-route-dajin-tianji-jade-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-jade-gate
+    description: 沿悬浮玉阶而行，未经许可且能力不足者受禁空约束。
+    access:
+      kind: public
+  - id: dajin-tianji-head-hall-route-dajin-tianji-secret-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-secret-archive
+    description: 藏典楼另有禁制，须实际取令并获授权。
+    access:
+      kind: public
+  - id: dajin-tianji-head-hall-route-dajin-tianji-head-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-head-store
+    description: 调拨物资须实际权限和账目。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

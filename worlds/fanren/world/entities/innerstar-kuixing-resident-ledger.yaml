@@ -1,0 +1,18 @@
+id: innerstar-kuixing-resident-ledger
+kind: item
+name: 魁星定居金册
+description: 登记经过担保核验的定居者姓名，登记须真实办理。
+placement: innerstar-dengxian-hall
+facts:
+  - id: innerstar-kuixing-resident-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 魁星岛务所公物，使用不等于取得私有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: innerstar-jin-cave
+kind: location
+name: 青石小院
+description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+placement: innerstar-holy-mountain
+facts:
+  - id: innerstar-jin-cave-route-innerstar-holy-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-holy-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-jin-cave-condition-innerstar-holy-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+  - id: innerstar-jin-cave-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-jin-cave-leased-to
+    predicate: leased-to
+    value:
+      kind: entity
+      entityId: canon-jin-qing
+    description: leased-to
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

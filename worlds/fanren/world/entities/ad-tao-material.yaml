@@ -1,0 +1,20 @@
+id: ad-tao-material
+kind: container
+name: 陶岑修补料
+description: 每修一件现有低阶破甲耗1份材料，使用相容魔火与时间。
+placement: ad-tao-cen
+facts:
+  - id: ad-tao-material-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-tao-cen
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 7
+ratings: []
+shared_activity_resources: []

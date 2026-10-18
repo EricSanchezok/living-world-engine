@@ -1,0 +1,18 @@
+id: far-luwan-shop
+kind: location
+name: 芦湾小铺
+description: 湾岸出售日用品并收普通药材的小铺。
+placement: far-luwan
+facts:
+  - id: far-luwan-shop-route-far-luwan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: far-luwan
+    description: 沿泊地岸边小路步行可达，按实际行程耗时。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: dv-purple-mirror
+kind: item
+name: 紫色古镜
+description: 古代炼制的紫镜，注入法力可放紫色光柱击散一定程度的遮蔽雾气，也会被强妖火挡住；不是自动显真万能镜。
+placement: dv-ancient-storage-bag
+facts:
+  - id: dv-purple-mirror-unclaimed
+    predicate: unclaimed
+    value:
+      kind: text
+      value: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    description: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

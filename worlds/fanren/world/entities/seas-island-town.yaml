@@ -1,0 +1,106 @@
+id: seas-island-town
+kind: location
+name: 龙岛交易小镇
+description: 龙人经营者与来访修士交易，各铺有有限库存。
+placement: seas-dragon-island
+facts:
+  - id: seas-island-town-route-seas-island-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-gate
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-island-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛方核验并批准普通街区出入后可用殿内短阵；不得凭口头称受邀越过禁区。
+    description: 岛方核验并批准普通街区出入后可用殿内短阵；不得凭口头称受邀越过禁区。
+    access:
+      kind: public
+  - id: seas-island-town-route-seas-island-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-lake
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-island-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+  - id: seas-island-town-route-seas-fruit-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-fruit-garden
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-fruit-garden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+  - id: seas-island-town-route-seas-dragon-stable
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-dragon-stable
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-dragon-stable
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+  - id: seas-island-town-route-seas-feier-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-feier-house
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-feier-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+  - id: seas-island-town-route-seas-fan-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-fan-house
+    description: route-to
+    access:
+      kind: public
+  - id: seas-island-town-condition-seas-fan-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

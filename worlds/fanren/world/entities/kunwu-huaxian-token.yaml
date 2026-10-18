@@ -1,0 +1,18 @@
+id: kunwu-huaxian-token
+kind: item
+name: 化仙银令
+description: 旧传银色令牌，能控制特定昆吾禁制，不是所有阵法万能钥匙。
+placement: south-huaxian-archive
+facts:
+  - id: kunwu-huaxian-token-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-huaxian-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

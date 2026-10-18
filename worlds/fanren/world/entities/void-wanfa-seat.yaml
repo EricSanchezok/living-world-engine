@@ -1,0 +1,42 @@
+id: void-wanfa-seat
+kind: location
+name: 万法门当期驻地
+description: 门人日常居住、修行和处理事务的驻地。
+placement: human-inner-star-sea
+facts:
+  - id: void-wanfa-seat-route-void-wanfa-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-wanfa-court
+    description: route-to
+    access:
+      kind: public
+  - id: void-wanfa-seat-condition-void-wanfa-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+  - id: void-wanfa-seat-route-human-tianxing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-island
+    description: route-to
+    access:
+      kind: public
+  - id: void-wanfa-seat-condition-human-tianxing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经已知海路远行，海况、距离、本人遁速与补给决定耗时，非相邻门口或无条件传送。
+    description: 经已知海路远行，海况、距离、本人遁速与补给决定耗时，非相邻门口或无条件传送。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

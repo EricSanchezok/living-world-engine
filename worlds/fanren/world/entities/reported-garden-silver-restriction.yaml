@@ -1,0 +1,26 @@
+id: reported-garden-silver-restriction
+kind: item
+name: 残园银色禁制
+description: 高空云层后的一层银纱状禁制，具有对古魔与浓烈魔气的针对性反应。
+placement: associated-lingmiao-remnant
+facts:
+  - id: reported-garden-silver-restriction-trigger-boundary
+    predicate: trigger-boundary
+    value:
+      kind: text
+      value: 对释放古魔魔气的闯入者可凝聚银焰攻击；普通人族曾通过无事，但破坏阵式或改变目标状态要重新判断，不能由族名保证任意行为免疫。
+    description: 对释放古魔魔气的闯入者可凝聚银焰攻击；普通人族曾通过无事，但破坏阵式或改变目标状态要重新判断，不能由族名保证任意行为免疫。
+    access:
+      kind: private
+  - id: reported-garden-silver-restriction-energy-source
+    predicate: energy-source
+    value:
+      kind: text
+      value: 依托残骸现有阵式与环境灵气维持；大规模损伤、持续消耗会改变效能，不能当成随身无限银火源。
+    description: 依托残骸现有阵式与环境灵气维持；大规模损伤、持续消耗会改变效能，不能当成随身无限银火源。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

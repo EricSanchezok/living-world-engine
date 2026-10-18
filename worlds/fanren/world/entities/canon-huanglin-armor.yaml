@@ -1,0 +1,26 @@
+id: canon-huanglin-armor
+kind: item
+name: 皇鳞甲
+description: 黑底银鳞旧护甲，当前内衬一道缝松脱，主要鳞片完整。
+placement: void-man-cave
+facts:
+  - id: canon-huanglin-armor-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-man-huzi
+    description: owned-by
+    access:
+      kind: private
+  - id: canon-huanglin-armor-repair-state
+    predicate: repair-state
+    value:
+      kind: text
+      value: 内衬松脱，修需一份材料、一时辰；主鳞不需全部替换。
+    description: 内衬松脱，修需一份材料、一时辰；主鳞不需全部替换。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

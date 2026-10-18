@@ -1,0 +1,18 @@
+id: blood-lihuo-ledger
+kind: item
+name: 离火宗年供账
+description: 本期应交上宗24高阶灵石，30个本地日后到期；公库已备18。可申请延期或接受已约定等价药材，未经双方同意不算结清。
+placement: blood-lihuo-office
+facts:
+  - id: blood-lihuo-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

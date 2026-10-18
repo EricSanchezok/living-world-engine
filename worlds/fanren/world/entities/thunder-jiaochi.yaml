@@ -1,0 +1,42 @@
+id: thunder-jiaochi
+kind: location
+name: 角蚩族辖域
+description: 强盛角蚩族的控制区，对边界、军械与对外消息十分敏感。
+placement: thunder-continent
+facts:
+  - id: thunder-jiaochi-route-seas-jiatun-thunder-counterpart
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiatun-thunder-counterpart
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jiaochi-condition-seas-jiatun-thunder-counterpart
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 依雷鸣实际道路旅行与接受当地盘查，不将对面族一律认作角蚩所有。
+    description: 依雷鸣实际道路旅行与接受当地盘查，不将对面族一律认作角蚩所有。
+    access:
+      kind: public
+  - id: thunder-jiaochi-route-seas-jiaochi-spirit-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-jiaochi-spirit-space
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jiaochi-condition-seas-jiaochi-spirit-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须契约持有方与真灵回应，真实仪式和承载能力；普通访客不因知道名字即可穿入。
+    description: 须契约持有方与真灵回应，真实仪式和承载能力；普通访客不因知道名字即可穿入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

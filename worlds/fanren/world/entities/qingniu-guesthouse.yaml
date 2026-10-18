@@ -1,0 +1,18 @@
+id: qingniu-guesthouse
+kind: location
+name: 青牛客栈
+description: 青牛镇唯一客栈，位于镇西，掌柜为旅客安排食宿。
+placement: qingniu-town
+facts:
+  - id: qingniu-guesthouse-route-qingniu-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-street
+    description: 青牛镇唯一客栈，位于镇西，掌柜为旅客安排食宿。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

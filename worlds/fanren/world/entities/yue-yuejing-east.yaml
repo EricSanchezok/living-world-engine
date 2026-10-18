@@ -1,0 +1,34 @@
+id: yue-yuejing-east
+kind: location
+name: 东城区
+description: 商户与富家宅院相间，也有货栈和日用铺。
+placement: yue-yuejing
+facts:
+  - id: yue-yuejing-east-route-yue-yuejing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+  - id: yue-yuejing-east-route-yue-qin-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-estate
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+  - id: yue-yuejing-east-route-yue-qin-warehouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-warehouse
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

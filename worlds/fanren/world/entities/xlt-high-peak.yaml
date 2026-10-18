@@ -1,0 +1,26 @@
+id: xlt-high-peak
+kind: location
+name: 人族巨峰
+description: 一座近万丈高峰，峰顶有石殿；这里与天门山是不同的落点。
+placement: xlt-human-land
+facts:
+  - id: xlt-high-peak-route-xlt-human-land
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-human-land
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-high-peak-route-xlt-stone-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-stone-hall
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

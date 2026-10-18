@@ -1,0 +1,50 @@
+id: ad-bloodstone-mountains
+kind: location
+name: 血石山脉
+description: 魔气与资源相对稀薄的广大山脉，存在可勘察的空间薄弱点。
+placement: associated-demon-realm
+facts:
+  - id: ad-bloodstone-mountains-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-bloodstone-mountains-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-bloodstone-mountains-route-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: route-to
+    access:
+      kind: public
+  - id: ad-bloodstone-mountains-condition-spirit-wilderness-fringe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 仅为空间薄弱区的可能对应关系，当前通道关闭；真实定位、破界与护持、两端状态均须成立。
+    description: 仅为空间薄弱区的可能对应关系，当前通道关闭；真实定位、破界与护持、两端状态均须成立。
+    access:
+      kind: public
+  - id: ad-bloodstone-mountains-route-to-ad-bloodcrow-city
+    predicate: route-to-ad-bloodcrow-city
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

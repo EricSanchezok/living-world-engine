@@ -1,0 +1,27 @@
+id: root-library-flame
+kind: item
+name: 火候入门抄本
+description: 封着管书处验印的现存抄本。
+placement: root-tianti-shuge
+facts:
+  - id: root-library-flame-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-library-office
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+  - id: root-library-flame-readable-content
+    predicate: readable-content
+    value:
+      kind: text
+      value: 记载低阶御火、稳火与普通炼药火候练习，使用者仍需有对应根基并实际练习，不含高阶丹方。
+    description: 记载低阶御火、稳火与普通炼药火候练习，使用者仍需有对应根基并实际练习，不含高阶丹方。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

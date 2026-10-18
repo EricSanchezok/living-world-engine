@@ -1,0 +1,42 @@
+id: steppe-shiwan-camp
+kind: location
+name: 石湾部营地
+description: 浅湾边的羊皮帐围着炊烟，制革棚散出油脂气味，东侧停着一辆尚未套马的木车。
+placement: steppe-tuwu-south
+facts:
+  - id: steppe-shiwan-camp-route-steppe-tuwu-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tuwu-south
+    description: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    access:
+      kind: public
+  - id: steppe-shiwan-camp-travel-steppe-tuwu-south
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    description: 沿河湾牧道进入帐区，来客可向看管车具者表明来意。
+    access:
+      kind: public
+  - id: steppe-shiwan-camp-route-steppe-shiwan-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-shiwan-store
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-shiwan-camp-travel-steppe-shiwan-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

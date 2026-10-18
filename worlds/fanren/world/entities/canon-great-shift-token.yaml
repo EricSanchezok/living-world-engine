@@ -1,0 +1,19 @@
+id: canon-great-shift-token
+kind: item
+name: 蓝色古令
+description: 一枚蓝灿灿的古牌，外观不能直接告知其用途。
+placement: yue-fivecolour-remains
+facts:
+  - id: canon-great-shift-token-identity
+    predicate: artifact-identity
+    value:
+      kind: text
+      value: 大挪移令，可为相应古阵的超远传送提供空间压力防护，不负责修好阵体或供应传送灵力。
+    description: 大挪移令，可为相应古阵的超远传送提供空间压力防护，不负责修好阵体或供应传送灵力。
+    access:
+      kind: discoverable
+      condition: 实际检查古牌并比对洞玄解等可信记录，或用适用知识识别；仅远望颜色不足。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

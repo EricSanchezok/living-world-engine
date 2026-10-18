@@ -1,0 +1,20 @@
+id: south-boatkeeper-purse
+kind: container
+name: 葛满的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-boatkeeper
+facts:
+  - id: south-boatkeeper-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-boatkeeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 50
+ratings: []
+shared_activity_resources: []

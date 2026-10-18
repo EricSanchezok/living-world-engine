@@ -1,0 +1,20 @@
+id: yinming-crystals-forge
+kind: container
+name: 本村兽晶盒
+description: 战时调用或交易须真实交出，不是掌柜私人财产。
+placement: yinming-village-forge
+facts:
+  - id: yinming-crystals-forge-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-forge
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: yin-crystal
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: ad-tool-return-slip
+kind: item
+name: 测矿器借用簿
+description: 苏翎借一件测矿器，约明日傍晚归还；钱珂误把今天写为到期，实物回条仍在苏翎手。
+placement: ad-qingyi-qian
+facts:
+  - id: ad-tool-return-slip-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-qingyi-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

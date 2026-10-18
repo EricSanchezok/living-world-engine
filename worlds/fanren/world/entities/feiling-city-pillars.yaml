@@ -1,0 +1,26 @@
+id: feiling-city-pillars
+kind: location
+name: 圣城入境柱
+description: 多彩巨柱立在白砖高墙上，连着护城光幕；来者在柱台受验后穿过获准的光口。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-city-pillars-route-to-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-city-pillars-route-conditions-feiling-tianpeng-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: blood-qingping-cave
+kind: location
+name: 清平道人居所
+description: 清平道人在万月山中的居所。外厅便于接待可谈合作的同道，旧传承平日由他收存，访客不会因坐到桌前便看见全部内容。
+placement: blood-wanyue-mountains
+facts:
+  - id: blood-qingping-cave-route-blood-wanyue-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wanyue-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-qingping-cave-condition-blood-wanyue-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

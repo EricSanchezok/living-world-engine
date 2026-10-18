@@ -1,0 +1,24 @@
+id: feiling-public-stock
+kind: container
+name: 天鹏公共储备
+description: 族内养护和有限委托费用，需相关长老核准。
+placement: feiling-tianpeng-hall
+facts:
+  - id: feiling-public-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 1600
+  - definition_id: craft-material
+    amount: 50
+  - definition_id: herb-packet
+    amount: 20
+ratings: []
+shared_activity_resources: []

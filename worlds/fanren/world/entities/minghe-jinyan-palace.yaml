@@ -1,0 +1,42 @@
+id: minghe-jinyan-palace
+kind: location
+name: 金焰宫
+description: 金焰候会客与日常居住之处，金饰与收藏分室保管。
+placement: minghe-jinyan-island
+facts:
+  - id: minghe-jinyan-palace-route-minghe-jinyan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-jinyan-island
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-jinyan-palace-condition-minghe-jinyan-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 金焰候会客与日常居住之处，金饰与收藏分室保管。
+    description: 金焰候会客与日常居住之处，金饰与收藏分室保管。
+    access:
+      kind: public
+  - id: minghe-jinyan-palace-route-minghe-wine-cellar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-wine-cellar
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-jinyan-palace-condition-minghe-wine-cellar
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 用寒气保存灵酒的窟室，领酒要经主人许可。
+    description: 用寒气保存灵酒的窟室，领酒要经主人许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: spirit-training-stones
+kind: item
+name: 练力石与护垫
+description: 数块不同重量的练力石和防摔护垫，只用于实际能承受的负重。
+placement: spirit-body-school
+facts:
+  - id: spirit-training-stones-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-body-teacher
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

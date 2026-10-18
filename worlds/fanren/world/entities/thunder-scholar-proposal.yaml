@@ -1,0 +1,28 @@
+id: thunder-scholar-proposal
+kind: item
+name: 温砚磁阵研究札记
+description: 拟比较两种矿石在弱磁阵中的响应，需要安静试验室及有限矿样。
+placement: thunder-independent-scholar
+facts:
+  - id: thunder-scholar-proposal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-independent-scholar
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-scholar-proposal-test
+    predicate: test
+    value:
+      kind: text
+      value: 需要两份矿样、一块低阶灵石、本人已掌握的测量术和三千六百秒；得到的是本次记录，是否有新发现由实际条件决定。
+    description: 需要两份矿样、一块低阶灵石、本人已掌握的测量术和三千六百秒；得到的是本次记录，是否有新发现由实际条件决定。
+    access:
+      kind: agents
+      agentIds:
+        - thunder-independent-scholar
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

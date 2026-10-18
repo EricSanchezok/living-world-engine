@@ -1,0 +1,20 @@
+id: outerstar-healer-kit
+kind: container
+name: 闻雨药箱
+description: 个人配好的止血护伤材料，不能治疗所有妖毒。
+placement: outerstar-hunter-healer
+facts:
+  - id: outerstar-healer-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-hunter-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 12
+ratings: []
+shared_activity_resources: []

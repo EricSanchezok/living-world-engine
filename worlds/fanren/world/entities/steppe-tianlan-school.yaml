@@ -1,0 +1,74 @@
+id: steppe-tianlan-school
+kind: location
+name: 天澜南部分殿
+description: 石殿依低丘而立，前院供部落来人歇脚，侧屋用于抄写与低阶授课；内院供奉兽形神像。
+placement: steppe-tuwu-south
+facts:
+  - id: steppe-tianlan-school-route-steppe-tuwu-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tuwu-south
+    description: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-travel-steppe-tuwu-south
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    description: 抵达分殿前院须实际行路；旁听、授法与内院通行权限不同。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-route-steppe-school-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-school-court
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-travel-steppe-school-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-route-steppe-school-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-school-archive
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-travel-steppe-school-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-route-steppe-holy-ding-vault
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-holy-ding-vault
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-tianlan-school-travel-steppe-holy-ding-vault
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

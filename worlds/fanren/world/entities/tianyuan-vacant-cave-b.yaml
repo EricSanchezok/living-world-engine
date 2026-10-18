@@ -1,0 +1,42 @@
+id: tianyuan-vacant-cave-b
+kind: location
+name: 天韵山西坡乙洞
+description: 有安静石室的小洞府，灵气较均匀，没有现成药圃。
+placement: spirit-tianyun-mountain
+facts:
+  - id: tianyuan-vacant-cave-b-route-spirit-tianyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyun-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-b-condition-spirit-tianyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有安静石室的小洞府，灵气较均匀，没有现成药圃。
+    description: 有安静石室的小洞府，灵气较均匀，没有现成药圃。
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-b-tenure-owner
+    predicate: tenure-owner
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: tenure-owner
+    access:
+      kind: public
+  - id: tianyuan-vacant-cave-b-lease-conditions
+    predicate: lease-conditions
+    value:
+      kind: text
+      value: 可申请三十个人界日居用，费用30低阶灵石；药圃现无成熟灵草，住用权不包含整座山脉。
+    description: 可申请三十个人界日居用，费用30低阶灵石；药圃现无成熟灵草，住用权不包含整座山脉。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

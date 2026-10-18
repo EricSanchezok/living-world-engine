@@ -1,0 +1,20 @@
+id: boundless-rope-stock
+kind: item
+name: 程家待验麻绳
+description: 晾干后才能验收的麻绳原料。
+placement: boundless-house
+facts:
+  - id: boundless-rope-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: boundless-cheng-ji
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

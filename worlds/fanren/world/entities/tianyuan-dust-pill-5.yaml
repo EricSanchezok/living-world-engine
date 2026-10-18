@@ -1,0 +1,26 @@
+id: tianyuan-dust-pill-5
+kind: item
+name: 灭尘丹封装5
+description: 一份灭尘丹，须核验无误后由丹房授权领取，服下会实际耗尽。
+placement: tianyuan-dust-stock
+facts:
+  - id: tianyuan-dust-pill-5-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-dust-pill-5-dose-rule
+    predicate: dose-rule
+    value:
+      kind: text
+      value: 一份供一人本次年度疗程使用；确有异界气息并实际服用才记已服，不治愈全部伤病，也不直接提高境界。
+    description: 一份供一人本次年度疗程使用；确有异界气息并实际服用才记已服，不治愈全部伤病，也不直接提高境界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

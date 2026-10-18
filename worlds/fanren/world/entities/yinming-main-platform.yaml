@@ -1,0 +1,34 @@
+id: yinming-main-platform
+kind: location
+name: 檀云高台
+description: 石符凹槽空置，内部已注有限阴力。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-platform-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-platform-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石符凹槽空置，内部已注有限阴力。
+    description: 石符凹槽空置，内部已注有限阴力。
+    access:
+      kind: public
+  - id: yinming-main-platform-dust-observation
+    predicate: dust-observation
+    value:
+      kind: text
+      value: 转角纹内积灰，石符仍完整；仔细清理需工具、两人配合一小时，不能未经检查就换整个石盘。
+    description: 转角纹内积灰，石符仍完整；仔细清理需工具、两人配合一小时，不能未经检查就换整个石盘。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

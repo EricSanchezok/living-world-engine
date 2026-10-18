@@ -1,0 +1,26 @@
+id: feiling-blue-ghost-palace
+kind: location
+name: 蓝鬼婆宫殿
+description: 鬼道修士居住的宫殿，寒潭和内室有严格进入条件。
+placement: feiling-abyss-6
+facts:
+  - id: feiling-blue-ghost-palace-route-feiling-abyss-6
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-6
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-blue-ghost-palace-condition-feiling-abyss-6
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 鬼道修士居住的宫殿，寒潭和内室有严格进入条件。
+    description: 鬼道修士居住的宫殿，寒潭和内室有严格进入条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

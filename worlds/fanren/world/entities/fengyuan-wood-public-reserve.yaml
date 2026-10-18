@@ -1,0 +1,24 @@
+id: fengyuan-wood-public-reserve
+kind: container
+name: 木族圣地养护储备
+description: 供养护、水渠和边境维修使用，灵花不在这只材料箱中。
+placement: fengyuan-wood-sanctuary
+facts:
+  - id: fengyuan-wood-public-reserve-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 1200
+  - definition_id: craft-material
+    amount: 40
+  - definition_id: herb-packet
+    amount: 20
+ratings: []
+shared_activity_resources: []

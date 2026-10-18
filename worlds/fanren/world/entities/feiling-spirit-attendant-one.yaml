@@ -1,0 +1,26 @@
+id: feiling-spirit-attendant-one
+kind: item
+name: 青羽灵侍
+description: 灵体与傀儡身结合的侍者，能搬运、清扫和奏乐，只依训练指令活动。
+placement: feiling-bloodflame-palace
+facts:
+  - id: feiling-spirit-attendant-one-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-spirit-attendant-one-instruction-boundary
+    predicate: instruction-boundary
+    value:
+      kind: text
+      value: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    description: 由地血当面或已学信号指挥；指令要有感知通道，搬运需实际物品与路径，无法越过自身防护。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,212 @@
+id: guanghan-collector
+kind: person
+name: 闻璞
+description: 石茧收藏者，愿资助研究，却希望为私人藏书保留首发时间。
+placement: guanghan-ink-study
+facts:
+  - id: guanghan-collector-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - guanghan-collector
+  - id: guanghan-collector-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚法体、古纸玉简鉴别与交易协商。
+    description: 炼虚法体、古纸玉简鉴别与交易协商。
+    access:
+      kind: agents
+      agentIds:
+        - guanghan-collector
+  - id: guanghan-collector-cultivation-path
+    predicate: cultivation-path
+    value:
+      kind: text
+      value: 按自身异族体质和已学功法修行，不使用人族灵根标签。
+    description: 按自身异族体质和已学功法修行，不使用人族灵根标签。
+    access:
+      kind: private
+  - id: guanghan-collector-known-correspondent
+    predicate: known-correspondent
+    value:
+      kind: entity
+      entityId: guanghan-archivist
+    description: known-correspondent
+    access:
+      kind: private
+  - id: guanghan-collector-known-correspondent-guanghan-copyist
+    predicate: known-correspondent
+    value:
+      kind: entity
+      entityId: guanghan-copyist
+    description: known-correspondent
+    access:
+      kind: private
+meters:
+  - id: guanghan-collector-health
+    definition_id: health
+    current: 100
+  - id: guanghan-collector-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 80
+ratings:
+  - id: guanghan-collector-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: guanghan-collector-force
+    definition_id: force
+    value: 6
+  - id: guanghan-collector-craft
+    definition_id: craft
+    value: 5
+  - id: guanghan-collector-perception
+    definition_id: perception
+    value: 6
+  - id: guanghan-collector-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: guanghan-collector
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 石茧收藏者，愿资助研究，却希望为私人藏书保留首发时间。
+      voice: 报价爽快，谈收藏会显出痴迷，对被指只图名声会认真辩解。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 争取二十个本地日独家阅览，或谈成可接受的署名和回报。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 闻璞
+        description: 石茧收藏者，愿资助研究，却希望为私人藏书保留首发时间。
+        status: observed
+      - id: location
+        name: 云城墨衡书舍
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-guanghan-archivist
+        name: 墨衡
+        description: 围绕旧档与出版有过实际讨论，各自意见不同；不知道对方未说出口的打算。
+        status: observed
+      - id: known-guanghan-copyist
+        name: 照砚
+        description: 围绕旧档与出版有过实际讨论，各自意见不同；不知道对方未说出口的打算。
+        status: observed
+      - id: known-guanghan-collector-offer
+        name: 闻璞资助提议
+        description: 拟出三十中阶灵石支持临摹，要求二十个灵界本地日即6912000共同秒独家阅览；尚未获接受。
+        status: observed
+      - id: known-guanghan-collector-fund
+        name: 闻璞书籍预算
+        description: 个人有限藏书预算，未签约前仍属于闻璞。
+        status: observed
+      - id: known-guanghan-old-journey-record
+        name: 旧次广寒行记
+        description: 已在会面中看过该文书的内容，尚未形成新的许可或合约。
+        status: observed
+      - id: known-guanghan-copy-draft
+        name: 照砚的便览草稿
+        description: 已在会面中看过该文书的内容，尚未形成新的许可或合约。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚法体、古纸玉简鉴别与交易协商。
+        description: 炼虚法体、古纸玉简鉴别与交易协商。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己以本族体质和所学修行，当前能力来自长期训练。
+        description: 自己以本族体质和所学修行，当前能力来自长期训练。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: offer-boundary
+        subjectId: self
+        predicate: offer-boundary
+        value:
+          kind: text
+          value: 愿付三十中阶石换二十本地日独家阅览，也能考虑用公开署名换缩短独家时间；资金在自己的实际预算里。
+        description: 愿付三十中阶石换二十本地日独家阅览，也能考虑用公开署名换缩短独家时间；资金在自己的实际预算里。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: location
+        predicate: observed-light
+        value:
+          kind: text
+          value: 开篇当地已经入夜，屋里仍亮着灯；此记忆不自动代表后来时刻的天光。
+        description: 开篇所见夜色。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - guanghan-collector
+      - local_entity_id: location
+        canonical_entity_ids:
+          - guanghan-ink-study
+      - local_entity_id: known-guanghan-archivist
+        canonical_entity_ids:
+          - guanghan-archivist
+      - local_entity_id: known-guanghan-copyist
+        canonical_entity_ids:
+          - guanghan-copyist
+      - local_entity_id: known-guanghan-collector-offer
+        canonical_entity_ids:
+          - guanghan-collector-offer
+      - local_entity_id: known-guanghan-collector-fund
+        canonical_entity_ids:
+          - guanghan-collector-fund
+      - local_entity_id: known-guanghan-old-journey-record
+        canonical_entity_ids:
+          - guanghan-old-journey-record
+      - local_entity_id: known-guanghan-copy-draft
+        canonical_entity_ids:
+          - guanghan-copy-draft

@@ -1,0 +1,26 @@
+id: reported-garden-corridor
+kind: location
+name: 残园半廊
+description: 只剩半截的走廊，通向园中药畦而不通外界。
+placement: associated-lingmiao-remnant
+facts:
+  - id: reported-garden-corridor-route-associated-lingmiao-remnant
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: associated-lingmiao-remnant
+    description: route-to
+    access:
+      kind: public
+  - id: reported-garden-corridor-condition-associated-lingmiao-remnant
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。
+    description: 同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

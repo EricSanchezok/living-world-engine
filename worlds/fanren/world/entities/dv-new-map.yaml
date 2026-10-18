@@ -1,0 +1,18 @@
+id: dv-new-map
+kind: item
+name: 青筠新图
+description: 在旧刻片基础上新增外部路径与风况，有清楚署名与参考说明；不承诺谷内无险。
+placement: dv-tracing-room
+facts:
+  - id: dv-new-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-young-surveyor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

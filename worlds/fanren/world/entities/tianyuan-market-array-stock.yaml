@@ -1,0 +1,20 @@
+id: tianyuan-market-array-stock
+kind: container
+name: 太玄本期阵库
+description: 二十枚中阶石，验物室每次入口小阵耗一枚；交易厅限法阵每次开启须另投入一枚，持续至本地日终或操作者关闭；再次开启须重新付石，用尽后不能启动。
+placement: tianyuan-taixuan-hall
+facts:
+  - id: tianyuan-market-array-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-auction-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

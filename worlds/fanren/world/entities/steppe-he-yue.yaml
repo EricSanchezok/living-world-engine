@@ -1,0 +1,185 @@
+id: steppe-he-yue
+kind: person
+name: 禾岳
+description: 天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。
+placement: steppe-tianfeng-store
+facts:
+  - id: steppe-he-yue-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - steppe-he-yue
+  - id: steppe-he-yue-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 粮料记账、干药保存、驱车；懂慕兰语与商旅数字。
+    description: 粮料记账、干药保存、驱车；懂慕兰语与商旅数字。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-he-yue
+  - id: steppe-he-yue-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根的凡人。
+    description: 无灵根的凡人。
+    access:
+      kind: agents
+      agentIds:
+        - steppe-he-yue
+  - id: steppe-he-yue-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: steppe-tianfeng-tribe-reference
+    description: 自己当前有往来与责任的族群或机构，公产另有保管规则。
+    access:
+      kind: public
+meters:
+  - id: steppe-he-yue-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 64
+ratings:
+  - id: steppe-he-yue-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: steppe-he-yue-force
+    definition_id: force
+    value: 0
+  - id: steppe-he-yue-craft
+    definition_id: craft
+    value: 1
+  - id: steppe-he-yue-perception
+    definition_id: perception
+    value: 0
+  - id: steppe-he-yue-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: steppe-he-yue
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。
+      voice: 说话留有余地，谈自己的工作会给出具体条件，不把承诺当成已经发生。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 禾岳
+        description: 天风共库管事，核对粮袋时很认真，愿意让孩子学手艺，但不愿把来年种粮全换成修炼材料。
+        status: observed
+      - id: location
+        name: 天风当期共库
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-steppe-he-yue-pouch
+        name: 禾岳的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-mu-tianfeng
+        name: 穆姓法士
+        description: 长期在本部修行的穆氏，私用药材和部落粮食要分账。
+        status: observed
+      - id: known-steppe-chi-ning
+        name: 赤宁
+        description: 拜火管火棚的法士，可商谈烘药费用。
+        status: observed
+      - id: known-steppe-tianfeng-tribe-reference
+        name: 天风部
+        description: 自己当前有往来与责任的族群或机构，公产另有保管规则。
+        status: observed
+      - id: known-steppe-tianfeng-current-stock
+        name: 天风当期粮药库
+        description: 禾岳受托保管的冬粮、干药和练法材料。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 粮料记账、干药保存、驱车；懂慕兰语与商旅数字。
+        description: 粮料记账、干药保存、驱车；懂慕兰语与商旅数字。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。
+        description: 把穆氏要用的三份药材与冬粮分别记清，谈一笔不会亏待牧户的供料协议。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - steppe-he-yue
+      - local_entity_id: location
+        canonical_entity_ids:
+          - steppe-tianfeng-store
+      - local_entity_id: known-steppe-he-yue-pouch
+        canonical_entity_ids:
+          - steppe-he-yue-pouch
+      - local_entity_id: known-canon-mu-tianfeng
+        canonical_entity_ids:
+          - canon-mu-tianfeng
+      - local_entity_id: known-steppe-chi-ning
+        canonical_entity_ids:
+          - steppe-chi-ning
+      - local_entity_id: known-steppe-tianfeng-tribe-reference
+        canonical_entity_ids:
+          - steppe-tianfeng-tribe-reference
+      - local_entity_id: known-steppe-tianfeng-current-stock
+        canonical_entity_ids:
+          - steppe-tianfeng-current-stock

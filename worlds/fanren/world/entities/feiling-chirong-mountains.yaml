@@ -1,0 +1,42 @@
+id: feiling-chirong-mountains
+kind: location
+name: 赤融山脉
+description: 风元大陆的赤融山脉绵延数百万里，近半山峰为活火山；盛产火属性灵石、矿材与至阳灵药。同名不代表它属于飞灵赤融支。
+placement: fengyuan-continent
+facts:
+  - id: feiling-chirong-mountains-route-feiling-chirong-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chirong-domain
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chirong-mountains-condition-feiling-chirong-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长途商路连接飞灵赤融族地与风元赤融山脉，须跨越大片地域、备路图和物资；不是族地内部的短程通道。具体行程按实际速度、路线与条件判断。
+    description: 长途商路连接飞灵赤融族地与风元赤融山脉，须跨越大片地域、备路图和物资；不是族地内部的短程通道。具体行程按实际速度、路线与条件判断。
+    access:
+      kind: public
+  - id: feiling-chirong-mountains-route-seas-heijiao-peaks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-heijiao-peaks
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-chirong-mountains-condition-seas-heijiao-peaks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山中高温和禁地盘查需实际应对，外客需信物或得到准许。
+    description: 山中高温和禁地盘查需实际应对，外客需信物或得到准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

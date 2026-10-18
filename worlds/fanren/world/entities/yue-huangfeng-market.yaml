@@ -1,0 +1,82 @@
+id: yue-huangfeng-market
+kind: location
+name: 黄枫坊市
+description: 太岳东北缘的一条长街，南面是固定店铺，北面设流动摊位。
+placement: yue-taiyue-range
+facts:
+  - id: yue-huangfeng-market-route-yue-huangfeng-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-huangfeng-valley
+    description: 沿太岳东北方向实际行路或御器；坊市五里内禁止飞行是需守卫执行的规章。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-wanbao
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-wanbao
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-qiqiao
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-qiqiao
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-yinfeng
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-yinfeng
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-wuxing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-wuxing
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-tiangong
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-tiangong
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-guesthouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-guesthouse
+    description: 从街面进入店堂，货柜和库房需店家允许，标价不使货物自动转移。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-stall-fee
+    predicate: service-price
+    value:
+      kind: text
+      value: 北侧流动摊位每日一低阶灵石，须实际获准占位并缴纳。
+    description: 北侧流动摊位每日一低阶灵石，须实际获准占位并缴纳。
+    access:
+      kind: public
+  - id: yue-huangfeng-market-route-yue-market-restaurant
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-market-restaurant
+    description: 沿坊市街面进入酒楼或返回街上，柜后与库房仍须店家许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

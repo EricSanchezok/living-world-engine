@@ -1,0 +1,26 @@
+id: tiannan-cheng-retreat
+kind: location
+name: 程天坤洞府
+description: 当前洞府，有旧典、茶炉和修炼石室。
+placement: tiannan-luoyun-mountain
+facts:
+  - id: tiannan-cheng-retreat-route-tiannan-luoyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-luoyun-mountain
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-cheng-retreat-travel-tiannan-luoyun-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

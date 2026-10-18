@@ -1,0 +1,177 @@
+id: xlt-pei
+kind: person
+name: 裴霁
+description: 护路修士习惯先走一段查路，给出的工价包含同行风险。
+placement: xlt-border-pass
+facts:
+  - id: xlt-pei-cultivation
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - xlt-pei
+  - id: xlt-pei-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 护送、御器、风势判断
+    description: 护送、御器、风势判断
+    access:
+      kind: agents
+      agentIds:
+        - xlt-pei
+  - id: xlt-pei-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    description: 已经实际修习相应种族法门，拥有此境界法力；具体工艺仍需学习，不因境界获悉他人秘密。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-pei
+  - id: xlt-pei-member-of-xlt-human-community
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: xlt-human-community
+    description: member-of
+    access:
+      kind: public
+  - id: xlt-pei-known-colleague-xlt-qian
+    predicate: known-colleague
+    value:
+      kind: entity
+      entityId: xlt-qian
+    description: known-colleague
+    access:
+      kind: public
+  - id: xlt-pei-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 具有已检测的木水土三属性灵根；修为已通过实际修炼获得，灵根不保证任何未来突破。
+    description: 具有已检测的木水土三属性灵根；修为已通过实际修炼获得，灵根不保证任何未来突破。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-pei
+meters:
+  - id: xlt-pei-health
+    definition_id: health
+    current: 100
+  - id: xlt-pei-mana
+    definition_id: mana
+    current: 720
+quantities:
+  - definition_id: low-stone
+    amount: 200
+ratings:
+  - id: xlt-pei-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: xlt-pei-force
+    definition_id: force
+    value: 4
+  - id: xlt-pei-craft
+    definition_id: craft
+    value: 4
+  - id: xlt-pei-perception
+    definition_id: perception
+    value: 4
+  - id: xlt-pei-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: xlt-pei
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 护路修士习惯先走一段查路，给出的工价包含同行风险。
+      voice: 用自己的经历说话，先回应眼前具体事情，不复述世界百科。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清隘口新落石，决定茶队能否按时出发。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 裴霁
+        description: 护路修士习惯先走一段查路，给出的工价包含同行风险。
+        status: observed
+      - id: location
+        name: 折岚隘口
+        description: 自己当前所处之地。
+        status: observed
+      - id: known-xlt-human-community
+        name: 小灵天人族
+        description: 自己所属的群体，但不因此知道其他成员的全部活动。
+        status: observed
+      - id: known-xlt-qian
+        name: 钳泽
+        description: 曾一起护过商队的巨螂修士。
+        status: observed
+      - id: known-xlt-range-disc-a
+        name: 东坡测距盘
+        description: 借给裴霁测隘口，借用不改变所有者。
+        status: observed
+      - id: known-xlt-pei-tool
+        name: 裴霁的护路飞剑
+        description: 护路飞剑可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+        status: observed
+    evidence:
+      - id: own-life
+        kind: observation
+        description: 本人的修行、职业与日常往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skills
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 护送、御器、风势判断
+        description: 护送、御器、风势判断
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - own-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - xlt-pei
+      - local_entity_id: location
+        canonical_entity_ids:
+          - xlt-border-pass
+      - local_entity_id: known-xlt-human-community
+        canonical_entity_ids:
+          - xlt-human-community
+      - local_entity_id: known-xlt-qian
+        canonical_entity_ids:
+          - xlt-qian
+      - local_entity_id: known-xlt-range-disc-a
+        canonical_entity_ids:
+          - xlt-range-disc-a
+      - local_entity_id: known-xlt-pei-tool
+        canonical_entity_ids:
+          - xlt-pei-tool

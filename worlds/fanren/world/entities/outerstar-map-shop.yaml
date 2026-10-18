@@ -1,0 +1,26 @@
+id: outerstar-map-shop
+kind: location
+name: 潮纹图铺
+description: 新旧海图摊在案上，图边注明绘制者和大概日期。
+placement: outerstar-blackstone-city
+facts:
+  - id: outerstar-map-shop-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-map-shop-condition-outerstar-blackstone-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 新旧海图摊在案上，图边注明绘制者和大概日期。
+    description: 新旧海图摊在案上，图边注明绘制者和大概日期。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

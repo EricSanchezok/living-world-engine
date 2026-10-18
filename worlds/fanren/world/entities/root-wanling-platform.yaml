@@ -1,0 +1,37 @@
+id: root-wanling-platform
+kind: location
+name: 万灵台
+description: 青石圆台，中央有封压阵纹与祭盆，当前没有正在降临的万灵分念。
+placement: root-wanling-valley
+facts:
+  - id: root-wanling-platform-route-to-root-wanling-valley
+    predicate: route-to-root-wanling-valley
+    value:
+      kind: entity
+      entityId: root-wanling-valley
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-platform-travel-condition-root-wanling-valley
+    predicate: travel-condition-root-wanling-valley
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-platform-root-detail-wanling-rite
+    predicate: root-detail-wanling-rite
+    value:
+      kind: text
+      value: 祭礼按三千年古约，献真实真血并依御雷万封阵接引受压分念，制成九百九十九潜灵令后才能分发。比试和资源排名可随实际选择改变，令牌不凭日历生成。
+    description: 祭礼按三千年古约，献真实真血并依御雷万封阵接引受压分念，制成九百九十九潜灵令后才能分发。比试和资源排名可随实际选择改变，令牌不凭日历生成。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

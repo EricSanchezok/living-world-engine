@@ -1,0 +1,77 @@
+id: minghe-outer-gate
+kind: location
+name: 蜉蝣圣地接引阵
+description: 本轮筹备完毕的接引阵室，尚有一次短时开放额度；用过后须重新筹备，不能随叫随到。
+placement: minghe-inspection-court
+facts:
+  - id: minghe-outer-gate-route-minghe-inspection-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inspection-court
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-outer-gate-route-minghe-entry-bank
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-entry-bank
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-outer-gate-condition-minghe-entry-bank
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有当前已筹备窗口、双方配合和有效许可均成立才能启用；本次耗四块高阶灵石并清零一次开放额度，持续六百秒，可让至多六名普通人形来客及合理行李往返。超时未归者须另寻真实离境办法。
+    description: 只有当前已筹备窗口、双方配合和有效许可均成立才能启用；本次耗四块高阶灵石并清零一次开放额度，持续六百秒，可让至多六名普通人形来客及合理行李往返。超时未归者须另寻真实离境办法。
+    access:
+      kind: public
+  - id: minghe-outer-gate-prepared-openings
+    predicate: prepared-openings
+    value:
+      kind: number
+      value: 1
+    description: prepared-openings
+    access:
+      kind: agents
+      agentIds:
+        - minghe-gate-warden
+        - minghe-inner-keeper
+  - id: minghe-outer-gate-condition-minghe-inspection-court
+    predicate: condition-minghe-inspection-court
+    value:
+      kind: text
+      value: 从阵室退回外巡院是同一侧院落中的通行，无须启动跨界接引；院落守卫和门禁仍须应对。
+    description: 从阵室退回外巡院是同一侧院落中的通行，无须启动跨界接引；院落守卫和门禁仍须应对。
+    access:
+      kind: public
+  - id: minghe-outer-gate-next-opening-preparation
+    predicate: next-opening-preparation
+    value:
+      kind: text
+      value: 本次额度耗尽后，紧急再开也须重新组织高阶主持、材料及空间条件，至少准备六个当地月（62208000秒）；时间到达本身不会补充材料或恢复额度。当前未安排第二次开放。
+    description: 本次额度耗尽后，紧急再开也须重新组织高阶主持、材料及空间条件，至少准备六个当地月（62208000秒）；时间到达本身不会补充材料或恢复额度。当前未安排第二次开放。
+    access:
+      kind: public
+  - id: minghe-outer-gate-opening-state
+    predicate: opening-state
+    value:
+      kind: text
+      value: 当前关闭，尚未启动本轮六百秒窗口。开启时必须记录实际开启和关闭时刻并耗尽一次额度；本轮往返不重复扣燃料。
+    description: 当前关闭，尚未启动本轮六百秒窗口。开启时必须记录实际开启和关闭时刻并耗尽一次额度；本轮往返不重复扣燃料。
+    access:
+      kind: public
+  - id: minghe-outer-gate-window-condition
+    predicate: window-condition
+    value:
+      kind: text
+      value: 仅此阵室与冥河接引岸之间的跨界往返受窗口限制。同侧步行无需跨界代价；窗口关闭后，不再能以许可纸代替破界。
+    description: 仅此阵室与冥河接引岸之间的跨界往返受窗口限制。同侧步行无需跨界代价；窗口关闭后，不再能以许可纸代替破界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

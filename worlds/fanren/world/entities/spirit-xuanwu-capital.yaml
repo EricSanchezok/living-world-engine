@@ -1,0 +1,34 @@
+id: spirit-xuanwu-capital
+kind: location
+name: 玄武城
+description: 建立在古龟背上的海上巨城，离城与返航都须核对港口和古龟当前方位。
+placement: spirit-canling-turtle
+facts:
+  - id: spirit-xuanwu-capital-route-spirit-xuanwu-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-xuanwu-harbor
+    description: 来往人群交易、问路和核验通行文书的地方，贵重货物由各自持有人保管。
+    access:
+      kind: public
+  - id: spirit-xuanwu-capital-route-to-spirit3-xuanwu-hall
+    predicate: route-to-spirit3-xuanwu-hall
+    value:
+      kind: entity
+      entityId: spirit3-xuanwu-hall
+    description: route-to-spirit3-xuanwu-hall
+    access:
+      kind: private
+  - id: spirit-xuanwu-capital-route-conditions-spirit3-xuanwu-hall
+    predicate: route-conditions-spirit3-xuanwu-hall
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

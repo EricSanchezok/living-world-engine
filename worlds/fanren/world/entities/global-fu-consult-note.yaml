@@ -1,0 +1,26 @@
+id: global-fu-consult-note
+kind: item
+name: 闻素问诊记录
+description: 闻素转来的一份伤情观察，询问针刺能否辅助恢复活动。
+placement: global-fu-clinic
+facts:
+  - id: global-fu-consult-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-physician
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-fu-consult-note-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。
+    description: 只是观察与请求，不是病人自动康复；尚未给出诊断，需核实际伤情。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

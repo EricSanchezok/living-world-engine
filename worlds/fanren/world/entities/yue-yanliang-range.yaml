@@ -1,0 +1,42 @@
+id: yue-yanliang-range
+kind: location
+name: 燕梁山
+description: 燕家堡所在山地，具体入堡路线由族人掌握。
+placement: yue-linzhou
+facts:
+  - id: yue-yanliang-range-route-yue-qingliang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qingliang
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-yanliang-range-travel-yue-qingliang
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-yanliang-range-route-yue-yanling-fort
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yanling-fort
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-yanliang-range-travel-yue-yanling-fort
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,32 @@
+id: guanghan-four-wing-birds
+kind: creature-group
+name: 四翅鸟群
+description: 四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。
+placement: guanghan-mainland-steppe
+facts:
+  - id: guanghan-four-wing-birds-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 18
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-four-wing-birds-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。
+    description: 四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。
+    access:
+      kind: private
+meters:
+  - id: guanghan-four-wing-birds-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-four-wing-birds-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

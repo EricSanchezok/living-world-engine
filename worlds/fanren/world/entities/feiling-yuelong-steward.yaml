@@ -1,0 +1,156 @@
+id: feiling-yuelong-steward
+kind: person
+name: 砚翼
+description: 替越隆照料炼场的老飞灵修士，乐于看大阵运转，却认为浪费好料比弄坏衣裳更可惜。
+placement: feiling-yuelong-retreat
+facts:
+  - id: feiling-yuelong-steward-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: feiling-yuelong-steward-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修为，熟悉本炼场的避险信号、库存和保养；能记录和领用，不能独自炼成极元晶。
+    description: 炼虚修为，熟悉本炼场的避险信号、库存和保养；能记录和领用，不能独自炼成极元晶。
+    access:
+      kind: private
+meters:
+  - id: feiling-yuelong-steward-health
+    definition_id: health
+    current: 100
+  - id: feiling-yuelong-steward-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: feiling-yuelong-steward-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: feiling-yuelong-steward-force
+    definition_id: force
+    value: 6
+  - id: feiling-yuelong-steward-craft
+    definition_id: craft
+    value: 4
+  - id: feiling-yuelong-steward-perception
+    definition_id: perception
+    value: 6
+  - id: feiling-yuelong-steward-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: feiling-yuelong-steward
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 替越隆照料炼场的老飞灵修士，乐于看大阵运转，却认为浪费好料比弄坏衣裳更可惜。
+      voice: 称主人老祖，谈材料时逐项报数，遇到含糊交接会停笔追问。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 在试炉之前确认余料足够，并寻一份能解释地气变化的观察记录。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 砚翼
+        description: 替越隆照料炼场的老飞灵修士，乐于看大阵运转，却认为浪费好料比弄坏衣裳更可惜。
+        status: observed
+      - id: location
+        name: 越隆居所
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: feiling-review-feiling-yuelong-steward-private-stock
+        name: 砚翼私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: feiling-review-canon-yue-long
+        name: 越隆
+        description: 长期受托照料炼场，知道主人珍惜时间，也愿为有价值的材料耐心讲价。
+        status: observed
+      - id: feiling-review-feiling-yuelong-feed-stock
+        name: 炼晶备料
+        description: 自己检查和登记过的炼场设施与储备，支用须主人同意。
+        status: observed
+      - id: feiling-review-feiling-goldwind-array
+        name: 金罡风魔阵柱组
+        description: 金属性引力与减压柱阵，不能当作水属工序的承力器。
+        status: observed
+      - id: feiling-review-feiling-yuelong-refining-ground
+        name: 越隆炼晶洼地
+        description: 自己检查和登记过的炼场设施与储备，支用须主人同意。
+        status: observed
+      - id: feiling-review-feiling-yuelong-observation-offer
+        name: 地气观测邀约
+        description: 目前只是公开邀约，核验记录后才能支出实有酒或晶料，不保证每个来客都有赏。
+        status: observed
+      - id: feiling-review-feiling-yuelong-water-array
+        name: 澄水承力盘
+        description: 已检查过的水属小炉阵盘，只有老祖主持并实际供石供法才可启用。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修为，熟悉本炼场的避险信号、库存和保养；能记录和领用，不能独自炼成极元晶。
+        description: 炼虚修为，熟悉本炼场的避险信号、库存和保养；能记录和领用，不能独自炼成极元晶。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - feiling-yuelong-steward
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-yuelong-retreat
+      - local_entity_id: feiling-review-feiling-yuelong-steward-private-stock
+        canonical_entity_ids:
+          - feiling-yuelong-steward-private-stock
+      - local_entity_id: feiling-review-canon-yue-long
+        canonical_entity_ids:
+          - canon-yue-long
+      - local_entity_id: feiling-review-feiling-yuelong-feed-stock
+        canonical_entity_ids:
+          - feiling-yuelong-feed-stock
+      - local_entity_id: feiling-review-feiling-goldwind-array
+        canonical_entity_ids:
+          - feiling-goldwind-array
+      - local_entity_id: feiling-review-feiling-yuelong-refining-ground
+        canonical_entity_ids:
+          - feiling-yuelong-refining-ground
+      - local_entity_id: feiling-review-feiling-yuelong-observation-offer
+        canonical_entity_ids:
+          - feiling-yuelong-observation-offer
+      - local_entity_id: feiling-review-feiling-yuelong-water-array
+        canonical_entity_ids:
+          - feiling-yuelong-water-array

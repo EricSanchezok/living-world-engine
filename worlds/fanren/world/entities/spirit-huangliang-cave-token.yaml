@@ -1,0 +1,18 @@
+id: spirit-huangliang-cave-token
+kind: item
+name: 黄粱洞府禁制令
+description: 本人控制洞府外层禁制的令牌，外来者持有仍需理解对应法诀。
+placement: canon-huangliang-lingjun
+facts:
+  - id: spirit-huangliang-cave-token-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huangliang-lingjun
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

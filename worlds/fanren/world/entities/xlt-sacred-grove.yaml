@@ -1,0 +1,18 @@
+id: xlt-sacred-grove
+kind: location
+name: 共护木圃
+description: 受数方旧约保护的小圃，黑金色的罡木立在土台中央。
+placement: xlt-border-pass
+facts:
+  - id: xlt-sacred-grove-route-xlt-border-pass
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-border-pass
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

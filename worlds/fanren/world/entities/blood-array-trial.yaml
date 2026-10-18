@@ -1,0 +1,18 @@
+id: blood-array-trial
+kind: item
+name: 旧护阵残盘
+description: 缺一段回流纹的旧护阵实物，边缘与阵心不是同一损伤；未经补齐不能安全全力启动。
+placement: blood-bone-retreat
+facts:
+  - id: blood-array-trial-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xiao-ming
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

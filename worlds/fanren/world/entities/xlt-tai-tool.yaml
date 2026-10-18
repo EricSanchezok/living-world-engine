@@ -1,0 +1,18 @@
+id: xlt-tai-tool
+kind: item
+name: 苔生的行路短刃
+description: 行路短刃可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-tai
+facts:
+  - id: xlt-tai-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-tai
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: steppe-school-register
+kind: item
+name: 分殿开灵候选册
+description: 石苓已测灵根；本轮约两年后开灵，缴贡和教习安排尚未完成；罗荻另列已入门弟子。
+placement: steppe-school-court
+facts:
+  - id: steppe-school-register-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianlan-temple-network
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

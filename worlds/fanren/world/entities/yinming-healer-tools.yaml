@@ -1,0 +1,18 @@
+id: yinming-healer-tools
+kind: item
+name: 孟祈的个人器具
+description: 凡俗诊治、清创、夹板与毒物辨认，不能治好一切。所需的有限工具，不包含无限兽晶。
+placement: yinming-healer
+facts:
+  - id: yinming-healer-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

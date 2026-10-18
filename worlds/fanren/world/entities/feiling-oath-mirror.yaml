@@ -1,0 +1,18 @@
+id: feiling-oath-mirror
+kind: item
+name: 镇誓铜镜
+description: 青铜小镜，用于压住副卷开封时显出的鹏影；保管和开卷均需许可。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-oath-mirror-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

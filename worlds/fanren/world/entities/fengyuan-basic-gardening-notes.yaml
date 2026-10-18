@@ -1,0 +1,27 @@
+id: fengyuan-basic-gardening-notes
+kind: item
+name: 木姣的基础养植笔记
+description: 记录引水、土质与观察根床的做法，可在获准后抄录，用于相应环境下的养植实践。
+placement: fengyuan-wood-rest-grove
+facts:
+  - id: fengyuan-basic-gardening-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-jiao
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-basic-gardening-notes-usable-knowledge
+    predicate: usable-knowledge
+    value:
+      kind: text
+      value: 根床排水检查、土样对照与温和引水；施用需要实际水土与园艺技能，不能催熟万年灵花。
+    description: 根床排水检查、土样对照与温和引水；施用需要实际水土与园艺技能，不能催熟万年灵花。
+    access:
+      kind: discoverable
+      condition: 获准阅读或抄录笔记。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

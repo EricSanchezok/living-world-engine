@@ -1,0 +1,214 @@
+id: canon-ling-king
+kind: person
+name: 灵王
+description: 白袍灵族长者，独居惯了，喜欢照料堂前花树，与陌生人谈条件时颇有耐心。
+placement: fengyuan-purple-hall
+facts:
+  - id: canon-ling-king-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-ling-king
+  - id: canon-ling-king-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘法力、圣山禁制、器物操纵与寒法；仙界旧历只在本人认知。
+    description: 大乘法力、圣山禁制、器物操纵与寒法；仙界旧历只在本人认知。
+    access:
+      kind: agents
+      agentIds:
+        - canon-ling-king
+  - id: canon-ling-king-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 灵族古老修炼主体，拥有仙界旧历，非人族灵根路线。
+    description: 灵族古老修炼主体，拥有仙界旧历，非人族灵根路线。
+    access:
+      kind: agents
+      agentIds:
+        - canon-ling-king
+  - id: canon-ling-king-delegates-to
+    predicate: delegates-to
+    value:
+      kind: entity
+      entityId: canon-ling-mie
+    description: delegates-to
+    access:
+      kind: private
+  - id: canon-ling-king-original-body
+    predicate: original-body
+    value:
+      kind: text
+      value: 本体为眩光天晶塔；不同外显形态与塔体共属同一灵王主体，不另生成可独立行动或被赠出的第二灵王。
+    description: 本体为眩光天晶塔；不同外显形态与塔体共属同一灵王主体，不另生成可独立行动或被赠出的第二灵王。
+    access:
+      kind: private
+meters:
+  - id: canon-ling-king-health
+    definition_id: health
+    current: 100
+  - id: canon-ling-king-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-ling-king-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-ling-king-force
+    definition_id: force
+    value: 8
+  - id: canon-ling-king-craft
+    definition_id: craft
+    value: 4
+  - id: canon-ling-king-perception
+    definition_id: perception
+    value: 8
+  - id: canon-ling-king-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-ling-king
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 白袍灵族长者，独居惯了，喜欢照料堂前花树，与陌生人谈条件时颇有耐心。
+      voice: 表面温和，会先请人坐下；交易时把话留半句，受冒犯后仍慢条斯理。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 稳住族内各支并保存稀缺旧物，筛选真正值得交换的消息。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 灵王
+        description: 白袍灵族长者，独居惯了，喜欢照料堂前花树，与陌生人谈条件时颇有耐心。
+        status: observed
+      - id: location
+        name: 紫气堂
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-ling-king-supplies
+        name: 灵王的私用储备
+        description: 自身修炼和出行费用，与族域公产分开。
+        status: observed
+      - id: known-canon-ling-mie
+        name: 灵灭
+        description: 圣山当前接引公务，灵灭不知灵王全部仙界旧历。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-old-heart
+        name: 完整修罗旧心护器
+        description: 自己保存的一枚完整护器，只够一人使用；尚未承诺给任何访客。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-array-room
+        name: 伏灵山旧跨界阵室
+        description: 本人掌握的跨界阵室，启动要花费真实极品石。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-array-stock
+        name: 旧阵封存极品石
+        description: 此阵封存一百二十枚极品石，动用前会比较机会与代价。
+        status: observed
+      - id: fengyuan-review-fengyuan-shura-return-chart
+        name: 旧阵与返程坐标札
+        description: 已学过的本阵操作札记。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘法力、圣山禁制、器物操纵与寒法；仙界旧历只在本人认知。
+        description: 大乘法力、圣山禁制、器物操纵与寒法；仙界旧历只在本人认知。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 灵族古老修炼主体，拥有仙界旧历，非人族灵根路线。
+        description: 灵族古老修炼主体，拥有仙界旧历，非人族灵根路线。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        description: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: fengyuan-review-original-body
+        subjectId: self
+        predicate: original-body
+        value:
+          kind: text
+          value: 自己的本体是眩光天晶塔，外显身体与塔身同属自身。
+        description: 本人知道自己的本体与外显形式。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-ling-king
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-purple-hall
+      - local_entity_id: known-canon-ling-king-supplies
+        canonical_entity_ids:
+          - canon-ling-king-supplies
+      - local_entity_id: known-canon-ling-mie
+        canonical_entity_ids:
+          - canon-ling-mie
+      - local_entity_id: fengyuan-review-fengyuan-shura-old-heart
+        canonical_entity_ids:
+          - fengyuan-shura-old-heart
+      - local_entity_id: fengyuan-review-fengyuan-shura-array-room
+        canonical_entity_ids:
+          - fengyuan-shura-array-room
+      - local_entity_id: fengyuan-review-fengyuan-shura-array-stock
+        canonical_entity_ids:
+          - fengyuan-shura-array-stock
+      - local_entity_id: fengyuan-review-fengyuan-shura-return-chart
+        canonical_entity_ids:
+          - fengyuan-shura-return-chart

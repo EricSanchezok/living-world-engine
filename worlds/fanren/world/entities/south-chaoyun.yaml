@@ -1,0 +1,42 @@
+id: south-chaoyun
+kind: location
+name: 潮云府
+description: 西部山地与毒草生境相连，常有采集者和运药商旅。
+placement: human-south-kunwu
+facts:
+  - id: south-chaoyun-route-human-south-kunwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-south-kunwu
+    description: route-to
+    access:
+      kind: public
+  - id: south-chaoyun-condition-human-south-kunwu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿府间道路行旅，有距离、负重与雷雨影响。
+    description: 沿府间道路行旅，有距离、负重与雷雨影响。
+    access:
+      kind: public
+  - id: south-chaoyun-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-chaoyun-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿溪进市。
+    description: 沿溪进市。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

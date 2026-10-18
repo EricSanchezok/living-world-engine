@@ -1,0 +1,42 @@
+id: dv-mouth
+kind: location
+name: 坠魔谷口
+description: 从外面看十余丈宽的山间豁口，上方灰云与灵气异象交织；通道内的古禁和裂缝使普通飞遁和步行都可能遇险。
+placement: human-devil-valley
+facts:
+  - id: dv-mouth-route-dv-foothill-lodge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-foothill-lodge
+    description: route-to
+    access:
+      kind: public
+  - id: dv-mouth-condition-dv-foothill-lodge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。
+    description: 沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。
+    access:
+      kind: public
+  - id: dv-mouth-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-mouth-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷口没有传送阵；须实地识别并避开当前裂缝或具可靠空间防护，普通护罩不能保证。
+    description: 谷口没有传送阵；须实地识别并避开当前裂缝或具可靠空间防护，普通护罩不能保证。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

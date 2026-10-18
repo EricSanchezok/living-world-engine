@@ -1,0 +1,18 @@
+id: spirit3-shadow-note
+kind: item
+name: 普通影符工艺手录
+description: 记录一次性普通影符的材料、封存与操纵边界；提及完美影符只是未见原件的传闻。
+placement: spirit3-ranking-island
+facts:
+  - id: spirit3-shadow-note-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-ranking-custodian
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

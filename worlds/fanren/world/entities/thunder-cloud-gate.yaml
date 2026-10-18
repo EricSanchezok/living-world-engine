@@ -1,0 +1,83 @@
+id: thunder-cloud-gate
+kind: location
+name: 云城东门
+description: 核验实际身份和携带物的入城处，普通访客可以询问居停手续。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-cloud-gate-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-cloud-gate-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 核验实际身份和携带物的入城处，普通访客可以询问居停手续。
+    description: 核验实际身份和携带物的入城处，普通访客可以询问居停手续。
+    access:
+      kind: public
+  - id: thunder-cloud-gate-route-to-thunder-cloud-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-archive
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-cloud-gate-route-conditions-thunder-cloud-archive
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经公开街巷，入档案内室另需借阅许可。
+    description: 经公开街巷，入档案内室另需借阅许可。
+    access:
+      kind: private
+  - id: thunder-cloud-gate-route-to-thunder-small-clan-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-small-clan-court
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-cloud-gate-route-conditions-thunder-small-clan-court
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经城内道路可到公共院落，客房不随意开放。
+    description: 经城内道路可到公共院落，客房不随意开放。
+    access:
+      kind: private
+  - id: thunder-cloud-gate-route-to-thunder-wangu-crisis-exit
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-wangu-crisis-exit
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-cloud-gate-travel-condition-thunder-wangu-crisis-exit
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。
+    description: 须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。
+    access:
+      kind: private
+  - id: thunder-cloud-gate-root-detail-cloud-entry
+    predicate: root-detail-cloud-entry
+    value:
+      kind: text
+      value: 入境法盘及青族凝神归一有实际探察范围；常规出城不用同等检查。青族合神须同胞、同功法与相近修为，不是全族共脑。
+    description: 入境法盘及青族凝神归一有实际探察范围；常规出城不用同等检查。青族合神须同胞、同功法与相近修为，不是全族共脑。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,27 @@
+id: blood-ice-cache
+kind: location
+name: 冰魄昔日封藏处
+description: 天元境荒坡下的旧洞窟，深处普通石壁后封着古铜门，门上银色符封完整；隐蔽大厅中央石桌上保存一只青色小鼎。
+placement: spirit-tianyuan-domain
+facts:
+  - id: blood-ice-cache-return-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: route-to
+    access:
+      kind: public
+  - id: blood-ice-cache-sealed-entry
+    predicate: entry-restriction
+    value:
+      kind: text
+      value: 地下石壁伪装与门上符封完好；相配虚天鼎及法诀可显门揭符。其他破解须实测禁制并承担毁物与惊动风险，不能仅因知道地名便进入。
+    description: 地下石壁伪装与门上符封完好；相配虚天鼎及法诀可显门揭符。其他破解须实测禁制并承担毁物与惊动风险，不能仅因知道地名便进入。
+    access:
+      kind: discoverable
+      condition: 实际抵达旧洞窟并检视石壁禁制，或获得亲历者可信说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

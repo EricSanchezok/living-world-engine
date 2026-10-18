@@ -1,0 +1,26 @@
+id: qixuan-ordinary-members
+kind: social-group
+name: 七玄门各堂普通门人
+description: 分布在山内与各处产业的普通门人，承担巡守、练功、劳作和经营；只有具体在场或经联络的人才能参与当前行动。
+placement: qixuan-sect
+facts:
+  - id: qixuan-ordinary-members-part-of
+    predicate: part-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 分属本门各机构。
+    access:
+      kind: private
+  - id: qixuan-ordinary-members-reported-size
+    predicate: reported-size
+    value:
+      kind: text
+      value: 内外门弟子合计约三四千，不等于同一时刻都在总堂或拥有相同信息。
+    description: 门派整体规模，不是当前场景可同时调用的人数。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

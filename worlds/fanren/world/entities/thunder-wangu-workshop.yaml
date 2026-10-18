@@ -1,0 +1,44 @@
+id: thunder-wangu-workshop
+kind: location
+name: 万古试艺院
+description: 提供傀儡入门试作的工坊，材料按人登记。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-wangu-workshop-route-thunder-tianxu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianxu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-wangu-workshop-condition-thunder-tianxu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 提供傀儡入门试作的工坊，材料按人登记。
+    description: 提供傀儡入门试作的工坊，材料按人登记。
+    access:
+      kind: public
+  - id: thunder-wangu-workshop-root-detail-living-puppets
+    predicate: root-detail-living-puppets
+    value:
+      kind: text
+      value: 通灵傀儡滴血建立操纵关系，强窥受保护核心可能毁坏。白蛇、人形等形态不是多个本体；灵珠滋养、寒晶铁冰石供能各需实物时间。
+    description: 通灵傀儡滴血建立操纵关系，强窥受保护核心可能毁坏。白蛇、人形等形态不是多个本体；灵珠滋养、寒晶铁冰石供能各需实物时间。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: thunder-wangu-workshop-root-detail-tiele-warship
+    predicate: root-detail-tiele-warship
+    value:
+      kind: text
+      value: 铁勒古战舟图纸不同于成舟，造舟及运作需实材、晶柱和众修配合。仿制不能凭名称取得原版全部威力。
+    description: 铁勒古战舟图纸不同于成舟，造舟及运作需实材、晶柱和众修配合。仿制不能凭名称取得原版全部威力。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: yue-mo-inner-court
+kind: location
+name: 墨府内院
+description: 家人吃饭、读书和歇息的院落，孩子的功课与夫人们的事务各有位置。
+placement: yue-mo-mansion
+facts:
+  - id: yue-mo-inner-court-route-yue-mo-mansion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mo-mansion
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+  - id: yue-mo-inner-court-travel-yue-mo-mansion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    description: 沿城内道路或院门通行，内宅与书房需主人允许，水路另需实际船只。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: wanyao-qing-cave
+kind: location
+name: 青背苍狼洞府
+description: 洞府，保存副谷主自身修行与往来用品。
+placement: human-wanyao-valley
+facts:
+  - id: wanyao-qing-cave-route-human-wanyao-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-wanyao-valley
+    description: 副谷主私人洞府，须通报来意和获得许可。
+    access:
+      kind: public
+  - id: wanyao-qing-cave-travel-human-wanyao-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 副谷主私人洞府，须通报来意和获得许可。
+    description: 副谷主私人洞府，须通报来意和获得许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

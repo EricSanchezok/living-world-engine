@@ -1,0 +1,51 @@
+id: fengyuan-shura-tianzhu-city
+kind: location
+name: 天蛛城
+description: 青石城墙围合整座要塞而不设普通门户，白莲禁制遮挡外窥；许可来客从控制通道升降进入。
+placement: fengyuan-shura-mountains
+facts:
+  - id: fengyuan-shura-tianzhu-city-route-to-fengyuan-shura-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-tianzhu-city-route-conditions-fengyuan-shura-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 飞至城墙外须表明来意；进入要经过守门者开启的禁制通路，不能把无门城墙当普通敞门。
+    description: 飞至城墙外须表明来意；进入要经过守门者开启的禁制通路，不能把无门城墙当普通敞门。
+    access:
+      kind: public
+  - id: fengyuan-shura-tianzhu-city-route-to-fengyuan-shura-council
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-council
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-tianzhu-city-route-conditions-fengyuan-shura-council
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内步行到内殿，族库与内室另需许可。
+    description: 城内步行到内殿，族库与内室另需许可。
+    access:
+      kind: public
+  - id: fengyuan-shura-tianzhu-city-root-detail-white-lotus-array
+    predicate: root-detail-white-lotus-array
+    value:
+      kind: text
+      value: 大化白莲阵可遮高阶探察仍可实破，布设需知识材料法力；未具名来源不能凭猜确定某族。
+    description: 大化白莲阵可遮高阶探察仍可实破，布设需知识材料法力；未具名来源不能凭猜确定某族。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

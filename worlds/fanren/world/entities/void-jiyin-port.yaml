@@ -1,0 +1,42 @@
+id: void-jiyin-port
+kind: location
+name: 极阴岛海埠
+description: 货船系在木桩旁，执事记着运货工钱。
+placement: human-jiyin-island
+facts:
+  - id: void-jiyin-port-route-human-jiyin-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-jiyin-island
+    description: route-to
+    access:
+      kind: public
+  - id: void-jiyin-port-condition-human-jiyin-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+  - id: void-jiyin-port-route-void-jiyin-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-jiyin-court
+    description: route-to
+    access:
+      kind: public
+  - id: void-jiyin-port-condition-void-jiyin-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,37 @@
+id: thunder-firecoral-core-beast
+kind: creature-group
+name: 深海巨兽
+description: 长躯似鲸的海兽在深水游动，腹内有早年吞下的坚硬晶物，普通岸民不知它的准确位置。
+placement: thunder-firecoral-deepwater
+facts:
+  - id: thunder-firecoral-core-beast-capability
+    predicate: capability
+    value:
+      kind: text
+      value: 能改变体形、快速游水、护身撞击；没有空间神通。
+    description: 能改变体形、快速游水、护身撞击；没有空间神通。
+    access:
+      kind: private
+  - id: thunder-firecoral-core-beast-ecology
+    predicate: ecology
+    value:
+      kind: text
+      value: 饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。
+    description: 饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。
+    access:
+      kind: private
+meters:
+  - id: thunder-firecoral-core-beast-health
+    definition_id: health
+    current: 100
+  - id: thunder-firecoral-core-beast-mana
+    definition_id: mana
+    current: 1080
+quantities:
+  - definition_id: thunder-creature-count
+    amount: 1
+ratings:
+  - id: thunder-firecoral-core-beast-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

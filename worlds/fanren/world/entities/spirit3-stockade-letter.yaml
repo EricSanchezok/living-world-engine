@@ -1,0 +1,18 @@
+id: spirit3-stockade-letter
+kind: item
+name: 石溪教头的港务问函
+description: 拟问程海笙是否有三日本地日的短期港务学工，尚未送出或成立雇约。
+placement: spirit3-stockade-teacher
+facts:
+  - id: spirit3-stockade-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-stockade-teacher
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

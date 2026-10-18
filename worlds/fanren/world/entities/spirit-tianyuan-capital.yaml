@@ -1,0 +1,50 @@
+id: spirit-tianyuan-capital
+kind: location
+name: 天元城
+description: 依天元圣山而建的广大主城，有凡人和修士的街区。
+placement: spirit-tianyuan-mountain
+facts:
+  - id: spirit-tianyuan-capital-route-spirit-shengshan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-shengshan-market
+    description: 来往人群交易、问路和核验通行文书的地方，贵重货物由各自持有人保管。
+    access:
+      kind: public
+  - id: spirit-tianyuan-capital-route-to-spirit3-tianyuan-hall
+    predicate: route-to-spirit3-tianyuan-hall
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-hall
+    description: route-to-spirit3-tianyuan-hall
+    access:
+      kind: private
+  - id: spirit-tianyuan-capital-route-conditions-spirit3-tianyuan-hall
+    predicate: route-conditions-spirit3-tianyuan-hall
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+  - id: spirit-tianyuan-capital-route-tianyuan-mo-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-mo-retreat
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-tianyuan-capital-condition-tianyuan-mo-retreat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 对外来函由守居人转交，内室受防护禁制隔绝。
+    description: 对外来函由守居人转交，内室受防护禁制隔绝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

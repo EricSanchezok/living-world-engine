@@ -1,0 +1,117 @@
+id: minghe-qingyuan-cave
+kind: location
+name: 青元子洞府
+description: 青元子维护阴气节点和独自修行的洞府，来访须通传。
+placement: minghe-space
+facts:
+  - id: minghe-qingyuan-cave-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-qingyuan-cave-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 青元子维护阴气节点和独自修行的洞府，来访须通传。
+    description: 青元子维护阴气节点和独自修行的洞府，来访须通传。
+    access:
+      kind: public
+  - id: minghe-qingyuan-cave-route-minghe-yin-node
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-yin-node
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-qingyuan-cave-condition-minghe-yin-node
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可测到局部阴气波动的节点，周边修缮不等于掌控整座阵。
+    description: 可测到局部阴气波动的节点，周边修缮不等于掌控整座阵。
+    access:
+      kind: public
+  - id: minghe-qingyuan-cave-route-to-minghe-grey-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-grey-mountains
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-route-conditions-minghe-grey-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。
+    description: 洞府至裂隙山顶为界内山路；只有裂隙处实际施法才发生离境。
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-route-to-minghe-green-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-green-lake
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-route-conditions-minghe-green-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。
+    description: 这是冥河内部长途行程，即使高手全速也需多个本地昼夜；不会跨越圣地界壁。
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-route-to-minghe-qingyuan-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-hall
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-route-conditions-minghe-qingyuan-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经青石通道入厅须得到主人许可。
+    description: 经青石通道入厅须得到主人许可。
+    access:
+      kind: private
+  - id: minghe-qingyuan-cave-root-detail-sword-purification
+    predicate: root-detail-sword-purification
+    value:
+      kind: text
+      value: 九炎熔金诀需火丹配合及长期闭关，可能损飞剑木精；种剑术以实际金雷竹灵气养剑，剑灵化虚重组会损剑体、大耗法力，过度受创仍可毁剑。
+    description: 九炎熔金诀需火丹配合及长期闭关，可能损飞剑木精；种剑术以实际金雷竹灵气养剑，剑灵化虚重组会损剑体、大耗法力，过度受创仍可毁剑。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: minghe-qingyuan-cave-root-detail-mingyu-classic
+    predicate: root-detail-mingyu-classic
+    value:
+      kind: text
+      value: 冥狱真经半部及找全线索分别是知识和消息筹码，知道消息不等已持全本或学成。
+    description: 冥狱真经半部及找全线索分别是知识和消息筹码，知道消息不等已持全本或学成。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: minghe-qingyuan-cave-root-detail-eighteen-fiend-array
+    predicate: root-detail-eighteen-fiend-array
+    value:
+      kind: text
+      value: 十八天煞连环阵可逐阵破或同时破，主持可增威，须阵具地形和供能；不能因听过名便已被围困。
+    description: 十八天煞连环阵可逐阵破或同时破，主持可增威，须阵具地形和供能；不能因听过名便已被围困。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,58 @@
+id: feiling-tianpeng-domain
+kind: location
+name: 天鹏族地
+description: 天鹏支系生活的区域，族内有不同家庭和职业。
+placement: feiling-territory
+facts:
+  - id: feiling-tianpeng-domain-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-domain-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天鹏支系生活的区域，族内有不同家庭和职业。
+    description: 天鹏支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+  - id: feiling-tianpeng-domain-route-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-domain-condition-feiling-tianpeng-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天鹏族的主要聚居城，飞行往来连接依山修建的高处殿堂。
+    description: 天鹏族的主要聚居城，飞行往来连接依山修建的高处殿堂。
+    access:
+      kind: public
+  - id: feiling-tianpeng-domain-route-feiling-chimo-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chimo-sea
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-tianpeng-domain-condition-feiling-chimo-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海路漫长，天气、海兽和补给决定通行安全。
+    description: 海路漫长，天气、海兽和补给决定通行安全。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

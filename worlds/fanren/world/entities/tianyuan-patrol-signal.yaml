@@ -1,0 +1,18 @@
+id: tianyuan-patrol-signal
+kind: item
+name: 巡察哨传讯盘
+description: 可向备勤院配对盘发简短信号，每次消耗一块低阶灵石，不是随处可联络任何人的器物。
+placement: tianyuan-patrol-post
+facts:
+  - id: tianyuan-patrol-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: global-true-toad-lakes
+kind: location
+name: 蛮荒湖群
+description: 低矮湿林间分布大小湖泊，水下的情况须实探。
+placement: fengyuan-continent
+facts:
+  - id: global-true-toad-lakes-route-global-true-toad-twin-peaks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-true-toad-twin-peaks
+    description: 沿湿林湖岸行走或飞行，实际需应对雾、水与兽类。
+    access:
+      kind: public
+  - id: global-true-toad-lakes-route-global-true-toad-magnetic-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-true-toad-magnetic-mountain
+    description: 穿过湖区可抵巨山，地下路径狭滑。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

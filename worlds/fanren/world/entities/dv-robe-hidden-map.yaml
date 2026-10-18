@@ -1,0 +1,19 @@
+id: dv-robe-hidden-map
+kind: item
+name: 青袍夹层地图
+description: 非布非绢薄片以碳笔画简陋线条，粗大标记指向白石祭坛所在盆地；需自己比对地形才能定位，不附封印内幕。
+placement: dv-qingcan-robe
+facts:
+  - id: dv-robe-hidden-map-marked-site
+    predicate: marked-site
+    value:
+      kind: entity
+      entityId: dv-white-altar
+    description: marked-site
+    access:
+      kind: discoverable
+      condition: 实际阅读夹层图、比对古地形和祭坛所在盆地。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

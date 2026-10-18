@@ -1,0 +1,42 @@
+id: boundless-abyss
+kind: location
+name: 海底封魔渊
+description: 旧阵内积存浓厚魔气；这里并非天南坠魔谷。
+placement: boundless-seal-depth
+facts:
+  - id: boundless-abyss-route-boundless-seal-depth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-seal-depth
+    description: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    access:
+      kind: public
+  - id: boundless-abyss-travel-boundless-seal-depth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    description: 须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。
+    access:
+      kind: public
+  - id: boundless-abyss-route-boundless-altar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-altar
+    description: 继续深入须持续护持，消耗随魔性与深度增加。
+    access:
+      kind: public
+  - id: boundless-abyss-travel-boundless-altar
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 继续深入须持续护持，消耗随魔性与深度增加。
+    description: 继续深入须持续护持，消耗随魔性与深度增加。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

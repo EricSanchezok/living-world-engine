@@ -1,0 +1,26 @@
+id: seas-fan-house
+kind: location
+name: 樊咆子住处
+description: 喜好见闻与交游的真龙修行所。
+placement: seas-dragon-island
+facts:
+  - id: seas-fan-house-route-seas-island-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-town
+    description: route-to
+    access:
+      kind: public
+  - id: seas-fan-house-condition-seas-island-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    description: 岛内循路实际行进，果园、私宅和驿院内栏须持有人准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

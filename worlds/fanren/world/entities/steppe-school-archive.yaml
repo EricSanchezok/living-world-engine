@@ -1,0 +1,26 @@
+id: steppe-school-archive
+kind: location
+name: 分殿典籍室
+description: 薄石板与皮卷分架存放，公授入门法诀放在外架，召请祭仪资料在内侧封龛中。
+placement: steppe-tianlan-school
+facts:
+  - id: steppe-school-archive-route-steppe-tianlan-school
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianlan-school
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-school-archive-travel-steppe-tianlan-school
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

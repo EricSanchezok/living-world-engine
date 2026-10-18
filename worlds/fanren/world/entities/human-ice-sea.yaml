@@ -1,0 +1,42 @@
+id: human-ice-sea
+kind: location
+name: 冰海
+description: 北地寒海与妖修生活区域，海冰不能当作永远平坦的道路。
+placement: human-dajin
+facts:
+  - id: human-ice-sea-route-north-bingyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-bingyuan
+    description: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    access:
+      kind: public
+  - id: human-ice-sea-travel-north-bingyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    description: 海冰、距离和妖族领地限制行进，需确切路线和抗寒手段。
+    access:
+      kind: public
+  - id: human-ice-sea-route-north-ice-flower-site
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-ice-flower-site
+    description: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    access:
+      kind: public
+  - id: human-ice-sea-travel-north-ice-flower-site
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    description: 需已知路线、抗寒和足够行路时间；妖族边界不是自动安全区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

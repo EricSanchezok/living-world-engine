@@ -1,0 +1,154 @@
+id: qixuan-gate
+kind: location
+name: 七玄门山门
+description: 进山入口有人值守，访客可以陈明来意，准入属于门派决定。
+placement: caixia-mountain
+facts:
+  - id: qixuan-gate-route-caixia-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-mountain
+    description: 进山入口有人值守，访客可以陈明来意，准入属于门派决定。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-checkpoint-01
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-checkpoint-01
+    description: 上落日峰通路上的哨位，山势险要，来往者须接受门中盘查。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-guest-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-guest-court
+    description: 接待与安排来访者暂宿的院落，选拔人员并未必须于今晚入住。
+    access:
+      kind: public
+  - id: qixuan-gate-route-bone-bamboo-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: bone-bamboo-slope
+    description: 通往炼骨崖的竹林山坡，坡度渐陡；不入门也可以申请在许可范围内练脚力。
+    access:
+      kind: public
+  - id: qixuan-gate-route-divine-hand-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: divine-hand-valley
+    description: 一条山路通入的药谷，访者通常因病伤求医；不是任何人都获准进入私室。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-flying-bird-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-flying-bird-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-treasure-gathering-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-treasure-gathering-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-four-seas-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-four-seas-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-outer-blade-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-outer-blade-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-hundred-forging-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-hundred-forging-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-seven-arts-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-seven-arts-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-guest-service-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-guest-service-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-blood-blade-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-blood-blade-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-qixuan-elders-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-elders-hall
+    description: 门内机构使用的院舍，访客须先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-red-water-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: red-water-peak
+    description: 山中一峰，峰下有瀑布，附近可见练功空地。
+    access:
+      kind: public
+  - id: qixuan-gate-route-li-elder-courtyard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: li-elder-courtyard
+    description: 几间厢房围成的朴素小院，家中人日常起居的地方。
+    access:
+      kind: public
+  - id: qixuan-gate-route-senior-training-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: senior-training-house
+    description: 门中资深武者使用的清静院落，访客需先通报。
+    access:
+      kind: public
+  - id: qixuan-gate-route-local-metalworks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-metalworks
+    description: 小炉、铁砧和工具放在通风处，铁料和炭料分开储放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

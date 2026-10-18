@@ -1,0 +1,42 @@
+id: south-jiuyou-court
+kind: location
+name: 九幽宗静院
+description: 宗门往来和闭关分开，护法器物并非每人都能借出。
+placement: human-dajin
+facts:
+  - id: south-jiuyou-court-route-human-dajin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-dajin
+    description: route-to
+    access:
+      kind: public
+  - id: south-jiuyou-court-condition-human-dajin
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧商路能达静院外，宗库另有权限。
+    description: 旧商路能达静院外，宗库另有权限。
+    access:
+      kind: public
+  - id: south-jiuyou-court-route-south-jiuyou-vault
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-jiuyou-vault
+    description: route-to
+    access:
+      kind: public
+  - id: south-jiuyou-court-condition-south-jiuyou-vault
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

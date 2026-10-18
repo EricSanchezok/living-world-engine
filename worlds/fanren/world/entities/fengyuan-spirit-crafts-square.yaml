@@ -1,0 +1,44 @@
+id: fengyuan-spirit-crafts-square
+kind: location
+name: 翠烟修器坊
+description: 器灵与其他灵族一起修补自身所需的器物，修器不等于可以买卖有灵智的邻居。
+placement: fengyuan-cuiyan-city
+facts:
+  - id: fengyuan-spirit-crafts-square-route-fengyuan-cuiyan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-cuiyan-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-spirit-crafts-square-condition-fengyuan-cuiyan-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 器灵与其他灵族一起修补自身所需的器物，修器不等于可以买卖有灵智的邻居。
+    description: 器灵与其他灵族一起修补自身所需的器物，修器不等于可以买卖有灵智的邻居。
+    access:
+      kind: public
+  - id: fengyuan-spirit-crafts-square-root-detail-spirit-cultivation
+    predicate: root-detail-spirit-cultivation
+    value:
+      kind: text
+      value: 灵族特产植物可能需灵元培育，其他催熟方法须按实际植物试验，不保证全类有效或无效。
+    description: 灵族特产植物可能需灵元培育，其他催熟方法须按实际植物试验，不保证全类有效或无效。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: fengyuan-spirit-crafts-square-root-detail-spirit-waste-law
+    predicate: root-detail-spirit-waste-law
+    value:
+      kind: text
+      value: 器灵族对废灵有分类及不得外送禁例，个别无自主意识不代表全灵族如此；镜体与人形可为同一主体不同形态。
+    description: 器灵族对废灵有分类及不得外送禁例，个别无自主意识不代表全灵族如此；镜体与人形可为同一主体不同形态。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

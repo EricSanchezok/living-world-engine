@@ -1,0 +1,35 @@
+id: blood-xuesha-avatar
+kind: animated-body
+name: 血煞同源化身
+description: 与血煞容貌相同的长期祭炼躯体，当前在静室温养；以本体意识主动操纵，未独立外出。
+placement: blood-xuesha-cave
+facts:
+  - id: blood-xuesha-avatar-controlled-by
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: canon-blood-xue-sha
+    description: controlled-by
+    access:
+      kind: private
+  - id: blood-xuesha-avatar-control-boundary
+    predicate: control-boundary
+    value:
+      kind: text
+      value: 躯体法力与损伤独立记账，本体不会因两具躯体获得第二份个人库存。相邻同府可操纵；远行所需传念媒介与距离须实际落实。
+    description: 躯体法力与损伤独立记账，本体不会因两具躯体获得第二份个人库存。相邻同府可操纵；远行所需传念媒介与距离须实际落实。
+    access:
+      kind: private
+meters:
+  - id: blood-xuesha-avatar-health
+    definition_id: health
+    current: 100
+  - id: blood-xuesha-avatar-mana
+    definition_id: mana
+    current: 1400
+quantities: []
+ratings:
+  - id: blood-xuesha-avatar-cultivation
+    definition_id: cultivation
+    value: 8
+shared_activity_resources: []

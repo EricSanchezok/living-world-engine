@@ -1,0 +1,118 @@
+id: canon-li-wife
+kind: person
+name: 李氏
+description: 李长老的妻子，料理家中事务，关心来往亲属。
+placement: li-elder-courtyard
+facts:
+  - id: canon-li-wife-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 家务、采买与人情往来，没有修仙法力。
+    description: 家务、采买与人情往来，没有修仙法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-wife
+  - id: canon-li-wife-spouse-of
+    predicate: spouse-of
+    value:
+      kind: entity
+      entityId: canon-li-elder
+    description: 夫妻
+    access:
+      kind: private
+meters:
+  - id: canon-li-wife-health
+    definition_id: health
+    current: 100
+  - id: canon-li-wife-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 10
+ratings:
+  - id: canon-li-wife-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-li-wife-perception
+    definition_id: perception
+    value: 2
+  - id: canon-li-wife-craft
+    definition_id: craft
+    value: 2
+  - id: canon-li-wife-influence
+    definition_id: influence
+    value: 2
+  - id: canon-li-wife-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-li-wife
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 李长老的妻子，料理家中事务，关心来往亲属。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对生活支出，照顾家中年幼亲属。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 李氏
+        description: 李长老的妻子，料理家中事务，关心来往亲属。
+        status: observed
+      - id: location
+        name: 李长老家院
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-canon-li-elder
+        name: 李长老
+        description: 夫妻关系，了解彼此日常生活；不知道对方所有私念。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 家务、采买与人情往来，没有修仙法力。
+        description: 家务、采买与人情往来，没有修仙法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-li-wife
+      - local_entity_id: location
+        canonical_entity_ids:
+          - li-elder-courtyard
+      - local_entity_id: known-canon-li-elder
+        canonical_entity_ids:
+          - canon-li-elder

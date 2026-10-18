@@ -1,0 +1,54 @@
+id: spirit-repair-yard
+kind: location
+name: 归衡灵具修造院
+description: 供灵具制作、修补和带护挡演示的院子，炉台与演示台分开。
+placement: tianyuan-city
+facts:
+  - id: spirit-repair-yard-route-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: 供灵具制作、修补和带护挡演示的院子，炉台与演示台分开。
+    access:
+      kind: public
+  - id: spirit-repair-yard-root-detail-blood-maintained-puppet
+    predicate: root-detail-blood-maintained-puppet
+    value:
+      kind: text
+      value: 化劫傀儡工艺可学习，仍要精血、材料及定期培养；血祭复苏和替劫各依本法供给，不共享无限次数。
+    description: 化劫傀儡工艺可学习，仍要精血、材料及定期培养；血祭复苏和替劫各依本法供给，不共享无限次数。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-repair-yard-root-detail-spirit-gathering-stakes
+    predicate: root-detail-spirit-gathering-stakes
+    value:
+      kind: text
+      value: 十二聚灵桩须灵眼之木及辅材炼成后布设，胚胎不享完整效果；取材改变原处资源，不凭空生灵气。
+    description: 十二聚灵桩须灵眼之木及辅材炼成后布设，胚胎不享完整效果；取材改变原处资源，不凭空生灵气。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-repair-yard-root-detail-portable-array-limits
+    predicate: root-detail-portable-array-limits
+    value:
+      kind: text
+      value: 便携阵具要实际布设供能，可被强破；低阶空间指环破毁放出空间力是一次性消耗，不等半须弥珠或免费遁逃。
+    description: 便携阵具要实际布设供能，可被强破；低阶空间指环破毁放出空间力是一次性消耗，不等半须弥珠或免费遁逃。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: spirit-repair-yard-root-detail-mugu-puppets
+    predicate: root-detail-mugu-puppets
+    value:
+      kind: text
+      value: 黄巾傀儡可有幻形工艺，是否骗过高阶要实测；同名不等同件或同样能力。
+    description: 黄巾傀儡可有幻形工艺，是否骗过高阶要实测；同名不等同件或同样能力。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

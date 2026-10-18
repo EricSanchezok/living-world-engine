@@ -1,0 +1,26 @@
+id: ad-firecloud-passage
+kind: location
+name: 火云矿道
+description: 由沙丘顶部正式口进入，矿层有热气，支护与安全巡检先于开采。
+placement: ad-firecloud-mine
+facts:
+  - id: ad-firecloud-passage-route-to-ad-firecloud-mine
+    predicate: route-to-ad-firecloud-mine
+    value:
+      kind: entity
+      entityId: ad-firecloud-mine
+    description: 经正式口通行，须有矿方许可、耐热准备并核实当日支护。
+    access:
+      kind: public
+  - id: ad-firecloud-passage-route-to-ad-firecloud-lava
+    predicate: route-to-ad-firecloud-lava
+    value:
+      kind: entity
+      entityId: ad-firecloud-lava
+    description: 沿地下裂道逐段探查；高热、岩壁和深层神念阻碍不能由普通步行省略。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

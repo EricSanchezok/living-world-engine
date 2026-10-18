@@ -1,0 +1,18 @@
+id: spirit-yuque-upper
+kind: location
+name: 玉阙阁上层
+description: 处理较高阶修士灵地事务的房间，有地图和独立文书柜。
+placement: spirit-yuque-hall
+facts:
+  - id: spirit-yuque-upper-route-spirit-yuque-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuque-hall
+    description: 处理较高阶修士灵地事务的房间，有地图和独立文书柜。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

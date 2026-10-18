@@ -1,0 +1,18 @@
+id: canon-xuangu-void-map
+kind: item
+name: 玄骨所藏虚天残图
+description: 藏于骨内的旧锦帕，开殿时才响应方向，当前无指路光。
+placement: canon-xuangu-old-bones
+facts:
+  - id: canon-xuangu-void-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xuan-gu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

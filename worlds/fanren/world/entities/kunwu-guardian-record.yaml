@@ -1,0 +1,18 @@
+id: kunwu-guardian-record
+kind: item
+name: 化仙旧训册
+description: 记录半隐守土与祖师传承，深层内容须识古文并完整翻读。
+placement: south-huaxian-archive
+facts:
+  - id: kunwu-guardian-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-huaxian-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,37 @@
+id: root-wanbao-hall
+kind: location
+name: 万宝殿
+description: 供大交易会使用的殿厅，平日只有维护与小批验货。
+placement: root-feixian-peak
+facts:
+  - id: root-wanbao-hall-route-to-root-feixian-peak
+    predicate: route-to-root-feixian-peak
+    value:
+      kind: entity
+      entityId: root-feixian-peak
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanbao-hall-travel-condition-root-feixian-peak
+    predicate: travel-condition-root-feixian-peak
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanbao-hall-root-detail-wanbao-institutions
+    predicate: root-detail-wanbao-institutions
+    value:
+      kind: text
+      value: 万宝会按千年传统组织，须实际筹备、人手货物及安全条件；报价、成交和交付分开，公开程度与证据影响执法。
+    description: 万宝会按千年传统组织，须实际筹备、人手货物及安全条件；报价、成交和交付分开，公开程度与证据影响执法。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

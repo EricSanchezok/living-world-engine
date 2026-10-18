@@ -1,0 +1,26 @@
+id: feiling-guard-yard
+kind: location
+name: 地渊守军备勤楼
+description: 换岗、检修和训练之处，入渊许可在此核验。
+placement: feiling-abyss-wall
+facts:
+  - id: feiling-guard-yard-route-feiling-abyss-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-wall
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-guard-yard-condition-feiling-abyss-wall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 换岗、检修和训练之处，入渊许可在此核验。
+    description: 换岗、检修和训练之处，入渊许可在此核验。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,234 @@
+id: canon-black-phoenix-king
+kind: person
+name: 筱馆
+description: 黑凤王，处理族内事务时态度从容，重视血脉后辈及长期盟约。
+placement: demon-phoenix-court
+facts:
+  - id: canon-black-phoenix-king-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-black-phoenix-king
+  - id: canon-black-phoenix-king-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 黑凤血脉火焰、防护与飞遁；强度取决于修为、环境和法力。
+    description: 黑凤血脉火焰、防护与飞遁；强度取决于修为、环境和法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-black-phoenix-king
+  - id: canon-black-phoenix-king-cultivation-path
+    predicate: cultivation-path
+    value:
+      kind: text
+      value: 妖族血脉修行，法体、法力与已学手段分别起作用。
+    description: 妖族血脉修行，法体、法力与已学手段分别起作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-black-phoenix-king
+  - id: canon-black-phoenix-king-delegate-to
+    predicate: delegate-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-firekeeper
+    description: delegate-to
+    access:
+      kind: private
+meters:
+  - id: canon-black-phoenix-king-health
+    definition_id: health
+    current: 100
+  - id: canon-black-phoenix-king-mana
+    definition_id: mana
+    current: 1540
+quantities:
+  - definition_id: low-stone
+    amount: 3000
+ratings:
+  - id: canon-black-phoenix-king-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-black-phoenix-king-force
+    definition_id: force
+    value: 7
+  - id: canon-black-phoenix-king-craft
+    definition_id: craft
+    value: 5
+  - id: canon-black-phoenix-king-perception
+    definition_id: perception
+    value: 7
+  - id: canon-black-phoenix-king-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-black-phoenix-king
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 黑凤王，处理族内事务时态度从容，重视血脉后辈及长期盟约。
+      voice: 语调从容，常以轻笑开头，谈及后辈与王庭利益时忽然变得直截了当。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 确保火脉配给与外部贸易互不挤兑。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 筱馆
+        description: 黑凤王，处理族内事务时态度从容，重视血脉后辈及长期盟约。
+        status: observed
+      - id: location
+        name: 黑凤之地议事处
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-black-phoenix-king-purse
+        name: 筱馆的储物袋
+        description: 个人旅费与修炼材料，领地公产另置。
+        status: observed
+      - id: known-demon-phoenix-firekeeper
+        name: 筱砚
+        description: 本地长期公务往来，各自只知道已报告的事务。
+        status: observed
+      - id: resource-demon-phoenix-palace
+        name: 黑凤宫
+        description: 玄黑石檐沿山而建，前庭接见来使，侧道通向炎域；进内院需经当值者许可。
+        status: observed
+      - id: resource-demon-phoenix-inner-sanctuary
+        name: 黑凤族秘禁地
+        description: 深入山腹的静修石室以层层阵门隔开，门外有存放入内文书的石龛；此刻没有获准入内的闭关者。
+        status: observed
+      - id: resource-demon-phoenix-sanctuary-seal
+        name: 秘禁地启门符
+        description: 一枚刻有黑羽纹的石符，与秘禁地阵门匹配。
+        status: observed
+      - id: resource-demon-phoenix-reserve-pill
+        name: 筱馆旧炼黑炎丹
+        description: 以封符锁住的一枚黑色丹丸，瓶塞可见旧炼标记；服用需先辨识和评估自身修行。
+        status: observed
+      - id: resource-demon-phoenix-silk-purchase-proposal
+        name: 黑凤王的购丝意向
+        description: 署筱馆名的一页短笺，请筱砚代表公库提出回复。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+      - id: opening-night
+        kind: observation
+        description: 开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。
+        sourceId: null
+        step: 0
+      - id: resource-review-prior-life
+        kind: observation
+        description: 自己在开篇前实际参与的资源保管、制备与书面协商。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 黑凤血脉火焰、防护与飞遁；强度取决于修为、环境和法力。
+        description: 黑凤血脉火焰、防护与飞遁；强度取决于修为、环境和法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己以妖族血脉与所学功法修行。
+        description: 自己以妖族血脉与所学功法修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: local-obligations
+        subjectId: self
+        predicate: local-obligations
+        value:
+          kind: text
+          value: 确保火脉配给与外部贸易互不挤兑。
+        description: 确保火脉配给与外部贸易互不挤兑。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 记得入场时此地已入夜。
+        description: 开篇时的夜色记忆。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night
+      - id: resource-current-arrangement
+        subjectId: self
+        predicate: known-resources
+        value:
+          kind: text
+          value: 秘禁地由我保管启门符；个人瓶内留一颗旧炼黑炎丹。我已提出个人六十灵石购丝，等待筱砚代表公库回复，尚未付款。
+        description: 秘禁地由我保管启门符；个人瓶内留一颗旧炼黑炎丹。我已提出个人六十灵石购丝，等待筱砚代表公库回复，尚未付款。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - resource-review-prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-black-phoenix-king
+      - local_entity_id: location
+        canonical_entity_ids:
+          - demon-phoenix-court
+      - local_entity_id: known-canon-black-phoenix-king-purse
+        canonical_entity_ids:
+          - canon-black-phoenix-king-purse
+      - local_entity_id: known-demon-phoenix-firekeeper
+        canonical_entity_ids:
+          - demon-phoenix-firekeeper
+      - local_entity_id: resource-demon-phoenix-palace
+        canonical_entity_ids:
+          - demon-phoenix-palace
+      - local_entity_id: resource-demon-phoenix-inner-sanctuary
+        canonical_entity_ids:
+          - demon-phoenix-inner-sanctuary
+      - local_entity_id: resource-demon-phoenix-sanctuary-seal
+        canonical_entity_ids:
+          - demon-phoenix-sanctuary-seal
+      - local_entity_id: resource-demon-phoenix-reserve-pill
+        canonical_entity_ids:
+          - demon-phoenix-reserve-pill
+      - local_entity_id: resource-demon-phoenix-silk-purchase-proposal
+        canonical_entity_ids:
+          - demon-phoenix-silk-purchase-proposal

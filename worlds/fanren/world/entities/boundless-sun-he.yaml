@@ -1,0 +1,163 @@
+id: boundless-sun-he
+kind: person
+name: 孙禾
+description: 望棚值守人，熟悉近岸天气，家里还种着一小块地。
+placement: boundless-watch
+facts:
+  - id: boundless-sun-he-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - boundless-sun-he
+  - id: boundless-sun-he-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 辨风向、修木棚与熟悉近岸地形。
+    description: 辨风向、修木棚与熟悉近岸地形。
+    access:
+      kind: agents
+      agentIds:
+        - boundless-sun-he
+  - id: boundless-sun-he-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根的凡人。
+    description: 无灵根的凡人。
+    access:
+      kind: agents
+      agentIds:
+        - boundless-sun-he
+meters:
+  - id: boundless-sun-he-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 70
+ratings:
+  - id: boundless-sun-he-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: boundless-sun-he-force
+    definition_id: force
+    value: 0
+  - id: boundless-sun-he-craft
+    definition_id: craft
+    value: 1
+  - id: boundless-sun-he-perception
+    definition_id: perception
+    value: 0
+  - id: boundless-sun-he-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: boundless-sun-he
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 望棚值守人，熟悉近岸天气，家里还种着一小块地。
+      voice: 说话简洁，遇到所关心的事情会详细解释自己的理由。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 记录今夜浪头高度，决定明早石阶是否需封一段。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 孙禾
+        description: 望棚值守人，熟悉近岸天气，家里还种着一小块地。
+        status: observed
+      - id: location
+        name: 海岸望棚
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-boundless-sun-he-pouch
+        name: 孙禾的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-boundless-watch-record
+        name: 近岸浪况簿
+        description: 过去十日的近岸观察，不含深海封魔阵位置。
+        status: observed
+      - id: known-boundless-shore
+        name: 小城北岸
+        description: 每日上下望棚经过的礁岸。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 辨风向、修木棚与熟悉近岸地形。
+        description: 辨风向、修木棚与熟悉近岸地形。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 记录今夜浪头高度，决定明早石阶是否需封一段。
+        description: 记录今夜浪头高度，决定明早石阶是否需封一段。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - boundless-sun-he
+      - local_entity_id: location
+        canonical_entity_ids:
+          - boundless-watch
+      - local_entity_id: known-boundless-sun-he-pouch
+        canonical_entity_ids:
+          - boundless-sun-he-pouch
+      - local_entity_id: known-boundless-watch-record
+        canonical_entity_ids:
+          - boundless-watch-record
+      - local_entity_id: known-boundless-shore
+        canonical_entity_ids:
+          - boundless-shore

@@ -1,0 +1,18 @@
+id: outerstar-nanli-island
+kind: location
+name: 南黎岛
+description: 外海荒岛，沿岸岩地低缓，岛内只有稀疏草木。
+placement: human-outer-star-sea
+facts:
+  - id: outerstar-nanli-island-route-human-outer-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-outer-star-sea
+    description: 须辨海路并用真实船或修行能力渡海；岛名不替代航行时间和补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

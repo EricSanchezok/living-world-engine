@@ -1,0 +1,18 @@
+id: boundless-sealing-stele
+kind: item
+name: 海底阵眼古碑
+description: 灰色旧碑带古符文，具体材质不凭外观自动识别。
+placement: boundless-altar
+facts:
+  - id: boundless-sealing-stele-seal-state
+    predicate: physical-state
+    value:
+      kind: text
+      value: 碑体完整，仍是古阵一部分；破坏、移动可能改变封魔状态。
+    description: 碑体完整，仍是古阵一部分；破坏、移动可能改变封魔状态。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

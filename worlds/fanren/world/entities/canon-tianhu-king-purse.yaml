@@ -1,0 +1,24 @@
+id: canon-tianhu-king-purse
+kind: container
+name: 天狐王的储物袋
+description: 个人旅费与修炼材料，领地公产另置。
+placement: canon-tianhu-king
+facts:
+  - id: canon-tianhu-king-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tianhu-king
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 200
+  - definition_id: high-stone
+    amount: 20
+  - definition_id: craft-material
+    amount: 15
+ratings: []
+shared_activity_resources: []

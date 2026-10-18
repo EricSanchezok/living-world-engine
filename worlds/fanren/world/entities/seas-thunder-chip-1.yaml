@@ -1,0 +1,18 @@
+id: seas-thunder-chip-1
+kind: item
+name: 商盟配套阵芯1
+description: 一枚当前完好的消耗阵芯，一次使用后须移除或记为失效，不能重复投入。
+placement: seas-thunder-relay-hall
+facts:
+  - id: seas-thunder-chip-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-thunder-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

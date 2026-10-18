@@ -1,0 +1,18 @@
+id: tianyuan-practice-options
+kind: item
+name: 广武本期试练选项
+description: 当前可选单人演示或双方自愿的限招试练；须另行约时、确认费用和旁观权限。不是灵地分配终局，未有任何当事人已签同意。
+placement: tianyuan-duel-arbiter
+facts:
+  - id: tianyuan-practice-options-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

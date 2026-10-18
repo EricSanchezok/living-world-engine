@@ -1,0 +1,26 @@
+id: kunwu-foot
+kind: location
+name: 昆吾山脚
+description: 山下寻常草木旁立巨大旧碑，石阶向上延伸。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-foot-route-kunwu-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-gate
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-foot-condition-kunwu-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 万修之门完整禁制须被真实处理。
+    description: 万修之门完整禁制须被真实处理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

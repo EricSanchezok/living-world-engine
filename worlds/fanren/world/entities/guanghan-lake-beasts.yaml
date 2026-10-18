@@ -1,0 +1,32 @@
+id: guanghan-lake-beasts
+kind: creature-group
+name: 草原湖兽群
+description: 形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。
+placement: guanghan-steppe-lake
+facts:
+  - id: guanghan-lake-beasts-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 7
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-lake-beasts-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。
+    description: 形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。
+    access:
+      kind: private
+meters:
+  - id: guanghan-lake-beasts-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-lake-beasts-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

@@ -1,0 +1,35 @@
+id: innerstar-bamboo-treasury
+kind: container
+name: 留竹小宗公用储备
+description: 用于护圃和教习的实际储备。
+placement: innerstar-bamboo-islet
+facts:
+  - id: innerstar-bamboo-treasury-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-bamboo-school
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-bamboo-treasury-trade-possibility
+    predicate: trade-possibility
+    value:
+      kind: text
+      value: 八包普通养神草可以询价售卖；本批若按每包三灵石谈妥可得二十四，但买家必须有钱且真的接受。
+    description: 八包普通养神草可以询价售卖；本批若按每包三灵石谈妥可得二十四，但买家必须有钱且真的接受。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-bamboo-guardian
+        - innerstar-bamboo-student
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 18
+  - definition_id: grain
+    amount: 24
+  - definition_id: herb-packet
+    amount: 8
+ratings: []
+shared_activity_resources: []

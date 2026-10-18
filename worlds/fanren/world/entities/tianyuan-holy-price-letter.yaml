@@ -1,0 +1,35 @@
+id: tianyuan-holy-price-letter
+kind: item
+name: 药材核价函
+description: 药材核价函，交接痕迹清楚可辨。
+placement: tianyuan-holy-envoy
+facts:
+  - id: tianyuan-holy-price-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-holy-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-holy-price-letter-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 阮澄请周砚丹核实温养伤损经脉所用普通灵药的现货与报价，拟购十二包，预算十二中阶灵石。文见微只负责问价；未经回复与批准尚未成交，函中不写圣岛路径。
+    description: 阮澄请周砚丹核实温养伤损经脉所用普通灵药的现货与报价，拟购十二包，预算十二中阶灵石。文见微只负责问价；未经回复与批准尚未成交，函中不写圣岛路径。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+  - id: tianyuan-holy-price-letter-recipient
+    predicate: recipient
+    value:
+      kind: entity
+      entityId: tianyuan-dust-physician
+    description: recipient
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

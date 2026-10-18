@@ -1,0 +1,90 @@
+id: thunder-greenlight-city
+kind: location
+name: 绿光城
+description: 诸小族中转城，客商与修士共居，旧海外传送阵尚未修复。
+placement: thunder-greenlight-domain
+facts:
+  - id: thunder-greenlight-city-route-thunder-jinjia-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-jinjia-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-city-condition-thunder-jinjia-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-greenlight-city-route-thunder-greenlight-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-array
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-city-condition-thunder-greenlight-array
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧阵通往火瑚群岛的远端联系已断，不能直接投入灵石便通行。
+    description: 旧阵通往火瑚群岛的远端联系已断，不能直接投入灵石便通行。
+    access:
+      kind: public
+  - id: thunder-greenlight-city-route-thunder-greenlight-office
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-office
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-greenlight-city-condition-thunder-greenlight-office
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 负责旧阵、商路和城防的驻守机构。
+    description: 负责旧阵、商路和城防的驻守机构。
+    access:
+      kind: public
+  - id: thunder-greenlight-city-route-to-thunder-firecoral-deepwater
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-firecoral-deepwater
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-greenlight-city-route-conditions-thunder-firecoral-deepwater
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。
+    description: 跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。
+    access:
+      kind: private
+  - id: thunder-greenlight-city-route-to-root-greenlight-west-hill
+    predicate: route-to-root-greenlight-west-hill
+    value:
+      kind: entity
+      entityId: root-greenlight-west-hill
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: thunder-greenlight-city-travel-condition-root-greenlight-west-hill
+    predicate: travel-condition-root-greenlight-west-hill
+    value:
+      kind: text
+      value: 经城西十余里郊野和山中石壁通道行走，封闭石壁要真实开启或破坏。
+    description: 经城西十余里郊野和山中石壁通道行走，封闭石壁要真实开启或破坏。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

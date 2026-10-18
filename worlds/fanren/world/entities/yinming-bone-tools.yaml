@@ -1,0 +1,18 @@
+id: yinming-bone-tools
+kind: item
+name: 陆骨生的个人器具
+description: 选骨、磨刃、沉水浸养与凡俗工具修补。所需的有限工具，不包含无限兽晶。
+placement: yinming-bone
+facts:
+  - id: yinming-bone-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-bone
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

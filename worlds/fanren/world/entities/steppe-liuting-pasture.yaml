@@ -1,0 +1,34 @@
+id: steppe-liuting-pasture
+kind: location
+name: 柳汀牧地
+description: 低草地被细流分开；有十只公用羊和两匹驮马受圈绳看管，家畜可以牵走但须处理实际所有权。
+placement: steppe-liuting-camp
+facts:
+  - id: steppe-liuting-pasture-route-steppe-liuting-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-liuting-camp
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-pasture-travel-steppe-liuting-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    description: 营地或院落内步行可达；封库、私物和授课另遵实际权限。
+    access:
+      kind: public
+  - id: steppe-liuting-pasture-fodder
+    predicate: fodder-source
+    value:
+      kind: text
+      value: 有供当前公用畜群日常啃食的活草，刈草、践踏和再生均需真实面积与时间，不作为无穷粮袋。
+    description: 有供当前公用畜群日常啃食的活草，刈草、践踏和再生均需真实面积与时间，不作为无穷粮袋。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

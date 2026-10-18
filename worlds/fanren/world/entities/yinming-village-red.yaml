@@ -1,0 +1,26 @@
+id: yinming-village-red
+kind: location
+name: 红土村
+description: 红土边的小村，依耕地与碧蟾维生。
+placement: yinming-red-soil
+facts:
+  - id: yinming-village-red-route-yinming-red-soil
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-red-soil
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-village-red-condition-yinming-red-soil
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

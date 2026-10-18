@@ -1,0 +1,22 @@
+id: south-smith-stock
+kind: container
+name: 炉匠材料箱
+description: 本人炉料，不是地火无限生成金属。
+placement: south-forge-hut
+facts:
+  - id: south-smith-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 15
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

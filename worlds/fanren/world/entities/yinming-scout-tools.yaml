@@ -1,0 +1,18 @@
+id: yinming-scout-tools
+kind: item
+name: 辛岩的个人器具
+description: 辨路、听兽踪、盾矛武技与救助。所需的有限工具，不包含无限兽晶。
+placement: yinming-scout
+facts:
+  - id: yinming-scout-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-scout
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

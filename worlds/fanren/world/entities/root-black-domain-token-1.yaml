@@ -1,0 +1,18 @@
+id: root-black-domain-token-1
+kind: item
+name: 本期接引牌1
+description: 有当前接引者签印的有限信物，可被转交但还需核验。
+placement: root-black-domain-keeper
+facts:
+  - id: root-black-domain-token-1-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-black-domain-office
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

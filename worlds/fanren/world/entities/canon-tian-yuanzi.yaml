@@ -1,0 +1,256 @@
+id: canon-tian-yuanzi
+kind: person
+name: 天缘子
+description: 爱惜离龟的老修，天悟子的师兄。
+placement: void-tianyuan-pool
+facts:
+  - id: canon-tian-yuanzi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴中期，熟悉自身灵兽与水法。
+    description: 元婴中期，熟悉自身灵兽与水法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-yuanzi
+  - id: canon-tian-yuanzi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴中期，熟悉自身灵兽与水法。
+    description: 元婴中期，熟悉自身灵兽与水法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-yuanzi
+  - id: canon-tian-yuanzi-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tian-yuanzi
+  - id: canon-tian-yuanzi-senior-fellow-of
+    predicate: senior-fellow-of
+    value:
+      kind: entity
+      entityId: canon-tian-wuzi
+    description: senior-fellow-of
+    access:
+      kind: private
+  - id: canon-tian-yuanzi-employs
+    predicate: employs
+    value:
+      kind: entity
+      entityId: void-turtle-keeper
+    description: employs
+    access:
+      kind: private
+meters:
+  - id: canon-tian-yuanzi-health
+    definition_id: health
+    current: 100
+  - id: canon-tian-yuanzi-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-tian-yuanzi-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-tian-yuanzi-force
+    definition_id: force
+    value: 6
+  - id: canon-tian-yuanzi-craft
+    definition_id: craft
+    value: 3
+  - id: canon-tian-yuanzi-perception
+    definition_id: perception
+    value: 4
+  - id: canon-tian-yuanzi-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-tian-yuanzi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 爱惜离龟的老修，天悟子的师兄。
+      voice: 声音不高，对池中细节敏感，遇催促会耐心反问。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清池水变浑的原因，暂不答应外借离龟。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 天缘子
+        description: 爱惜离龟的老修，天悟子的师兄。
+        status: observed
+      - id: location
+        name: 离龟池
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-tian-wuzi
+        name: 天悟子
+        description: 同门师兄弟，离龟借用须另谈。
+        status: observed
+      - id: known-canon-ji-yin
+        name: 极阴祖师
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-qing-yi
+        name: 青易居士
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-man-huzi
+        name: 蛮胡子
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wen-furen
+        name: 白壁山温夫人
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wan-tianming
+        name: 万天明
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-wan-sangu
+        name: 万三姑
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-canon-liudao-jisheng
+        name: 六道极圣
+        description: 知道这位成名修士的身份与公开立场，不知其私库或秘密。
+        status: observed
+      - id: known-void-turtle-keeper
+        name: 温菱
+        description: 池院日常护理。
+        status: observed
+      - id: known-canon-tian-yuanzi-private-cache
+        name: 天缘子的私库
+        description: 个人留用的有限物资，不能代表整个门派或无尽财富。
+        status: observed
+      - id: known-canon-tianyuan-li-turtle
+        name: 天缘子的离龟
+        description: 自己长期照顾的灵兽，其实际状态依观察得知。
+        status: observed
+      - id: known-void-pool-tools
+        name: 清渠工具与滤料
+        description: 用于实地清渠的当期物资。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴中期，熟悉自身灵兽与水法。
+        description: 元婴中期，熟悉自身灵兽与水法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间。后续依据天时和实际经过时间判断。
+        description: 当地此时为夜间。后续依据天时和实际经过时间判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-cultivation
+        subjectId: self
+        predicate: own-cultivation
+        value:
+          kind: text
+          value: 元婴中期，熟悉自身灵兽与水法。
+        description: 元婴中期，熟悉自身灵兽与水法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-tian-yuanzi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-tianyuan-pool
+      - local_entity_id: known-canon-tian-wuzi
+        canonical_entity_ids:
+          - canon-tian-wuzi
+      - local_entity_id: known-canon-ji-yin
+        canonical_entity_ids:
+          - canon-ji-yin
+      - local_entity_id: known-canon-qing-yi
+        canonical_entity_ids:
+          - canon-qing-yi
+      - local_entity_id: known-canon-man-huzi
+        canonical_entity_ids:
+          - canon-man-huzi
+      - local_entity_id: known-canon-wen-furen
+        canonical_entity_ids:
+          - canon-wen-furen
+      - local_entity_id: known-canon-wan-tianming
+        canonical_entity_ids:
+          - canon-wan-tianming
+      - local_entity_id: known-canon-wan-sangu
+        canonical_entity_ids:
+          - canon-wan-sangu
+      - local_entity_id: known-canon-liudao-jisheng
+        canonical_entity_ids:
+          - canon-liudao-jisheng
+      - local_entity_id: known-void-turtle-keeper
+        canonical_entity_ids:
+          - void-turtle-keeper
+      - local_entity_id: known-canon-tian-yuanzi-private-cache
+        canonical_entity_ids:
+          - canon-tian-yuanzi-private-cache
+      - local_entity_id: known-canon-tianyuan-li-turtle
+        canonical_entity_ids:
+          - canon-tianyuan-li-turtle
+      - local_entity_id: known-void-pool-tools
+        canonical_entity_ids:
+          - void-pool-tools

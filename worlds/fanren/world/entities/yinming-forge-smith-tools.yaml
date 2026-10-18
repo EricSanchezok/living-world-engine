@@ -1,0 +1,18 @@
+id: yinming-forge-smith-tools
+kind: item
+name: 骨铮的个人器具
+description: 制骨、沉水工序与内力。所需的有限工具，不包含无限兽晶。
+placement: yinming-forge-smith
+facts:
+  - id: yinming-forge-smith-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-forge-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

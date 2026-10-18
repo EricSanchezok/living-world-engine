@@ -1,0 +1,195 @@
+id: innerstar-healer
+kind: person
+name: 陶芸
+description: 凡俗医师，余泊的妻子，照顾邻里也经营自己的药铺。
+placement: innerstar-mortal-street
+facts:
+  - id: innerstar-healer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-healer
+  - id: innerstar-healer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 辨普通药材、包扎与接骨；没有灵根。
+    description: 辨普通药材、包扎与接骨；没有灵根。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-healer
+  - id: innerstar-healer-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 没有灵根，不能按修仙者炼气入道。
+    description: 没有灵根，不能按修仙者炼气入道。
+    access:
+      kind: discoverable
+      condition: 有能力者经本人同意实际检测灵根。
+  - id: innerstar-healer-spouse
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: innerstar-sailor
+    description: spouse
+    access:
+      kind: private
+meters:
+  - id: innerstar-healer-health
+    definition_id: health
+    current: 100
+  - id: innerstar-healer-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 120
+ratings:
+  - id: innerstar-healer-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: innerstar-healer-force
+    definition_id: force
+    value: 1
+  - id: innerstar-healer-craft
+    definition_id: craft
+    value: 3
+  - id: innerstar-healer-perception
+    definition_id: perception
+    value: 1
+  - id: innerstar-healer-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-healer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 凡俗医师，余泊的妻子，照顾邻里也经营自己的药铺。
+      voice: 耐心但不哄人，诊察时喜欢先让病人说完整。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 配好一批外伤药，不为客人夸张成仙药。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陶芸
+        description: 凡俗医师，余泊的妻子，照顾邻里也经营自己的药铺。
+        status: observed
+      - id: location
+        name: 临潮街
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-innerstar-healer-personal-pouch
+        name: 陶芸的私用行囊
+        description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+        status: observed
+      - id: known-innerstar-sailor
+        name: 余泊
+        description: 夫妻，各有职业和自己的财产。
+        status: observed
+      - id: known-innerstar-healer-medicine
+        name: 陶芸药铺成药
+        description: 六包普通外伤药，不提升修为；每包售价二十铜钱。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 辨普通药材、包扎与接骨；没有灵根。
+        description: 辨普通药材、包扎与接骨；没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 配好一批外伤药，不为客人夸张成仙药。
+        description: 配好一批外伤药，不为客人夸张成仙药。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己尚未修仙。
+        description: 自己尚未修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己没有灵根。
+        description: 自己没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        description: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-healer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-mortal-street
+      - local_entity_id: known-innerstar-healer-personal-pouch
+        canonical_entity_ids:
+          - innerstar-healer-personal-pouch
+      - local_entity_id: known-innerstar-sailor
+        canonical_entity_ids:
+          - innerstar-sailor
+      - local_entity_id: known-innerstar-healer-medicine
+        canonical_entity_ids:
+          - innerstar-healer-medicine

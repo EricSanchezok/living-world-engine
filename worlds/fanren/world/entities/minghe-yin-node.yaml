@@ -1,0 +1,35 @@
+id: minghe-yin-node
+kind: location
+name: 七门锁阴阵外节点
+description: 可测到局部阴气波动的节点，周边修缮不等于掌控整座阵。
+placement: minghe-space
+facts:
+  - id: minghe-yin-node-route-minghe-qingyuan-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-cave
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-yin-node-condition-minghe-qingyuan-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可测到局部阴气波动的节点，周边修缮不等于掌控整座阵。
+    description: 可测到局部阴气波动的节点，周边修缮不等于掌控整座阵。
+    access:
+      kind: public
+  - id: minghe-yin-node-actual-fault
+    predicate: actual-fault
+    value:
+      kind: text
+      value: 旁槽一片导阴石松脱，少量阴流漏入土层；主源尚稳定，修补后应重测而非宣布整个圣地安全。
+    description: 旁槽一片导阴石松脱，少量阴流漏入土层；主源尚稳定，修补后应重测而非宣布整个圣地安全。
+    access:
+      kind: discoverable
+      condition: 检查两槽接缝并比对同一时段测流记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

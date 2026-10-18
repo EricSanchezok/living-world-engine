@@ -1,0 +1,26 @@
+id: qixuan-guest-service
+kind: organization
+name: 供奉堂
+description: 七玄门内部机构；具体当夜库存及行政流程以已写入的状态为准。
+placement: qixuan-guest-service-hall
+facts:
+  - id: qixuan-guest-service-part-of
+    predicate: part-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 属于七玄门，不另立独立宗门。
+    access:
+      kind: private
+  - id: qixuan-guest-service-belongs-to-division
+    predicate: belongs-to-division
+    value:
+      kind: entity
+      entityId: qixuan-inner
+    description: 所属内外门分部。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: steppe-shiwan-cart
+kind: item
+name: 石湾红木车
+description: 能装粮食和贡品的木车；需一匹驮马或相当真实牵引，载荷上限400斤，超过则有断轴风险。
+placement: steppe-shiwan-camp
+facts:
+  - id: steppe-shiwan-cart-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-shiwan-tribe
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

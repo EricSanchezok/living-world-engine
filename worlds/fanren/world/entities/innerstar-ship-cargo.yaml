@@ -1,0 +1,26 @@
+id: innerstar-ship-cargo
+kind: item
+name: 青帆号布货
+description: 六箱普通布匹，为自己购入转售的货。
+placement: innerstar-sea-ship
+facts:
+  - id: innerstar-ship-cargo-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-ship-cargo-commodity-type
+    predicate: commodity-type
+    value:
+      kind: text
+      value: 六只实际布箱各有十匹棉布，不能当作炼器灵材。
+    description: 六只实际布箱各有十匹棉布，不能当作炼器灵材。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

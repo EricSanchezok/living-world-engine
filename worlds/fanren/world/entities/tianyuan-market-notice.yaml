@@ -1,0 +1,26 @@
+id: tianyuan-market-notice
+kind: item
+name: 太玄本期入殿告示
+description: 普通交换现收2低阶石，须领佩幡；可先在门外问价。验物小室另收1中阶石并从阵库付出实际运转用石。正式大拍须另有公告。
+placement: tianyuan-taixuan-hall
+facts:
+  - id: tianyuan-market-notice-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-auction-office
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-market-notice-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: tianyuan-market-steward
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

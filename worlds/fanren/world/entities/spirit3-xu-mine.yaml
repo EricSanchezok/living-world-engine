@@ -1,0 +1,26 @@
+id: spirit3-xu-mine
+kind: location
+name: 许氏现用矿井
+description: 支撑木与矿轨分出一段已勘明开采面，深处未勘地层不算现有可取库存。
+placement: spirit3-xu-copper-hills
+facts:
+  - id: spirit3-xu-mine-route-to-spirit3-xu-copper-hills
+    predicate: route-to-spirit3-xu-copper-hills
+    value:
+      kind: entity
+      entityId: spirit3-xu-copper-hills
+    description: route-to-spirit3-xu-copper-hills
+    access:
+      kind: private
+  - id: spirit3-xu-mine-route-conditions-spirit3-xu-copper-hills
+    predicate: route-conditions-spirit3-xu-copper-hills
+    value:
+      kind: text
+      value: 矿道内须照明与当前支护条件。
+    description: 矿道内须照明与当前支护条件。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

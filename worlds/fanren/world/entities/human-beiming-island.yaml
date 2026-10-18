@@ -1,0 +1,42 @@
+id: human-beiming-island
+kind: location
+name: 北冥冰岛
+description: 北冥岛实际是三面环海、一面连通大晋内陆的半岛；冰城在其极北处。
+placement: human-dajin
+facts:
+  - id: human-beiming-island-route-north-snow-station
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-snow-station
+    description: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    access:
+      kind: public
+  - id: human-beiming-island-travel-north-snow-station
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    description: 严寒风雪，凡人须有足够衣物、暖处与引路；修士仍须抗寒。
+    access:
+      kind: public
+  - id: human-beiming-island-route-north-entry-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-entry-market
+    description: 可从内陆一侧到达，严寒仍须防护。
+    access:
+      kind: public
+  - id: human-beiming-island-travel-north-entry-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可从内陆一侧到达，严寒仍须防护。
+    description: 可从内陆一侧到达，严寒仍须防护。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

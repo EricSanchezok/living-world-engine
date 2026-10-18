@@ -1,0 +1,58 @@
+id: feiling-bloodflame-palace
+kind: location
+name: 血焰宫
+description: 宫内黑红玉桌带温凉变化，廊后分出阴火殿和试作室。
+placement: feiling-bloodflame-lake
+facts:
+  - id: feiling-bloodflame-palace-route-to-feiling-bloodflame-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-lake
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-palace-route-conditions-feiling-bloodflame-lake
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 经地血准许由杶龟载入且禁网让行；没有许可强闯须承受血晶禁网。
+    description: 经地血准许由杶龟载入且禁网让行；没有许可强闯须承受血晶禁网。
+    access:
+      kind: private
+  - id: feiling-bloodflame-palace-route-to-feiling-yinhuo-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yinhuo-hall
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-palace-route-conditions-feiling-yinhuo-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 内门仅准主人与受托者开关。
+    description: 内门仅准主人与受托者开关。
+    access:
+      kind: private
+  - id: feiling-bloodflame-palace-route-to-feiling-dixue-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-dixue-workshop
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-bloodflame-palace-route-conditions-feiling-dixue-workshop
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 宫内廊道通试作室，未经允许不动台上材料。
+    description: 宫内廊道通试作室，未经允许不动台上材料。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

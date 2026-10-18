@@ -1,0 +1,26 @@
+id: minghe-yan-retreat
+kind: location
+name: 言姓隐修者洞府
+description: 远离神池的石府，有独立观察阴气的庭台。
+placement: minghe-space
+facts:
+  - id: minghe-yan-retreat-route-minghe-inner-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-inner-shore
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-yan-retreat-condition-minghe-inner-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 远离神池的石府，有独立观察阴气的庭台。
+    description: 远离神池的石府，有独立观察阴气的庭台。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

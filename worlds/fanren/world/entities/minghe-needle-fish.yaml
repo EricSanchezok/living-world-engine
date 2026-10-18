@@ -1,0 +1,26 @@
+id: minghe-needle-fish
+kind: creature-group
+name: 冥河针鱼群
+description: 水下活动的一小群针鱼，会对进入其活动范围的生物作出反应。
+placement: minghe-river
+facts:
+  - id: minghe-needle-fish-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    description: 数量记同群活体。分离个体或死亡必须同步扣数，不能在群量保留时另生成同一个体；复形需原残骸和适用环境，不等于繁殖。
+    access:
+      kind: private
+meters:
+  - id: minghe-needle-fish-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 24
+ratings:
+  - id: minghe-needle-fish-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: yue-market-wuxing-business
+kind: organization
+name: 五行书店当期商号
+description: 独立经营账目，铺面租自黄枫谷；商号货款与个人随身钱分开。
+placement: yue-market-wuxing
+facts:
+  - id: yue-market-wuxing-business-operator
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: yue-market-wuxing-keeper
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

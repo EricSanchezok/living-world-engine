@@ -1,0 +1,82 @@
+id: root-tianti-shuge
+kind: location
+name: 圣岛天书阁
+description: 收藏术法的阁楼，外堂可询价，内阁须核验借学权限。
+placement: spirit-holy-island
+facts:
+  - id: root-tianti-shuge-route-to-spirit-holy-island
+    predicate: route-to-spirit-holy-island
+    value:
+      kind: entity
+      entityId: spirit-holy-island
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-tianti-shuge-travel-condition-spirit-holy-island
+    predicate: travel-condition-spirit-holy-island
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-tianti-shuge-root-detail-sensing-specializations
+    predicate: root-detail-sensing-specializations
+    value:
+      kind: text
+      value: 察骨龄、望气和玉灵术各须实修，受神识、遮蔽和目标条件影响；普通观察不自动读取完整身份与功法。
+    description: 察骨龄、望气和玉灵术各须实修，受神识、遮蔽和目标条件影响；普通观察不自动读取完整身份与功法。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-tianti-shuge-root-detail-gold-script-seal
+    predicate: root-detail-gold-script-seal
+    value:
+      kind: text
+      value: 金篆封卷可吞探入神念，需适当方法显文；逼出文字不同于读全和修成所记阵法。
+    description: 金篆封卷可吞探入神念，需适当方法显文；逼出文字不同于读全和修成所记阵法。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-tianti-shuge-root-detail-law-force-grasp
+    predicate: root-detail-law-force-grasp
+    value:
+      kind: text
+      value: 含法则的大擒拿须特定修为与修习；器物被比作玄天威力不等就是玄天之宝，法则、器格与归属分别核定。
+    description: 含法则的大擒拿须特定修为与修习；器物被比作玄天威力不等就是玄天之宝，法则、器格与归属分别核定。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-tianti-shuge-root-detail-hidden-thunder-root
+    predicate: root-detail-hidden-thunder-root
+    value:
+      kind: text
+      value: 天隐雷根是先天既定资质，减劫有触发条件；强提持有者修为可能透支潜力寿元，检测揭示已有资质而非创造。
+    description: 天隐雷根是先天既定资质，减劫有触发条件；强提持有者修为可能透支潜力寿元，检测揭示已有资质而非创造。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-tianti-shuge-root-detail-holyisland-library
+    predicate: root-detail-holyisland-library
+    value:
+      kind: text
+      value: 可付巨额费用或以未藏的相应秘术换学，外传受限制；提交普通已藏术不等换走全阁，守阁者也非全知。
+    description: 可付巨额费用或以未藏的相应秘术换学，外传受限制；提交普通已藏术不等换走全阁，守阁者也非全知。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-tianti-shuge-root-detail-feiyu-secret
+    predicate: root-detail-feiyu-secret
+    value:
+      kind: text
+      value: 消元分光须飞羽族传承许可及血统适配，知名称或旁观不等学会；飞羽不能无据等同全部飞灵族。
+    description: 消元分光须飞羽族传承许可及血统适配，知名称或旁观不等学会；飞羽不能无据等同全部飞灵族。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

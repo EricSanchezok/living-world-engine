@@ -1,0 +1,42 @@
+id: feiling-abyss-gate
+kind: location
+name: 地渊之门
+description: 黑风环绕的广大深渊，下降途中的寒雾会侵蚀不具防护的旅人。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-gate-route-feiling-abyss-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-1
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-gate-condition-feiling-abyss-1
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地下第1层。阴气、地形和居民各异；不同层次通道须实际辨认。
+    description: 地下第1层。阴气、地形和居民各异；不同层次通道须实际辨认。
+    access:
+      kind: public
+  - id: feiling-abyss-gate-route-to-feiling-black-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-black-desert
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-abyss-gate-route-conditions-feiling-black-desert
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 需跨越万里黑地与邪风雾海，实际耗时随修为、交通和避险而变，不可一步跨越。
+    description: 需跨越万里黑地与邪风雾海，实际耗时随修为、交通和避险而变，不可一步跨越。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: dajin-kuzhu-yingfeng-hall
+kind: location
+name: 迎凤木殿
+description: 山顶木殿有大厅与偏殿，来访须先通报。
+placement: dajin-kuzhu-island
+facts:
+  - id: dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-island
+    description: 穿过岛内山林登峰，入殿另须主人许可。
+    access:
+      kind: public
+  - id: dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-store
+    description: 器库有值守与保管安排。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

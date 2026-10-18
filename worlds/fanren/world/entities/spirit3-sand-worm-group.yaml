@@ -1,0 +1,31 @@
+id: spirit3-sand-worm-group
+kind: social-group
+name: 青罗近地沙虫群
+description: 六头沙虫藏在远离道路的沙穴，腐液受体力和补充限制。
+placement: spirit-qingluo-desert
+facts:
+  - id: spirit3-sand-worm-group-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 死亡扣实存；分离个体或小群必须转出相应数量并保留伤势。群体恢复不能复活已死成员，繁衍需真实过程。
+    description: 死亡扣实存；分离个体或小群必须转出相应数量并保留伤势。群体恢复不能复活已死成员，繁衍需真实过程。
+    access:
+      kind: private
+  - id: spirit3-sand-worm-group-behavior-boundary
+    predicate: behavior-boundary
+    value:
+      kind: text
+      value: 受饥饿、领地、刺激、真实驱使与伤势影响；当前这些小群没有攻城集结。
+    description: 受饥饿、领地、刺激、真实驱使与伤势影响；当前这些小群没有攻城集结。
+    access:
+      kind: private
+meters:
+  - id: spirit3-sand-worm-group-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: spirit3-worm-count
+    amount: 6
+ratings: []
+shared_activity_resources: []

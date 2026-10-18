@@ -1,0 +1,26 @@
+id: tianyuan-grain-offer
+kind: item
+name: 备勤院询购函
+description: 罗同尘询购24份干粮，愿付12低阶石，要求三个本地日内交到备勤院；此为待接受要约，尚未交粮或付款。
+placement: tianyuan-village-supplier
+facts:
+  - id: tianyuan-grain-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-grain-offer-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: tianyuan-council-clerk
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

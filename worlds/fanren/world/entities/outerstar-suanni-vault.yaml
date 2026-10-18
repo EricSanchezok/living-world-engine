@@ -1,0 +1,22 @@
+id: outerstar-suanni-vault
+kind: container
+name: 王庭小库
+description: 王庭维护与传讯储备，个人赏赐须实际扣用。
+placement: outerstar-suanni-court
+facts:
+  - id: outerstar-suanni-vault-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-suanni-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 90
+  - definition_id: craft-material
+    amount: 30
+ratings: []
+shared_activity_resources: []

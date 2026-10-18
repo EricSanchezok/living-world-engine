@@ -1,0 +1,42 @@
+id: seas-auction-tower
+kind: location
+name: 商盟拍卖石塔
+description: 塔内入口另通受禁制保护的拍卖洞天。
+placement: seas-underground-headquarters
+facts:
+  - id: seas-auction-tower-route-seas-underground-headquarters
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-underground-headquarters
+    description: route-to
+    access:
+      kind: public
+  - id: seas-auction-tower-condition-seas-underground-headquarters
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿街路行走，私室与内库仍须明确准许。
+    description: 沿街路行走，私室与内库仍须明确准许。
+    access:
+      kind: public
+  - id: seas-auction-tower-route-seas-auction-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-auction-space
+    description: route-to
+    access:
+      kind: public
+  - id: seas-auction-tower-condition-seas-auction-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 经塔内空间入口入场，须有效入场资格与当前安排；拍卖不保证任何物品一定出售。
+    description: 经塔内空间入口入场，须有效入场资格与当前安排；拍卖不保证任何物品一定出售。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

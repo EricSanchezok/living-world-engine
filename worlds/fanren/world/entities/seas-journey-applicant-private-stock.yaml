@@ -1,0 +1,24 @@
+id: seas-journey-applicant-private-stock
+kind: container
+name: 卢缄的私人储备
+description: 自用财物，不属于所在机构公库。
+placement: seas-journey-applicant
+facts:
+  - id: seas-journey-applicant-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-journey-applicant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 2
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

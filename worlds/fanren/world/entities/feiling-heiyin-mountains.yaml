@@ -1,0 +1,60 @@
+id: feiling-heiyin-mountains
+kind: location
+name: 黑隐山脉
+description: 半岛一侧可辨山势的山脉，洞府和药地各有实际占有者。
+placement: feiling-heiming-peninsula
+facts:
+  - id: feiling-heiyin-mountains-route-feiling-heiming-peninsula
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-heiming-peninsula
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-heiyin-mountains-condition-feiling-heiming-peninsula
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 半岛一侧可辨山势的山脉，洞府和药地各有实际占有者。
+    description: 半岛一侧可辨山势的山脉，洞府和药地各有实际占有者。
+    access:
+      kind: public
+  - id: feiling-heiyin-mountains-route-to-feiling-blackmist-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-blackmist-sea
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-heiyin-mountains-route-conditions-feiling-blackmist-sea
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 雾海侵蚀身魂，飞行会受禁空压制，缺防护不宜深入。
+    description: 雾海侵蚀身魂，飞行会受禁空压制，缺防护不宜深入。
+    access:
+      kind: private
+  - id: feiling-heiyin-mountains-route-to-root-heiyin-ruin
+    predicate: route-to-root-heiyin-ruin
+    value:
+      kind: entity
+      entityId: root-heiyin-ruin
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: feiling-heiyin-mountains-travel-condition-root-heiyin-ruin
+    predicate: travel-condition-root-heiyin-ruin
+    value:
+      kind: text
+      value: 沿山道踏查，崩坏石构与未知生灵可能阻路；没有自动到手的血杏。
+    description: 沿山道踏查，崩坏石构与未知生灵可能阻路；没有自动到手的血杏。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

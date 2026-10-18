@@ -1,0 +1,22 @@
+id: canon-wangu-huang-elder-personal-kit
+kind: container
+name: 皇长老的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: canon-wangu-huang-elder
+facts:
+  - id: canon-wangu-huang-elder-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wangu-huang-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

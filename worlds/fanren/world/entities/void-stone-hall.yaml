@@ -1,0 +1,67 @@
+id: void-stone-hall
+kind: location
+name: 四门石厅
+description: 石桌凳围绕中转阵，四扇青石门通向不同处所。
+placement: human-void-hall
+facts:
+  - id: void-stone-hall-route-void-ice
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-ice
+    description: route-to
+    access:
+      kind: public
+  - id: void-stone-hall-condition-void-ice
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-stone-hall-route-void-fire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-fire
+    description: route-to
+    access:
+      kind: public
+  - id: void-stone-hall-condition-void-fire
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-stone-hall-route-void-gallery-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-gallery-one
+    description: route-to
+    access:
+      kind: public
+  - id: void-stone-hall-condition-void-gallery-one
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-stone-hall-exit-options
+    predicate: exit-options
+    value:
+      kind: text
+      value: 四门开放时三路通往不同宝阁，一路直通下一关；入口通向并非固定。进入后不能原路退出，留在石厅不取宝可等待法阵送出。
+    description: 四门开放时三路通往不同宝阁，一路直通下一关；入口通向并非固定。进入后不能原路退出，留在石厅不取宝可等待法阵送出。
+    access:
+      kind: discoverable
+      condition: 实际观察开启的四门和相关禁制，或获得可信的通行说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

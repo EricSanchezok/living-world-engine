@@ -1,0 +1,20 @@
+id: local-mechanic-stock
+kind: container
+name: 机关维护料
+description: 有限现有资源；经授权用途支用与个人所得分开。
+placement: local-cavern-control
+facts:
+  - id: local-mechanic-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+ratings: []
+shared_activity_resources: []

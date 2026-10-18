@@ -1,0 +1,20 @@
+id: guanghan-ore-outcrop
+kind: container
+name: 灰峰露头矿
+description: 岩层显露的特殊原矿，取下需要工具、法力、时间与避险。
+placement: guanghan-grey-peak
+facts:
+  - id: guanghan-ore-outcrop-extraction-condition
+    predicate: extraction-condition
+    value:
+      kind: text
+      value: 现存三十六份为已经露出的有限原矿，采下会减少露头库存；深层矿石须实际勘探和开采。石茧族旧地图不等于对整个矿岛的所有权凭证。
+    description: 现存三十六份为已经露出的有限原矿，采下会减少露头库存；深层矿石须实际勘探和开采。石茧族旧地图不等于对整个矿岛的所有权凭证。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: guanghan-grey-ore
+    amount: 36
+ratings: []
+shared_activity_resources: []

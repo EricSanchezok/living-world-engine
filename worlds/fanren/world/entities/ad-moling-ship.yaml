@@ -1,0 +1,20 @@
+id: ad-moling-ship
+kind: item
+name: 墨灵圣舟
+description: 古老空间飞舟，现收缩保存；能展巨舟须真实祭炼操纵与供能，船名不等于免费任意跨界。
+placement: ad-qiling-treasury
+facts:
+  - id: ad-moling-ship-activation-and-crossing
+    predicate: activation-and-crossing
+    value:
+      kind: text
+      value: 须识别并祭炼原有控制结构；常规航行每日消耗1魔石，受阻破界还需适格操作者、足够法力及至少80魔石。材料齐备也不能代替施术条件。
+    description: 须识别并祭炼原有控制结构；常规航行每日消耗1魔石，受阻破界还需适格操作者、足够法力及至少80魔石。材料齐备也不能代替施术条件。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 320
+ratings: []
+shared_activity_resources: []

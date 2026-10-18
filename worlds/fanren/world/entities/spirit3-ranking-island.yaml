@@ -1,0 +1,26 @@
+id: spirit3-ranking-island
+kind: location
+name: 天灵高空榜碑岛
+description: 高空浮岛中央的玉壁映出金银符文，边沿罡风使无适当飞行防护者难以抵达。
+placement: spirit-tianling-domain
+facts:
+  - id: spirit3-ranking-island-route-to-spirit-tianling-capital
+    predicate: route-to-spirit-tianling-capital
+    value:
+      kind: entity
+      entityId: spirit-tianling-capital
+    description: route-to-spirit-tianling-capital
+    access:
+      kind: private
+  - id: spirit3-ranking-island-route-conditions-spirit-tianling-capital
+    predicate: route-conditions-spirit-tianling-capital
+    value:
+      kind: text
+      value: 须有真实飞行手段往返高空浮岛，克服罡风且获入岛许可；普通步行不能到达。
+    description: 须有真实飞行手段往返高空浮岛，克服罡风且获入岛许可；普通步行不能到达。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tianyuan-auction-hall
+kind: location
+name: 太玄偏殿拍卖厅
+description: 阶台旁有隔窥石屋与入口小阵，本期只开放两间验物室；正式大拍依公开排期招徕，未开场时不能凭背景生成买家。
+placement: tianyuan-taixuan-hall
+facts:
+  - id: tianyuan-auction-hall-route-to-tianyuan-taixuan-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-taixuan-hall
+    description: route-to-tianyuan-taixuan-hall
+    access:
+      kind: private
+  - id: tianyuan-auction-hall-route-conditions-tianyuan-taixuan-hall
+    predicate: route-conditions-tianyuan-taixuan-hall
+    value:
+      kind: text
+      value: 走指定偏廊，正式拍卖要报名并按现行许可入场；小阵送到已开启的对应石屋，实际耗用阵库灵石。
+    description: 走指定偏廊，正式拍卖要报名并按现行许可入场；小阵送到已开启的对应石屋，实际耗用阵库灵石。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

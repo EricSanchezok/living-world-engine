@@ -1,0 +1,18 @@
+id: canon-qingming-needles
+kind: item
+name: 青冥针
+description: 青易温养的法宝；符宝须真实分割威力并耗制符材料，不能无限复印。
+placement: canon-qing-yi
+facts:
+  - id: canon-qingming-needles-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

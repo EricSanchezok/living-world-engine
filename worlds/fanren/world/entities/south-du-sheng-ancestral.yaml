@@ -1,0 +1,26 @@
+id: south-du-sheng-ancestral
+kind: location
+name: 毒圣祖师堂
+description: 旧训与感灵珠受门内保管，当前宝珠静止。
+placement: south-du-sheng-court
+facts:
+  - id: south-du-sheng-ancestral-route-south-du-sheng-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-du-sheng-court
+    description: route-to
+    access:
+      kind: public
+  - id: south-du-sheng-ancestral-condition-south-du-sheng-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    description: 门内保管处，只可按现实权限请求进入，不能把听说宝物等同已获物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

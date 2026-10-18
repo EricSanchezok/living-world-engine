@@ -1,0 +1,42 @@
+id: root-greenlight-west-hill
+kind: location
+name: 绿光西郊密道山洞
+description: 城西十余里小山石壁内的洞窟，内有向外通道。
+placement: thunder-tianyun
+facts:
+  - id: root-greenlight-west-hill-route-to-thunder-greenlight-city
+    predicate: route-to-thunder-greenlight-city
+    value:
+      kind: entity
+      entityId: thunder-greenlight-city
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-greenlight-west-hill-travel-condition-thunder-greenlight-city
+    predicate: travel-condition-thunder-greenlight-city
+    value:
+      kind: text
+      value: 经城西十余里郊野和山中石壁通道行走，封闭石壁要真实开启或破坏。
+    description: 经城西十余里郊野和山中石壁通道行走，封闭石壁要真实开启或破坏。
+    access:
+      kind: private
+  - id: root-greenlight-west-hill-route-to-root-greenlight-statue-room
+    predicate: route-to-root-greenlight-statue-room
+    value:
+      kind: entity
+      entityId: root-greenlight-statue-room
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-greenlight-west-hill-travel-condition-root-greenlight-statue-room
+    predicate: travel-condition-root-greenlight-statue-room
+    value:
+      kind: text
+      value: 近程阵两端可用且使用者会启动时，消耗神像内现存黄色晶石一枚及法力二十，每次至多两名普通体型旅人；无燃料或另一端损坏则不能如此通行。
+    description: 近程阵两端可用且使用者会启动时，消耗神像内现存黄色晶石一枚及法力二十，每次至多两名普通体型旅人；无燃料或另一端损坏则不能如此通行。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

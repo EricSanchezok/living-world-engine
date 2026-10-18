@@ -1,0 +1,18 @@
+id: innerstar-tongtian-fog-sea
+kind: location
+name: 通天雾海
+description: 连片海雾笼罩的海域，能见度随雾况变化，实际行路须辨方向。
+placement: human-luanxing-sea
+facts:
+  - id: innerstar-tongtian-fog-sea-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 须寻找可辨航线入海，浓雾不代表无障碍安全通路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

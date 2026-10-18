@@ -1,0 +1,42 @@
+id: dv-hidden-rifts
+kind: location
+name: 无形裂隙坡
+description: 看似平静的山坡横着多道无形空间裂隙，绕路和准确勘察比盲冲更有意义。
+placement: human-devil-valley
+facts:
+  - id: dv-hidden-rifts-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-hidden-rifts-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此路必须能探测无形裂缝；一般神识强并不保证发现。
+    description: 此路必须能探测无形裂缝；一般神识强并不保证发现。
+    access:
+      kind: public
+  - id: dv-hidden-rifts-route-dv-lava-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-lava-cave
+    description: route-to
+    access:
+      kind: public
+  - id: dv-hidden-rifts-condition-dv-lava-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 绕过本段裂缝后进入赤峰，须各人持续知道安全落脚点。
+    description: 绕过本段裂缝后进入赤峰，须各人持续知道安全落脚点。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

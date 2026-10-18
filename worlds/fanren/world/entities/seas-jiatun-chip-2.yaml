@@ -1,0 +1,18 @@
+id: seas-jiatun-chip-2
+kind: item
+name: 甲豚配套阵芯2
+description: 与本殿阵槽匹配的一次性核心，封纸完整；投入传送后会失效。
+placement: seas-jiatun-array-hall
+facts:
+  - id: seas-jiatun-chip-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-jiatun-domain-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

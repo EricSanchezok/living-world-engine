@@ -1,0 +1,18 @@
+id: dv-seal-red-pearl
+kind: item
+name: 镇钵血红圆珠
+description: 悬于银钵上方的三镇物之一；与另两物及玉符共同镇压，取走会改变封印，不是无后果拾取。
+placement: dv-seal-hall
+facts:
+  - id: dv-seal-red-pearl-seals
+    predicate: seals
+    value:
+      kind: entity
+      entityId: dv-main-seal-bowl
+    description: seals
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

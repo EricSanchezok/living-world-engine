@@ -1,0 +1,26 @@
+id: yinming-main-grain
+kind: location
+name: 食物公仓
+description: 种粮、口粮和熏肉分别码放。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-grain-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-grain-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 种粮、口粮和熏肉分别码放。
+    description: 种粮、口粮和熏肉分别码放。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

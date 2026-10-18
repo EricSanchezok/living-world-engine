@@ -1,0 +1,42 @@
+id: dv-blood-boundary
+kind: location
+name: 内外谷血禁山岭
+description: 十余小峰连成弯曲山岭，后方血霞连天，天然地貌与禁制叠在一起。
+placement: human-devil-valley
+facts:
+  - id: dv-blood-boundary-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-blood-boundary-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿外谷山路谨慎勘察，空间裂缝随时存在；上空不是免检捷径。
+    description: 沿外谷山路谨慎勘察，空间裂缝随时存在；上空不是免检捷径。
+    access:
+      kind: public
+  - id: dv-blood-boundary-route-dv-polar-path
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-polar-path
+    description: route-to
+    access:
+      kind: public
+  - id: dv-blood-boundary-condition-dv-polar-path
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须发现并破解苍坤旧幻术或获对应法诀；不能只按地图名字穿入。
+    description: 须发现并破解苍坤旧幻术或获对应法诀；不能只按地图名字穿入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

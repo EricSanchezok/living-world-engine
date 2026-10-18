@@ -1,0 +1,26 @@
+id: human-huangming-island
+kind: location
+name: 皇明岛
+description: 内星海的一座中型海岛，近岸可择合适水面停舟。
+placement: human-inner-star-sea
+facts:
+  - id: human-huangming-island-route-human-inner-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-inner-star-sea
+    description: 经实际海路往来，需舟船或御器等通行能力、辨明海向和备足给养，不因知道岛名直接抵达。
+    access:
+      kind: public
+  - id: human-huangming-island-route-innerstar-huangming-landing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-huangming-landing
+    description: 沿岸地步行往来，出海须另有实际交通。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

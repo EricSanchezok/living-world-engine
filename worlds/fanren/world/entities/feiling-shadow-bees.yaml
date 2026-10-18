@@ -1,0 +1,20 @@
+id: feiling-shadow-bees
+kind: creature-group
+name: 阴蛛蜂群
+description: 二十四只蜂形暗秽生物，趋近移动光源；灭净身形和凝聚气息才算消灭。
+placement: feiling-abyss-2
+facts:
+  - id: feiling-shadow-bees-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: feiling-creature-count
+    amount: 24
+ratings: []
+shared_activity_resources: []

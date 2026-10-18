@@ -1,0 +1,165 @@
+id: yinming-ridge-tanner
+kind: person
+name: 灰岚
+description: 制皮人，妹妹常往返大村。
+placement: yinming-village-ridge
+facts:
+  - id: yinming-ridge-tanner-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - yinming-ridge-tanner
+  - id: yinming-ridge-tanner-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 裁皮、缝合、有限保暖经验。
+    description: 裁皮、缝合、有限保暖经验。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-ridge-tanner
+  - id: yinming-ridge-tanner-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根；现有能力来自凡俗经历与训练。
+    description: 无灵根；现有能力来自凡俗经历与训练。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-ridge-tanner
+  - id: yinming-ridge-tanner-elder-sister-of-yinming-ridge-runner
+    predicate: elder-sister-of
+    value:
+      kind: entity
+      entityId: yinming-ridge-runner
+    description: elder-sister-of
+    access:
+      kind: private
+meters:
+  - id: yinming-ridge-tanner-health
+    definition_id: health
+    current: 100
+  - id: yinming-ridge-tanner-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: yinming-ridge-tanner-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: yinming-ridge-tanner-force
+    definition_id: force
+    value: 3
+  - id: yinming-ridge-tanner-craft
+    definition_id: craft
+    value: 4
+  - id: yinming-ridge-tanner-perception
+    definition_id: perception
+    value: 1
+  - id: yinming-ridge-tanner-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yinming-ridge-tanner
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 制皮人，妹妹常往返大村。
+      voice: 谈价格温和，谈赔损则一项项说清。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 修好一件可借巡队的厚皮衣，商量归还时日。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 灰岚
+        description: 制皮人，妹妹常往返大村。
+        status: observed
+      - id: location
+        name: 灰岭村
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yinming-ridge-tanner-tools
+        name: 灰岚的个人器具
+        description: 裁皮、缝合、有限保暖经验。所需的有限工具，不包含无限兽晶。
+        status: observed
+      - id: known-yinming-ridge-runner
+        name: 灰穗
+        description: 成年姐妹，各有工作与收益。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 裁皮、缝合、有限保暖经验。
+        description: 裁皮、缝合、有限保暖经验。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        description: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: local-life
+        subjectId: self
+        predicate: local-life
+        value:
+          kind: text
+          value: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        description: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yinming-ridge-tanner
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yinming-village-ridge
+      - local_entity_id: known-yinming-ridge-tanner-tools
+        canonical_entity_ids:
+          - yinming-ridge-tanner-tools
+      - local_entity_id: known-yinming-ridge-runner
+        canonical_entity_ids:
+          - yinming-ridge-runner

@@ -1,0 +1,28 @@
+id: tiannan-shayun-herb-store
+kind: item
+name: 清川货院自有药包
+description: 有限库存，有单独账目；保管人只可按已约定用途支用。
+placement: tiannan-shayun-courtyard
+facts:
+  - id: tiannan-shayun-herb-store-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-chen-que
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-shayun-herb-store-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-chen-que
+    description: 实际保管人；保管不等于归个人所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

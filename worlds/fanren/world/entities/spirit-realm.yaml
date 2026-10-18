@@ -1,0 +1,36 @@
+id: spirit-realm
+kind: location
+name: 灵界
+description: 与人界分离的广大界面，有不同族群、城域与荒野，跨界必须具备相应条件。
+placement: null
+facts:
+  - id: spirit-realm-root-possibility-rumor
+    predicate: root-possibility-rumor
+    value:
+      kind: text
+      value: 境外有罕见生根灵药的说法流传于部分炼体士，不等于任何无灵根者已知其位置或必能得到。
+    description: 仅在角色实际听闻相关说法后进入其知识。
+    access:
+      kind: private
+  - id: spirit-realm-route-to-root-dijiao-island
+    predicate: route-to-root-dijiao-island
+    value:
+      kind: entity
+      entityId: root-dijiao-island
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-realm-travel-condition-root-dijiao-island
+    predicate: travel-condition-root-dijiao-island
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

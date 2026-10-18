@@ -1,0 +1,20 @@
+id: far-zhao-grain
+kind: item
+name: 赵家米粮
+description: 赵家日用口粮，需照顾两人的生活。
+placement: far-luwan-shop
+facts:
+  - id: far-zhao-grain-owner
+    predicate: owner
+    value:
+      kind: entity
+      entityId: far-zhao-zhi
+    description: 由赵芷所有。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

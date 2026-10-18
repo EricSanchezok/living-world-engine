@@ -1,0 +1,198 @@
+id: canon-guangyuan-grandmother
+kind: person
+name: 蓝氏前辈
+description: 广源斋女斋主，当前主持分斋。
+placement: ad-guangyuan-house
+facts:
+  - id: canon-guangyuan-grandmother-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: agents
+      agentIds:
+        - canon-guangyuan-grandmother
+  - id: canon-guangyuan-grandmother-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体卜算、情报辨析和传讯；没有无所不知的能力。
+    description: 合体卜算、情报辨析和传讯；没有无所不知的能力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-guangyuan-grandmother
+  - id: canon-guangyuan-grandmother-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    description: 依自身族属、功法与法体修炼，现有能力与资源分别限制行动。
+    access:
+      kind: agents
+      agentIds:
+        - canon-guangyuan-grandmother
+  - id: canon-guangyuan-grandmother-divination-cost
+    predicate: divination-cost
+    value:
+      kind: text
+      value: 这项特定卜算会真实减少一年寿元并留下记录；无法从普通闲谈免费取得同样效果。
+    description: 这项特定卜算会真实减少一年寿元并留下记录；无法从普通闲谈免费取得同样效果。
+    access:
+      kind: private
+  - id: canon-guangyuan-grandmother-lifespan-sacrificed-common-years
+    predicate: lifespan-sacrificed-common-years
+    value:
+      kind: number
+      value: 0
+    description: lifespan-sacrificed-common-years
+    access:
+      kind: private
+  - id: canon-guangyuan-grandmother-lifespan-sacrifice-accounting
+    predicate: lifespan-sacrifice-accounting
+    value:
+      kind: text
+      value: 这项卜算每实际施作一次，就把寿元牺牲累计增加一共同年，并影响本人真实寿元状态；已经付费但未施术不记消耗。
+    description: 这项卜算每实际施作一次，就把寿元牺牲累计增加一共同年，并影响本人真实寿元状态；已经付费但未施术不记消耗。
+    access:
+      kind: private
+meters:
+  - id: canon-guangyuan-grandmother-health
+    definition_id: health
+    current: 100
+  - id: canon-guangyuan-grandmother-mana
+    definition_id: mana
+    current: 1540
+quantities: []
+ratings:
+  - id: canon-guangyuan-grandmother-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-guangyuan-grandmother-force
+    definition_id: force
+    value: 7
+  - id: canon-guangyuan-grandmother-craft
+    definition_id: craft
+    value: 7
+  - id: canon-guangyuan-grandmother-perception
+    definition_id: perception
+    value: 7
+  - id: canon-guangyuan-grandmother-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-guangyuan-grandmother
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 广源斋女斋主，当前主持分斋。
+      voice: 听人讲完才问最在意什么，常将能查证与需冒险的部分分开报价。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否为这次卜算承担一年寿元代价，或让客户先付费做可核的地理调查。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 蓝氏前辈
+        description: 广源斋女斋主，当前主持分斋。
+        status: observed
+      - id: location
+        name: 广源斋湖边阁
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-guangyuan-grandmother-private-stock
+        name: 蓝氏前辈的自用储备
+        description: 本人财物，与机构公库和门人财产分开。
+        status: observed
+      - id: known-ad-guangyuan-surveyor
+        name: 迟简
+        description: 分斋主持与独立取证的调查员，知道彼此做事方式。
+        status: observed
+      - id: known-ad-information-client
+        name: 鹿珩
+        description: 本次已递交海道旧图的客人，尚未购买卜算。
+        status: observed
+      - id: known-ad-divination-board
+        name: 蓝氏卜盘
+        description: 有实际刻纹和可用材料的占卜器具，只辅助本人已学术法。
+        status: observed
+      - id: known-ad-old-sea-map
+        name: 鹿珩海道旧图
+        description: 已当面讨论的材料与报价；尚未承诺卜算结论。
+        status: observed
+      - id: known-ad-information-quote
+        name: 查图与卜算报价
+        description: 已当面讨论的材料与报价；尚未承诺卜算结论。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体卜算、情报辨析和传讯；没有无所不知的能力。
+        description: 合体卜算、情报辨析和传讯；没有无所不知的能力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 了解自己身体、法力与所学手段的真实边界。
+        description: 了解自己身体、法力与所学手段的真实边界。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-guangyuan-grandmother
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-guangyuan-house
+      - local_entity_id: known-canon-guangyuan-grandmother-private-stock
+        canonical_entity_ids:
+          - canon-guangyuan-grandmother-private-stock
+      - local_entity_id: known-ad-guangyuan-surveyor
+        canonical_entity_ids:
+          - ad-guangyuan-surveyor
+      - local_entity_id: known-ad-information-client
+        canonical_entity_ids:
+          - ad-information-client
+      - local_entity_id: known-ad-divination-board
+        canonical_entity_ids:
+          - ad-divination-board
+      - local_entity_id: known-ad-old-sea-map
+        canonical_entity_ids:
+          - ad-old-sea-map
+      - local_entity_id: known-ad-information-quote
+        canonical_entity_ids:
+          - ad-information-quote

@@ -1,0 +1,26 @@
+id: dajin-wind-retreat
+kind: location
+name: 风老怪暂居山舍
+description: 当期暂居处，来者不能仅凭知道姓名便找到隐修。
+placement: dajin-wuyue
+facts:
+  - id: dajin-wind-retreat-route-dajin-wuyue
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-wuyue
+    description: 山间隐修小径需确切引路，地点认知不自动共享。
+    access:
+      kind: public
+  - id: dajin-wind-retreat-travel-dajin-wuyue
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山间隐修小径需确切引路，地点认知不自动共享。
+    description: 山间隐修小径需确切引路，地点认知不自动共享。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

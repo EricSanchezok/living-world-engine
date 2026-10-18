@@ -1,0 +1,42 @@
+id: guanghan-yellow-ruins
+kind: location
+name: 黄沙古遗址
+description: 风沙下藏有成片残垣和仍可活动的古代机关。
+placement: guanghan-realm
+facts:
+  - id: guanghan-yellow-ruins-route-guanghan-mountain-chain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mountain-chain
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-yellow-ruins-condition-guanghan-mountain-chain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-yellow-ruins-route-guanghan-white-cliff
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-white-cliff
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-yellow-ruins-condition-guanghan-white-cliff
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

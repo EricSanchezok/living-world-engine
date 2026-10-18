@@ -1,0 +1,34 @@
+id: jingzhou-capital
+kind: location
+name: 镜州城
+description: 镜州首府，有集市和商旅往来；前往各地须安排路程与食宿。
+placement: jingzhou
+facts:
+  - id: jingzhou-capital-route-caixia-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: caixia-road
+    description: 镜州首府，有集市和商旅往来；前往各地须安排路程与食宿。
+    access:
+      kind: public
+  - id: jingzhou-capital-route-baimang-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: baimang-mountain
+    description: 镜州境内规模大于彩霞山的大山，山路陌生，进山需准备。
+    access:
+      kind: public
+  - id: jingzhou-capital-route-local-iron-spear-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-iron-spear-yard
+    description: 沿城郊小路步行往来。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

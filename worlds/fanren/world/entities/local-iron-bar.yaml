@@ -1,0 +1,18 @@
+id: local-iron-bar
+kind: item
+name: 打铁房现有铁条
+description: 一条可用于普通小件的生铁料，制作须实际消耗。
+placement: local-metalworks
+facts:
+  - id: local-iron-bar-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: local-metalworker
+    description: 铁匠的料与用具。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

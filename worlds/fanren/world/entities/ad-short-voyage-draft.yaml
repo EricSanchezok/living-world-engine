@@ -1,0 +1,18 @@
+id: ad-short-voyage-draft
+kind: item
+name: 渡口短航议约
+description: 去魔猿礁附近再视天气决定，价80魔石、40预付40返港结算；遇严重雷云船主可返，研究者须分担护舟法力。未收款即无已成交契约。
+placement: ad-sea-pilot
+facts:
+  - id: ad-short-voyage-draft-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-sea-pilot
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

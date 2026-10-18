@@ -1,0 +1,18 @@
+id: blood-upper-receipt-book
+kind: item
+name: 上宗本期收供簿
+description: 离火宗本期应交24高阶灵石；现收讫为零。依已发回函可收6份已验药材抵6枚，实际入库后逐笔登记。
+placement: blood-upper-court
+facts:
+  - id: blood-upper-receipt-book-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-lihuo-upper-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

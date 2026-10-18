@@ -1,0 +1,26 @@
+id: canon-liangqi-imitation
+kind: item
+name: 两气瓶仿制灵宝
+description: 以黑白二气有限拦吸攻击的仿制灵宝；需要实际祭炼、法力和控制，不无限吸收任何目标。
+placement: north-stockroom
+facts:
+  - id: canon-liangqi-imitation-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-liangqi-imitation-custodian
+    predicate: authorized-custodian
+    value:
+      kind: entity
+      entityId: canon-ye-north-inspector
+    description: authorized-custodian
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

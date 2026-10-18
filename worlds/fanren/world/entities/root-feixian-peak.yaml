@@ -1,0 +1,64 @@
+id: root-feixian-peak
+kind: location
+name: 飞仙峰
+description: 峰顶与周围云海间有接待、交易的旧设施。
+placement: demon-nine-immortal-mountain
+facts:
+  - id: root-feixian-peak-route-to-demon-nine-immortal-mountain
+    predicate: route-to-demon-nine-immortal-mountain
+    value:
+      kind: entity
+      entityId: demon-nine-immortal-mountain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-feixian-peak-travel-condition-demon-nine-immortal-mountain
+    predicate: travel-condition-demon-nine-immortal-mountain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-feixian-peak-route-to-root-wanbao-hall
+    predicate: route-to-root-wanbao-hall
+    value:
+      kind: entity
+      entityId: root-wanbao-hall
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-feixian-peak-travel-condition-root-wanbao-hall
+    predicate: travel-condition-root-wanbao-hall
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-feixian-peak-route-to-root-jiuying-palace
+    predicate: route-to-root-jiuying-palace
+    value:
+      kind: entity
+      entityId: root-jiuying-palace
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-feixian-peak-travel-condition-root-jiuying-palace
+    predicate: travel-condition-root-jiuying-palace
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

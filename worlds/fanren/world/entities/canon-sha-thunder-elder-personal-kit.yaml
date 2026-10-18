@@ -1,0 +1,22 @@
+id: canon-sha-thunder-elder-personal-kit
+kind: container
+name: 沙夫人的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: canon-sha-thunder-elder
+facts:
+  - id: canon-sha-thunder-elder-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-sha-thunder-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

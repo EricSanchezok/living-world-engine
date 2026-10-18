@@ -1,0 +1,142 @@
+id: local-doctor-qiu
+kind: person
+name: 邱大夫
+description: 地方凡俗生活者，有自己有限资产、职责与选择。
+placement: local-common-clinic
+facts:
+  - id: local-doctor-qiu-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通跌打接骨、器械清洁；不能修仙续肢。
+    description: 普通跌打接骨、器械清洁；不能修仙续肢。
+    access:
+      kind: private
+meters:
+  - id: local-doctor-qiu-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: local-doctor-qiu-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: local-doctor-qiu-force
+    definition_id: force
+    value: 1
+  - id: local-doctor-qiu-craft
+    definition_id: craft
+    value: 2
+  - id: local-doctor-qiu-perception
+    definition_id: perception
+    value: 1
+shared_activity_resources: []
+agent:
+  id: local-doctor-qiu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地方凡俗生活者，有自己有限资产、职责与选择。
+      voice: 说话干脆，对不愿休息的人会直说后果。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-life
+        description: 修好一副夹板后再决定是否接新的出诊，工钱与药费分别核算。
+        priority: 0.6
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 邱大夫
+        description: 地方凡俗生活者，有自己有限资产、职责与选择。
+        status: observed
+      - id: location
+        name: 门内常用医舍
+        description: 本人日常所在。
+        status: observed
+      - id: known-local-doctor-qiu-purse
+        name: 邱大夫私囊
+        description: 本人实际支配的积蓄。
+        status: observed
+      - id: known-local-doctor-luo
+        name: 罗大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-doctor-he
+        name: 何大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-clinic-stock
+        name: 医舍药柜
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-clinic-splint
+        name: 待修夹板
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-local-metalworker
+        name: 周铁匠
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+      - id: known-canon-mo-juren
+        name: 墨大夫
+        description: 过去实际接触的工作人或物；仅本职所知，不授对方私密经历。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的学习、工作与生活经历。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通跌打接骨、器械清洁；不能修仙续肢。
+        description: 普通跌打接骨、器械清洁；不能修仙续肢。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - local-doctor-qiu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-common-clinic
+      - local_entity_id: known-local-doctor-qiu-purse
+        canonical_entity_ids:
+          - local-doctor-qiu-purse
+      - local_entity_id: known-local-doctor-luo
+        canonical_entity_ids:
+          - local-doctor-luo
+      - local_entity_id: known-local-doctor-he
+        canonical_entity_ids:
+          - local-doctor-he
+      - local_entity_id: known-local-clinic-stock
+        canonical_entity_ids:
+          - local-clinic-stock
+      - local_entity_id: known-local-clinic-splint
+        canonical_entity_ids:
+          - local-clinic-splint
+      - local_entity_id: known-local-metalworker
+        canonical_entity_ids:
+          - local-metalworker
+      - local_entity_id: known-canon-mo-juren
+        canonical_entity_ids:
+          - canon-mo-juren

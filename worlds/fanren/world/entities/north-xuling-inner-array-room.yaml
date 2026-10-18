@@ -1,0 +1,42 @@
+id: north-xuling-inner-array-room
+kind: location
+name: 第一殿传送小厅
+description: 容两三人通行的小阵所在内厅，连接本殿主殿侧厅。
+placement: north-xuling-hall-one
+facts:
+  - id: north-xuling-inner-array-room-route-north-xuling-ice-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-ice-court
+    description: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    access:
+      kind: public
+  - id: north-xuling-inner-array-room-travel-north-xuling-ice-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    description: 穿过庭院抵达小厅，须避开或解决实际禁制。
+    access:
+      kind: public
+  - id: north-xuling-inner-array-room-route-north-xuling-first-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-first-main
+    description: 殿内小型传送阵每次最多两三人，需法诀与供能；此处不作为步行距离瞬移。
+    access:
+      kind: public
+  - id: north-xuling-inner-array-room-travel-north-xuling-first-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 殿内小型传送阵每次最多两三人，需法诀与供能；此处不作为步行距离瞬移。
+    description: 殿内小型传送阵每次最多两三人，需法诀与供能；此处不作为步行距离瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

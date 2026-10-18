@@ -1,0 +1,18 @@
+id: yinming-cove-porter-tools
+kind: item
+name: 芦背的个人器具
+description: 搬运、补袋、辨鱼是否腐败。所需的有限工具，不包含无限兽晶。
+placement: yinming-cove-porter
+facts:
+  - id: yinming-cove-porter-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-cove-porter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

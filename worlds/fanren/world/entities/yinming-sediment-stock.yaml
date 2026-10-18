@@ -1,0 +1,20 @@
+id: yinming-sediment-stock
+kind: container
+name: 大村沉水缸
+description: 用于养护骨兵，当前八罐，可拆分实际分配。
+placement: yinming-main-workshop
+facts:
+  - id: yinming-sediment-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: yin-soak
+    amount: 8
+ratings: []
+shared_activity_resources: []

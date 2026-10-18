@@ -1,0 +1,188 @@
+id: canon-nanlong-hou
+kind: person
+name: 南陇侯
+description: 已有元婴修为的散修，自视祖传见闻甚重，愿与有用之人合作，也会留一手。
+placement: dv-nanlong-retreat
+facts:
+  - id: canon-nanlong-hou-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-nanlong-hou
+  - id: canon-nanlong-hou-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴御剑、防护和辨读家传禁制，万尺一线以精血元气为代价。
+    description: 元婴御剑、防护和辨读家传禁制，万尺一线以精血元气为代价。
+    access:
+      kind: agents
+      agentIds:
+        - canon-nanlong-hou
+  - id: canon-nanlong-hou-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - canon-nanlong-hou
+  - id: canon-nanlong-hou-known-associate-canon-lu-weiying
+    predicate: known-associate
+    value:
+      kind: entity
+      entityId: canon-lu-weiying
+    description: known-associate
+    access:
+      kind: private
+meters:
+  - id: canon-nanlong-hou-health
+    definition_id: health
+    current: 100
+  - id: canon-nanlong-hou-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-nanlong-hou-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-nanlong-hou-force
+    definition_id: force
+    value: 4
+  - id: canon-nanlong-hou-craft
+    definition_id: craft
+    value: 4
+  - id: canon-nanlong-hou-perception
+    definition_id: perception
+    value: 4
+  - id: canon-nanlong-hou-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-nanlong-hou
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 已有元婴修为的散修，自视祖传见闻甚重，愿与有用之人合作，也会留一手。
+      voice: 说话自称本侯，礼数周全而喜欢掌握谈话节奏；提到祖传物会下意识压低声音。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 比较祖传旧图与当前山势，暂不以性命冒险。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 南陇侯
+        description: 已有元婴修为的散修，自视祖传见闻甚重，愿与有用之人合作，也会留一手。
+        status: observed
+      - id: location
+        name: 南陇侯静舍
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-nanlong-hou-supplies
+        name: 南陇侯个人储备
+        description: 个人物资与有限灵石，不包含所属门派全部财产。
+        status: observed
+      - id: known-canon-lu-weiying
+        name: 鲁卫英（璇玑子）
+        description: 已有修行往来，各自私藏的线索不会全共享。鲁卫英与璇玑子是同一位修士的称呼。
+        status: observed
+      - id: known-dv-nanlong-family-book
+        name: 南陇祖传残记
+        description: 祖传隐语提及苍坤与血咒门，不包含现时确认安全的路线或银钵内真相。
+        status: observed
+      - id: known-dv-nanlong-sword
+        name: 南陇金剑
+        description: 自己持有的普通本命金剑，仍需继续培炼。
+        status: observed
+      - id: known-dv-cangkun-hidden-cave
+        name: 苍坤旧藏府
+        description: 只知道家传传说可能指向草原旧藏府，尚无实察坐标。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴御剑、防护和辨读家传禁制，万尺一线以精血元气为代价。
+        description: 元婴御剑、防护和辨读家传禁制，万尺一线以精血元气为代价。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-life
+        subjectId: self
+        predicate: current-life
+        value:
+          kind: text
+          value: 比较祖传旧图与当前山势，暂不以性命冒险。
+        description: 比较祖传旧图与当前山势，暂不以性命冒险。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-nanlong-hou
+      - local_entity_id: location
+        canonical_entity_ids:
+          - dv-nanlong-retreat
+      - local_entity_id: known-canon-nanlong-hou-supplies
+        canonical_entity_ids:
+          - canon-nanlong-hou-supplies
+      - local_entity_id: known-canon-lu-weiying
+        canonical_entity_ids:
+          - canon-lu-weiying
+      - local_entity_id: known-dv-nanlong-family-book
+        canonical_entity_ids:
+          - dv-nanlong-family-book
+      - local_entity_id: known-dv-nanlong-sword
+        canonical_entity_ids:
+          - dv-nanlong-sword
+      - local_entity_id: known-dv-cangkun-hidden-cave
+        canonical_entity_ids:
+          - dv-cangkun-hidden-cave

@@ -1,0 +1,26 @@
+id: ad-he-kang-altar
+kind: location
+name: 八元锁魂祭坛
+description: 隐蔽石林中的血坛、八铜柱与古灯相联，内有黑檀钵。
+placement: associated-demon-realm
+facts:
+  - id: ad-he-kang-altar-route-ad-original-seal
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-original-seal
+    description: route-to
+    access:
+      kind: public
+  - id: ad-he-kang-altar-condition-ad-original-seal
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐藏的内层支路需要真实定位与阵法手段；阵可阻拦和挪移来者，外守卫不知祭坛精确入口。
+    description: 隐藏的内层支路需要真实定位与阵法手段；阵可阻拦和挪移来者，外守卫不知祭坛精确入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

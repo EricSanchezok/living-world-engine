@@ -1,0 +1,24 @@
+id: guanghan-dark-pack
+kind: creature-group
+name: 暗兽林南群
+description: 有各自身体的局部兽群，护食、育幼和避险；不是全界生物总数。
+placement: guanghan-dark-forest
+facts:
+  - id: guanghan-dark-pack-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 18
+    description: individual-count
+    access:
+      kind: private
+meters:
+  - id: guanghan-dark-pack-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-dark-pack-force
+    definition_id: force
+    value: 5
+shared_activity_resources: []

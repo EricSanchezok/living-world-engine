@@ -1,0 +1,1235 @@
+{
+  "scope": "final-full-world-initialization",
+  "worldHash": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721",
+  "regions": 35,
+  "baselineEntities": 5164,
+  "originCount": 9,
+  "archiveImport": true,
+  "origins": [
+    {
+      "origin": "herbal-apprentice",
+      "instance": "3b971bb9-b1d8-4179-ab20-293862fd36a5",
+      "actor": "herbal-apprentice-1",
+      "entities": 5182,
+      "agents": 852,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "herbal-apprentice-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "十二岁的乡村药童，有基本辨药手艺，尚不知道自己能否修仙。家人健在，生活拮据但正常。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "herbal-yard",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:a4fdc2b738d3ad998d73de6812e8eafc3c8517cfcf2244869c378f9472dc4438",
+          "definitionId": "copper",
+          "holderId": "herbal-apprentice-1",
+          "amount": 36
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "herbal-apprentice-1-health",
+          "definitionId": "health",
+          "entityId": "herbal-apprentice-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "herbal-apprentice-1-mana",
+          "definitionId": "mana",
+          "entityId": "herbal-apprentice-1",
+          "current": 0,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "herbal-player-root",
+          "subjectId": "herbal-apprentice-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "金木水土四属性灵根。"
+          },
+          "description": "金木水土四属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "herbal-player-age",
+          "subjectId": "herbal-apprentice-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 12
+          },
+          "description": "药童十二岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "herbal-player-skill",
+          "subjectId": "herbal-apprentice-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "能辨认常见药草，处理轻微外伤；不会修仙法诀。"
+          },
+          "description": "能辨认常见药草，处理轻微外伤；不会修仙法诀。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "herbal-mother",
+        "herbal-master",
+        "herbal-buyer",
+        "herbal-uncle"
+      ],
+      "ownBindingCount": 16,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "merchant-heir",
+      "instance": "e905018b-25dd-46b7-9157-3fa1e6409d5d",
+      "actor": "merchant-heir-1",
+      "entities": 5184,
+      "agents": 852,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "merchant-heir-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "林家经营药材铺与杂货铺，父亲仍掌大账。你有月例、住处和日常帮手，尚未正式接管家业。家业稳健，家人各有日常事务。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "lin-estate",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:2d588662654db3ebf629aa05859a0253080f4b2d3881e7bec2b41135e7af46e1",
+          "definitionId": "silver",
+          "holderId": "merchant-heir-1",
+          "amount": 40
+        },
+        {
+          "id": "rt:quantity:169eb70e6272cb9370e93d01de82e29967636ee8d0d458dd8f60b5701daece84",
+          "definitionId": "copper",
+          "holderId": "merchant-heir-1",
+          "amount": 600
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "merchant-heir-1-health",
+          "definitionId": "health",
+          "entityId": "merchant-heir-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "merchant-heir-1-mana",
+          "definitionId": "mana",
+          "entityId": "merchant-heir-1",
+          "current": 0,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "merchant-heir-root",
+          "subjectId": "merchant-heir-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "木水火属性灵根。"
+          },
+          "description": "木水火属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "merchant-heir-age",
+          "subjectId": "merchant-heir-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 17
+          },
+          "description": "年龄为17岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "merchant-heir-skill",
+          "subjectId": "merchant-heir-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "会识普通货账与药材品类，尚未学修仙功法。"
+          },
+          "description": "会识普通货账与药材品类，尚未学修仙功法。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "merchant-heir-cultivation",
+          "subjectId": "merchant-heir-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "凡人，尚未修炼"
+          },
+          "description": "凡人，尚未修炼",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "merchant-heir-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "lin-father",
+        "lin-manager",
+        "lin-buyer",
+        "lin-helper",
+        "lin-old-client"
+      ],
+      "ownBindingCount": 21,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "escort-apprentice",
+      "instance": "be0ba6ba-ea48-4018-8613-096f8135b297",
+      "actor": "escort-apprentice-1",
+      "entities": 5182,
+      "agents": 854,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "escort-apprentice-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "走过几趟短镖，会照料驮马、辨认驿路和使用普通兵刃，尚不是江湖高手。曾帮助一名受伤散修躲开追踪，对方答应偿还一次有边界的人情。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "yuanan-yard",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:41cf2bfb0f1b0a8388695acd2f24e4f00917634657acb3c67d2ecf691a2164c0",
+          "definitionId": "silver",
+          "holderId": "escort-apprentice-1",
+          "amount": 3
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "escort-apprentice-1-health",
+          "definitionId": "health",
+          "entityId": "escort-apprentice-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "escort-apprentice-1-mana",
+          "definitionId": "mana",
+          "entityId": "escort-apprentice-1",
+          "current": 0,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "escort-apprentice-root",
+          "subjectId": "escort-apprentice-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "escort-apprentice-age",
+          "subjectId": "escort-apprentice-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 19
+          },
+          "description": "年龄为19岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "escort-apprentice-skill",
+          "subjectId": "escort-apprentice-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "会照料驮马、辨认普通驿路和使用短刀；没有灵根与修仙法力。"
+          },
+          "description": "会照料驮马、辨认普通驿路和使用短刀；没有灵根与修仙法力。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "escort-apprentice-cultivation",
+          "subjectId": "escort-apprentice-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "凡俗武艺学徒"
+          },
+          "description": "凡俗武艺学徒",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "escort-apprentice-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "escort-master",
+        "escort-friend",
+        "escort-cultivator",
+        "escort-stranger",
+        "escort-client"
+      ],
+      "ownBindingCount": 17,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "clan-junior",
+      "instance": "2f8c54ee-15e7-4c31-98f8-3928f021d731",
+      "actor": "clan-junior-1",
+      "entities": 5185,
+      "agents": 851,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "clan-junior-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "与母亲住在支谷，按族规维护库房和低阶器物。配给有限，有族人看重手艺，也有人担忧保留旧物拖累账目。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "shen-store",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:047f7324532b5fc161d2fe1a5143f3ba3e3fdd1988f94b060201dff4e573cc8b",
+          "definitionId": "low-stone",
+          "holderId": "clan-junior-1",
+          "amount": 18
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "clan-junior-1-health",
+          "definitionId": "health",
+          "entityId": "clan-junior-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "clan-junior-1-mana",
+          "definitionId": "mana",
+          "entityId": "clan-junior-1",
+          "current": 30,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "clan-junior-root",
+          "subjectId": "clan-junior-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "金土水属性灵根。"
+          },
+          "description": "金土水属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "clan-junior-age",
+          "subjectId": "clan-junior-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 21
+          },
+          "description": "年龄为21岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "clan-junior-skill",
+          "subjectId": "clan-junior-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气三层，已学普通引气与有限御物，能检查一种低阶器座的断线接点；材料和图样限制真实存在。"
+          },
+          "description": "炼气三层，已学普通引气与有限御物，能检查一种低阶器座的断线接点；材料和图样限制真实存在。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "clan-junior-cultivation",
+          "subjectId": "clan-junior-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "炼气三层"
+          },
+          "description": "炼气三层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "clan-junior-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "shen-mother",
+        "shen-keeper",
+        "shen-peer"
+      ],
+      "ownBindingCount": 14,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "foundation-independent",
+      "instance": "00f910e5-4af0-4f0e-b4c0-14b1967022a9",
+      "actor": "foundation-independent-1",
+      "entities": 5177,
+      "agents": 850,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "foundation-independent-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "经营小洞府，与两名受你指导的晚辈相处多年。洞府有药圃、静室和储物间，产出有限。两位晚辈各有愿望，并非自动服从的随从。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "stone-pond",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:7a723fe7786a01b1ca6b1f8e6d73d8702fe0e3f132401600b20a1997d97949ec",
+          "definitionId": "low-stone",
+          "holderId": "foundation-independent-1",
+          "amount": 260
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "foundation-independent-1-health",
+          "definitionId": "health",
+          "entityId": "foundation-independent-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "foundation-independent-1-mana",
+          "definitionId": "mana",
+          "entityId": "foundation-independent-1",
+          "current": 200,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "foundation-independent-root",
+          "subjectId": "foundation-independent-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "木水土属性灵根。"
+          },
+          "description": "木水土属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "foundation-independent-age",
+          "subjectId": "foundation-independent-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 86
+          },
+          "description": "年龄为86岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "foundation-independent-skill",
+          "subjectId": "foundation-independent-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基初期；已学御物、基础神识运用、自用飞行法器催动与藏风阵器布置维护；不能用修为代替未知地点调查。"
+          },
+          "description": "筑基初期；已学御物、基础神识运用、自用飞行法器催动与藏风阵器布置维护；不能用修为代替未知地点调查。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "foundation-independent-cultivation",
+          "subjectId": "foundation-independent-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "筑基初期"
+          },
+          "description": "筑基初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "foundation-independent-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "pond-qinghe",
+        "pond-zhaosong",
+        "pond-wenshen"
+      ],
+      "ownBindingCount": 11,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "core-clan-elder",
+      "instance": "ddc7b12c-708d-4fba-8bfc-8fd1a394fcc3",
+      "actor": "core-clan-elder-1",
+      "entities": 5187,
+      "agents": 856,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "core-clan-elder-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "你是家族结丹长者之一，有分红和议事权，日常账目由管事负责。族人期待庇护，也有权对资源安排提出意见。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "xu-hall",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:4d21331d3c2415d5c197871811671051e49aed7f39919b978f5e5ec0a67e02eb",
+          "definitionId": "low-stone",
+          "holderId": "core-clan-elder-1",
+          "amount": 2200
+        },
+        {
+          "id": "rt:quantity:0475672f82bafed2174925e25a88fb2960ee21253e1682f7361636f812225ad8",
+          "definitionId": "mid-stone",
+          "holderId": "core-clan-elder-1",
+          "amount": 12
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "core-clan-elder-1-health",
+          "definitionId": "health",
+          "entityId": "core-clan-elder-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "core-clan-elder-1-mana",
+          "definitionId": "mana",
+          "entityId": "core-clan-elder-1",
+          "current": 500,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "core-clan-elder-root",
+          "subjectId": "core-clan-elder-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "火土属性灵根。"
+          },
+          "description": "火土属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "core-clan-elder-age",
+          "subjectId": "core-clan-elder-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 213
+          },
+          "description": "年龄为213岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "core-clan-elder-skill",
+          "subjectId": "core-clan-elder-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期；已学御物、遁行、神识和本命法宝催动，掌握完整的普通灵材预处理副业。每份成品需要一份适用原料和真实工时，不保证特殊炼制必成。"
+          },
+          "description": "结丹初期；已学御物、遁行、神识和本命法宝催动，掌握完整的普通灵材预处理副业。每份成品需要一份适用原料和真实工时，不保证特殊炼制必成。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "core-clan-elder-cultivation",
+          "subjectId": "core-clan-elder-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期"
+          },
+          "description": "结丹初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "core-clan-elder-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "xu-manager",
+        "xu-cousin",
+        "xu-client",
+        "xu-shuangli",
+        "xu-zhicheng",
+        "xu-xingwang",
+        "xu-lan",
+        "xu-yuanshan",
+        "xu-qingning"
+      ],
+      "ownBindingCount": 21,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "spirit-merchant",
+      "instance": "8615c03e-cedc-4f4e-b244-f582cf9ec4cc",
+      "actor": "spirit-merchant-1",
+      "entities": 5185,
+      "agents": 852,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "spirit-merchant-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "三百二十六岁的灵界本土人族化神中期修士，经营青禾灵材行，有独立修炼居所。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "qinghe-store",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:ca6fbd48c42dccafa49c210faf88a0454466bfdf1a9b7f568d84000abe530e0e",
+          "definitionId": "low-stone",
+          "holderId": "spirit-merchant-1",
+          "amount": 8000
+        },
+        {
+          "id": "rt:quantity:038868975baf3ddc3d70f5cb38fbef456c30c2dd2753ab45f025eaea97744f85",
+          "definitionId": "mid-stone",
+          "holderId": "spirit-merchant-1",
+          "amount": 80
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "spirit-merchant-1-health",
+          "definitionId": "health",
+          "entityId": "spirit-merchant-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "spirit-merchant-1-mana",
+          "definitionId": "mana",
+          "entityId": "spirit-merchant-1",
+          "current": 1200,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "merchant-stage",
+          "subjectId": "spirit-merchant-1",
+          "predicate": "cultivation",
+          "value": {
+            "kind": "text",
+            "value": "化神中期；本土人族修士。"
+          },
+          "description": "化神中期；本土人族修士。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "merchant-roots",
+          "subjectId": "spirit-merchant-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "木水双属性灵根。"
+          },
+          "description": "木水双属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "merchant-skills",
+          "subjectId": "spirit-merchant-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。"
+          },
+          "description": "已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "spirit-merchant-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "spirit-manager",
+        "spirit-supplier",
+        "spirit-client-one",
+        "spirit-client-two"
+      ],
+      "ownBindingCount": 19,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "spirit-array-master",
+      "instance": "49df7435-79e9-499b-872b-4654e513b306",
+      "actor": "spirit-array-master-1",
+      "entities": 5179,
+      "agents": 851,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "spirit-array-master-1",
+        "kind": "person",
+        "name": "本地验收者",
+        "description": "灵界本土人族阵师，拥有独立修炼处所、相应能力、法宝与积蓄，与少数同阶旧友长期往来。残传尚有缺页，日常研究由熟悉的晚辈协助。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "listening-spring",
+      "personalQuantities": [
+        {
+          "id": "rt:quantity:8b65dc282b60cf5818ed4ff16cad832b37a5559f4b0c2b9b32ce2571d78c375f",
+          "definitionId": "low-stone",
+          "holderId": "spirit-array-master-1",
+          "amount": 20000
+        },
+        {
+          "id": "rt:quantity:7840ed686c9a1e6c58f5609937a1a3b80b8c98fc12f06da9057615adbd9300a4",
+          "definitionId": "mid-stone",
+          "holderId": "spirit-array-master-1",
+          "amount": 220
+        },
+        {
+          "id": "rt:quantity:b547c217d128fdcd9299126a13e1d936c99d5326ce917d7dd1d77b4d2856d342",
+          "definitionId": "high-stone",
+          "holderId": "spirit-array-master-1",
+          "amount": 4
+        }
+      ],
+      "personalMeters": [
+        {
+          "id": "spirit-array-master-1-health",
+          "definitionId": "health",
+          "entityId": "spirit-array-master-1",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "spirit-array-master-1-mana",
+          "definitionId": "mana",
+          "entityId": "spirit-array-master-1",
+          "current": 1800,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "spirit-array-master-root",
+          "subjectId": "spirit-array-master-1",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "金木水火土属性灵根。"
+          },
+          "description": "金木水火土属性灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "spirit-array-master-age",
+          "subjectId": "spirit-array-master-1",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 782
+          },
+          "description": "年龄为782岁。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "spirit-array-master-skill",
+          "subjectId": "spirit-array-master-1",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼虚初期，已具五行合一的修行基础；已学遁行、御物、神识与自用法宝催动。能识别残传覆盖的阵纹接点，不能凭境界读取他人记忆、判定争议权属或补齐未知古阵。"
+          },
+          "description": "炼虚初期，已具五行合一的修行基础；已学遁行、御物、神识与自用法宝催动。能识别残传覆盖的阵纹接点，不能凭境界读取他人记忆、判定争议权属或补齐未知古阵。",
+          "access": {
+            "kind": "public"
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "spirit-array-master-cultivation",
+          "subjectId": "spirit-array-master-1",
+          "predicate": "cultivation-stage",
+          "value": {
+            "kind": "text",
+            "value": "炼虚初期"
+          },
+          "description": "炼虚初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "spirit-array-master-1"
+            ]
+          },
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "array-friend",
+        "array-claimant",
+        "array-assistant"
+      ],
+      "ownBindingCount": 13,
+      "admissions": 1,
+      "producer": "15",
+      "creationEnabled": false
+    },
+    {
+      "origin": "han-li",
+      "instance": "7dc450d4-07c5-438c-b39a-7d03b204c9dd",
+      "actor": "canon-han-li",
+      "entities": 5164,
+      "agents": 846,
+      "hanCount": 1,
+      "replayEqual": true,
+      "initialEntity": {
+        "id": "canon-han-li",
+        "kind": "person",
+        "name": "韩立",
+        "description": "十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。",
+        "lifecycle": "active",
+        "createdAtStep": 0
+      },
+      "placement": "han-home",
+      "personalQuantities": [],
+      "personalMeters": [
+        {
+          "id": "canon-han-li-health",
+          "definitionId": "health",
+          "entityId": "canon-han-li",
+          "current": 100,
+          "firedThresholdIds": []
+        },
+        {
+          "id": "canon-han-li-mana",
+          "definitionId": "mana",
+          "entityId": "canon-han-li",
+          "current": 0,
+          "firedThresholdIds": []
+        }
+      ],
+      "personalFacts": [
+        {
+          "id": "han-age",
+          "predicate": "age",
+          "value": {
+            "kind": "number",
+            "value": 10
+          },
+          "description": "开篇韩立十岁。",
+          "access": {
+            "kind": "public"
+          },
+          "subjectId": "canon-han-li",
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "han-root",
+          "predicate": "spirit-root",
+          "value": {
+            "kind": "text",
+            "value": "木水火土四属性伪灵根。"
+          },
+          "description": "木水火土四属性伪灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
+          },
+          "subjectId": "canon-han-li",
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "han-untrained",
+          "predicate": "cultivation",
+          "value": {
+            "kind": "text",
+            "value": "尚未修仙，也未拜墨大夫为师。"
+          },
+          "description": "尚未修仙，也未拜墨大夫为师。",
+          "access": {
+            "kind": "private"
+          },
+          "subjectId": "canon-han-li",
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "canon-han-li-attitude-toward-uncle",
+          "predicate": "attitude-toward-uncle",
+          "value": {
+            "kind": "text",
+            "value": "对曾照顾家里的三叔印象很好。"
+          },
+          "description": "对曾照顾家里的三叔印象很好。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-han-li"
+            ]
+          },
+          "subjectId": "canon-han-li",
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        },
+        {
+          "id": "source-han-opening-literacy",
+          "predicate": "literacy",
+          "value": {
+            "kind": "text",
+            "value": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。"
+          },
+          "description": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-han-li"
+            ]
+          },
+          "subjectId": "canon-han-li",
+          "provenance": [
+            {
+              "kind": "world_seed",
+              "id": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721"
+            }
+          ]
+        }
+      ],
+      "knownBy": [
+        "han-elder-sister",
+        "han-eldest-brother",
+        "han-father",
+        "han-mother",
+        "han-uncle",
+        "han-younger-sister",
+        "han-zhu",
+        "old-zhang"
+      ],
+      "ownBindingCount": 11,
+      "admissions": 0,
+      "producer": "15",
+      "creationEnabled": false
+    }
+  ],
+  "modelCalls": 0,
+  "networkAttempts": 0,
+  "priorBehavioralEvidence": "reviews/regional-draft-import-and-origins.json",
+  "limitations": [
+    "This proves final artifact admission, identity, cognition references and replay; live action behavior is separately qualified.",
+    "Previously passed 150/700 actor probes are reused rather than rerun."
+  ]
+}

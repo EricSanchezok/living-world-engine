@@ -1,0 +1,26 @@
+id: bone-rock-wall
+kind: location
+name: 炼骨崖岩壁段
+description: 风化岩壁夹锐石，攀登有伤害与坠落风险；不会因是玩家而自动安全。
+placement: caixia-mountain
+facts:
+  - id: bone-rock-wall-route-bone-bamboo-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: bone-bamboo-slope
+    description: 风化岩壁夹锐石，攀登有伤害与坠落风险；不会因是玩家而自动安全。
+    access:
+      kind: public
+  - id: bone-rock-wall-route-bone-cliff-top
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: bone-cliff-top
+    description: 悬崖上方平台；测试时的绳索和护卫安排须由当时实际准备决定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

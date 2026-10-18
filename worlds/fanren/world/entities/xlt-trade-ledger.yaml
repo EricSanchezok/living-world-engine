@@ -1,0 +1,29 @@
+id: xlt-trade-ledger
+kind: item
+name: 茶叶订货簿
+description: 四十份干茶总价三十枚下阶灵石，十枚定金已收，二十枚待实际验货结清；约定交到折岚隘口。
+placement: xlt-tea-yard
+facts:
+  - id: xlt-trade-ledger-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-xu-lan
+    description: owned-by
+    access:
+      kind: public
+  - id: xlt-trade-ledger-balance
+    predicate: obligation
+    value:
+      kind: text
+      value: 细翼欠许兰二十枚下阶灵石尾款，以按约交付验收四十份干茶为条件；尚未转移，违约可协商赔偿。
+    description: 细翼欠许兰二十枚下阶灵石尾款，以按约交付验收四十份干茶为条件；尚未转移，违约可协商赔偿。
+    access:
+      kind: agents
+      agentIds:
+        - xlt-xi
+        - xlt-xu-lan
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

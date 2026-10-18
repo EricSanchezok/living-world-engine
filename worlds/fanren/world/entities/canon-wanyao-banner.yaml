@@ -1,0 +1,18 @@
+id: canon-wanyao-banner
+kind: item
+name: 万妖幡
+description: 唯一万妖幡，长期由谷中妖气积蓄维护；威力受实际祭炼者、积蓄与目标影响。
+placement: wanyao-banner-ground
+facts:
+  - id: canon-wanyao-banner-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wanyao-court
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

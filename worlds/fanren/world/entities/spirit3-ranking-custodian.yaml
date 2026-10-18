@@ -1,0 +1,183 @@
+id: spirit3-ranking-custodian
+kind: person
+name: 乔缄
+description: 负责抄录榜碑可见变化的炼虚修士，擅长符文比较，对未见原件的奇谈兴趣很大。
+placement: spirit3-ranking-island
+facts:
+  - id: spirit3-ranking-custodian-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: spirit3-ranking-custodian-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护体与飞遁、银蝌文字形辨识、普通影符工艺与有限影体操纵。
+    description: 炼虚护体与飞遁、银蝌文字形辨识、普通影符工艺与有限影体操纵。
+    access:
+      kind: private
+  - id: spirit3-ranking-custodian-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 木、土两属性灵根
+    description: 木、土两属性灵根
+    access:
+      kind: discoverable
+      condition: 有合适手段并实际检测本人的灵根；旁人不能由职务或衣饰读出。
+meters:
+  - id: spirit3-ranking-custodian-health
+    definition_id: health
+    current: 100
+  - id: spirit3-ranking-custodian-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: spirit3-ranking-custodian-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: spirit3-ranking-custodian-force
+    definition_id: force
+    value: 6
+  - id: spirit3-ranking-custodian-craft
+    definition_id: craft
+    value: 5
+  - id: spirit3-ranking-custodian-perception
+    definition_id: perception
+    value: 6
+  - id: spirit3-ranking-custodian-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: spirit3-ranking-custodian
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 负责抄录榜碑可见变化的炼虚修士，擅长符文比较，对未见原件的奇谈兴趣很大。
+      voice: 喜欢先让来客画出看见的符号，再谈各自解释；遇到好问题会翻旧抄页。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 比较两页旧抄录里一处笔画差异，决定是誊写误差还是需要重读玉壁。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 乔缄
+        description: 负责抄录榜碑可见变化的炼虚修士，擅长符文比较，对未见原件的奇谈兴趣很大。
+        status: observed
+      - id: location
+        name: 天灵高空榜碑岛
+        description: 当前生活或办事之地，开篇已入夜。
+        status: observed
+      - id: review-spirit3-ranking-custodian-private-stock
+        name: 乔缄私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-spirit3-ranking-notebook
+        name: 榜碑观测册
+        description: 记录当前可见纹路的局部抄录，含一处笔画待核，纸边留有重新比对的空格。
+        status: observed
+      - id: review-spirit3-shadow-note
+        name: 普通影符工艺手录
+        description: 记录一次性普通影符的材料、封存与操纵边界；提及完美影符只是未见原件的传闻。
+        status: observed
+      - id: review-spirit3-chaling-note
+        name: 诧灵琵琶旧闻摘记
+        description: 记数万年前未知姓名修士所炼琵琶的三种传闻神通，未记现存地点。
+        status: observed
+      - id: review-spirit3-shadow-sample
+        name: 乔缄试制影符
+        description: 已用二枚中阶灵石封成的一张一次性普通影符；用后实体消耗，影体不带独立心智或私人财产。
+        status: observed
+      - id: review-spirit3-ranking-jade-wall
+        name: 混沌万灵榜玉壁
+        description: 职责是实看榜纹，既不知道宝主位置也没有完整原理。
+        status: observed
+      - id: review-spirit3-ranking-petition
+        name: 榜碑摹录呈文
+        description: 乔缄申请4份工料重制两张容易混笔的摹片，希望保留原件供对照，尚未用去公库材料。
+        status: observed
+      - id: review-spirit3-current-tianling-ruler
+        name: 天灵灵皇
+        description: 认识当前本境持位者，能递送自己职责内的记录。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护体与飞遁、银蝌文字形辨识、普通影符工艺与有限影体操纵。
+        description: 炼虚护体与飞遁、银蝌文字形辨识、普通影符工艺与有限影体操纵。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root
+        subjectId: self
+        predicate: known-spiritual-root
+        value:
+          kind: text
+          value: 木、土两属性灵根，是本人已有检测结果。
+        description: 本人接受过检测并知道结果。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - spirit3-ranking-custodian
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit3-ranking-island
+      - local_entity_id: review-spirit3-ranking-custodian-private-stock
+        canonical_entity_ids:
+          - spirit3-ranking-custodian-private-stock
+      - local_entity_id: review-spirit3-ranking-notebook
+        canonical_entity_ids:
+          - spirit3-ranking-notebook
+      - local_entity_id: review-spirit3-shadow-note
+        canonical_entity_ids:
+          - spirit3-shadow-note
+      - local_entity_id: review-spirit3-chaling-note
+        canonical_entity_ids:
+          - spirit3-chaling-note
+      - local_entity_id: review-spirit3-shadow-sample
+        canonical_entity_ids:
+          - spirit3-shadow-sample
+      - local_entity_id: review-spirit3-ranking-jade-wall
+        canonical_entity_ids:
+          - spirit3-ranking-jade-wall
+      - local_entity_id: review-spirit3-ranking-petition
+        canonical_entity_ids:
+          - spirit3-ranking-petition
+      - local_entity_id: review-spirit3-current-tianling-ruler
+        canonical_entity_ids:
+          - spirit3-current-tianling-ruler

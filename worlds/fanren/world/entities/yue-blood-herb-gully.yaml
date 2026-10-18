@@ -1,0 +1,26 @@
+id: yue-blood-herb-gully
+kind: location
+name: 禁地湿石药沟
+description: 潮湿岩隙间长有灵草，安全采集须识别地形与生物。
+placement: yue-blood-forbidden
+facts:
+  - id: yue-blood-herb-gully-route-yue-blood-forbidden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    access:
+      kind: public
+  - id: yue-blood-herb-gully-travel-yue-blood-forbidden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    description: 禁地内山路不安全，药沟具体位置须真实探察，不因地图有名字直接知道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

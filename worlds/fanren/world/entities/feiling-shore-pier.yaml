@@ -1,0 +1,26 @@
+id: feiling-shore-pier
+kind: location
+name: 天鹏沿海栈台
+description: 旅人登岸验货和照顾飞禽的地方。
+placement: feiling-tianpeng-domain
+facts:
+  - id: feiling-shore-pier-route-feiling-chimo-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-chimo-sea
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-shore-pier-condition-feiling-chimo-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旅人登岸验货和照顾飞禽的地方。
+    description: 旅人登岸验货和照顾飞禽的地方。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: thunder-debate-fund
+kind: container
+name: 问艺台支用款
+description: 只供本轮记录与试验，报酬须验收实际记录。
+placement: thunder-public-debate
+facts:
+  - id: thunder-debate-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

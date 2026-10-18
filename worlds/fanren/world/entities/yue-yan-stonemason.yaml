@@ -1,0 +1,178 @@
+id: yue-yan-stonemason
+kind: person
+name: 燕河
+description: 燕家凡俗族人，修屋砌墙，从家族工作中谋生。
+placement: yue-yanling-fort
+facts:
+  - id: yue-yan-stonemason-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-stonemason
+  - id: yue-yan-stonemason-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 石作、测缝和基础脚手架搭设。
+    description: 石作、测缝和基础脚手架搭设。
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-stonemason
+  - id: yue-yan-stonemason-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根的凡人。
+    description: 无灵根的凡人。
+    access:
+      kind: agents
+      agentIds:
+        - yue-yan-stonemason
+  - id: yue-yan-stonemason-member
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 自己所属家族，职责和个人份额需分别说明。
+    access:
+      kind: public
+meters:
+  - id: yue-yan-stonemason-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 120
+ratings:
+  - id: yue-yan-stonemason-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: yue-yan-stonemason-force
+    definition_id: force
+    value: 1
+  - id: yue-yan-stonemason-craft
+    definition_id: craft
+    value: 1
+  - id: yue-yan-stonemason-perception
+    definition_id: perception
+    value: 0
+  - id: yue-yan-stonemason-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-yan-stonemason
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 燕家凡俗族人，修屋砌墙，从家族工作中谋生。
+      voice: 讲手艺有耐心，不愿让人拿没灵根来否定自己。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把外墙裂缝的位置交给管事，争取及时修补。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 燕河
+        description: 燕家凡俗族人，修屋砌墙，从家族工作中谋生。
+        status: observed
+      - id: location
+        name: 燕翎堡
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-yan-stonemason-pouch
+        name: 燕河的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+      - id: known-canon-yan-xuanye
+        name: 玄夜
+        description: 族务管事与凡俗石匠，修缮要付实际工钱。
+        status: observed
+      - id: known-yue-yan-repair-tools
+        name: 燕河的石作工具
+        description: 锤凿、测线与一副可用脚手架，不能同时在两处架好。
+        status: observed
+      - id: known-yue-yan-clan
+        name: 燕氏家族
+        description: 自己所属家族，职责和个人份额需分别说明。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 石作、测缝和基础脚手架搭设。
+        description: 石作、测缝和基础脚手架搭设。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把外墙裂缝的位置交给管事，争取及时修补。
+        description: 把外墙裂缝的位置交给管事，争取及时修补。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-yan-stonemason
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-yanling-fort
+      - local_entity_id: known-yue-yan-stonemason-pouch
+        canonical_entity_ids:
+          - yue-yan-stonemason-pouch
+      - local_entity_id: known-canon-yan-xuanye
+        canonical_entity_ids:
+          - canon-yan-xuanye
+      - local_entity_id: known-yue-yan-repair-tools
+        canonical_entity_ids:
+          - yue-yan-repair-tools
+      - local_entity_id: known-yue-yan-clan
+        canonical_entity_ids:
+          - yue-yan-clan

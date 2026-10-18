@@ -1,0 +1,27 @@
+id: spirit-basic-drive-diagram
+kind: item
+name: 基础驱动线图
+description: 唐简多年修补经验汇成的一册图纸，展示手套和升降器的低阶线路。
+placement: spirit-device-smith
+facts:
+  - id: spirit-basic-drive-diagram-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-basic-drive-diagram-study-scope
+    predicate: study-scope
+    value:
+      kind: text
+      value: 可学会特定石槽、引流线与动作开关的对应，抄阅并练习后才可形成技能；不含银蝌文全解或高阶阵法。
+    description: 可学会特定石槽、引流线与动作开关的对应，抄阅并练习后才可形成技能；不含银蝌文全解或高阶阵法。
+    access:
+      kind: discoverable
+      condition: 经唐简允许实际阅读图纸，并逐段看清注记。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: void-black-hall
+kind: location
+name: 极妙黑殿
+description: 吸光阵下显得极黑，神识难以离体。
+placement: human-void-hall
+facts:
+  - id: void-black-hall-route-void-illusion
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-illusion
+    description: route-to
+    access:
+      kind: public
+  - id: void-black-hall-condition-void-illusion
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-black-hall-route-void-tower-one
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tower-one
+    description: route-to
+    access:
+      kind: public
+  - id: void-black-hall-condition-void-tower-one
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

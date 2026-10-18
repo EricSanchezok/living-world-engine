@@ -1,0 +1,24 @@
+id: blood-xu-fund
+kind: container
+name: 许氏养护公库
+description: 供祖物养护及共同生活，需记录用途，经共同同意可调整。
+placement: blood-xu-ancestral-estate
+facts:
+  - id: blood-xu-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-xu-clan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: herb-packet
+    amount: 12
+ratings: []
+shared_activity_resources: []

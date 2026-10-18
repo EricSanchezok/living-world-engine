@@ -1,0 +1,20 @@
+id: wild-wolf-funds
+kind: container
+name: 野狼帮账房现银
+description: 储放在此的现有物资，取用需经持有人授权。
+placement: wild-wolf-headquarters
+facts:
+  - id: wild-wolf-funds-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: wild-wolf-gang
+    description: 物资属于记载主体。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 1500
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,19 @@
+id: global-qilin-earth-pear-3
+kind: item
+name: 土梨果3
+description: 一枚用于喂养双瞳鼠的土梨果。
+placement: yue-beast-feed
+facts:
+  - id: global-qilin-earth-pear-3-use
+    predicate: consumable-use
+    value:
+      kind: text
+      value: 门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。
+    description: 门中饲料，由陶冬取用；一枚被吃掉即消耗，不能作为仍存的果实再喂或交易。
+    access:
+      kind: discoverable
+      condition: 检查兽栏交接牌或询问当值饲养者。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

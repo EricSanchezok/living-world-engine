@@ -1,0 +1,179 @@
+id: south-smith
+kind: person
+name: 岳识火
+description: 低阶散修炉匠，在银蛇山地火旁修炼兼炼小器。
+placement: south-forge-hut
+facts:
+  - id: south-smith-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - south-smith
+  - id: south-smith-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼气七层火法、低阶炼器与金属修补。
+    description: 炼气七层火法、低阶炼器与金属修补。
+    access:
+      kind: agents
+      agentIds:
+        - south-smith
+  - id: south-smith-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、火双灵根，早年已经检测。
+    description: 木、火双灵根，早年已经检测。
+    access:
+      kind: agents
+      agentIds:
+        - south-smith
+  - id: south-smith-teaches-south-smith-student
+    predicate: teaches
+    value:
+      kind: entity
+      entityId: south-smith-student
+    description: teaches
+    access:
+      kind: private
+meters:
+  - id: south-smith-health
+    definition_id: health
+    current: 100
+  - id: south-smith-mana
+    definition_id: mana
+    current: 220
+quantities: []
+ratings:
+  - id: south-smith-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: south-smith-force
+    definition_id: force
+    value: 2
+  - id: south-smith-craft
+    definition_id: craft
+    value: 4
+  - id: south-smith-perception
+    definition_id: perception
+    value: 1
+  - id: south-smith-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: south-smith
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 低阶散修炉匠，在银蛇山地火旁修炼兼炼小器。
+      voice: 说起火候兴致很高，做不出的东西会说明缺哪步本领。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把一只旧炉钳修好，试做能稳拿热坩埚的夹口。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 岳识火
+        description: 低阶散修炉匠，在银蛇山地火旁修炼兼炼小器。
+        status: observed
+      - id: location
+        name: 火口工棚
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-south-smith-purse
+        name: 岳识火的小袋
+        description: 本人随身钱物，不含家产或宗门库。
+        status: observed
+      - id: known-south-smith-student
+        name: 陆荻
+        description: 既有炼器师徒，学徒自己的材料仍归本人。
+        status: observed
+      - id: known-south-smith-anvil
+        name: 炉匠锻台
+        description: 真实锻台和夹持工具，使用需技能与炉火。
+        status: observed
+      - id: known-south-smith-stock
+        name: 炉匠材料箱
+        description: 本人炉料，不是地火无限生成金属。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼气七层火法、低阶炼器与金属修补。
+        description: 炼气七层火法、低阶炼器与金属修补。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、火双灵根，早年已经检测。
+        description: 木、火双灵根，早年已经检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-work
+        subjectId: self
+        predicate: opening-work
+        value:
+          kind: text
+          value: 把一只旧炉钳修好，试做能稳拿热坩埚的夹口。
+        description: 把一只旧炉钳修好，试做能稳拿热坩埚的夹口。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - south-smith
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-forge-hut
+      - local_entity_id: known-south-smith-purse
+        canonical_entity_ids:
+          - south-smith-purse
+      - local_entity_id: known-south-smith-student
+        canonical_entity_ids:
+          - south-smith-student
+      - local_entity_id: known-south-smith-anvil
+        canonical_entity_ids:
+          - south-smith-anvil
+      - local_entity_id: known-south-smith-stock
+        canonical_entity_ids:
+          - south-smith-stock

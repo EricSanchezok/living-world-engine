@@ -1,0 +1,18 @@
+id: qixuan-inner
+kind: organization
+name: 七玄门内门
+description: 七玄门的行政分部，由所属堂口分担事务。
+placement: qixuan-main-hall
+facts:
+  - id: qixuan-inner-part-of
+    predicate: part-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 七玄门内部建制。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

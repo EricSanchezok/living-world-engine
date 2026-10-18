@@ -1,0 +1,26 @@
+id: dajin-huangqing-workshop
+kind: location
+name: 皇清观炼器别院
+description: 山腰的炼器别院，设炼器阁与依山居住洞窟，器物交付须有实际委托。
+placement: dajin-huangqing
+facts:
+  - id: dajin-huangqing-workshop-route-dajin-huangqing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing
+    description: 观内往来须有相应通行资格。
+    access:
+      kind: public
+  - id: dajin-huangqing-workshop-route-dajin-huangqing-earthfire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing-earthfire
+    description: 进入炼制场所须核对火源、器物及借用权限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: xlt-lu-tool
+kind: item
+name: 露汀的采药铲
+description: 采药铲可用于本人已经学会的手艺，使用和维护须相应材料，不能代替其他法门。
+placement: xlt-lu
+facts:
+  - id: xlt-lu-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-lu
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

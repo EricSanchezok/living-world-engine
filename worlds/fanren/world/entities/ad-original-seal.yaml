@@ -1,0 +1,58 @@
+id: ad-original-seal
+kind: location
+name: 始印之地
+description: 封印螟虫之母的上古禁地，外围仍有守卫和有限破隙。
+placement: associated-demon-realm
+facts:
+  - id: ad-original-seal-route-ad-seal-outer-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-seal-outer-post
+    description: route-to
+    access:
+      kind: public
+  - id: ad-original-seal-condition-ad-seal-outer-post
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-original-seal-route-ad-seal-inner-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-seal-inner-cave
+    description: route-to
+    access:
+      kind: public
+  - id: ad-original-seal-condition-ad-seal-inner-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-original-seal-route-ad-he-kang-altar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-he-kang-altar
+    description: route-to
+    access:
+      kind: public
+  - id: ad-original-seal-condition-ad-he-kang-altar
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐藏的内层支路需要真实定位与阵法手段；阵可阻拦和挪移来者，外守卫不知祭坛精确入口。
+    description: 隐藏的内层支路需要真实定位与阵法手段；阵可阻拦和挪移来者，外守卫不知祭坛精确入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

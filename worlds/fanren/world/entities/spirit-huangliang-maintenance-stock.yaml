@@ -1,0 +1,22 @@
+id: spirit-huangliang-maintenance-stock
+kind: container
+name: 黄粱洞府维护料
+description: 修炼居所日常维护所用现存材料。
+placement: spirit-huangliang-cave
+facts:
+  - id: spirit-huangliang-maintenance-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huangliang-lingjun
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: maintenance-material
+    amount: 12
+  - definition_id: mid-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

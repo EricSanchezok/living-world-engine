@@ -1,0 +1,26 @@
+id: north-bingyuan-ritual-ground
+kind: location
+name: 冰渊岛族中仪式地
+description: 冰凤族传统进阶仪式地，须掌握本族仪式知识并备齐所需材料；能否进阶仍取决于修行与施术情况。
+placement: north-bingyuan
+facts:
+  - id: north-bingyuan-ritual-ground-route-north-bingyuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-bingyuan
+    description: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    access:
+      kind: public
+  - id: north-bingyuan-ritual-ground-travel-north-bingyuan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    description: 本族仪式地，须获实际许可与相关知识；前往不保证突破。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

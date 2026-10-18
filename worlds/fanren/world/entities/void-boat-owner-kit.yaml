@@ -1,0 +1,22 @@
+id: void-boat-owner-kit
+kind: container
+name: 沈棹的随身器具
+description: 识潮行船、凡俗记账，无灵根。所需的个人日常器具。
+placement: void-boat-owner
+facts:
+  - id: void-boat-owner-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-boat-owner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

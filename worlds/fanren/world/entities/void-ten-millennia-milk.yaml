@@ -1,0 +1,26 @@
+id: void-ten-millennia-milk
+kind: container
+name: 龙首累积灵乳
+description: 龙首凝聚装置中积存的灵乳，取用会消耗现存液体。
+placement: void-spring
+facts:
+  - id: void-ten-millennia-milk-remaining-doses
+    predicate: remaining-doses
+    value:
+      kind: number
+      value: 12
+    description: remaining-doses
+    access:
+      kind: private
+  - id: void-ten-millennia-milk-effect
+    predicate: effect
+    value:
+      kind: text
+      value: 一小口能迅速恢复相应人界修士大量法力；不可把有限液体重复使用或保证所有境界全满。
+    description: 一小口能迅速恢复相应人界修士大量法力；不可把有限液体重复使用或保证所有境界全满。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

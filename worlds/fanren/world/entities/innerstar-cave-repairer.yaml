@@ -1,0 +1,217 @@
+id: innerstar-cave-repairer
+kind: person
+name: 许锥
+description: 修洞匠人，与租居所合作，修行慢却熟悉引水槽。
+placement: innerstar-rental-cave-b
+facts:
+  - id: innerstar-cave-repairer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 筑基
+    description: 筑基
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-cave-repairer
+  - id: innerstar-cave-repairer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 筑基土法、引水槽修整与小阵修护。
+    description: 筑基土法、引水槽修整与小阵修护。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-cave-repairer
+  - id: innerstar-cave-repairer-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 水火灵根，已经检测。
+    description: 水火灵根，已经检测。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-cave-repairer
+  - id: innerstar-cave-repairer-contracted-by
+    predicate: contracted-by
+    value:
+      kind: entity
+      entityId: innerstar-cave-clerk
+    description: contracted-by
+    access:
+      kind: private
+  - id: innerstar-cave-repairer-repair-offer
+    predicate: repair-offer
+    value:
+      kind: text
+      value: 把槽口归位需两份材料、一次支撑和3600秒施工，工钱三十低阶灵石；检查后可提不同办法，但尚未收钱也没有完工。
+    description: 把槽口归位需两份材料、一次支撑和3600秒施工，工钱三十低阶灵石；检查后可提不同办法，但尚未收钱也没有完工。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-cave-repairer
+meters:
+  - id: innerstar-cave-repairer-health
+    definition_id: health
+    current: 100
+  - id: innerstar-cave-repairer-mana
+    definition_id: mana
+    current: 440
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: innerstar-cave-repairer-cultivation
+    definition_id: cultivation
+    value: 2
+  - id: innerstar-cave-repairer-force
+    definition_id: force
+    value: 2
+  - id: innerstar-cave-repairer-craft
+    definition_id: craft
+    value: 3
+  - id: innerstar-cave-repairer-perception
+    definition_id: perception
+    value: 2
+  - id: innerstar-cave-repairer-influence
+    definition_id: influence
+    value: 2
+shared_activity_resources: []
+agent:
+  id: innerstar-cave-repairer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 修洞匠人，与租居所合作，修行慢却熟悉引水槽。
+      voice: 有行家脾气，喜欢让人亲眼看湿痕，再解释工序。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 找到临风洞渗水根源，谈妥工料后再动手。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 许锥
+        description: 修洞匠人，与租居所合作，修行慢却熟悉引水槽。
+        status: observed
+      - id: location
+        name: 临风洞
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-innerstar-cave-repairer-personal-pouch
+        name: 许锥的私用行囊
+        description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+        status: observed
+      - id: known-innerstar-cave-clerk
+        name: 苏砚
+        description: 熟悉的修洞合作人，临风洞这次尚未谈妥费用。
+        status: observed
+      - id: known-innerstar-cave-repair-fund
+        name: 租居所维护款
+        description: 租居所答应按验修结果支付，尚未付给自己。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 筑基土法、引水槽修整与小阵修护。
+        description: 筑基土法、引水槽修整与小阵修护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 找到临风洞渗水根源，谈妥工料后再动手。
+        description: 找到临风洞渗水根源，谈妥工料后再动手。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是筑基修士。
+        description: 自己是筑基修士。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 水火灵根，已经检测。
+        description: 水火灵根，已经检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        description: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: repair-offer
+        subjectId: self
+        predicate: repair-offer
+        value:
+          kind: text
+          value: 估计需两份材料和一小时，工钱三十；会先看清槽口再动手。
+        description: 估计需两份材料和一小时，工钱三十；会先看清槽口再动手。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-cave-repairer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-rental-cave-b
+      - local_entity_id: known-innerstar-cave-repairer-personal-pouch
+        canonical_entity_ids:
+          - innerstar-cave-repairer-personal-pouch
+      - local_entity_id: known-innerstar-cave-clerk
+        canonical_entity_ids:
+          - innerstar-cave-clerk
+      - local_entity_id: known-innerstar-cave-repair-fund
+        canonical_entity_ids:
+          - innerstar-cave-repair-fund

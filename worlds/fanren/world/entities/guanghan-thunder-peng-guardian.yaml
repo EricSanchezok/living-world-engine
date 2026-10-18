@@ -1,0 +1,19 @@
+id: guanghan-thunder-peng-guardian
+kind: item
+name: 遗址雷鹏机关
+description: 古代巨鸟机关，金身银头青羽，表面留有旧损、羽毛残缺且缺一爪，仍能驱使雷弧巡守。
+placement: guanghan-yellow-ruins
+facts:
+  - id: guanghan-thunder-peng-guardian-guardian-condition
+    predicate: guardian-condition
+    value:
+      kind: text
+      value: 依古阵反应巡守，须实际触发才攻击；可被侦察、绕行、损坏，不能自动归发现者所有。
+    description: 依古阵反应巡守，须实际触发才攻击；可被侦察、绕行、损坏，不能自动归发现者所有。
+    access:
+      kind: discoverable
+      condition: 勘查机关响应或古阵结构。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

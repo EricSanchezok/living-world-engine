@@ -1,0 +1,89 @@
+id: thunder-mojin-mountains
+kind: location
+name: 魔金山脉
+description: 黑色山脊浸在浓重魔气里，谷底传来断续兽鸣。高空有不稳的空间裂隙，旧路也可能被落石堵住。
+placement: thunder-continent
+facts:
+  - id: thunder-mojin-mountains-route-thunder-mojin-cloud-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-cloud-sea
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-mojin-mountains-condition-thunder-mojin-cloud-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 只有已开的许可窗口才可循接引区通过；强行越过须真实突破禁制和魔气，不能把知晓地点当无害通行。
+    description: 只有已开的许可窗口才可循接引区通过；强行越过须真实突破禁制和魔气，不能把知晓地点当无害通行。
+    access:
+      kind: public
+  - id: thunder-mojin-mountains-route-thunder-mojin-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-palace
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-condition-thunder-mojin-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐宫旧部知道私下山路；外人须先发现入口，沿路有真实禁制与警戒。
+    description: 隐宫旧部知道私下山路；外人须先发现入口，沿路有真实禁制与警戒。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-route-thunder-mojin-croc-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-croc-lake
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-condition-thunder-mojin-croc-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从深山实际找到黑渊潭，路上魔气浓重，潭主可能察觉来者。
+    description: 从深山实际找到黑渊潭，路上魔气浓重，潭主可能察觉来者。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-route-thunder-mojin-ape-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-ape-cave
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-condition-thunder-mojin-ape-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐洞入口被藏匿，须有实地线索、追踪或实际探查能力找到。
+    description: 隐洞入口被藏匿，须有实地线索、追踪或实际探查能力找到。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-mountains-root-detail-mojin-ecology
+    predicate: root-detail-mojin-ecology
+    value:
+      kind: text
+      value: 魔气和地形会限制外来神识，原生魔兽适应度不同；不同物种不共享全部神通，入山风险不按固定死亡配额发生。
+    description: 魔气和地形会限制外来神识，原生魔兽适应度不同；不同物种不共享全部神通，入山风险不按固定死亡配额发生。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,32 @@
+id: spirit-sunset-draught-beast
+kind: creature
+name: 铺后驮兽
+description: 材料铺饲养的温顺低阶驮兽，熟悉董箐的牵引，仍会疲乏、饥饿和受伤。
+placement: spirit-sunset-human-market
+facts:
+  - id: spirit-sunset-draught-beast-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-material-dealer
+    description: 董箐的个人经营财物，借用或买卖须本人同意。
+    access:
+      kind: private
+  - id: spirit-sunset-draught-beast-care
+    predicate: care-requirement
+    value:
+      kind: text
+      value: 每个本地日需一份实际口粮与饮水、足够休息；缺食缺水或连续重载会损体力，不能无穷奔走。
+    description: 兽的照料有真实消耗。
+    access:
+      kind: public
+meters:
+  - id: spirit-sunset-draught-beast-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: spirit-sunset-draught-beast-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []

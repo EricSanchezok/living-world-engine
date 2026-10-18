@@ -1,0 +1,52 @@
+id: canon-lingyan-tree
+kind: item
+name: 云梦山灵眼之树
+description: 此地古老的灵眼之树；三派共有守护利益，名义管理者不等于能私自砍走。
+placement: tiannan-tree-grotto
+facts:
+  - id: canon-lingyan-tree-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yunmeng-three-custody
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-lingyan-tree-co-stewardship
+    predicate: institutional-rule
+    value:
+      kind: text
+      value: 古剑门、百巧院、落云宗共同管理本树与本期醇液；修改分配需三派当前管事协商并履行，私取会导致可追查争端。
+    description: 古剑门、百巧院、落云宗共同管理本树与本期醇液；修改分配需三派当前管事协商并履行，私取会导致可追查争端。
+    access:
+      kind: public
+  - id: canon-lingyan-tree-production-time
+    predicate: production-state
+    value:
+      kind: text
+      value: 开篇时距下一次正常产液六十共同年；此为初始相位记录，之后以secretion-phase周期状态为准。
+    description: 开篇时距下一次正常产液六十共同年；此为初始相位记录，之后以secretion-phase周期状态为准。
+    access:
+      kind: agents
+      agentIds:
+        - canon-cheng-tiankun
+  - id: canon-lingyan-tree-last-collected-cycle
+    predicate: last-collected-cycle
+    value:
+      kind: number
+      value: 0
+    description: last-collected-cycle
+    access:
+      kind: public
+  - id: canon-lingyan-tree-production-procedure
+    predicate: production-procedure
+    value:
+      kind: text
+      value: 以floor((自开篇起实际经过的共同秒数+4415040000)/6307200000)标识本树当前产液周期。只在产液窗口、树体存活且生境未受破坏时可首次检查采集；本周期标识必须大于last-collected-cycle，一次至多获得二十四滴醇液，并在同一事务更新last-collected-cycle。未采过的旧窗口不得追补，树坏死或产液失败不会补偿凭空库存。
+    description: 以floor((自开篇起实际经过的共同秒数+4415040000)/6307200000)标识本树当前产液周期。只在产液窗口、树体存活且生境未受破坏时可首次检查采集；本周期标识必须大于last-collected-cycle，一次至多获得二十四滴醇液，并在同一事务更新last-collected-cycle。未采过的旧窗口不得追补，树坏死或产液失败不会补偿凭空库存。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

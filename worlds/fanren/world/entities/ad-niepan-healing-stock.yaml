@@ -1,0 +1,20 @@
+id: ad-niepan-healing-stock
+kind: container
+name: 静养药料
+description: 12份实际修养材料，温养一轮消耗一份，疗效依真实伤势；不保证立即恢复。
+placement: ad-niepan-retreat
+facts:
+  - id: ad-niepan-healing-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nie-pan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 12
+ratings: []
+shared_activity_resources: []

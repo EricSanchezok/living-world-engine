@@ -1,0 +1,22 @@
+id: innerstar-village-fund
+kind: container
+name: 小寰护阵公款
+description: 船户合计凑来的本期护阵款。
+placement: innerstar-xiaohuan-village
+facts:
+  - id: innerstar-village-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-xiaohuan-community
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 7
+  - definition_id: copper
+    amount: 300
+ratings: []
+shared_activity_resources: []

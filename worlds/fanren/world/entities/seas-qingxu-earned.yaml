@@ -1,0 +1,20 @@
+id: seas-qingxu-earned
+kind: container
+name: 青序已挣工钱
+description: 已经实际交付本人，任何转职不自动清零。
+placement: seas-adult-attendant
+facts:
+  - id: seas-qingxu-earned-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-adult-attendant
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 28
+ratings: []
+shared_activity_resources: []

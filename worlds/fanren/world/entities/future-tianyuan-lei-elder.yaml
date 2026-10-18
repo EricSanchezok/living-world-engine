@@ -1,0 +1,150 @@
+id: future-tianyuan-lei-elder
+kind: person
+name: 雷姓老修士
+description: 在术法演示与实战之间分得很清楚的老修士，享受与人争论一个细节的乐趣。
+placement: future-tianyuan-lei-elder-room
+facts:
+  - id: future-tianyuan-lei-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: future-tianyuan-lei-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚护体、御器与短距雷光示警；掌握现用试护器的有限感应方法。
+    description: 炼虚护体、御器与短距雷光示警；掌握现用试护器的有限感应方法。
+    access:
+      kind: private
+  - id: future-tianyuan-lei-elder-spiritual-aptitude
+    predicate: spiritual-aptitude
+    value:
+      kind: text
+      value: 具与当前修法相应的资质，具体属性未记录。
+    description: 具与当前修法相应的资质，具体属性未记录。
+    access:
+      kind: private
+meters:
+  - id: future-tianyuan-lei-elder-health
+    definition_id: health
+    current: 100
+  - id: future-tianyuan-lei-elder-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: future-tianyuan-lei-elder-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: future-tianyuan-lei-elder-force
+    definition_id: force
+    value: 6
+  - id: future-tianyuan-lei-elder-craft
+    definition_id: craft
+    value: 5
+  - id: future-tianyuan-lei-elder-perception
+    definition_id: perception
+    value: 6
+  - id: future-tianyuan-lei-elder-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: future-tianyuan-lei-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 在术法演示与实战之间分得很清楚的老修士，享受与人争论一个细节的乐趣。
+      voice: 会先复述对方论点，再指出自己试过的反例，觉得有意思时笑声很响。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 请鲍道友拿一份自己的遮息观察与护罩感应作比较，接受结果可能推翻原判断。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 雷姓老修士
+        description: 在术法演示与实战之间分得很清楚的老修士，享受与人争论一个细节的乐趣。
+        status: observed
+      - id: location
+        name: 五松访学小院
+        description: 自己静室所在的五松访学小院，今夜已入夜；静室与院内其他位置各有门道。
+        status: observed
+      - id: review-future-tianyuan-lei-elder-private-stock
+        name: 雷姓老修士私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-future-tianyuan-lei-elder-room-key
+        name: 雷姓老修士客室钥牌
+        description: 本人钥牌，私室由自己控制。
+        status: observed
+      - id: review-future-tianyuan-bao-yan-elder
+        name: 鲍姓妖修
+        description: 同院相识的修士，已谈过一次遮息与感应对照；尚未交付器物。
+        status: observed
+      - id: review-future-tianyuan-lei-elder-study-item
+        name: 雷氏感应护片
+        description: 输入20法力可感应身前三丈内显露的法力冲击并减轻一次低阶打击；不能自动击穿遮息。
+        status: observed
+      - id: review-future-tianyuan-lei-elder-room
+        name: 雷姓老修士静室
+        description: 自己当前使用的独立客室，可关门静修。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚护体、御器与短距雷光示警；掌握现用试护器的有限感应方法。
+        description: 炼虚护体、御器与短距雷光示警；掌握现用试护器的有限感应方法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - future-tianyuan-lei-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tianyuan-old-study-yard
+      - local_entity_id: review-future-tianyuan-lei-elder-private-stock
+        canonical_entity_ids:
+          - future-tianyuan-lei-elder-private-stock
+      - local_entity_id: review-future-tianyuan-lei-elder-room-key
+        canonical_entity_ids:
+          - future-tianyuan-lei-elder-room-key
+      - local_entity_id: review-future-tianyuan-bao-yan-elder
+        canonical_entity_ids:
+          - future-tianyuan-bao-yan-elder
+      - local_entity_id: review-future-tianyuan-lei-elder-study-item
+        canonical_entity_ids:
+          - future-tianyuan-lei-elder-study-item
+      - local_entity_id: review-future-tianyuan-lei-elder-room
+        canonical_entity_ids:
+          - future-tianyuan-lei-elder-room

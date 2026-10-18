@@ -1,0 +1,26 @@
+id: tiannan-jinma-repair-blade
+kind: item
+name: 吴柏寄修的旧短刀
+description: 旧刀刀柄裂了，刀身完整；孟磐暂保管，尚未谈妥修价。
+placement: tiannan-shenbing-workyard
+facts:
+  - id: tiannan-jinma-repair-blade-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-tiannan-wu-bai
+    description: 归所列主体所有，保管和运输不自动转移所有权。
+    access:
+      kind: public
+  - id: tiannan-jinma-repair-blade-keeper
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: original-tiannan-meng-pan
+    description: 寄修保管不转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

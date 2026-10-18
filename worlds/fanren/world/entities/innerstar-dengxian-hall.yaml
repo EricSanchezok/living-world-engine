@@ -1,0 +1,34 @@
+id: innerstar-dengxian-hall
+kind: location
+name: 登仙阁
+description: 核验修士、登记可选灵地并办理岛内事务。
+placement: innerstar-qingyun-mountain
+facts:
+  - id: innerstar-dengxian-hall-route-innerstar-qingyun-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-qingyun-mountain
+    description: 通往青云山
+    access:
+      kind: public
+  - id: innerstar-dengxian-hall-condition-innerstar-qingyun-mountain
+    predicate: condition-innerstar-qingyun-mountain
+    value:
+      kind: text
+      value: 沿青云山中道路前往登仙阁办理岛内事务。
+    description: 沿青云山中道路前往登仙阁办理岛内事务。
+    access:
+      kind: public
+  - id: innerstar-dengxian-hall-registration-procedure
+    predicate: registration-procedure
+    value:
+      kind: text
+      value: 申请定居须验保人文书，记入金册并收回临时绿色玉牌，才换发蓝玉佩。选灵地须查占用登记和应负义务。
+    description: 申请定居须验保人文书，记入金册并收回临时绿色玉牌，才换发蓝玉佩。选灵地须查占用登记和应负义务。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

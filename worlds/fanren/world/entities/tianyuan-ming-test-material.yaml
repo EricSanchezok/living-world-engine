@@ -1,0 +1,22 @@
+id: tianyuan-ming-test-material
+kind: container
+name: 魂音试验材料
+description: 当前八份工料四枚中阶石；每轮对照耗一份工料和一枚中阶石。
+placement: tianyuan-ming-workshop
+facts:
+  - id: tianyuan-ming-test-material-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ming-oldmaster
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: mid-stone
+    amount: 4
+ratings: []
+shared_activity_resources: []

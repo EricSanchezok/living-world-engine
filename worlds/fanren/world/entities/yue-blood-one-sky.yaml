@@ -1,0 +1,34 @@
+id: yue-blood-one-sky
+kind: location
+name: 血禁一线天
+description: 两侧陡峭险峰夹出狭长山路，通向禁地中心一带。
+placement: yue-blood-forbidden
+facts:
+  - id: yue-blood-one-sky-route-yue-blood-forbidden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 沿狭窄山路退回禁地外围，岩壁陡峭，须实际行走。
+    access:
+      kind: public
+  - id: yue-blood-one-sky-route-yue-blood-central-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-central-garden
+    description: 沿两峰之间的小路向中心区行进，再由实际找到的铜门进入外层花园。
+    access:
+      kind: public
+  - id: yue-blood-one-sky-terrain
+    predicate: terrain
+    value:
+      kind: text
+      value: 陡峰夹道，地面只容沿狭路进退；攀登困难，凌空飞越易暴露。
+    description: 高处飞行会使行迹暴露，并不保证每次都有埋伏者；是否遭袭取决于实际在场者与行动。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

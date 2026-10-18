@@ -1,0 +1,34 @@
+id: qinghe-store
+kind: location
+name: 青禾灵材行仓院
+description: 商号的验货、议价处。账房与私人修炼处所用途不同。
+placement: tianyuan-city
+facts:
+  - id: qinghe-store-route-qinghe-study
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qinghe-study
+    description: 有普通道路通往东家静室；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+  - id: qinghe-store-route-spirit-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wharf
+    description: 有普通道路通往城中转运货场；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+  - id: qinghe-store-route-spirit-tianyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-market
+    description: 青禾仓院邻近交易街，客人可到门口通报；仓内货物仍受商行管理。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,162 @@
+id: blood-crane-warden
+kind: person
+name: 周如晦
+description: 血鹤城当值大乘守城者，关心城中收益与秩序，主张约斗须在场内。
+placement: blood-city-office
+facts:
+  - id: blood-crane-warden-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - blood-crane-warden
+  - id: blood-crane-warden-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘防护、城禁监督与争议裁断。
+    description: 大乘防护、城禁监督与争议裁断。
+    access:
+      kind: agents
+      agentIds:
+        - blood-crane-warden
+  - id: blood-crane-warden-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: blood-crane-warden-current-office
+    predicate: current-office
+    value:
+      kind: entity
+      entityId: blood-city-office
+    description: current-office
+    access:
+      kind: public
+  - id: blood-crane-warden-supervises
+    predicate: supervises
+    value:
+      kind: entity
+      entityId: blood-arena-steward
+    description: supervises
+    access:
+      kind: private
+meters:
+  - id: blood-crane-warden-health
+    definition_id: health
+    current: 100
+  - id: blood-crane-warden-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-crane-warden-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: blood-crane-warden-force
+    definition_id: force
+    value: 8
+  - id: blood-crane-warden-craft
+    definition_id: craft
+    value: 6
+  - id: blood-crane-warden-perception
+    definition_id: perception
+    value: 8
+  - id: blood-crane-warden-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: blood-crane-warden
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血鹤城当值大乘守城者，关心城中收益与秩序，主张约斗须在场内。
+      voice: 听人讲完后才发问，常用很短的句子划清条件；对推卸责任不耐烦。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查看较技场的新场次是否按现行规矩筹备，并处理实际送到府中的商户申请。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 周如晦
+        description: 血鹤城当值大乘守城者，关心城中收益与秩序，主张约斗须在场内。
+        status: observed
+      - id: location
+        name: 血鹤城守城府
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-crane-warden-resources
+        name: 周如晦的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-blood-arena-steward
+        name: 闻棘
+        description: 竞技场执事向守城者报告场内重大事故。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘防护、城禁监督与争议裁断。
+        description: 大乘防护、城禁监督与争议裁断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-crane-warden
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-city-office
+      - local_entity_id: known-blood-crane-warden-resources
+        canonical_entity_ids:
+          - blood-crane-warden-resources
+      - local_entity_id: known-blood-arena-steward
+        canonical_entity_ids:
+          - blood-arena-steward

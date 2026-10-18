@@ -1,0 +1,46 @@
+id: root-huangquan-peaks
+kind: location
+name: 黄泉地火七峰
+description: 七座山峰环绕的地火区域，地下越深热压与未知危险越强。
+placement: spirit-human-demon-territory
+facts:
+  - id: root-huangquan-peaks-route-to-spirit-human-demon-territory
+    predicate: route-to-spirit-human-demon-territory
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huangquan-peaks-travel-condition-spirit-human-demon-territory
+    predicate: travel-condition-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huangquan-peaks-route-to-root-huangquan-shaft
+    predicate: route-to-root-huangquan-shaft
+    value:
+      kind: entity
+      entityId: root-huangquan-shaft
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-huangquan-peaks-travel-condition-root-huangquan-shaft
+    predicate: travel-condition-root-huangquan-shaft
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

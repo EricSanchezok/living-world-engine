@@ -1,0 +1,22 @@
+id: minghe-node-tools
+kind: container
+name: 阴气节点检修匣
+description: 真实测流石、刻尺与修槽工具。
+placement: minghe-qingyuan-maintainer
+facts:
+  - id: minghe-node-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-maintainer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+  - definition_id: mid-stone
+    amount: 3
+ratings: []
+shared_activity_resources: []

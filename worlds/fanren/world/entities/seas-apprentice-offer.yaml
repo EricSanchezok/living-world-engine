@@ -1,0 +1,18 @@
+id: seas-apprentice-offer
+kind: item
+name: 商砚试艺条件
+description: 自愿刻一低阶接引示意符：需一份刻符材料和两低阶石，实测只显短距方向，不开跨洲门；合格后愿给每本地月20低阶石学徒工钱，尚须本人接受及处理原役务契。
+placement: seas-array-tutor
+facts:
+  - id: seas-apprentice-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-array-tutor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

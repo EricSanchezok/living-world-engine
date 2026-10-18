@@ -1,0 +1,43 @@
+id: dv-old-inner-array
+kind: location
+name: 内谷旧传送台
+description: 旧台阵纹部分藏在石尘下，实际对应外谷落台。
+placement: dv-inner
+facts:
+  - id: dv-old-inner-array-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-old-inner-array-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须查古遗录或实地勘察才知道此台；穿行仍受裂缝与古禁限制。
+    description: 须查古遗录或实地勘察才知道此台；穿行仍受裂缝与古禁限制。
+    access:
+      kind: public
+  - id: dv-old-inner-array-route-to
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-old-outer-array
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 在旧台现场辨阵并核对终端。
+  - id: dv-old-inner-array-travel-condition
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 使用前须检验阵纹；一次启动消耗2枚中阶灵石，并持续注入30法力量，可容3名近身乘员。此阵只有现有传送方向，抵达后的离谷安全仍需另行判断。
+    description: 使用前须检验阵纹；一次启动消耗2枚中阶灵石，并持续注入30法力量，可容3名近身乘员。此阵只有现有传送方向，抵达后的离谷安全仍需另行判断。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

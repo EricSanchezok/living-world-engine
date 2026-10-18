@@ -1,0 +1,24 @@
+id: canon-dongmen-tu-supplies
+kind: container
+name: 东门图个人储备
+description: 个人物资与有限灵石，不包含所属门派全部财产。
+placement: dv-dongmen-room
+facts:
+  - id: canon-dongmen-tu-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-dongmen-tu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: grain
+    amount: 10
+ratings: []
+shared_activity_resources: []

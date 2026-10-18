@@ -1,0 +1,28 @@
+id: dajin-tianji-gate-puppet-1
+kind: item
+name: 机关卫1
+description: 金甲外形的机关守卫，受值守者控制并消耗实际供能，不是金甲活人。
+placement: dajin-tianji-jade-gate
+facts:
+  - id: dajin-tianji-gate-puppet-1-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-tianji-guild
+    description: 商号守卫器物。
+    access:
+      kind: public
+  - id: dajin-tianji-gate-puppet-1-control
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: original-dajin-tianji-liqi
+    description: 李屺按通报和防护需要操纵。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 10
+ratings: []
+shared_activity_resources: []

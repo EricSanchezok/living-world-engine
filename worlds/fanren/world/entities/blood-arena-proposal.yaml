@@ -1,0 +1,26 @@
+id: blood-arena-proposal
+kind: item
+name: 平鹭与桑铸斗技草约
+description: 双方拟定点到为止、可随时认输；公开挑衅者无权把此草约改成生死斗。
+placement: blood-arena
+facts:
+  - id: blood-arena-proposal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-arena-steward
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-arena-proposal-terms
+    predicate: terms
+    value:
+      kind: text
+      value: 拟交场地费各八低阶灵石；护阵正常且双方明确同意后才开斗。认输或执事示停即终止，超出边界造成损害另查，不默认杀死败者。
+    description: 拟交场地费各八低阶灵石；护阵正常且双方明确同意后才开斗。认输或执事示停即终止，超出边界造成损害另查，不默认杀死败者。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: outerstar-mine-ward-provisions
+kind: container
+name: 顾榆的随身食药
+description: 自己的食物和药材，不包含公家库存。
+placement: outerstar-mine-ward
+facts:
+  - id: outerstar-mine-ward-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-mine-ward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 5
+  - definition_id: herb-packet
+    amount: 2
+ratings: []
+shared_activity_resources: []

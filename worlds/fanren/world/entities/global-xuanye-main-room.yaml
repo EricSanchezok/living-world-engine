@@ -1,0 +1,19 @@
+id: global-xuanye-main-room
+kind: location
+name: 三棺墓室
+description: 宽大的墓室并列三具石棺，四角铜缸燃着阴绿火。
+placement: global-xuanye-tomb
+facts:
+  - id: global-xuanye-main-room-route-global-xuanye-tomb
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-xuanye-tomb
+    description: 穿越墓道和真实禁制才能到达主室。
+    access:
+      kind: discoverable
+      condition: 实地寻路或从知情向导、地图获知路线；仍须实际移动与应对门禁。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

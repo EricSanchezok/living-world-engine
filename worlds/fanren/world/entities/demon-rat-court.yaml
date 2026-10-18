@@ -1,0 +1,35 @@
+id: demon-rat-court
+kind: location
+name: 洞天鼠族之地议事处
+description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+placement: demon-rat-territory
+facts:
+  - id: demon-rat-court-route-demon-rat-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-rat-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-rat-court-condition-demon-rat-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-rat-court-root-detail-qiongmouse-lineage
+    predicate: root-detail-qiongmouse-lineage
+    value:
+      kind: text
+      value: 琼鼠属洞天鼠王一脉，不代表所有鼠族，也不是第八妖王。受邀担任王位可接受或拒绝。
+    description: 琼鼠属洞天鼠王一脉，不代表所有鼠族，也不是第八妖王。受邀担任王位可接受或拒绝。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

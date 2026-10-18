@@ -1,0 +1,159 @@
+id: blood-xuehen-array-keeper
+kind: person
+name: 桑符
+description: 血痕宗炼虚阵守，负责核对阵端回信，手边有一册未补齐的目的地名录。
+placement: blood-xuehen-array-hall
+facts:
+  - id: blood-xuehen-array-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: blood-xuehen-array-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修法、阵槽维护和目标纹路核对；不掌握全大陆所有传送坐标。
+    description: 炼虚修法、阵槽维护和目标纹路核对；不掌握全大陆所有传送坐标。
+    access:
+      kind: private
+  - id: blood-xuehen-array-keeper-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    description: 多年修炼形成真实法力与法体，具体灵根性质暂无独立测验记录。
+    access:
+      kind: private
+  - id: blood-xuehen-array-keeper-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: blood-xuehen-sect
+    description: member-of
+    access:
+      kind: private
+  - id: blood-xuehen-array-keeper-authorized-scope
+    predicate: authorized-scope
+    value:
+      kind: text
+      value: 在本职文书范围内安排验收与维护；跨陆开阵或变更贡约须由组织实际授权，不能据职位自行赠送公产。
+    description: 在本职文书范围内安排验收与维护；跨陆开阵或变更贡约须由组织实际授权，不能据职位自行赠送公产。
+    access:
+      kind: private
+meters:
+  - id: blood-xuehen-array-keeper-health
+    definition_id: health
+    current: 100
+  - id: blood-xuehen-array-keeper-mana
+    definition_id: mana
+    current: 600
+quantities: []
+ratings:
+  - id: blood-xuehen-array-keeper-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: blood-xuehen-array-keeper-force
+    definition_id: force
+    value: 6
+  - id: blood-xuehen-array-keeper-craft
+    definition_id: craft
+    value: 5
+  - id: blood-xuehen-array-keeper-perception
+    definition_id: perception
+    value: 6
+  - id: blood-xuehen-array-keeper-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: blood-xuehen-array-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血痕宗炼虚阵守，负责核对阵端回信，手边有一册未补齐的目的地名录。
+      voice: 习惯将出发与回程分开问，见模糊地址会让对方指到图上。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清一条旧接应地址是否仍有人值守，再决定是否申请开阵。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 桑符
+        description: 血痕宗炼虚阵守，负责核对阵端回信，手边有一册未补齐的目的地名录。
+        status: observed
+      - id: location
+        name: 血痕宗阵厅
+        description: 自己当前居处。
+        status: observed
+      - id: review-blood-xuehen-array-keeper-review-stock
+        name: 桑符自用储备
+        description: 本人持有的修炼用石与材料，不能随意动用组织库房。
+        status: observed
+      - id: review-blood-xuehen-transfer-array
+        name: 血痕宗跨陆阵
+        description: 古跨陆阵体尚完整，目的地盘可调；当前没有收到接收端的有效回信。
+        status: observed
+      - id: review-blood-xuehen-sect
+        name: 血痕宗
+        description: 拥有旧跨陆阵的血道宗门，阵务与访客事务由门中分别经管。
+        status: observed
+      - id: review-blood-xuehen-end-ledger
+        name: 血痕宗目的地残录
+        description: 当前能辨雷鸣一旧阵端纹路，接应人未联络，不能仅调准方向就保证落地；第二处记录残缺，须研究而非猜补。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身修行、亲历和已读记录。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修法、阵槽维护和目标纹路核对；不掌握全大陆所有传送坐标。
+        description: 炼虚修法、阵槽维护和目标纹路核对；不掌握全大陆所有传送坐标。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-xuehen-array-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-xuehen-array-hall
+      - local_entity_id: review-blood-xuehen-array-keeper-review-stock
+        canonical_entity_ids:
+          - blood-xuehen-array-keeper-review-stock
+      - local_entity_id: review-blood-xuehen-transfer-array
+        canonical_entity_ids:
+          - blood-xuehen-transfer-array
+      - local_entity_id: review-blood-xuehen-sect
+        canonical_entity_ids:
+          - blood-xuehen-sect
+      - local_entity_id: review-blood-xuehen-end-ledger
+        canonical_entity_ids:
+          - blood-xuehen-end-ledger

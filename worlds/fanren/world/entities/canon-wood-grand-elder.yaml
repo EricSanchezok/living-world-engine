@@ -1,0 +1,182 @@
+id: canon-wood-grand-elder
+kind: person
+name: 木族大长老
+description: 青衫木族长者，重视圣树和全族传承，面对强者仍维护族产。
+placement: fengyuan-wood-sanctuary
+facts:
+  - id: canon-wood-grand-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-wood-grand-elder
+  - id: canon-wood-grand-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘木法、空间撕裂与木族防护。
+    description: 大乘木法、空间撕裂与木族防护。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wood-grand-elder
+  - id: canon-wood-grand-elder-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木族法体与木灵修炼体系。
+    description: 木族法体与木灵修炼体系。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wood-grand-elder
+  - id: canon-wood-grand-elder-delegates-to
+    predicate: delegates-to
+    value:
+      kind: entity
+      entityId: canon-mu-jun
+    description: delegates-to
+    access:
+      kind: private
+  - id: canon-wood-grand-elder-delegates-to-canon-mu-jiao
+    predicate: delegates-to
+    value:
+      kind: entity
+      entityId: canon-mu-jiao
+    description: delegates-to
+    access:
+      kind: private
+meters:
+  - id: canon-wood-grand-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-wood-grand-elder-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-wood-grand-elder-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-wood-grand-elder-force
+    definition_id: force
+    value: 8
+  - id: canon-wood-grand-elder-craft
+    definition_id: craft
+    value: 4
+  - id: canon-wood-grand-elder-perception
+    definition_id: perception
+    value: 8
+  - id: canon-wood-grand-elder-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-wood-grand-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 青衫木族长者，重视圣树和全族传承，面对强者仍维护族产。
+      voice: 言语威严，谈及圣树会很具体；认为有人轻慢族产时会直问交代。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 养护圣树并平衡边境投入，宁愿花时间核实也不轻易耗尽灵花。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 木族大长老
+        description: 青衫木族长者，重视圣树和全族传承，面对强者仍维护族产。
+        status: observed
+      - id: location
+        name: 木族圣地
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-wood-grand-elder-supplies
+        name: 木族大长老的私用储备
+        description: 自身修炼和出行费用，与族域公产分开。
+        status: observed
+      - id: known-canon-mu-jun
+        name: 木君
+        description: 当前圣地养护往来，木君知道大长老的日常安排。
+        status: observed
+      - id: known-canon-mu-jiao
+        name: 木姣
+        description: 当前共同照料圣树，大长老认可木姣观察植物的能力。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘木法、空间撕裂与木族防护。
+        description: 大乘木法、空间撕裂与木族防护。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木族法体与木灵修炼体系。
+        description: 木族法体与木灵修炼体系。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        description: 此时是当地夜间；后续昼夜会随时间变化，不能将这一刻永远当成夜晚。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wood-grand-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - fengyuan-wood-sanctuary
+      - local_entity_id: known-canon-wood-grand-elder-supplies
+        canonical_entity_ids:
+          - canon-wood-grand-elder-supplies
+      - local_entity_id: known-canon-mu-jun
+        canonical_entity_ids:
+          - canon-mu-jun
+      - local_entity_id: known-canon-mu-jiao
+        canonical_entity_ids:
+          - canon-mu-jiao

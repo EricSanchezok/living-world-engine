@@ -1,0 +1,27 @@
+id: tianyuan-holy-plan-replace
+kind: item
+name: 修缮方案乙
+description: 修缮方案乙，交接痕迹清楚可辨。
+placement: tianyuan-holy-steward
+facts:
+  - id: tianyuan-holy-plan-replace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-holy-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-holy-plan-replace-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 更换接引台整段导灵槽，需十四份材料、七十中阶灵石工钱和三个本地日。现有材料只有十二份，须先另购两份；拆下旧石可检验是否回收，不能预先计为已回收。
+    description: 更换接引台整段导灵槽，需十四份材料、七十中阶灵石工钱和三个本地日。现有材料只有十二份，须先另购两份；拆下旧石可检验是否回收，不能预先计为已回收。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

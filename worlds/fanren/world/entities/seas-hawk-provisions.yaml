@@ -1,0 +1,20 @@
+id: seas-hawk-provisions
+kind: container
+name: 鹰架饲料袋
+description: 干肉与饲料按巡哨份额封装，开袋后需登记消耗。
+placement: seas-patrol-post
+facts:
+  - id: seas-hawk-provisions-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: seas-hawk-feed
+    amount: 6
+ratings: []
+shared_activity_resources: []

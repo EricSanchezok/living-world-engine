@@ -1,0 +1,26 @@
+id: xlt-moon-terrain
+kind: location
+name: 月牙丘地
+description: 丘谷便于依地势布阵，族中耕作地与守护阵位相间。
+placement: xlt-realm
+facts:
+  - id: xlt-moon-terrain-route-xlt-border-pass
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-border-pass
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+  - id: xlt-moon-terrain-route-xlt-night-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xlt-night-marsh
+    description: 依真实距离、能力和路况耗时；隘口跨族往来需面对在地人员和权限，不能瞬间抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: thunder-tiechi-bone-pearl
+kind: item
+name: 铁翅的魔骨珠
+description: 可用来寄附合适载体的独立魔骨珠，当前没有已寄附的巨蜍。
+placement: canon-tie-chi-mo
+facts:
+  - id: thunder-tiechi-bone-pearl-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tie-chi-mo
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-tiechi-bone-pearl-use-limit
+    predicate: use-limit
+    value:
+      kind: text
+      value: 寄附须找到合适真实载体并施术；力量只是本体部分，载体受毁会损失该寄附。
+    description: 寄附须找到合适真实载体并施术；力量只是本体部分，载体受毁会损失该寄附。
+    access:
+      kind: agents
+      agentIds:
+        - canon-tie-chi-mo
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

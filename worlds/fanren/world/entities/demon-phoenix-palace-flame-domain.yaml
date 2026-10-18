@@ -1,0 +1,26 @@
+id: demon-phoenix-palace-flame-domain
+kind: location
+name: 黑凤宫炎域
+description: 隔热石廊尽头是一片由禁制分开的火室，静修者可依承受能力选用；值守记录记载各室火势与启闭。
+placement: demon-phoenix-palace
+facts:
+  - id: demon-phoenix-palace-flame-domain-route-to-demon-phoenix-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-palace
+    description: route-to-demon-phoenix-palace
+    access:
+      kind: public
+  - id: demon-phoenix-palace-flame-domain-condition-demon-phoenix-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。
+    description: 火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

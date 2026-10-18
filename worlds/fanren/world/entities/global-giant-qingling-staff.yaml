@@ -1,0 +1,26 @@
+id: global-giant-qingling-staff
+kind: item
+name: 青灵砂石棒
+description: 沉在巨人身旁泥土中的巨大石棒。
+placement: global-chaos-valley
+facts:
+  - id: global-giant-qingling-staff-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-chaos-one-eye-giant
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-giant-qingling-staff-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 青灵砂比同体积精铁更重，巨人醒后仍需自身力量才能举用；不是无限化生的普通泥土棒。
+    description: 青灵砂比同体积精铁更重，巨人醒后仍需自身力量才能举用；不是无限化生的普通泥土棒。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

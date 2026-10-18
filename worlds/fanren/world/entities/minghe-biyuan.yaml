@@ -1,0 +1,26 @@
+id: minghe-biyuan
+kind: location
+name: 碧原小筑
+description: 草原边缘的小筑，屋外禁制与地势相接，院中可展开小型阵图试验。
+placement: fengyuan-continent
+facts:
+  - id: minghe-biyuan-route-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-biyuan-condition-fengyuan-continent
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

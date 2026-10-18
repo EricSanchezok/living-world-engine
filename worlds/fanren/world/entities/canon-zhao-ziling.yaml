@@ -1,0 +1,118 @@
+id: canon-zhao-ziling
+kind: person
+name: 赵子灵
+description: 年轻少年，对拳剑有兴趣，珍惜表现自己的机会。
+placement: local-zhao-ziling-home
+facts:
+  - id: canon-zhao-ziling-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 普通体力与初步拳脚，未习得拂柳剑法。
+    description: 普通体力与初步拳脚，未习得拂柳剑法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhao-ziling
+  - id: canon-zhao-ziling-child-of
+    predicate: child-of
+    value:
+      kind: entity
+      entityId: local-zhao-mother
+    description: 亲子关系。
+    access:
+      kind: private
+meters:
+  - id: canon-zhao-ziling-health
+    definition_id: health
+    current: 100
+  - id: canon-zhao-ziling-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 2
+ratings:
+  - id: canon-zhao-ziling-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-zhao-ziling-perception
+    definition_id: perception
+    value: 2
+  - id: canon-zhao-ziling-craft
+    definition_id: craft
+    value: 2
+  - id: canon-zhao-ziling-influence
+    definition_id: influence
+    value: 2
+  - id: canon-zhao-ziling-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-zhao-ziling
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 年轻少年，对拳剑有兴趣，珍惜表现自己的机会。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 练好眼下所会的基本动作，再寻找合适师承。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 赵子灵
+        description: 年轻少年，对拳剑有兴趣，珍惜表现自己的机会。
+        status: observed
+      - id: location
+        name: 赵家住处
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-local-zhao-mother
+        name: 赵家母亲
+        description: 一起生活的亲人。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 普通体力与初步拳脚，未习得拂柳剑法。
+        description: 普通体力与初步拳脚，未习得拂柳剑法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-zhao-ziling
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-zhao-ziling-home
+      - local_entity_id: known-local-zhao-mother
+        canonical_entity_ids:
+          - local-zhao-mother

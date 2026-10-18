@@ -1,0 +1,26 @@
+id: tianyuan-hinterland-village
+kind: location
+name: 石渠村
+description: 山间凡俗聚落，以谷物、布匹与短程运送换取城内货物，成人可择学艺或应募军中工作。
+placement: spirit-cuilong-mountain
+facts:
+  - id: tianyuan-hinterland-village-route-to-spirit-cuilong-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-cuilong-mountain
+    description: route-to-spirit-cuilong-mountain
+    access:
+      kind: private
+  - id: tianyuan-hinterland-village-route-conditions-spirit-cuilong-mountain
+    predicate: route-conditions-spirit-cuilong-mountain
+    value:
+      kind: text
+      value: 沿山脚村路往返，搬运须有实际体力、工具与路程时间。
+    description: 沿山脚村路往返，搬运须有实际体力、工具与路程时间。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

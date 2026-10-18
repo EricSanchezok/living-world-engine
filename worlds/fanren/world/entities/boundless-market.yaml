@@ -1,0 +1,58 @@
+id: boundless-market
+kind: location
+name: 小城南市
+description: 陆路药材、绳索、布匹的交易处，海鱼不是稳定食物来源。
+placement: boundless-coast-town
+facts:
+  - id: boundless-market-route-boundless-coast-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-coast-town
+    description: 城中街路，普通步行可达。
+    access:
+      kind: public
+  - id: boundless-market-travel-boundless-coast-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 城中街路，普通步行可达。
+    description: 城中街路，普通步行可达。
+    access:
+      kind: public
+  - id: boundless-market-route-boundless-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-house
+    description: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    access:
+      kind: public
+  - id: boundless-market-travel-boundless-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    description: 穿过南市小巷，程家房门与居民意愿仍需尊重。
+    access:
+      kind: public
+  - id: boundless-market-route-boundless-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-inn
+    description: 街市旁的客舍，住宿和货物保管需协商。
+    access:
+      kind: public
+  - id: boundless-market-travel-boundless-inn
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 街市旁的客舍，住宿和货物保管需协商。
+    description: 街市旁的客舍，住宿和货物保管需协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: seas-hu-house
+kind: location
+name: 胡氏三尾狐修行所
+description: 靠着血天市路的狐族小院，前室放交易札记，后室留给主人静修与梳尾；来客先叩外门。
+placement: blood-north-domain
+facts:
+  - id: seas-hu-house-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: seas-hu-house-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 循北域商路到私宅，需本人愿意见客。
+    description: 循北域商路到私宅，需本人愿意见客。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

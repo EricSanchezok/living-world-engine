@@ -1,0 +1,27 @@
+id: feiling-fast-clock
+kind: item
+name: 偏快的巡守砂漏
+description: 交接时使用的砂漏，外观无显著破损。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-fast-clock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-guard
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-fast-clock-actual-fault
+    predicate: actual-fault
+    value:
+      kind: text
+      value: 上次清洗后出砂孔装错铜片，计时较正常快；与备用砂漏同起比对可查明。
+    description: 上次清洗后出砂孔装错铜片，计时较正常快；与备用砂漏同起比对可查明。
+    access:
+      kind: discoverable
+      condition: 拆查铜片或与正常备用计时器同步比对。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

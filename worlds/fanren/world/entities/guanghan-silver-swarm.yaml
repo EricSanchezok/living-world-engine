@@ -1,0 +1,32 @@
+id: guanghan-silver-swarm
+kind: creature-group
+name: 银潮虫群
+description: 银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。
+placement: guanghan-mountain-chain
+facts:
+  - id: guanghan-silver-swarm-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 100000
+    description: individual-count
+    access:
+      kind: private
+  - id: guanghan-silver-swarm-biological-actions
+    predicate: biological-actions
+    value:
+      kind: text
+      value: 银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。
+    description: 银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。
+    access:
+      kind: private
+meters:
+  - id: guanghan-silver-swarm-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-silver-swarm-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

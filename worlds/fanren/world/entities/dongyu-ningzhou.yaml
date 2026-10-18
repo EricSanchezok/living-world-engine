@@ -1,0 +1,34 @@
+id: dongyu-ningzhou
+kind: location
+name: 宁州
+description: 与昌州相邻的州域，村镇和散修小族可以自行往来。
+placement: human-dongyu
+facts:
+  - id: dongyu-ningzhou-route-dongyu-changzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dongyu-changzhou
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-ningzhou-travel-dongyu-changzhou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-ningzhou-route-dv-linglin-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-linglin-mountains
+    description: 沿宁州西南普通地表路径到达，距离与所用行法决定实际耗时；不穿越隐秘空间或私宅禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

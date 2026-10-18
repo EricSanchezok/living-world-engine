@@ -1,0 +1,22 @@
+id: outerstar-cunjin-stock
+kind: container
+name: 寸金阁当期药材
+description: 当期普通伴妖草与可交易药材，无法凭名称宣称是千叶露。
+placement: outerstar-cunjin
+facts:
+  - id: outerstar-cunjin-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-cunjin-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 16
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

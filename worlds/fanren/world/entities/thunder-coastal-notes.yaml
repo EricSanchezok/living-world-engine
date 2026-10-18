@@ -1,0 +1,18 @@
+id: thunder-coastal-notes
+kind: item
+name: 旧沿岸航图
+description: 记附岛与常见暗礁，末页有早年古阵传说；无深海巨兽即时坐标。
+placement: thunder-fireyang-herbalist
+facts:
+  - id: thunder-coastal-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-fireyang-herbalist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

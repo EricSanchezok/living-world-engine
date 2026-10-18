@@ -1,0 +1,34 @@
+id: tianyuan-guest-quarter
+kind: location
+name: 飞灵殿东廊客舍
+description: 临时客舍内分寝室、静室和小炼制室；禁止进入他人已锁住的房间。
+placement: spirit-feiling-hall
+facts:
+  - id: tianyuan-guest-quarter-route-to-spirit-feiling-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-feiling-reception
+    description: route-to-spirit-feiling-reception
+    access:
+      kind: private
+  - id: tianyuan-guest-quarter-route-conditions-spirit-feiling-reception
+    predicate: route-conditions-spirit-feiling-reception
+    value:
+      kind: text
+      value: 殿内步行到东廊；关门后须用本舍钥牌或实际破禁，不可穿门。
+    description: 殿内步行到东廊；关门后须用本舍钥牌或实际破禁，不可穿门。
+    access:
+      kind: private
+  - id: tianyuan-guest-quarter-current-occupancy
+    predicate: current-occupancy
+    value:
+      kind: entity
+      entityId: tianyuan-ascender-fengyuan
+    description: current-occupancy
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

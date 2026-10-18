@@ -1,0 +1,26 @@
+id: spirit-sunset-trade-cart
+kind: item
+name: 董箐的运料兽车
+description: 停在材料铺旁的四轮木车，可载少量货物或至多四名常人体型乘客，须以现有驮兽牵引。
+placement: spirit-sunset-human-market
+facts:
+  - id: spirit-sunset-trade-cart-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-material-dealer
+    description: 董箐的个人经营财物，借用或买卖须本人同意。
+    access:
+      kind: private
+  - id: spirit-sunset-trade-cart-movement-condition
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需实际套妥驮兽、有人掌缰、车轴完好和道路可通；行程随街路、载重与兽力变化，不固定为数个时辰。
+    description: 上车和乘车移动各需实际动作，兽车不会遥距召来。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

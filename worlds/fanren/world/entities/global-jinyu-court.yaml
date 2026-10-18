@@ -1,0 +1,26 @@
+id: global-jinyu-court
+kind: location
+name: 金玉宗外院
+description: 靠山而建的外院，通向内潭的石门有人照管。
+placement: spirit-tianyuan-domain
+facts:
+  - id: global-jinyu-court-route-spirit-sunset-human-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-sunset-human-city
+    description: 可沿人族陆路前往金玉外院；路程需实际安排，内潭不对未经许可者开放。
+    access:
+      kind: public
+  - id: global-jinyu-court-route-global-jinyu-pond
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-jinyu-pond
+    description: 潭门须执事核许可后通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

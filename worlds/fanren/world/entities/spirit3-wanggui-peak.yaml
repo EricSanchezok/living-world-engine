@@ -1,0 +1,26 @@
+id: spirit3-wanggui-peak
+kind: location
+name: 望龟峰
+description: 偏僻葱绿山峰，岩台朝向天元腹地，适合短暂停留辨认路线。
+placement: spirit-tianyuan-domain
+facts:
+  - id: spirit3-wanggui-peak-route-to-spirit-inner-caravan-road
+    predicate: route-to-spirit-inner-caravan-road
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: route-to-spirit-inner-caravan-road
+    access:
+      kind: private
+  - id: spirit3-wanggui-peak-route-conditions-spirit-inner-caravan-road
+    predicate: route-conditions-spirit-inner-caravan-road
+    value:
+      kind: text
+      value: 沿实地山道长途往返岩台，山中没有固定补给站。
+    description: 沿实地山道长途往返岩台，山中没有固定补给站。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

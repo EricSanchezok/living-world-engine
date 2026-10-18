@@ -1,0 +1,35 @@
+id: tianyuan-stream-gully
+kind: location
+name: 巡察哨南侧石涧
+description: 雨后水流较急的石涧，旧便桥一侧断裂。
+placement: spirit-wilderness-fringe
+facts:
+  - id: tianyuan-stream-gully-route-tianyuan-patrol-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-post
+    description: route-to
+    access:
+      kind: public
+  - id: tianyuan-stream-gully-condition-tianyuan-patrol-post
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 雨后水流较急的石涧，旧便桥一侧断裂。
+    description: 雨后水流较急的石涧，旧便桥一侧断裂。
+    access:
+      kind: public
+  - id: tianyuan-stream-gully-bridge-damage
+    predicate: bridge-damage
+    value:
+      kind: text
+      value: 昨日积水冲松一侧桥墩，断木上有冲刷痕；现场没有证明有人偷袭的痕迹。
+    description: 昨日积水冲松一侧桥墩，断木上有冲刷痕；现场没有证明有人偷袭的痕迹。
+    access:
+      kind: discoverable
+      condition: 从安全岸侧实地检查桥墩、断木与水流。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

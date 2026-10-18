@@ -1,0 +1,20 @@
+id: root-ye-wood-stock
+kind: container
+name: 叶家符木
+description: 四块现存可用符木，取用后需登记。
+placement: root-ye-estate
+facts:
+  - id: root-ye-wood-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-ye-clan
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: root-array-wood
+    amount: 4
+ratings: []
+shared_activity_resources: []

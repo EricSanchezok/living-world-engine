@@ -1,0 +1,26 @@
+id: outerstar-ningcui-transit-charm-3
+kind: item
+name: 护身传送符
+description: 一次性远传防护符，使用后耗尽，不能当作大挪移令。
+placement: outerstar-ningcui-array
+facts:
+  - id: outerstar-ningcui-transit-charm-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-ningcui-transit-charm-3-remaining-use
+    predicate: remaining-use
+    value:
+      kind: number
+      value: 1
+    description: remaining-use
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

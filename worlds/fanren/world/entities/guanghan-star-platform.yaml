@@ -1,0 +1,35 @@
+id: guanghan-star-platform
+kind: location
+name: 星图高台
+description: 绿椅、九甲傀儡与星图相连，上方金盘隐藏于阵内。
+placement: guanghan-screen-space
+facts:
+  - id: guanghan-star-platform-route-guanghan-screen-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-screen-space
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-star-platform-condition-guanghan-screen-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须经过古阵空间，观看星图有幻术牵引；黑门自修复禁制仍完整，蛮力与克制手段依实际强度裁定。
+    description: 须经过古阵空间，观看星图有幻术牵引；黑门自修复禁制仍完整，蛮力与克制手段依实际强度裁定。
+    access:
+      kind: public
+  - id: guanghan-star-platform-infusion-condition
+    predicate: infusion-condition
+    value:
+      kind: text
+      value: 必须识别启动结构并实际施诀；一旦大量星力灌体，承受、转化、停止和逃脱各需真实能力。可能突破也可能造成经脉、神识和空间损害；没有保证成功的固定奖励。
+    description: 必须识别启动结构并实际施诀；一旦大量星力灌体，承受、转化、停止和逃脱各需真实能力。可能突破也可能造成经脉、神识和空间损害；没有保证成功的固定奖励。
+    access:
+      kind: discoverable
+      condition: 研究阵理或实际启动观察，未研究者不能预知全部后果。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

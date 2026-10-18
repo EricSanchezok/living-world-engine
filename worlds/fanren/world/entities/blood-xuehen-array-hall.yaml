@@ -1,0 +1,26 @@
+id: blood-xuehen-array-hall
+kind: location
+name: 血痕宗阵厅
+description: 石槽围住旧阵台，目的地盘可调；残缺名录使值守者须先联系对岸。
+placement: blood-xuehen-domain
+facts:
+  - id: blood-xuehen-array-hall-review-route-blood-xuehen-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-xuehen-domain
+    description: review-route-blood-xuehen-domain
+    access:
+      kind: public
+  - id: blood-xuehen-array-hall-review-route-condition-blood-xuehen-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

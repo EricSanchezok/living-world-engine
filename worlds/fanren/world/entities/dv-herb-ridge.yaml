@@ -1,0 +1,26 @@
+id: dv-herb-ridge
+kind: location
+name: 内谷阴坡草地
+description: 潮湿石隙间有低矮灵草，坡外仍有空间裂缝。
+placement: dv-inner
+facts:
+  - id: dv-herb-ridge-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-herb-ridge-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 实察坡地裂缝、辨识草药后采收；内谷裂缝与外谷情形不同，不能据旧印象直接闯入。
+    description: 实察坡地裂缝、辨识草药后采收；内谷裂缝与外谷情形不同，不能据旧印象直接闯入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

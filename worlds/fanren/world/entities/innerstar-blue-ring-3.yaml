@@ -1,0 +1,26 @@
+id: innerstar-blue-ring-3
+kind: item
+name: 蓝色临时身份环3
+description: 未登记的身份环，须实际交付、记名并按条件激活。
+placement: innerstar-ring-stock
+facts:
+  - id: innerstar-blue-ring-3-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: star-palace
+    description: owned-by
+    access:
+      kind: private
+  - id: innerstar-blue-ring-3-registration-rule
+    predicate: registration-rule
+    value:
+      kind: text
+      value: 付3低阶灵石并由登记员记录。从实际登记时起有效604800全局秒；过期不等于立刻驱逐，须续办。
+    description: 付3低阶灵石并由登记员记录。从实际登记时起有效604800全局秒；过期不等于立刻驱逐，须续办。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,24 @@
+id: canon-zhong-devil-elder-supplies
+kind: container
+name: 鬼灵门钟长老个人储备
+description: 个人物资与有限灵石，不包含所属门派全部财产。
+placement: dv-zhong-retreat
+facts:
+  - id: canon-zhong-devil-elder-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-zhong-devil-elder
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 24
+  - definition_id: craft-material
+    amount: 8
+  - definition_id: grain
+    amount: 10
+ratings: []
+shared_activity_resources: []

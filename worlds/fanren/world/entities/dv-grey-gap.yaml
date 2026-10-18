@@ -1,0 +1,28 @@
+id: dv-grey-gap
+kind: location
+name: 灰色封魔间隙
+description: 十余里的灰色空间，低矮黑石与灰雾中魔气浓重；与真实药园残骸身份分离，平时入口闭合。
+placement: human-realm
+facts:
+  - id: dv-grey-gap-route-dv-white-altar
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-white-altar
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 实察祭坛结构并拥有足够古阵/空间知识，或由知情者真实传授。
+  - id: dv-grey-gap-condition-dv-white-altar
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 必须依次解开柱阵遮蔽、以可用破界珠及足够法力稳定空间通路，并满足个体护持。无形魂体须适配寄体；当前没有已开启通道。
+    description: 必须依次解开柱阵遮蔽、以可用破界珠及足够法力稳定空间通路，并满足个体护持。无形魂体须适配寄体；当前没有已开启通道。
+    access:
+      kind: discoverable
+      condition: 实察祭坛结构并拥有足够古阵/空间知识，或由知情者真实传授。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

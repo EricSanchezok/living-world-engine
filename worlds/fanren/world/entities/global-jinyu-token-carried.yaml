@@ -1,0 +1,26 @@
+id: global-jinyu-token-carried
+kind: item
+name: 许静澄随身灵心佩
+description: 许静澄携带的另一枚灵心佩。
+placement: original-jinyu-xujingcheng
+facts:
+  - id: global-jinyu-token-carried-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: original-jinyu-xujingcheng
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-jinyu-token-carried-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 与留宗佩组成一对，不得复制第二份精魂与无代价补佩。
+    description: 与留宗佩组成一对，不得复制第二份精魂与无代价补佩。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

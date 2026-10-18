@@ -1,0 +1,18 @@
+id: minghe-gate-seal
+kind: item
+name: 羽衍接引印
+description: 接引值守使用的核验印，私自夺印不自动获得内岸配合。
+placement: minghe-gate-warden
+facts:
+  - id: minghe-gate-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

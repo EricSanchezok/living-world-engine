@@ -1,0 +1,20 @@
+id: outerstar-wage-purse
+kind: container
+name: 杜岸工钱袋
+description: 可支付实际雇工工钱，尚未形成雇佣关系。
+placement: outerstar-employer
+facts:
+  - id: outerstar-wage-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-employer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 900
+ratings: []
+shared_activity_resources: []

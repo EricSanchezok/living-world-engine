@@ -1,0 +1,26 @@
+id: dv-outer-round-pit
+kind: location
+name: 百丈熔石圆坑
+description: 百丈宽的整齐圆坑覆着灰土，扫开后可见暗红熔石；其确切制造者与攻击手段未知。
+placement: dv-outer
+facts:
+  - id: dv-outer-round-pit-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-outer-round-pit-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    description: 穿行外谷必须逐段观察裂缝和禁制，地点名称不提供安全路线。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

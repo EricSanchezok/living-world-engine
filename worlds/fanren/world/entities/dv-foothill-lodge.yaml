@@ -1,0 +1,58 @@
+id: dv-foothill-lodge
+kind: location
+name: 问山庐
+description: 山脉外围瘴气较稀薄处的两间木屋，门前挂着旧路标，供附近采药者停脚、比对山图。
+placement: devil-wanling-mountains
+facts:
+  - id: dv-foothill-lodge-route-dv-yehua-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-yehua-city
+    description: route-to
+    access:
+      kind: public
+  - id: dv-foothill-lodge-condition-dv-yehua-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。
+    description: 沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。
+    access:
+      kind: public
+  - id: dv-foothill-lodge-route-dv-tracing-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-tracing-room
+    description: route-to
+    access:
+      kind: public
+  - id: dv-foothill-lodge-condition-dv-tracing-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 庐内短途移动，工作台资料仍需主人许可。
+    description: 庐内短途移动，工作台资料仍需主人许可。
+    access:
+      kind: public
+  - id: dv-foothill-lodge-route-dv-mouth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-mouth
+    description: route-to
+    access:
+      kind: public
+  - id: dv-foothill-lodge-condition-dv-mouth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。
+    description: 沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

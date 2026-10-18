@@ -1,0 +1,119 @@
+id: blood-qiyun-mountains
+kind: location
+name: 齐云山脉
+description: 诸国与宗门相交的山脉，诸国山门散布其间，商旅沿山道来往。
+placement: blood-continent
+facts:
+  - id: blood-qiyun-mountains-route-blood-crane-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-crane-city
+    description: route-to
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-condition-blood-crane-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-route-blood-luochao-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-luochao-steppe
+    description: route-to
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-condition-blood-luochao-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-route-blood-witch-refuge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-witch-refuge
+    description: route-to
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-condition-blood-witch-refuge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-qiyun-mountains-route-to-root-tixue-domain
+    predicate: route-to-root-tixue-domain
+    value:
+      kind: entity
+      entityId: root-tixue-domain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: blood-qiyun-mountains-travel-condition-root-tixue-domain
+    predicate: travel-condition-root-tixue-domain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: blood-qiyun-mountains-route-to-root-windsnake-domain
+    predicate: route-to-root-windsnake-domain
+    value:
+      kind: entity
+      entityId: root-windsnake-domain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: blood-qiyun-mountains-travel-condition-root-windsnake-domain
+    predicate: travel-condition-root-windsnake-domain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: blood-qiyun-mountains-root-detail-qiyun-institutions
+    predicate: root-detail-qiyun-institutions
+    value:
+      kind: text
+      value: 啼血门、风蛇族与周围宗国分别独立，辖地住民与资源随当期真实状态存在，不因未来故事而预先消失。
+    description: 啼血门、风蛇族与周围宗国分别独立，辖地住民与资源随当期真实状态存在，不因未来故事而预先消失。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

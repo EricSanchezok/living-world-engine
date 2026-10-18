@@ -1,0 +1,26 @@
+id: lin-estate
+kind: location
+name: 林家前厅
+description: 药材商户的家宅前厅，桌椅齐整，家业稳健。
+placement: qingniu-town
+facts:
+  - id: lin-estate-route-lin-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: lin-store
+    description: 家宅与店铺之间可步行往返，需要实际行程。
+    access:
+      kind: public
+  - id: lin-estate-route-qingniu-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qingniu-town
+    description: 从宅门通向青牛镇街道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

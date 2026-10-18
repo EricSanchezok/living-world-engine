@@ -1,0 +1,42 @@
+id: dv-old-canyon
+kind: location
+name: 古禁峡道
+description: 一条外谷通内谷的峡道，数重不同阵纹叠在崖壁，破一层可能触发相邻反击。
+placement: human-devil-valley
+facts:
+  - id: dv-old-canyon-route-dv-outer
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-outer
+    description: route-to
+    access:
+      kind: public
+  - id: dv-old-canyon-condition-dv-outer
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 外谷山道到峡口，内谷端的禁制尚未解除。
+    description: 外谷山道到峡口，内谷端的禁制尚未解除。
+    access:
+      kind: public
+  - id: dv-old-canyon-route-dv-inner
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-inner
+    description: route-to
+    access:
+      kind: public
+  - id: dv-old-canyon-condition-dv-inner
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需识别并解除当前多层古禁，暴力硬闯会触发反击；没有天晶东门已完成的开路。
+    description: 需识别并解除当前多层古禁，暴力硬闯会触发反击；没有天晶东门已完成的开路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

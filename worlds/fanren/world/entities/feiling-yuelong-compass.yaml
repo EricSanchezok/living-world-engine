@@ -1,0 +1,18 @@
+id: feiling-yuelong-compass
+kind: item
+name: 星象青罗盘
+description: 观测天地变化以择合炼时机的罗盘；所见变化还须炼者判断。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-compass-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

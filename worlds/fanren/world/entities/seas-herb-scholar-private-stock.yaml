@@ -1,0 +1,24 @@
+id: seas-herb-scholar-private-stock
+kind: container
+name: 岑枝的私人储备
+description: 自用财物，不属于所在机构公库。
+placement: seas-herb-scholar
+facts:
+  - id: seas-herb-scholar-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-herb-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 8
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

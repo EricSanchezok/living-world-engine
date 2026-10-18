@@ -1,0 +1,18 @@
+id: steppe-a-ran-knife
+kind: item
+name: 阿冉的短刀
+description: 普通铁短刀，用于自卫、切绳与日常劳动，不能当作破法飞剑。
+placement: steppe-a-ran
+facts:
+  - id: steppe-a-ran-knife-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: steppe-a-ran
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

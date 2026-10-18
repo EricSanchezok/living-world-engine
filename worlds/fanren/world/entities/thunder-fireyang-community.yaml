@@ -1,0 +1,27 @@
+id: thunder-fireyang-community
+kind: social-group
+name: 火阳支族
+description: 生活在火云岛的娲氏支族，港口与地火窖由族中共同保有。
+placement: thunder-fireyang-settlement
+facts:
+  - id: thunder-fireyang-community-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-washi-people
+    description: 属于娲氏族群的一支。
+    access:
+      kind: private
+  - id: thunder-fireyang-community-root-detail-firecoral-craft
+    predicate: root-detail-firecoral-craft
+    value:
+      kind: text
+      value: 骨舟、蜥蜴坐骑、采石巨蟹、传信鸟和青铜锥各依实物用途。火阳晶球须八人共驱，三层光幕耗费力量；其他部族装备不视为共有财产。
+    description: 骨舟、蜥蜴坐骑、采石巨蟹、传信鸟和青铜锥各依实物用途。火阳晶球须八人共驱，三层光幕耗费力量；其他部族装备不视为共有财产。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

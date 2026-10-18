@@ -1,0 +1,26 @@
+id: minghe-milk-pool
+kind: location
+name: 冥河神池
+description: 凝成神乳的池体，当前有一份可采凝液，其余尚未达到采集条件。
+placement: minghe-god-pool-palace
+facts:
+  - id: minghe-milk-pool-route-minghe-god-pool-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-god-pool-palace
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-milk-pool-condition-minghe-god-pool-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 凝成神乳的池体，当前有一份可采凝液，其余尚未达到采集条件。
+    description: 凝成神乳的池体，当前有一份可采凝液，其余尚未达到采集条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: global-jinyu-pond
+kind: location
+name: 九玄明玉潭
+description: 深水带着玉色微光的潭池，岸边立着入潭名册案。
+placement: global-jinyu-court
+facts:
+  - id: global-jinyu-pond-effect
+    predicate: body-cultivation-effect
+    value:
+      kind: text
+      value: 深水只对同一炼体者助突破一次瓶颈，再浸不重复生效；实际能否突破仍取决于其已有基础。对修仙法力进阶用处不大。
+    description: 深水只对同一炼体者助突破一次瓶颈，再浸不重复生效；实际能否突破仍取决于其已有基础。对修仙法力进阶用处不大。
+    access:
+      kind: public
+  - id: global-jinyu-pond-route-global-jinyu-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-jinyu-court
+    description: 潭门须执事核许可后通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

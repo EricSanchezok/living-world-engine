@@ -1,0 +1,42 @@
+id: spirit-anyuan-market
+kind: location
+name: 安远城街市
+description: 凡人住宅之间的街市，以普通日用品、药材和炼体器材为主；没有修士坊市的专属交易设施。
+placement: spirit-anyuan-city
+facts:
+  - id: spirit-anyuan-market-route-spirit-anyuan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-city
+    description: 凡俗钱物和修行资源分别作价，店家按实物与成色议价。
+    access:
+      kind: public
+  - id: spirit-anyuan-market-route-spirit-anyuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-gate
+    description: 通向草原的城门，商队可询问路况并补足口粮，守卫按当前警戒执行检查。
+    access:
+      kind: public
+  - id: spirit-anyuan-market-route-to-spirit3-anyuan-cart-shed
+    predicate: route-to-spirit3-anyuan-cart-shed
+    value:
+      kind: entity
+      entityId: spirit3-anyuan-cart-shed
+    description: route-to-spirit3-anyuan-cart-shed
+    access:
+      kind: private
+  - id: spirit-anyuan-market-route-conditions-spirit3-anyuan-cart-shed
+    predicate: route-conditions-spirit3-anyuan-cart-shed
+    value:
+      kind: text
+      value: 街市内步行可达，不进入私人储物箱。
+    description: 街市内步行可达，不进入私人储物箱。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tianyuan-qiankun-monitor
+kind: item
+name: 本期执法乾坤盘
+description: 现用盘每次由受训者输入30法力并耗一枚中阶石，读取城外现有观测阵最近记录的较强空间波动方位；范围为本期已覆盖近界，不能定位未记录事物或得知原因。
+placement: tianyuan-law-investigator
+facts:
+  - id: tianyuan-qiankun-monitor-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-qiankun-monitor-linked-observer
+    predicate: linked-observer
+    value:
+      kind: entity
+      entityId: tianyuan-near-watch-array
+    description: linked-observer
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,248 @@
+id: canon-jin-jiao-wang
+kind: person
+name: 金蛟王
+description: 修炼数万年的蛟族统领，重视族群利益，也会为自己的修行留力。
+placement: outerstar-jinflood-court
+facts:
+  - id: canon-jin-jiao-wang-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 十级金蛟。
+    description: 十级金蛟。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jin-jiao-wang
+  - id: canon-jin-jiao-wang-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 十级金蛟法体、化龙诀、金爪和强大神识；预感可能失误。
+    description: 十级金蛟法体、化龙诀、金爪和强大神识；预感可能失误。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jin-jiao-wang
+  - id: canon-jin-jiao-wang-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 妖族血脉与本体修行，不用人类灵根判断。
+    description: 妖族法体修行。
+    access:
+      kind: agents
+      agentIds:
+        - canon-jin-jiao-wang
+  - id: canon-jin-jiao-wang-ancestor-of-canon-wu-dujiao
+    predicate: ancestor-of
+    value:
+      kind: entity
+      entityId: canon-wu-dujiao
+    description: ancestor-of
+    access:
+      kind: private
+  - id: canon-jin-jiao-wang-delegates-outerstar-flood-courier
+    predicate: delegates
+    value:
+      kind: entity
+      entityId: outerstar-flood-courier
+    description: delegates
+    access:
+      kind: private
+  - id: canon-jin-jiao-wang-knows-rival-canon-suanni-king
+    predicate: knows-rival
+    value:
+      kind: entity
+      entityId: canon-suanni-king
+    description: knows-rival
+    access:
+      kind: private
+  - id: canon-jin-jiao-wang-knows-rival-canon-suanni-elder
+    predicate: knows-rival
+    value:
+      kind: entity
+      entityId: canon-suanni-elder
+    description: knows-rival
+    access:
+      kind: private
+meters:
+  - id: canon-jin-jiao-wang-health
+    definition_id: health
+    current: 100
+  - id: canon-jin-jiao-wang-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-jin-jiao-wang-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-jin-jiao-wang-force
+    definition_id: force
+    value: 4
+  - id: canon-jin-jiao-wang-craft
+    definition_id: craft
+    value: 4
+  - id: canon-jin-jiao-wang-perception
+    definition_id: perception
+    value: 4
+  - id: canon-jin-jiao-wang-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-jin-jiao-wang
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 修炼数万年的蛟族统领，重视族群利益，也会为自己的修行留力。
+      voice: 发问简短，确定利益后才松口，少向外人解释私怨。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 查清邻近猎场变化，决定是否让后辈迁移。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 金蛟王
+        description: 修炼数万年的蛟族统领，重视族群利益，也会为自己的修行留力。
+        status: observed
+      - id: location
+        name: 金蛟潜宫
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-jin-jiao-wang-provisions
+        name: 金蛟王的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-canon-wu-dujiao
+        name: 武姓毒蛟
+        description: 同族长辈和后辈，亲属关系不代替当下命令。
+        status: observed
+      - id: known-outerstar-flood-courier
+        name: 澜牙
+        description: 长期巡视往来。
+        status: observed
+      - id: known-outerstar-jin-cache
+        name: 金蛟私库
+        description: 个人多年保留的有限可用储备，不能代表全海族财富。
+        status: observed
+      - id: known-outerstar-flood-scroll
+        name: 澜牙巡水记录
+        description: 澜牙自己写下的巡水记录；主人知道有这项巡视，正文只有交付后才得知。
+        status: observed
+      - id: known-canon-suanni-king
+        name: 狻猊王
+        description: 知晓对方代表的海族利益，不共享私下打算与当前位置。
+        status: observed
+      - id: known-canon-suanni-elder
+        name: 狻猊大长老
+        description: 知晓对方代表的海族利益，不共享私下打算与当前位置。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 十级金蛟法体、化龙诀、金爪和强大神识；预感可能失误。
+        description: 十级金蛟法体、化龙诀、金爪和强大神识；预感可能失误。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体修行。
+        description: 自己依本族法体修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-cultivation
+        subjectId: self
+        predicate: own-cultivation
+        value:
+          kind: text
+          value: 十级金蛟。
+        description: 十级金蛟。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: pending-report
+        subjectId: self
+        predicate: pending-report
+        value:
+          kind: text
+          value: 澜牙正在回报巡水，我尚未读他昨日记录。
+        description: 澜牙正在回报巡水，我尚未读他昨日记录。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-jin-jiao-wang
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-jinflood-court
+      - local_entity_id: known-canon-jin-jiao-wang-provisions
+        canonical_entity_ids:
+          - canon-jin-jiao-wang-provisions
+      - local_entity_id: known-canon-wu-dujiao
+        canonical_entity_ids:
+          - canon-wu-dujiao
+      - local_entity_id: known-outerstar-flood-courier
+        canonical_entity_ids:
+          - outerstar-flood-courier
+      - local_entity_id: known-outerstar-jin-cache
+        canonical_entity_ids:
+          - outerstar-jin-cache
+      - local_entity_id: known-outerstar-flood-scroll
+        canonical_entity_ids:
+          - outerstar-flood-scroll
+      - local_entity_id: known-canon-suanni-king
+        canonical_entity_ids:
+          - canon-suanni-king
+      - local_entity_id: known-canon-suanni-elder
+        canonical_entity_ids:
+          - canon-suanni-elder

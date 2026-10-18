@@ -1,0 +1,28 @@
+id: tianyuan-yitian-stewardship
+kind: organization
+name: 倚天城本期事务处
+description: 本期收取明确费用、处理公共讲席与道路争议的城务机构；不能随意没收居民私物。
+placement: tianyuan-yitian-city-reference
+facts:
+  - id: tianyuan-yitian-stewardship-current-sect-contract
+    predicate: current-sect-contract
+    value:
+      kind: text
+      value: 四宗各留九百低阶灵石修护款，可由本期城务处提出修护报价，实际获各宗认可后支付；不能仅因城务员提出就自动扣款。
+    description: 四宗各留九百低阶灵石修护款，可由本期城务处提出修护报价，实际获各宗认可后支付；不能仅因城务员提出就自动扣款。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: tianyuan-yitian-stewardship-root-detail-yitian-four-sects
+    predicate: root-detail-yitian-four-sects
+    value:
+      kind: text
+      value: 四宗各管自己事务，与城防协作不合并全部库存。天皇宗和倚天门有培育守兽的传统，战时军数不等平日实数。
+    description: 四宗各管自己事务，与城防协作不合并全部库存。天皇宗和倚天门有培育守兽的传统，战时军数不等平日实数。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

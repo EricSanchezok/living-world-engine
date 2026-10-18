@@ -1,0 +1,18 @@
+id: yinming-field-leader-tools
+kind: item
+name: 谷周的个人器具
+description: 耕作安排、交易、辨粮与普通防卫。所需的有限工具，不包含无限兽晶。
+placement: yinming-field-leader
+facts:
+  - id: yinming-field-leader-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-field-leader
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

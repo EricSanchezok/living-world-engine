@@ -1,0 +1,58 @@
+id: north-xuling-hall-one
+kind: location
+name: 虚灵殿第1殿
+description: 三座古殿之一，有独立地下通道；当前封闭。玄玉洞位于此殿内。
+placement: north-hanli-realm
+facts:
+  - id: north-xuling-hall-one-entry-state
+    predicate: entry-state
+    value:
+      kind: text
+      value: closed
+    description: closed
+    access:
+      kind: public
+  - id: north-xuling-hall-one-route-north-xuanyu-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuanyu-cave
+    description: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    access:
+      kind: public
+  - id: north-xuling-hall-one-travel-north-xuanyu-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    description: 乾蓝鼎能辅助控制相关通道，洞中玄玉寒气危险，许可不替代防护。
+    access:
+      kind: public
+  - id: north-xuling-hall-one-route-north-xuling-ice-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-xuling-ice-court
+    description: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    access:
+      kind: public
+  - id: north-xuling-hall-one-travel-north-xuling-ice-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    description: 偏门有封印，冰雕守卫的开启与停止需要真实法诀；不能当普通无阻走廊。
+    access:
+      kind: public
+  - id: north-xuling-hall-one-ancestral-image
+    predicate: ritual-feature
+    value:
+      kind: text
+      value: 开启古殿的既有法事可显现冰魄祖师光影；这是影像，不生成另一个活体或无依据跨界通信。
+    description: 开启古殿的既有法事可显现冰魄祖师光影；这是影像，不生成另一个活体或无依据跨界通信。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

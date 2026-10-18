@@ -1,0 +1,26 @@
+id: kunwu-treasure-house
+kind: location
+name: 灵宝阁
+description: 广场题碑所指旧阁，内部现存器物未由正文逐柜说明。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-treasure-house-route-kunwu-square
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-square
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-treasure-house-condition-kunwu-square
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    description: 石阶题碑可指路，目的地封禁与物品仍须实际查看，禁止凭名称宣告取得未写实宝物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

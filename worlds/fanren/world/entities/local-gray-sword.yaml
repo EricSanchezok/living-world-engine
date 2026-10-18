@@ -1,0 +1,18 @@
+id: local-gray-sword
+kind: item
+name: 灰衣前辈的佩剑
+description: 一柄保养得当的凡铁剑。
+placement: canon-martial-uncle-gray
+facts:
+  - id: local-gray-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-martial-uncle-gray
+    description: 随身用具属于持有人。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

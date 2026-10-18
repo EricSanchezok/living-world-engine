@@ -1,0 +1,24 @@
+id: canon-wuling-wu-resources
+kind: container
+name: 巫灵吴姓老者的个人储备
+description: 有限修行财物，与宗门及城库分开。
+placement: canon-wuling-wu
+facts:
+  - id: canon-wuling-wu-resources-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wuling-wu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 12
+  - definition_id: mid-stone
+    amount: 80
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

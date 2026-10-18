@@ -1,0 +1,26 @@
+id: blood-eagle-residence
+kind: location
+name: 白羽石楼
+description: 血骨门山地的石楼，羽衣老者在此收存门中旧库题记与自己的修炼材料。
+placement: blood-bone-domain
+facts:
+  - id: blood-eagle-residence-route-blood-bone-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-bone-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-eagle-residence-condition-blood-bone-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: thunder-offering-contract-record
+kind: item
+name: 三供位契约记
+description: 记蹄龙、泰雀、阳鹿三供位的古契约关系和递请程序，未向管事公开三者所在坐标。
+placement: thunder-offering-hall
+facts:
+  - id: thunder-offering-contract-record-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-offering-contract-record-summoning-boundary
+    predicate: summoning-boundary
+    value:
+      kind: text
+      value: 须族中具权高阶主持并具备契约实际条件方能提出召请；管事递请不等于强制真灵立即出现。供奉已交出的资源不可留在旧库存。
+    description: 须族中具权高阶主持并具备契约实际条件方能提出召请；管事递请不等于强制真灵立即出现。供奉已交出的资源不可留在旧库存。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

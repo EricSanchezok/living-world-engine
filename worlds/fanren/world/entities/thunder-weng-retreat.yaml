@@ -1,0 +1,26 @@
+id: thunder-weng-retreat
+kind: location
+name: 翁姓长老清修处
+description: 山壁间的院门平素紧闭，送来的公函放在外厅。静室自有隔绝探查的禁制。
+placement: thunder-fujiao-city
+facts:
+  - id: thunder-weng-retreat-route-thunder-fujiao-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-fujiao-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-weng-retreat-condition-thunder-fujiao-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 使者核验来函后可递交，是否接见由主人自行决定。
+    description: 使者核验来函后可递交，是否接见由主人自行决定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

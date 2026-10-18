@@ -1,0 +1,28 @@
+id: dajin-wanmu-array
+kind: item
+name: 万木大阵
+description: 古木阵以神树为阵眼，遮蔽与削弱闯入者的能力取决于阵法完好、供能及对方实际手段。
+placement: dajin-kuzhu-island
+facts:
+  - id: dajin-wanmu-array-array-core
+    predicate: array-core
+    value:
+      kind: entity
+      entityId: canon-tiansang-tree
+    description: 同一古树根系支撑阵眼，破坏会影响阵法。
+    access:
+      kind: public
+  - id: dajin-wanmu-array-managed-by
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: canon-ku-zhu
+    description: 岛主负责启闭维护，阵法不自主无限运转。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

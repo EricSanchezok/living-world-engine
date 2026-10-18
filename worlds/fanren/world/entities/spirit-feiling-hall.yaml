@@ -1,0 +1,26 @@
+id: spirit-feiling-hall
+kind: location
+name: 飞灵殿
+description: 接待新来飞升者的殿阁，临时居所和办事室相连，各私室有自己的禁制。
+placement: tianyuan-city
+facts:
+  - id: spirit-feiling-hall-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 接待新来飞升者的殿阁，临时居所和办事室相连，各私室有自己的禁制。
+    access:
+      kind: public
+  - id: spirit-feiling-hall-route-spirit-feiling-reception
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-feiling-reception
+    description: 登记实际到来者的身份、气息和所需协助，不把本地修士当作飞升者。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

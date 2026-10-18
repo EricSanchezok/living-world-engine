@@ -1,0 +1,20 @@
+id: fengyuan-sap-store
+kind: container
+name: 禁地今季留存树汁
+description: 已经采得并封存的六瓶树汁；不是未来百年产额，继续采集须评估古树状态。
+placement: fengyuan-sacred-tree-enclosure
+facts:
+  - id: fengyuan-sap-store-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-sacred-sap
+    amount: 6
+ratings: []
+shared_activity_resources: []

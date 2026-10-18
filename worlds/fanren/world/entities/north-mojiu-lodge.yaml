@@ -1,0 +1,26 @@
+id: north-mojiu-lodge
+kind: location
+name: 北地散修行院
+description: 摩鸠当前租住的小院，闭关与会面有自己的安排。
+placement: human-beiming-island
+facts:
+  - id: north-mojiu-lodge-route-north-entry-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-entry-market
+    description: 需得知住处并通报，主人可不接待。
+    access:
+      kind: public
+  - id: north-mojiu-lodge-travel-north-entry-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需得知住处并通报，主人可不接待。
+    description: 需得知住处并通报，主人可不接待。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,20 @@
+id: fengyuan-wine-store
+kind: container
+name: 旧酿仙叶酒
+description: 已完成酿制的三瓶仙叶酒，饮用真实扣减；可能助益体质而不是一饮必升境。
+placement: fengyuan-sacred-tree-enclosure
+facts:
+  - id: fengyuan-wine-store-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-immortal-leaf-wine
+    amount: 3
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: south-silver-snake
+kind: location
+name: 银蛇山
+description: 三四百里细长山脉，淡银叶片的树木从高处看如蜿蜒巨蛇。
+placement: human-south-kunwu
+facts:
+  - id: south-silver-snake-route-human-south-kunwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-south-kunwu
+    description: route-to
+    access:
+      kind: public
+  - id: south-silver-snake-condition-human-south-kunwu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 进入山脉需沿已知路径。
+    description: 进入山脉需沿已知路径。
+    access:
+      kind: public
+  - id: south-silver-snake-route-south-volcano
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-volcano
+    description: route-to
+    access:
+      kind: public
+  - id: south-silver-snake-condition-south-volcano
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 地火热度随地点变化，不可直接涉熔岩。
+    description: 地火热度随地点变化，不可直接涉熔岩。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

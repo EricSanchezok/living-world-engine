@@ -1,0 +1,18 @@
+id: spirit-black-guard-equipment
+kind: item
+name: 祝远的佩剑
+description: 供本人御使的剑器，护手留有任职刻记。
+placement: spirit-black-guard
+facts:
+  - id: spirit-black-guard-equipment-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-black-guard
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: south-herbal-household
+kind: container
+name: 何阮家日用箱
+description: 家庭用品，配偶与同住学徒知道用途，不能被访客直接认成自己库存。
+placement: south-market-home
+facts:
+  - id: south-herbal-household-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-herbalist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 30
+  - definition_id: copper
+    amount: 120
+ratings: []
+shared_activity_resources: []

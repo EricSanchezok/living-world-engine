@@ -1,0 +1,42 @@
+id: yinming-beasts-jiao
+kind: animal-group
+name: 狡狰兽当期群
+description: 有限现存群体，捕杀会减少其数量。
+placement: yinming-beast-deep
+facts:
+  - id: yinming-beasts-jiao-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 2
+    description: living-count
+    access:
+      kind: private
+  - id: yinming-beasts-jiao-food-safety
+    predicate: food-safety
+    value:
+      kind: text
+      value: 非已确认可供人类食用，不可按肉多就判无毒。
+    description: 非已确认可供人类食用，不可按肉多就判无毒。
+    access:
+      kind: private
+  - id: yinming-beasts-jiao-crystal-bearing-count
+    predicate: crystal-bearing-count
+    value:
+      kind: number
+      value: 1
+    description: crystal-bearing-count
+    access:
+      kind: private
+  - id: yinming-beasts-jiao-defense
+    predicate: defense
+    value:
+      kind: text
+      value: 四目、肉翅、可喷寒风及颈部硬毛；硬毛一次发出后不会立即凭空长回。
+    description: 四目、肉翅、可喷寒风及颈部硬毛；硬毛一次发出后不会立即凭空长回。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

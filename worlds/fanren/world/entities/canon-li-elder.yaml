@@ -1,0 +1,178 @@
+id: canon-li-elder
+kind: person
+name: 李长老
+description: 七玄门资深武者，待人温和，重视门人和家属。
+placement: li-elder-courtyard
+facts:
+  - id: canon-li-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 长期修习的普通内家功夫与师长教导经验；没有修仙法力。
+    description: 长期修习的普通内家功夫与师长教导经验；没有修仙法力。
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-elder
+  - id: canon-li-elder-spouse-of
+    predicate: spouse-of
+    value:
+      kind: entity
+      entityId: canon-li-wife
+    description: 夫妻
+    access:
+      kind: private
+  - id: canon-li-elder-friend-of
+    predicate: friend-of
+    value:
+      kind: entity
+      entityId: canon-zhao-elder
+    description: 旧交
+    access:
+      kind: private
+  - id: canon-li-elder-niece
+    predicate: niece
+    value:
+      kind: entity
+      entityId: canon-zhang-xiuer
+    description: 张袖儿是外甥女。
+    access:
+      kind: private
+  - id: canon-li-elder-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 七玄门成员。
+    access:
+      kind: private
+  - id: canon-li-elder-elders-rank
+    predicate: elders-rank
+    value:
+      kind: number
+      value: 5
+    description: 门中排行第五。
+    access:
+      kind: private
+meters:
+  - id: canon-li-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-li-elder-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 30
+ratings:
+  - id: canon-li-elder-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-li-elder-perception
+    definition_id: perception
+    value: 2
+  - id: canon-li-elder-craft
+    definition_id: craft
+    value: 2
+  - id: canon-li-elder-influence
+    definition_id: influence
+    value: 2
+  - id: canon-li-elder-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-li-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 七玄门资深武者，待人温和，重视门人和家属。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 安排今日练功与家务，对门内相识者照应有度。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 李长老
+        description: 七玄门资深武者，待人温和，重视门人和家属。
+        status: observed
+      - id: location
+        name: 李长老家院
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-canon-li-wife
+        name: 李氏
+        description: 夫妻关系，了解彼此日常生活；不知道对方所有私念。
+        status: observed
+      - id: known-canon-zhao-elder
+        name: 赵长老
+        description: 旧交关系，了解彼此日常生活；不知道对方所有私念。
+        status: observed
+      - id: known-canon-zhang-xiuer
+        name: 张袖儿
+        description: 年幼的外甥女，关心其生活。
+        status: observed
+      - id: known-qixuan-sect
+        name: 七玄门
+        description: 自己生活与习武的门派。
+        status: observed
+      - id: known-canon-qixuan-master
+        name: 王门主
+        description: 处理日常门务的负责人。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 长期修习的普通内家功夫与师长教导经验；没有修仙法力。
+        description: 长期修习的普通内家功夫与师长教导经验；没有修仙法力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-li-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - li-elder-courtyard
+      - local_entity_id: known-canon-li-wife
+        canonical_entity_ids:
+          - canon-li-wife
+      - local_entity_id: known-canon-zhao-elder
+        canonical_entity_ids:
+          - canon-zhao-elder
+      - local_entity_id: known-canon-zhang-xiuer
+        canonical_entity_ids:
+          - canon-zhang-xiuer
+      - local_entity_id: known-qixuan-sect
+        canonical_entity_ids:
+          - qixuan-sect
+      - local_entity_id: known-canon-qixuan-master
+        canonical_entity_ids:
+          - canon-qixuan-master

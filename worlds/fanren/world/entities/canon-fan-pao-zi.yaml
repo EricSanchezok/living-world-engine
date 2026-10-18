@@ -1,0 +1,176 @@
+id: canon-fan-pao-zi
+kind: person
+name: 樊咆子
+description: 银衫紫角真龙，眼界高，喜欢亲自考察有趣修士。
+placement: seas-fan-house
+facts:
+  - id: canon-fan-pao-zi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-fan-pao-zi
+  - id: canon-fan-pao-zi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 真龙法体、银龙遁行、鳞片邀请与本族神通。
+    description: 真龙法体、银龙遁行、鳞片邀请与本族神通。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fan-pao-zi
+  - id: canon-fan-pao-zi-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-fan-pao-zi
+meters:
+  - id: canon-fan-pao-zi-health
+    definition_id: health
+    current: 100
+  - id: canon-fan-pao-zi-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-fan-pao-zi-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-fan-pao-zi-force
+    definition_id: force
+    value: 8
+  - id: canon-fan-pao-zi-craft
+    definition_id: craft
+    value: 7
+  - id: canon-fan-pao-zi-perception
+    definition_id: perception
+    value: 8
+  - id: canon-fan-pao-zi-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-fan-pao-zi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 银衫紫角真龙，眼界高，喜欢亲自考察有趣修士。
+      voice: 说话爽朗，碰到新奇经历会追问，认可对方时不吝真情。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否邀请一位远来的匠人交流，在强者之外也看看手艺。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 樊咆子
+        description: 银衫紫角真龙，眼界高，喜欢亲自考察有趣修士。
+        status: observed
+      - id: location
+        name: 樊咆子住处
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-fan-pao-zi-private-stock
+        name: 樊咆子的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-tian-feier
+        name: 田飞儿
+        description: 相识的真龙族人，称师兄妹只是同族交往称呼，不自动造同一师父。
+        status: observed
+      - id: known-canon-golden-dragon-elder
+        name: 金龙大长老
+        description: 长期相识的本族长者与族人，知道对方行事习惯。
+        status: observed
+      - id: known-seas-dragon-crafts-visitor
+        name: 桑络
+        description: 已经接引来岛的客人，认可其工艺但未答应所有交换请求。
+        status: observed
+      - id: known-seas-fruit-tree
+        name: 广灵道果树
+        description: 族中实际果树与成熟状态，今未宣布新一届大会。
+        status: observed
+      - id: known-seas-visitor-plan
+        name: 桑络轻舟接口图
+        description: 客人主动介绍的有边界工艺交换，并非已经赠给自己。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 真龙法体、银龙遁行、鳞片邀请与本族神通。
+        description: 真龙法体、银龙遁行、鳞片邀请与本族神通。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-fan-pao-zi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-fan-house
+      - local_entity_id: known-canon-fan-pao-zi-private-stock
+        canonical_entity_ids:
+          - canon-fan-pao-zi-private-stock
+      - local_entity_id: known-canon-tian-feier
+        canonical_entity_ids:
+          - canon-tian-feier
+      - local_entity_id: known-canon-golden-dragon-elder
+        canonical_entity_ids:
+          - canon-golden-dragon-elder
+      - local_entity_id: known-seas-dragon-crafts-visitor
+        canonical_entity_ids:
+          - seas-dragon-crafts-visitor
+      - local_entity_id: known-seas-fruit-tree
+        canonical_entity_ids:
+          - seas-fruit-tree
+      - local_entity_id: known-seas-visitor-plan
+        canonical_entity_ids:
+          - seas-visitor-plan

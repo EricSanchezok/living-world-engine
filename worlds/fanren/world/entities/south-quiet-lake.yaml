@@ -1,0 +1,51 @@
+id: south-quiet-lake
+kind: location
+name: 普云静湖
+description: 岸边草木与旧渔路，湖水没有冲天光柱，水底深封古阵不从岸上可见。
+placement: south-puyun
+facts:
+  - id: south-quiet-lake-route-south-puyun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-puyun
+    description: route-to
+    access:
+      kind: public
+  - id: south-quiet-lake-condition-south-puyun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧岸路通到湖边，路本身不说明湖底秘密。
+    description: 旧岸路通到湖边，路本身不说明湖底秘密。
+    access:
+      kind: public
+  - id: south-quiet-lake-route-south-lake-hamlet
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-lake-hamlet
+    description: route-to
+    access:
+      kind: public
+  - id: south-quiet-lake-condition-south-lake-hamlet
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿湖堤往浅湾村。
+    description: 沿湖堤往浅湾村。
+    access:
+      kind: public
+  - id: south-quiet-lake-hidden-seal
+    predicate: hidden-seal
+    value:
+      kind: entity
+      entityId: kunwu-sealed-mountain
+    description: hidden-seal
+    access:
+      kind: discoverable
+      condition: 潜入湖底并识别上古法阵，或从真实知情档案获知，岸上闲看不能得出。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

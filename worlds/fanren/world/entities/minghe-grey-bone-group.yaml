@@ -1,0 +1,26 @@
+id: minghe-grey-bone-group
+kind: group
+name: 骨原阴骨群
+description: 阴气鼓动的十二具杂骨，破坏主骨及驱散所附阴气可使其失去活动。
+placement: minghe-bone-plain
+facts:
+  - id: minghe-grey-bone-group-group-boundary
+    predicate: group-boundary
+    value:
+      kind: text
+      value: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    description: 同群生命个体的合并记账；分离须从此群扣除个体数量，死亡扣减，不能同时保留旧数量并另生成活物。
+    access:
+      kind: private
+meters:
+  - id: minghe-grey-bone-group-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: minghe-creature-count
+    amount: 12
+ratings:
+  - id: minghe-grey-bone-group-force
+    definition_id: force
+    value: 4
+shared_activity_resources: []

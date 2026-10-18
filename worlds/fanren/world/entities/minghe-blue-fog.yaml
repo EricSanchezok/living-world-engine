@@ -1,0 +1,42 @@
+id: minghe-blue-fog
+kind: location
+name: 蓝雾洼地
+description: 低洼处悬着蓝色怪雾，身影入雾后很快模糊；能避开浓雾的高地绕路更远。
+placement: minghe-space
+facts:
+  - id: minghe-blue-fog-route-to-minghe-blood-marsh
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-blood-marsh
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-blue-fog-route-conditions-minghe-blood-marsh
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。
+    description: 沼外高地连蓝雾洼地；可绕浓雾，远行需辨路和持续护身。
+    access:
+      kind: private
+  - id: minghe-blue-fog-route-to-minghe-withered-wood
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-withered-wood
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-blue-fog-route-conditions-minghe-withered-wood
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。
+    description: 洼地外有通向枯林的地形，雾中易失方向，不能据此获得完整安全地图。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

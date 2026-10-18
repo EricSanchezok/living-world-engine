@@ -1,0 +1,38 @@
+id: minghe-qingyuan-exit-array
+kind: item
+name: 青元子离境阵台
+description: 依真实空间条件施法开裂离境，目的地只能在外界适合处落定，不能承诺任意门牌。
+placement: minghe-grey-mountains
+facts:
+  - id: minghe-qingyuan-exit-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-qingyuan-exit-array-exit-rule
+    predicate: exit-rule
+    value:
+      kind: text
+      value: 青元子或具有足够理解和力量者可准备法阵、耗用五块中阶灵石尝试打开暂时裂口；当前观察到的候选区域在飞灵族外沿黑冥半岛一带，实际施法仍须判断空间条件，不能保证精确落点。
+    description: 青元子或具有足够理解和力量者可准备法阵、耗用五块中阶灵石尝试打开暂时裂口；当前观察到的候选区域在飞灵族外沿黑冥半岛一带，实际施法仍须判断空间条件，不能保证精确落点。
+    access:
+      kind: agents
+      agentIds:
+        - canon-qing-yuan-zi
+  - id: minghe-qingyuan-exit-array-destination
+    predicate: destination
+    value:
+      kind: entity
+      entityId: feiling-heiming-peninsula
+    description: destination
+    access:
+      kind: agents
+      agentIds:
+        - canon-qing-yuan-zi
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

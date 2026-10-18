@@ -1,0 +1,18 @@
+id: spirit3-current-tianyuan-ruler-defense
+kind: item
+name: 天元圣皇个人护身佩
+description: 本人祭炼的护身佩，每次主动防御耗20法力，威力有界且可损坏。
+placement: spirit3-current-tianyuan-ruler
+facts:
+  - id: spirit3-current-tianyuan-ruler-defense-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-current-tianyuan-ruler
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

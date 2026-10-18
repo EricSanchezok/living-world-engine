@@ -1,0 +1,35 @@
+id: guanghan-sun-desert
+kind: location
+name: 旭日沙漠
+description: 刺目日光笼罩的荒漠，阴影稀少，长时暴晒有致命危险。
+placement: guanghan-realm
+facts:
+  - id: guanghan-sun-desert-route-guanghan-myriad-bird-ridge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-myriad-bird-ridge
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-sun-desert-condition-guanghan-myriad-bird-ridge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-sun-desert-sunlight-hazard
+    predicate: sunlight-hazard
+    value:
+      kind: text
+      value: 日光持续侵蚀法体与防护，须按受照时间、防护与实际承受能力判定；典籍的半日告诫不是对所有生灵统一倒计时。
+    description: 日光持续侵蚀法体与防护，须按受照时间、防护与实际承受能力判定；典籍的半日告诫不是对所有生灵统一倒计时。
+    access:
+      kind: discoverable
+      condition: 实际感受日照或取得可靠典籍。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

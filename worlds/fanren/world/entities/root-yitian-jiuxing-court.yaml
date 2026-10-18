@@ -1,0 +1,37 @@
+id: root-yitian-jiuxing-court
+kind: location
+name: 九星宗事务院
+description: 当前处理本宗在城中修护与往来的事务院。
+placement: tianyuan-yitian-city-reference
+facts:
+  - id: root-yitian-jiuxing-court-route-to-tianyuan-yitian-city-reference
+    predicate: route-to-tianyuan-yitian-city-reference
+    value:
+      kind: entity
+      entityId: tianyuan-yitian-city-reference
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-yitian-jiuxing-court-travel-condition-tianyuan-yitian-city-reference
+    predicate: travel-condition-tianyuan-yitian-city-reference
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-yitian-jiuxing-court-root-detail-blood-shaped-dragon
+    predicate: root-detail-blood-shaped-dragon
+    value:
+      kind: text
+      value: 铸血塑灵以精血和引物成龙形，维持有血力耗竭风险，不赋所有人真龙血脉。
+    description: 铸血塑灵以精血和引物成龙形，维持有血力耗竭风险，不赋所有人真龙血脉。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

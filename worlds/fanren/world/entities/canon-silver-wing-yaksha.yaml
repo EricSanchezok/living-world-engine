@@ -1,0 +1,203 @@
+id: canon-silver-wing-yaksha
+kind: corpse-spirit
+name: 银翅夜叉
+description: 上古空玄丹士尸身生出的尸灵，被五血圈困住，不能离阵；与古主人生前身份并非同一活人。
+placement: south-yaksha-prison
+facts:
+  - id: canon-silver-wing-yaksha-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-silver-wing-yaksha
+  - id: canon-silver-wing-yaksha-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 银瞳幻术、邪月幻镜、风土遁、特殊金遁与三尸煞化身，缺阴月精华未成金身月尸。
+    description: 银瞳幻术、邪月幻镜、风土遁、特殊金遁与三尸煞化身，缺阴月精华未成金身月尸。
+    access:
+      kind: agents
+      agentIds:
+        - canon-silver-wing-yaksha
+  - id: canon-silver-wing-yaksha-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+    access:
+      kind: agents
+      agentIds:
+        - canon-silver-wing-yaksha
+  - id: canon-silver-wing-yaksha-ancient-acquaintance-canon-gui-ling
+    predicate: ancient-acquaintance
+    value:
+      kind: entity
+      entityId: canon-gui-ling
+    description: ancient-acquaintance
+    access:
+      kind: private
+  - id: canon-silver-wing-yaksha-ancient-acquaintance-canon-shiqin-beast
+    predicate: ancient-acquaintance
+    value:
+      kind: entity
+      entityId: canon-shiqin-beast
+    description: ancient-acquaintance
+    access:
+      kind: private
+  - id: canon-silver-wing-yaksha-once-gave-qingxu-pill-canon-gui-ling
+    predicate: once-gave-qingxu-pill
+    value:
+      kind: entity
+      entityId: canon-gui-ling
+    description: once-gave-qingxu-pill
+    access:
+      kind: private
+  - id: canon-silver-wing-yaksha-confined-by
+    predicate: confined-by
+    value:
+      kind: entity
+      entityId: kunwu-prison-array-yaksha
+    description: confined-by
+    access:
+      kind: private
+meters:
+  - id: canon-silver-wing-yaksha-health
+    definition_id: health
+    current: 100
+  - id: canon-silver-wing-yaksha-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: kunwu-corpse-qi
+    amount: 400
+  - definition_id: kunwu-gold-escape
+    amount: 12
+ratings:
+  - id: canon-silver-wing-yaksha-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-silver-wing-yaksha-force
+    definition_id: force
+    value: 5
+  - id: canon-silver-wing-yaksha-craft
+    definition_id: craft
+    value: 4
+  - id: canon-silver-wing-yaksha-perception
+    definition_id: perception
+    value: 4
+  - id: canon-silver-wing-yaksha-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-silver-wing-yaksha
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 上古空玄丹士尸身生出的尸灵，被五血圈困住，不能离阵；与古主人生前身份并非同一活人。
+      voice: 平日阴沉，会讨价还价；见有利机会时话快，遇克制神通会谨慎收手。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 观察阵势是否变化，积蓄来之不易的金遁灵力。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 银翅夜叉
+        description: 上古空玄丹士尸身生出的尸灵，被五血圈困住，不能离阵；与古主人生前身份并非同一活人。
+        status: observed
+      - id: location
+        name: 尸灵血柱阵
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-gui-ling
+        name: 圭灵
+        description: 古时相识，长期分囚，不知道对方此刻每一动作。
+        status: observed
+      - id: known-canon-shiqin-beast
+        name: 狮禽兽
+        description: 古时相识，长期分囚，不知道对方此刻每一动作。
+        status: observed
+      - id: known-kunwu-prison-array-yaksha
+        name: 古困灵阵
+        description: 长期限制自己的法阵，尚未出现真实松动。
+        status: observed
+      - id: known-kunwu-evil-moon-mirror
+        name: 邪月幻镜
+        description: 从旧探索者得来的镜宝，增强银瞳幻术；不能凭幻象改变真实库存。
+        status: observed
+      - id: known-kunwu-yaksha-ore
+        name: 夜叉特殊金矿
+        description: 用于长期炼出有限金遁灵力的特殊矿物，现存十二份。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 银瞳幻术、邪月幻镜、风土遁、特殊金遁与三尸煞化身，缺阴月精华未成金身月尸。
+        description: 银瞳幻术、邪月幻镜、风土遁、特殊金遁与三尸煞化身，缺阴月精华未成金身月尸。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        description: 按自身妖体、尸灵或魂源修行，不套人族五行灵根检测。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-silver-wing-yaksha
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-yaksha-prison
+      - local_entity_id: known-canon-gui-ling
+        canonical_entity_ids:
+          - canon-gui-ling
+      - local_entity_id: known-canon-shiqin-beast
+        canonical_entity_ids:
+          - canon-shiqin-beast
+      - local_entity_id: known-kunwu-prison-array-yaksha
+        canonical_entity_ids:
+          - kunwu-prison-array-yaksha
+      - local_entity_id: known-kunwu-evil-moon-mirror
+        canonical_entity_ids:
+          - kunwu-evil-moon-mirror
+      - local_entity_id: known-kunwu-yaksha-ore
+        canonical_entity_ids:
+          - kunwu-yaksha-ore

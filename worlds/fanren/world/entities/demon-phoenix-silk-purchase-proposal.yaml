@@ -1,0 +1,27 @@
+id: demon-phoenix-silk-purchase-proposal
+kind: item
+name: 黑凤王的购丝意向
+description: 署筱馆名的一页短笺，请筱砚代表公库提出回复。
+placement: demon-phoenix-firekeeper-tools
+facts:
+  - id: demon-phoenix-silk-purchase-proposal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-firekeeper
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-phoenix-silk-purchase-proposal-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 筱馆愿以个人六十低阶灵石买一根公有晶炎丝，供本人制作火脉护腕。尚未同意或付款；筱砚可以拒绝、协商价格或保留材料。交易成立须从王的真实库存付到公库，丝亦实际移交，不从公库支付王的私人采购。
+    description: 筱馆愿以个人六十低阶灵石买一根公有晶炎丝，供本人制作火脉护腕。尚未同意或付款；筱砚可以拒绝、协商价格或保留材料。交易成立须从王的真实库存付到公库，丝亦实际移交，不从公库支付王的私人采购。
+    access:
+      kind: discoverable
+      condition: 实际阅读短笺或听取当事人说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

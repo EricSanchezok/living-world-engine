@@ -1,0 +1,18 @@
+id: ad-mother-black-core
+kind: item
+name: 骨壳黑晶核
+description: 与古骨壳相连的黑色晶核，女仙残魂能在现有控制边界内驱动；吞噬仍须实际对象、损耗与成功条件。
+placement: ad-mother-old-skeleton
+facts:
+  - id: ad-mother-black-core-controlled-by
+    predicate: controlled-by
+    value:
+      kind: entity
+      entityId: canon-unnamed-female-patrol-immortal
+    description: controlled-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

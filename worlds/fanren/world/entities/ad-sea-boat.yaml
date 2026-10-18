@@ -1,0 +1,18 @@
+id: ad-sea-boat
+kind: item
+name: 沐舟木舟
+description: 真实有限载重小舟，可载三名人形与器材，由两头小海兽拉行；防护需船主与协作者实际法力。
+placement: ad-moyuan-port
+facts:
+  - id: ad-sea-boat-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-sea-pilot
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

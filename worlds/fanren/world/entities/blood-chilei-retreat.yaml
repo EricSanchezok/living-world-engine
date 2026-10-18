@@ -1,0 +1,26 @@
+id: blood-chilei-retreat
+kind: location
+name: 赤雷观云台
+description: 山崖石台避开居民聚落，雷纹试法石围住练功场，居室在背风岩洞。
+placement: blood-north-domain
+facts:
+  - id: blood-chilei-retreat-route-blood-north-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-north-domain
+    description: route-to
+    access:
+      kind: public
+  - id: blood-chilei-retreat-condition-blood-north-domain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    description: 按实际路程抵达外院或洞府门前，内禁仍需主人允许或真实破解；来客不默认知道准确隐居坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

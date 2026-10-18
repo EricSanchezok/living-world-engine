@@ -1,0 +1,18 @@
+id: tianyuan-city-signal
+kind: item
+name: 备勤院配对盘
+description: 接收指定巡察哨传讯；信号只有报告者所知内容。
+placement: tianyuan-guard-yard
+facts:
+  - id: tianyuan-city-signal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

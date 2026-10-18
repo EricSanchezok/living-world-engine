@@ -1,0 +1,18 @@
+id: dajin-yuzhou
+kind: location
+name: 玉州
+description: 大晋州域之一，山地与凡俗小城相间。
+placement: human-dajin
+facts:
+  - id: dajin-yuzhou-route-dajin-yuzhou-small-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yuzhou-small-city
+    description: 州内道路有实际距离。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

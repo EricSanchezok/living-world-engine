@@ -1,0 +1,26 @@
+id: yue-market-guest-room-2-key
+kind: item
+name: 客房2钥匙
+description: 对应本房门锁的普通钥匙。
+placement: yue-market-guesthouse-keeper
+facts:
+  - id: yue-market-guest-room-2-key-opens
+    predicate: opens-location
+    value:
+      kind: entity
+      entityId: yue-market-guest-room-2
+    description: 这把钥匙可开对应房门的锁；须实际取钥、插锁转动，持钥不等于取得房屋所有权。
+    access:
+      kind: public
+  - id: yue-market-guest-room-2-key-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-guesthouse-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

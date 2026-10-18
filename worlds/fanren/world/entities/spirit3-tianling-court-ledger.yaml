@@ -1,0 +1,18 @@
+id: spirit3-tianling-court-ledger
+kind: item
+name: 天灵灵皇本期议簿
+description: 本期公库支出尚未划拨，收件需逐项审读；既有到期与承诺须真实记账。
+placement: spirit3-tianling-hall
+facts:
+  - id: spirit3-tianling-court-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianling-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

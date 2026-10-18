@@ -1,0 +1,42 @@
+id: guanghan-barren-plain
+kind: location
+name: 荒凉原野
+description: 裸土与碎石交错，长途穿越须辨方向并安排补给。
+placement: guanghan-realm
+facts:
+  - id: guanghan-barren-plain-route-guanghan-mainland-steppe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mainland-steppe
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-barren-plain-condition-guanghan-mainland-steppe
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-barren-plain-route-guanghan-mountain-chain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mountain-chain
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-barren-plain-condition-guanghan-mountain-chain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

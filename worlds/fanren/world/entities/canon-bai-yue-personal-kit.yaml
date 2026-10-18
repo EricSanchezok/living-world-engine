@@ -1,0 +1,22 @@
+id: canon-bai-yue-personal-kit
+kind: container
+name: 白钺的私用行囊
+description: 私人修炼和生活用品，机构资源另行保管。
+placement: canon-bai-yue
+facts:
+  - id: canon-bai-yue-personal-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bai-yue
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 30
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

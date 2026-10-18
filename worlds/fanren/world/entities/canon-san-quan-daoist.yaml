@@ -1,0 +1,167 @@
+id: canon-san-quan-daoist
+kind: person
+name: 三全道人
+description: 蛇纹青年道士形貌的三头巨蟒修士，擅长阵法，珍惜自己的利益。
+placement: minghe-biyuan
+facts:
+  - id: canon-san-quan-daoist-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-san-quan-daoist
+  - id: canon-san-quan-daoist-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘蟒身、阵法辨析与三色霞光；体量变化仍是同一生命。
+    description: 大乘蟒身、阵法辨析与三色霞光；体量变化仍是同一生命。
+    access:
+      kind: agents
+      agentIds:
+        - canon-san-quan-daoist
+  - id: canon-san-quan-daoist-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 三头蟒妖法体。
+    description: 三头蟒妖法体。
+    access:
+      kind: agents
+      agentIds:
+        - canon-san-quan-daoist
+  - id: canon-san-quan-daoist-contact-canon-huang-yuan-zi
+    predicate: prior-contact
+    value:
+      kind: entity
+      entityId: canon-huang-yuan-zi
+    description: prior-contact
+    access:
+      kind: private
+meters:
+  - id: canon-san-quan-daoist-health
+    definition_id: health
+    current: 100
+  - id: canon-san-quan-daoist-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: canon-san-quan-daoist-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-san-quan-daoist-force
+    definition_id: force
+    value: 8
+  - id: canon-san-quan-daoist-craft
+    definition_id: craft
+    value: 5
+  - id: canon-san-quan-daoist-perception
+    definition_id: perception
+    value: 8
+  - id: canon-san-quan-daoist-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-san-quan-daoist
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 蛇纹青年道士形貌的三头巨蟒修士，擅长阵法，珍惜自己的利益。
+      voice: 说话冷，认为报酬不足会直接拒绝；讨论阵理时格外认真。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 钻研禁制，寻找冥狱真经的可靠线索。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 三全道人
+        description: 蛇纹青年道士形貌的三头巨蟒修士，擅长阵法，珍惜自己的利益。
+        status: observed
+      - id: location
+        name: 碧原小筑
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-san-quan-daoist-private-stock
+        name: 三全道人私用储备
+        description: 当前有限材料与行路用石。
+        status: observed
+      - id: known-canon-huang-yuan-zi
+        name: 黄元子
+        description: 有过高阶修行往来，当前没有相互雇佣或借宝承诺。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘蟒身、阵法辨析与三色霞光；体量变化仍是同一生命。
+        description: 大乘蟒身、阵法辨析与三色霞光；体量变化仍是同一生命。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 三头蟒妖法体。
+        description: 三头蟒妖法体。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-san-quan-daoist
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-biyuan
+      - local_entity_id: known-canon-san-quan-daoist-private-stock
+        canonical_entity_ids:
+          - canon-san-quan-daoist-private-stock
+      - local_entity_id: known-canon-huang-yuan-zi
+        canonical_entity_ids:
+          - canon-huang-yuan-zi

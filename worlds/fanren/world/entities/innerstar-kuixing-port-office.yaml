@@ -1,0 +1,26 @@
+id: innerstar-kuixing-port-office
+kind: location
+name: 魁星港登记石屋
+description: 港口核验来客与登记临时玉牌的石屋。
+placement: innerstar-kuixing-harbor
+facts:
+  - id: innerstar-kuixing-port-office-route-innerstar-kuixing-harbor
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-harbor
+    description: 通往魁星港
+    access:
+      kind: public
+  - id: innerstar-kuixing-port-office-condition-innerstar-kuixing-harbor
+    predicate: condition-innerstar-kuixing-harbor
+    value:
+      kind: text
+      value: 港口旁登记石屋，需经过门口实际进入。
+    description: 港口旁登记石屋，需经过门口实际进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

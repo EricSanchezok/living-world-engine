@@ -1,0 +1,18 @@
+id: dv-tianji-trip-plan
+kind: item
+name: 陆缃历练计划
+description: 拟先到叶桦城及山口外测绘，预算18低阶灵石和六日粮；尚未获师长回应，更未同意入谷。
+placement: dv-tianji-house
+facts:
+  - id: dv-tianji-trip-plan-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-tianji-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

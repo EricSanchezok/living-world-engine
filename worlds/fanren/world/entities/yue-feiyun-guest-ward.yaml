@@ -1,0 +1,28 @@
+id: yue-feiyun-guest-ward
+kind: item
+name: 飞云客厅困阵
+description: 客厅四个阵脚以灵石维持；启动可封门形成困阻，不能仅凭阵名囚住任意修士。
+placement: yue-feiyun-hall
+facts:
+  - id: yue-feiyun-guest-ward-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-feiyun-guest-ward-operation
+    predicate: operation-condition
+    value:
+      kind: text
+      value: 须燕文或获教手法者现场操阵，启动消耗一低阶石；阵脚损毁会削弱困阻。
+    description: 须燕文或获教手法者现场操阵，启动消耗一低阶石；阵脚损毁会削弱困阻。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,28 @@
+id: innerstar-kuixing-maintenance-fund
+kind: container
+name: 魁星岛务维护库
+description: 有限的公共维护灵石，按用途支取并记账。
+placement: innerstar-dengxian-hall
+facts:
+  - id: innerstar-kuixing-maintenance-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 属于岛务所的公用灵石。
+    access:
+      kind: public
+  - id: innerstar-kuixing-maintenance-fund-allocation
+    predicate: allocation
+    value:
+      kind: text
+      value: 已批准20低阶灵石用于小寰护阵维护；沈册可按实际工料从库中拨付，收款和用途应记账，未支付前不计作村款或匠人私款。
+    description: 已批准20低阶灵石用于小寰护阵维护；沈册可按实际工料从库中拨付，收款和用途应记账，未支付前不计作村款或匠人私款。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 160
+ratings: []
+shared_activity_resources: []

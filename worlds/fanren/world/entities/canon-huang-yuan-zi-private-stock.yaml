@@ -1,0 +1,22 @@
+id: canon-huang-yuan-zi-private-stock
+kind: container
+name: 黄元子私用储备
+description: 当前有限材料与行路用石。
+placement: canon-huang-yuan-zi
+facts:
+  - id: canon-huang-yuan-zi-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-huang-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

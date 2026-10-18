@@ -1,0 +1,18 @@
+id: guanghan-empty-silk
+kind: container
+name: 空白薄绢
+description: 六片空白薄绢，可实际用于书写，不预置隐藏完整秘籍。
+placement: guanghan-study-table
+facts:
+  - id: guanghan-empty-silk-piece-count
+    predicate: piece-count
+    value:
+      kind: number
+      value: 6
+    description: piece-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

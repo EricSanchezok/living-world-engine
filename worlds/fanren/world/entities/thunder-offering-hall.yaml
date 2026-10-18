@@ -1,0 +1,50 @@
+id: thunder-offering-hall
+kind: location
+name: 角蚩供奉堂
+description: 三个供位各存有旧契约标记，供物清册列出本堂可支用的材料，召请有严格权限。
+placement: thunder-gailing-city
+facts:
+  - id: thunder-offering-hall-route-to-thunder-gailing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-gailing-city
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-offering-hall-route-conditions-thunder-gailing-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 到外厅可递送清册，供位禁区须独立许可。
+    description: 到外厅可递送清册，供位禁区须独立许可。
+    access:
+      kind: private
+  - id: thunder-offering-hall-maintains-offering-to-canon-ti-long
+    predicate: maintains-offering-to
+    value:
+      kind: entity
+      entityId: canon-ti-long
+    description: maintains-offering-to
+    access:
+      kind: private
+  - id: thunder-offering-hall-maintains-offering-to-canon-tai-que
+    predicate: maintains-offering-to
+    value:
+      kind: entity
+      entityId: canon-tai-que
+    description: maintains-offering-to
+    access:
+      kind: private
+  - id: thunder-offering-hall-maintains-offering-to-canon-yang-lu
+    predicate: maintains-offering-to
+    value:
+      kind: entity
+      entityId: canon-yang-lu
+    description: maintains-offering-to
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

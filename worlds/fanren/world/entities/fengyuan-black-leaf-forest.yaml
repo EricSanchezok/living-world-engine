@@ -1,0 +1,42 @@
+id: fengyuan-black-leaf-forest
+kind: location
+name: 黑叶森林
+description: 木族边境林海，外来人不能把每棵树都视为无主木材。
+placement: fengyuan-wood-domain
+facts:
+  - id: fengyuan-black-leaf-forest-route-fengyuan-one-sky
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-one-sky
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-black-leaf-forest-condition-fengyuan-one-sky
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木族边境林海，外来人不能把每棵树都视为无主木材。
+    description: 木族边境林海，外来人不能把每棵树都视为无主木材。
+    access:
+      kind: public
+  - id: fengyuan-black-leaf-forest-route-fengyuan-border-exchange
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-border-exchange
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-black-leaf-forest-condition-fengyuan-border-exchange
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 林缘获准交易的市口，有双方可以坐下来交涉的棚亭。
+    description: 林缘获准交易的市口，有双方可以坐下来交涉的棚亭。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

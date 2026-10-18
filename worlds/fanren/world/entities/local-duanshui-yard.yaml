@@ -1,0 +1,18 @@
+id: local-duanshui-yard
+kind: location
+name: 断水门堂院
+description: 地方小派自己的住处，尚未同野狼订下攻山盟约。
+placement: jingzhou
+facts:
+  - id: local-duanshui-yard-route-local-luosha-slope
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-luosha-slope
+    description: 经地方山路，入堂仍须许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

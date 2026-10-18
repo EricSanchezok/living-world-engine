@@ -1,0 +1,34 @@
+id: dajin-yinluo-main-hall
+kind: location
+name: 阴罗宗总坛
+description: 古传宗门的议事与修行本山，进入需通过宗门禁制和值守。
+placement: dajin-fangmang-range
+facts:
+  - id: dajin-yinluo-main-hall-route-dajin-fangmang-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-fangmang-range
+    description: 山门有防护和值守，入宗须许可。
+    access:
+      kind: public
+  - id: dajin-yinluo-main-hall-route-dajin-yinluo-lamp-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yinluo-lamp-room
+    description: 宗内秘室，未经许可不得进入。
+    access:
+      kind: public
+  - id: dajin-yinluo-main-hall-route-dajin-yinluo-corpse-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yinluo-corpse-yard
+    description: 炼尸场所须识防护和规程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

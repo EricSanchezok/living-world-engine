@@ -1,0 +1,18 @@
+id: innerstar-kuixing-land-map
+kind: item
+name: 魁星灵地银册
+description: 灵地地图：金光示已占用，白光示可申请；地图本身不授予用地权。
+placement: innerstar-dengxian-hall
+facts:
+  - id: innerstar-kuixing-land-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-kuixing-administration
+    description: 魁星岛务所公物，使用不等于取得私有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

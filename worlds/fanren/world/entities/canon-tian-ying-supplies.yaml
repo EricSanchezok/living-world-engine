@@ -1,0 +1,22 @@
+id: canon-tian-ying-supplies
+kind: container
+name: 天樱的私用储备
+description: 自身修炼和出行费用，与族域公产分开。
+placement: canon-tian-ying
+facts:
+  - id: canon-tian-ying-supplies-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-tian-ying
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

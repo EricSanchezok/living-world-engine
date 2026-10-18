@@ -1,0 +1,26 @@
+id: xu-settlement
+kind: location
+name: 石汀许氏聚落
+description: 大晋山地中的修仙家族聚落，议事厅和工坊分据坡地两侧。
+placement: human-realm
+facts:
+  - id: xu-settlement-route-xu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xu-hall
+    description: 议事厅可通往聚落。
+    access:
+      kind: public
+  - id: xu-settlement-route-xu-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xu-workshop
+    description: 聚落内有通往工坊的道路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

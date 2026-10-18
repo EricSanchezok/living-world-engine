@@ -1,0 +1,26 @@
+id: south-scorpion
+kind: location
+name: 双蝎山
+description: 绵延山脉中瘴气积聚，铁尾蝎、红线蝎与毒草各占生境。
+placement: south-chaoyun
+facts:
+  - id: south-scorpion-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-scorpion-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 出市入山，须预备防瘴和辨识虫踪。
+    description: 出市入山，须预备防瘴和辨识虫踪。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

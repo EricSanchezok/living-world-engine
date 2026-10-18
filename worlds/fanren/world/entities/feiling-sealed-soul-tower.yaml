@@ -1,0 +1,26 @@
+id: feiling-sealed-soul-tower
+kind: location
+name: 封灵塔
+description: 古塔由层叠灵纹封闭，塔心保有残缺鲲鹏圣魂；护持族禁而非随意召出完整神禽。
+placement: feiling-tianpeng-city
+facts:
+  - id: feiling-sealed-soul-tower-route-to-feiling-tianpeng-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-city
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-sealed-soul-tower-route-conditions-feiling-tianpeng-city
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    description: 城内沿空中廊道或低空标识通行；塔与传承内区须取得执事许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

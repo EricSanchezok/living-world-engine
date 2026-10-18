@@ -1,0 +1,28 @@
+id: root-black-domain-blue
+kind: location
+name: 黑域青光厅
+description: 青光笼罩的等候处，各来客自己选择遮蔽身份。
+placement: root-black-domain
+facts:
+  - id: root-black-domain-blue-route-to-root-black-domain
+    predicate: route-to-root-black-domain
+    value:
+      kind: entity
+      entityId: root-black-domain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-black-domain-blue-travel-condition-root-black-domain
+    predicate: travel-condition-root-black-domain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

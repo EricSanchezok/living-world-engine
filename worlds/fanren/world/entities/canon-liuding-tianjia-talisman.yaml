@@ -1,0 +1,19 @@
+id: canon-liuding-tianjia-talisman
+kind: item
+name: 六丁天甲符
+description: 残骸衣内保存的一张银符，符纹完整；其名称与用法须通过识读或实际研究辨认。
+placement: yue-blood-intruder-remains
+facts:
+  - id: canon-liuding-tianjia-talisman-use
+    predicate: activation-condition
+    value:
+      kind: text
+      value: 掌握对应法诀后可启符，吸引附近实际天地灵气形成六层光罩并凝为护身战甲；环境灵气受阻或不足会限制发挥。战甲主要护躯干，四肢头颅不因此自动全护；停止后可收回银符。此处只有一张成符，没有炼制法。
+    description: 掌握对应法诀后可启符，吸引附近实际天地灵气形成六层光罩并凝为护身战甲；环境灵气受阻或不足会限制发挥。战甲主要护躯干，四肢头颅不因此自动全护；停止后可收回银符。此处只有一张成符，没有炼制法。
+    access:
+      kind: discoverable
+      condition: 实际研究符纹、以可信典籍认符或通过有条件试用观察功能；未检查残骸者不知道其存在。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

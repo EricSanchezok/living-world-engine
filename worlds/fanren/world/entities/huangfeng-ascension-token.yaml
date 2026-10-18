@@ -1,0 +1,18 @@
+id: huangfeng-ascension-token
+kind: item
+name: 黄枫谷升仙令
+description: 秦家传下的一枚黄枫谷升仙令，尚未使用。
+placement: canon-jinguang-shangren
+facts:
+  - id: huangfeng-ascension-token-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jinguang-shangren
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

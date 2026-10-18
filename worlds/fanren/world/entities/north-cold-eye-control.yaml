@@ -1,0 +1,20 @@
+id: north-cold-eye-control
+kind: item
+name: 天元阴脉寒眼禁制
+description: 长期积攒寒气的控制禁制；当前低度泄流，突然全释放会耗去蓄积。
+placement: human-beiming-island
+facts:
+  - id: north-cold-eye-control-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: north-cold-reserve
+    amount: 3
+ratings: []
+shared_activity_resources: []

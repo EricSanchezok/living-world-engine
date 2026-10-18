@@ -1,0 +1,18 @@
+id: spirit3-anyuan-crossbow
+kind: item
+name: 安远草原门巨弩
+description: 固定重弩，需多人上弦、实矢、视线与瞄准；命中和穿透取决于距离、角度与目标防护。
+placement: spirit-anyuan-gate
+facts:
+  - id: spirit3-anyuan-crossbow-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-anyuan-watch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

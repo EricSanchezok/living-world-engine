@@ -1,0 +1,34 @@
+id: yue-old-mine
+kind: location
+name: 荒原灵石矿
+description: 荒原深峡中的旧矿，入口由幻阵遮蔽，采石须沿实际矿道开掘。
+placement: human-yue
+facts:
+  - id: yue-old-mine-route-human-yue
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yue
+    description: 找到荒原峡谷入口后才能沿路进入；矿口幻阵需看守准许或以适用手段识破。
+    access:
+      kind: public
+  - id: yue-old-mine-route-yue-old-mine-tunnel
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-old-mine-tunnel
+    description: 矿工沿开凿的支道行走，挖进未开岩层需工具、时间和防护。
+    access:
+      kind: public
+  - id: yue-old-mine-mask
+    predicate: barrier-condition
+    value:
+      kind: text
+      value: 矿口普通幻阵可由祝砚按手法出入和维护，夜间仍需照明；强行识破不自动取得库房财物。
+    description: 矿口普通幻阵可由祝砚按手法出入和维护，夜间仍需照明；强行识破不自动取得库房财物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

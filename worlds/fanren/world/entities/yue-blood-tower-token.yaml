@@ -1,0 +1,19 @@
+id: yue-blood-tower-token
+kind: item
+name: 古塔禁制令牌
+description: 刻有相应古纹的旧令牌，需取出并实际施用才能开启对应塔门。
+placement: yue-blood-golden-chest
+facts:
+  - id: yue-blood-tower-token-opens
+    predicate: opens-location
+    value:
+      kind: entity
+      entityId: yue-blood-ancient-tower
+    description: 此令对应塔门；到达仍须解决外部压制禁制，拿令不能代替修为和实际行路。
+    access:
+      kind: discoverable
+      condition: 取得令牌并比对对应塔门古纹，或读懂可信的使用说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

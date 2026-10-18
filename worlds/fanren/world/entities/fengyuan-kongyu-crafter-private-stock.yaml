@@ -1,0 +1,24 @@
+id: fengyuan-kongyu-crafter-private-stock
+kind: container
+name: 环汀私用储备
+description: 本人可支配的有限储备，与族库和受托物分开。
+placement: fengyuan-kongyu-crafter
+facts:
+  - id: fengyuan-kongyu-crafter-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-crafter
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 2
+  - definition_id: mid-stone
+    amount: 12
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

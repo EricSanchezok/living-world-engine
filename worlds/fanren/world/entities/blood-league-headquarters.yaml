@@ -1,0 +1,42 @@
+id: blood-league-headquarters
+kind: location
+name: 血天分盟总堂
+description: 血天分盟处理商路、委托和资源往来的总堂。公事文书与长老的私人储物分处保管；来访者先在外堂说明所为何事。
+placement: blood-crane-city
+facts:
+  - id: blood-league-headquarters-route-blood-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-market
+    description: route-to
+    access:
+      kind: public
+  - id: blood-league-headquarters-condition-blood-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-league-headquarters-review-route-blood-league-archive
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-league-archive
+    description: review-route-blood-league-archive
+    access:
+      kind: public
+  - id: blood-league-headquarters-review-route-condition-blood-league-archive
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    description: 按地理距离、实际遁速与补给行进，邻院可步行，跨山海不能视为一步；私人禁地须另获准入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

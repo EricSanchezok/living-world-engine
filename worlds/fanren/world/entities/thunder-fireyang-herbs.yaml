@@ -1,0 +1,20 @@
+id: thunder-fireyang-herbs
+kind: container
+name: 芷鳞采得的草药
+description: 十二份可辨识的止血药材，交出或炼用均扣量。
+placement: thunder-fireyang-settlement
+facts:
+  - id: thunder-fireyang-herbs-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-fireyang-herbalist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 12
+ratings: []
+shared_activity_resources: []

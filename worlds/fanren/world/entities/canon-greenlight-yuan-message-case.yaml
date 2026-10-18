@@ -1,0 +1,36 @@
+id: canon-greenlight-yuan-message-case
+kind: container
+name: 元姓驻守的万里符匣
+description: 专用于本族已知接收人的四张传讯符，发出一张就减少一张。
+placement: canon-greenlight-yuan
+facts:
+  - id: canon-greenlight-yuan-message-case-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: canon-greenlight-yuan-message-case-message-rule
+    predicate: message-rule
+    value:
+      kind: text
+      value: 向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。
+    description: 向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。
+    access:
+      kind: private
+  - id: canon-greenlight-yuan-message-case-known-recipient
+    predicate: known-recipient
+    value:
+      kind: entity
+      entityId: canon-qian-ji-zi
+    description: known-recipient
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-seal-sheet
+    amount: 4
+ratings: []
+shared_activity_resources: []

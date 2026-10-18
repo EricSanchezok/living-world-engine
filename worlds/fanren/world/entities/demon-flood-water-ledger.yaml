@@ -1,0 +1,26 @@
+id: demon-flood-water-ledger
+kind: item
+name: 水火交界取用簿
+description: 炉房和蛟族育幼水池按时段分流，当前两份申请有一段重合。
+placement: demon-flood-town
+facts:
+  - id: demon-flood-water-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-flood-community
+    description: owned-by
+    access:
+      kind: private
+  - id: demon-flood-water-ledger-allocation
+    predicate: allocation
+    value:
+      kind: text
+      value: 炉房申请下一本地日四时辰冷却水，育幼池申请同一时段补水；实际渠流只能满足一方全量。可错峰、减量或修旁渠，但无权让另一方凭空失水。
+    description: 炉房申请下一本地日四时辰冷却水，育幼池申请同一时段补水；实际渠流只能满足一方全量。可错峰、减量或修旁渠，但无权让另一方凭空失水。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

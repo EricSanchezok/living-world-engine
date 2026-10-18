@@ -1,0 +1,22 @@
+id: void-wanfa-treasurer-kit
+kind: container
+name: 程衡的随身器具
+description: 筑基修行与公库核算。所需的个人日常器具。
+placement: void-wanfa-treasurer
+facts:
+  - id: void-wanfa-treasurer-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-wanfa-treasurer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

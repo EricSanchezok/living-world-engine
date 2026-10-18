@@ -1,0 +1,210 @@
+id: innerstar-sailor
+kind: person
+name: 余泊
+description: 顾汀的舵手，家在临潮街，右肩旧伤不影响掌舵但不能再搬重箱。
+placement: innerstar-harbor
+facts:
+  - id: innerstar-sailor-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-sailor
+  - id: innerstar-sailor-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 辨潮、操舟与绳结；没有灵根。
+    description: 辨潮、操舟与绳结；没有灵根。
+    access:
+      kind: agents
+      agentIds:
+        - innerstar-sailor
+  - id: innerstar-sailor-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 没有灵根，不能按修仙者炼气入道。
+    description: 没有灵根，不能按修仙者炼气入道。
+    access:
+      kind: discoverable
+      condition: 有能力者经本人同意实际检测灵根。
+  - id: innerstar-sailor-works-for
+    predicate: works-for
+    value:
+      kind: entity
+      entityId: innerstar-shipowner
+    description: works-for
+    access:
+      kind: private
+  - id: innerstar-sailor-spouse
+    predicate: spouse
+    value:
+      kind: entity
+      entityId: innerstar-healer
+    description: spouse
+    access:
+      kind: private
+meters:
+  - id: innerstar-sailor-health
+    definition_id: health
+    current: 100
+  - id: innerstar-sailor-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 120
+ratings:
+  - id: innerstar-sailor-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: innerstar-sailor-force
+    definition_id: force
+    value: 1
+  - id: innerstar-sailor-craft
+    definition_id: craft
+    value: 3
+  - id: innerstar-sailor-perception
+    definition_id: perception
+    value: 1
+  - id: innerstar-sailor-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: innerstar-sailor
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 顾汀的舵手，家在临潮街，右肩旧伤不影响掌舵但不能再搬重箱。
+      voice: 说海况时笃定，谈家事稍慢，偶尔挖苦船主算得太精。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 把船安全开出港，留出回家送药的时间。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 余泊
+        description: 顾汀的舵手，家在临潮街，右肩旧伤不影响掌舵但不能再搬重箱。
+        status: observed
+      - id: location
+        name: 天星港
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-innerstar-sailor-personal-pouch
+        name: 余泊的私用行囊
+        description: 自己保管的生活或修炼用品，不包含所任机构的公产。
+        status: observed
+      - id: known-innerstar-shipowner
+        name: 顾汀
+        description: 合作多年的船主和舵手，彼此知道当前船期。
+        status: observed
+      - id: known-innerstar-healer
+        name: 陶芸
+        description: 夫妻，各有职业和自己的财产。
+        status: observed
+      - id: known-innerstar-family-letter
+        name: 余泊给家里的纸条
+        description: 写着若因风浪延后开船便回家吃饭，尚未交给陶芸。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 辨潮、操舟与绳结；没有灵根。
+        description: 辨潮、操舟与绳结；没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 把船安全开出港，留出回家送药的时间。
+        description: 把船安全开出港，留出回家送药的时间。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己尚未修仙。
+        description: 自己尚未修仙。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己没有灵根。
+        description: 自己没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        description: 此刻是当地夜间，之后昼夜按实际经过的时间变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - innerstar-sailor
+      - local_entity_id: location
+        canonical_entity_ids:
+          - innerstar-harbor
+      - local_entity_id: known-innerstar-sailor-personal-pouch
+        canonical_entity_ids:
+          - innerstar-sailor-personal-pouch
+      - local_entity_id: known-innerstar-shipowner
+        canonical_entity_ids:
+          - innerstar-shipowner
+      - local_entity_id: known-innerstar-healer
+        canonical_entity_ids:
+          - innerstar-healer
+      - local_entity_id: known-innerstar-family-letter
+        canonical_entity_ids:
+          - innerstar-family-letter

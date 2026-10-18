@@ -1,0 +1,18 @@
+id: ad-bloodlight-mine
+kind: location
+name: 血光晶矿
+description: 靠近血鸦城的矿脉，矿石与矿权分开登记；裸矿不能当现成魔石。
+placement: associated-demon-realm
+facts:
+  - id: ad-bloodlight-mine-route-to-ad-bloodcrow-city
+    predicate: route-to-ad-bloodcrow-city
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

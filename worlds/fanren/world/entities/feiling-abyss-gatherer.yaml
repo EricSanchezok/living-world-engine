@@ -1,0 +1,177 @@
+id: feiling-abyss-gatherer
+kind: person
+name: 苔午
+description: 地渊本地采集妖修，熟悉附近凶兽的觅食时刻。
+placement: feiling-first-layer-shelter
+facts:
+  - id: feiling-abyss-gatherer-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - feiling-abyss-gatherer
+  - id: feiling-abyss-gatherer-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴妖体、低光辨路与地下植物处理。
+    description: 元婴妖体、低光辨路与地下植物处理。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-abyss-gatherer
+  - id: feiling-abyss-gatherer-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 地下妖族修行。
+    description: 地下妖族修行。
+    access:
+      kind: agents
+      agentIds:
+        - feiling-abyss-gatherer
+meters:
+  - id: feiling-abyss-gatherer-health
+    definition_id: health
+    current: 100
+  - id: feiling-abyss-gatherer-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: feiling-abyss-gatherer-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: feiling-abyss-gatherer-force
+    definition_id: force
+    value: 4
+  - id: feiling-abyss-gatherer-craft
+    definition_id: craft
+    value: 4
+  - id: feiling-abyss-gatherer-perception
+    definition_id: perception
+    value: 4
+  - id: feiling-abyss-gatherer-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: feiling-abyss-gatherer
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 地渊本地采集妖修，熟悉附近凶兽的觅食时刻。
+      voice: 声音低，谈凶兽像谈难相处的邻居，守约后会多讲一条小路。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 以自己采得的材料交换光源，改善石檐里的生活。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 苔午
+        description: 地渊本地采集妖修，熟悉附近凶兽的觅食时刻。
+        status: observed
+      - id: location
+        name: 一层石檐避风处
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-feiling-gatherer-cache
+        name: 苔午采集包
+        description: 本地采到的有限植物样本，可交换灯石和药物。
+        status: observed
+      - id: feiling-review-feiling-lore-clerk
+        name: 竹翎
+        description: 在天知阁借过地图，觉得她会认真核实记录。
+        status: observed
+      - id: feiling-review-feiling-orchid-plants
+        name: 可采毒兰
+        description: 自己照看的毒兰，取料前要防蜂毒且登记消耗。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴妖体、低光辨路与地下植物处理。
+        description: 元婴妖体、低光辨路与地下植物处理。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 地下妖族修行。
+        description: 地下妖族修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        description: 此时为当地夜间，此后按真实经过的时间与观察判断昼夜。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: abyss-waypoints
+        subjectId: self
+        predicate: abyss-waypoints
+        value:
+          kind: text
+          value: 守墙银门后还要跨越黑地到巨渊，下降才到一层。地渊暗秽限制神识；不知道深层每位妖王的居所秘密。
+        description: 守墙银门后还要跨越黑地到巨渊，下降才到一层。地渊暗秽限制神识；不知道深层每位妖王的居所秘密。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - feiling-abyss-gatherer
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-first-layer-shelter
+      - local_entity_id: known-feiling-gatherer-cache
+        canonical_entity_ids:
+          - feiling-gatherer-cache
+      - local_entity_id: feiling-review-feiling-lore-clerk
+        canonical_entity_ids:
+          - feiling-lore-clerk
+      - local_entity_id: feiling-review-feiling-orchid-plants
+        canonical_entity_ids:
+          - feiling-orchid-plants

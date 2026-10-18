@@ -1,0 +1,58 @@
+id: dongyu-changzhou
+kind: location
+name: 昌州
+description: 东裕北部，广阔森林盆地环绕万岭山地，瘴气使采药与旅行受到实际限制。
+placement: human-dongyu
+facts:
+  - id: dongyu-changzhou-route-human-dongyu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-dongyu
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-changzhou-travel-human-dongyu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-changzhou-route-dongyu-ningzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dongyu-ningzhou
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-changzhou-travel-dongyu-ningzhou
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-changzhou-route-tiannan-dongyu-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-dongyu-market
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: dongyu-changzhou-travel-tiannan-dongyu-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

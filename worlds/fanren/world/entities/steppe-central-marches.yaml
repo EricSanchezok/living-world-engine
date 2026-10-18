@@ -1,0 +1,58 @@
+id: steppe-central-marches
+kind: location
+name: 草原中部交界
+description: 低矮土岗分开两侧迁牧路线，旧石堆用于认路。行旅可绕开已知巡队，暴露的营火也可能招来盘问。
+placement: human-mulan-steppe
+facts:
+  - id: steppe-central-marches-route-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    access:
+      kind: public
+  - id: steppe-central-marches-travel-steppe-mulan-north
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    description: 长途穿越草原，需辨别水源和部落活动；当前没有必然触发的会战。
+    access:
+      kind: public
+  - id: steppe-central-marches-route-steppe-tuwu-south
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tuwu-south
+    description: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    access:
+      kind: public
+  - id: steppe-central-marches-travel-steppe-tuwu-south
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    description: 越过巡逻边界可交涉、避行或冒险强闯；族属影响反应但不自动宣判敌对。
+    access:
+      kind: public
+  - id: steppe-central-marches-route-steppe-jinyang-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-jinyang-camp
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-central-marches-travel-steppe-jinyang-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

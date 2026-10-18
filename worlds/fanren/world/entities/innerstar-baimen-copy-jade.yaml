@@ -1,0 +1,18 @@
+id: innerstar-baimen-copy-jade
+kind: item
+name: 白门待刻玉片
+description: 一片尚未写入内容的可刻玉片；抄录要实际读取原册并耗工。
+placement: innerstar-baimen-stock
+facts:
+  - id: innerstar-baimen-copy-jade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

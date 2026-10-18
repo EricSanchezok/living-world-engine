@@ -1,0 +1,42 @@
+id: minghe-current-transit-writ
+kind: item
+name: 本次送材许可
+description: 准许经羽衍核验的一组至多三人将六份补料送至内岸槐宁，三灵界本地日内有效；须配合本轮唯一短时窗口，不含深入神池和魔坟。
+placement: minghe-gate-warden
+facts:
+  - id: minghe-current-transit-writ-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-sanctuary-office
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-current-transit-writ-expiry-seconds
+    predicate: expiry-seconds
+    value:
+      kind: number
+      value: 1036800
+    description: expiry-seconds
+    access:
+      kind: public
+  - id: minghe-current-transit-writ-paid-task
+    predicate: paid-task
+    value:
+      kind: text
+      value: 实际送交六份材料并取得验收后，外巡院从公产支付三十低阶灵石，使用一次接引所耗高阶灵石由机构承担。
+    description: 实际送交六份材料并取得验收后，外巡院从公产支付三十低阶灵石，使用一次接引所耗高阶灵石由机构承担。
+    access:
+      kind: public
+  - id: minghe-current-transit-writ-return-duty
+    predicate: return-duty
+    value:
+      kind: text
+      value: 本次开放期间须接回临时内驻的槐宁；送材只是本次维护窗口的最后交接，不保证日后还能靠此纸通行。
+    description: 本次开放期间须接回临时内驻的槐宁；送材只是本次维护窗口的最后交接，不保证日后还能靠此纸通行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

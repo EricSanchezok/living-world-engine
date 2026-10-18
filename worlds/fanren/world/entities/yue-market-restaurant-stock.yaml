@@ -1,0 +1,38 @@
+id: yue-market-restaurant-stock
+kind: item
+name: 坊市酒楼货柜
+description: 普通饭食十份一低阶灵石，可合桌结账；每份实际消耗一份食粮，不提供凭空恢复法力的仙宴。
+placement: yue-market-restaurant
+facts:
+  - id: yue-market-restaurant-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-market-restaurant-business
+    description: 实际归属关系，保管不自动转移所有权。
+    access:
+      kind: public
+  - id: yue-market-restaurant-stock-terms
+    predicate: sale-terms
+    value:
+      kind: text
+      value: 普通饭食十份一低阶灵石，可合桌结账；每份实际消耗一份食粮，不提供凭空恢复法力的仙宴。
+    description: 普通饭食十份一低阶灵石，可合桌结账；每份实际消耗一份食粮，不提供凭空恢复法力的仙宴。
+    access:
+      kind: public
+  - id: yue-market-restaurant-stock-authorize
+    predicate: spending-rule
+    value:
+      kind: text
+      value: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    description: 当值经营者可按已列价格收付款和交付货物；折价与收购须双方具体同意，不能把整个商号库存放进私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 20
+  - definition_id: low-stone
+    amount: 60
+ratings: []
+shared_activity_resources: []

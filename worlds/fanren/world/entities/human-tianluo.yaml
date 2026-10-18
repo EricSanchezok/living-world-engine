@@ -1,0 +1,106 @@
+id: human-tianluo
+kind: location
+name: 天罗国
+description: 魔道六宗的本土，宗门间有边界、产业和竞争，凡俗城镇仍按各自生活运行。
+placement: human-tiannan
+facts:
+  - id: human-tianluo-route-human-tiannan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-travel-human-tiannan
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-qiling-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-qiling-mountains
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-travel-tiannan-qiling-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-guiling-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-guiling-court
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-travel-tiannan-guiling-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-hehuan-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-hehuan-court
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-travel-tiannan-hehuan-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-human-jiang
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-jiang
+    description: 跨国商路有边关与关卡；按道路、天气、载具和实际行进速度累计行程，不能把国家直接相邻视为一步到达。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-moyan-outer-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-moyan-outer-court
+    description: 天罗干道可至外院门前，入内须核明来意与守值许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-tiansha-outer-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-tiansha-outer-court
+    description: 天罗干道可至外院门前，入内须核明来意与守值许可。
+    access:
+      kind: public
+  - id: human-tianluo-route-tiannan-qianhuan-outer-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-qianhuan-outer-court
+    description: 天罗干道可至外院门前，入内须核明来意与守值许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

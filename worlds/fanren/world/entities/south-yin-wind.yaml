@@ -1,0 +1,26 @@
+id: south-yin-wind
+kind: location
+name: 黑阴风穴
+description: 三块乌黑风晶嵌在风口，大块附近幻出阴冥蛾。
+placement: south-yin-forks
+facts:
+  - id: south-yin-wind-route-south-yin-forks
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-yin-forks
+    description: route-to
+    access:
+      kind: public
+  - id: south-yin-wind-condition-south-yin-forks
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 强风穴口的幻蛾与风力同在，不是安全穿越道。
+    description: 强风穴口的幻蛾与风力同在，不是安全穿越道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

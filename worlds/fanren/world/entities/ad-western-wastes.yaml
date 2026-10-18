@@ -1,0 +1,50 @@
+id: ad-western-wastes
+kind: location
+name: 西行荒地
+description: 魔兽与荒野并存，远行需真实地图与补给。
+placement: associated-demon-realm
+facts:
+  - id: ad-western-wastes-route-ad-chongyue-plain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-chongyue-plain
+    description: route-to
+    access:
+      kind: public
+  - id: ad-western-wastes-condition-ad-chongyue-plain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-western-wastes-route-ad-huanye-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-huanye-city
+    description: route-to
+    access:
+      kind: public
+  - id: ad-western-wastes-condition-ad-huanye-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-western-wastes-route-to-ad-qiling-icefield
+    predicate: route-to-ad-qiling-icefield
+    value:
+      kind: entity
+      entityId: ad-qiling-icefield
+    description: 须从实际获知的地图寻找冰原，长程飞行需要法力补给与定向。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

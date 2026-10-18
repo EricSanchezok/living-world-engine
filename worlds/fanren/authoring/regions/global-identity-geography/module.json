@@ -204,6 +204,30 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-imperial-quarter",
+      "name": "晋京皇城区",
+      "kind": "location",
+      "placement": "dajin-jinjing",
+      "description": "晋京最北的广大皇城区；外围街路连向城中，宫门以内有各自的准入界限。",
+      "facts": [
+        {
+          "id": "dajin-imperial-quarter-route-dajin-jinjing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjing"
+          },
+          "description": "从皇城区外缘沿城内街路返回晋京其余街区；须实际移动。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -310,6 +334,23 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "dajin-jinjing",
+      "facts": [
+        {
+          "id": "dajin-jinjing-route-dajin-imperial-quarter",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-imperial-quarter"
+          },
+          "description": "沿城内街路向最北皇城区外缘行走；宫门内部的通行另须许可，抵达城区不等于进入所有殿宇。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
     }
   ],
   "placements": [],
@@ -390,6 +431,15 @@
     ],
     "fact:yue-blood-one-sky-terrain": [
       "global-blood-one-sky-geography"
+    ],
+    "entity:dajin-imperial-quarter": [
+      "global-jinjing-imperial-quarter"
+    ],
+    "fact:dajin-imperial-quarter-route-dajin-jinjing": [
+      "global-jinjing-imperial-quarter"
+    ],
+    "fact:dajin-jinjing-route-dajin-imperial-quarter": [
+      "global-jinjing-imperial-quarter"
     ]
   }
 }

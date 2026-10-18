@@ -1,0 +1,18 @@
+id: tianyuan-ming-sample-metal
+kind: item
+name: 魂音金纹试片
+description: 一块已经取样的金纹工料，鸣老怪作过一次导灵测试；每次研磨会减少可复验表面，耗尽后不能重复当新料。
+placement: tianyuan-ming-workshop
+facts:
+  - id: tianyuan-ming-sample-metal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ming-oldmaster
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

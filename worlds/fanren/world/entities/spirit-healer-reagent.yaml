@@ -1,0 +1,20 @@
+id: spirit-healer-reagent
+kind: container
+name: 闻素常用医药料
+description: 用于实际护理的常用药料，没有包治未知禁咒的神药。
+placement: spirit-tianyuan-market
+facts:
+  - id: spirit-healer-reagent-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-physician
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 24
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: dajin-leiyin-court
+kind: location
+name: 雷音宗修行院
+description: 雷音寺的一处修行院。
+placement: human-dajin
+facts:
+  - id: dajin-leiyin-court-route-dajin-leiyin-library
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-leiyin-library
+    description: 入藏典处须获得宗门许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

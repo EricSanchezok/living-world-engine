@@ -1,0 +1,26 @@
+id: innerstar-haiyuan-market
+kind: location
+name: 海猿收购埠
+description: 商户联合维持的小埠与活猿收购棚，等候海船装运。
+placement: human-haiyuan-island
+facts:
+  - id: innerstar-haiyuan-market-route-human-haiyuan-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-haiyuan-island
+    description: 通往海猿岛
+    access:
+      kind: public
+  - id: innerstar-haiyuan-market-travel-human-haiyuan-island
+    predicate: travel-human-haiyuan-island
+    value:
+      kind: text
+      value: 岛上道路可步行；海猿出没处在近海，不是柜台无限生货。
+    description: 岛上道路可步行；海猿出没处在近海，不是柜台无限生货。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

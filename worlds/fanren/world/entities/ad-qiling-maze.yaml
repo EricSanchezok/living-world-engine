@@ -1,0 +1,42 @@
+id: ad-qiling-maze
+kind: location
+name: 泣灵迷殿
+description: 柱林禁制能发邪音、凝幻兽且藏其他机关，须逐步应对。
+placement: ad-qiling-threshold
+facts:
+  - id: ad-qiling-maze-route-to-ad-qiling-threshold
+    predicate: route-to-ad-qiling-threshold
+    value:
+      kind: entity
+      entityId: ad-qiling-threshold
+    description: 须先实际打开入口禁制。
+    access:
+      kind: public
+  - id: ad-qiling-maze-route-to-ad-qiling-firehall
+    predicate: route-to-ad-qiling-firehall
+    value:
+      kind: entity
+      entityId: ad-qiling-firehall
+    description: 须破或绕过柱林幻兽与隐藏机关。
+    access:
+      kind: public
+  - id: ad-qiling-maze-route-to-ad-qiling-outer-store-a
+    predicate: route-to-ad-qiling-outer-store-a
+    value:
+      kind: entity
+      entityId: ad-qiling-outer-store-a
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+  - id: ad-qiling-maze-route-to-ad-qiling-outer-store-b
+    predicate: route-to-ad-qiling-outer-store-b
+    value:
+      kind: entity
+      entityId: ad-qiling-outer-store-b
+    description: 须先抵达此层并通过相应禁制，不能从界外直接传取。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

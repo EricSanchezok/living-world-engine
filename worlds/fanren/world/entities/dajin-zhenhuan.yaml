@@ -1,0 +1,42 @@
+id: dajin-zhenhuan
+kind: location
+name: 真桓山
+description: 太一门控制的广大灵脉山系。
+placement: human-dajin
+facts:
+  - id: dajin-zhenhuan-route-dajin-taiyi-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-taiyi-court
+    description: 山门外院允许通报来意。
+    access:
+      kind: public
+  - id: dajin-zhenhuan-travel-dajin-taiyi-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山门外院允许通报来意。
+    description: 山门外院允许通报来意。
+    access:
+      kind: public
+  - id: dajin-zhenhuan-route-dajin-binghun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-binghun
+    description: 隐秘禁地，知位置仍不等于获准进入。
+    access:
+      kind: public
+  - id: dajin-zhenhuan-travel-dajin-binghun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 隐秘禁地，知位置仍不等于获准进入。
+    description: 隐秘禁地，知位置仍不等于获准进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

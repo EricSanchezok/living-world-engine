@@ -1,0 +1,42 @@
+id: demon-phoenix-court
+kind: location
+name: 黑凤之地议事处
+description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+placement: demon-phoenix-palace
+facts:
+  - id: demon-phoenix-court-route-demon-phoenix-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-phoenix-court-condition-demon-phoenix-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-phoenix-court-route-to-demon-phoenix-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-phoenix-palace
+    description: route-to-demon-phoenix-palace
+    access:
+      kind: public
+  - id: demon-phoenix-court-condition-demon-phoenix-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 前庭与议事处相通；接见时按守门安排进入。
+    description: 前庭与议事处相通；接见时按守门安排进入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

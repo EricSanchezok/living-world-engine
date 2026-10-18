@@ -1,0 +1,28 @@
+id: root-tixue-domain
+kind: location
+name: 啼血门山地
+description: 齐云一带的旧门派辖地，修士与运货者在山门交易。
+placement: blood-qiyun-mountains
+facts:
+  - id: root-tixue-domain-route-to-blood-qiyun-mountains
+    predicate: route-to-blood-qiyun-mountains
+    value:
+      kind: entity
+      entityId: blood-qiyun-mountains
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-tixue-domain-travel-condition-blood-qiyun-mountains
+    predicate: travel-condition-blood-qiyun-mountains
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,27 @@
+id: spirit-borrowed-medical-book
+kind: item
+name: 闻素借出的劳损医册
+description: 闻素借出的劳损医册，纸面或封装仍保持交接时的样子。
+placement: spirit-body-healer
+facts:
+  - id: spirit-borrowed-medical-book-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-physician
+    description: 归闻素所有。
+    access:
+      kind: private
+  - id: spirit-borrowed-medical-book-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 有普通炼体劳损的诊治笔记和留白。施岚获准借阅三当地日，尚余一日；书中没有凭空治愈所有伤病的法门。
+    description: 有普通炼体劳损的诊治笔记和留白。施岚获准借阅三当地日，尚余一日；书中没有凭空治愈所有伤病的法门。
+    access:
+      kind: discoverable
+      condition: 获得持有人许可后实际查看；封缄内容须拆封或由已读者主动告知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

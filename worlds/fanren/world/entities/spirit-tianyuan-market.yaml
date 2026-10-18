@@ -1,0 +1,74 @@
+id: spirit-tianyuan-market
+kind: location
+name: 天渊城交易街
+description: 蛮荒材料、各地货物和修士器具在此交易，真假、交付与产权仍需各自核验。
+placement: tianyuan-city
+facts:
+  - id: spirit-tianyuan-market-route-spirit-tianyuan-street
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-street
+    description: 蛮荒材料、各地货物和修士器具在此交易，真假、交付与产权仍需各自核验。
+    access:
+      kind: public
+  - id: spirit-tianyuan-market-route-qinghe-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qinghe-store
+    description: 青禾仓院邻近交易街，客人可到门口通报；仓内货物仍受商行管理。
+    access:
+      kind: public
+  - id: spirit-tianyuan-market-route-spirit-wharf
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wharf
+    description: 货场与交易街有搬运道路，货物流转应带交接记录。
+    access:
+      kind: public
+  - id: spirit-tianyuan-market-route-spirit-repair-yard
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-repair-yard
+    description: 供灵具制作、修补和带护挡演示的院子，炉台与演示台分开。
+    access:
+      kind: public
+  - id: spirit-tianyuan-market-route-spirit-record-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-record-shop
+    description: 出售行路图、地理册和抄本的铺子，不把常识图册冒充高阶功法。
+    access:
+      kind: public
+  - id: tianyuan-review-spirit-tianyuan-market-route-to-tianyuan-taixuan-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-taixuan-hall
+    description: route-to-tianyuan-taixuan-hall
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-tianyuan-market-route-conditions-tianyuan-taixuan-hall
+    predicate: route-conditions-tianyuan-taixuan-hall
+    value:
+      kind: text
+      value: 人族侧入口步行，查领遮光佩并缴已公开费用；拒领可留门外谈。
+    description: 人族侧入口步行，查领遮光佩并缴已公开费用；拒领可留门外谈。
+    access:
+      kind: private
+  - id: spirit-tianyuan-market-route-global-fu-clinic
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: global-fu-clinic
+    description: 人族道路可至医舍；问诊与取药需约定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

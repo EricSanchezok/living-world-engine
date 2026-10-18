@@ -1,0 +1,27 @@
+id: tiannan-market-entry-stall
+kind: location
+name: 天星街口小摊位
+description: 登记亭旁一处可摆两只小桌的摊位，只能安排一组同时营业。
+placement: tiannan-tianxing-market
+facts:
+  - id: tiannan-market-entry-stall-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-tianxing-sect
+    description: 所有权按记录，不因保管自动转移。
+    access:
+      kind: public
+  - id: tiannan-market-entry-stall-availability
+    predicate: availability
+    value:
+      kind: text
+      value: 当前空置；下一段租期尚未签定，两份申请均未获得优先权。
+    description: 申请不自动占有摊位。
+    access:
+      kind: discoverable
+      condition: 取得保管人允许后查看该物的可见情况、账册或文字；隐蔽事实仍需相应调查，不能只凭名称得知。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

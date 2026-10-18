@@ -1,0 +1,18 @@
+id: kunwu-four-image-ruler
+kind: item
+name: 四象尺
+description: 仿八灵尺的宗门传承，属性与木夫人不尽相合，强用有真实消耗。
+placement: south-huaxian-archive
+facts:
+  - id: kunwu-four-image-ruler-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-huaxian-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

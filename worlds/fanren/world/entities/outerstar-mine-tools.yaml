@@ -1,0 +1,18 @@
+id: outerstar-mine-tools
+kind: item
+name: 陶石的支木工具
+description: 锤、绳与测距竹尺，可检查支撑但不能替代结构安全。
+placement: outerstar-miner
+facts:
+  - id: outerstar-mine-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-miner
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

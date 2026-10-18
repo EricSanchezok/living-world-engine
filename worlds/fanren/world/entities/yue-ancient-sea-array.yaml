@@ -1,0 +1,18 @@
+id: yue-ancient-sea-array
+kind: item
+name: 矿下古六角阵
+description: 嵌在地面的古六角传送阵，一角的阵纹断裂；不能搬作随身器物。
+placement: yue-old-mine-cavern
+facts:
+  - id: yue-ancient-sea-array-condition
+    predicate: operation-condition
+    value:
+      kind: text
+      value: 阵角断裂，须先依据适用图式与材料修复；未完成修复和供能不会传送。远传者还须能承受空间压力。
+    description: 阵角断裂，须先依据适用图式与材料修复；未完成修复和供能不会传送。远传者还须能承受空间压力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

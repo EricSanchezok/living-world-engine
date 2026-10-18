@@ -1,0 +1,58 @@
+id: yue-tainan-mountain
+kind: location
+name: 太南山
+description: 广贵城西的高山，山路长年有雾。
+placement: yue-lanzhou
+facts:
+  - id: yue-tainan-mountain-route-yue-guanggui
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-guanggui
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-mountain-travel-yue-guanggui
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-mountain-route-yue-tainan-temple
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-temple
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-mountain-travel-yue-tainan-temple
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-mountain-route-yue-tainan-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-valley
+    description: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    access:
+      kind: public
+  - id: yue-tainan-mountain-travel-yue-tainan-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    description: 谷门迷雾遮路，可递通音符等谷中人接引；蛮闯可能迷失、受困或引来阻止。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

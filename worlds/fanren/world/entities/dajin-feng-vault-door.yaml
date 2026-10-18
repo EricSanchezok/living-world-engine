@@ -1,0 +1,27 @@
+id: dajin-feng-vault-door
+kind: location
+name: 瀑布后石门
+description: 石门右下留有小孔，表面禁制阻隔未经许可的进入。
+placement: dajin-xueling-range
+facts:
+  - id: dajin-feng-vault-door-route-dajin-xueling-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-xueling-range
+    description: 由门前返回山中。
+    access:
+      kind: public
+  - id: dajin-feng-vault-door-route-dajin-feng-vault
+    predicate: transport-to
+    value:
+      kind: entity
+      entityId: dajin-feng-vault
+    description: 开门后正确操作实际传送阵，五槽供能；禁制或配槽错误会导致失败或空间危险。
+    access:
+      kind: discoverable
+      condition: 取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

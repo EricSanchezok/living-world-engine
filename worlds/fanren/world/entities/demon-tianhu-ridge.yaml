@@ -1,0 +1,26 @@
+id: demon-tianhu-ridge
+kind: location
+name: 天狐岭
+description: 妖狐势力的重要山岭，内山有护持禁制。
+placement: demon-fox-territory
+facts:
+  - id: demon-tianhu-ridge-route-demon-fox-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-fox-town
+    description: route-to
+    access:
+      kind: public
+  - id: demon-tianhu-ridge-condition-demon-fox-town
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 妖狐势力的重要山岭，内山有护持禁制。
+    description: 妖狐势力的重要山岭，内山有护持禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

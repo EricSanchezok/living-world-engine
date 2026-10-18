@@ -1,0 +1,174 @@
+id: canon-zhong-devil-elder
+kind: person
+name: 鬼灵门钟长老
+description: 鬼灵门钟姓资深修士，与慕兰仲神师不是同人；当前没有谷中死讯与灵果争夺合约。
+placement: dv-zhong-retreat
+facts:
+  - id: canon-zhong-devil-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhong-devil-elder
+  - id: canon-zhong-devil-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴魔功、阴气防护和低阶灵材鉴别。
+    description: 元婴魔功、阴气防护和低阶灵材鉴别。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhong-devil-elder
+  - id: canon-zhong-devil-elder-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhong-devil-elder
+  - id: canon-zhong-devil-elder-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: guiling-sect
+    description: member-of
+    access:
+      kind: public
+meters:
+  - id: canon-zhong-devil-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-zhong-devil-elder-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 180
+ratings:
+  - id: canon-zhong-devil-elder-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-zhong-devil-elder-force
+    definition_id: force
+    value: 4
+  - id: canon-zhong-devil-elder-craft
+    definition_id: craft
+    value: 4
+  - id: canon-zhong-devil-elder-perception
+    definition_id: perception
+    value: 4
+  - id: canon-zhong-devil-elder-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-zhong-devil-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 鬼灵门钟姓资深修士，与慕兰仲神师不是同人；当前没有谷中死讯与灵果争夺合约。
+      voice: 问话简短，喜欢让弟子复述步骤；利益相关时直谈代价，听奉承常冷哼。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核查自己早年收录的灵果残记是否可靠。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 鬼灵门钟长老
+        description: 鬼灵门钟姓资深修士，与慕兰仲神师不是同人；当前没有谷中死讯与灵果争夺合约。
+        status: observed
+      - id: location
+        name: 钟长老旧居
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-zhong-devil-elder-supplies
+        name: 鬼灵门钟长老个人储备
+        description: 个人物资与有限灵石，不包含所属门派全部财产。
+        status: observed
+      - id: known-guiling-sect
+        name: 鬼灵门
+        description: 自己长期所属宗门，职位不等于全部公产所有权。
+        status: observed
+      - id: known-dv-zhong-fruit-note
+        name: 钟长老古果残页
+        description: 一页来历未全明的古果抄本，提到造化丹但无可信谷内地点，不等于拥有完整炼法。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴魔功、阴气防护和低阶灵材鉴别。
+        description: 元婴魔功、阴气防护和低阶灵材鉴别。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-life
+        subjectId: self
+        predicate: current-life
+        value:
+          kind: text
+          value: 核查自己早年收录的灵果残记是否可靠。
+        description: 核查自己早年收录的灵果残记是否可靠。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-zhong-devil-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - dv-zhong-retreat
+      - local_entity_id: known-canon-zhong-devil-elder-supplies
+        canonical_entity_ids:
+          - canon-zhong-devil-elder-supplies
+      - local_entity_id: known-guiling-sect
+        canonical_entity_ids:
+          - guiling-sect
+      - local_entity_id: known-dv-zhong-fruit-note
+        canonical_entity_ids:
+          - dv-zhong-fruit-note

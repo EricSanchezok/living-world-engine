@@ -1,0 +1,26 @@
+id: tianyuan-wave-query
+kind: item
+name: 旧阵余波待核笺
+description: 方既明在上次交接报告近界旧驿阵偶见青辉，尚未实测空间扰动；申观微尚未下结论或出发。这份旧报讯与今夜救助商旅是不同事务。
+placement: tianyuan-law-investigator
+facts:
+  - id: tianyuan-wave-query-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianyuan-law-enforcement
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-wave-query-author
+    predicate: author
+    value:
+      kind: entity
+      entityId: tianyuan-patrol-scout
+    description: author
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,40 @@
+id: dajin-feng-store
+kind: location
+name: 冯家保管室
+description: 有禁制和交接记录的族物保管处，取物须授权。
+placement: dajin-feng-estate
+facts:
+  - id: dajin-feng-store-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-feng-clan
+    description: 由冯家保管的族产，实际取用须家族许可。
+    access:
+      kind: public
+  - id: dajin-feng-store-route-dajin-feng-estate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-estate
+    description: 从保管室返回院落。
+    access:
+      kind: public
+  - id: dajin-feng-store-keeper
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: original-dajin-feng-shoujian
+    description: 保管人可按职责取用登记，公库不是私人行囊。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 24
+  - definition_id: copper
+    amount: 900
+  - definition_id: maintenance-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

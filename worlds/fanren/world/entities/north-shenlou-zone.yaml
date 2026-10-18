@@ -1,0 +1,42 @@
+id: north-shenlou-zone
+kind: location
+name: 蜃楼石阵极寒区
+description: 神念方位受阵法偏转的严寒地带，可靠引路物有实际作用。
+placement: human-beiming-island
+facts:
+  - id: north-shenlou-zone-route-north-entry-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-entry-market
+    description: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    access:
+      kind: public
+  - id: north-shenlou-zone-travel-north-entry-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    description: 阵内神念方向不可靠，定元牌或经验证的其他手段可引路；低阶飞遁另受禁制限制。
+    access:
+      kind: public
+  - id: north-shenlou-zone-route-north-ice-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-ice-city
+    description: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    access:
+      kind: public
+  - id: north-shenlou-zone-travel-north-ice-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    description: 需穿越实际风雪和方位禁制，获知目的地不等于已到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

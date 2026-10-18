@@ -1,0 +1,106 @@
+id: guanghan-mind-cave
+kind: location
+name: 金篆文密洞
+description: 青木门后是古秘术刻文，部分有银光罩封护。
+placement: guanghan-mind-canyon
+facts:
+  - id: guanghan-mind-cave-route-guanghan-mind-canyon
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-canyon
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-canyon
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 寻找星纹入口并处理青木门禁制，才能进入；最后文字还需另解银罩。
+    description: 寻找星纹入口并处理青木门禁制，才能进入；最后文字还需另解银罩。
+    access:
+      kind: public
+  - id: guanghan-mind-cave-route-guanghan-mind-last-chamber
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-last-chamber
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-last-chamber
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    description: 沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。
+    access:
+      kind: public
+  - id: guanghan-mind-cave-route-guanghan-mind-chamber-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-chamber-1
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-chamber-1
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    description: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    access:
+      kind: public
+  - id: guanghan-mind-cave-route-guanghan-mind-chamber-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-chamber-2
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-chamber-2
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    description: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    access:
+      kind: public
+  - id: guanghan-mind-cave-route-guanghan-mind-chamber-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-chamber-3
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-chamber-3
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    description: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    access:
+      kind: public
+  - id: guanghan-mind-cave-route-guanghan-mind-chamber-4
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-chamber-4
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-cave-condition-guanghan-mind-chamber-4
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    description: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

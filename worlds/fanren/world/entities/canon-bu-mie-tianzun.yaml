@@ -1,0 +1,167 @@
+id: canon-bu-mie-tianzun
+kind: person
+name: 不灭天尊
+description: 骨刺巨汉，外貌憨厚而好强，重视炼体成就。
+placement: minghe-bumie
+facts:
+  - id: canon-bu-mie-tianzun-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-bu-mie-tianzun
+  - id: canon-bu-mie-tianzun-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘法力、巨人变化与强大再生；头颅和元婴受创会破坏恢复。
+    description: 大乘法力、巨人变化与强大再生；头颅和元婴受创会破坏恢复。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bu-mie-tianzun
+  - id: canon-bu-mie-tianzun-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 高阶炼体与妖身变化。
+    description: 高阶炼体与妖身变化。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bu-mie-tianzun
+  - id: canon-bu-mie-tianzun-contact-canon-huang-yuan-zi
+    predicate: prior-contact
+    value:
+      kind: entity
+      entityId: canon-huang-yuan-zi
+    description: prior-contact
+    access:
+      kind: private
+meters:
+  - id: canon-bu-mie-tianzun-health
+    definition_id: health
+    current: 100
+  - id: canon-bu-mie-tianzun-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 150
+ratings:
+  - id: canon-bu-mie-tianzun-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-bu-mie-tianzun-force
+    definition_id: force
+    value: 8
+  - id: canon-bu-mie-tianzun-craft
+    definition_id: craft
+    value: 5
+  - id: canon-bu-mie-tianzun-perception
+    definition_id: perception
+    value: 8
+  - id: canon-bu-mie-tianzun-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-bu-mie-tianzun
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 骨刺巨汉，外貌憨厚而好强，重视炼体成就。
+      voice: 声音洪亮，愿夸赞强者，也常用自己肉身经历反驳纸面推断。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 磨炼法体，寻觅能够真正伤到自身的练习手段。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 不灭天尊
+        description: 骨刺巨汉，外貌憨厚而好强，重视炼体成就。
+        status: observed
+      - id: location
+        name: 不灭洞
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-bu-mie-tianzun-private-stock
+        name: 不灭天尊私用储备
+        description: 当前有限材料与行路用石。
+        status: observed
+      - id: known-canon-huang-yuan-zi
+        name: 黄元子
+        description: 有过高阶修行往来，当前没有相互雇佣或借宝承诺。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘法力、巨人变化与强大再生；头颅和元婴受创会破坏恢复。
+        description: 大乘法力、巨人变化与强大再生；头颅和元婴受创会破坏恢复。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 高阶炼体与妖身变化。
+        description: 高阶炼体与妖身变化。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        description: 此时依当地计时处于夜间；封闭洞室是否明亮须看实际灯火，不能以夜间代替照明判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-bu-mie-tianzun
+      - local_entity_id: location
+        canonical_entity_ids:
+          - minghe-bumie
+      - local_entity_id: known-canon-bu-mie-tianzun-private-stock
+        canonical_entity_ids:
+          - canon-bu-mie-tianzun-private-stock
+      - local_entity_id: known-canon-huang-yuan-zi
+        canonical_entity_ids:
+          - canon-huang-yuan-zi

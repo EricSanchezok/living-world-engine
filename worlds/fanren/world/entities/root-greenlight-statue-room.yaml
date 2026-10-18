@@ -1,0 +1,50 @@
+id: root-greenlight-statue-room
+kind: location
+name: 绿光阁楼神像室
+description: 一层立着四目四手大腹神像，腹内传送台未向普通来客开放。
+placement: thunder-greenlight-office
+facts:
+  - id: root-greenlight-statue-room-route-to-thunder-greenlight-office
+    predicate: route-to-thunder-greenlight-office
+    value:
+      kind: entity
+      entityId: thunder-greenlight-office
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-greenlight-statue-room-travel-condition-thunder-greenlight-office
+    predicate: travel-condition-thunder-greenlight-office
+    value:
+      kind: text
+      value: 可由楼中实际行走至一层；发现和开启神像内台需实际勘察、许可或突破看守。
+    description: 可由楼中实际行走至一层；发现和开启神像内台需实际勘察、许可或突破看守。
+    access:
+      kind: private
+  - id: root-greenlight-statue-room-route-to-root-greenlight-west-hill
+    predicate: route-to-root-greenlight-west-hill
+    value:
+      kind: entity
+      entityId: root-greenlight-west-hill
+    description: 可经实际路径前往。
+    access:
+      kind: private
+  - id: root-greenlight-statue-room-travel-condition-root-greenlight-west-hill
+    predicate: travel-condition-root-greenlight-west-hill
+    value:
+      kind: text
+      value: 近程阵两端可用且使用者会启动时，消耗神像内现存黄色晶石一枚及法力二十，每次至多两名普通体型旅人；无燃料或另一端损坏则不能如此通行。
+    description: 近程阵两端可用且使用者会启动时，消耗神像内现存黄色晶石一枚及法力二十，每次至多两名普通体型旅人；无燃料或另一端损坏则不能如此通行。
+    access:
+      kind: private
+  - id: root-greenlight-statue-room-root-detail-greenlight-exit
+    predicate: root-detail-greenlight-exit
+    value:
+      kind: text
+      value: 四目四手大腹神像内的小阵以黄色晶石驱动，出口在城西十余里小山石壁中。此近程暗道不同于万古远程危急阵。
+    description: 四目四手大腹神像内的小阵以黄色晶石驱动，出口在城西十余里小山石壁中。此近程暗道不同于万古远程危急阵。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

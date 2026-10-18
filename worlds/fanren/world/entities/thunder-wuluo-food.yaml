@@ -1,0 +1,20 @@
+id: thunder-wuluo-food
+kind: container
+name: 暗汐藏食
+description: 六份鱼干，维持短期独居。
+placement: thunder-wuluo-hidden-bay
+facts:
+  - id: thunder-wuluo-food-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wuluo-hermit
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-food-ration
+    amount: 6
+ratings: []
+shared_activity_resources: []

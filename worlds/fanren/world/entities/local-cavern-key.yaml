@@ -1,0 +1,18 @@
+id: local-cavern-key
+kind: item
+name: 机关室钥匙
+description: 陈衡当前受托保管的钥匙，不等同他拥有山体或可擅自启动。
+placement: local-chen-mechanic
+facts:
+  - id: local-cavern-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已有所有权与暂时保管另计。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

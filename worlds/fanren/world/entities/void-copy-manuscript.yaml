@@ -1,0 +1,26 @@
+id: void-copy-manuscript
+kind: item
+name: 一卷残简
+description: 讲草药物候的古简，其中一个方位字磨损，需要比照上下文。
+placement: void-nanhe-cottage
+facts:
+  - id: void-copy-manuscript-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yi
+    description: owned-by
+    access:
+      kind: private
+  - id: void-copy-manuscript-damaged-text
+    predicate: damaged-text
+    value:
+      kind: text
+      value: 一处南字的右笔残损，看起来像西；依据旁侧河流描述可校正，初始未校正。
+    description: 一处南字的右笔残损，看起来像西；依据旁侧河流描述可校正，初始未校正。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

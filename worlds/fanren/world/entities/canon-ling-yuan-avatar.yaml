@@ -1,0 +1,143 @@
+id: canon-ling-yuan-avatar
+kind: person
+name: 凌源铁沙岭化身
+description: 凌源的一具独立执行驻守任务的化身，非另一位同名圣祖本体。
+placement: ad-tiesha-ridge
+facts:
+  - id: canon-ling-yuan-avatar-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体
+    description: 合体
+    access:
+      kind: private
+  - id: canon-ling-yuan-avatar-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体级魔功与当地守护手段；使用本体划出的有限法力储备，通信须实际完成。
+    description: 合体级魔功与当地守护手段；使用本体划出的有限法力储备，通信须实际完成。
+    access:
+      kind: private
+  - id: canon-ling-yuan-avatar-same-subject
+    predicate: same-subject
+    value:
+      kind: entity
+      entityId: canon-ling-yuan
+    description: same-subject
+    access:
+      kind: private
+meters:
+  - id: canon-ling-yuan-avatar-health
+    definition_id: health
+    current: 100
+  - id: canon-ling-yuan-avatar-mana
+    definition_id: mana
+    current: 1260
+quantities: []
+ratings:
+  - id: canon-ling-yuan-avatar-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: canon-ling-yuan-avatar-force
+    definition_id: force
+    value: 7
+  - id: canon-ling-yuan-avatar-craft
+    definition_id: craft
+    value: 7
+  - id: canon-ling-yuan-avatar-perception
+    definition_id: perception
+    value: 7
+  - id: canon-ling-yuan-avatar-influence
+    definition_id: influence
+    value: 7
+shared_activity_resources: []
+agent:
+  id: canon-ling-yuan-avatar
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 凌源的一具独立执行驻守任务的化身，非另一位同名圣祖本体。
+      voice: 重旧恩，不愿听人把所有争端推给一位闭关者。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 确认族中工具争议并按旧约维护寨外安全，不代替族人作一切决定。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 凌源铁沙岭化身
+        description: 凌源的一具独立执行驻守任务的化身，非另一位同名圣祖本体。
+        status: observed
+      - id: location
+        name: 铁沙岭
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-canon-ling-yuan-avatar-private-stock
+        name: 凌源铁沙岭化身自用储备
+        description: 本人能够实际动用的储备。
+        status: observed
+      - id: known-canon-ling-yuan
+        name: 凌源
+        description: 本体与所派化身，不能无条件共享遥远处实时感知。
+        status: observed
+      - id: known-ad-qingyi-su
+        name: 苏翎
+        description: 留守化身与当地巡山者，可由实际报告更新情况。
+        status: observed
+      - id: known-ad-qingyi-qian
+        name: 钱珂
+        description: 留守化身与阁吏，借还公物不等于事事要其裁决。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体级魔功与当地守护手段；使用本体划出的有限法力储备，通信须实际完成。
+        description: 合体级魔功与当地守护手段；使用本体划出的有限法力储备，通信须实际完成。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-ling-yuan-avatar
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-tiesha-ridge
+      - local_entity_id: known-canon-ling-yuan-avatar-private-stock
+        canonical_entity_ids:
+          - canon-ling-yuan-avatar-private-stock
+      - local_entity_id: known-canon-ling-yuan
+        canonical_entity_ids:
+          - canon-ling-yuan
+      - local_entity_id: known-ad-qingyi-su
+        canonical_entity_ids:
+          - ad-qingyi-su
+      - local_entity_id: known-ad-qingyi-qian
+        canonical_entity_ids:
+          - ad-qingyi-qian

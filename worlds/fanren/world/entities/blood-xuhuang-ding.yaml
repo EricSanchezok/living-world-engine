@@ -1,0 +1,28 @@
+id: blood-xuhuang-ding
+kind: item
+name: 虚皇鼎
+description: 冰魄出发前又炼制的青色小鼎，独立封存在地下大厅石桌上；是较早两鼎效用更强的仿制钥匙。
+placement: blood-ice-cache
+facts:
+  - id: blood-xuhuang-ding-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-bingpo
+    description: owned-by
+    access:
+      kind: private
+  - id: blood-xuhuang-ding-limited-key
+    predicate: limited-key
+    value:
+      kind: text
+      value: 仿制钥匙，能借相配法诀辅助利用天鼎宫大阵破绽；仍须真实开启时机、足够法力与具体秘术，不是随时开启宫殿的原钥。
+    description: 仿制钥匙，能借相配法诀辅助利用天鼎宫大阵破绽；仍须真实开启时机、足够法力与具体秘术，不是随时开启宫殿的原钥。
+    access:
+      kind: agents
+      agentIds:
+        - canon-bingpo
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

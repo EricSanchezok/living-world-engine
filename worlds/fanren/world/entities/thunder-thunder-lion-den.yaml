@@ -1,0 +1,26 @@
+id: thunder-thunder-lion-den
+kind: location
+name: 雷石洞
+description: 洞壁有碎裂的雷纹，洞口散着冻骨，一头尚小的金色狮兽在里面休息。
+placement: thunder-northern-ice-domain
+facts:
+  - id: thunder-thunder-lion-den-route-to-thunder-northern-ice-domain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-northern-ice-domain
+    description: route-to
+    access:
+      kind: private
+  - id: thunder-thunder-lion-den-route-conditions-thunder-northern-ice-domain
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。
+    description: 只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

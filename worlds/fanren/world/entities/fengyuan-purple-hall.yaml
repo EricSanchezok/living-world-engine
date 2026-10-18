@@ -1,0 +1,26 @@
+id: fengyuan-purple-hall
+kind: location
+name: 紫气堂
+description: 灵王会见获准来客的阁楼，周围有受照料的花树。
+placement: fengyuan-fuling-mountain
+facts:
+  - id: fengyuan-purple-hall-route-fengyuan-fuling-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuling-mountain
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-purple-hall-condition-fengyuan-fuling-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵王会见获准来客的阁楼，周围有受照料的花树。
+    description: 灵王会见获准来客的阁楼，周围有受照料的花树。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

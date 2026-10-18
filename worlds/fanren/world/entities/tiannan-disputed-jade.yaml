@@ -1,0 +1,27 @@
+id: tiannan-disputed-jade
+kind: item
+name: 出处待核的旧玉简
+description: 沈砚自己从旧摊取得的残缺风土札记；内容有些可核路线，没有凭空完整上古功法。
+placement: tiannan-shen-yan
+facts:
+  - id: tiannan-disputed-jade-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tiannan-shen-yan
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: tiannan-disputed-jade-evidence
+    predicate: discoverable-content
+    value:
+      kind: text
+      value: 末段溪国河道名与现行商路不同，前三段山形与现地相符；比对旧地图和亲历者能确认是旧路记载，非所有内容都假。
+    description: 末段溪国河道名与现行商路不同，前三段山形与现地相符；比对旧地图和亲历者能确认是旧路记载，非所有内容都假。
+    access:
+      kind: discoverable
+      condition: 获准读简且具备基本神识阅读能力，逐段对照文字。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

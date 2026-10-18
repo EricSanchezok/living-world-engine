@@ -1,0 +1,222 @@
+id: canon-suanni-elder
+kind: person
+name: 狻猊大长老
+description: 万丈海王族的古老主持者，维护传承与王族声望。
+placement: outerstar-suanni-court
+facts:
+  - id: canon-suanni-elder-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 十级狻猊。
+    description: 十级狻猊。
+    access:
+      kind: agents
+      agentIds:
+        - canon-suanni-elder
+  - id: canon-suanni-elder-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 十级狻猊法体与万妖令召集手段，召集要付精血并非控制一切生灵。
+    description: 十级狻猊法体与万妖令召集手段，召集要付精血并非控制一切生灵。
+    access:
+      kind: agents
+      agentIds:
+        - canon-suanni-elder
+  - id: canon-suanni-elder-spiritual-root
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 妖族血脉与本体修行，不用人类灵根判断。
+    description: 妖族法体修行。
+    access:
+      kind: agents
+      agentIds:
+        - canon-suanni-elder
+  - id: canon-suanni-elder-delegates-outerstar-suanni-steward
+    predicate: delegates
+    value:
+      kind: entity
+      entityId: outerstar-suanni-steward
+    description: delegates
+    access:
+      kind: private
+  - id: canon-suanni-elder-advises-canon-suanni-king
+    predicate: advises
+    value:
+      kind: entity
+      entityId: canon-suanni-king
+    description: advises
+    access:
+      kind: private
+  - id: canon-suanni-elder-knows-rival-canon-jin-jiao-wang
+    predicate: knows-rival
+    value:
+      kind: entity
+      entityId: canon-jin-jiao-wang
+    description: knows-rival
+    access:
+      kind: private
+meters:
+  - id: canon-suanni-elder-health
+    definition_id: health
+    current: 100
+  - id: canon-suanni-elder-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-suanni-elder-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-suanni-elder-force
+    definition_id: force
+    value: 4
+  - id: canon-suanni-elder-craft
+    definition_id: craft
+    value: 4
+  - id: canon-suanni-elder-perception
+    definition_id: perception
+    value: 4
+  - id: canon-suanni-elder-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-suanni-elder
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 万丈海王族的古老主持者，维护传承与王族声望。
+      voice: 惯于慢慢说完，再等众人表态；对质疑传承者语气严厉。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 听取各支关于猎场的意见，维持海族对王庭的信任。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 狻猊大长老
+        description: 万丈海王族的古老主持者，维护传承与王族声望。
+        status: observed
+      - id: location
+        name: 万丈海王庭
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-suanni-elder-provisions
+        name: 狻猊大长老的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-suanni-steward
+        name: 狻澈
+        description: 长期王庭公务，报告需实际传达。
+        status: observed
+      - id: known-outerstar-suanni-vault
+        name: 王庭小库
+        description: 王庭维护与传讯储备，个人赏赐须实际扣用。
+        status: observed
+      - id: known-canon-fan-sheng-fragment
+        name: 梵圣真片
+        description: 海族世传残片，仅有残缺法诀图文，不是完整可直接入门功法。
+        status: observed
+      - id: known-canon-suanni-king
+        name: 狻猊王
+        description: 两位长期主持王族的十级妖修，各有主意而非共享心智。
+        status: observed
+      - id: known-canon-jin-jiao-wang
+        name: 金蛟王
+        description: 知晓对方代表的海族利益，不共享私下打算与当前位置。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 十级狻猊法体与万妖令召集手段，召集要付精血并非控制一切生灵。
+        description: 十级狻猊法体与万妖令召集手段，召集要付精血并非控制一切生灵。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己依本族法体修行。
+        description: 自己依本族法体修行。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-cultivation
+        subjectId: self
+        predicate: own-cultivation
+        value:
+          kind: text
+          value: 十级狻猊。
+        description: 十级狻猊。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-suanni-elder
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-suanni-court
+      - local_entity_id: known-canon-suanni-elder-provisions
+        canonical_entity_ids:
+          - canon-suanni-elder-provisions
+      - local_entity_id: known-outerstar-suanni-steward
+        canonical_entity_ids:
+          - outerstar-suanni-steward
+      - local_entity_id: known-outerstar-suanni-vault
+        canonical_entity_ids:
+          - outerstar-suanni-vault
+      - local_entity_id: known-canon-fan-sheng-fragment
+        canonical_entity_ids:
+          - canon-fan-sheng-fragment
+      - local_entity_id: known-canon-suanni-king
+        canonical_entity_ids:
+          - canon-suanni-king
+      - local_entity_id: known-canon-jin-jiao-wang
+        canonical_entity_ids:
+          - canon-jin-jiao-wang

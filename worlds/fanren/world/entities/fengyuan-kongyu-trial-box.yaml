@@ -1,0 +1,18 @@
+id: fengyuan-kongyu-trial-box
+kind: item
+name: 空鱼试作小匣
+description: 环汀用已有旧匣修好的演示器，可容下三件杯碗大小死物，不装活人；每次存取耗操作者2法力。
+placement: fengyuan-shura-courier
+facts:
+  - id: fengyuan-kongyu-trial-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-kongyu-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

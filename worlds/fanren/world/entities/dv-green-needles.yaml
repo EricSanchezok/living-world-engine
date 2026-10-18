@@ -1,0 +1,18 @@
+id: dv-green-needles
+kind: item
+name: 墨绿古针组
+description: 一套十二枚墨绿飞针，须以神识分别控制；遗失或损坏会减少可用针数。
+placement: dv-ancient-storage-bag
+facts:
+  - id: dv-green-needles-unclaimed
+    predicate: unclaimed
+    value:
+      kind: text
+      value: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    description: 古主人已死，当前无活人所有者；发现与实际取走是不同状态。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

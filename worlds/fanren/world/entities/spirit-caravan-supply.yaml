@@ -1,0 +1,24 @@
+id: spirit-caravan-supply
+kind: container
+name: 远汀出行补给
+description: 已备口粮、钱款和传送用高阶灵石，不代表所有班次都已获通行。
+placement: spirit-xuanwu-route-office
+facts:
+  - id: spirit-caravan-supply-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-caravan-service
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 200
+  - definition_id: low-stone
+    amount: 500
+  - definition_id: high-stone
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: canon-di-xue-private-stock
+kind: container
+name: 地血私用储备
+description: 个人维护与修炼材料，不能充当全族公库。
+placement: canon-di-xue
+facts:
+  - id: canon-di-xue-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: mid-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,42 @@
+id: dajin-huangqing
+kind: location
+name: 皇清观
+description: 玉田山上的女观，另有男性外观门人居住和办事的区域；内外院通行各有规定。
+placement: dajin-yutian
+facts:
+  - id: dajin-huangqing-branch-of
+    predicate: branch-of
+    value:
+      kind: entity
+      entityId: dajin-sanhuang
+    description: 三皇观分支。
+    access:
+      kind: public
+  - id: dajin-huangqing-route-dajin-yutian
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-yutian
+    description: 玉田山不同峰间须沿路或使用确有能力的飞行。
+    access:
+      kind: public
+  - id: dajin-huangqing-route-dajin-huangqing-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huangqing-workshop
+    description: 观内往来须有相应通行资格。
+    access:
+      kind: public
+  - id: dajin-huangqing-route-dajin-tianqing-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianqing-court
+    description: 内院接待与外观活动范围不同。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

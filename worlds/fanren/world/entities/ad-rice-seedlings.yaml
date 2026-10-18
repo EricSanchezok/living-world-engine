@@ -1,0 +1,18 @@
+id: ad-rice-seedlings
+kind: item
+name: 两株未熟血牙米苗
+description: 两株尚不足百年的未熟苗，分别可移栽；尚不能当成熟米出售。
+placement: ad-rice-field
+facts:
+  - id: ad-rice-seedlings-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-grower
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

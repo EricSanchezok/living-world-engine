@@ -1,0 +1,122 @@
+id: yinming-stones
+kind: location
+name: 黑石地
+description: 怪石与低丘之间分出村路。
+placement: associated-yinming
+facts:
+  - id: yinming-stones-route-yinming-sand
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-sand
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-sand
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-red-soil
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-red-soil
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-red-soil
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-storm-foot
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-storm-foot
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-storm-foot
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    description: 须实际步行、负重和辨路；暴风山路逐段承担对应寒冷、冰滑、幻雾与阴兽风险。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-village-well
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-well
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-village-well
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-village-ridge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-ridge
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-village-ridge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+  - id: yinming-stones-route-yinming-village-forge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-forge
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-stones-condition-yinming-village-forge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    description: 沿石路抵村门；关门是村民在危险时采取的防护，来人仍可呼唤协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: void-turtle-keeper-kit
+kind: container
+name: 温菱的随身器具
+description: 筑基水法、灵兽日常护理。所需的个人日常器具。
+placement: void-turtle-keeper
+facts:
+  - id: void-turtle-keeper-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-turtle-keeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

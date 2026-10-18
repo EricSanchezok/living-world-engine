@@ -1,0 +1,34 @@
+id: void-tianyuan-pool
+kind: location
+name: 离龟池
+description: 巨龟日常栖息与进食的池院。
+placement: void-tianyuan-seat
+facts:
+  - id: void-tianyuan-pool-route-void-tianyuan-seat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-tianyuan-seat
+    description: route-to
+    access:
+      kind: public
+  - id: void-tianyuan-pool-condition-void-tianyuan-seat
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    description: 当地道路可步行或依真实能力御器，进入私人居所仍需应对门户与主人。
+    access:
+      kind: public
+  - id: void-tianyuan-pool-mud-source
+    predicate: mud-source
+    value:
+      kind: text
+      value: 上游旁渠泥沙被昨夜雨冲入，离龟无新伤，先清旁渠可逐渐恢复。
+    description: 上游旁渠泥沙被昨夜雨冲入，离龟无新伤，先清旁渠可逐渐恢复。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

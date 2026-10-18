@@ -1,0 +1,22 @@
+id: void-copyist-kit
+kind: container
+name: 余书的随身器具
+description: 识古字、基础炼气和制纸。所需的个人日常器具。
+placement: void-copyist
+facts:
+  - id: void-copyist-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-copyist
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

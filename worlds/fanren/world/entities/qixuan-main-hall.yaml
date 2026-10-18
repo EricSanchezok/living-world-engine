@@ -1,0 +1,74 @@
+id: qixuan-main-hall
+kind: location
+name: 七玄殿
+description: 山顶总堂的议事处；不预设战争包围或机关已经启动。
+placement: sunset-peak
+facts:
+  - id: qixuan-main-hall-route-qixuan-checkpoint-13
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-checkpoint-13
+    description: 山顶总堂的议事处；不预设战争包围或机关已经启动。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-sunset-cavern
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-sunset-cavern
+    description: 主殿后封闭通道，须实际得准或采取可行手段进入。
+    access:
+      kind: private
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-1
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-1
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-2
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-2
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-3
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-4
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-4
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-5
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-5
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+  - id: qixuan-main-hall-route-local-qixuan-sidehall-6
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: local-qixuan-sidehall-6
+    description: 由峰顶殿前空地往来，非跨山瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

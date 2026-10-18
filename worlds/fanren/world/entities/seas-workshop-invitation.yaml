@@ -1,0 +1,26 @@
+id: seas-workshop-invitation
+kind: item
+name: 雷鸣坊会邀请札
+description: 邀请卢缄在90个灵界本地日内赴云城问艺台作刻印交流；接受或拒绝均由本人选择。
+placement: seas-journey-applicant
+facts:
+  - id: seas-workshop-invitation-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-journey-applicant
+    description: owned-by
+    access:
+      kind: private
+  - id: seas-workshop-invitation-reply-due-time
+    predicate: reply-due-time
+    value:
+      kind: number
+      value: 31104000
+    description: reply-due-time
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: void-cliff-smith-kit
+kind: container
+name: 秦岳的随身器具
+description: 结丹炼器，不能随意复制皇鳞甲。所需的个人日常器具。
+placement: void-cliff-smith
+facts:
+  - id: void-cliff-smith-kit-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: void-cliff-smith
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 3
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

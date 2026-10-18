@@ -1,0 +1,18 @@
+id: fengyuan-wood-sacred-tree
+kind: plant
+name: 通灵圣树
+description: 供奉久远的通灵古树，根系深入谷中，移栽会损伤本源；树冠与根系都是同一活体。
+placement: fengyuan-sacred-tree-enclosure
+facts:
+  - id: fengyuan-wood-sacred-tree-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-wood-people
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

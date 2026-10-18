@@ -1,0 +1,26 @@
+id: tianyuan-burial-desert
+kind: location
+name: 葬骨沙漠
+description: 妖族巡查的干沙地带，沙脊间有旧路标；风能移走表层痕迹，踪迹和隐匿者都须现场探查。
+placement: spirit-wilderness-fringe
+facts:
+  - id: tianyuan-burial-desert-route-to-spirit-wilderness-fringe
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-wilderness-fringe
+    description: route-to-spirit-wilderness-fringe
+    access:
+      kind: private
+  - id: tianyuan-burial-desert-route-conditions-spirit-wilderness-fringe
+    predicate: route-conditions-spirit-wilderness-fringe
+    value:
+      kind: text
+      value: 沿蛮荒近界外侧旱路到沙缘，须实际赶路、补水并处理天气；此路径不直接穿城墙。
+    description: 沿蛮荒近界外侧旱路到沙缘，须实际赶路、补水并处理天气；此路径不直接穿城墙。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

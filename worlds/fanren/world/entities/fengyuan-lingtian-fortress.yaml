@@ -1,0 +1,58 @@
+id: fengyuan-lingtian-fortress
+kind: location
+name: 灵天要塞
+description: 天然山墙后高峰上建有棱形塔楼，负责一处出入灵域的通道。
+placement: fengyuan-spirit-domain
+facts:
+  - id: fengyuan-lingtian-fortress-route-fengyuan-burial-desert
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-burial-desert
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-lingtian-fortress-condition-fengyuan-burial-desert
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 天然山墙后高峰上建有棱形塔楼，负责一处出入灵域的通道。
+    description: 天然山墙后高峰上建有棱形塔楼，负责一处出入灵域的通道。
+    access:
+      kind: public
+  - id: fengyuan-lingtian-fortress-route-fengyuan-cuiyan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-cuiyan-city
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-lingtian-fortress-condition-fengyuan-cuiyan-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 灵域中部的重要城池，各种形态的灵族在这里交易和求学。
+    description: 灵域中部的重要城池，各种形态的灵族在这里交易和求学。
+    access:
+      kind: public
+  - id: fengyuan-lingtian-fortress-route-fengyuan-blackwater-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-blackwater-lake
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-lingtian-fortress-condition-fengyuan-blackwater-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 有毒雾与异常力场的险地，许多飞行器在此减速，水中生活着玄蜍兽。
+    description: 有毒雾与异常力场的险地，许多飞行器在此减速，水中生活着玄蜍兽。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

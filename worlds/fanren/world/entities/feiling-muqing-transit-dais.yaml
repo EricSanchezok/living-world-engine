@@ -1,0 +1,26 @@
+id: feiling-muqing-transit-dais
+kind: location
+name: 木仙谷传送高台
+description: 黑霞阵纹与谷内禁制相接，启用前必须认定收发端的阵位和被送者。
+placement: feiling-muxian-valley
+facts:
+  - id: feiling-muqing-transit-dais-route-to-feiling-muxian-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muxian-valley
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-muqing-transit-dais-route-conditions-feiling-muxian-valley
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 谷内到高台的普通道路；启用跨层阵须另具术法、接收阵和法力。
+    description: 谷内到高台的普通道路；启用跨层阵须另具术法、接收阵和法力。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

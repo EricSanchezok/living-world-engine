@@ -1,0 +1,58 @@
+id: feiling-abyss-4
+kind: location
+name: 地渊第4层
+description: 地下第4层。阴气、地形和居民各异；不同层次通道须实际辨认。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-4-route-feiling-abyss-3
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-3
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-4-condition-feiling-abyss-3
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-4-route-feiling-abyss-5
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-5
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-4-condition-feiling-abyss-5
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-4-route-feiling-zhu-hollow
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-zhu-hollow
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-4-condition-feiling-zhu-hollow
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 石室中陈列着地层标本，主人习惯先查地质再派人深入。
+    description: 石室中陈列着地层标本，主人习惯先查地质再派人深入。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: dajin-longzhou
+kind: location
+name: 陇州
+description: 中西部交界的多山州域，瘴气和毒虫限制穿行。
+placement: human-dajin
+facts:
+  - id: dajin-longzhou-route-dajin-tianyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianyue-range
+    description: 瘴气山路，需准备避毒与行路补给。
+    access:
+      kind: public
+  - id: dajin-longzhou-travel-dajin-tianyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 瘴气山路，需准备避毒与行路补给。
+    description: 瘴气山路，需准备避毒与行路补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

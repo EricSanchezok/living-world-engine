@@ -1,0 +1,18 @@
+id: dajin-feng-estate-records
+kind: item
+name: 冯家族产簿
+description: 记录族产事务的文书；持有文书并不能绕过核验直接占有全部产业。
+placement: dajin-feng-store
+facts:
+  - id: dajin-feng-estate-records-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-feng-clan
+    description: 由冯家保管的族产，实际取用须家族许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

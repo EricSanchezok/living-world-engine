@@ -1,0 +1,32 @@
+id: outerstar-party-food
+kind: container
+name: 猎队共有补给
+description: 本次出海共有食药，尚未分摊购买钱。
+placement: outerstar-team-yard
+facts:
+  - id: outerstar-party-food-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-hunting-party
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-party-food-shared-claim
+    predicate: shared-claim
+    value:
+      kind: text
+      value: 当前合计耗材价值由四人协商分摊，尚无按人头自动债务。
+    description: 当前合计耗材价值由四人协商分摊，尚无按人头自动债务。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 32
+  - definition_id: herb-packet
+    amount: 8
+  - definition_id: craft-material
+    amount: 8
+ratings: []
+shared_activity_resources: []

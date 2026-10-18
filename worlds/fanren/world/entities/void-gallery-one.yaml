@@ -1,0 +1,34 @@
+id: void-gallery-one
+kind: location
+name: 宝光阁一层
+description: 古兵器分置玉台，每台都有独立禁罩。
+placement: human-void-hall
+facts:
+  - id: void-gallery-one-route-void-gallery-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: void-gallery-two
+    description: route-to
+    access:
+      kind: public
+  - id: void-gallery-one-condition-void-gallery-two
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    description: 须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。
+    access:
+      kind: public
+  - id: void-gallery-one-illumination
+    predicate: illumination
+    value:
+      kind: text
+      value: 阁外暗黄天空和灰雾中不见红日，局部明暗依此处空间与禁制，不套用外海日出日落。
+    description: 阁外暗黄天空和灰雾中不见红日，局部明暗依此处空间与禁制，不套用外海日出日落。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

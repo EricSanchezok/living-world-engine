@@ -1,0 +1,26 @@
+id: guanghan-mind-chamber-1
+kind: location
+name: 炼神刻文石窟1
+description: 天然洞窟中一面淡白石壁铭有金色符文，与其他刻文段分处不同岔路。
+placement: guanghan-mind-cave
+facts:
+  - id: guanghan-mind-chamber-1-route-guanghan-mind-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-mind-cave
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-mind-chamber-1-condition-guanghan-mind-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    description: 沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

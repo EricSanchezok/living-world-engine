@@ -1,0 +1,37 @@
+id: minghe-jinyan-wine
+kind: item
+name: 金焰候一壶碧灵酒
+description: 当前仅这一壶已成的珍藏灵酒，可分饮但不会饮后复满。
+placement: minghe-wine-cellar
+facts:
+  - id: minghe-jinyan-wine-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-jinyan-wine-remaining-cups
+    predicate: remaining-cups
+    value:
+      kind: number
+      value: 8
+    description: remaining-cups
+    access:
+      kind: discoverable
+      condition: 开封或核对酒藏量记。
+  - id: minghe-jinyan-wine-division-boundary
+    predicate: division-boundary
+    value:
+      kind: text
+      value: 这一壶可分八小杯；倒出、饮用或泼洒均扣相应用量，空壶仍可留存但不再含酒。
+    description: 这一壶可分八小杯；倒出、饮用或泼洒均扣相应用量，空壶仍可留存但不再含酒。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: minghe-wine-cup
+    amount: 8
+ratings: []
+shared_activity_resources: []

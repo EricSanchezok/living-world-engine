@@ -1,0 +1,20 @@
+id: thunder-scholar-specimens
+kind: container
+name: 温砚的两份矿样
+description: 已带来的普通矿样，不是无穷元磁神材。
+placement: thunder-independent-scholar
+facts:
+  - id: thunder-scholar-specimens-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-independent-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

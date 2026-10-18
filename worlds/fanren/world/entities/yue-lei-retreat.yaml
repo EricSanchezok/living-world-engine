@@ -1,0 +1,26 @@
+id: yue-lei-retreat
+kind: location
+name: 雷万鹤洞府
+description: 药柜与修炼静室分开，来客先递交来意。
+placement: yue-taiyue-range
+facts:
+  - id: yue-lei-retreat-route-yue-taiyue-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-taiyue-range
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-lei-retreat-travel-yue-taiyue-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

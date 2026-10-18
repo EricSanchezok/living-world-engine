@@ -1,0 +1,28 @@
+id: yue-qin-cashbox
+kind: item
+name: 秦家公银匣
+description: 家族经营公款，不是某一人的随身银钱。
+placement: yue-qin-accounts
+facts:
+  - id: yue-qin-cashbox-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-cashbox-authorization
+    predicate: resource-authority
+    value:
+      kind: text
+      value: 秦言或管账三爷可按真实商单付已确认家族采购；私人赠礼需另外获得同意，记清收付人和数额。
+    description: 秦言或管账三爷可按真实商单付已确认家族采购；私人赠礼需另外获得同意，记清收付人和数额。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: silver
+    amount: 600
+ratings: []
+shared_activity_resources: []

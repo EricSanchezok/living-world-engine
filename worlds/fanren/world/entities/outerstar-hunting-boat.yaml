@@ -1,0 +1,18 @@
+id: outerstar-hunting-boat
+kind: item
+name: 四人猎队小舟
+description: 可载四人和行装的近海木舟，风大时需靠泊。
+placement: outerstar-team-yard
+facts:
+  - id: outerstar-hunting-boat-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-leader
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,321 @@
+id: spirit-human-demon-territory
+kind: location
+name: 人妖两族疆域
+description: 三境七地由古老禁制共同护持，内部仍有荒野、城池与不同族群。
+placement: fengyuan-continent
+facts:
+  - id: tianyuan-review-spirit-human-demon-territory-route-to-tianyuan-nantian-edge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-nantian-edge
+    description: route-to-tianyuan-nantian-edge
+    access:
+      kind: private
+  - id: tianyuan-review-spirit-human-demon-territory-route-conditions-tianyuan-nantian-edge
+    predicate: route-conditions-tianyuan-nantian-edge
+    value:
+      kind: text
+      value: 从两族内部道路长途到灰雾山缘；到达山缘不等于穿过护族大阵，需实际路线与补给。
+    description: 从两族内部道路长途到灰雾山缘；到达山缘不等于穿过护族大阵，需实际路线与补给。
+    access:
+      kind: private
+  - id: spirit-human-demon-territory-route-seas-wuya-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-wuya-sea
+    description: route-to
+    access:
+      kind: public
+  - id: spirit-human-demon-territory-condition-seas-wuya-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿内陆到海岸的远程道路，时间随路线和能力计算。
+    description: 沿内陆到海岸的远程道路，时间随路线和能力计算。
+    access:
+      kind: public
+  - id: spirit-human-demon-territory-route-to-root-yuenan-mountain
+    predicate: route-to-root-yuenan-mountain
+    value:
+      kind: entity
+      entityId: root-yuenan-mountain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-yuenan-mountain
+    predicate: travel-condition-root-yuenan-mountain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-wuhai-temple
+    predicate: route-to-root-wuhai-temple
+    value:
+      kind: entity
+      entityId: root-wuhai-temple
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-wuhai-temple
+    predicate: travel-condition-root-wuhai-temple
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-blackwater-mountains
+    predicate: route-to-root-blackwater-mountains
+    value:
+      kind: entity
+      entityId: root-blackwater-mountains
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-blackwater-mountains
+    predicate: travel-condition-root-blackwater-mountains
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-wanling-valley
+    predicate: route-to-root-wanling-valley
+    value:
+      kind: entity
+      entityId: root-wanling-valley
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-wanling-valley
+    predicate: travel-condition-root-wanling-valley
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-gu-estate
+    predicate: route-to-root-gu-estate
+    value:
+      kind: entity
+      entityId: root-gu-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-gu-estate
+    predicate: travel-condition-root-gu-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-ye-estate
+    predicate: route-to-root-ye-estate
+    value:
+      kind: entity
+      entityId: root-ye-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-ye-estate
+    predicate: travel-condition-root-ye-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-long-estate
+    predicate: route-to-root-long-estate
+    value:
+      kind: entity
+      entityId: root-long-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-long-estate
+    predicate: travel-condition-root-long-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-feng-estate
+    predicate: route-to-root-feng-estate
+    value:
+      kind: entity
+      entityId: root-feng-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-feng-estate
+    predicate: travel-condition-root-feng-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-lin-estate
+    predicate: route-to-root-lin-estate
+    value:
+      kind: entity
+      entityId: root-lin-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-lin-estate
+    predicate: travel-condition-root-lin-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-lao-estate
+    predicate: route-to-root-lao-estate
+    value:
+      kind: entity
+      entityId: root-lao-estate
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-lao-estate
+    predicate: travel-condition-root-lao-estate
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-huangquan-peaks
+    predicate: route-to-root-huangquan-peaks
+    value:
+      kind: entity
+      entityId: root-huangquan-peaks
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-huangquan-peaks
+    predicate: travel-condition-root-huangquan-peaks
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-huatian-sect
+    predicate: route-to-root-huatian-sect
+    value:
+      kind: entity
+      entityId: root-huatian-sect
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-huatian-sect
+    predicate: travel-condition-root-huatian-sect
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-weiyun-city
+    predicate: route-to-root-weiyun-city
+    value:
+      kind: entity
+      entityId: root-weiyun-city
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-weiyun-city
+    predicate: travel-condition-root-weiyun-city
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-qianhuan-mountain
+    predicate: route-to-root-qianhuan-mountain
+    value:
+      kind: entity
+      entityId: root-qianhuan-mountain
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-qianhuan-mountain
+    predicate: travel-condition-root-qianhuan-mountain
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-route-to-root-huoli-sect
+    predicate: route-to-root-huoli-sect
+    value:
+      kind: entity
+      entityId: root-huoli-sect
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-travel-condition-root-huoli-sect
+    predicate: travel-condition-root-huoli-sect
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: spirit-human-demon-territory-root-detail-two-peoples-abduction-ban
+    predicate: root-detail-two-peoples-abduction-ban
+    value:
+      kind: text
+      value: 两族禁止强掳对方族人作炉鼎侍妾，可被违反并追责；被囚或被交易者仍保有独立意愿，交易本身不产生服从。
+    description: 两族禁止强掳对方族人作炉鼎侍妾，可被违反并追责；被囚或被交易者仍保有独立意愿，交易本身不产生服从。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

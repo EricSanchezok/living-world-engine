@@ -1,0 +1,18 @@
+id: spirit3-wangu-bone-shield
+kind: item
+name: 万骨的骨盾
+description: 已祭炼骨盾，每次主动驱动耗20法力，受强击可碎，须实料修复。
+placement: canon-wan-gu-zhenren
+facts:
+  - id: spirit3-wangu-bone-shield-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wan-gu-zhenren
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

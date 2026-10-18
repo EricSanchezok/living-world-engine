@@ -1,0 +1,34 @@
+id: human-jiang
+kind: location
+name: 姜国
+description: 天南小国，处于天罗与越国之间，凡俗社会与修仙门派并存。
+placement: human-tiannan
+facts:
+  - id: human-jiang-route-human-tianluo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianluo
+    description: 跨国商路有边关与关卡；按道路、天气、载具和实际行进速度累计行程，不能把国家直接相邻视为一步到达。
+    access:
+      kind: public
+  - id: human-jiang-route-human-cheqi
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-cheqi
+    description: 沿边境道路往来；无当前战争封路，不保证今后永远开放。
+    access:
+      kind: public
+  - id: human-jiang-route-tiannan-jiang-post
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tiannan-jiang-post
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

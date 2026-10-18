@@ -1,0 +1,18 @@
+id: local-forging-tools
+kind: item
+name: 锻打工具
+description: 铁锤、钳子、铁砧和普通小炉。
+placement: local-metalworks
+facts:
+  - id: local-forging-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: local-metalworker
+    description: 铁匠的料与用具。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

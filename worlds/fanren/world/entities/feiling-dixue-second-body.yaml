@@ -1,0 +1,26 @@
+id: feiling-dixue-second-body
+kind: item
+name: 地血双煞第二躯
+description: 与主躯同源的血袍躯体，可以分位施法但共用地血意志和法力。
+placement: canon-di-xue
+facts:
+  - id: feiling-dixue-second-body-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-dixue-second-body-same-subject-as
+    predicate: same-subject-as
+    value:
+      kind: entity
+      entityId: canon-di-xue
+    description: same-subject-as
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,44 @@
+id: dv-qianzhu-hall
+kind: location
+name: 千竹教旧山门
+description: 竹林与石阶通向教中库房，普通弟子只知道部分古代祖师遗迹。
+placement: human-far-west
+facts:
+  - id: dv-qianzhu-hall-route-human-far-west
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-far-west
+    description: route-to
+    access:
+      kind: public
+  - id: dv-qianzhu-hall-condition-human-far-west
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿当地路径到山门；访客须与当前人员交涉，不能以祖师名号免除其选择。
+    description: 沿当地路径到山门；访客须与当前人员交涉，不能以祖师名号免除其选择。
+    access:
+      kind: public
+  - id: dv-qianzhu-hall-route-dv-dayan-secret-room
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-dayan-secret-room
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 实际调查祖师旧建筑并识别被藏起的入口与禁制。
+  - id: dv-qianzhu-hall-condition-dv-dayan-secret-room
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须找到不公开的密室入口并破解古阵及守卫；大衍自己目前不能开禁、召卫或给访客远程授权。
+    description: 须找到不公开的密室入口并破解古阵及守卫；大衍自己目前不能开禁、召卫或给访客远程授权。
+    access:
+      kind: discoverable
+      condition: 实际调查祖师旧建筑并识别被藏起的入口与禁制。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

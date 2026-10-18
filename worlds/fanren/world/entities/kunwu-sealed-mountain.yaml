@@ -1,0 +1,18 @@
+id: kunwu-sealed-mountain
+kind: location
+name: 封印中的昆吾山
+description: 山体藏在完整上古封禁内，现无可供普通船客进入的裂口。
+placement: south-quiet-lake
+facts:
+  - id: kunwu-sealed-mountain-sealed-state
+    predicate: sealed-state
+    value:
+      kind: text
+      value: 外层封印完整；无已打开裂缝，无破封倒计时。
+    description: 外层封印完整；无已打开裂缝，无破封倒计时。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

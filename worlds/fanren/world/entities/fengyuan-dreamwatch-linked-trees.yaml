@@ -1,0 +1,28 @@
+id: fengyuan-dreamwatch-linked-trees
+kind: collective
+name: 梦罗联根树群
+description: 林缘东侧的相连活树，根系将扰动传回梦罗树；折损、截根或移走其中一株都会改变可感范围。
+placement: fengyuan-black-leaf-forest
+facts:
+  - id: fengyuan-dreamwatch-linked-trees-connected-to
+    predicate: connected-to
+    value:
+      kind: entity
+      entityId: fengyuan-dreamwatch-tree
+    description: connected-to
+    access:
+      kind: private
+  - id: fengyuan-dreamwatch-linked-trees-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 单独标出一株必须从群数转出，毁树须减少活树数并改变对应观测范围；不可由重新连根凭空生长成熟树木。
+    description: 单独标出一株必须从群数转出，毁树须减少活树数并改变对应观测范围；不可由重新连根凭空生长成熟树木。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-linked-tree
+    amount: 8
+ratings: []
+shared_activity_resources: []

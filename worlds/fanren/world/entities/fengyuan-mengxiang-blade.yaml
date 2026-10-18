@@ -1,0 +1,18 @@
+id: fengyuan-mengxiang-blade
+kind: item
+name: 梦祥的修复兵刃
+description: 刃口已由伏刃修复，可实际使用，修刃工钱尚待结清。
+placement: canon-meng-xiang
+facts:
+  - id: fengyuan-mengxiang-blade-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-meng-xiang
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

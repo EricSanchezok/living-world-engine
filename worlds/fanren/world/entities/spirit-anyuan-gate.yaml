@@ -1,0 +1,34 @@
+id: spirit-anyuan-gate
+kind: location
+name: 安远城草原门
+description: 通向草原的城门，商队可询问路况并补足口粮，守卫按当前警戒执行检查。
+placement: spirit-anyuan-city
+facts:
+  - id: spirit-anyuan-gate-route-spirit-anyuan-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-market
+    description: 通向草原的城门，商队可询问路况并补足口粮，守卫按当前警戒执行检查。
+    access:
+      kind: public
+  - id: spirit-anyuan-gate-route-spirit-anyuan-grassland
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-anyuan-grassland
+    description: 远离城墙后缺少庇护，草坡间有兽迹，路线随水源和兽群迁移而调整。
+    access:
+      kind: public
+  - id: spirit-anyuan-gate-route-spirit-inner-caravan-road
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-inner-caravan-road
+    description: 连接各城驿站的长途道路，行程可能以月计；没有备粮、车畜或护卫不宜贸然赶路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

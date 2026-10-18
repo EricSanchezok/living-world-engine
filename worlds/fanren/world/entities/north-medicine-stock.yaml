@@ -1,0 +1,22 @@
+id: north-medicine-stock
+kind: item
+name: 公库当期防寒解毒药
+description: 四粒火阳丹、二粒百草丹，各有用途；实际领用需要准许与交接。
+placement: north-stockroom
+facts:
+  - id: north-medicine-stock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: north-huoyang-pill
+    amount: 4
+  - definition_id: north-baicao-pill
+    amount: 2
+ratings: []
+shared_activity_resources: []

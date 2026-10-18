@@ -1,0 +1,36 @@
+id: fengyuan-damaged-guide-marker
+kind: item
+name: 曲照集遮光路标
+description: 引导夜行人的固定路标，灯罩与遮光片之间有裂纹。
+placement: fengyuan-shadow-town
+facts:
+  - id: fengyuan-damaged-guide-marker-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: fengyuan-shadow-people
+    description: owned-by
+    access:
+      kind: private
+  - id: fengyuan-damaged-guide-marker-actual-fault
+    predicate: actual-fault
+    value:
+      kind: text
+      value: 固定片断裂，灯火位置偏移造成错误影向；阵纹本身完好，换片可修复。
+    description: 固定片断裂，灯火位置偏移造成错误影向；阵纹本身完好，换片可修复。
+    access:
+      kind: discoverable
+      condition: 停灯后拆看固定片与阵纹。
+  - id: fengyuan-damaged-guide-marker-repair-recipe
+    predicate: repair-recipe
+    value:
+      kind: text
+      value: 经社区同意，消耗一份材料、更换固定片并调位七百二十秒，再以一低阶灵石试灯；成功后报酬二十低阶灵石从社区储备支付。
+    description: 经社区同意，消耗一份材料、更换固定片并调位七百二十秒，再以一低阶灵石试灯；成功后报酬二十低阶灵石从社区储备支付。
+    access:
+      kind: discoverable
+      condition: 懂此类器物者检查或阙微说明。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: yue-greenwave-library
+kind: location
+name: 绿波藏书室
+description: 一间低矮石室，门口红色禁制与册页上的封护各自存在。
+placement: yue-greenwave-cave
+facts:
+  - id: yue-greenwave-library-route-yue-greenwave-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-greenwave-cave
+    description: 李化元或李夫人解除门口禁制后方可进入；取册还须逐件解封。
+    access:
+      kind: public
+  - id: yue-greenwave-library-ward
+    predicate: barrier-condition
+    value:
+      kind: text
+      value: 红色门禁由李化元夫妇掌握；擅取未解封册页会触发困阵。强行破坏仍按手段、法力和阵体实际状态裁定。
+    description: 红色门禁由李化元夫妇掌握；擅取未解封册页会触发困阵。强行破坏仍按手段、法力和阵体实际状态裁定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

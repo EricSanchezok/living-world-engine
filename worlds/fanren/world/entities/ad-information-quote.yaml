@@ -1,0 +1,18 @@
+id: ad-information-quote
+kind: item
+name: 查图与卜算报价
+description: 先付30魔石可核查现存档案，结果可能仍不确定；卜算另议，主持愿为这次最多损失1共同年寿元并收600魔石，需本人接受后实际施术，不能保证目标唯一或结果永不改变。
+placement: ad-guangyuan-house
+facts:
+  - id: ad-information-quote-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-guangyuan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

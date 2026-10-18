@@ -1,0 +1,51 @@
+id: blood-luochao-steppe
+kind: location
+name: 落潮草原
+description: 妖兽与湖泽分布的辽阔草原，安全道路需实际勘察。
+placement: blood-continent
+facts:
+  - id: blood-luochao-steppe-route-blood-qiyun-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-qiyun-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-luochao-steppe-condition-blood-qiyun-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-luochao-steppe-route-blood-tianma-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tianma-city
+    description: route-to
+    access:
+      kind: public
+  - id: blood-luochao-steppe-condition-blood-tianma-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-luochao-steppe-south-route-observation
+    predicate: south-route-observation
+    value:
+      kind: text
+      value: 南侧湖汊退水后出现浅石脊，可供徒步和轻兽通行，重车需另测承重；附近七只草原兽守巢，绕行可减少冲突。
+    description: 南侧湖汊退水后出现浅石脊，可供徒步和轻兽通行，重车需另测承重；附近七只草原兽守巢，绕行可减少冲突。
+    access:
+      kind: discoverable
+      condition: 亲自到湖汊测量或取得真实勘测记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

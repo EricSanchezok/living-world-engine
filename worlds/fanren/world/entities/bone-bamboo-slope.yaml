@@ -1,0 +1,26 @@
+id: bone-bamboo-slope
+kind: location
+name: 炼骨崖竹林段
+description: 通往炼骨崖的竹林山坡，坡度渐陡；不入门也可以申请在许可范围内练脚力。
+placement: caixia-mountain
+facts:
+  - id: bone-bamboo-slope-route-qixuan-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-gate
+    description: 通往炼骨崖的竹林山坡，坡度渐陡；不入门也可以申请在许可范围内练脚力。
+    access:
+      kind: public
+  - id: bone-bamboo-slope-route-bone-rock-wall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: bone-rock-wall
+    description: 风化岩壁夹锐石，攀登有伤害与坠落风险；不会因是玩家而自动安全。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

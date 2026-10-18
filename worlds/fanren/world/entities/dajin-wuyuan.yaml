@@ -1,0 +1,18 @@
+id: dajin-wuyuan
+kind: location
+name: 五原府
+description: 与关宁相距遥远的辽州府域，往来须实际行路。
+placement: dajin-liaozhou
+facts:
+  - id: dajin-wuyuan-route-dajin-liaozhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-liaozhou
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

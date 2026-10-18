@@ -1,0 +1,24 @@
+id: guanghan-three-eye-patrol
+kind: creature-group
+name: 三眼暗兽巡群
+description: 有各自身体的局部兽群，护食、育幼和避险；不是全界生物总数。
+placement: guanghan-dark-forest
+facts:
+  - id: guanghan-three-eye-patrol-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 3
+    description: individual-count
+    access:
+      kind: private
+meters:
+  - id: guanghan-three-eye-patrol-health
+    definition_id: health
+    current: 100
+quantities: []
+ratings:
+  - id: guanghan-three-eye-patrol-force
+    definition_id: force
+    value: 6
+shared_activity_resources: []

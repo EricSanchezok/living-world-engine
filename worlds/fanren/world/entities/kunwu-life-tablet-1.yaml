@@ -1,0 +1,26 @@
+id: kunwu-life-tablet-1
+kind: item
+name: 本命元牌1
+description: 昆吾三老所制血木牌，T0完整；元婴以上炼化才可尝试控制，不保证压倒强于己者。
+placement: kunwu-rear-hall
+facts:
+  - id: kunwu-life-tablet-1-bound-being
+    predicate: bound-being
+    value:
+      kind: entity
+      entityId: canon-silver-wing-yaksha
+    description: bound-being
+    access:
+      kind: private
+  - id: kunwu-life-tablet-1-current-controller
+    predicate: current-controller
+    value:
+      kind: text
+      value: 无后来获得此牌的玩家或访客；控制归古殿封禁。
+    description: 无后来获得此牌的玩家或访客；控制归古殿封禁。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

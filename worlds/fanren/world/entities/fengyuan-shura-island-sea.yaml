@@ -1,0 +1,42 @@
+id: fengyuan-shura-island-sea
+kind: location
+name: 修罗古战场岛海
+description: 岛屿间灵气属性不同，残禁让航线时而折弯；古战场痕迹尚留在岸石与水下。
+placement: fengyuan-minor-shura-realm
+facts:
+  - id: fengyuan-shura-island-sea-route-to-fengyuan-shura-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-island-sea-route-conditions-fengyuan-shura-mountains
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 飞越山海须实际法力与路程，并观察海岛残禁。
+    description: 飞越山海须实际法力与路程，并观察海岛残禁。
+    access:
+      kind: public
+  - id: fengyuan-shura-island-sea-route-to-fengyuan-shura-frozen-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-frozen-island
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-island-sea-route-conditions-fengyuan-shura-frozen-island
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 沿可辨水道或空中绕开残禁到雪岛，普通修士不能以古禁已残为由无视风险。
+    description: 沿可辨水道或空中绕开残禁到雪岛，普通修士不能以古禁已残为由无视风险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

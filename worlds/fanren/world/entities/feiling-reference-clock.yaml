@@ -1,0 +1,18 @@
+id: feiling-reference-clock
+kind: item
+name: 备用巡守砂漏
+description: 有最近校准记录的备用砂漏，可与在用者比对。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-reference-clock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

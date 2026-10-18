@@ -1,0 +1,176 @@
+id: canon-wuling-third
+kind: person
+name: 巫灵未具名第三老者
+description: 巫灵三圣之一，留意功法相容和同伴的真实消耗。
+placement: blood-witch-refuge
+facts:
+  - id: canon-wuling-third-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-wuling-third
+  - id: canon-wuling-third-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 巫道法体、木化秘术与阴寒术法。
+    description: 巫道法体、木化秘术与阴寒术法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-wuling-third
+  - id: canon-wuling-third-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+  - id: canon-wuling-third-colleague-canon-wuling-wu
+    predicate: longstanding-colleague
+    value:
+      kind: entity
+      entityId: canon-wuling-wu
+    description: longstanding-colleague
+    access:
+      kind: private
+  - id: canon-wuling-third-colleague-canon-wuling-yu
+    predicate: longstanding-colleague
+    value:
+      kind: entity
+      entityId: canon-wuling-yu
+    description: longstanding-colleague
+    access:
+      kind: private
+meters:
+  - id: canon-wuling-third-health
+    definition_id: health
+    current: 100
+  - id: canon-wuling-third-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: canon-wuling-third-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-wuling-third-force
+    definition_id: force
+    value: 8
+  - id: canon-wuling-third-craft
+    definition_id: craft
+    value: 6
+  - id: canon-wuling-third-perception
+    definition_id: perception
+    value: 8
+  - id: canon-wuling-third-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-wuling-third
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 巫灵三圣之一，留意功法相容和同伴的真实消耗。
+      voice: 话少，常在两人争论后补上一个实际代价；对同伴损伤会追问。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 为残碑研究保留备用资源，避免全押一次险行。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 巫灵未具名第三老者
+        description: 巫灵三圣之一，留意功法相容和同伴的真实消耗。
+        status: observed
+      - id: location
+        name: 巫灵三圣修行地
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-canon-wuling-third-resources
+        name: 巫灵未具名第三老者的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-wuling-wu
+        name: 巫灵吴姓老者
+        description: 长期巫道同修，熟悉彼此所学而不知未说出的私人打算。
+        status: observed
+      - id: known-canon-wuling-yu
+        name: 巫灵余姓老者
+        description: 长期巫道同修，熟悉彼此所学而不知未说出的私人打算。
+        status: observed
+      - id: known-blood-wuling-stone
+        name: 巫道残碑
+        description: 共同研究的残碑，尚不能保证其中推测正确。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 巫道法体、木化秘术与阴寒术法。
+        description: 巫道法体、木化秘术与阴寒术法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-wuling-third
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-witch-refuge
+      - local_entity_id: known-canon-wuling-third-resources
+        canonical_entity_ids:
+          - canon-wuling-third-resources
+      - local_entity_id: known-canon-wuling-wu
+        canonical_entity_ids:
+          - canon-wuling-wu
+      - local_entity_id: known-canon-wuling-yu
+        canonical_entity_ids:
+          - canon-wuling-yu
+      - local_entity_id: known-blood-wuling-stone
+        canonical_entity_ids:
+          - blood-wuling-stone

@@ -1,0 +1,26 @@
+id: feiling-oath-copy-2
+kind: item
+name: 天鹏之誓第2副卷
+description: 鬼头咬合的封卷。署名余位必须开卷核对，一份卷不能代替另一份的真实留名。
+placement: feiling-sealed-vault
+facts:
+  - id: feiling-oath-copy-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-oath-copy-2-signature-capacity
+    predicate: signature-capacity
+    value:
+      kind: text
+      value: 尚余两处可用署名空白；开封须四名获准长老提供翎羽，署名须本人真名和精血。已满后不得无限添名。
+    description: 尚余两处可用署名空白；开封须四名获准长老提供翎羽，署名须本人真名和精血。已满后不得无限添名。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

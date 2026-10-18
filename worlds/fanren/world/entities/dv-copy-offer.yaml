@@ -1,0 +1,26 @@
+id: dv-copy-offer
+kind: item
+name: 徐氏抄录提案
+description: 拟以30低阶灵石取得一份注明原作者的研究抄本，不含转卖原片和删改署名权限。
+placement: dv-foothill-lodge
+facts:
+  - id: dv-copy-offer-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-copy-scholar
+    description: owned-by
+    access:
+      kind: private
+  - id: dv-copy-offer-unsigned
+    predicate: unsigned
+    value:
+      kind: text
+      value: 双方尚未签，价款尚未支付；任何一方可另谈或拒绝。
+    description: 双方尚未签，价款尚未支付；任何一方可另谈或拒绝。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

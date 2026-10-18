@@ -1,0 +1,28 @@
+id: thunder-mojin-return-charms
+kind: item
+name: 青灵归阵符存箱
+description: 四张本轮归阵符，仅在实际开放窗口内指引入口附近接引，不能从山脉任意位置瞬移。
+placement: thunder-mojin-cloud-sea
+facts:
+  - id: thunder-mojin-return-charms-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-tianyun-alliance
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-mojin-return-charms-division-boundary
+    predicate: division-boundary
+    value:
+      kind: text
+      value: 分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。
+    description: 分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-seal-sheet
+    amount: 4
+ratings: []
+shared_activity_resources: []

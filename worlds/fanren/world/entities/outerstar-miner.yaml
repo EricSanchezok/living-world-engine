@@ -1,0 +1,193 @@
+id: outerstar-miner
+kind: person
+name: 陶石
+description: 凡俗矿工，发现一处支撑发响，尚未确认是否塌陷。
+placement: outerstar-small-mine
+facts:
+  - id: outerstar-miner-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-miner
+  - id: outerstar-miner-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 辨矿石、支木与地下听响，无灵根。
+    description: 辨矿石、支木与地下听响，无灵根。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-miner
+  - id: outerstar-miner-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根。
+    description: 没有灵根。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-miner
+  - id: outerstar-miner-community-with-outerstar-village-head
+    predicate: community-with
+    value:
+      kind: entity
+      entityId: outerstar-village-head
+    description: community-with
+    access:
+      kind: private
+  - id: outerstar-miner-works-with
+    predicate: works-with
+    value:
+      kind: entity
+      entityId: outerstar-village-community
+    description: works-with
+    access:
+      kind: private
+meters:
+  - id: outerstar-miner-health
+    definition_id: health
+    current: 100
+  - id: outerstar-miner-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 160
+ratings:
+  - id: outerstar-miner-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: outerstar-miner-force
+    definition_id: force
+    value: 1
+  - id: outerstar-miner-craft
+    definition_id: craft
+    value: 1
+  - id: outerstar-miner-perception
+    definition_id: perception
+    value: 1
+  - id: outerstar-miner-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: outerstar-miner
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 凡俗矿工，发现一处支撑发响，尚未确认是否塌陷。
+      voice: 说话简短，谈石头裂声时十分具体。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 先停下东巷作业，请顾榆从安全口检查异响。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陶石
+        description: 凡俗矿工，发现一处支撑发响，尚未确认是否塌陷。
+        status: observed
+      - id: location
+        name: 白汀石矿
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-outerstar-miner-provisions
+        name: 陶石的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-village-head
+        name: 桑平
+        description: 村中多年邻里，知道对方职业。
+        status: observed
+      - id: known-outerstar-mine-tools
+        name: 陶石的支木工具
+        description: 锤、绳与测距竹尺，可检查支撑但不能替代结构安全。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 辨矿石、支木与地下听响，无灵根。
+        description: 辨矿石、支木与地下听响，无灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己经过检测，没有灵根。
+        description: 自己经过检测，没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: heard-creak
+        subjectId: self
+        predicate: heard-creak
+        value:
+          kind: text
+          value: 我刚听到东巷支木发响，还未知道原因，已停在安全口。
+        description: 我刚听到东巷支木发响，还未知道原因，已停在安全口。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - outerstar-miner
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-small-mine
+      - local_entity_id: known-outerstar-miner-provisions
+        canonical_entity_ids:
+          - outerstar-miner-provisions
+      - local_entity_id: known-outerstar-village-head
+        canonical_entity_ids:
+          - outerstar-village-head
+      - local_entity_id: known-outerstar-mine-tools
+        canonical_entity_ids:
+          - outerstar-mine-tools

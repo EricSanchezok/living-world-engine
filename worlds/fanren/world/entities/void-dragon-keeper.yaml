@@ -1,0 +1,193 @@
+id: void-dragon-keeper
+kind: person
+name: 方潭
+description: 与寒蛟相处多年的结丹饲养人。
+placement: void-wanfa-spiritpool
+facts:
+  - id: void-dragon-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: agents
+      agentIds:
+        - void-dragon-keeper
+  - id: void-dragon-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 结丹修行、长期驯养与具体饲料记录。
+    description: 结丹修行、长期驯养与具体饲料记录。
+    access:
+      kind: agents
+      agentIds:
+        - void-dragon-keeper
+  - id: void-dragon-keeper-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - void-dragon-keeper
+  - id: void-dragon-keeper-works-for
+    predicate: works-for
+    value:
+      kind: entity
+      entityId: canon-wan-sangu
+    description: works-for
+    access:
+      kind: private
+  - id: void-dragon-keeper-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: wanfa-sect
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: void-dragon-keeper-health
+    definition_id: health
+    current: 100
+  - id: void-dragon-keeper-mana
+    definition_id: mana
+    current: 660
+quantities:
+  - definition_id: low-stone
+    amount: 60
+ratings:
+  - id: void-dragon-keeper-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: void-dragon-keeper-force
+    definition_id: force
+    value: 3
+  - id: void-dragon-keeper-craft
+    definition_id: craft
+    value: 3
+  - id: void-dragon-keeper-perception
+    definition_id: perception
+    value: 3
+  - id: void-dragon-keeper-influence
+    definition_id: influence
+    value: 3
+shared_activity_resources: []
+agent:
+  id: void-dragon-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 与寒蛟相处多年的结丹饲养人。
+      voice: 声音沉稳，先让来客别惊动池中灵兽。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 观察少食是否只因刚换的饲料，不急着断言生病。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 方潭
+        description: 与寒蛟相处多年的结丹饲养人。
+        status: observed
+      - id: location
+        name: 万法寒池
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-void-dragon-keeper-kit
+        name: 方潭的随身器具
+        description: 结丹修行、长期驯养与具体饲料记录。所需的个人日常器具。
+        status: observed
+      - id: known-canon-wan-sangu
+        name: 万三姑
+        description: 长期饲养寒蛟的合作，近况须实际报告。
+        status: observed
+      - id: known-canon-wan-sangu-cold-flood
+        name: 万三姑的寒蛟
+        description: 自己长期照顾的灵兽。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 结丹修行、长期驯养与具体饲料记录。
+        description: 结丹修行、长期驯养与具体饲料记录。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 当地此时为夜间，后续按实际天时行动。
+        description: 当地此时为夜间，后续按实际天时行动。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: observed-appetite
+        subjectId: self
+        predicate: observed-appetite
+        value:
+          kind: text
+          value: 换料后它吃得少，游动仍有力，我不确定是否药性或病。
+        description: 换料后它吃得少，游动仍有力，我不确定是否药性或病。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - void-dragon-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - void-wanfa-spiritpool
+      - local_entity_id: known-void-dragon-keeper-kit
+        canonical_entity_ids:
+          - void-dragon-keeper-kit
+      - local_entity_id: known-canon-wan-sangu
+        canonical_entity_ids:
+          - canon-wan-sangu
+      - local_entity_id: known-canon-wan-sangu-cold-flood
+        canonical_entity_ids:
+          - canon-wan-sangu-cold-flood

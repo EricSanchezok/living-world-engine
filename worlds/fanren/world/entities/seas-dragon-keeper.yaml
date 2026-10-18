@@ -1,0 +1,211 @@
+id: seas-dragon-keeper
+kind: person
+name: 岚辔
+description: 成年炼虚龙人驿师，熟悉每匹狞马的脾气。
+placement: seas-dragon-stable
+facts:
+  - id: seas-dragon-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-keeper
+  - id: seas-dragon-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚风法、狞马养护、风灵车配平。
+    description: 炼虚风法、狞马养护、风灵车配平。
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-keeper
+  - id: seas-dragon-keeper-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - seas-dragon-keeper
+meters:
+  - id: seas-dragon-keeper-health
+    definition_id: health
+    current: 100
+  - id: seas-dragon-keeper-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: seas-dragon-keeper-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: seas-dragon-keeper-force
+    definition_id: force
+    value: 6
+  - id: seas-dragon-keeper-craft
+    definition_id: craft
+    value: 6
+  - id: seas-dragon-keeper-perception
+    definition_id: perception
+    value: 6
+  - id: seas-dragon-keeper-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: seas-dragon-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 成年炼虚龙人驿师，熟悉每匹狞马的脾气。
+      voice: 喜欢先摸马颈再说话，谈训练比谈贵人身份更有主见。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 为一匹拒绝长途驾车的狞马改配训练，拒绝把耐力等同永不疲累。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 岚辔
+        description: 成年炼虚龙人驿师，熟悉每匹狞马的脾气。
+        status: observed
+      - id: location
+        name: 狞马驿院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-seas-dragon-keeper-private-stock
+        name: 岚辔的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-canon-tian-feier
+        name: 田飞儿
+        description: 曾合作出行，需实际议定借马和归还。
+        status: observed
+      - id: known-seas-dragon-trader
+        name: 砺角
+        description: 驿院与材料铺已有一份20斤风精金旧约。
+        status: observed
+      - id: known-seas-stable-payment
+        name: 驿院采购预留
+        description: 本人经营驿院预留货款，与岛族公产分开。
+        status: observed
+      - id: known-seas-ninghorse-1
+        name: 驿院狞马1
+        description: 自己日常照管、可辨认性情的实际狞马。
+        status: observed
+      - id: known-seas-ninghorse-2
+        name: 驿院狞马2
+        description: 自己日常照管、可辨认性情的实际狞马。
+        status: observed
+      - id: known-seas-ninghorse-3
+        name: 驿院狞马3
+        description: 自己日常照管、可辨认性情的实际狞马。
+        status: observed
+      - id: known-seas-ninghorse-4
+        name: 驿院狞马4
+        description: 自己日常照管、可辨认性情的实际狞马。
+        status: observed
+      - id: known-seas-wind-car
+        name: 驿院风灵车
+        description: 可由四匹狞马牵引的灵铜车，需驾驶者持续风法护持与真实行路；载客不保证自动获龙岛许可。
+        status: observed
+      - id: known-seas-stable-provisions
+        name: 驿院饲草和训练物资
+        description: 真实有限补给，训练和远行需规划。
+        status: observed
+      - id: known-seas-wind-gold-old-contract
+        name: 驿院风精金旧约
+        description: 双方已经同意的采购约，未付款交货。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚风法、狞马养护、风灵车配平。
+        description: 炼虚风法、狞马养护、风灵车配平。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - seas-dragon-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-dragon-stable
+      - local_entity_id: known-seas-dragon-keeper-private-stock
+        canonical_entity_ids:
+          - seas-dragon-keeper-private-stock
+      - local_entity_id: known-canon-tian-feier
+        canonical_entity_ids:
+          - canon-tian-feier
+      - local_entity_id: known-seas-dragon-trader
+        canonical_entity_ids:
+          - seas-dragon-trader
+      - local_entity_id: known-seas-stable-payment
+        canonical_entity_ids:
+          - seas-stable-payment
+      - local_entity_id: known-seas-ninghorse-1
+        canonical_entity_ids:
+          - seas-ninghorse-1
+      - local_entity_id: known-seas-ninghorse-2
+        canonical_entity_ids:
+          - seas-ninghorse-2
+      - local_entity_id: known-seas-ninghorse-3
+        canonical_entity_ids:
+          - seas-ninghorse-3
+      - local_entity_id: known-seas-ninghorse-4
+        canonical_entity_ids:
+          - seas-ninghorse-4
+      - local_entity_id: known-seas-wind-car
+        canonical_entity_ids:
+          - seas-wind-car
+      - local_entity_id: known-seas-stable-provisions
+        canonical_entity_ids:
+          - seas-stable-provisions
+      - local_entity_id: known-seas-wind-gold-old-contract
+        canonical_entity_ids:
+          - seas-wind-gold-old-contract

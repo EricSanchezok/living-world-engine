@@ -1,0 +1,44 @@
+id: ad-seal-inner-cave
+kind: location
+name: 始印深层封禁
+description: 上古封印内层，虫母受真实压制，普通人无法凭地图闯入。
+placement: associated-demon-realm
+facts:
+  - id: ad-seal-inner-cave-route-ad-original-seal
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-original-seal
+    description: route-to
+    access:
+      kind: public
+  - id: ad-seal-inner-cave-condition-ad-original-seal
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-seal-inner-cave-root-detail-borer-types
+    predicate: root-detail-borer-types
+    value:
+      kind: text
+      value: 螟虫凡种、绿喷吐种、红自爆种和人面后代各有能力与弱点，强攻击不保证强防，自愈不免毁身；虫群须真实繁殖供养。
+    description: 螟虫凡种、绿喷吐种、红自爆种和人面后代各有能力与弱点，强攻击不保证强防，自愈不免毁身；虫群须真实繁殖供养。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-seal-inner-cave-root-detail-seal-palace-layout
+    predicate: root-detail-seal-palace-layout
+    value:
+      kind: text
+      value: 地宫有深峡、白玉广场、岔路、塔林、隔念殿和八元阵，封灵力量有限，强召或破阵可能伤封禁；蓝海裂缝也受封印制约。
+    description: 地宫有深峡、白玉广场、岔路、塔林、隔念殿和八元阵，封灵力量有限，强召或破阵可能伤封禁；蓝海裂缝也受封印制约。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

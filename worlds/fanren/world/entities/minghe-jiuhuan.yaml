@@ -1,0 +1,26 @@
+id: minghe-jiuhuan
+kind: location
+name: 九幻居所
+description: 遮掩于几重幻幕后的清静居所，门前窄径须主人解除相应禁制方能通行。
+placement: fengyuan-continent
+facts:
+  - id: minghe-jiuhuan-route-fengyuan-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-continent
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-jiuhuan-condition-fengyuan-continent
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    description: 此地距蜉蝣族域需长途远行；有自己的居住与来客规矩。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

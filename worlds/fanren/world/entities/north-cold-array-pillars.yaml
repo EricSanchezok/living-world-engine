@@ -1,0 +1,20 @@
+id: north-cold-array-pillars
+kind: item
+name: 冰魄寒烈阵古炼冰柱
+description: 一千零八根古炼万年玄冰柱，构成此殿古阵；损毁、搬走和修复须对实际阵柱计数。
+placement: north-xuling-hall-one
+facts:
+  - id: north-cold-array-pillars-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: north-ancient-ice-pillar
+    amount: 1008
+ratings: []
+shared_activity_resources: []

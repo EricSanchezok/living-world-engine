@@ -1,0 +1,26 @@
+id: steppe-baihuo-store
+kind: location
+name: 拜火部共用火棚
+description: 干柴、草药和陶炉分列，外人可议价换取材料，需先问管事。
+placement: steppe-baihuo-camp
+facts:
+  - id: steppe-baihuo-store-route-steppe-baihuo-camp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-baihuo-camp
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-baihuo-store-travel-steppe-baihuo-camp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

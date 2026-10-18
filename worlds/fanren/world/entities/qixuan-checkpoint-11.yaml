@@ -1,0 +1,26 @@
+id: qixuan-checkpoint-11
+kind: location
+name: 上峰第11道哨卡
+description: 上落日峰通路上的哨位，山势险要，来往者须接受门中盘查。
+placement: sunset-peak
+facts:
+  - id: qixuan-checkpoint-11-route-qixuan-checkpoint-10
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-checkpoint-10
+    description: 上落日峰通路上的哨位，山势险要，来往者须接受门中盘查。
+    access:
+      kind: public
+  - id: qixuan-checkpoint-11-route-qixuan-checkpoint-12
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qixuan-checkpoint-12
+    description: 上落日峰通路上的哨位，山势险要，来往者须接受门中盘查。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

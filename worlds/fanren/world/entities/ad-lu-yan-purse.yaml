@@ -1,0 +1,22 @@
+id: ad-lu-yan-purse
+kind: container
+name: 卢砚私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-lu-yan
+facts:
+  - id: ad-lu-yan-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lu-yan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 65
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

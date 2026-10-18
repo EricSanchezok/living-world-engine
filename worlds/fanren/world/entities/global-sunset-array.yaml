@@ -1,0 +1,26 @@
+id: global-sunset-array
+kind: item
+name: 入口封锁阵石台
+description: 与峡谷两侧封锁阵相连的石台。
+placement: global-sunset-watch
+facts:
+  - id: global-sunset-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-sunset-border
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-sunset-array-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 维持侧路封锁需要阵材和定期维护；正口能通行但有真实监视，不能使整个落日之墓绝对安全。
+    description: 维持侧路封锁需要阵材和定期维护；正口能通行但有真实监视，不能使整个落日之墓绝对安全。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

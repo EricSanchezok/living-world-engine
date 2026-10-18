@@ -1,0 +1,18 @@
+id: void-north-receiver
+kind: item
+name: 石屋大型古阵
+description: 与北域古阵相应的接收设施；单向关联不能逆向当作返乡捷径。
+placement: void-arrival-room
+facts:
+  - id: void-north-receiver-source
+    predicate: transmission-source
+    value:
+      kind: entity
+      entityId: north-xuling-ancient-array
+    description: 单向上古阵的来向；此信息不自动给予人物。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

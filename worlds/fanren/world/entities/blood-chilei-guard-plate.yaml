@@ -1,0 +1,18 @@
+id: blood-chilei-guard-plate
+kind: item
+name: 赤雷护身雷牌
+description: 个人护身法器，持续注法力可挡常规冲击，会被足够强攻击击坏。
+placement: canon-chi-lei-laozu
+facts:
+  - id: blood-chilei-guard-plate-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-chi-lei-laozu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

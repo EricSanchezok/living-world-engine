@@ -1,0 +1,42 @@
+id: thunder-jinjia-city
+kind: location
+name: 金甲城
+description: 守卫主干道路的城邑，有商栈与对外驿路。
+placement: thunder-tianyun
+facts:
+  - id: thunder-jinjia-city-route-thunder-greenlight-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-greenlight-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jinjia-city-condition-thunder-greenlight-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+  - id: thunder-jinjia-city-route-thunder-hengshui-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-hengshui-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-jinjia-city-condition-thunder-hengshui-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    description: 须沿实际道路、飞行或获准乘舟经过中间地域；长途需要时间、补给和当日通行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

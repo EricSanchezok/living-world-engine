@@ -1,0 +1,22 @@
+id: feiling-lamp-stock
+kind: container
+name: 守军灯具材料
+description: 检修灯具和调校计时砂漏的储备。
+placement: feiling-guard-yard
+facts:
+  - id: feiling-lamp-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-abyss-guard
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 200
+  - definition_id: craft-material
+    amount: 10
+ratings: []
+shared_activity_resources: []

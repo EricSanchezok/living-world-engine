@@ -1,0 +1,29 @@
+id: yinming-trade-letter
+kind: item
+name: 薄田换粮函
+description: 薄田愿用八份成熟粮换一块兽晶，另可提供清渠劳务。
+placement: yinming-ridge-runner
+facts:
+  - id: yinming-trade-letter-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-field
+    description: owned-by
+    access:
+      kind: private
+  - id: yinming-trade-letter-actual-offer
+    predicate: actual-offer
+    value:
+      kind: text
+      value: 八份成熟粮换一兽晶；若对方愿意，也可四份粮加两人各一日清渠，未得到大村答复。
+    description: 八份成熟粮换一兽晶；若对方愿意，也可四份粮加两人各一日清渠，未得到大村答复。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-field-leader
+        - yinming-ridge-runner
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

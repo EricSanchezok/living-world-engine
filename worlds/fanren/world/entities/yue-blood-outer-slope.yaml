@@ -1,0 +1,26 @@
+id: yue-blood-outer-slope
+kind: location
+name: 禁地外黄土坡
+description: 靠元武边界的荒坡，隔着风禁不能径入禁地。
+placement: human-yue
+facts:
+  - id: yue-blood-outer-slope-route-yue-blood-forbidden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-forbidden
+    description: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    access:
+      kind: public
+  - id: yue-blood-outer-slope-travel-yue-blood-forbidden
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    description: 风刃古禁通常封闭，五年衰弱五日仍要结丹修士实际合力开路；通路不会因知道日期自动出现。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

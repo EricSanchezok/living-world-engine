@@ -1,0 +1,42 @@
+id: yue-blood-inner-wood
+kind: location
+name: 第三层密林
+description: 环形山内侧密林，外围强大古禁仍在运行。
+placement: yue-blood-forbidden
+facts:
+  - id: yue-blood-inner-wood-route-yue-blood-ring-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-ring-range
+    description: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    access:
+      kind: public
+  - id: yue-blood-inner-wood-travel-yue-blood-ring-range
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    description: 三层交界强大古禁仍在，通常炼气手段无法破开；不可因看见塔便跳过禁制。
+    access:
+      kind: public
+  - id: yue-blood-inner-wood-route-yue-blood-ancient-tower
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-ancient-tower
+    description: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    access:
+      kind: public
+  - id: yue-blood-inner-wood-travel-yue-blood-ancient-tower
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    description: 穿过密林与巨塔门禁需要分别检查并解除对应古禁，望见门户不能越过阻隔。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

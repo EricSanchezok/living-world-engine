@@ -1,0 +1,18 @@
+id: dv-survey-log
+kind: item
+name: 青筠观测册
+description: 一月每日风向与实走里程，纸页时间顺序完整，能核出新图不是单纯照抄。
+placement: dv-tracing-room
+facts:
+  - id: dv-survey-log-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dv-young-surveyor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

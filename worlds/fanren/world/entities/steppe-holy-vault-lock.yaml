@@ -1,0 +1,28 @@
+id: steppe-holy-vault-lock
+kind: item
+name: 内库门封
+description: 配八枚低阶灵石的封门设施，当前完好；实际解封或破坏会改变门禁，不使整片分殿绝对不可进。
+placement: steppe-holy-ding-vault
+facts:
+  - id: steppe-holy-vault-lock-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: tianlan-temple-network
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: steppe-holy-vault-lock-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: steppe-yu-su
+    description: custodian
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 8
+ratings: []
+shared_activity_resources: []

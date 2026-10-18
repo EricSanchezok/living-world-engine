@@ -1,0 +1,216 @@
+id: blood-sponsor
+kind: person
+name: 栾砚
+description: 材料铺经营者，把公开竞技视为挑选可靠护送人选的办法。
+placement: blood-market
+facts:
+  - id: blood-sponsor-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - blood-sponsor
+  - id: blood-sponsor-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴防护、鉴材与商路核价。
+    description: 元婴防护、鉴材与商路核价。
+    access:
+      kind: agents
+      agentIds:
+        - blood-sponsor
+  - id: blood-sponsor-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+meters:
+  - id: blood-sponsor-health
+    definition_id: health
+    current: 100
+  - id: blood-sponsor-mana
+    definition_id: mana
+    current: 880
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-sponsor-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: blood-sponsor-force
+    definition_id: force
+    value: 4
+  - id: blood-sponsor-craft
+    definition_id: craft
+    value: 4
+  - id: blood-sponsor-perception
+    definition_id: perception
+    value: 4
+  - id: blood-sponsor-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: blood-sponsor
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 材料铺经营者，把公开竞技视为挑选可靠护送人选的办法。
+      voice: 笑着听人自夸，却总问上次遇险如何收场；谈报酬精确报数。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 看清两人的真正长处，再决定发出哪一种护送合约。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 栾砚
+        description: 材料铺经营者，把公开竞技视为挑选可靠护送人选的办法。
+        status: observed
+      - id: location
+        name: 血鹤城交易广场
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-sponsor-resources
+        name: 栾砚的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-blood-sponsor-offers
+        name: 栾砚两种护送邀约
+        description: 轻装递信和慢行护车两种拟聘；以实际能力、诚信和双方意愿决定，不由单场胜负自动签约。
+        status: observed
+      - id: known-blood-sponsor-pay
+        name: 护送报酬预算
+        description: 两项拟约每项四十低阶灵石，共八十，未支出。
+        status: observed
+      - id: known-blood-arena-proposal
+        name: 平鹭与桑铸斗技草约
+        description: 已讨论的草拟条件，仍可商议或拒绝。
+        status: observed
+      - id: known-blood-contestant-a
+        name: 平鹭
+        description: 见过其练身法，仍想了解可靠性。
+        status: observed
+      - id: known-blood-contestant-b
+        name: 桑铸
+        description: 看过其盾法，尚未签护送约。
+        status: observed
+      - id: known-blood-sponsor-letter
+        name: 栾砚的申报封信
+        description: 封给守城府周如晦，内容是申请新增材料铺柜位；接约后可投递，收件人没有义务因送信者到达便准许申请。
+        status: observed
+      - id: known-blood-sponsor-cart
+        name: 栾砚的轻型货车
+        description: 可由熟练修士牵引的轻车，载重有限，当前停在市场外沿。
+        status: observed
+      - id: known-blood-sponsor-cargo
+        name: 送血骨门的灵材箱
+        description: 已与萧冥约定送去比对旧阵材料，仍属栾砚，验收与价格另议。
+        status: observed
+      - id: known-canon-xiao-ming
+        name: 萧冥
+        description: 愿看灵材但尚未答应购买的血骨门前辈。
+        status: observed
+      - id: review-blood-gu-specimen
+        name: 血蛊保存标本
+        description: 密封玻管中的一只已死血蛊，现为观察其离血后形态的标本；死物不能继续感染。
+        status: observed
+      - id: review-blood-bloodsteel-stock
+        name: 血罡铁小批存料
+        description: 明确独立的当前库存，转移或消耗须从此处扣除，不与个人袋重复。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴防护、鉴材与商路核价。
+        description: 元婴防护、鉴材与商路核价。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-sponsor
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-market
+      - local_entity_id: known-blood-sponsor-resources
+        canonical_entity_ids:
+          - blood-sponsor-resources
+      - local_entity_id: known-blood-sponsor-offers
+        canonical_entity_ids:
+          - blood-sponsor-offers
+      - local_entity_id: known-blood-sponsor-pay
+        canonical_entity_ids:
+          - blood-sponsor-pay
+      - local_entity_id: known-blood-arena-proposal
+        canonical_entity_ids:
+          - blood-arena-proposal
+      - local_entity_id: known-blood-contestant-a
+        canonical_entity_ids:
+          - blood-contestant-a
+      - local_entity_id: known-blood-contestant-b
+        canonical_entity_ids:
+          - blood-contestant-b
+      - local_entity_id: known-blood-sponsor-letter
+        canonical_entity_ids:
+          - blood-sponsor-letter
+      - local_entity_id: known-blood-sponsor-cart
+        canonical_entity_ids:
+          - blood-sponsor-cart
+      - local_entity_id: known-blood-sponsor-cargo
+        canonical_entity_ids:
+          - blood-sponsor-cargo
+      - local_entity_id: known-canon-xiao-ming
+        canonical_entity_ids:
+          - canon-xiao-ming
+      - local_entity_id: review-blood-gu-specimen
+        canonical_entity_ids:
+          - blood-gu-specimen
+      - local_entity_id: review-blood-bloodsteel-stock
+        canonical_entity_ids:
+          - blood-bloodsteel-stock

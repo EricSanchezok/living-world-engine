@@ -1,0 +1,20 @@
+id: seas-plant-box
+kind: container
+name: 岑枝活种匣
+description: 十二株自育耐盐草苗，叶缘微卷，缓慢养护可缓解；没有开瓶即死的陷阱。
+placement: seas-herb-scholar
+facts:
+  - id: seas-plant-box-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-herb-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 12
+ratings: []
+shared_activity_resources: []

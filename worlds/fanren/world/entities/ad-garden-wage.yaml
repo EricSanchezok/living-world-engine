@@ -1,0 +1,20 @@
+id: ad-garden-wage
+kind: container
+name: 金穗已收工钱
+description: 本人已挣得且可独立花用的魔石，不是沈黍家产。
+placement: ad-lake-apprentice
+facts:
+  - id: ad-garden-wage-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-lake-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 36
+ratings: []
+shared_activity_resources: []

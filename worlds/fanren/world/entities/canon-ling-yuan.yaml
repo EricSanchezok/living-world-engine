@@ -1,0 +1,121 @@
+id: canon-ling-yuan
+kind: person
+name: 凌源
+description: 长期闭关的魔族圣祖，旧受青翼族恩；化身替其留在铁沙岭。
+placement: ad-lingyuan-retreat
+facts:
+  - id: canon-ling-yuan-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: private
+  - id: canon-ling-yuan-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 大乘魔功、闭关炼化及同主体化身控制；感应受距离、界面与禁制影响。
+    description: 大乘魔功、闭关炼化及同主体化身控制；感应受距离、界面与禁制影响。
+    access:
+      kind: private
+meters:
+  - id: canon-ling-yuan-health
+    definition_id: health
+    current: 100
+  - id: canon-ling-yuan-mana
+    definition_id: mana
+    current: 1440
+quantities: []
+ratings:
+  - id: canon-ling-yuan-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-ling-yuan-force
+    definition_id: force
+    value: 8
+  - id: canon-ling-yuan-craft
+    definition_id: craft
+    value: 8
+  - id: canon-ling-yuan-perception
+    definition_id: perception
+    value: 8
+  - id: canon-ling-yuan-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-ling-yuan
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 长期闭关的魔族圣祖，旧受青翼族恩；化身替其留在铁沙岭。
+      voice: 不轻易答话，先分清来讯与自身感应。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 维持本轮闭关；只有实际接到足以打断修行的消息才权衡是否出关。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 凌源
+        description: 长期闭关的魔族圣祖，旧受青翼族恩；化身替其留在铁沙岭。
+        status: observed
+      - id: location
+        name: 凌源闭关处
+        description: 本人生活或受困所在。
+        status: observed
+      - id: known-canon-ling-yuan-private-stock
+        name: 凌源自用储备
+        description: 本人能够实际动用的储备。
+        status: observed
+      - id: known-canon-ling-yuan-avatar
+        name: 凌源铁沙岭化身
+        description: 本体与所派化身，不能无条件共享遥远处实时感知。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、已学手艺及实际往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 大乘魔功、闭关炼化及同主体化身控制；感应受距离、界面与禁制影响。
+        description: 大乘魔功、闭关炼化及同主体化身控制；感应受距离、界面与禁制影响。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-ling-yuan
+      - local_entity_id: location
+        canonical_entity_ids:
+          - ad-lingyuan-retreat
+      - local_entity_id: known-canon-ling-yuan-private-stock
+        canonical_entity_ids:
+          - canon-ling-yuan-private-stock
+      - local_entity_id: known-canon-ling-yuan-avatar
+        canonical_entity_ids:
+          - canon-ling-yuan-avatar

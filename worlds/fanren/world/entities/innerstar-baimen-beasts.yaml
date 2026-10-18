@@ -1,0 +1,18 @@
+id: innerstar-baimen-beasts
+kind: item
+name: 近海兽性抄册
+description: 记录海猿会水箭潜水、婴鲤水系特长及噬金幼虫玉木束缚；无当前野兽坐标或隐藏人物资料。
+placement: innerstar-baimen-stock
+facts:
+  - id: innerstar-baimen-beasts-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

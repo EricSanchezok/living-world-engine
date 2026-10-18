@@ -1,0 +1,26 @@
+id: yue-blood-jade-pavilion
+kind: location
+name: 地下白玉亭
+description: 沼泽中央白玉小亭，金色巨箱悬浮其中，接近会惊动附近兽类。
+placement: yue-blood-under-swamp
+facts:
+  - id: yue-blood-jade-pavilion-route-yue-blood-under-swamp
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-blood-under-swamp
+    description: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    access:
+      kind: public
+  - id: yue-blood-jade-pavilion-travel-yue-blood-under-swamp
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    description: 须跨过黑泥沼泽并应对真实墨蛟，不能把泥面当平路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

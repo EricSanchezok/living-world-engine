@@ -1,0 +1,42 @@
+id: boundless-deep-water
+kind: location
+name: 近岸外海
+description: 远离陆地的浑浊水域，缺乏普通船只可靠停泊处。
+placement: human-boundless
+facts:
+  - id: boundless-deep-water-route-boundless-shore
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-shore
+    description: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    access:
+      kind: public
+  - id: boundless-deep-water-travel-boundless-shore
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    description: 须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。
+    access:
+      kind: public
+  - id: boundless-deep-water-route-boundless-seal-depth
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-seal-depth
+    description: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    access:
+      kind: public
+  - id: boundless-deep-water-travel-boundless-seal-depth
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    description: 须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

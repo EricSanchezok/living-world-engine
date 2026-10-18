@@ -1,0 +1,22 @@
+id: canon-xue-bi-private-stock
+kind: container
+name: 隐宫部属私用储备
+description: 旧部各自保有的少量材料，不是主人的全部宝藏。
+placement: canon-xue-bi
+facts:
+  - id: canon-xue-bi-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xue-bi
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: high-stone
+    amount: 5
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: spirit-tool-bench
+kind: item
+name: 灵具修造台
+description: 固定钳、细锉、隔热夹和检查镜组成的修造台。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-tool-bench-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

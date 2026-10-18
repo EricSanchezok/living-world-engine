@@ -1,0 +1,26 @@
+id: north-stockroom
+kind: location
+name: 小极宫公库
+description: 日常公库，与长老私用储物分开。
+placement: north-inner-palace
+facts:
+  - id: north-stockroom-route-north-inner-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: 领物需授权并核对账目，私取会形成可追查后果。
+    access:
+      kind: public
+  - id: north-stockroom-travel-north-inner-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 领物需授权并核对账目，私取会形成可追查后果。
+    description: 领物需授权并核对账目，私取会形成可追查后果。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

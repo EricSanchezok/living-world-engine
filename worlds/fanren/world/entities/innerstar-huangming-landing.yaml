@@ -1,0 +1,26 @@
+id: innerstar-huangming-landing
+kind: location
+name: 皇明岛近岸登陆带
+description: 背风岸边有可落脚的石地，岛内小径可向古石台走。
+placement: human-huangming-island
+facts:
+  - id: innerstar-huangming-landing-route-human-huangming-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-huangming-island
+    description: 沿岸地步行往来，出海须另有实际交通。
+    access:
+      kind: public
+  - id: innerstar-huangming-landing-route-innerstar-huangming-old-array
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-huangming-old-array
+    description: 沿岛内小径到山洞口、再入洞抵达旧石台；须实际走过路段，留意沿途状况。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

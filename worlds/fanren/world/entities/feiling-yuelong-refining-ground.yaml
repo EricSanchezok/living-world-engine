@@ -1,0 +1,26 @@
+id: feiling-yuelong-refining-ground
+kind: location
+name: 越隆炼晶洼地
+description: 洼地开阔，阵基围着承力鼎台，炼制时旁观者须退到禁制之外。
+placement: feiling-yuelong-retreat
+facts:
+  - id: feiling-yuelong-refining-ground-route-to-feiling-yuelong-retreat
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuelong-retreat
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-yuelong-refining-ground-route-conditions-feiling-yuelong-retreat
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 居所通炼场的山道；引天地力时封场，须主人许可进入。
+    description: 居所通炼场的山道；引天地力时封场，须主人许可进入。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

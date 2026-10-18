@@ -1,0 +1,74 @@
+id: seas-between-continents
+kind: location
+name: 三陆间远洋
+description: 连接三陆漫长海路的海域总区，航行需要真实耐力、补给、路线与危险应对。
+placement: spirit-realm
+facts:
+  - id: seas-between-continents-route-seas-wuya-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-wuya-sea
+    description: route-to
+    access:
+      kind: public
+  - id: seas-between-continents-condition-seas-wuya-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从近岸驶向远洋，需要持续防护与补给；短程小舟不能仅凭意愿抵达异大陆。
+    description: 从近岸驶向远洋，需要持续防护与补给；短程小舟不能仅凭意愿抵达异大陆。
+    access:
+      kind: public
+  - id: seas-between-continents-route-thunder-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-continent
+    description: route-to
+    access:
+      kind: public
+  - id: seas-between-continents-condition-thunder-continent
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    description: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    access:
+      kind: public
+  - id: seas-between-continents-route-blood-continent
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-continent
+    description: route-to
+    access:
+      kind: public
+  - id: seas-between-continents-condition-blood-continent
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    description: 跨洋须实际航行足够路程并承担海兽、天气和迷航风险；未建立坐标的海岸不能任意精确落点。
+    access:
+      kind: public
+  - id: seas-between-continents-route-seas-moke-approach
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-moke-approach
+    description: route-to
+    access:
+      kind: public
+  - id: seas-between-continents-condition-seas-moke-approach
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 此为跨界可能路线索引，须取得真实界面坐标、破界手段与虚空护持；普通海行不能直接变成破界。
+    description: 此为跨界可能路线索引，须取得真实界面坐标、破界手段与虚空护持；普通海行不能直接变成破界。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

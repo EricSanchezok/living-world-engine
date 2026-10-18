@@ -1,0 +1,165 @@
+id: thunder-bell-custodian
+kind: person
+name: 谛晷
+description: 角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。
+placement: thunder-jiaochi-bell-hall
+facts:
+  - id: thunder-bell-custodian-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: thunder-bell-custodian-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。
+    description: 炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。
+    access:
+      kind: private
+  - id: thunder-bell-custodian-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-jiaochi-power
+    description: affiliation
+    access:
+      kind: private
+  - id: thunder-bell-custodian-acquaintance-thunder-offering-steward
+    predicate: acquaintance
+    value:
+      kind: entity
+      entityId: thunder-offering-steward
+    description: acquaintance
+    access:
+      kind: private
+meters:
+  - id: thunder-bell-custodian-health
+    definition_id: health
+    current: 100
+  - id: thunder-bell-custodian-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: thunder-bell-custodian-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: thunder-bell-custodian-force
+    definition_id: force
+    value: 6
+  - id: thunder-bell-custodian-craft
+    definition_id: craft
+    value: 4
+  - id: thunder-bell-custodian-perception
+    definition_id: perception
+    value: 6
+  - id: thunder-bell-custodian-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: thunder-bell-custodian
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。
+      voice: 讲话低缓，涉及鸣钟就逐项确认受众、范围和停声办法。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定是否准许研武院做一次局部共鸣观测。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 谛晷
+        description: 角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。
+        status: observed
+      - id: location
+        name: 迷天钟殿
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: thunder-review-thunder-bell-custodian-private-stock
+        name: 谛晷私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: thunder-review-thunder-jiaochi-power
+        name: 角蚩族
+        description: 自己所属族群，族内的私事仍依本人经历知情。
+        status: observed
+      - id: thunder-review-thunder-offering-steward
+        name: 翕衡
+        description: 日常通过清册申请器物维护用料，供物由各自权限处理。
+        status: observed
+      - id: thunder-review-thunder-mitian-bell
+        name: 迷天神钟
+        description: 自己守护的本体，只获外层共鸣操作权限。
+        status: observed
+      - id: thunder-review-canon-jiaochi-yin
+        name: 殷尊者
+        description: 研武院的殷尊者，曾请求观测，并非可随意发钟的主人。
+        status: observed
+      - id: thunder-review-thunder-offering-stock
+        name: 供奉堂备料
+        description: 知道供奉堂可申请材料，不知道每次更新后的私账以外事项。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。
+        description: 炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-bell-custodian
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-jiaochi-bell-hall
+      - local_entity_id: thunder-review-thunder-bell-custodian-private-stock
+        canonical_entity_ids:
+          - thunder-bell-custodian-private-stock
+      - local_entity_id: thunder-review-thunder-jiaochi-power
+        canonical_entity_ids:
+          - thunder-jiaochi-power
+      - local_entity_id: thunder-review-thunder-offering-steward
+        canonical_entity_ids:
+          - thunder-offering-steward
+      - local_entity_id: thunder-review-thunder-mitian-bell
+        canonical_entity_ids:
+          - thunder-mitian-bell
+      - local_entity_id: thunder-review-canon-jiaochi-yin
+        canonical_entity_ids:
+          - canon-jiaochi-yin
+      - local_entity_id: thunder-review-thunder-offering-stock
+        canonical_entity_ids:
+          - thunder-offering-stock

@@ -1,0 +1,20 @@
+id: yue-east-market-jingyu
+kind: item
+name: 晶玉料盒
+description: 可切分作相应器材的晶玉，每份一低阶石；不替代未知阵法所有材料。
+placement: yue-mining-east-market
+facts:
+  - id: yue-east-market-jingyu-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-east-market-house
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-jingyu
+    amount: 16
+ratings: []
+shared_activity_resources: []

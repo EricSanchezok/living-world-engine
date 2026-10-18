@@ -1,0 +1,26 @@
+id: minghe-mist-island-waters
+kind: location
+name: 噬灵雾水域
+description: 碧黑广水中岛屿星布，浓雾团遮住部分岛屿，接近浓雾时灵力运转会受牵制。
+placement: minghe-space
+facts:
+  - id: minghe-mist-island-waters-route-to-minghe-black-hills
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-black-hills
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-mist-island-waters-route-conditions-minghe-black-hills
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。
+    description: 林丘外通广水域的高岸，进入各浓雾岛须另判法力压制与落脚条件。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

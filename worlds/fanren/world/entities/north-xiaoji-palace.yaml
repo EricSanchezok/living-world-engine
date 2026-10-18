@@ -1,0 +1,34 @@
+id: north-xiaoji-palace
+kind: organization
+name: 北夜小极宫
+description: 冰魄仙子留在人界的传承；宫主、大长老和外务各有职分。
+placement: north-inner-palace
+facts:
+  - id: north-xiaoji-palace-founder
+    predicate: historical-founder
+    value:
+      kind: entity
+      entityId: canon-bingpo
+    description: 历史祖师已经离开人界，不是当前站在宫中的本体。
+    access:
+      kind: public
+  - id: north-xiaoji-palace-council-roster
+    predicate: council-roster
+    value:
+      kind: text
+      value: 当前五人：师相、白梦馨、欧阳、柳姓宫务修士、叶姓监察长老。常规过半需三人；全员留守时越过监察异议需至少四人。若有人离任或不在留守名册，须先更新真实名册再判断。
+    description: 当前五人：师相、白梦馨、欧阳、柳姓宫务修士、叶姓监察长老。常规过半需三人；全员留守时越过监察异议需至少四人。若有人离任或不在留守名册，须先更新真实名册再判断。
+    access:
+      kind: public
+  - id: north-xiaoji-palace-entry-token-ledger
+    predicate: entry-token-ledger
+    value:
+      kind: text
+      value: 当年已售八块，余二十二个名额；已售不等于都仍有效，逐块以发行日起一年计。
+    description: 当年已售八块，余二十二个名额；已售不等于都仍有效，逐块以发行日起一年计。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

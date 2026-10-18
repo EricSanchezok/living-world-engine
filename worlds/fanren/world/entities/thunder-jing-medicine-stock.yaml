@@ -1,0 +1,30 @@
+id: thunder-jing-medicine-stock
+kind: container
+name: 晶院成药小库
+description: 封存一颗万妙丹和一份晶月液，非学徒日用料。
+placement: thunder-jing-workshop
+facts:
+  - id: thunder-jing-medicine-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-jing-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-jing-medicine-stock-use-condition
+    predicate: use-condition
+    value:
+      kind: text
+      value: 需晶族负责者授权交付。万妙丹炼化会耗去一颗，只辅助合适的瓶颈；晶月液一份耗完即无，炼体效果随身体与修法裁定，均不保证进阶。
+    description: 需晶族负责者授权交付。万妙丹炼化会耗去一颗，只辅助合适的瓶颈；晶月液一份耗完即无，炼体效果随身体与修法裁定，均不保证进阶。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-wanmiao-pill
+    amount: 1
+  - definition_id: thunder-jingyue-dose
+    amount: 1
+ratings: []
+shared_activity_resources: []

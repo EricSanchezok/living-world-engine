@@ -1,0 +1,26 @@
+id: ad-qiling-warm-lake
+kind: location
+name: 冰原暖湖
+description: 冰原中异常不冻的小湖，入口在湖下，不因到湖边自动打开。
+placement: ad-qiling-icefield
+facts:
+  - id: ad-qiling-warm-lake-route-to-ad-qiling-icefield
+    predicate: route-to-ad-qiling-icefield
+    value:
+      kind: entity
+      entityId: ad-qiling-icefield
+    description: 冰原内按真实位置寻找暖湖。
+    access:
+      kind: public
+  - id: ad-qiling-warm-lake-route-to-ad-qiling-threshold
+    predicate: route-to-ad-qiling-threshold
+    value:
+      kind: entity
+      entityId: ad-qiling-threshold
+    description: 水下入口当前关闭，须持四件真实圣砖并组成正确法阵。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

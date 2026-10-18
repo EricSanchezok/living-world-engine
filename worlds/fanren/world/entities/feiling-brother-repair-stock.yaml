@@ -1,0 +1,20 @@
+id: feiling-brother-repair-stock
+kind: container
+name: 赤禾的修补料
+description: 自己留下的两份低阶修补原料。
+placement: feiling-miner-brother
+facts:
+  - id: feiling-brother-repair-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-miner-brother
+    description: 所有权归属。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

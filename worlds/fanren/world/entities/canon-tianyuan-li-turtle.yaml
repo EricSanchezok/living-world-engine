@@ -1,0 +1,26 @@
+id: canon-tianyuan-li-turtle
+kind: animal
+name: 天缘子的离龟
+description: 半透明巨龟，尚未被带往虚天殿。
+placement: void-tianyuan-pool
+facts:
+  - id: canon-tianyuan-li-turtle-kept-by
+    predicate: kept-by
+    value:
+      kind: entity
+      entityId: canon-tian-yuanzi
+    description: kept-by
+    access:
+      kind: private
+  - id: canon-tianyuan-li-turtle-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 对元婴初期能构成威胁的高阶灵兽；精确妖级未直证，不赋予无敌属性。
+    description: 对元婴初期能构成威胁的高阶灵兽；精确妖级未直证，不赋予无敌属性。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

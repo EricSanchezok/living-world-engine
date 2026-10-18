@@ -1,0 +1,26 @@
+id: guanghan-redluo
+kind: plant-group
+name: 红罗果药畦
+description: 已结果的古老药株；培育有千年开花、万年结果与早期难存活的条件，不是每日产果。
+placement: guanghan-garden
+facts:
+  - id: guanghan-redluo-living-plant-count
+    predicate: living-plant-count
+    value:
+      kind: number
+      value: 120
+    description: living-plant-count
+    access:
+      kind: private
+  - id: guanghan-redluo-harvest-accounting
+    predicate: harvest-accounting
+    value:
+      kind: text
+      value: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    description: 采收必须说明取果、枝、根或整株并改变对应真实存量与植株状态；不能把同一药株重复算作两株。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

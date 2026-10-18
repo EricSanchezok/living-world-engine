@@ -1,0 +1,34 @@
+id: yinming-main-archive
+kind: location
+name: 古碑旧仓
+description: 旧石碑上记着前人修行与文字对照。
+placement: yinming-village-main
+facts:
+  - id: yinming-main-archive-route-yinming-village-main
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yinming-village-main
+    description: route-to
+    access:
+      kind: public
+  - id: yinming-main-archive-condition-yinming-village-main
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 旧石碑上记着前人修行与文字对照。
+    description: 旧石碑上记着前人修行与文字对照。
+    access:
+      kind: public
+  - id: yinming-main-archive-roof-leak
+    predicate: roof-leak
+    value:
+      kind: text
+      value: 一块顶石接缝渗水，水还没到碑字；覆一层现存皮布可暂挡，再补石缝。
+    description: 一块顶石接缝渗水，水还没到碑字；覆一层现存皮布可暂挡，再补石缝。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

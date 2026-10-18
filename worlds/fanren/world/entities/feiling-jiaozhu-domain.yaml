@@ -1,0 +1,26 @@
+id: feiling-jiaozhu-domain
+kind: location
+name: 角鹫族地
+description: 角鹫支系生活的区域，族内有不同家庭和职业。
+placement: feiling-territory
+facts:
+  - id: feiling-jiaozhu-domain-route-feiling-yuhuang-peak
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-yuhuang-peak
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-jiaozhu-domain-condition-feiling-yuhuang-peak
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 角鹫支系生活的区域，族内有不同家庭和职业。
+    description: 角鹫支系生活的区域，族内有不同家庭和职业。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,22 @@
+id: demon-wolf-steward-tools
+kind: container
+name: 岳白岑的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-wolf-steward
+facts:
+  - id: demon-wolf-steward-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-wolf-steward
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

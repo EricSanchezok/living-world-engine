@@ -1,0 +1,26 @@
+id: steppe-tianshui-tributary
+kind: location
+name: 天水河支汊
+description: 宽阔河水绕着浅滩流过，近岸适合取水，中央水流湍急；小木船只在这段支汊渡运。
+placement: steppe-tianshui-river
+facts:
+  - id: steppe-tianshui-tributary-route-steppe-tianshui-river
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-tianshui-river
+    description: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    access:
+      kind: public
+  - id: steppe-tianshui-tributary-travel-steppe-tianshui-river
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    description: 主支流之间沿岸或水路行进，木舟额定只用于近岸渡运，远航另需器物能力与补给。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

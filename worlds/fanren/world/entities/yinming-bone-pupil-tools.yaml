@@ -1,0 +1,18 @@
+id: yinming-bone-pupil-tools
+kind: item
+name: 陆荇的个人器具
+description: 修矛、缝皮、识简单文字与对照试验。所需的有限工具，不包含无限兽晶。
+placement: yinming-bone-pupil
+facts:
+  - id: yinming-bone-pupil-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-bone-pupil
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

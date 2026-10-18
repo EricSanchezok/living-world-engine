@@ -1,0 +1,20 @@
+id: yue-beast-feed
+kind: item
+name: 兽栏饲料箱
+description: 用于喂养灵兽的门中公料。
+placement: yue-qilin-beast-pens
+facts:
+  - id: yue-beast-feed-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: huangfeng-sect
+    description: 所有权与保管、借用分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

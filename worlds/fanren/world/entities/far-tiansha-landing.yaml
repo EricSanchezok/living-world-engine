@@ -1,0 +1,18 @@
+id: far-tiansha-landing
+kind: location
+name: 天沙南岸渡口
+description: 天沙一处供近岸小船停泊的渡口。
+placement: human-tiansha
+facts:
+  - id: far-tiansha-landing-route-far-tiansha-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: far-tiansha-store
+    description: 渡口石阶与药栈相连，须实际步行。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

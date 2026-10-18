@@ -1,0 +1,28 @@
+id: canon-zhenhai-bell
+kind: item
+name: 镇海钟
+description: 唯一镇海钟，当前可用；一次发动后需百余年恢复，不能在每次争斗重新刷新。
+placement: north-hanli-realm
+facts:
+  - id: canon-zhenhai-bell-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: canon-zhenhai-bell-readiness
+    predicate: readiness
+    value:
+      kind: text
+      value: ready
+    description: ready
+    access:
+      kind: agents
+      agentIds:
+        - canon-hanli-shangren
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

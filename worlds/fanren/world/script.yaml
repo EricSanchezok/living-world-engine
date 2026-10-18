@@ -1,0 +1,17 @@
+schema_version: 19
+id: fanren
+name: 凡人修仙传
+version: 1.0.0
+description: 从韩立尚在山村的那一夜进入人界与灵界。选择八种原创出身，或接过十岁韩立的人生；亲友、财产、修炼与机缘各有来处，之后的路由你的选择与世界中的人共同改变。
+narrative:
+  language: zh-CN
+  style: 用具体的处境、动作和对话展现人物；只描写玩家可以感知的信息，不预告小说未来。
+  expansion: false
+runtime_defaults:
+  max_autonomous_span_seconds: 300
+  realtime_interval_ms: 300000
+  action_window_ms: 60000
+model_profiles:
+  decision: decision-deepseek
+  creation: creation-deepseek
+  fallback: decision-deepseek

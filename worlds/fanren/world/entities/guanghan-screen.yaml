@@ -1,0 +1,18 @@
+id: guanghan-screen
+kind: item
+name: 须弥屏风
+description: 连接屏中洞天，已被旧主炼化，外人不能轻易夺走；进入不等于控制全空间。
+placement: guanghan-purple-palace
+facts:
+  - id: guanghan-screen-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

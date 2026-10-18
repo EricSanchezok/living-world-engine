@@ -1,0 +1,46 @@
+id: thunder-mojin-refuge
+kind: location
+name: 花树静养空间
+description: 隔绝外界的空间里立着一株花树，枝下静养的身影极少移动。进入此地需先越过外面的隐宫与禁制。
+placement: thunder-mojin-palace
+facts:
+  - id: thunder-mojin-refuge-route-thunder-mojin-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-mojin-palace
+    description: route-to
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-refuge-condition-thunder-mojin-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 主人掌控的空间入口，未经允许不能凭知道位置进入。
+    description: 主人掌控的空间入口，未经允许不能凭知道位置进入。
+    access:
+      kind: discoverable
+      condition: 亲历对应道路、获得可信的具体引路或以实际能力探查到。
+  - id: thunder-mojin-refuge-location-secrecy
+    predicate: location-secrecy
+    value:
+      kind: text
+      value: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    description: 准确入口与路径并非公开知识，必须亲历、可信引路或有效探查才能获得。
+    access:
+      kind: discoverable
+      condition: 实际取得位置与入口线索。
+  - id: thunder-mojin-refuge-root-detail-baohua-arts
+    predicate: root-detail-baohua-arts
+    value:
+      kind: text
+      value: 幻日真焰可克多种魔功仍能被相应强宝抵挡；花树纳身是实际秘宝作用，不生成第二个被纳者，取用武器须能驾驭。
+    description: 幻日真焰可克多种魔功仍能被相应强宝抵挡；花树纳身是实际秘宝作用，不生成第二个被纳者，取用武器须能驾驭。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,18 @@
+id: kunwu-tian-a-sword
+kind: item
+name: 天阿神剑
+description: 太一门传承古剑，配符和秘术有破空之能，当前在宗库。
+placement: south-taiyi-vault
+facts:
+  - id: kunwu-tian-a-sword-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: dajin-taiyi-sect
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

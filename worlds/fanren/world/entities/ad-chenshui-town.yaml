@@ -1,0 +1,26 @@
+id: ad-chenshui-town
+kind: location
+name: 沉水镇
+description: 河岸镇子，正常商旅生活尚在继续。
+placement: associated-demon-realm
+facts:
+  - id: ad-chenshui-town-route-to-ad-shuojin-valley
+    predicate: route-to-ad-shuojin-valley
+    value:
+      kind: entity
+      entityId: ad-shuojin-valley
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-chenshui-town-route-to-ad-shiya-city
+    predicate: route-to-ad-shiya-city
+    value:
+      kind: entity
+      entityId: ad-shiya-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

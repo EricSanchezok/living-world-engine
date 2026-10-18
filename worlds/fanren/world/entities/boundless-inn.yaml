@@ -1,0 +1,26 @@
+id: boundless-inn
+kind: location
+name: 临街客舍
+description: 小城的一处普通客舍，备有陆路行商带来的粮食。
+placement: boundless-coast-town
+facts:
+  - id: boundless-inn-route-boundless-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: boundless-market
+    description: 街市旁的客舍，住宿和货物保管需协商。
+    access:
+      kind: public
+  - id: boundless-inn-travel-boundless-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 街市旁的客舍，住宿和货物保管需协商。
+    description: 街市旁的客舍，住宿和货物保管需协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

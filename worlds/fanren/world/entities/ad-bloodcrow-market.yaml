@@ -1,0 +1,36 @@
+id: ad-bloodcrow-market
+kind: location
+name: 血鸦城外货场
+description: 城外货场与矿道相连，交货、存放和入城许可分开。
+placement: ad-bloodcrow-city
+facts:
+  - id: ad-bloodcrow-market-route-to-ad-bloodcrow-city
+    predicate: route-to-ad-bloodcrow-city
+    value:
+      kind: entity
+      entityId: ad-bloodcrow-city
+    description: 经城门往返，载货须按实清点，禁空不免查验。
+    access:
+      kind: public
+  - id: ad-bloodcrow-market-root-detail-demon-storage
+    predicate: root-detail-demon-storage
+    value:
+      kind: text
+      value: 腰带形储物器是魔族常见形制，容量与内容按实物，不凭外形生成满库魔晶。
+    description: 腰带形储物器是魔族常见形制，容量与内容按实物，不凭外形生成满库魔晶。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: ad-bloodcrow-market-root-detail-bloodcrow-market
+    predicate: root-detail-bloodcrow-market
+    value:
+      kind: text
+      value: 阶梯拍场与魔斗场受当值巡法者管理，场容量不等当前人数，允许的争斗和私斗可有不同社会后果。
+    description: 阶梯拍场与魔斗场受当值巡法者管理，场容量不等当前人数，允许的争斗和私斗可有不同社会后果。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

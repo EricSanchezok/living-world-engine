@@ -1,0 +1,42 @@
+id: dajin-kaijiang
+kind: location
+name: 开江镇
+description: 距海二百余里的小镇，附近有白竹山。
+placement: dajin-huayun
+facts:
+  - id: dajin-kaijiang-route-dajin-huayun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huayun
+    description: 距海二百余里的内陆镇路，不能一瞬抵达。
+    access:
+      kind: public
+  - id: dajin-kaijiang-travel-dajin-huayun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 距海二百余里的内陆镇路，不能一瞬抵达。
+    description: 距海二百余里的内陆镇路，不能一瞬抵达。
+    access:
+      kind: public
+  - id: dajin-kaijiang-route-dajin-baizhu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-baizhu
+    description: 山道通行，入天符门须经门人许可。
+    access:
+      kind: public
+  - id: dajin-kaijiang-travel-dajin-baizhu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 山道通行，入天符门须经门人许可。
+    description: 山道通行，入天符门须经门人许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

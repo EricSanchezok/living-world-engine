@@ -1,0 +1,58 @@
+id: demon-rat-town
+kind: location
+name: 伏渠城
+description: 地上商栈与地下居所并存，深层洞府并非外人可随意穿行。城门或码头按当日记录核验来客。
+placement: demon-rat-territory
+facts:
+  - id: demon-rat-town-route-demon-rat-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-rat-court
+    description: route-to
+    access:
+      kind: public
+  - id: demon-rat-town-condition-demon-rat-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    description: 接见使者、处理族内事务的所在；旁听和进入内院须获准。
+    access:
+      kind: public
+  - id: demon-rat-town-route-spirit-demon-ward-gate
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-demon-ward-gate
+    description: route-to
+    access:
+      kind: public
+  - id: demon-rat-town-condition-spirit-demon-ward-gate
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    description: 往返商路须备补给、核验沿途文书，至少经历数个本地日，不能一念越过广大地域。
+    access:
+      kind: public
+  - id: demon-rat-town-route-demon-rat-shallow-tunnel
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-rat-shallow-tunnel
+    description: route-to
+    access:
+      kind: public
+  - id: demon-rat-town-condition-demon-rat-shallow-tunnel
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 供矿车与搬运人通行的地道，一段渗水压住了轨道。
+    description: 供矿车与搬运人通行的地道，一段渗水压住了轨道。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

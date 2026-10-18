@@ -1,0 +1,24 @@
+id: yinming-store-main
+kind: container
+name: 共同粮储
+description: 食物、种子和劳务报酬须分别登记；现存量不代表全年产量。
+placement: yinming-village-main
+facts:
+  - id: yinming-store-main-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yinming-council-main
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 400
+  - definition_id: yin-meat
+    amount: 32
+  - definition_id: yin-bone
+    amount: 4
+ratings: []
+shared_activity_resources: []

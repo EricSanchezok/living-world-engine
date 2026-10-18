@@ -1,0 +1,22 @@
+id: void-tomb-fuel
+kind: container
+name: 守墓用料
+description: 当期维护用料，属于岛主交付用途。
+placement: void-xuangu-island
+facts:
+  - id: void-tomb-fuel-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-ji-yin
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 6
+  - definition_id: low-stone
+    amount: 18
+ratings: []
+shared_activity_resources: []

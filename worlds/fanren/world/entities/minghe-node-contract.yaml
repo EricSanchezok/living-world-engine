@@ -1,0 +1,34 @@
+id: minghe-node-contract
+kind: item
+name: 外节点检修约定
+description: 查明差异并完成该外节点修补复测后，支付十块中阶灵石；若确属更深损坏，先报告再议。
+placement: minghe-qingyuan-maintainer
+facts:
+  - id: minghe-node-contract-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi
+    description: owned-by
+    access:
+      kind: private
+  - id: minghe-node-contract-repair-requirement
+    predicate: repair-requirement
+    value:
+      kind: text
+      value: 修补松脱导阴石需两份材料、一块中阶灵石和七千二百秒的实际检修；有相关手艺且取得许可者可协助。
+    description: 修补松脱导阴石需两份材料、一块中阶灵石和七千二百秒的实际检修；有相关手艺且取得许可者可协助。
+    access:
+      kind: public
+  - id: minghe-node-contract-reward-source
+    predicate: reward-source
+    value:
+      kind: entity
+      entityId: canon-qing-yuan-zi-private-stock
+    description: reward-source
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

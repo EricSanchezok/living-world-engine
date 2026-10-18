@@ -1,0 +1,192 @@
+id: outerstar-jobseeker
+kind: person
+name: 秋禾
+description: 成年外来织网人，带着积蓄寻找能长住的工作。
+placement: outerstar-lodging-office
+facts:
+  - id: outerstar-jobseeker-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-jobseeker
+  - id: outerstar-jobseeker-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 织网、补帆与凡俗算账，无灵根。
+    description: 织网、补帆与凡俗算账，无灵根。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-jobseeker
+  - id: outerstar-jobseeker-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根。
+    description: 没有灵根。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-jobseeker
+  - id: outerstar-jobseeker-negotiating-outerstar-employer
+    predicate: negotiating
+    value:
+      kind: entity
+      entityId: outerstar-employer
+    description: negotiating
+    access:
+      kind: private
+meters:
+  - id: outerstar-jobseeker-health
+    definition_id: health
+    current: 100
+  - id: outerstar-jobseeker-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: copper
+    amount: 160
+ratings:
+  - id: outerstar-jobseeker-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: outerstar-jobseeker-force
+    definition_id: force
+    value: 1
+  - id: outerstar-jobseeker-craft
+    definition_id: craft
+    value: 1
+  - id: outerstar-jobseeker-perception
+    definition_id: perception
+    value: 1
+  - id: outerstar-jobseeker-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: outerstar-jobseeker
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 成年外来织网人，带着积蓄寻找能长住的工作。
+      voice: 语气沉静，会把不清楚的条件再问一遍。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 比较船工和修网铺两份活计，保留自己的退路。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 秋禾
+        description: 成年外来织网人，带着积蓄寻找能长住的工作。
+        status: observed
+      - id: location
+        name: 黑石居留所
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-outerstar-jobseeker-provisions
+        name: 秋禾的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-employer
+        name: 杜岸
+        description: 已经见面谈过招工，尚未订约。
+        status: observed
+      - id: known-outerstar-village-head
+        name: 桑平
+        description: 已见过招修网人的桑平，他报每张六十铜钱，想亲眼看网再决定。
+        status: observed
+      - id: known-outerstar-blackstone-dock
+        name: 黑石城外泊埠
+        description: 已经谈到的船只泊处，可由城门往来。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 织网、补帆与凡俗算账，无灵根。
+        description: 织网、补帆与凡俗算账，无灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己经过检测，没有灵根。
+        description: 自己经过检测，没有灵根。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: two-jobs
+        subjectId: self
+        predicate: two-jobs
+        value:
+          kind: text
+          value: 杜岸船工三日九十铜钱包饭；桑平公仓现有两网每张六十。担心船上的伤病条款，也想先看看网破得多重。
+        description: 杜岸船工三日九十铜钱包饭；桑平公仓现有两网每张六十。担心船上的伤病条款，也想先看看网破得多重。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - outerstar-jobseeker
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-lodging-office
+      - local_entity_id: known-outerstar-jobseeker-provisions
+        canonical_entity_ids:
+          - outerstar-jobseeker-provisions
+      - local_entity_id: known-outerstar-employer
+        canonical_entity_ids:
+          - outerstar-employer
+      - local_entity_id: known-outerstar-village-head
+        canonical_entity_ids:
+          - outerstar-village-head
+      - local_entity_id: known-outerstar-blackstone-dock
+        canonical_entity_ids:
+          - outerstar-blackstone-dock

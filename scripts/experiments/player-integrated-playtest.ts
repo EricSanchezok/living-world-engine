@@ -198,7 +198,7 @@ export async function runIntegratedPlayer(root: string) {
   try {
     save(directory, "binding.json", { codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
       preparationHash: contentHash(manifest), sourceCodeHashes: sourceHashes(), protocol, algorithm: manifest.algorithm });
-    installBundledWorlds(database, catalog, path.join(root, "worlds"));
+    installBundledWorlds(database, catalog, path.join(root, "worlds"), ["blackmarsh"]);
     if (database.load("blackmarsh", protocol.seed, catalog).contentHash !== manifest.worldHash) throw new Error("Persisted catalog drift");
     const host = new WorldHost({ repository: database, store: database, ledger: database, provider, observer,
       algorithmRegistry: registerIntegratedPlayerAlgorithm(), defaultAlgorithmRef: manifest.algorithm,

@@ -1,0 +1,18 @@
+id: outerstar-employer-boat
+kind: item
+name: 杜岸渔船
+description: 船停在城外码头，已备帆网；可以载六人，无跨洋耐航保证。
+placement: outerstar-blackstone-dock
+facts:
+  - id: outerstar-employer-boat-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-employer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

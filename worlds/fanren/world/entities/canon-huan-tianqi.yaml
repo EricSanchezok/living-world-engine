@@ -1,0 +1,143 @@
+id: canon-huan-tianqi
+kind: person
+name: 寰天奇
+description: 琼鼠族老修士，与黄粱有过多次险境合作，喜欢把生存手段磨到可靠。
+placement: tianyuan-huan-residence
+facts:
+  - id: canon-huan-tianqi-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: private
+  - id: canon-huan-tianqi-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚遁行、琼鼠隐匿与地形辨识、风刃御物；只能依实际见闻识别危险。
+    description: 炼虚遁行、琼鼠隐匿与地形辨识、风刃御物；只能依实际见闻识别危险。
+    access:
+      kind: private
+  - id: canon-huan-tianqi-species
+    predicate: species
+    value:
+      kind: text
+      value: 琼鼠族，具本族修行能力，具体血脉属性未详。
+    description: 琼鼠族，具本族修行能力，具体血脉属性未详。
+    access:
+      kind: private
+meters:
+  - id: canon-huan-tianqi-health
+    definition_id: health
+    current: 100
+  - id: canon-huan-tianqi-mana
+    definition_id: mana
+    current: 1080
+quantities: []
+ratings:
+  - id: canon-huan-tianqi-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: canon-huan-tianqi-force
+    definition_id: force
+    value: 6
+  - id: canon-huan-tianqi-craft
+    definition_id: craft
+    value: 5
+  - id: canon-huan-tianqi-perception
+    definition_id: perception
+    value: 6
+  - id: canon-huan-tianqi-influence
+    definition_id: influence
+    value: 5
+shared_activity_resources: []
+agent:
+  id: canon-huan-tianqi
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 琼鼠族老修士，与黄粱有过多次险境合作，喜欢把生存手段磨到可靠。
+      voice: 口气带笑，谈危险时会拿自己吃过的亏打比方；做买卖则算得细。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 对照旧行囊与身法试验，考虑是否请黄粱交换一种防护材料的判断。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 寰天奇
+        description: 琼鼠族老修士，与黄粱有过多次险境合作，喜欢把生存手段磨到可靠。
+        status: observed
+      - id: location
+        name: 琼鼠长老落日客院
+        description: 当前生活或办事之地，今夜已入夜。
+        status: observed
+      - id: review-canon-huan-tianqi-private-stock
+        name: 寰天奇私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-tianyuan-huan-map
+        name: 寰天奇旧途手图
+        description: 自己的旧行路记，知道它有过时可能。
+        status: observed
+      - id: review-tianyuan-huan-shield
+        name: 寰天奇试用护符
+        description: 已做成的一张试符，尚未用过。
+        status: observed
+      - id: review-canon-huangliang-lingjun
+        name: 黄粱灵君
+        description: 曾共同深入蛮荒并脱险的旧识，信任他的应变，不知他未寄来的当下私事。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚遁行、琼鼠隐匿与地形辨识、风刃御物；只能依实际见闻识别危险。
+        description: 炼虚遁行、琼鼠隐匿与地形辨识、风刃御物；只能依实际见闻识别危险。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-huan-tianqi
+      - local_entity_id: location
+        canonical_entity_ids:
+          - tianyuan-huan-residence
+      - local_entity_id: review-canon-huan-tianqi-private-stock
+        canonical_entity_ids:
+          - canon-huan-tianqi-private-stock
+      - local_entity_id: review-tianyuan-huan-map
+        canonical_entity_ids:
+          - tianyuan-huan-map
+      - local_entity_id: review-tianyuan-huan-shield
+        canonical_entity_ids:
+          - tianyuan-huan-shield
+      - local_entity_id: review-canon-huangliang-lingjun
+        canonical_entity_ids:
+          - canon-huangliang-lingjun

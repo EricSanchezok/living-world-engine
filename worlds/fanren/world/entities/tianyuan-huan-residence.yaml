@@ -1,0 +1,26 @@
+id: tianyuan-huan-residence
+kind: location
+name: 琼鼠长老落日客院
+description: 靠城内石坡的一处长期客院，堆着旧野外器具与可折叠行囊；院门由当前居者控制。
+placement: demon-sunset-city
+facts:
+  - id: tianyuan-huan-residence-route-to-demon-sunset-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: demon-sunset-city
+    description: route-to-demon-sunset-city
+    access:
+      kind: private
+  - id: tianyuan-huan-residence-route-conditions-demon-sunset-city
+    predicate: route-conditions-demon-sunset-city
+    value:
+      kind: text
+      value: 妖族落日城内沿石坡到客院，入内需居者许可。
+    description: 妖族落日城内沿石坡到客院，入内需居者许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

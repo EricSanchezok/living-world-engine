@@ -1,0 +1,18 @@
+id: blood-archive-permission-register
+kind: item
+name: 藏经许可簿
+description: 借阅需碧影或合法授权者签定范围，复制须材料和工时；当前只向获准者开放指定篇目。
+placement: blood-league-archive
+facts:
+  - id: blood-archive-permission-register-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: blood-helian-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

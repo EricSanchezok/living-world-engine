@@ -1,25 +1,34 @@
 {
   "version": 1,
-  "status": "incomplete-collation",
+  "status": "working-edition-integrity-resolved-with-disclosed-variants",
   "blocked_chapters": [],
   "findings": [
     {
       "id": "missing-opening-1077",
       "chapter_id": "qq-26497309",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "observation": "原候选缺失的开头已逐段对照官方预览、HJWZW全文和fundgao片段。采用HJWZW原始26段1038字插入候选开头，保留候选全部2197字及繁体异写；合成工作章3235字，精确出处和指纹见repairs.json。此项解决工作版本缺段，不证明全书无异文。",
       "sources": [
         "https://fanrenxiuxianzhuan.bookresource.qq.com/chapter/107580/26497309/",
         "https://github.com/fundgao/xiuxian/tree/b75ea20180a209ffd7eba6f5ac4559324be0b763/凡人修仙传"
       ],
-      "repair_id": "missing-opening-1077"
+      "repair_id": "missing-opening-1077",
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-opening-1077",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "preview-limit",
-      "severity": "blocking",
-      "status": "unresolved",
-      "observation": "2451章均与目录对齐，但官方192章为完整文本、2259章只有预览；未完成全篇跨版本校勘，不能据此宣布无删节。"
+      "severity": "limitation",
+      "status": "scoped",
+      "observation": "官方192章可见完整正文、2259章只有预览，这个访问限制仍然存在。已明确采用2451章可追溯混合工作版本并完成全部输入与独立语义审校；本项不再等同工作本缺章阻断，仍禁止声称官方全文或无删节异文。具体工作本与9处补段证据见working-version-adoption.json。",
+      "previousStatus": "unresolved",
+      "previousSeverity": "blocking"
     },
     {
       "id": "chapter-two-toponym",
@@ -61,90 +70,146 @@
       "id": "missing-ending-1117",
       "chapter_id": "qq-26772204",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-ending-1117",
       "observation": "原候选缺少冰凤发动攻击后的595字结尾。逐段对照公开第三来源与fundgao合并章，采用第三来源原始尾段补齐；旧正文保留，batch-0175必须重建提取与后续引用。具体异写、边界与出处见repairs.json。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/1120.html",
         "https://github.com/fundgao/xiuxian/tree/b75ea20180a209ffd7eba6f5ac4559324be0b763/凡人修仙传"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-ending-1117",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-499",
       "chapter_id": "qq-22454418",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-499",
       "observation": "缺少停遁、观察港口攻防的三句，原候选直接从赶路跳到“看这声势”；原样插入，不改其后的上千修士、阵法和双方战斗叙述。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/501.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-499",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-635",
       "chapter_id": "qq-23223484",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-635",
       "observation": "缺少百里内修士承受结婴灵压、炼气期呼吸困难、打坐抗拒及区域外感应的五段。fundgao与全本637页均有此内容；选fundgao原始片段保留“震荡”，全本对应字被替为星号。候选总述“有成千上万的修仙者也发现了异常”保留。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/637.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-635",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-818",
       "chapter_id": "qq-24559787",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-818",
       "observation": "候选从“两片光霞”开头而缺其先行对象；第三来源和fundgao均明确火蟾断首与躯体伤口放出两片光霞。仅补开篇一段。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/820.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-818",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-1068",
       "chapter_id": "qq-26431671",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-1068",
       "observation": "缺少爆裂声、韩立飞往祭坛、运转明清灵目穿透魔气及黑色深洞的五段，导致候选“此骷髅”缺先行对象。保留来源“遗落”“百余长广”“黑骷髅”“期内”等异写，相关器物/地形不可据错字新增骷髅实体；该处后续“黑渊”也须语义核对。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/1071.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-1068",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-1106",
       "chapter_id": "qq-26717131",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-1106",
       "observation": "候选在韩立“略一犹豫后”直接接“化为一枚…球”，漏掉搓手、辟邪神雷缠绕并禁锢黑焰的完整动作，导致主语和资源动作不明。只补漏段；第三来源上文也另有漏文，故不整章替换。原候选“死球”与两对照源“丝球”的异文保留登记。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/1109.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-1106",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-1165",
       "chapter_id": "qq-27092278",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-1165",
       "observation": "候选从“古传送阵”直接接“未被激发的时候”，缺少反弹法器、众人吃惊和“若是古传送阵”的条件引导；该漏段影响传送阵是否能被破坏的适用条件，必须补齐。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/1168.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-1165",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     },
     {
       "id": "missing-segment-1944",
       "chapter_id": "qq-35529001",
       "severity": "blocking",
-      "status": "resolved-by-traceable-working-insertion",
+      "status": "resolved",
       "repair_id": "missing-segment-1944",
       "observation": "缺少大汉质疑提取混沌之气方法的一句对白，导致下一句“你这话什么意思”失去回应对象。此章尚未提取；修补后必须按新指纹读取。",
       "sources": [
         "https://www.quanben.io/n/fanrenxiuxianzhuan/1947.html"
-      ]
+      ],
+      "previousStatus": "resolved-by-traceable-working-insertion",
+      "resolution": {
+        "type": "traceable-working-insertion",
+        "adoption": "working-version-adoption.json",
+        "repairId": "missing-segment-1944",
+        "reconstruction": "all-original-and-inserted-source-bytes-match"
+      }
     }
   ],
   "secondary_sources": [

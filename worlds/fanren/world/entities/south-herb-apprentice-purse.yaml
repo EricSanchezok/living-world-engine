@@ -1,0 +1,20 @@
+id: south-herb-apprentice-purse
+kind: container
+name: 田霁的小袋
+description: 本人随身钱物，不含家产或宗门库。
+placement: south-herb-apprentice
+facts:
+  - id: south-herb-apprentice-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-herb-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: copper
+    amount: 50
+ratings: []
+shared_activity_resources: []

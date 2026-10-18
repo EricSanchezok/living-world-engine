@@ -1,0 +1,36 @@
+id: root-huoli-sword-green
+kind: item
+name: 天干青剑
+description: 青黄双剑之一，封存在宗门剑库，剑体有可见护纹。
+placement: root-huoli-sect
+facts:
+  - id: root-huoli-sword-green-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-huoli-office
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+  - id: root-huoli-sword-green-capability
+    predicate: capability
+    value:
+      kind: text
+      value: 与另一口天干剑配合可放强剑光；须实际持有、掌握驱使法且承受法力精血消耗，不能只报剑名发动。
+    description: 与另一口天干剑配合可放强剑光；须实际持有、掌握驱使法且承受法力精血消耗，不能只报剑名发动。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+  - id: root-huoli-sword-green-current-ward
+    predicate: current-ward
+    value:
+      kind: text
+      value: 现封条须火离执事以验封法解开，强破会触动鸣警；没有解除封条便不能正常御使。
+    description: 现封条须火离执事以验封法解开，强破会触动鸣警；没有解除封条便不能正常御使。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

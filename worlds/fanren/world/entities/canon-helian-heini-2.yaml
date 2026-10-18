@@ -1,0 +1,176 @@
+id: canon-helian-heini-2
+kind: person
+name: 黑猊第2真灵
+description: 受商盟长期供奉的龙首狮身真灵，四者分别有身体和意志。
+placement: seas-black-spirit-space
+facts:
+  - id: canon-helian-heini-2-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 大乘
+    description: 大乘
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-heini-2
+  - id: canon-helian-heini-2-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 黑风、近距瞬移、强大法体与利爪。
+    description: 黑风、近距瞬移、强大法体与利爪。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-heini-2
+  - id: canon-helian-heini-2-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    description: 自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。
+    access:
+      kind: agents
+      agentIds:
+        - canon-helian-heini-2
+meters:
+  - id: canon-helian-heini-2-health
+    definition_id: health
+    current: 100
+  - id: canon-helian-heini-2-mana
+    definition_id: mana
+    current: 1760
+quantities:
+  - definition_id: low-stone
+    amount: 90
+ratings:
+  - id: canon-helian-heini-2-cultivation
+    definition_id: cultivation
+    value: 8
+  - id: canon-helian-heini-2-force
+    definition_id: force
+    value: 8
+  - id: canon-helian-heini-2-craft
+    definition_id: craft
+    value: 7
+  - id: canon-helian-heini-2-perception
+    definition_id: perception
+    value: 8
+  - id: canon-helian-heini-2-influence
+    definition_id: influence
+    value: 8
+shared_activity_resources: []
+agent:
+  id: canon-helian-heini-2
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 受商盟长期供奉的龙首狮身真灵，四者分别有身体和意志。
+      voice: 话少，护住自己选定的石台。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 维持自己的修行与栖地，判断商盟新供奉安排是否可接受。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 黑猊第2真灵
+        description: 受商盟长期供奉的龙首狮身真灵，四者分别有身体和意志。
+        status: observed
+      - id: location
+        name: 黑猊真灵栖地
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-helian-heini-2-private-stock
+        name: 黑猊第2真灵的私人储备
+        description: 自用财物，不属于所在机构公库。
+        status: observed
+      - id: known-seas-black-spirit-space-offering
+        name: 古契约供奉储备
+        description: 已经送达的实际供奉，与尚未许诺的未来帮助分开。
+        status: observed
+      - id: known-canon-helian-heini-1
+        name: 黑猊第1真灵
+        description: 长期相邻修行并共受一方古契约供奉的同伴，非同一意志。
+        status: observed
+      - id: known-canon-helian-heini-3
+        name: 黑猊第3真灵
+        description: 长期相邻修行并共受一方古契约供奉的同伴，非同一意志。
+        status: observed
+      - id: known-canon-helian-heini-4
+        name: 黑猊第4真灵
+        description: 长期相邻修行并共受一方古契约供奉的同伴，非同一意志。
+        status: observed
+      - id: known-canon-ming-zun
+        name: 明尊
+        description: 商盟持约联系人，曾有供奉往来，但不能替自己决定是否回应。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 黑风、近距瞬移、强大法体与利爪。
+        description: 黑风、近距瞬移、强大法体与利爪。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 熟悉自己的身体资质与已经练过的功法。
+        description: 熟悉自己的身体资质与已经练过的功法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-helian-heini-2
+      - local_entity_id: location
+        canonical_entity_ids:
+          - seas-black-spirit-space
+      - local_entity_id: known-canon-helian-heini-2-private-stock
+        canonical_entity_ids:
+          - canon-helian-heini-2-private-stock
+      - local_entity_id: known-seas-black-spirit-space-offering
+        canonical_entity_ids:
+          - seas-black-spirit-space-offering
+      - local_entity_id: known-canon-helian-heini-1
+        canonical_entity_ids:
+          - canon-helian-heini-1
+      - local_entity_id: known-canon-helian-heini-3
+        canonical_entity_ids:
+          - canon-helian-heini-3
+      - local_entity_id: known-canon-helian-heini-4
+        canonical_entity_ids:
+          - canon-helian-heini-4
+      - local_entity_id: known-canon-ming-zun
+        canonical_entity_ids:
+          - canon-ming-zun

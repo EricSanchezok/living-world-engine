@@ -1,0 +1,42 @@
+id: guanghan-purple-palace
+kind: location
+name: 紫色主殿
+description: 主殿门与墙面禁制具有强烈紫雷及精神反震。
+placement: guanghan-palace-space
+facts:
+  - id: guanghan-purple-palace-route-guanghan-palace-court
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-palace-court
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-purple-palace-condition-guanghan-palace-court
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须实际解决主殿门的强禁制与紫雷；不因侧殿开启就视主殿已开。
+    description: 须实际解决主殿门的强禁制与紫雷；不因侧殿开启就视主殿已开。
+    access:
+      kind: public
+  - id: guanghan-purple-palace-route-guanghan-screen-space
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: guanghan-screen-space
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-purple-palace-condition-guanghan-screen-space
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 识别并以真实空间手段打开屏风通路；无法靠普通收纳术取走已被旧主炼化的屏风。
+    description: 识别并以真实空间手段打开屏风通路；无法靠普通收纳术取走已被旧主炼化的屏风。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

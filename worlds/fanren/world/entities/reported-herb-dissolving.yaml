@@ -1,0 +1,44 @@
+id: reported-herb-dissolving
+kind: container
+name: 动根化液的未具名古药
+description: 当前有三份可采部位，碰动根土会损坏整株。
+placement: reported-garden-beds
+facts:
+  - id: reported-herb-dissolving-harvest-boundary
+    predicate: harvest-boundary
+    value:
+      kind: text
+      value: 触动根部泥土即溶解化液；提取地上部分仍须实际辨认与相容手段。
+    description: 触动根部泥土即溶解化液；提取地上部分仍须实际辨认与相容手段。
+    access:
+      kind: private
+  - id: reported-herb-dissolving-longevity-limit
+    predicate: longevity-limit
+    value:
+      kind: text
+      value: 现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。
+    description: 现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。
+    access:
+      kind: private
+  - id: reported-herb-dissolving-ownership-state
+    predicate: ownership-state
+    value:
+      kind: text
+      value: 未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。
+    description: 未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。
+    access:
+      kind: private
+  - id: reported-herb-dissolving-regrowth
+    predicate: regrowth
+    value:
+      kind: text
+      value: 药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。
+    description: 药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: ancient-herb-portion
+    amount: 3
+ratings: []
+shared_activity_resources: []

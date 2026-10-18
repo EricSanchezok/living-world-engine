@@ -1,0 +1,18 @@
+id: yue-paper-charcoal-pen
+kind: item
+name: 孟竹的制符笔
+description: 普通低阶灵毛笔，已习惯笔性；借给妹妹须本人允许。
+placement: yue-tainan-seller
+facts:
+  - id: yue-paper-charcoal-pen-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-tainan-seller
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

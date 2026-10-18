@@ -1,0 +1,20 @@
+id: canon-root-heilin-reserve
+kind: container
+name: 黑鳞私用灵石
+description: 已分账的有限储备，支出后须减少余额。
+placement: root-dijiao-island
+facts:
+  - id: canon-root-heilin-reserve-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-root-heilin
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 40
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: spirit3-shadow-sample
+kind: item
+name: 乔缄试制影符
+description: 已用二枚中阶灵石封成的一张一次性普通影符；用后实体消耗，影体不带独立心智或私人财产。
+placement: spirit3-ranking-custodian
+facts:
+  - id: spirit3-shadow-sample-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-ranking-custodian
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-shadow-sample-operation
+    predicate: operation
+    value:
+      kind: text
+      value: 炼虚初期及以下本人需读懂驱动法，耗20法力启动，最多600全局秒维持相当本次操作者两成法力的影体，只能护体、飞遁与一项本人已学基础法术；本体另施术仍另耗法力。影体破损或结束即散，符不可复用。
+    description: 炼虚初期及以下本人需读懂驱动法，耗20法力启动，最多600全局秒维持相当本次操作者两成法力的影体，只能护体、飞遁与一项本人已学基础法术；本体另施术仍另耗法力。影体破损或结束即散，符不可复用。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

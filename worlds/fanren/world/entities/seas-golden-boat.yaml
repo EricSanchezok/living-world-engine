@@ -1,0 +1,26 @@
+id: seas-golden-boat
+kind: location
+name: 金长老长舟
+description: 金龙大长老处理事务的舟中场所。
+placement: seas-dragon-island
+facts:
+  - id: seas-golden-boat-route-seas-island-lake
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: seas-island-lake
+    description: route-to
+    access:
+      kind: public
+  - id: seas-golden-boat-condition-seas-island-lake
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 需获舟中接见或登舟许可。
+    description: 需获舟中接见或登舟许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

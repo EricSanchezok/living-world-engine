@@ -1,0 +1,18 @@
+id: canon-xuehe-body-3-resources
+kind: container
+name: 血合第3体的个人储备
+description: 此体随身空行囊，共用修炼准备另在共同库中。
+placement: canon-xuehe-body-3
+facts:
+  - id: canon-xuehe-body-3-resources-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xuehe-body-3
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

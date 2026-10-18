@@ -1,0 +1,26 @@
+id: innerstar-haiyuan-captive
+kind: creature
+name: 邱舟收购的海猿
+description: 一头已捕的海猿，关在有锁木笼中；能活动、饮食与反抗。
+placement: innerstar-haiyuan-cage
+facts:
+  - id: innerstar-haiyuan-captive-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-haiyuan-trader
+    description: 由邱舟所有；实际交付才改变归属。
+    access:
+      kind: public
+  - id: innerstar-haiyuan-captive-care
+    predicate: care
+    value:
+      kind: text
+      value: 木笼是实际约束但非永久奴役；需要鱼食和饮水，转卖须交付，驯养仍需时间与能力。
+    description: 木笼是实际约束但非永久奴役；需要鱼食和饮水，转卖须交付，驯养仍需时间与能力。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

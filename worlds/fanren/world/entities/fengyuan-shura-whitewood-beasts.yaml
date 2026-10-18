@@ -1,0 +1,20 @@
+id: fengyuan-shura-whitewood-beasts
+kind: collective
+name: 白木林异兽小群
+description: 有限的本地群体，当前数量只包括未单独列为人物的成员；具体个体有自己的状态，不能用总量代替无条件共同决策。
+placement: fengyuan-shura-whitewood
+facts:
+  - id: fengyuan-shura-whitewood-beasts-member-accounting
+    predicate: member-accounting
+    value:
+      kind: text
+      value: 分离一个真实个体须从群量转出并保留伤势、能力与已发生经历；死亡扣数量，不能以群体恢复复活或复制已具名成员。
+    description: 分离一个真实个体须从群量转出并保留伤势、能力与已发生经历；死亡扣数量，不能以群体恢复复活或复制已具名成员。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: fengyuan-shura-wild-beast
+    amount: 8
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-mujing-cave
+kind: location
+name: 木精洞
+description: 越过谷外数座山丘才能到达的修炼洞；灵木本体扎根在洞深处。
+placement: feiling-abyss-3
+facts:
+  - id: feiling-mujing-cave-route-feiling-muxian-valley
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-muxian-valley
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-mujing-cave-condition-feiling-muxian-valley
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 木灵气浓郁的洞府，入口和内室由木青控制禁制。
+    description: 木灵气浓郁的洞府，入口和内室由木青控制禁制。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

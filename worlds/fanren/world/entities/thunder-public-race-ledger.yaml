@@ -1,0 +1,26 @@
+id: thunder-public-race-ledger
+kind: item
+name: 公开族际地理簿
+description: 分别收白目、千幻、火月、海王、黑儒与极北雪吼的公开称谓和传闻出处，缺乏各族密术。
+placement: thunder-cloud-archive
+facts:
+  - id: thunder-public-race-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-cloud-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-public-race-ledger-reading-boundary
+    predicate: reading-boundary
+    value:
+      kind: text
+      value: 海王与角蚩往来和地理不接天云有记录；黑儒载具、雪吼性情等条目明确为见闻，不能据此知每位族人的立场。
+    description: 海王与角蚩往来和地理不接天云有记录；黑儒载具、雪吼性情等条目明确为见闻，不能据此知每位族人的立场。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

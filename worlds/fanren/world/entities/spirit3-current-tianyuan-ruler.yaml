@@ -1,0 +1,205 @@
+id: spirit3-current-tianyuan-ruler
+kind: person
+name: 天元圣皇
+description: 当前在位的天元圣皇，处置境内日常事务并保有自己的修行安排。
+placement: spirit3-tianyuan-hall
+facts:
+  - id: spirit3-current-tianyuan-ruler-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 合体后期
+    description: 合体后期
+    access:
+      kind: private
+  - id: spirit3-current-tianyuan-ruler-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 合体后期护体遁术、御剑与金行禁制，能审读账目但不知远城未报之事。
+    description: 合体后期护体遁术、御剑与金行禁制，能审读账目但不知远城未报之事。
+    access:
+      kind: private
+  - id: spirit3-current-tianyuan-ruler-holds-office
+    predicate: holds-office
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-court
+    description: holds-office
+    access:
+      kind: private
+  - id: spirit3-current-tianyuan-ruler-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 金、水两属性灵根
+    description: 金、水两属性灵根
+    access:
+      kind: discoverable
+      condition: 有合适手段并实际检测本人的灵根；旁人不能由职务或衣饰读出。
+meters:
+  - id: spirit3-current-tianyuan-ruler-health
+    definition_id: health
+    current: 100
+  - id: spirit3-current-tianyuan-ruler-mana
+    definition_id: mana
+    current: 1800
+quantities: []
+ratings:
+  - id: spirit3-current-tianyuan-ruler-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: spirit3-current-tianyuan-ruler-force
+    definition_id: force
+    value: 7
+  - id: spirit3-current-tianyuan-ruler-craft
+    definition_id: craft
+    value: 6
+  - id: spirit3-current-tianyuan-ruler-perception
+    definition_id: perception
+    value: 7
+  - id: spirit3-current-tianyuan-ruler-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: spirit3-current-tianyuan-ruler
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 当前在位的天元圣皇，处置境内日常事务并保有自己的修行安排。
+      voice: 谈政务时先问普通住民实际负担，遇珍奇技艺则愿意亲自看演示。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 审议安远武具预算与圣城藏书开放意见，等两份实报后决定。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 天元圣皇
+        description: 当前在位的天元圣皇，处置境内日常事务并保有自己的修行安排。
+        status: observed
+      - id: location
+        name: 天元圣皇理事院
+        description: 当前生活或办事之地，开篇已入夜。
+        status: observed
+      - id: review-spirit3-current-tianyuan-ruler-private-stock
+        name: 天元圣皇私用储备
+        description: 本人实际可支用的钱料。
+        status: observed
+      - id: review-spirit3-tianyuan-court
+        name: 天元圣皇府
+        description: 自己当前负责的皇府，公共预算需按记录支付。
+        status: observed
+      - id: review-spirit-tianyuan-capital
+        name: 天元城
+        description: 自身治所与来往的主要公共区域。
+        status: observed
+      - id: review-spirit3-tianyuan-court-fund
+        name: 天元圣皇本期事务公库
+        description: 本期可以安排的六十枚高阶石及十六份材料；不是境域全部财富。
+        status: observed
+      - id: review-spirit3-tianyuan-court-ledger
+        name: 天元圣皇本期议簿
+        description: 本期公库支出尚未划拨，收件需逐项审读；既有到期与承诺须真实记账。
+        status: observed
+      - id: review-spirit3-current-tianyuan-ruler-seal
+        name: 天元圣皇现用印令
+        description: 证明当前职务的印令，单凭印令不能越过实物所有权与已定约束。
+        status: observed
+      - id: review-spirit3-current-tianyuan-ruler-defense
+        name: 天元圣皇个人护身佩
+        description: 本人祭炼的护身佩，每次主动防御耗20法力，威力有界且可损坏。
+        status: observed
+      - id: review-spirit3-anyuan-budget-petition
+        name: 安远教习补料呈文
+        description: 冯棠请求本期拨8高阶灵石用于守备教习和购矢，尚未批准；现存十二支矢不因申请而增加。
+        status: observed
+      - id: review-spirit3-capital-library-petition
+        name: 圣城阅书开放呈文
+        description: 宋砚台请求开放一段公用读书时段，先以4高阶灵石试行；需皇府决定，尚未招募或收费。
+        status: observed
+      - id: review-spirit-capital-postmaster
+        name: 宋砚台
+        description: 有实际任职往来，知道对方当前工作，不知其未陈述的私事。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己实际修习、生活和已参加的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 合体后期护体遁术、御剑与金行禁制，能审读账目但不知远城未报之事。
+        description: 合体后期护体遁术、御剑与金行禁制，能审读账目但不知远城未报之事。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: known-root
+        subjectId: self
+        predicate: known-spiritual-root
+        value:
+          kind: text
+          value: 金、水两属性灵根，是本人已有检测结果。
+        description: 本人接受过检测并知道结果。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - spirit3-current-tianyuan-ruler
+      - local_entity_id: location
+        canonical_entity_ids:
+          - spirit3-tianyuan-hall
+      - local_entity_id: review-spirit3-current-tianyuan-ruler-private-stock
+        canonical_entity_ids:
+          - spirit3-current-tianyuan-ruler-private-stock
+      - local_entity_id: review-spirit3-tianyuan-court
+        canonical_entity_ids:
+          - spirit3-tianyuan-court
+      - local_entity_id: review-spirit-tianyuan-capital
+        canonical_entity_ids:
+          - spirit-tianyuan-capital
+      - local_entity_id: review-spirit3-tianyuan-court-fund
+        canonical_entity_ids:
+          - spirit3-tianyuan-court-fund
+      - local_entity_id: review-spirit3-tianyuan-court-ledger
+        canonical_entity_ids:
+          - spirit3-tianyuan-court-ledger
+      - local_entity_id: review-spirit3-current-tianyuan-ruler-seal
+        canonical_entity_ids:
+          - spirit3-current-tianyuan-ruler-seal
+      - local_entity_id: review-spirit3-current-tianyuan-ruler-defense
+        canonical_entity_ids:
+          - spirit3-current-tianyuan-ruler-defense
+      - local_entity_id: review-spirit3-anyuan-budget-petition
+        canonical_entity_ids:
+          - spirit3-anyuan-budget-petition
+      - local_entity_id: review-spirit3-capital-library-petition
+        canonical_entity_ids:
+          - spirit3-capital-library-petition
+      - local_entity_id: review-spirit-capital-postmaster
+        canonical_entity_ids:
+          - spirit-capital-postmaster

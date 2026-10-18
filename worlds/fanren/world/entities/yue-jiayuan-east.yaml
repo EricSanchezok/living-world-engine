@@ -1,0 +1,26 @@
+id: yue-jiayuan-east
+kind: location
+name: 嘉元东城区
+description: 城东的居住与商贸街区，宅院店铺各有其主。
+placement: yue-jiayuan
+facts:
+  - id: yue-jiayuan-east-route-yue-jiayuan
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-jiayuan
+    description: 沿嘉元城内公共街路实际行走；途中院门、店铺和货仓另受各自通行条件限制。
+    access:
+      kind: public
+  - id: yue-jiayuan-east-dominant-guild
+    predicate: dominant-guild
+    value:
+      kind: entity
+      entityId: jingjiao-guild
+    description: 惊蛟会在此地有强势经营与江湖影响；居民和商户的私产仍各归其主，势力影响不等官府所有权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: spirit3-tianyuan-hall
+kind: location
+name: 天元圣皇理事院
+description: 石阶沿圣山内院向上，议事厅旁设收件案；来客先在外檐等接待。
+placement: spirit-tianyuan-capital
+facts:
+  - id: spirit3-tianyuan-hall-route-to-spirit-tianyuan-capital
+    predicate: route-to-spirit-tianyuan-capital
+    value:
+      kind: entity
+      entityId: spirit-tianyuan-capital
+    description: route-to-spirit-tianyuan-capital
+    access:
+      kind: private
+  - id: spirit3-tianyuan-hall-route-conditions-spirit-tianyuan-capital
+    predicate: route-conditions-spirit-tianyuan-capital
+    value:
+      kind: text
+      value: 城内道路到外院，内厅、库房与静室需相关许可。
+    description: 城内道路到外院，内厅、库房与静室需相关许可。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

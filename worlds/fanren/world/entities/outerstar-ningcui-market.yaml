@@ -1,0 +1,42 @@
+id: outerstar-ningcui-market
+kind: location
+name: 凝翠小市
+description: 数家铺子卖图、收材料，也替修士找出海伙伴。
+placement: human-ningcui-island
+facts:
+  - id: outerstar-ningcui-market-route-human-ningcui-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-ningcui-island
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-ningcui-market-condition-human-ningcui-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 数家铺子卖图、收材料，也替修士找出海伙伴。
+    description: 数家铺子卖图、收材料，也替修士找出海伙伴。
+    access:
+      kind: public
+  - id: outerstar-ningcui-market-route-outerstar-fengle-shop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-fengle-shop
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-ningcui-market-condition-outerstar-fengle-shop
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 柜上陈列海图与补给，后屋分存寄售货。
+    description: 柜上陈列海图与补给，后屋分存寄售货。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

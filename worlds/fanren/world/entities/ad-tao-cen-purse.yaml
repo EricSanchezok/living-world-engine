@@ -1,0 +1,22 @@
+id: ad-tao-cen-purse
+kind: container
+name: 陶岑私囊
+description: 本人可支配积蓄，与机构货款分开。
+placement: ad-tao-cen
+facts:
+  - id: ad-tao-cen-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-tao-cen
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 40
+  - definition_id: craft-material
+    amount: 2
+ratings: []
+shared_activity_resources: []

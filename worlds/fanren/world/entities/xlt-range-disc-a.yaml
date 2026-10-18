@@ -1,0 +1,18 @@
+id: xlt-range-disc-a
+kind: item
+name: 东坡测距盘
+description: 借给裴霁测隘口，借用不改变所有者。
+placement: xlt-pei
+facts:
+  - id: xlt-range-disc-a-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: xlt-shuang
+    description: owned-by
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

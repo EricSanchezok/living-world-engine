@@ -1,0 +1,26 @@
+id: thunder-public-debate
+kind: location
+name: 问艺台
+description: 可申请举行技艺演示与论辩的广场，观众自愿来去。
+placement: thunder-cloud-city
+facts:
+  - id: thunder-public-debate-route-thunder-cloud-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-cloud-city
+    description: route-to
+    access:
+      kind: public
+  - id: thunder-public-debate-condition-thunder-cloud-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可申请举行技艺演示与论辩的广场，观众自愿来去。
+    description: 可申请举行技艺演示与论辩的广场，观众自愿来去。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

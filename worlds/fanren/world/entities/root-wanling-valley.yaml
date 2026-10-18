@@ -1,0 +1,82 @@
+id: root-wanling-valley
+kind: location
+name: 万灵谷
+description: 四面环山的古谷，祭台及山壁殿堂保有古老禁制。
+placement: spirit-human-demon-territory
+facts:
+  - id: root-wanling-valley-route-to-spirit-human-demon-territory
+    predicate: route-to-spirit-human-demon-territory
+    value:
+      kind: entity
+      entityId: spirit-human-demon-territory
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-travel-condition-spirit-human-demon-territory
+    predicate: travel-condition-spirit-human-demon-territory
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-route-to-root-wanling-platform
+    predicate: route-to-root-wanling-platform
+    value:
+      kind: entity
+      entityId: root-wanling-platform
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-travel-condition-root-wanling-platform
+    predicate: travel-condition-root-wanling-platform
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-route-to-root-wanling-hall
+    predicate: route-to-root-wanling-hall
+    value:
+      kind: entity
+      entityId: root-wanling-hall
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-travel-condition-root-wanling-hall
+    predicate: travel-condition-root-wanling-hall
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-route-to-root-qianling-cave
+    predicate: route-to-root-qianling-cave
+    value:
+      kind: entity
+      entityId: root-qianling-cave
+    description: 可经实际路径前往。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+  - id: root-wanling-valley-travel-condition-root-qianling-cave
+    predicate: travel-condition-root-qianling-cave
+    value:
+      kind: text
+      value: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    description: 沿当地道路或可辨地貌实际行进；山海距离、天气与自身交通能力均计入耗时，不因同属一域而瞬达。
+    access:
+      kind: discoverable
+      condition: 实地踏查或取得可信路线记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

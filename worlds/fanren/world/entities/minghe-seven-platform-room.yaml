@@ -1,0 +1,26 @@
+id: minghe-seven-platform-room
+kind: location
+name: 峭壁阵台
+description: 几座玉台位于峭壁下方，青石柱间白幕挡住滚滚黑雾，石壁通道通向洞府白沙厅。
+placement: minghe-qingyuan-cave
+facts:
+  - id: minghe-seven-platform-room-route-to-minghe-qingyuan-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-qingyuan-hall
+    description: route-to
+    access:
+      kind: private
+  - id: minghe-seven-platform-room-route-conditions-minghe-qingyuan-hall
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。
+    description: 从厅前青石通道折向峭壁下方阵台，须得到主人许可；调阴阵启动时不得擅踏阵台。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

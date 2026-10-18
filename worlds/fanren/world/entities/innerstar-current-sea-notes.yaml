@@ -1,0 +1,18 @@
+id: innerstar-current-sea-notes
+kind: item
+name: 海丹药性汇抄
+description: 记录妖丹主辅料的区别、灵药性状和有限冲关作用；不是完整炼制丹方，不自动授予炼丹技能。
+placement: innerstar-yuhuan-house
+facts:
+  - id: innerstar-current-sea-notes-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-liulian-group
+    description: 由六连殿所有；实际交付才改变归属。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

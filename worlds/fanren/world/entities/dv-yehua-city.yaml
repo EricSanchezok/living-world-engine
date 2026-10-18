@@ -1,0 +1,26 @@
+id: dv-yehua-city
+kind: location
+name: 叶桦城
+description: 城中有商铺与旅舍，来自万岭山的采药人常在东市交易。
+placement: human-dongyu
+facts:
+  - id: dv-yehua-city-route-dv-foothill-lodge
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dv-foothill-lodge
+    description: route-to
+    access:
+      kind: public
+  - id: dv-yehua-city-condition-dv-foothill-lodge
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。
+    description: 沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

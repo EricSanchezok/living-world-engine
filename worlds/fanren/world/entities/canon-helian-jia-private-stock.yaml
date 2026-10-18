@@ -1,0 +1,24 @@
+id: canon-helian-jia-private-stock
+kind: container
+name: 贾姓长老的私人储备
+description: 自用财物，不属于所在机构公库。
+placement: canon-helian-jia
+facts:
+  - id: canon-helian-jia-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-helian-jia
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 8
+  - definition_id: mid-stone
+    amount: 60
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

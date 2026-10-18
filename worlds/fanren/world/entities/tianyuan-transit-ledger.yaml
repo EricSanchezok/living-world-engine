@@ -1,0 +1,18 @@
+id: tianyuan-transit-ledger
+kind: item
+name: 本期出入境核验簿
+description: 登记当前实际核验与已领临时牌，不追踪所有未到场者；本轮空白牌尚未发给任何来访者。
+placement: tianyuan-transport-hall
+facts:
+  - id: tianyuan-transit-ledger-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

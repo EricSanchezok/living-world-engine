@@ -1,0 +1,18 @@
+id: blood-steppe-herd
+kind: creature-group
+name: 西岸草原兽群
+description: 七只护巢的草原兽，绕行、惊扰或狩猎会产生不同反应。
+placement: blood-luochao-steppe
+facts:
+  - id: blood-steppe-herd-individual-count
+    predicate: individual-count
+    value:
+      kind: number
+      value: 7
+    description: individual-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

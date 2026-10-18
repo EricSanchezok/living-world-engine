@@ -1,0 +1,26 @@
+id: tianyuan-guest-key
+kind: item
+name: 东廊客舍现用钥牌
+description: 吕慎已经交冯原使用的临时钥牌，只开东廊此舍，不开丹箱与其他房间。
+placement: tianyuan-ascender-fengyuan
+facts:
+  - id: tianyuan-guest-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-guest-key-controls
+    predicate: controls
+    value:
+      kind: entity
+      entityId: tianyuan-guest-quarter
+    description: controls
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

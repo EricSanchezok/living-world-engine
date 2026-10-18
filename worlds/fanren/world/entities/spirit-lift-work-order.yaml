@@ -1,0 +1,27 @@
+id: spirit-lift-work-order
+kind: item
+name: 提吊座维修委托单
+description: 邵谨交付的维修委托单，唐简已接收，允许拆检但不许擅自更换产权。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-lift-work-order-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yard-steward
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-lift-work-order-terms
+    predicate: terms
+    value:
+      kind: text
+      value: 先查故障并报价；货场预留工料费40枚低阶灵石，实际验收合格才由维修预算支付。唐简允许协作者在监督下拆检，若帮助查明故障并完成验收，从所收40枚中付协作者12枚，另准抄阅自己的基础驱动线图；协作者可拒绝。
+    description: 先查故障并报价；货场预留工料费40枚低阶灵石，实际验收合格才由维修预算支付。唐简允许协作者在监督下拆检，若帮助查明故障并完成验收，从所收40枚中付协作者12枚，另准抄阅自己的基础驱动线图；协作者可拒绝。
+    access:
+      kind: discoverable
+      condition: 实际阅读委托单或听到签约双方完整说明条款。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

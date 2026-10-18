@@ -1,0 +1,26 @@
+id: outerstar-sea-egg-2
+kind: item
+name: 白背海兽卵
+description: 姚汐正在看护的兽卵，壳色浅白，尚未孵化。
+placement: outerstar-egg-keeper
+facts:
+  - id: outerstar-sea-egg-2-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: outerstar-cunjin-keeper
+    description: owned-by
+    access:
+      kind: private
+  - id: outerstar-sea-egg-2-alive
+    predicate: alive
+    value:
+      kind: text
+      value: 胚胎存活，需要保温与定期护理；当下不能承受此远传阵冲击。
+    description: 胚胎存活，需要保温与定期护理；当下不能承受此远传阵冲击。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

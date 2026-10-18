@@ -1,0 +1,26 @@
+id: spirit3-maple-array
+kind: item
+name: 枫林长程阵台
+description: 既建阵台，当前未获目的端可用确认，不能凭到场自行传往任意地方。
+placement: spirit3-maple-array-hall
+facts:
+  - id: spirit3-maple-array-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-tianyuan-court
+    description: owned-by
+    access:
+      kind: private
+  - id: spirit3-maple-array-activation-boundary
+    predicate: activation-boundary
+    value:
+      kind: text
+      value: 须明确已存在且应答的接收端、实际供能、同意操作的阵师。当前暂无有效接收端确认，不能发起传送。
+    description: 须明确已存在且应答的接收端、实际供能、同意操作的阵师。当前暂无有效接收端确认，不能发起传送。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: tiannan-wanmiao-counter
+kind: location
+name: 万妙符务外舍
+description: 万妙观接待求符和交付材料的外舍，未授高级符道秘法。
+placement: human-yuanwu
+facts:
+  - id: tiannan-wanmiao-counter-route-human-yuanwu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yuanwu
+    description: 沿当地道路进入公开接待处；私人房间、炉房与寄存库须另外获得保管人的许可。
+    access:
+      kind: public
+  - id: tiannan-wanmiao-counter-institution
+    predicate: operated-by
+    value:
+      kind: entity
+      entityId: tiannan-wanmiao-temple
+    description: 场所由本门经营，雇员只按职责保管公物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

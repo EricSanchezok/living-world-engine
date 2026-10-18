@@ -1,0 +1,18 @@
+id: ad-light-mineral-sample
+kind: item
+name: 异常轻矿样
+description: 牛存在获准留存的碎石中挑出的样品，可比较密度与切面；它没有被预设成异魔金宝珠。
+placement: ad-niu-cun
+facts:
+  - id: ad-light-mineral-sample-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-niu-cun
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

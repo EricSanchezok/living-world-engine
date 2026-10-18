@@ -1,0 +1,18 @@
+id: minghe-ancient-ice-block
+kind: item
+name: 酒窟万年玄冰
+description: 酒窟内一方寒气凝重的玄冰，酒壶贴近藏放使味道更醇；移走会改变窟内冷藏条件。
+placement: minghe-wine-cellar
+facts:
+  - id: minghe-ancient-ice-block-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-jin-yan-hou
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

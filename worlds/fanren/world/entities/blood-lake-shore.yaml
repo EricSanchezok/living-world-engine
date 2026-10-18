@@ -1,0 +1,42 @@
+id: blood-lake-shore
+kind: location
+name: 万月山古潭边
+description: 万月山中的古潭岸边。近水处湿滑，岸上可察看水面和周围山势；没有显露的宫门可让路过者径直走入天鼎宫。
+placement: blood-wanyue-mountains
+facts:
+  - id: blood-lake-shore-route-blood-wanyue-mountains
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-wanyue-mountains
+    description: route-to
+    access:
+      kind: public
+  - id: blood-lake-shore-condition-blood-wanyue-mountains
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    description: 按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。
+    access:
+      kind: public
+  - id: blood-lake-shore-route-blood-tianding-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: blood-tianding-palace
+    description: route-to
+    access:
+      kind: public
+  - id: blood-lake-shore-condition-blood-tianding-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须真实现世窗口、可用入口与足够钥匙/破禁能力；当前隐匿，无当前有效开门信号。仿钥匙不保证安全入内。
+    description: 须真实现世窗口、可用入口与足够钥匙/破禁能力；当前隐匿，无当前有效开门信号。仿钥匙不保证安全入内。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

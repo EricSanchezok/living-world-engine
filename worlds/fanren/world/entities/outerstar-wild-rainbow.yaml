@@ -1,0 +1,42 @@
+id: outerstar-wild-rainbow
+kind: plant
+name: 礁上霓裳草
+description: 十三叶珊瑚生草；年龄要由实际观察与经验判断，不向路人展示数字。
+placement: outerstar-redcoral-bed
+facts:
+  - id: outerstar-wild-rainbow-age-years
+    predicate: age-years
+    value:
+      kind: number
+      value: 94
+    description: age-years
+    access:
+      kind: private
+  - id: outerstar-wild-rainbow-growth-habitat
+    predicate: growth-habitat
+    value:
+      kind: text
+      value: 根系附着海珊瑚，可离水短时照料但必须保持相应生境。
+    description: 根系附着海珊瑚，可离水短时照料但必须保持相应生境。
+    access:
+      kind: private
+  - id: outerstar-wild-rainbow-leaf-phase
+    predicate: leaf-phase
+    value:
+      kind: text
+      value: 首叶仍卷曲，尚未接近首次展叶，不放出引妖气味；后续生长要实际经过时间与合适环境。
+    description: 首叶仍卷曲，尚未接近首次展叶，不放出引妖气味；后续生长要实际经过时间与合适环境。
+    access:
+      kind: private
+  - id: outerstar-wild-rainbow-years-since-planted
+    predicate: years-since-planted
+    value:
+      kind: number
+      value: 94
+    description: years-since-planted
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

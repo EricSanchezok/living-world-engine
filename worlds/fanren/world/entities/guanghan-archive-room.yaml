@@ -1,0 +1,26 @@
+id: guanghan-archive-room
+kind: location
+name: 天旭阁旧界档案室
+description: 保管旧次入界记述与研究借阅记录的小室，原件阅览需保管者同意。
+placement: thunder-tianxu-hall
+facts:
+  - id: guanghan-archive-room-route-thunder-tianxu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: thunder-tianxu-hall
+    description: route-to
+    access:
+      kind: public
+  - id: guanghan-archive-room-condition-thunder-tianxu-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 保管旧次入界记述与研究借阅记录的小室，原件阅览需保管者同意。
+    description: 保管旧次入界记述与研究借阅记录的小室，原件阅览需保管者同意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

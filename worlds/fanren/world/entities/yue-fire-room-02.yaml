@@ -1,0 +1,43 @@
+id: yue-fire-room-02
+kind: location
+name: 第2地火室
+description: 石室内有八个铜龙首引火口；门户可用本室牌钥封闭，地火需要按法诀逐步控制。
+placement: yue-yuelu-fire-hall
+facts:
+  - id: yue-fire-room-02-route-yue-yuelu-fire-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuelu-fire-hall
+    description: 领取相配牌钥并获登记后可入；闭门者不应被后来租客打断。
+    access:
+      kind: public
+  - id: yue-fire-room-02-occupancy
+    predicate: occupancy-state
+    value:
+      kind: text
+      value: 当前无人租用，门关闭。
+    description: 当前无人租用，门关闭。
+    access:
+      kind: public
+  - id: yue-fire-room-02-fire
+    predicate: fire-state
+    value:
+      kind: text
+      value: 地火阀口关闭，八个龙首未喷火；须合适引火操作方可启用。
+    description: 地火阀口关闭，八个龙首未喷火；须合适引火操作方可启用。
+    access:
+      kind: public
+  - id: yue-fire-room-02-controls
+    predicate: instruction
+    value:
+      kind: text
+      value: 石墩刻有龙首引火与调节火焰高度、大小的操作；须以实际法力操纵，按步骤验证，文字本身不代替练习。
+    description: 石墩刻有龙首引火与调节火焰高度、大小的操作；须以实际法力操纵，按步骤验证，文字本身不代替练习。
+    access:
+      kind: discoverable
+      condition: 实际进入该室并读懂石墩刻字。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

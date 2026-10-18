@@ -1,0 +1,26 @@
+id: tiannan-hehuan-court
+kind: location
+name: 合欢宗内庭
+description: 当前内庭，有不同功法派系与独立静室，长老称号不代表统一修法。
+placement: human-tianluo
+facts:
+  - id: tiannan-hehuan-court-route-human-tianluo
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianluo
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-hehuan-court-travel-human-tianluo
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

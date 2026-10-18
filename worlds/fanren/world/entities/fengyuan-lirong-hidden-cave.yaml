@@ -1,0 +1,20 @@
+id: fengyuan-lirong-hidden-cave
+kind: location
+name: 蛮荒隐蔽石庵
+description: 石壁后隐藏的小庵，外有防风阵与小药圃。普通地图未标坐标。
+placement: fengyuan-continent
+facts:
+  - id: fengyuan-lirong-hidden-cave-hidden-approach
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-fuli-marsh
+    description: 经荒山可到浮黎沼泽外缘，须辨路与准备补给，路程受实际能力影响。
+    access:
+      kind: agents
+      agentIds:
+        - canon-li-rong
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,82 @@
+id: human-yue
+kind: location
+name: 越国
+description: 七派、修仙家族与凡俗州府并存，疆域与通行依现实道路和法力。
+placement: human-tiannan
+facts:
+  - id: human-yue-tiannan-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tiannan
+    description: 越国属于天南，可循官道或实际飞遁出国，跨国有真实距离。
+    access:
+      kind: public
+  - id: human-yue-jingzhou-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: jingzhou
+    description: 沿越国内陆州道到镜州，山村不与省城瞬间相邻。
+    access:
+      kind: public
+  - id: human-yue-lanzhou-route
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-lanzhou
+    description: 前往岚州仍需漫长陆路或接驳水路。
+    access:
+      kind: public
+  - id: yue-thirteen-provinces
+    predicate: territorial-structure
+    value:
+      kind: text
+      value: 越国下分十三州，岚州位于南部。
+    description: 越国下分十三州，岚州位于南部。
+    access:
+      kind: public
+  - id: human-yue-route-yue-xinzhou
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-xinzhou
+    description: 前往辛州需沿州际道路或实际遁行，行程仍有距离。
+    access:
+      kind: public
+  - id: human-yue-route-yue-yuejing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing
+    description: 沿实际驿路进入都城，路程需按出发州地和交通手段计算。
+    access:
+      kind: public
+  - id: human-yue-route-yue-old-mine
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-old-mine
+    description: 找到荒原峡谷入口后才能沿路进入；矿口幻阵需看守准许或以适用手段识破。
+    access:
+      kind: public
+  - id: human-yue-route-yue-nanwu-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-nanwu-city
+    description: 沿现存道路或适用遁行抵达，仍需实际路程和通行条件。
+    access:
+      kind: public
+  - id: human-yue-route-yue-mining-east-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-mining-east-market
+    description: 沿现存道路或适用遁行抵达，仍需实际路程和通行条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

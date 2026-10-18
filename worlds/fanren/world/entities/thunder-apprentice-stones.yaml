@@ -1,0 +1,20 @@
+id: thunder-apprentice-stones
+kind: container
+name: 岑音的试作灵石
+description: 供自己决定如何演示的有限灵石。
+placement: thunder-apprentice
+facts:
+  - id: thunder-apprentice-stones-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-apprentice
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 6
+ratings: []
+shared_activity_resources: []

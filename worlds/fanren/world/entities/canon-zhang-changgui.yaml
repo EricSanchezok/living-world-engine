@@ -1,0 +1,118 @@
+id: canon-zhang-changgui
+kind: person
+name: 张长贵
+description: 钱庄人家的少年，习惯宽裕的生活，在意体面。
+placement: local-zhang-changgui-home
+facts:
+  - id: canon-zhang-changgui-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 基本识字与账目常识，尚未接受门派高深武学训练。
+    description: 基本识字与账目常识，尚未接受门派高深武学训练。
+    access:
+      kind: agents
+      agentIds:
+        - canon-zhang-changgui
+  - id: canon-zhang-changgui-child-of
+    predicate: child-of
+    value:
+      kind: entity
+      entityId: local-zhang-banker
+    description: 亲子关系。
+    access:
+      kind: private
+meters:
+  - id: canon-zhang-changgui-health
+    definition_id: health
+    current: 100
+  - id: canon-zhang-changgui-mana
+    definition_id: mana
+    current: 0
+quantities:
+  - definition_id: silver
+    amount: 15
+ratings:
+  - id: canon-zhang-changgui-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-zhang-changgui-perception
+    definition_id: perception
+    value: 2
+  - id: canon-zhang-changgui-craft
+    definition_id: craft
+    value: 2
+  - id: canon-zhang-changgui-influence
+    definition_id: influence
+    value: 2
+  - id: canon-zhang-changgui-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-zhang-changgui
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 钱庄人家的少年，习惯宽裕的生活，在意体面。
+      voice: 依据自己知道的情况说话，不预告未来，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 整理家人给的练字与记账作业，安排自己的闲暇。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 张长贵
+        description: 钱庄人家的少年，习惯宽裕的生活，在意体面。
+        status: observed
+      - id: location
+        name: 张家钱庄后宅
+        description: 自己熟悉的所在处。
+        status: observed
+      - id: known-local-zhang-banker
+        name: 张家钱庄老板
+        description: 一起生活的亲人。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己的实际经历与训练。
+        sourceId: null
+        step: 0
+    claims:
+      - id: known-methods
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 基本识字与账目常识，尚未接受门派高深武学训练。
+        description: 基本识字与账目常识，尚未接受门派高深武学训练。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-zhang-changgui
+      - local_entity_id: location
+        canonical_entity_ids:
+          - local-zhang-changgui-home
+      - local_entity_id: known-local-zhang-banker
+        canonical_entity_ids:
+          - local-zhang-banker

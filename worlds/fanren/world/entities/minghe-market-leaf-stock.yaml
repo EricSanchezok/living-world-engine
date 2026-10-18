@@ -1,0 +1,20 @@
+id: minghe-market-leaf-stock
+kind: container
+name: 白笙待售虫粮
+description: 五包自有干虫粮，暂拟每包五低阶灵石；愿否出售给翎墨及改签订单要真实商议。
+placement: minghe-garden-neighbor
+facts:
+  - id: minghe-market-leaf-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: minghe-garden-neighbor
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 5
+ratings: []
+shared_activity_resources: []

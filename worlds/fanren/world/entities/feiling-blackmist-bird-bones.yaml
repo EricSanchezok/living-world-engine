@@ -1,0 +1,93 @@
+id: feiling-blackmist-bird-bones
+kind: creature
+name: 九头骨鸟冥尸
+description: 九颅巨骨在阴气中缓慢凝动，遭外力侵入时会循气息反击，活动范围受雾海阴气牵系。
+placement: feiling-blackmist-bone-nest
+facts:
+  - id: feiling-blackmist-bird-bones-innate-defence
+    predicate: innate-defence
+    value:
+      kind: text
+      value: 骨躯可动，消耗真实法力催阴气和残煞反击；不能无限复原骨骼、复制九个独立本体或离开阴气范围仍保全部能力。
+    description: 骨躯可动，消耗真实法力催阴气和残煞反击；不能无限复原骨骼、复制九个独立本体或离开阴气范围仍保全部能力。
+    access:
+      kind: private
+meters:
+  - id: feiling-blackmist-bird-bones-health
+    definition_id: health
+    current: 100
+  - id: feiling-blackmist-bird-bones-mana
+    definition_id: mana
+    current: 1200
+quantities: []
+ratings:
+  - id: feiling-blackmist-bird-bones-cultivation
+    definition_id: cultivation
+    value: 7
+  - id: feiling-blackmist-bird-bones-force
+    definition_id: force
+    value: 7
+  - id: feiling-blackmist-bird-bones-perception
+    definition_id: perception
+    value: 7
+shared_activity_resources: []
+agent:
+  id: feiling-blackmist-bird-bones
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 九颅巨骨在阴气中缓慢凝动，遭外力侵入时会循气息反击，活动范围受雾海阴气牵系。
+      voice: 以九首厉鸣和阴气冲击表达敌意，不进行人族式交易。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: guard-bones
+        description: 保住凝身阴气，驱逐接近骨巢的侵入者。
+        priority: 0.7
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 九头骨鸟冥尸
+        description: 九颅巨骨在阴气中缓慢凝动，遭外力侵入时会循气息反击，活动范围受雾海阴气牵系。
+        status: observed
+      - id: location
+        name: 雾海骨巢
+        description: 骨躯与阴气凝聚所在。
+        status: observed
+    evidence:
+      - id: corpse-sense
+        kind: observation
+        description: 骨巢附近的气息、触动和阴气变化。
+        sourceId: null
+        step: 0
+    claims:
+      - id: innate-defence
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 可催本巢阴气与残余凶煞防身，骨躯受损和法力耗散都会削弱反击。
+        description: 可催阴气与残余凶煞防身。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - corpse-sense
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - feiling-blackmist-bird-bones
+      - local_entity_id: location
+        canonical_entity_ids:
+          - feiling-blackmist-bone-nest

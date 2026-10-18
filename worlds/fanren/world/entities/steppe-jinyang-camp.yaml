@@ -1,0 +1,42 @@
+id: steppe-jinyang-camp
+kind: location
+name: 金阳部井坡营地
+description: 两条放牧路在浅井边交会，前棚接待货队；守夜轮值册挂在门边。
+placement: steppe-central-marches
+facts:
+  - id: steppe-jinyang-camp-route-steppe-central-marches
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-central-marches
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-jinyang-camp-travel-steppe-central-marches
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    description: 沿现有牧道持续行进；距离、昼夜、所用驮畜和天气影响行程，不能一念抵达。
+    access:
+      kind: public
+  - id: steppe-jinyang-camp-route-steppe-jinyang-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-jinyang-store
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+  - id: steppe-jinyang-camp-travel-steppe-jinyang-store
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    description: 院内步行可达门口；进私屋或开库须相应许可，抵达门口不代表拿到内物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

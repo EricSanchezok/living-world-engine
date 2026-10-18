@@ -1,0 +1,37 @@
+id: thunder-nine-fragrance-jar
+kind: item
+name: 九香灵酒封坛
+description: 彩流罂以自身功法酿得的一坛珍酒，现余十二小杯的体积。
+placement: thunder-chunxiang-winehall
+facts:
+  - id: thunder-nine-fragrance-jar-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-cai-liu-ying
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-nine-fragrance-jar-remaining-cups
+    predicate: remaining-cups
+    value:
+      kind: number
+      value: 12
+    description: remaining-cups
+    access:
+      kind: agents
+      agentIds:
+        - canon-cai-liu-ying
+        - thunder-wine-attendant
+  - id: thunder-nine-fragrance-jar-wine-effect
+    predicate: wine-effect
+    value:
+      kind: text
+      value: 灵力浓厚的少量饮品，修行益处仍须实际吸收和适合身体；一句品评不会直接增加境界。相同工艺每百年仅能酿少量坛数，现坛饮尽不会刷新。
+    description: 灵力浓厚的少量饮品，修行益处仍须实际吸收和适合身体；一句品评不会直接增加境界。相同工艺每百年仅能酿少量坛数，现坛饮尽不会刷新。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

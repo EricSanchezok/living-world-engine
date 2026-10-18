@@ -1,0 +1,42 @@
+id: kunwu-tower-three
+kind: location
+name: 镇魔塔三层
+description: 阴气较深，旧封室仍闭。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-tower-three-route-kunwu-tower-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-two
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-three-condition-kunwu-tower-two
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+  - id: kunwu-tower-three-route-kunwu-tower-four
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-four
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-three-condition-kunwu-tower-four
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,196 @@
+id: outerstar-egg-keeper
+kind: person
+name: 姚汐
+description: 养兽人，照料两枚海兽卵，已答应替雇主把幼兽运回内海。
+placement: outerstar-qiyuan-array
+facts:
+  - id: outerstar-egg-keeper-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼气
+    description: 炼气
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-egg-keeper
+  - id: outerstar-egg-keeper-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 基础驯养与孵化，掌握自身种类而不包治所有卵。
+    description: 基础驯养与孵化，掌握自身种类而不包治所有卵。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-egg-keeper
+  - id: outerstar-egg-keeper-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 有木水双灵根，已据自身经历完成检测。
+    description: 有木水双灵根，已据自身经历完成检测。
+    access:
+      kind: agents
+      agentIds:
+        - outerstar-egg-keeper
+  - id: outerstar-egg-keeper-consults-outerstar-qiyuan-clerk
+    predicate: consults
+    value:
+      kind: entity
+      entityId: outerstar-qiyuan-clerk
+    description: consults
+    access:
+      kind: private
+  - id: outerstar-egg-keeper-working-for-outerstar-cunjin-keeper
+    predicate: working-for
+    value:
+      kind: entity
+      entityId: outerstar-cunjin-keeper
+    description: working-for
+    access:
+      kind: private
+meters:
+  - id: outerstar-egg-keeper-health
+    definition_id: health
+    current: 100
+  - id: outerstar-egg-keeper-mana
+    definition_id: mana
+    current: 220
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: outerstar-egg-keeper-cultivation
+    definition_id: cultivation
+    value: 1
+  - id: outerstar-egg-keeper-force
+    definition_id: force
+    value: 1
+  - id: outerstar-egg-keeper-craft
+    definition_id: craft
+    value: 1
+  - id: outerstar-egg-keeper-perception
+    definition_id: perception
+    value: 1
+  - id: outerstar-egg-keeper-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: outerstar-egg-keeper
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 养兽人，照料两枚海兽卵，已答应替雇主把幼兽运回内海。
+      voice: 一谈幼兽就放轻声音，对催促交货会不安。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 决定留在外海孵化还是请人找可行护卵办法。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 姚汐
+        description: 养兽人，照料两枚海兽卵，已答应替雇主把幼兽运回内海。
+        status: observed
+      - id: location
+        name: 奇渊传送石屋
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-outerstar-egg-keeper-provisions
+        name: 姚汐的随身食药
+        description: 自己的食物和药材，不包含公家库存。
+        status: observed
+      - id: known-outerstar-qiyuan-clerk
+        name: 叶守舟
+        description: 一起检查过这批卵，尚未答应安全传送。
+        status: observed
+      - id: known-outerstar-sea-egg-1
+        name: 白背海兽卵
+        description: 自己答应照看的活卵，尚未查到安全传送方案。
+        status: observed
+      - id: known-outerstar-sea-egg-2
+        name: 白背海兽卵
+        description: 自己答应照看的活卵，尚未查到安全传送方案。
+        status: observed
+      - id: known-outerstar-cunjin-keeper
+        name: 岑槐
+        description: 岑槐委托看护与运回内海，答应实付二十四低阶灵石，安全优先而非死限。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 基础驯养与孵化，掌握自身种类而不包治所有卵。
+        description: 基础驯养与孵化，掌握自身种类而不包治所有卵。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己具有木水双灵根，已有相应修行经历。
+        description: 自己具有木水双灵根，已有相应修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: opening-night
+        subjectId: self
+        predicate: opening-night
+        value:
+          kind: text
+          value: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        description: 此时按当地纪时为夜间，后续依据真实经过时间和观察判断。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - outerstar-egg-keeper
+      - local_entity_id: location
+        canonical_entity_ids:
+          - outerstar-qiyuan-array
+      - local_entity_id: known-outerstar-egg-keeper-provisions
+        canonical_entity_ids:
+          - outerstar-egg-keeper-provisions
+      - local_entity_id: known-outerstar-qiyuan-clerk
+        canonical_entity_ids:
+          - outerstar-qiyuan-clerk
+      - local_entity_id: known-outerstar-sea-egg-1
+        canonical_entity_ids:
+          - outerstar-sea-egg-1
+      - local_entity_id: known-outerstar-sea-egg-2
+        canonical_entity_ids:
+          - outerstar-sea-egg-2
+      - local_entity_id: known-outerstar-cunjin-keeper
+        canonical_entity_ids:
+          - outerstar-cunjin-keeper

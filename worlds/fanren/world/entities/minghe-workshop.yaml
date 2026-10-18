@@ -1,0 +1,26 @@
+id: minghe-workshop
+kind: location
+name: 翎苔器修棚
+description: 能修理低阶封盒与灵灯的小棚，老板按工序报价。
+placement: minghe-lintai-market
+facts:
+  - id: minghe-workshop-route-minghe-lintai-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: minghe-lintai-market
+    description: route-to
+    access:
+      kind: public
+  - id: minghe-workshop-condition-minghe-lintai-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 能修理低阶封盒与灵灯的小棚，老板按工序报价。
+    description: 能修理低阶封盒与灵灯的小棚，老板按工序报价。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

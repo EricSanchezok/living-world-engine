@@ -1,0 +1,22 @@
+id: dajin-tianji-head-store
+kind: location
+name: 天机总殿器材库
+description: 维持禁制与机关的材料分柜登记，动用商号资产须核实权限。
+placement: dajin-tianji-head-space
+facts:
+  - id: dajin-tianji-head-store-route-dajin-tianji-head-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-tianji-head-hall
+    description: 调拨物资须实际权限和账目。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 1200
+  - definition_id: maintenance-material
+    amount: 30
+ratings: []
+shared_activity_resources: []

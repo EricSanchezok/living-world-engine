@@ -1,0 +1,26 @@
+id: global-baoling-qingchan-bell
+kind: item
+name: 青蝉钟
+description: 悬在钟架上的青色法钟。
+placement: global-baoling-temple
+facts:
+  - id: global-baoling-qingchan-bell-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: global-baoling-temple
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-baoling-qingchan-bell-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 上阶法器，每日三次寺中敲鸣为现行制度；驱动需会钟诀者注入法力。钟声提神，不能治疗任意心神病。
+    description: 上阶法器，每日三次寺中敲鸣为现行制度；驱动需会钟诀者注入法力。钟声提神，不能治疗任意心神病。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

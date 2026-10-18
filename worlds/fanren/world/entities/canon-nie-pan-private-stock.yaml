@@ -1,0 +1,22 @@
+id: canon-nie-pan-private-stock
+kind: container
+name: 涅槃的自用储备
+description: 本人财物，与机构公库和门人财产分开。
+placement: canon-nie-pan
+facts:
+  - id: canon-nie-pan-private-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-nie-pan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 240
+  - definition_id: craft-material
+    amount: 6
+ratings: []
+shared_activity_resources: []

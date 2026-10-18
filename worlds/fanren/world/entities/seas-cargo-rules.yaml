@@ -1,0 +1,18 @@
+id: seas-cargo-rules
+kind: item
+name: 活物行李验收规则
+description: 活种须验虫害、保湿和种类，受理者可说明真实风险，未经本人同意不强取研究样本。
+placement: seas-reception
+facts:
+  - id: seas-cargo-rules-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-fengyuan-branch
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

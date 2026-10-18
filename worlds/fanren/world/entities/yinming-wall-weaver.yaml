@@ -1,0 +1,165 @@
+id: yinming-wall-weaver
+kind: person
+name: 曲苇
+description: 编绳人，北徊的多年同行。
+placement: yinming-village-wall
+facts:
+  - id: yinming-wall-weaver-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡俗炼体
+    description: 凡俗炼体
+    access:
+      kind: agents
+      agentIds:
+        - yinming-wall-weaver
+  - id: yinming-wall-weaver-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 皮绳编织、结扣、搬运和基础攀援。
+    description: 皮绳编织、结扣、搬运和基础攀援。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-wall-weaver
+  - id: yinming-wall-weaver-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根；现有能力来自凡俗经历与训练。
+    description: 无灵根；现有能力来自凡俗经历与训练。
+    access:
+      kind: agents
+      agentIds:
+        - yinming-wall-weaver
+  - id: yinming-wall-weaver-longtime-companion-yinming-wall-guide
+    predicate: longtime-companion
+    value:
+      kind: entity
+      entityId: yinming-wall-guide
+    description: longtime-companion
+    access:
+      kind: private
+meters:
+  - id: yinming-wall-weaver-health
+    definition_id: health
+    current: 100
+  - id: yinming-wall-weaver-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: yinming-wall-weaver-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: yinming-wall-weaver-force
+    definition_id: force
+    value: 4
+  - id: yinming-wall-weaver-craft
+    definition_id: craft
+    value: 4
+  - id: yinming-wall-weaver-perception
+    definition_id: perception
+    value: 1
+  - id: yinming-wall-weaver-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yinming-wall-weaver
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 编绳人，北徊的多年同行。
+      voice: 喜欢现场演示，确认安全之后才笑着招手让人试。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 试验新结法能否在寒中解开，先做低处负重试验。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 曲苇
+        description: 编绳人，北徊的多年同行。
+        status: observed
+      - id: location
+        name: 北垒村
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yinming-wall-weaver-tools
+        name: 曲苇的个人器具
+        description: 皮绳编织、结扣、搬运和基础攀援。所需的有限工具，不包含无限兽晶。
+        status: observed
+      - id: known-yinming-wall-guide
+        name: 北徊
+        description: 长期合作，知道彼此见过的低处山路。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 皮绳编织、结扣、搬运和基础攀援。
+        description: 皮绳编织、结扣、搬运和基础攀援。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        description: 自知没有可修普通功法的灵根，依靠身体、工具和已学手艺。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: local-life
+        subjectId: self
+        predicate: local-life
+        value:
+          kind: text
+          value: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        description: 这里没有日升日落；按轮值与休息记录计时。黑风来时须看实际防护和天气，不能靠天色猜正午。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yinming-wall-weaver
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yinming-village-wall
+      - local_entity_id: known-yinming-wall-weaver-tools
+        canonical_entity_ids:
+          - yinming-wall-weaver-tools
+      - local_entity_id: known-yinming-wall-guide
+        canonical_entity_ids:
+          - yinming-wall-guide

@@ -1,0 +1,34 @@
+id: yue-tainan-temple
+kind: location
+name: 太南寺
+description: 山顶香火寺庙，香客以凡俗礼俗问签。
+placement: yue-tainan-mountain
+facts:
+  - id: yue-tainan-temple-route-yue-tainan-mountain
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-tainan-mountain
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-temple-travel-yue-tainan-mountain
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    description: 路段需要实际行走或合适遁行；门内院落、洞府和库房仍须核验许可，未作出发不会自动到达。
+    access:
+      kind: public
+  - id: yue-tainan-temple-eaves-leak
+    predicate: roof-condition
+    value:
+      kind: text
+      value: 西侧旧瓦缝在雨后滴水，眼下可先清沟、移开接水木盆；永久补瓦须取实际瓦片和工具。
+    description: 西侧旧瓦缝在雨后滴水，眼下可先清沟、移开接水木盆；永久补瓦须取实际瓦片和工具。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

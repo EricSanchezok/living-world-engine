@@ -1,0 +1,42 @@
+id: innerstar-nanming-herbshop
+kind: location
+name: 若泉药铺
+description: 经营普通药材的小铺，柜后侧门通分拣间。
+placement: innerstar-nanming-market
+facts:
+  - id: innerstar-nanming-herbshop-route-innerstar-nanming-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-market
+    description: 从临街店门步行进出。
+    access:
+      kind: public
+  - id: innerstar-nanming-herbshop-route-innerstar-nanming-sorting
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-sorting
+    description: 柜侧小门可通，搬货和检查需实际走入。
+    access:
+      kind: public
+  - id: innerstar-nanming-herbshop-ordinary-trade
+    predicate: ordinary-trade
+    value:
+      kind: text
+      value: 普通药材现价每包六枚铜钱；成交须由经营者接受、付款入经营匣并从实际药材库存交付。
+    description: 普通药材现价每包六枚铜钱；成交须由经营者接受、付款入经营匣并从实际药材库存交付。
+    access:
+      kind: public
+  - id: innerstar-nanming-herbshop-managed-by
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: innerstar-nanming-fan
+    description: 樊若泉经营管理，检查货物先讲明来意。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

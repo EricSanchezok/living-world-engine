@@ -1,0 +1,26 @@
+id: global-xuanye-corpse-manual
+kind: item
+name: 冥河天尸诀旧册
+description: 记着墓中尸修口诀的旧册。
+placement: global-xuanye-main-room
+facts:
+  - id: global-xuanye-corpse-manual-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-xuanye-king
+    description: 物权与取用许可属于此主体。
+    access:
+      kind: public
+  - id: global-xuanye-corpse-manual-use
+    predicate: use-condition
+    value:
+      kind: text
+      value: 供既有修炼和传授，修受损分神需真正修炼与阴气；不能读一遍立刻恢复或越阶。
+    description: 供既有修炼和传授，修受损分神需真正修炼与阴气；不能读一遍立刻恢复或越阶。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

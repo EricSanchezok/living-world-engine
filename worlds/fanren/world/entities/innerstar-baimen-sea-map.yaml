@@ -1,0 +1,18 @@
+id: innerstar-baimen-sea-map
+kind: item
+name: 已知内海路线册
+description: 记录天星、魁星与西南三岛的已知地理，不声称覆盖未探的全部外海。
+placement: innerstar-baimen-stock
+facts:
+  - id: innerstar-baimen-sea-map-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 实际归属与保管，转让须交付。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

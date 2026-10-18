@@ -1,0 +1,26 @@
+id: south-market-clinic
+kind: location
+name: 草庐医舍
+description: 药柜、清洗处和两张竹床，诊费与药材另计。
+placement: south-market
+facts:
+  - id: south-market-clinic-route-south-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: south-market
+    description: route-to
+    access:
+      kind: public
+  - id: south-market-clinic-condition-south-market
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    description: 可沿市街到门外；入私人内间和拿取物品需真实许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

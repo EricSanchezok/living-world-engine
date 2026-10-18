@@ -1,0 +1,22 @@
+id: south-yinluo-custodian-17-purse
+kind: container
+name: 守幡长老私袋
+description: 本人积蓄，非机构款。
+placement: south-yinluo-custodian-17
+facts:
+  - id: south-yinluo-custodian-17-purse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-yinluo-custodian-17
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 30
+  - definition_id: mid-stone
+    amount: 2
+ratings: []
+shared_activity_resources: []

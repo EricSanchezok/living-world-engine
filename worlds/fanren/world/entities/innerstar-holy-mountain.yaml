@@ -1,0 +1,106 @@
+id: innerstar-holy-mountain
+kind: location
+name: 天星圣山
+description: 从外来修士居住层逐渐上升至星宫内层和圣宫。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-holy-mountain-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 从外来修士居住层逐渐上升至星宫内层和圣宫。
+    description: 从外来修士居住层逐渐上升至星宫内层和圣宫。
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-route-innerstar-star-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-star-hall
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-innerstar-star-hall
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 位于圣山五十层附近，传送阵由星宫轮值者看守。
+    description: 位于圣山五十层附近，传送阵由星宫轮值者看守。
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-route-innerstar-saint-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-saint-palace
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-innerstar-saint-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 圣山最高层的内宫，外院接函，内室未经许可不得进入。
+    description: 圣山最高层的内宫，外院接函，内室未经许可不得进入。
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-route-innerstar-rental-cave-a
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-rental-cave-a
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-innerstar-rental-cave-a
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-route-innerstar-rental-cave-b
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-rental-cave-b
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-innerstar-rental-cave-b
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-route-innerstar-jin-cave
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-jin-cave
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-holy-mountain-condition-innerstar-jin-cave
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    description: 沿圣山外居层开辟的住处，水路、灵气和实际租约分别登记。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

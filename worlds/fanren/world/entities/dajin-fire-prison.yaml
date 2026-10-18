@@ -1,0 +1,26 @@
+id: dajin-fire-prison
+kind: location
+name: 火狱
+description: 大晋东南部的大片火山地区，灰黑地面散着火山灰和硫磺热气；无防护的凡人难以生存，进入火山采材须有实际耐热和避险能力。
+placement: human-dajin
+facts:
+  - id: dajin-fire-prison-route-dajin-fire-mist-range
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-fire-mist-range
+    description: 外围与红雾山脉相接；越过边缘仍需承担热毒、雷火和迷失风险。
+    access:
+      kind: public
+  - id: dajin-fire-prison-material-context
+    predicate: environment
+    value:
+      kind: text
+      value: 高温、火山灰和硫磺气；火属性材料的存在需要现场发现与实际采集。
+    description: 山口有活火山与死火山，不能因知道地名就获得材料。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

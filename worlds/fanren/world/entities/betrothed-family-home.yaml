@@ -1,0 +1,18 @@
+id: betrothed-family-home
+kind: location
+name: 邻镇女孩家
+description: 附近另一镇的一户普通人家，有小院和家人住处。
+placement: jingzhou
+facts:
+  - id: betrothed-family-home-route-peer-market-town
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: peer-market-town
+    description: 附近另一镇的一户普通人家，有小院和家人住处。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,136 @@
+id: thunder-wuluo-hermit
+kind: person
+name: 暗汐
+description: 乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。
+placement: thunder-wuluo-hidden-bay
+facts:
+  - id: thunder-wuluo-hermit-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 结丹
+    description: 结丹
+    access:
+      kind: private
+  - id: thunder-wuluo-hermit-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。
+    description: 隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。
+    access:
+      kind: private
+  - id: thunder-wuluo-hermit-affiliation
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: thunder-wuluo-people
+    description: affiliation
+    access:
+      kind: private
+meters:
+  - id: thunder-wuluo-hermit-health
+    definition_id: health
+    current: 100
+  - id: thunder-wuluo-hermit-mana
+    definition_id: mana
+    current: 540
+quantities: []
+ratings:
+  - id: thunder-wuluo-hermit-cultivation
+    definition_id: cultivation
+    value: 3
+  - id: thunder-wuluo-hermit-force
+    definition_id: force
+    value: 3
+  - id: thunder-wuluo-hermit-craft
+    definition_id: craft
+    value: 2
+  - id: thunder-wuluo-hermit-perception
+    definition_id: perception
+    value: 3
+  - id: thunder-wuluo-hermit-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: thunder-wuluo-hermit
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。
+      voice: 警觉，谈交换时直说所需，触及来处便收口。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 寻到足够食物维持隐居，判断是否愿与偶遇者交易。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 暗汐
+        description: 乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。
+        status: observed
+      - id: location
+        name: 无名背浪湾
+        description: 自己当前实际身处的地方。
+        status: observed
+      - id: thunder-review-thunder-wuluo-hermit-private-stock
+        name: 暗汐私用储备
+        description: 自己清点过的私用钱料。
+        status: observed
+      - id: thunder-review-thunder-wuluo-people
+        name: 乌罗族
+        description: 自己所属族群，族内的私事仍依本人经历知情。
+        status: observed
+      - id: thunder-review-thunder-wuluo-food
+        name: 暗汐藏食
+        description: 自己剩下的食物，不会无故变多。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 本人实际生活、修习与参与过的事务。
+        sourceId: null
+        step: 0
+    claims:
+      - id: skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。
+        description: 隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - thunder-wuluo-hermit
+      - local_entity_id: location
+        canonical_entity_ids:
+          - thunder-wuluo-hidden-bay
+      - local_entity_id: thunder-review-thunder-wuluo-hermit-private-stock
+        canonical_entity_ids:
+          - thunder-wuluo-hermit-private-stock
+      - local_entity_id: thunder-review-thunder-wuluo-people
+        canonical_entity_ids:
+          - thunder-wuluo-people
+      - local_entity_id: thunder-review-thunder-wuluo-food
+        canonical_entity_ids:
+          - thunder-wuluo-food

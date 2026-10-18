@@ -1,0 +1,26 @@
+id: spirit-tool-stock
+kind: container
+name: 灵具修造院备料
+description: 架上的现有备料和灵石，领用与售出都须登记。
+placement: spirit-repair-yard
+facts:
+  - id: spirit-tool-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-device-smith
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 90
+  - definition_id: craft-material
+    amount: 12
+  - definition_id: joining-wire
+    amount: 8
+  - definition_id: prepared-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,50 @@
+id: yue-qin-estate
+kind: location
+name: 秦宅
+description: 秦家的住宅与会客处，外院可投帖求见，后宅需主人允许。
+placement: yue-yuejing-east
+facts:
+  - id: yue-qin-estate-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-qin-family
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+  - id: yue-qin-estate-route-yue-yuejing-east
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing-east
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+  - id: yue-qin-estate-route-yue-qin-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-hall
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+  - id: yue-qin-estate-route-yue-qin-qingyin
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-qingyin
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+  - id: yue-qin-estate-route-yue-qin-accounts
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-qin-accounts
+    description: 沿街面或宅内走道实际行走；后宅、账房和货仓须主人或管事准许。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

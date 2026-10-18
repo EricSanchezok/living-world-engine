@@ -1,0 +1,24 @@
+id: canon-chi-lei-laozu-resources
+kind: container
+name: 赤雷老祖个人储备
+description: 有限私人修炼用石和材料；同门公产不在此袋。
+placement: canon-chi-lei-laozu
+facts:
+  - id: canon-chi-lei-laozu-resources-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-chi-lei-laozu
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 120
+  - definition_id: mid-stone
+    amount: 400
+  - definition_id: craft-material
+    amount: 16
+ratings: []
+shared_activity_resources: []

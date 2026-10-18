@@ -1,0 +1,22 @@
+id: south-medical-stock
+kind: container
+name: 诊房药柜
+description: 普通外伤和轻毒药材，不能据此治所有修士毒伤。
+placement: south-market-clinic
+facts:
+  - id: south-medical-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: south-healer
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: herb-packet
+    amount: 16
+  - definition_id: grain
+    amount: 4
+ratings: []
+shared_activity_resources: []

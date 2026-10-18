@@ -1,0 +1,18 @@
+id: blood-core-statue
+kind: item
+name: 天鼎护塔雕像
+description: 背剑持塔的古像，向金塔光幕供力，受攻可反击。
+placement: blood-treasure-room
+facts:
+  - id: blood-core-statue-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

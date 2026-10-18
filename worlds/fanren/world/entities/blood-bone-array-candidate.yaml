@@ -1,0 +1,160 @@
+id: blood-bone-array-candidate
+kind: person
+name: 白砺
+description: 血骨门外门炼虚阵师，靠拆解旧阵学艺，想争取一次进藏室校对的机会。
+placement: blood-bone-retreat
+facts:
+  - id: blood-bone-array-candidate-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 炼虚
+    description: 炼虚
+    access:
+      kind: agents
+      agentIds:
+        - blood-bone-array-candidate
+  - id: blood-bone-array-candidate-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 炼虚血法、分段验阵与低耗护阵设计。
+    description: 炼虚血法、分段验阵与低耗护阵设计。
+    access:
+      kind: agents
+      agentIds:
+        - blood-bone-array-candidate
+  - id: blood-bone-array-candidate-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    description: 自身经长期修炼形成相应法体与法力，施术仍需对应功法和练习。
+    access:
+      kind: private
+meters:
+  - id: blood-bone-array-candidate-health
+    definition_id: health
+    current: 100
+  - id: blood-bone-array-candidate-mana
+    definition_id: mana
+    current: 1320
+quantities:
+  - definition_id: low-stone
+    amount: 120
+ratings:
+  - id: blood-bone-array-candidate-cultivation
+    definition_id: cultivation
+    value: 6
+  - id: blood-bone-array-candidate-force
+    definition_id: force
+    value: 6
+  - id: blood-bone-array-candidate-craft
+    definition_id: craft
+    value: 6
+  - id: blood-bone-array-candidate-perception
+    definition_id: perception
+    value: 6
+  - id: blood-bone-array-candidate-influence
+    definition_id: influence
+    value: 6
+shared_activity_resources: []
+agent:
+  id: blood-bone-array-candidate
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 血骨门外门炼虚阵师，靠拆解旧阵学艺，想争取一次进藏室校对的机会。
+      voice: 说阵法时会下意识在桌上划线，面对前辈仍会认真争取署名。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 证明自己的阵解能用于实物，并保留署名和不交独门笔记的选择。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 白砺
+        description: 血骨门外门炼虚阵师，靠拆解旧阵学艺，想争取一次进藏室校对的机会。
+        status: observed
+      - id: location
+        name: 血骨门静修山居
+        description: 自己熟悉并正在使用的住处或办事场所。
+        status: observed
+      - id: known-blood-bone-array-candidate-resources
+        name: 白砺的个人储备
+        description: 有限修行财物，与宗门及城库分开。
+        status: observed
+      - id: known-canon-xiao-ming
+        name: 萧冥
+        description: 自己正在请教的本门前辈，认可与否仍由他判断。
+        status: observed
+      - id: known-blood-array-draft-a
+        name: 白砺的分段旧阵解
+        description: 先测边缘再合环的方案：需两份灵材和四低阶石，耗时3600共同秒，可降低一次试阵冲击，但无法验证阵心。
+        status: observed
+      - id: known-blood-array-trial
+        name: 旧护阵残盘
+        description: 自己获准查看的残盘，仍需获准才能拆解。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 炼虚血法、分段验阵与低耗护阵设计。
+        description: 炼虚血法、分段验阵与低耗护阵设计。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 自己知道所修功法、身体资质与既有修行经历。
+        description: 自己知道所修功法、身体资质与既有修行经历。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - blood-bone-array-candidate
+      - local_entity_id: location
+        canonical_entity_ids:
+          - blood-bone-retreat
+      - local_entity_id: known-blood-bone-array-candidate-resources
+        canonical_entity_ids:
+          - blood-bone-array-candidate-resources
+      - local_entity_id: known-canon-xiao-ming
+        canonical_entity_ids:
+          - canon-xiao-ming
+      - local_entity_id: known-blood-array-draft-a
+        canonical_entity_ids:
+          - blood-array-draft-a
+      - local_entity_id: known-blood-array-trial
+        canonical_entity_ids:
+          - blood-array-trial

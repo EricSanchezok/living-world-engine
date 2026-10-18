@@ -1,0 +1,22 @@
+id: ad-research-budget
+kind: container
+name: 折纹海行预算
+description: 用于这次可拒绝的观察行程。
+placement: ad-route-scholar
+facts:
+  - id: ad-research-budget-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: ad-route-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: demon-stone
+    amount: 100
+  - definition_id: craft-material
+    amount: 4
+ratings: []
+shared_activity_resources: []

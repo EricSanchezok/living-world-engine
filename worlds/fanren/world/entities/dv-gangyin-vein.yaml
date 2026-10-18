@@ -1,0 +1,20 @@
+id: dv-gangyin-vein
+kind: container
+name: 洞壁罡银沙矿脉
+description: 坚硬洞壁中分布不均的罡银沙矿，现有600采炼份；一采炼份远大于一拳原矿。
+placement: dv-polar-cave
+facts:
+  - id: dv-gangyin-vein-refining
+    predicate: refining
+    value:
+      kind: text
+      value: 每30采炼份原矿分离杂质并完成炼制后可产1份精料，余岩留在原地；常规采炼须使用强力工具并投入足够法力。适配的食矿灵虫及已学吐晶口诀可改进采炼过程。
+    description: 每30采炼份原矿分离杂质并完成炼制后可产1份精料，余岩留在原地；常规采炼须使用强力工具并投入足够法力。适配的食矿灵虫及已学吐晶口诀可改进采炼过程。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: gangyin-ore-portion
+    amount: 600
+ratings: []
+shared_activity_resources: []

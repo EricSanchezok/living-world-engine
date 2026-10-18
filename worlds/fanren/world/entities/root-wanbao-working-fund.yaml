@@ -1,0 +1,20 @@
+id: root-wanbao-working-fund
+kind: container
+name: 万宝殿维护处周转款
+description: 已分账的有限储备，支出后须减少余额。
+placement: root-wanbao-hall
+facts:
+  - id: root-wanbao-working-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: root-wanbao-office
+    description: 归属与保管按此关系判断，搬动不自动变更所有权。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 1200
+ratings: []
+shared_activity_resources: []

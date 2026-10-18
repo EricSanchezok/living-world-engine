@@ -1,0 +1,18 @@
+id: feiling-yuelong-crucible
+kind: item
+name: 承力银鼎
+description: 承接炼料与经削弱天地之力的银鼎，持续受力会损伤，需要操作者控制火候。
+placement: feiling-yuelong-refining-ground
+facts:
+  - id: feiling-yuelong-crucible-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yue-long
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

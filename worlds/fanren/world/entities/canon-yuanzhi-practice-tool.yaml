@@ -1,0 +1,18 @@
+id: canon-yuanzhi-practice-tool
+kind: item
+name: 修习用器
+description: 个人练习器具，不能凭名称视为后期顶阶法宝。
+placement: canon-yuanzhi
+facts:
+  - id: canon-yuanzhi-practice-tool-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yuanzhi
+    description: 个人修习器物。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

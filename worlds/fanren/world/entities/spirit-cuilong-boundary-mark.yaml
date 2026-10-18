@@ -1,0 +1,27 @@
+id: spirit-cuilong-boundary-mark
+kind: item
+name: 南麓旧界石
+description: 用于核定灌溉细阵范围的旧石，苔痕下仍留凿记。
+placement: spirit-cuilong-south-line
+facts:
+  - id: spirit-cuilong-boundary-mark-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuque-office
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-cuilong-boundary-mark-survey-evidence
+    predicate: survey-evidence
+    value:
+      kind: text
+      value: 清理苔痕后可见旧水线刻记偏向东石内侧，测距与登记图一致；西石旁有新踩痕和盆底圆印，仅据此不能确定何人留下或证明改界。结论须结合现场测距和旧图。
+    description: 清理苔痕后可见旧水线刻记偏向东石内侧，测距与登记图一致；西石旁有新踩痕和盆底圆印，仅据此不能确定何人留下或证明改界。结论须结合现场测距和旧图。
+    access:
+      kind: discoverable
+      condition: 获勘验权限后实际清理旧刻、测距并对照登记图；仅到场不能取得全部结论。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

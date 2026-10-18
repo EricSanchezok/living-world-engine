@@ -1,0 +1,26 @@
+id: feiling-muqing-golden-flower
+kind: item
+name: 金花法轮
+description: 可载木青的金色大花，施法时转为法轮切开阻碍。
+placement: canon-mu-qing
+facts:
+  - id: feiling-muqing-golden-flower-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-mu-qing
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-muqing-golden-flower-operating-cost
+    predicate: operating-cost
+    value:
+      kind: text
+      value: 每次有意催动至少消耗持有施术者15法力；持续作用随强度追加耗用，器物本身不会无限供能。
+    description: 每次有意催动至少消耗持有施术者15法力；持续作用随强度追加耗用，器物本身不会无限供能。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

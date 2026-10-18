@@ -1,0 +1,58 @@
+id: outerstar-reef-village
+kind: location
+name: 白汀村
+description: 奇渊近邻小岛上的渔村，沿岸木屋晒着网具。
+placement: outerstar-baiting-island
+facts:
+  - id: outerstar-reef-village-route-human-outer-star-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-outer-star-sea
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-reef-village-condition-human-outer-star-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 奇渊近邻小岛上的渔村，沿岸木屋晒着网具。
+    description: 奇渊近邻小岛上的渔村，沿岸木屋晒着网具。
+    access:
+      kind: public
+  - id: outerstar-reef-village-route-outerstar-small-mine
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-small-mine
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-reef-village-condition-outerstar-small-mine
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿村外石路步行约半个时辰；滑坡、修路及不同速度会改变实际时间。
+    description: 沿村外石路步行约半个时辰；滑坡、修路及不同速度会改变实际时间。
+    access:
+      kind: public
+  - id: outerstar-reef-village-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-reef-village-condition-outerstar-blackstone-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 须用船或御器沿近岸海路往返，凡俗小船通常约半日；天气和负载会改变行程。
+    description: 须用船或御器沿近岸海路往返，凡俗小船通常约半日；天气和负载会改变行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

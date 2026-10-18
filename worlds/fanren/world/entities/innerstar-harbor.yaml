@@ -1,0 +1,98 @@
+id: innerstar-harbor
+kind: location
+name: 天星港
+description: 海船装卸货物、核对乘客与船期的港口。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-harbor-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-harbor-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 海船装卸货物、核对乘客与船期的港口。
+    description: 海船装卸货物、核对乘客与船期的港口。
+    access:
+      kind: public
+  - id: innerstar-harbor-route-human-kuixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-kuixing-island
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-harbor-condition-human-kuixing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    description: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    access:
+      kind: public
+  - id: innerstar-harbor-route-human-weixing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-weixing-island
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-harbor-condition-human-weixing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    description: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    access:
+      kind: public
+  - id: innerstar-harbor-route-human-sangxing-island
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-sangxing-island
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-harbor-condition-human-sangxing-island
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    description: 跨岛需足够补给、载具和符合航路的时间；远航不能当作跨一间房。
+    access:
+      kind: public
+  - id: innerstar-harbor-route-innerstar-near-reef
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-near-reef
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-harbor-condition-innerstar-near-reef
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 离港可到的礁区，潮沟深浅不同；绕行与近探各有耗时。
+    description: 离港可到的礁区，潮沟深浅不同；绕行与近探各有耗时。
+    access:
+      kind: public
+  - id: innerstar-harbor-route-innerstar-nanming-port
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-nanming-port
+    description: 沿近海航线前往南明港，须船、御器或相应通行能力，海况和给养实际核定。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

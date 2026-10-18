@@ -1,0 +1,26 @@
+id: spirit-yuyang-basics-book
+kind: item
+name: 圣塔基础炼体选读
+description: 介绍常见基础炼体的风险与练法比较，非传授全部高阶秘术。
+placement: spirit-yuyang-tower
+facts:
+  - id: spirit-yuyang-basics-book-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-yuyang-librarian
+    description: 实际物权归属；取用须获授权。
+    access:
+      kind: private
+  - id: spirit-yuyang-basics-book-reading-access
+    predicate: reading-access
+    value:
+      kind: text
+      value: 值员可让来客当面读普通入门页；借抄完整册须交两枚低阶灵石抄写费并实际抄录7200秒。读书只能形成相应理解，练习仍需教师、身体条件与耗材。
+    description: 值员可让来客当面读普通入门页；借抄完整册须交两枚低阶灵石抄写费并实际抄录7200秒。读书只能形成相应理解，练习仍需教师、身体条件与耗材。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

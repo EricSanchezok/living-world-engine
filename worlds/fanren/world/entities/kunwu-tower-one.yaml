@@ -1,0 +1,42 @@
+id: kunwu-tower-one
+kind: location
+name: 镇魔塔一层
+description: 旧囚室与向下阶道；具体囚室状态须分别查看。
+placement: kunwu-sealed-mountain
+facts:
+  - id: kunwu-tower-one-route-kunwu-tower-trench
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-trench
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-one-condition-kunwu-tower-trench
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 入塔须处理入口封禁。
+    description: 入塔须处理入口封禁。
+    access:
+      kind: public
+  - id: kunwu-tower-one-route-kunwu-tower-two
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: kunwu-tower-two
+    description: route-to
+    access:
+      kind: public
+  - id: kunwu-tower-one-condition-kunwu-tower-two
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    description: 沿塔内下行道，逐层承担真实封禁和现存囚物的危险。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

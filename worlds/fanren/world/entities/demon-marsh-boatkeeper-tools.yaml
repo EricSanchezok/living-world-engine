@@ -1,0 +1,22 @@
+id: demon-marsh-boatkeeper-tools
+kind: container
+name: 泽绡的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-marsh-boatkeeper
+facts:
+  - id: demon-marsh-boatkeeper-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-marsh-boatkeeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,26 @@
+id: feiling-kunpeng-soul-remnant
+kind: item
+name: 鲲鹏残圣魂
+description: 一只古鲲鹏的小半圣魂，受塔禁封护；完整性有限，脱离护塔牵连族禁。
+placement: feiling-sealed-soul-tower
+facts:
+  - id: feiling-kunpeng-soul-remnant-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: feiling-tianpeng-people
+    description: owned-by
+    access:
+      kind: private
+  - id: feiling-kunpeng-soul-remnant-integrity
+    predicate: integrity
+    value:
+      kind: text
+      value: 残缺圣魂，不能补足成另一头有完整意志、法力与记忆的鲲鹏。
+    description: 残缺圣魂，不能补足成另一头有完整意志、法力与记忆的鲲鹏。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

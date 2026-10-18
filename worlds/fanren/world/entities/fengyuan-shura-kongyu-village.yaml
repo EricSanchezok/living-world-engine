@@ -1,0 +1,35 @@
+id: fengyuan-shura-kongyu-village
+kind: location
+name: 乾火池下空鱼聚落
+description: 三角小屋沿暖水光幕边缘排列，弯曲圆弧文字记着家事与工艺，通向上层熔岩的出口由族人看守。
+placement: fengyuan-shura-dryfire
+facts:
+  - id: fengyuan-shura-kongyu-village-route-to-fengyuan-shura-dryfire
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: fengyuan-shura-dryfire
+    description: route-to
+    access:
+      kind: public
+  - id: fengyuan-shura-kongyu-village-route-conditions-fengyuan-shura-dryfire
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 须实际穿过热熔岩并获光幕通路，空鱼生活适应不自动传给异族。
+    description: 须实际穿过热熔岩并获光幕通路，空鱼生活适应不自动传给异族。
+    access:
+      kind: public
+  - id: fengyuan-shura-kongyu-village-root-detail-kongyu-firebath
+    predicate: root-detail-kongyu-firebath
+    value:
+      kind: text
+      value: 空鱼族浴火暂增体法力依适生血脉和方法，普通生灵不能照做即升阶。
+    description: 空鱼族浴火暂增体法力依适生血脉和方法，普通生灵不能照做即升阶。
+    access:
+      kind: discoverable
+      condition: 在当地实际观察、勘测、检验或取得相应可靠记录。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

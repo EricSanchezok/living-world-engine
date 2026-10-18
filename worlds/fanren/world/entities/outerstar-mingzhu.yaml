@@ -1,0 +1,26 @@
+id: outerstar-mingzhu
+kind: location
+name: 明珠轩
+description: 鉴定、寄售与拍卖分在不同房间。
+placement: outerstar-blackstone-city
+facts:
+  - id: outerstar-mingzhu-route-outerstar-blackstone-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: outerstar-blackstone-city
+    description: route-to
+    access:
+      kind: public
+  - id: outerstar-mingzhu-condition-outerstar-blackstone-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 鉴定、寄售与拍卖分在不同房间。
+    description: 鉴定、寄售与拍卖分在不同房间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

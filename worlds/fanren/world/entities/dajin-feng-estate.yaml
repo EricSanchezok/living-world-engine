@@ -1,0 +1,43 @@
+id: dajin-feng-estate
+kind: location
+name: 冯家院落
+description: 家族日常办事与保管族物的院地。
+placement: dajin-guanning
+facts:
+  - id: dajin-feng-estate-route-dajin-guanning
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-guanning
+    description: 沿来路返回上级地域，仍须实际行程。
+    access:
+      kind: public
+  - id: dajin-feng-estate-route-dajin-feng-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-store
+    description: 族库入口受保管禁制约束，须得到家族许可。
+    access:
+      kind: discoverable
+      condition: 取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。
+  - id: dajin-feng-estate-route-dajin-du-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-du-house
+    description: 沿当地田间路往来，要实际行走。
+    access:
+      kind: public
+  - id: dajin-feng-estate-route-dajin-feng-tenant-field
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-feng-tenant-field
+    description: 沿当地田间路往来，要实际行走。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

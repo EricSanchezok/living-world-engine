@@ -1,0 +1,26 @@
+id: blood-old-explorer-remains-1
+kind: item
+name: 旧次探索者遗骸1
+description: 旧次冲突遗留骸骨，已死去，不是可无代价复活的当前NPC。
+placement: blood-core-hall
+facts:
+  - id: blood-old-explorer-remains-1-ancient-custody
+    predicate: ancient-custody
+    value:
+      kind: text
+      value: 古禁制封存，尚未被取走。
+    description: 古禁制封存，尚未被取走。
+    access:
+      kind: private
+  - id: blood-old-explorer-remains-1-physical-state
+    predicate: physical-state
+    value:
+      kind: text
+      value: 仅剩半边躯体，旁有四口断成十余片的乌黑飞剑。
+    description: 仅剩半边躯体，旁有四口断成十余片的乌黑飞剑。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

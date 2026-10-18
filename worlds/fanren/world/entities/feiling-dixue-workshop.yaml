@@ -1,0 +1,26 @@
+id: feiling-dixue-workshop
+kind: location
+name: 地血炼制室
+description: 地血个人炼制傀儡和研究分神的山腹工房。
+placement: feiling-bloodflame-palace
+facts:
+  - id: feiling-dixue-workshop-route-to-feiling-bloodflame-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-bloodflame-palace
+    description: route-to
+    access:
+      kind: private
+  - id: feiling-dixue-workshop-route-conditions-feiling-bloodflame-palace
+    predicate: route-conditions
+    value:
+      kind: text
+      value: 宫内廊道通试作室，未经允许不动台上材料。
+    description: 宫内廊道通试作室，未经允许不动台上材料。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

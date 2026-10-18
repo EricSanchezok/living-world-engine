@@ -398,7 +398,7 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
     process.on("SIGINT", stop);
     process.on("SIGTERM", stop);
     timer = setInterval(report, 10_000);
-    installBundledWorlds(database, provider.catalog, variant?.worldsRoot);
+    installBundledWorlds(database, provider.catalog, variant?.worldsRoot, ["blackmarsh"]);
     const loadedWorld = database.load("blackmarsh", protocol.seed, provider.catalog);
     if (preparedWorld && loadedWorld.contentHash !== preparedWorld.contentHash) throw new Error("persisted world differs from retrieval preflight");
     if (variant && loadedWorld.modelProfiles.creation !== variant.groundingProfileId) throw new Error("persisted world grounding profile differs from the frozen variant");

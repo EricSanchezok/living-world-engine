@@ -1,0 +1,18 @@
+id: spirit3-current-xuanwu-ruler-seal
+kind: item
+name: 玄武霸皇现用印令
+description: 证明当前职务的印令，单凭印令不能越过实物所有权与已定约束。
+placement: spirit3-current-xuanwu-ruler
+facts:
+  - id: spirit3-current-xuanwu-ruler-seal-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit3-xuanwu-court
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

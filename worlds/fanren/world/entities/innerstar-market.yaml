@@ -1,0 +1,82 @@
+id: innerstar-market
+kind: location
+name: 天星坊市
+description: 丹药、法器、材料和修理铺各有自己的货物与经营者。
+placement: human-tianxing-city
+facts:
+  - id: innerstar-market-route-human-tianxing-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-tianxing-city
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-market-condition-human-tianxing-city
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 丹药、法器、材料和修理铺各有自己的货物与经营者。
+    description: 丹药、法器、材料和修理铺各有自己的货物与经营者。
+    access:
+      kind: public
+  - id: innerstar-market-route-innerstar-miaoyin-house
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-miaoyin-house
+    description: route-to
+    access:
+      kind: public
+  - id: innerstar-market-condition-innerstar-miaoyin-house
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 接待商客和洽谈贸易的院落，后院也供女弟子练艺与修行。
+    description: 接待商客和洽谈贸易的院落，后院也供女弟子练艺与修行。
+    access:
+      kind: public
+  - id: innerstar-market-route-innerstar-baimen-bookshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-baimen-bookshop
+    description: 沿城中街路通往白门阁
+    access:
+      kind: public
+  - id: innerstar-market-access-innerstar-baimen-bookshop
+    predicate: access-innerstar-baimen-bookshop
+    value:
+      kind: text
+      value: 需要实际行至门口并按接待情况进入。
+    description: 需要实际行至门口并按接待情况进入。
+    access:
+      kind: public
+  - id: innerstar-market-route-innerstar-fengle-auction
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-fengle-auction
+    description: 沿城中街路通往丰乐拍卖行
+    access:
+      kind: public
+  - id: innerstar-market-access-innerstar-fengle-auction
+    predicate: access-innerstar-fengle-auction
+    value:
+      kind: text
+      value: 需要实际行至门口并按接待情况进入。
+    description: 需要实际行至门口并按接待情况进入。
+    access:
+      kind: public
+  - id: innerstar-market-route-innerstar-qinghe-teahouse
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-qinghe-teahouse
+    description: 沿坊市街道可步行往返。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

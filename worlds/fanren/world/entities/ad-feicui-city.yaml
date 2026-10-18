@@ -1,0 +1,26 @@
+id: ad-feicui-city
+kind: location
+name: 翡翠魔城
+description: 旧有城池，近城传送台是否可用取决于当前守备与供能。
+placement: associated-demon-realm
+facts:
+  - id: ad-feicui-city-route-to-ad-lanpu-city
+    predicate: route-to-ad-lanpu-city
+    value:
+      kind: entity
+      entityId: ad-lanpu-city
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+  - id: ad-feicui-city-route-to-ad-shuojin-valley
+    predicate: route-to-ad-shuojin-valley
+    value:
+      kind: entity
+      entityId: ad-shuojin-valley
+    description: 循有据地理与当前勘定道路往返；须足够行旅时间、补给及当地通行许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

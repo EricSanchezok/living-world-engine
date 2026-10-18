@@ -1,0 +1,20 @@
+id: yue-tianhe-tea
+kind: item
+name: 雪铃茶罐
+description: 茶汤清凉有香，必须取实际茶叶和水冲泡。
+placement: yue-tianhe-teahouse
+facts:
+  - id: yue-tianhe-tea-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: yue-yan-clan
+    description: 所有权与携带、保管和使用许可分别处理。
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: yue-xueling-tea
+    amount: 12
+ratings: []
+shared_activity_resources: []

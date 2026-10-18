@@ -1,0 +1,27 @@
+id: thunder-rubbing-stub
+kind: item
+name: 拓本出售存底
+description: 记载荔册把一份旧纪事拓本售给柳窗，注明旧件参考。
+placement: thunder-tianxu-hall
+facts:
+  - id: thunder-rubbing-stub-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-wangu-people
+    description: owned-by
+    access:
+      kind: private
+  - id: thunder-rubbing-stub-counterpart
+    predicate: counterpart
+    value:
+      kind: entity
+      entityId: thunder-old-guanghan-rubbing
+    description: counterpart
+    access:
+      kind: discoverable
+      condition: 向荔册请求查阅该次出售记录并获同意。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

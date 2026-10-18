@@ -1,0 +1,18 @@
+id: fengyuan-wuling-furnace
+kind: item
+name: 乌灵试火炉
+description: 小型耐火炉，可投入一份本人现有工料与40法力试炼；失败会损耗原料，炉体也可能受伤。
+placement: canon-wu-ling-lady
+facts:
+  - id: fengyuan-wuling-furnace-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-wu-ling-lady
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

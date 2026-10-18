@@ -1,0 +1,20 @@
+id: seas-travel-price-fund
+kind: container
+name: 岑枝出行预算
+description: 本人预留费用，不含盟中任何公共灵石。
+placement: seas-herb-scholar
+facts:
+  - id: seas-travel-price-fund-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: seas-herb-scholar
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: high-stone
+    amount: 16
+ratings: []
+shared_activity_resources: []

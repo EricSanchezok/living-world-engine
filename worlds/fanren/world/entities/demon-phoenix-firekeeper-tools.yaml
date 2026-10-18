@@ -1,0 +1,22 @@
+id: demon-phoenix-firekeeper-tools
+kind: container
+name: 筱砚的随身工具
+description: 维护工作所用工具与材料。
+placement: demon-phoenix-firekeeper
+facts:
+  - id: demon-phoenix-firekeeper-tools-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: demon-phoenix-firekeeper
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: craft-material
+    amount: 5
+  - definition_id: low-stone
+    amount: 30
+ratings: []
+shared_activity_resources: []

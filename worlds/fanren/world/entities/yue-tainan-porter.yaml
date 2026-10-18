@@ -1,0 +1,149 @@
+id: yue-tainan-porter
+kind: person
+name: 陆全
+description: 广贵城搬货人，负责来往山脚的普通货物。
+placement: yue-guanggui
+facts:
+  - id: yue-tainan-porter-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 凡人
+    description: 凡人
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-porter
+  - id: yue-tainan-porter-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 搬运、山路经验和普通木器修补。
+    description: 搬运、山路经验和普通木器修补。
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-porter
+  - id: yue-tainan-porter-spiritual-root
+    predicate: spiritual-root
+    value:
+      kind: text
+      value: 无灵根的凡人。
+    description: 无灵根的凡人。
+    access:
+      kind: agents
+      agentIds:
+        - yue-tainan-porter
+meters:
+  - id: yue-tainan-porter-health
+    definition_id: health
+    current: 100
+quantities:
+  - definition_id: copper
+    amount: 120
+ratings:
+  - id: yue-tainan-porter-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: yue-tainan-porter-force
+    definition_id: force
+    value: 1
+  - id: yue-tainan-porter-craft
+    definition_id: craft
+    value: 1
+  - id: yue-tainan-porter-perception
+    definition_id: perception
+    value: 0
+  - id: yue-tainan-porter-influence
+    definition_id: influence
+    value: 1
+shared_activity_resources: []
+agent:
+  id: yue-tainan-porter
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 广贵城搬货人，负责来往山脚的普通货物。
+      voice: 嗓门大，会用山路石阶解释为什么要加钱。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 为明日上山搬运开出清楚的报价，等待愿意付工钱的人。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 陆全
+        description: 广贵城搬货人，负责来往山脚的普通货物。
+        status: observed
+      - id: location
+        name: 广贵城
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-yue-tainan-porter-pouch
+        name: 陆全的私用行囊
+        description: 自己保管的普通衣物、文具和日用器物，机构公库不在其中。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自己经历、修学及明确记录的当期往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 搬运、山路经验和普通木器修补。
+        description: 搬运、山路经验和普通木器修补。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: current-purpose
+        subjectId: self
+        predicate: current-purpose
+        value:
+          kind: text
+          value: 为明日上山搬运开出清楚的报价，等待愿意付工钱的人。
+        description: 为明日上山搬运开出清楚的报价，等待愿意付工钱的人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: own-rank
+        subjectId: self
+        predicate: own-rank
+        value:
+          kind: text
+          value: 自己是凡人。
+        description: 自己是凡人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - yue-tainan-porter
+      - local_entity_id: location
+        canonical_entity_ids:
+          - yue-guanggui
+      - local_entity_id: known-yue-tainan-porter-pouch
+        canonical_entity_ids:
+          - yue-tainan-porter-pouch

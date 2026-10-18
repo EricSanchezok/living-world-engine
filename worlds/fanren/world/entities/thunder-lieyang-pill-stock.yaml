@@ -1,0 +1,36 @@
+id: thunder-lieyang-pill-stock
+kind: container
+name: 地火窖中的烈阳神丹
+description: 丹匣内只有一颗火性旧丹，长年受地火温养。
+placement: thunder-fireyang-earthfire-cellar
+facts:
+  - id: thunder-lieyang-pill-stock-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: thunder-fireyang-community
+    description: 丹药为部族共有。
+    access:
+      kind: private
+  - id: thunder-lieyang-pill-stock-custodian
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: thunder-fireyang-herbalist
+    description: 芷鳞受托维护和议价，不能将族物当私产。
+    access:
+      kind: private
+  - id: thunder-lieyang-pill-stock-use-rule
+    predicate: use-rule
+    value:
+      kind: text
+      value: 取用须打开丹匣；服用消耗一颗，不能将丹匣和其中丹药重复计数。取出后不再受此窖地火温养。疗伤须依实际伤势、火性适配和炼化判断，祭司所称起死回生不能作为无条件复活保证，效果须有实际依据。
+    description: 服用扣除实际丹药，疗效依伤势与炼化。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: thunder-lieyang-pill
+    amount: 1
+ratings: []
+shared_activity_resources: []

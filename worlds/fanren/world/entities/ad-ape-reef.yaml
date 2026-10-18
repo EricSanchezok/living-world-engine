@@ -1,0 +1,42 @@
+id: ad-ape-reef
+kind: location
+name: 魔猿礁
+description: 海中如举臂巨猿的黑色高礁，能作为找路参照而非自动定位全海。
+placement: associated-demon-realm
+facts:
+  - id: ad-ape-reef-route-ad-moyuan-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-moyuan-sea
+    description: route-to
+    access:
+      kind: public
+  - id: ad-ape-reef-condition-ad-moyuan-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+  - id: ad-ape-reef-route-ad-kuling-thunder-sea
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: ad-kuling-thunder-sea
+    description: route-to
+    access:
+      kind: public
+  - id: ad-ape-reef-condition-ad-kuling-thunder-sea
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    description: 沿实际地域行进并满足当地环境、补给、许可与防护要求；连接是可达关系，不保证在一次短行动中跨越广大地区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

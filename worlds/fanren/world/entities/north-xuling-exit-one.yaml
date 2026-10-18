@@ -1,0 +1,28 @@
+id: north-xuling-exit-one
+kind: item
+name: 主殿常规出殿阵
+description: 一座小型出口阵，尚未启动。
+placement: north-xuling-first-main
+facts:
+  - id: north-xuling-exit-one-owner
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: north-xiaoji-palace
+    description: 所有权不随携带或任职自动转移。
+    access:
+      kind: public
+  - id: north-xuling-exit-one-destination
+    predicate: transmission-destination
+    value:
+      kind: entity
+      entityId: north-inner-palace
+    description: transmission-destination
+    access:
+      kind: public
+meters: []
+quantities:
+  - definition_id: low-stone
+    amount: 20
+ratings: []
+shared_activity_resources: []

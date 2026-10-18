@@ -1,0 +1,20 @@
+id: ad-flood-feed
+kind: container
+name: 三首蛟养护血料
+description: 已备好的四份相容养护血料，每次恢复养护耗一份，不代替法力修炼。
+placement: ad-yuan-retreat
+facts:
+  - id: ad-flood-feed-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: canon-yuan-yan
+    description: owned-by
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: sacred-beast-blood
+    amount: 4
+ratings: []
+shared_activity_resources: []

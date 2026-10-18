@@ -1,0 +1,18 @@
+id: void-ghosts
+kind: animal-group
+name: 鬼雾阴灵群
+description: 徘徊在鬼雾中的阴灵群。
+placement: void-mist
+facts:
+  - id: void-ghosts-living-count
+    predicate: living-count
+    value:
+      kind: number
+      value: 72
+    description: living-count
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

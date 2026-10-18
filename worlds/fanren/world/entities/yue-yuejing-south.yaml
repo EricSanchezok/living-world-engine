@@ -1,0 +1,18 @@
+id: yue-yuejing-south
+kind: location
+name: 南城区
+description: 官吏勋贵按品级分配的宅院，不得任意越制扩建。
+placement: yue-yuejing
+facts:
+  - id: yue-yuejing-south-route-yue-yuejing
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: yue-yuejing
+    description: 经城区道路到入口；皇城和官署门口另有身份及凭据查验。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

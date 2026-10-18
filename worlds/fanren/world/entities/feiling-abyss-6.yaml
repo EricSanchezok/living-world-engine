@@ -1,0 +1,58 @@
+id: feiling-abyss-6
+kind: location
+name: 地渊第6层
+description: 地下第6层。阴气、地形和居民各异；不同层次通道须实际辨认。
+placement: feiling-territory
+facts:
+  - id: feiling-abyss-6-route-feiling-abyss-5
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-5
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-6-condition-feiling-abyss-5
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-6-route-feiling-abyss-7
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-abyss-7
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-6-condition-feiling-abyss-7
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    description: 这是经实际层间通道的长程连通，须探路、避暗秽寒风并消耗行程；不能直接在层名之间瞬移。
+    access:
+      kind: public
+  - id: feiling-abyss-6-route-feiling-blue-ghost-palace
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: feiling-blue-ghost-palace
+    description: route-to
+    access:
+      kind: public
+  - id: feiling-abyss-6-condition-feiling-blue-ghost-palace
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 鬼道修士居住的宫殿，寒潭和内室有严格进入条件。
+    description: 鬼道修士居住的宫殿，寒潭和内室有严格进入条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

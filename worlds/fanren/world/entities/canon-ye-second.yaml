@@ -1,0 +1,177 @@
+id: canon-ye-second
+kind: person
+name: 叶家方脸修士
+description: 族内被称二哥的方脸修士，尚未在昆吾遭难，和白袍族兄弟有议事关系。
+placement: south-ye-estate
+facts:
+  - id: canon-ye-second-cultivation-state
+    predicate: cultivation-state
+    value:
+      kind: text
+      value: 元婴
+    description: 元婴
+    access:
+      kind: agents
+      agentIds:
+        - canon-ye-second
+  - id: canon-ye-second-learned-skill
+    predicate: learned-skill
+    value:
+      kind: text
+      value: 元婴初期护身与家族术法。
+    description: 元婴初期护身与家族术法。
+    access:
+      kind: agents
+      agentIds:
+        - canon-ye-second
+  - id: canon-ye-second-cultivation-foundation
+    predicate: cultivation-foundation
+    value:
+      kind: text
+      value: 木、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    description: 木、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+    access:
+      kind: agents
+      agentIds:
+        - canon-ye-second
+  - id: canon-ye-second-opening-stage
+    predicate: opening-stage
+    value:
+      kind: text
+      value: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    description: 修行与任职经历只形成已学能力，使用器物须实际持有。
+    access:
+      kind: private
+  - id: canon-ye-second-clan-brother-canon-ye-elder
+    predicate: clan-brother
+    value:
+      kind: entity
+      entityId: canon-ye-elder
+    description: clan-brother
+    access:
+      kind: private
+  - id: canon-ye-second-member-of
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: south-ye-family
+    description: member-of
+    access:
+      kind: private
+meters:
+  - id: canon-ye-second-health
+    definition_id: health
+    current: 100
+  - id: canon-ye-second-mana
+    definition_id: mana
+    current: 880
+quantities: []
+ratings:
+  - id: canon-ye-second-cultivation
+    definition_id: cultivation
+    value: 4
+  - id: canon-ye-second-force
+    definition_id: force
+    value: 5
+  - id: canon-ye-second-craft
+    definition_id: craft
+    value: 4
+  - id: canon-ye-second-perception
+    definition_id: perception
+    value: 4
+  - id: canon-ye-second-influence
+    definition_id: influence
+    value: 4
+shared_activity_resources: []
+agent:
+  id: canon-ye-second
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-deepseek
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 族内被称二哥的方脸修士，尚未在昆吾遭难，和白袍族兄弟有议事关系。
+      voice: 对含糊汇报会催问，保护家族时较易激动。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 核对族中外派人员的实际回报。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 叶家方脸修士
+        description: 族内被称二哥的方脸修士，尚未在昆吾遭难，和白袍族兄弟有议事关系。
+        status: observed
+      - id: location
+        name: 叶家修士内院
+        description: 自己当前所在之处。
+        status: observed
+      - id: known-canon-ye-second-personal-stock
+        name: 叶家方脸修士的私用行囊
+        description: 个人修行、行旅储备，与宗门或族产不同。
+        status: observed
+      - id: known-canon-ye-elder
+        name: 叶家白袍修士
+        description: 叶家长辈共同议事，知道家族仍在准备古迹计划。
+        status: observed
+      - id: known-south-ye-family
+        name: 叶氏修仙家族
+        description: 自己所属宗门或家族，公产不能随意当私人财物。
+        status: observed
+    evidence:
+      - id: prior-life
+        kind: observation
+        description: 自身经历、修行和职务往来。
+        sourceId: null
+        step: 0
+    claims:
+      - id: learned-skill
+        subjectId: self
+        predicate: learned-skill
+        value:
+          kind: text
+          value: 元婴初期护身与家族术法。
+        description: 元婴初期护身与家族术法。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+      - id: self-cultivation-foundation
+        subjectId: self
+        predicate: self-cultivation-foundation
+        value:
+          kind: text
+          value: 木、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        description: 木、水、土三灵根，早年检测已知，后续检测只揭示既有属性。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - prior-life
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-ye-second
+      - local_entity_id: location
+        canonical_entity_ids:
+          - south-ye-estate
+      - local_entity_id: known-canon-ye-second-personal-stock
+        canonical_entity_ids:
+          - canon-ye-second-personal-stock
+      - local_entity_id: known-canon-ye-elder
+        canonical_entity_ids:
+          - canon-ye-elder
+      - local_entity_id: known-south-ye-family
+        canonical_entity_ids:
+          - south-ye-family

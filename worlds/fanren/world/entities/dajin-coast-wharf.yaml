@@ -1,0 +1,35 @@
+id: dajin-coast-wharf
+kind: location
+name: 华云潮平码头
+description: 沿海码头，接纳有确切船期和货单的海船。
+placement: dajin-huayun
+facts:
+  - id: dajin-coast-wharf-route-dajin-huayun
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-huayun
+    description: 州内道路到海港，依实际距离和方式计算。
+    access:
+      kind: public
+  - id: dajin-coast-wharf-travel-dajin-huayun
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 州内道路到海港，依实际距离和方式计算。
+    description: 州内道路到海港，依实际距离和方式计算。
+    access:
+      kind: public
+  - id: dajin-coast-wharf-route-dajin-kuzhu-mist
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: dajin-kuzhu-mist
+    description: 先从可靠航图或沿海修士取得方位，再以实际航行或飞遁抵达，不能仅凭岛名瞬移。
+    access:
+      kind: discoverable
+      condition: 从航图或知情修士取得此岛可靠方位，或实际航行辨认此处。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

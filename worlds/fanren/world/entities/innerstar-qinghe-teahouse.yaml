@@ -1,0 +1,34 @@
+id: innerstar-qinghe-teahouse
+kind: location
+name: 清河茶馆
+description: 挂茶旗的会客阁楼，茶具和房间需由经营者安排。
+placement: innerstar-market
+facts:
+  - id: innerstar-qinghe-teahouse-route-innerstar-market
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-market
+    description: 沿坊市街道可步行往返。
+    access:
+      kind: public
+  - id: innerstar-qinghe-teahouse-route-innerstar-longxing-inn
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: innerstar-longxing-inn
+    description: 两店沿城内街道可往返，需实际步行。
+    access:
+      kind: public
+  - id: innerstar-qinghe-teahouse-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: innerstar-tea-keeper
+    description: 叶岑经营管理，租借或出售须实际协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

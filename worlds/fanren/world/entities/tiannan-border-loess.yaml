@@ -1,0 +1,34 @@
+id: tiannan-border-loess
+kind: location
+name: 九国边境黄土荒地
+description: 修士与法士往来冲突的漫长黄土带，风尘遮目；战斗取决于现场遇见的人与选择。
+placement: human-tiannan
+facts:
+  - id: tiannan-border-loess-route-human-yu
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: human-yu
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: tiannan-border-loess-travel-human-yu
+    predicate: travel-condition
+    value:
+      kind: text
+      value: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    description: 沿实际跨区道路或遁行到达，距离与行程需计入世界时间；禁门、边界与私宅另需许可。
+    access:
+      kind: public
+  - id: steppe-route-tiannan-border-loess-steppe-mulan-north
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: steppe-mulan-north
+    description: 北越黄土荒野可到九国方向；整片荒地近万里，须按实际能力与路径耗时，补给、风沙、巡逻和隐蔽各有影响。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

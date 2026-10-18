@@ -1,0 +1,18 @@
+id: spirit-yuyang-tower
+kind: location
+name: 虞阳圣塔
+description: 收藏炼体法门与心得的塔楼，阅览者须按藏本权限取阅，不得以读过一页自称练成。
+placement: spirit-yuyang-city
+facts:
+  - id: spirit-yuyang-tower-route-spirit-yuyang-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: spirit-yuyang-city
+    description: 收藏炼体法门与心得的塔楼，阅览者须按藏本权限取阅，不得以读过一页自称练成。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

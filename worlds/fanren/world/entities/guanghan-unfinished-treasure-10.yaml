@@ -1,0 +1,27 @@
+id: guanghan-unfinished-treasure-10
+kind: item
+name: 古如意胚10
+description: 一件未完成炼制的古宝胚体，内部结构真实存在，但完整功用与后续工艺须研究。
+placement: guanghan-snowwood-rack-2
+facts:
+  - id: guanghan-unfinished-treasure-10-custody-status
+    predicate: custody-status
+    value:
+      kind: text
+      value: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    description: 在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。
+    access:
+      kind: private
+  - id: guanghan-unfinished-treasure-10-craft-state
+    predicate: craft-state
+    value:
+      kind: text
+      value: 半成品；不能当成已经炼成的通天灵宝，强行催动可能损伤。
+    description: 半成品；不能当成已经炼成的通天灵宝，强行催动可能损伤。
+    access:
+      kind: discoverable
+      condition: 实际检查器体、禁纹和响应。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

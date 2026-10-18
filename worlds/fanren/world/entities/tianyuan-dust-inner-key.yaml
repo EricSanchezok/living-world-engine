@@ -1,0 +1,27 @@
+id: tianyuan-dust-inner-key
+kind: item
+name: 丹箱内锁钥匙
+description: 丹箱内锁钥匙，交接痕迹清楚可辨。
+placement: tianyuan-dust-physician
+facts:
+  - id: tianyuan-dust-inner-key-owned-by
+    predicate: owned-by
+    value:
+      kind: entity
+      entityId: spirit-city-council
+    description: owned-by
+    access:
+      kind: private
+  - id: tianyuan-dust-inner-key-contents
+    predicate: contents
+    value:
+      kind: text
+      value: 对应灭尘丹封存箱内锁，由周砚丹保管；两人共同检查领用理由与记录后才能正常开启。
+    description: 对应灭尘丹封存箱内锁，由周砚丹保管；两人共同检查领用理由与记录后才能正常开启。
+    access:
+      kind: discoverable
+      condition: 实际查看纸面或物件；封缄需获许可拆开，持有不自动等于已经阅读。
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []
