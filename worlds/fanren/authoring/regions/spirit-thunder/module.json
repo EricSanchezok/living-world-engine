@@ -181,11 +181,11 @@
       "quantities": []
     },
     {
-      "id": "thunder-alliance-seat-7",
-      "name": "天云第7族议席",
+      "id": "thunder-cloud-people",
+      "name": "云族",
       "kind": "social-group",
       "placement": "thunder-tianyun",
-      "description": "十三族中一席的现存组织职能；日常记录按议席区分，族中人各有自身生活。",
+      "description": "天云十三族之一，擅长变化与隐匿的族人不少；族人各自修行，也有人另走火法。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -551,6 +551,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "thunder-cloud-city-route-to-thunder-northern-ice-domain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-northern-ice-domain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-city-route-conditions-thunder-northern-ice-domain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。"
+          },
+          "description": "跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -634,6 +658,30 @@
           "description": "负责旧阵、商路和城防的驻守机构。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "thunder-greenlight-city-route-to-thunder-firecoral-deepwater",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-deepwater"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-greenlight-city-route-conditions-thunder-firecoral-deepwater",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。"
+          },
+          "description": "跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -874,6 +922,78 @@
           "description": "核验实际身份和携带物的入城处，普通访客可以询问居停手续。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-route-to-thunder-cloud-archive",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-archive"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-route-conditions-thunder-cloud-archive",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经公开街巷，入档案内室另需借阅许可。"
+          },
+          "description": "经公开街巷，入档案内室另需借阅许可。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-route-to-thunder-small-clan-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-small-clan-court"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-route-conditions-thunder-small-clan-court",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经城内道路可到公共院落，客房不随意开放。"
+          },
+          "description": "经城内道路可到公共院落，客房不随意开放。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-route-to-thunder-wangu-crisis-exit",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-crisis-exit"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-gate-travel-condition-thunder-wangu-crisis-exit",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。"
+          },
+          "description": "须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -1667,6 +1787,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "thunder-greenlight-office-route-to-thunder-wangu-crisis-entry",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-crisis-entry"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-greenlight-office-travel-condition-thunder-wangu-crisis-entry",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。"
+          },
+          "description": "元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -2266,6 +2410,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "thunder-jiaochi-frontier-route-to-thunder-gailing-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-gailing-city"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-jiaochi-frontier-route-conditions-thunder-gailing-city",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。"
+          },
+          "description": "长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -2691,6 +2859,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "canon-qian-ji-zi-crisis-array-skill",
+          "predicate": "crisis-array-skill",
+          "value": {
+            "kind": "text",
+            "value": "掌握此对万古密阵的启动、两端检查和停阵法，启动还须实物供能。"
+          },
+          "description": "掌握此对万古密阵的启动、两端检查和停阵法，启动还须实物供能。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -2856,6 +3036,36 @@
               "name": "沙夫人",
               "description": "在长期联盟族务中拜见过的前辈，知道其公开身份，不能据此知道当前所在或私人打算。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-entry",
+              "name": "万古危急阵内室",
+              "description": "知道本族内室和开启法，紧急用途须有授权。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-exit",
+              "name": "云城外密阵石室",
+              "description": "掌握该密阵另一端所在，不把它当成公开道路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-fuel",
+              "name": "万古危急阵用石",
+              "description": "本次封存八枚用石，消耗后需补，不能凭授权生石。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-canon-qian-ji-zi-message-case",
+              "name": "千机子的万里符匣",
+              "description": "自己保管的有限传讯符，只能传所写内容。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-canon-greenlight-yuan",
+              "name": "元姓驻守",
+              "description": "既有族务联系，掌握对方已约定的传讯印记。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2953,6 +3163,36 @@
               "local_entity_id": "known-canon-sha-thunder-elder",
               "canonical_entity_ids": [
                 "canon-sha-thunder-elder"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-entry",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-entry"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-exit",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-exit"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-fuel",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-fuel"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-canon-qian-ji-zi-message-case",
+              "canonical_entity_ids": [
+                "canon-qian-ji-zi-message-case"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-canon-greenlight-yuan",
+              "canonical_entity_ids": [
+                "canon-greenlight-yuan"
               ]
             }
           ],
@@ -4080,6 +4320,18 @@
               "name": "沙夫人",
               "description": "在长期联盟族务中拜见过的前辈，知道其公开身份，不能据此知道当前所在或私人打算。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jing-medicine-stock",
+              "name": "晶院成药小库",
+              "description": "已清点的族库成药，一颗一份；私人所得与学徒用料另计。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jing-restricted-craft",
+              "name": "晶院密传药札",
+              "description": "族内密札须守授权，自己知道其保管而不向外来人无偿转授。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -4183,6 +4435,18 @@
               "local_entity_id": "known-canon-sha-thunder-elder",
               "canonical_entity_ids": [
                 "canon-sha-thunder-elder"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jing-medicine-stock",
+              "canonical_entity_ids": [
+                "thunder-jing-medicine-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jing-restricted-craft",
+              "canonical_entity_ids": [
+                "thunder-jing-restricted-craft"
               ]
             }
           ],
@@ -6588,6 +6852,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "canon-greenlight-yuan-crisis-array-skill",
+          "predicate": "crisis-array-skill",
+          "value": {
+            "kind": "text",
+            "value": "掌握此对万古密阵的启动、两端检查和停阵法，启动还须实物供能。"
+          },
+          "description": "掌握此对万古密阵的启动、两端检查和停阵法，启动还须实物供能。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -6687,6 +6963,36 @@
               "name": "绿光至火瑚古阵",
               "description": "长期损坏的旧阵，本轮尚未决定投入修复。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-entry",
+              "name": "万古危急阵内室",
+              "description": "知道本族内室和开启法，紧急用途须有授权。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-exit",
+              "name": "云城外密阵石室",
+              "description": "掌握该密阵另一端所在，不把它当成公开道路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wangu-crisis-fuel",
+              "name": "万古危急阵用石",
+              "description": "本次封存八枚用石，消耗后需补，不能凭授权生石。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-canon-greenlight-yuan-message-case",
+              "name": "元姓驻守的万里符匣",
+              "description": "自己保管的有限传讯符，只能传所写内容。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-canon-qian-ji-zi",
+              "name": "千机子",
+              "description": "既有族务联系，掌握对方已约定的传讯印记。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6718,6 +7024,36 @@
               "local_entity_id": "known-thunder-firecoral-old-array",
               "canonical_entity_ids": [
                 "thunder-firecoral-old-array"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-entry",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-entry"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-exit",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-exit"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wangu-crisis-fuel",
+              "canonical_entity_ids": [
+                "thunder-wangu-crisis-fuel"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-canon-greenlight-yuan-message-case",
+              "canonical_entity_ids": [
+                "canon-greenlight-yuan-message-case"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-canon-qian-ji-zi",
+              "canonical_entity_ids": [
+                "canon-qian-ji-zi"
               ]
             }
           ],
@@ -6996,6 +7332,12 @@
               "name": "遮蔽试验罩",
               "description": "自己参与的有限试验器具，尚未对当前布置得出结果。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-bell-custodian",
+              "name": "谛晷",
+              "description": "与研武院有公文往来的守钟者，需要对方准许才可观测。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -7057,6 +7399,12 @@
               "local_entity_id": "known-thunder-jiaochi-screen",
               "canonical_entity_ids": [
                 "thunder-jiaochi-screen"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-bell-custodian",
+              "canonical_entity_ids": [
+                "thunder-bell-custodian"
               ]
             }
           ],
@@ -7509,6 +7857,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-jiaochi-ning-blood-soul-art",
+          "predicate": "blood-soul-art",
+          "value": {
+            "kind": "text",
+            "value": "已学化血离魂，需离魂并接近可作用目标；本体须承担无人操控的风险，吸得精血未炼完不得重施。此刻没有待炼的被吸精血。"
+          },
+          "description": "已学化血离魂，需离魂并接近可作用目标；本体须承担无人操控的风险，吸得精血未炼完不得重施。此刻没有待炼的被吸精血。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -7751,6 +8111,21 @@
                 "value": "按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。"
               },
               "description": "按当地纪时此时为夜段；洞内照明与天色另作观察，此后随实际经过的时间更新判断。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "blood-soul-art",
+              "subjectId": "self",
+              "predicate": "blood-soul-art",
+              "value": {
+                "kind": "text",
+                "value": "自己已学化血离魂，施术离魂有风险；吸血未炼完不能再施，此刻没有待炼精血。"
+              },
+              "description": "自己已学化血离魂，施术离魂有风险；吸血未炼完不能再施，此刻没有待炼精血。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -17051,7 +17426,7 @@
           "predicate": "owned-by",
           "value": {
             "kind": "entity",
-            "entityId": "thunder-alliance-seat-7"
+            "entityId": "thunder-cloud-people"
           },
           "description": "owned-by",
           "access": {
@@ -18713,7 +19088,7 @@
       "name": "绿光至火瑚古阵",
       "kind": "item",
       "placement": "thunder-greenlight-array",
-      "description": "阵体残损，远端失联；现有城务材料无法直接保证恢复。",
+      "description": "旧阵长久闲置，海外联系已断；本地维护不等于远端已修好。",
       "facts": [
         {
           "id": "thunder-firecoral-old-array-owned-by",
@@ -18732,11 +19107,23 @@
           "predicate": "status",
           "value": {
             "kind": "text",
-            "value": "损坏已久，尚未找到可复核的远端现况与完整修法。"
+            "value": "长久废置失联，尚未取得远端现况与可校验的完整修法。"
           },
-          "description": "损坏已久，尚未找到可复核的远端现况与完整修法。",
+          "description": "长久废置失联，尚未取得远端现况与可校验的完整修法。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "thunder-firecoral-old-array-paired-array",
+          "predicate": "paired-array",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-overseas-array"
+          },
+          "description": "paired-array",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -18812,21 +19199,26 @@
           }
         },
         {
-          "id": "thunder-mojin-return-charms-remaining-charms",
-          "predicate": "remaining-charms",
+          "id": "thunder-mojin-return-charms-division-boundary",
+          "predicate": "division-boundary",
           "value": {
-            "kind": "number",
-            "value": 4
+            "kind": "text",
+            "value": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。"
           },
-          "description": "remaining-charms",
+          "description": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。",
           "access": {
-            "kind": "public"
+            "kind": "private"
           }
         }
       ],
       "meters": [],
       "ratings": [],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "thunder-seal-sheet",
+          "amount": 4
+        }
+      ]
     },
     {
       "id": "thunder-mojin-wolves",
@@ -18836,13 +19228,13 @@
       "description": "栖息于魔气环境的有限兽群，会护食、逃避强者并对闯入者作反应。",
       "facts": [
         {
-          "id": "thunder-mojin-wolves-individual-count",
-          "predicate": "individual-count",
+          "id": "thunder-mojin-wolves-division-boundary",
+          "predicate": "division-boundary",
           "value": {
-            "kind": "number",
-            "value": 9
+            "kind": "text",
+            "value": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。"
           },
-          "description": "individual-count",
+          "description": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。",
           "access": {
             "kind": "private"
           }
@@ -18862,7 +19254,12 @@
           "value": 4
         }
       ],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "thunder-creature-count",
+          "amount": 9
+        }
+      ]
     },
     {
       "id": "thunder-mojin-lizards",
@@ -18872,13 +19269,13 @@
       "description": "栖息于魔气环境的有限兽群，会护食、逃避强者并对闯入者作反应。",
       "facts": [
         {
-          "id": "thunder-mojin-lizards-individual-count",
-          "predicate": "individual-count",
+          "id": "thunder-mojin-lizards-division-boundary",
+          "predicate": "division-boundary",
           "value": {
-            "kind": "number",
-            "value": 4
+            "kind": "text",
+            "value": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。"
           },
-          "description": "individual-count",
+          "description": "分离或耗用扣减原库存；活物死亡扣个体数量，不能保留旧群量再生成同一个体。",
           "access": {
             "kind": "private"
           }
@@ -18898,7 +19295,12 @@
           "value": 4
         }
       ],
-      "quantities": []
+      "quantities": [
+        {
+          "definition_id": "thunder-creature-count",
+          "amount": 4
+        }
+      ]
     },
     {
       "id": "thunder-fujiao-array-report",
@@ -18975,6 +19377,30 @@
               "canon-jiaochi-tu",
               "canon-jiaochi-ning"
             ]
+          }
+        },
+        {
+          "id": "thunder-jiaochi-compass-next-use-time",
+          "predicate": "next-use-time",
+          "value": {
+            "kind": "number",
+            "value": 0
+          },
+          "description": "next-use-time",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-jiaochi-compass-clock-rule",
+          "predicate": "clock-rule",
+          "value": {
+            "kind": "text",
+            "value": "成功施用后按实际世界时间将next-use-time设为当前时间加1036800秒，同时ready置0；到时只解除冷却，仍须靶物、法力和实际供能。"
+          },
+          "description": "成功施用后按实际世界时间将next-use-time设为当前时间加1036800秒，同时ready置0；到时只解除冷却，仍须靶物、法力和实际供能。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -19159,6 +19585,3653 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "thunder-washi-people",
+      "name": "娲氏族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "具蛇身特征的族群，海外三支与大陆族人分别生活；旧敌记录仍影响部分人的判断。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wuluo-people",
+      "name": "乌罗族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "古战后的残存族人隐于海外，血脉强弱和各自选择并不相同。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-baimu-people",
+      "name": "白目族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "以灵目传承闻名的族群，个人所学需要分别辨认。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-qianhuan-people",
+      "name": "千幻族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "另一支有灵目天赋的族群，异族相似瞳术不直接证明出身。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-xinmei-people",
+      "name": "心魅族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "雷鸣小族，族人有敏感的危机感应，仍可能被遮蔽和突袭欺骗。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-huoyue-people",
+      "name": "火月族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "火法传统的族群，与外族通婚者的血脉和立场各不相同。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-haiwang-people",
+      "name": "海王族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "临海强族，疆域与天云并不直接相接，和角蚩保持族际往来。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-heiru-people",
+      "name": "黑儒族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "有自己的行旅和载具传统，长途赶路常需准备适合族人的乘具。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-xuehou-people",
+      "name": "雪吼族",
+      "kind": "social-group",
+      "placement": "thunder-continent",
+      "description": "极北冰域的族群，外族难于往来，外界对其性情的看法不一。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-firecoral-islands",
+      "name": "火瑚群岛",
+      "kind": "location",
+      "placement": "spirit-realm",
+      "description": "远离雷鸣大陆的海岛群，海路漫长且有强兽，三支娲氏分居近邻岛屿；火阳住在火云岛。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-firecloud-island",
+      "name": "火云岛",
+      "kind": "location",
+      "placement": "thunder-firecoral-islands",
+      "description": "火阳族的常驻岛，谷地、海湾与石坡围着聚落；近岸附岛供采食取材，常住人集中于此。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-fireyang-settlement",
+      "name": "火阳住区",
+      "kind": "location",
+      "placement": "thunder-firecloud-island",
+      "description": "木石棚屋沿坡分布，白石小殿旁有地火窖，沿海空地晾着草药和渔网。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-settlement-route-to-thunder-sharp-tooth-settlement",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-sharp-tooth-settlement"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-settlement-route-conditions-thunder-sharp-tooth-settlement",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。"
+          },
+          "description": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-settlement-route-to-thunder-firecoral-overseas-array",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-overseas-array"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-settlement-route-conditions-thunder-firecoral-overseas-array",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿海岸到残台；海风无遮蔽，残台本身不能传送。"
+          },
+          "description": "沿海岸到残台；海风无遮蔽，残台本身不能传送。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-sharp-tooth-settlement",
+      "name": "尖齿住区",
+      "kind": "location",
+      "placement": "thunder-firecoral-islands",
+      "description": "近邻海岛的背风石谷里有架高储粮棚和练身空地，岸边可停靠小舟。",
+      "facts": [
+        {
+          "id": "thunder-sharp-tooth-settlement-route-to-thunder-fireyang-settlement",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-settlement"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-sharp-tooth-settlement-route-conditions-thunder-fireyang-settlement",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。"
+          },
+          "description": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-sharp-tooth-settlement-route-to-thunder-scorpion-tail-settlement",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-scorpion-tail-settlement"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-sharp-tooth-settlement-route-conditions-thunder-scorpion-tail-settlement",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。"
+          },
+          "description": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-scorpion-tail-settlement",
+      "name": "蝎尾住区",
+      "kind": "location",
+      "placement": "thunder-firecoral-islands",
+      "description": "近邻海岛的临湾浅滩上排着舟架，潮湿石壁开凿存盐的小窖。",
+      "facts": [
+        {
+          "id": "thunder-scorpion-tail-settlement-route-to-thunder-sharp-tooth-settlement",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-sharp-tooth-settlement"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-scorpion-tail-settlement-route-conditions-thunder-sharp-tooth-settlement",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。"
+          },
+          "description": "近邻岛屿间的海路，需适合潮况的舟或飞遁与补给，不能步行跨水；路线不保证避开海兽。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-firecoral-overseas-array",
+      "name": "火瑚古阵残台",
+      "kind": "location",
+      "placement": "thunder-firecloud-island",
+      "description": "海边岩台断裂，旧槽空着，通往大陆的灵纹已不能构成回路。",
+      "facts": [
+        {
+          "id": "thunder-firecoral-overseas-array-route-to-thunder-fireyang-settlement",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-settlement"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-overseas-array-route-conditions-thunder-fireyang-settlement",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿海岸到残台；海风无遮蔽，残台本身不能传送。"
+          },
+          "description": "沿海岸到残台；海风无遮蔽，残台本身不能传送。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-overseas-array-route-to-thunder-firecoral-deepwater",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-deepwater"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-overseas-array-route-conditions-thunder-firecoral-deepwater",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。"
+          },
+          "description": "从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-overseas-array-paired-array",
+          "predicate": "paired-array",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-old-array"
+          },
+          "description": "paired-array",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-overseas-array-status",
+          "predicate": "status",
+          "value": {
+            "kind": "text",
+            "value": "核心槽空缺、灵纹断裂；两端校准、真实阵核和材料未备齐时不能传送。"
+          },
+          "description": "核心槽空缺、灵纹断裂；两端校准、真实阵核和材料未备齐时不能传送。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-firecoral-deepwater",
+      "name": "群岛外深水",
+      "kind": "location",
+      "placement": "thunder-firecoral-islands",
+      "description": "深水中流向多变，远处偶有巨大背影破浪，不能由岸上看到海底全部物事。",
+      "facts": [
+        {
+          "id": "thunder-firecoral-deepwater-route-to-thunder-firecoral-overseas-array",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-overseas-array"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-deepwater-route-conditions-thunder-firecoral-overseas-array",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。"
+          },
+          "description": "从岸边入深水需舟或飞遁、续航与海兽防护，离岸后不能当作随时可返的短路。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-deepwater-route-to-thunder-wuluo-hidden-bay",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wuluo-hidden-bay"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-deepwater-route-conditions-thunder-wuluo-hidden-bay",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。"
+          },
+          "description": "长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-deepwater-route-to-thunder-greenlight-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-greenlight-city"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-deepwater-route-conditions-thunder-greenlight-city",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。"
+          },
+          "description": "跨海到雷鸣再沿陆路抵城，长程行舟或飞遁需持续补给与导航；古阵未通，不能瞬移。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wuluo-hidden-bay",
+      "name": "无名背浪湾",
+      "kind": "location",
+      "placement": "thunder-firecoral-islands",
+      "description": "背浪岩壁内有隐蔽洞隙，只有熟悉潮位者容易找到靠岸处。",
+      "facts": [
+        {
+          "id": "thunder-wuluo-hidden-bay-route-to-thunder-firecoral-deepwater",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-firecoral-deepwater"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wuluo-hidden-bay-route-conditions-thunder-firecoral-deepwater",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。"
+          },
+          "description": "长程水路，隐湾入口须实地辨潮与找寻，不因存在路线就获知秘密坐标。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-cloud-archive",
+      "name": "云族誊录间",
+      "kind": "location",
+      "placement": "thunder-cloud-city",
+      "description": "隔窗留光的誊录间保存少量公开地理簿和借阅凭条，密术不陈列于外案。",
+      "facts": [
+        {
+          "id": "thunder-cloud-archive-route-to-thunder-cloud-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-gate"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-archive-route-conditions-thunder-cloud-gate",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经公开街巷，入档案内室另需借阅许可。"
+          },
+          "description": "经公开街巷，入档案内室另需借阅许可。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-small-clan-court",
+      "name": "行旅会面院",
+      "kind": "location",
+      "placement": "thunder-cloud-city",
+      "description": "租住小院供往来异族歇脚与互通航路；各家门内是私室，院中挂着约谈牌。",
+      "facts": [
+        {
+          "id": "thunder-small-clan-court-route-to-thunder-cloud-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-gate"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-small-clan-court-route-conditions-thunder-cloud-gate",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "经城内道路可到公共院落，客房不随意开放。"
+          },
+          "description": "经城内道路可到公共院落，客房不随意开放。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-gailing-city",
+      "name": "盖灵城",
+      "kind": "location",
+      "placement": "thunder-jiaochi",
+      "description": "角蚩主城之一，厚重城门之外道路汇聚，城内军务与居住坊巷各有出入凭据。",
+      "facts": [
+        {
+          "id": "thunder-gailing-city-route-to-thunder-jiaochi-frontier",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-frontier"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-gailing-city-route-conditions-thunder-jiaochi-frontier",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。"
+          },
+          "description": "长程族境道路，携物与外族来者须接受边防查验，非瞬时迁移。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-gailing-city-route-to-thunder-tianjiao-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-tianjiao-mountain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-gailing-city-route-conditions-thunder-tianjiao-mountain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿山道至山门，超过警戒石须获许可。"
+          },
+          "description": "沿山道至山门，超过警戒石须获许可。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-gailing-city-route-to-thunder-offering-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-offering-hall"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-gailing-city-route-conditions-thunder-offering-hall",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "到外厅可递送清册，供位禁区须独立许可。"
+          },
+          "description": "到外厅可递送清册，供位禁区须独立许可。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-tianjiao-mountain",
+      "name": "天角圣山",
+      "kind": "location",
+      "placement": "thunder-jiaochi",
+      "description": "峰腹有供族中修行的封闭处所，外来访客止于山门，进入须经守者通报。",
+      "facts": [
+        {
+          "id": "thunder-tianjiao-mountain-route-to-thunder-gailing-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-gailing-city"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tianjiao-mountain-route-conditions-thunder-gailing-city",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "沿山道至山门，超过警戒石须获许可。"
+          },
+          "description": "沿山道至山门，超过警戒石须获许可。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tianjiao-mountain-route-to-thunder-jiaochi-bell-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-bell-hall"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tianjiao-mountain-route-conditions-thunder-jiaochi-bell-hall",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "内道受禁制守护，仅获准人员可入，破禁另判能力与后果。"
+          },
+          "description": "内道受禁制守护，仅获准人员可入，破禁另判能力与后果。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-jiaochi-bell-hall",
+      "name": "迷天钟殿",
+      "kind": "location",
+      "placement": "thunder-tianjiao-mountain",
+      "description": "阁楼高层的翠绿玉桌上供着雪白巨钟，重重禁制隔绝外探，值守案离钟座很远。",
+      "facts": [
+        {
+          "id": "thunder-jiaochi-bell-hall-route-to-thunder-tianjiao-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-tianjiao-mountain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-jiaochi-bell-hall-route-conditions-thunder-tianjiao-mountain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "内道受禁制守护，仅获准人员可入，破禁另判能力与后果。"
+          },
+          "description": "内道受禁制守护，仅获准人员可入，破禁另判能力与后果。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-offering-hall",
+      "name": "角蚩供奉堂",
+      "kind": "location",
+      "placement": "thunder-gailing-city",
+      "description": "三个供位各存有旧契约标记，供物清册列出本堂可支用的材料，召请有严格权限。",
+      "facts": [
+        {
+          "id": "thunder-offering-hall-route-to-thunder-gailing-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-gailing-city"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-hall-route-conditions-thunder-gailing-city",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "到外厅可递送清册，供位禁区须独立许可。"
+          },
+          "description": "到外厅可递送清册，供位禁区须独立许可。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-hall-maintains-offering-to-canon-ti-long",
+          "predicate": "maintains-offering-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ti-long"
+          },
+          "description": "maintains-offering-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-hall-maintains-offering-to-canon-tai-que",
+          "predicate": "maintains-offering-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-tai-que"
+          },
+          "description": "maintains-offering-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-hall-maintains-offering-to-canon-yang-lu",
+          "predicate": "maintains-offering-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-yang-lu"
+          },
+          "description": "maintains-offering-to",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-northern-ice-domain",
+      "name": "雷鸣极北冰域",
+      "kind": "location",
+      "placement": "thunder-continent",
+      "description": "冰雪覆盖的荒远地域，雪吼聚落与雷光奔行的兽踪都需实地寻找。",
+      "facts": [
+        {
+          "id": "thunder-northern-ice-domain-route-to-thunder-cloud-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-city"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-northern-ice-domain-route-conditions-thunder-cloud-city",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。"
+          },
+          "description": "跨越长途荒野抵极北，需御寒、导航和实际时间，天气及地形可迫使绕行。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-northern-ice-domain-route-to-thunder-thunder-lion-den",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-thunder-lion-den"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-northern-ice-domain-route-conditions-thunder-thunder-lion-den",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。"
+          },
+          "description": "只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-thunder-lion-den",
+      "name": "雷石洞",
+      "kind": "location",
+      "placement": "thunder-northern-ice-domain",
+      "description": "洞壁有碎裂的雷纹，洞口散着冻骨，一头尚小的金色狮兽在里面休息。",
+      "facts": [
+        {
+          "id": "thunder-thunder-lion-den-route-to-thunder-northern-ice-domain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-northern-ice-domain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-thunder-lion-den-route-conditions-thunder-northern-ice-domain",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。"
+          },
+          "description": "只有找到洞址才能沿坡接近；路线存在不向行旅者公开兽穴坐标。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-firecoral-core-beast",
+      "name": "深海巨兽",
+      "kind": "creature-group",
+      "placement": "thunder-firecoral-deepwater",
+      "description": "长躯似鲸的海兽在深水游动，腹内有早年吞下的坚硬晶物，普通岸民不知它的准确位置。",
+      "facts": [
+        {
+          "id": "thunder-firecoral-core-beast-capability",
+          "predicate": "capability",
+          "value": {
+            "kind": "text",
+            "value": "能改变体形、快速游水、护身撞击；没有空间神通。"
+          },
+          "description": "能改变体形、快速游水、护身撞击；没有空间神通。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-firecoral-core-beast-ecology",
+          "predicate": "ecology",
+          "value": {
+            "kind": "text",
+            "value": "饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。"
+          },
+          "description": "饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-firecoral-core-beast-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-firecoral-core-beast-mana",
+          "definition_id": "mana",
+          "current": 1080
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-firecoral-core-beast-force",
+          "definition_id": "force",
+          "value": 6
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "thunder-creature-count",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thunder-golden-thunder-lion",
+      "name": "幼生黄金雷狮",
+      "kind": "creature-group",
+      "placement": "thunder-thunder-lion-den",
+      "description": "金色幼狮体表偶有雷弧，受惊会吐出短促雷光，尚未长成。",
+      "facts": [
+        {
+          "id": "thunder-golden-thunder-lion-capability",
+          "predicate": "capability",
+          "value": {
+            "kind": "text",
+            "value": "天生御雷，当前可作近身短距放电，成长和修为积累仍需食物与时间。"
+          },
+          "description": "天生御雷，当前可作近身短距放电，成长和修为积累仍需食物与时间。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-golden-thunder-lion-ecology",
+          "predicate": "ecology",
+          "value": {
+            "kind": "text",
+            "value": "饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。"
+          },
+          "description": "饥饿时觅食，面对威胁可防御或逃避；损伤按真实身体和能力裁定，分离或死亡须扣群量。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-golden-thunder-lion-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-golden-thunder-lion-mana",
+          "definition_id": "mana",
+          "current": 540
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-golden-thunder-lion-force",
+          "definition_id": "force",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "thunder-creature-count",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thunder-kongyun-core",
+      "name": "海兽腹内空云晶",
+      "kind": "item",
+      "placement": "thunder-firecoral-core-beast",
+      "description": "巨兽早年吞下的古阵核心，坚硬晶层未消化；现处活体腹内，归属主张不等于占有。",
+      "facts": [
+        {
+          "id": "thunder-kongyun-core-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-kongyun-core-access-condition",
+          "predicate": "access-condition",
+          "value": {
+            "kind": "text",
+            "value": "取出必须实际接触腹内或令巨兽吐出，取得后从巨兽腹内移出；普通攻击难毁，空间力量仍可损伤。修阵还需两端知识及材料，不由一块核心自动成功。"
+          },
+          "description": "取出必须实际接触腹内或令巨兽吐出，取得后从巨兽腹内移出；普通攻击难毁，空间力量仍可损伤。修阵还需两端知识及材料，不由一块核心自动成功。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-kongyun-core-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-fireyang-herbalist",
+      "name": "芷鳞",
+      "kind": "person",
+      "placement": "thunder-fireyang-settlement",
+      "description": "火阳族结丹药师，喜欢远行者带来的新气味，亲手整理岛上常用草药。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-herbalist-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-herbalist-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "采药、止血药制作、近岸辨路与结丹修行。"
+          },
+          "description": "采药、止血药制作、近岸辨路与结丹修行。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-herbalist-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-herbalist-acquaintance-thunder-tail-boatkeeper",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-tail-boatkeeper"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-fireyang-herbalist-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-fireyang-herbalist-mana",
+          "definition_id": "mana",
+          "current": 540
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-fireyang-herbalist-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "thunder-fireyang-herbalist-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "thunder-fireyang-herbalist-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "thunder-fireyang-herbalist-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "thunder-fireyang-herbalist-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-fireyang-herbalist",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "火阳族结丹药师，喜欢远行者带来的新气味，亲手整理岛上常用草药。",
+            "voice": "先问药性再问价钱，说到没见过的花会追问形状。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "决定是否用自己的药材换一张较新的沿岸航图。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "芷鳞",
+              "description": "火阳族结丹药师，喜欢远行者带来的新气味，亲手整理岛上常用草药。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "火阳住区",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-fireyang-herbalist-private-stock",
+              "name": "芷鳞私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-washi-people",
+              "name": "娲氏族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-tail-boatkeeper",
+              "name": "潮席",
+              "description": "多次一起安排过近岸采集，药师供药、舟手负责水路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-fireyang-herbs",
+              "name": "芷鳞采得的草药",
+              "description": "自己采下并分类的十二份草药。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-island-boat",
+              "name": "蝎尾公用浅海舟",
+              "description": "常用于采药的公舟，并非舟手私产。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-coastal-notes",
+              "name": "旧沿岸航图",
+              "description": "自己的旧图，知道海岸而不知古阵核心的准确所在。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-fireyang-herbalist"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-fireyang-settlement"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-fireyang-herbalist-private-stock",
+              "canonical_entity_ids": [
+                "thunder-fireyang-herbalist-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-washi-people",
+              "canonical_entity_ids": [
+                "thunder-washi-people"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-tail-boatkeeper",
+              "canonical_entity_ids": [
+                "thunder-tail-boatkeeper"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-fireyang-herbs",
+              "canonical_entity_ids": [
+                "thunder-fireyang-herbs"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-island-boat",
+              "canonical_entity_ids": [
+                "thunder-island-boat"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-coastal-notes",
+              "canonical_entity_ids": [
+                "thunder-coastal-notes"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "采药、止血药制作、近岸辨路与结丹修行。"
+              },
+              "description": "采药、止血药制作、近岸辨路与结丹修行。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-fireyang-herbalist-private-stock",
+      "name": "芷鳞私用储备",
+      "kind": "container",
+      "placement": "thunder-fireyang-herbalist",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-herbalist-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-herbalist"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-tail-boatkeeper",
+      "name": "潮席",
+      "kind": "person",
+      "placement": "thunder-scorpion-tail-settlement",
+      "description": "蝎尾族筑基舟手，照管公用小舟，宁可晚出航也要先看潮。",
+      "facts": [
+        {
+          "id": "thunder-tail-boatkeeper-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tail-boatkeeper-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基修行、操舟、近岸采集与潮位观察。"
+          },
+          "description": "筑基修行、操舟、近岸采集与潮位观察。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tail-boatkeeper-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-tail-boatkeeper-acquaintance-thunder-fireyang-herbalist",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-herbalist"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-tail-boatkeeper-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-tail-boatkeeper-mana",
+          "definition_id": "mana",
+          "current": 360
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-tail-boatkeeper-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "thunder-tail-boatkeeper-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "thunder-tail-boatkeeper-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "thunder-tail-boatkeeper-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "thunder-tail-boatkeeper-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-tail-boatkeeper",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "蝎尾族筑基舟手，照管公用小舟，宁可晚出航也要先看潮。",
+            "voice": "短句多，习惯拿水位和风向解释自己的判断。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "为下一次附岛采集挑选安全的时段，并协商公舟的使用份额。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "潮席",
+              "description": "蝎尾族筑基舟手，照管公用小舟，宁可晚出航也要先看潮。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "蝎尾住区",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-tail-boatkeeper-private-stock",
+              "name": "潮席私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-washi-people",
+              "name": "娲氏族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-fireyang-herbalist",
+              "name": "芷鳞",
+              "description": "多次一起安排过近岸采集，药师供药、舟手负责水路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-island-boat",
+              "name": "蝎尾公用浅海舟",
+              "description": "自己照管的公舟，须协商公用时段。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-island-food",
+              "name": "蝎尾采集口粮",
+              "description": "公用采集粮，领用要扣除真实份数。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-tail-boatkeeper"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-scorpion-tail-settlement"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-tail-boatkeeper-private-stock",
+              "canonical_entity_ids": [
+                "thunder-tail-boatkeeper-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-washi-people",
+              "canonical_entity_ids": [
+                "thunder-washi-people"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-fireyang-herbalist",
+              "canonical_entity_ids": [
+                "thunder-fireyang-herbalist"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-island-boat",
+              "canonical_entity_ids": [
+                "thunder-island-boat"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-island-food",
+              "canonical_entity_ids": [
+                "thunder-island-food"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "筑基修行、操舟、近岸采集与潮位观察。"
+              },
+              "description": "筑基修行、操舟、近岸采集与潮位观察。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-tail-boatkeeper-private-stock",
+      "name": "潮席私用储备",
+      "kind": "container",
+      "placement": "thunder-tail-boatkeeper",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-tail-boatkeeper-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-tail-boatkeeper"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-wuluo-hermit",
+      "name": "暗汐",
+      "kind": "person",
+      "placement": "thunder-wuluo-hidden-bay",
+      "description": "乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。",
+      "facts": [
+        {
+          "id": "thunder-wuluo-hermit-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹"
+          },
+          "description": "结丹",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wuluo-hermit-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。"
+          },
+          "description": "隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wuluo-hermit-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wuluo-people"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-wuluo-hermit-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-wuluo-hermit-mana",
+          "definition_id": "mana",
+          "current": 540
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-wuluo-hermit-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "thunder-wuluo-hermit-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "thunder-wuluo-hermit-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "thunder-wuluo-hermit-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "thunder-wuluo-hermit-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-wuluo-hermit",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。",
+            "voice": "警觉，谈交换时直说所需，触及来处便收口。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "寻到足够食物维持隐居，判断是否愿与偶遇者交易。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "暗汐",
+              "description": "乌罗族结丹隐居者，独自在潮洞储食，旧战传说使其不愿公开行踪。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "无名背浪湾",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wuluo-hermit-private-stock",
+              "name": "暗汐私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wuluo-people",
+              "name": "乌罗族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-wuluo-food",
+              "name": "暗汐藏食",
+              "description": "自己剩下的食物，不会无故变多。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-wuluo-hermit"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-wuluo-hidden-bay"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wuluo-hermit-private-stock",
+              "canonical_entity_ids": [
+                "thunder-wuluo-hermit-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wuluo-people",
+              "canonical_entity_ids": [
+                "thunder-wuluo-people"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-wuluo-food",
+              "canonical_entity_ids": [
+                "thunder-wuluo-food"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。"
+              },
+              "description": "隐匿气息、近水潜行、结丹修行；压制异族的效果须看血脉与实力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-wuluo-hermit-private-stock",
+      "name": "暗汐私用储备",
+      "kind": "container",
+      "placement": "thunder-wuluo-hermit",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-wuluo-hermit-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wuluo-hermit"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-cloud-copyist",
+      "name": "凝页",
+      "kind": "person",
+      "placement": "thunder-cloud-archive",
+      "description": "云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。",
+      "facts": [
+        {
+          "id": "thunder-cloud-copyist-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-copyist-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。"
+          },
+          "description": "元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-copyist-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-people"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-cloud-copyist-acquaintance-thunder-xinmei-traveler",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-xinmei-traveler"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-cloud-copyist-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-cloud-copyist-mana",
+          "definition_id": "mana",
+          "current": 720
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-cloud-copyist-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "thunder-cloud-copyist-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "thunder-cloud-copyist-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "thunder-cloud-copyist-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "thunder-cloud-copyist-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-cloud-copyist",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。",
+            "voice": "喜欢让对方指出具体哪一页，纠错后会平和地解释理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "决定是否接受异族学者合写一份标明传闻的远行册。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "凝页",
+              "description": "云族元婴誊录者，长期抄校公开地理记录，对草率引用和无偿索书颇有脾气。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "云族誊录间",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-cloud-copyist-private-stock",
+              "name": "凝页私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-cloud-people",
+              "name": "云族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-xinmei-traveler",
+              "name": "弦预",
+              "description": "曾核过对方的一页沿路水源记，尚未同走北路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-traveler-notes",
+              "name": "弦预沿路水源记",
+              "description": "曾读其中一页；没有借阅全本，也不知道对方未走之路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-public-race-ledger",
+              "name": "公开族际地理簿",
+              "description": "自己整理的公开簿，传闻有标记，阅者不能当密报。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-cloud-copyist"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-cloud-archive"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-cloud-copyist-private-stock",
+              "canonical_entity_ids": [
+                "thunder-cloud-copyist-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-cloud-people",
+              "canonical_entity_ids": [
+                "thunder-cloud-people"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-xinmei-traveler",
+              "canonical_entity_ids": [
+                "thunder-xinmei-traveler"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-traveler-notes",
+              "canonical_entity_ids": [
+                "thunder-traveler-notes"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-public-race-ledger",
+              "canonical_entity_ids": [
+                "thunder-public-race-ledger"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。"
+              },
+              "description": "元婴修行、抄校地理、简单形貌幻化；未掌本族全部秘法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-cloud-copyist-private-stock",
+      "name": "凝页私用储备",
+      "kind": "container",
+      "placement": "thunder-cloud-copyist",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-cloud-copyist-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-copyist"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-xinmei-traveler",
+      "name": "弦预",
+      "kind": "person",
+      "placement": "thunder-small-clan-court",
+      "description": "心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。",
+      "facts": [
+        {
+          "id": "thunder-xinmei-traveler-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-xinmei-traveler-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "元婴修行、路图绘制、近身危机感应，不能预知所有伏击。"
+          },
+          "description": "元婴修行、路图绘制、近身危机感应，不能预知所有伏击。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-xinmei-traveler-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-xinmei-people"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-xinmei-traveler-acquaintance-thunder-cloud-copyist",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-copyist"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-xinmei-traveler-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-xinmei-traveler-mana",
+          "definition_id": "mana",
+          "current": 720
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-xinmei-traveler-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "thunder-xinmei-traveler-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "thunder-xinmei-traveler-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "thunder-xinmei-traveler-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "thunder-xinmei-traveler-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-xinmei-traveler",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。",
+            "voice": "先说自己亲见哪段路，再区分哪件事只是心头不安。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "为一条未亲走的北路寻找可靠同行或已有观察记录。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "弦预",
+              "description": "心魅族元婴行旅者，靠绘沿途水源和危险路段换取盘缠，重视自身不安却不把它当证据。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "行旅会面院",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-xinmei-traveler-private-stock",
+              "name": "弦预私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-xinmei-people",
+              "name": "心魅族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-cloud-copyist",
+              "name": "凝页",
+              "description": "曾核过对方的一页沿路水源记，尚未同走北路。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-traveler-notes",
+              "name": "弦预沿路水源记",
+              "description": "自己逐路画的记录，北路尚缺实见。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-xinmei-traveler"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-small-clan-court"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-xinmei-traveler-private-stock",
+              "canonical_entity_ids": [
+                "thunder-xinmei-traveler-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-xinmei-people",
+              "canonical_entity_ids": [
+                "thunder-xinmei-people"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-cloud-copyist",
+              "canonical_entity_ids": [
+                "thunder-cloud-copyist"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-traveler-notes",
+              "canonical_entity_ids": [
+                "thunder-traveler-notes"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "元婴修行、路图绘制、近身危机感应，不能预知所有伏击。"
+              },
+              "description": "元婴修行、路图绘制、近身危机感应，不能预知所有伏击。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-xinmei-traveler-private-stock",
+      "name": "弦预私用储备",
+      "kind": "container",
+      "placement": "thunder-xinmei-traveler",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-xinmei-traveler-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-xinmei-traveler"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-bell-custodian",
+      "name": "谛晷",
+      "kind": "person",
+      "placement": "thunder-jiaochi-bell-hall",
+      "description": "角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。",
+      "facts": [
+        {
+          "id": "thunder-bell-custodian-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼虚"
+          },
+          "description": "炼虚",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-bell-custodian-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。"
+          },
+          "description": "炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-bell-custodian-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-bell-custodian-acquaintance-thunder-offering-steward",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-offering-steward"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-bell-custodian-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-bell-custodian-mana",
+          "definition_id": "mana",
+          "current": 1080
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-bell-custodian-cultivation",
+          "definition_id": "cultivation",
+          "value": 6
+        },
+        {
+          "id": "thunder-bell-custodian-force",
+          "definition_id": "force",
+          "value": 6
+        },
+        {
+          "id": "thunder-bell-custodian-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "thunder-bell-custodian-perception",
+          "definition_id": "perception",
+          "value": 6
+        },
+        {
+          "id": "thunder-bell-custodian-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-bell-custodian",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。",
+            "voice": "讲话低缓，涉及鸣钟就逐项确认受众、范围和停声办法。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "决定是否准许研武院做一次局部共鸣观测。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "谛晷",
+              "description": "角蚩炼虚守钟者，按授权维护古钟外层禁制，敬重古器但厌烦把试验包装成神谕。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "迷天钟殿",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-bell-custodian-private-stock",
+              "name": "谛晷私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jiaochi-power",
+              "name": "角蚩族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-offering-steward",
+              "name": "翕衡",
+              "description": "日常通过清册申请器物维护用料，供物由各自权限处理。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-mitian-bell",
+              "name": "迷天神钟",
+              "description": "自己守护的本体，只获外层共鸣操作权限。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-canon-jiaochi-yin",
+              "name": "殷尊者",
+              "description": "研武院的殷尊者，曾请求观测，并非可随意发钟的主人。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-offering-stock",
+              "name": "供奉堂备料",
+              "description": "知道供奉堂可申请材料，不知道每次更新后的私账以外事项。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-bell-custodian"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-bell-hall"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-bell-custodian-private-stock",
+              "canonical_entity_ids": [
+                "thunder-bell-custodian-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jiaochi-power",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-power"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-offering-steward",
+              "canonical_entity_ids": [
+                "thunder-offering-steward"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-mitian-bell",
+              "canonical_entity_ids": [
+                "thunder-mitian-bell"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-canon-jiaochi-yin",
+              "canonical_entity_ids": [
+                "canon-jiaochi-yin"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-offering-stock",
+              "canonical_entity_ids": [
+                "thunder-offering-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。"
+              },
+              "description": "炼虚修行、钟殿阵纹维护、局部共鸣操作；无权擅发临时圣器。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-bell-custodian-private-stock",
+      "name": "谛晷私用储备",
+      "kind": "container",
+      "placement": "thunder-bell-custodian",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-bell-custodian-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-bell-custodian"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-offering-steward",
+      "name": "翕衡",
+      "kind": "person",
+      "placement": "thunder-offering-hall",
+      "description": "角蚩化神供奉堂管事，保管供物清册和递请手续，常与值守者争论耗料是否值得。",
+      "facts": [
+        {
+          "id": "thunder-offering-steward-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-steward-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神修行、供物清点与递请印记使用；不掌真灵全部意愿或所在坐标。"
+          },
+          "description": "化神修行、供物清点与递请印记使用；不掌真灵全部意愿或所在坐标。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-steward-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "affiliation",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-steward-acquaintance-thunder-bell-custodian",
+          "predicate": "acquaintance",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-bell-custodian"
+          },
+          "description": "acquaintance",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-offering-steward-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "thunder-offering-steward-mana",
+          "definition_id": "mana",
+          "current": 900
+        }
+      ],
+      "ratings": [
+        {
+          "id": "thunder-offering-steward-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "thunder-offering-steward-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "thunder-offering-steward-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "thunder-offering-steward-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "thunder-offering-steward-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "thunder-offering-steward",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "角蚩化神供奉堂管事，保管供物清册和递请手续，常与值守者争论耗料是否值得。",
+            "voice": "先报实际余数，谈旧契约时谨慎，谈自己支出的材料时很直接。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "在供物有限的情况下决定本轮备料顺序，并请求值守者说明用途。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "翕衡",
+              "description": "角蚩化神供奉堂管事，保管供物清册和递请手续，常与值守者争论耗料是否值得。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "角蚩供奉堂",
+              "description": "自己当前实际身处的地方。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-offering-steward-private-stock",
+              "name": "翕衡私用储备",
+              "description": "自己清点过的私用钱料。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jiaochi-power",
+              "name": "角蚩族",
+              "description": "自己所属族群，族内的私事仍依本人经历知情。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-bell-custodian",
+              "name": "谛晷",
+              "description": "日常通过清册申请器物维护用料，供物由各自权限处理。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-offering-stock",
+              "name": "供奉堂备料",
+              "description": "自己清点的备料，支给钟殿须登记实际扣数。",
+              "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-offering-contract-record",
+              "name": "三供位契约记",
+              "description": "自己保管的关系与递请记录，不能凭此强迫三真灵到场。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "thunder-offering-steward"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "thunder-offering-hall"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-offering-steward-private-stock",
+              "canonical_entity_ids": [
+                "thunder-offering-steward-private-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jiaochi-power",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-power"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-bell-custodian",
+              "canonical_entity_ids": [
+                "thunder-bell-custodian"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-offering-stock",
+              "canonical_entity_ids": [
+                "thunder-offering-stock"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-offering-contract-record",
+              "canonical_entity_ids": [
+                "thunder-offering-contract-record"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人实际生活、修习与参与过的事务。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神修行、供物清点与递请印记使用；不掌真灵全部意愿或所在坐标。"
+              },
+              "description": "化神修行、供物清点与递请印记使用；不掌真灵全部意愿或所在坐标。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thunder-offering-steward-private-stock",
+      "name": "翕衡私用储备",
+      "kind": "container",
+      "placement": "thunder-offering-steward",
+      "description": "本人可支配的有限储备，与族库和受托物分开。",
+      "facts": [
+        {
+          "id": "thunder-offering-steward-private-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-offering-steward"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 2
+        },
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-fireyang-herbs",
+      "name": "芷鳞采得的草药",
+      "kind": "container",
+      "placement": "thunder-fireyang-settlement",
+      "description": "十二份可辨识的止血药材，交出或炼用均扣量。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-herbs-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-herbalist"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "thunder-island-boat",
+      "name": "蝎尾公用浅海舟",
+      "kind": "item",
+      "placement": "thunder-scorpion-tail-settlement",
+      "description": "有短桨和帆，可载四位普通行旅者及少量物资，只适合近岸；潮席受托照管。",
+      "facts": [
+        {
+          "id": "thunder-island-boat-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-island-boat-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "下水需舟手或已学操舟者、合适潮位与船体完好；载客四人上限为本舟结构限制，不能凭此横渡至雷鸣。"
+          },
+          "description": "下水需舟手或已学操舟者、合适潮位与船体完好；载客四人上限为本舟结构限制，不能凭此横渡至雷鸣。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-island-boat-health",
+          "definition_id": "health",
+          "current": 90
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-island-food",
+      "name": "蝎尾采集口粮",
+      "kind": "container",
+      "placement": "thunder-scorpion-tail-settlement",
+      "description": "十六份准备供一次近岸采集的干粮。",
+      "facts": [
+        {
+          "id": "thunder-island-food-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-food-ration",
+          "amount": 16
+        }
+      ]
+    },
+    {
+      "id": "thunder-wuluo-food",
+      "name": "暗汐藏食",
+      "kind": "container",
+      "placement": "thunder-wuluo-hidden-bay",
+      "description": "六份鱼干，维持短期独居。",
+      "facts": [
+        {
+          "id": "thunder-wuluo-food-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wuluo-hermit"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-food-ration",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "thunder-coastal-notes",
+      "name": "旧沿岸航图",
+      "kind": "item",
+      "placement": "thunder-fireyang-herbalist",
+      "description": "记附岛与常见暗礁，末页有早年古阵传说；无深海巨兽即时坐标。",
+      "facts": [
+        {
+          "id": "thunder-coastal-notes-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-herbalist"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-traveler-notes",
+      "name": "弦预沿路水源记",
+      "kind": "item",
+      "placement": "thunder-xinmei-traveler",
+      "description": "已经走过路段以实线记录，未走的北路只有待查空栏；可拿去誊录而非自动补成完整地图。",
+      "facts": [
+        {
+          "id": "thunder-traveler-notes-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-xinmei-traveler"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-public-race-ledger",
+      "name": "公开族际地理簿",
+      "kind": "item",
+      "placement": "thunder-cloud-archive",
+      "description": "分别收白目、千幻、火月、海王、黑儒与极北雪吼的公开称谓和传闻出处，缺乏各族密术。",
+      "facts": [
+        {
+          "id": "thunder-public-race-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-public-race-ledger-reading-boundary",
+          "predicate": "reading-boundary",
+          "value": {
+            "kind": "text",
+            "value": "海王与角蚩往来和地理不接天云有记录；黑儒载具、雪吼性情等条目明确为见闻，不能据此知每位族人的立场。"
+          },
+          "description": "海王与角蚩往来和地理不接天云有记录；黑儒载具、雪吼性情等条目明确为见闻，不能据此知每位族人的立场。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-jing-medicine-stock",
+      "name": "晶院成药小库",
+      "kind": "container",
+      "placement": "thunder-jing-workshop",
+      "description": "封存一颗万妙丹和一份晶月液，非学徒日用料。",
+      "facts": [
+        {
+          "id": "thunder-jing-medicine-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jing-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-jing-medicine-stock-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "需晶族负责者授权交付。万妙丹炼化会耗去一颗，只辅助合适的瓶颈；晶月液一份耗完即无，炼体效果随身体与修法裁定，均不保证进阶。"
+          },
+          "description": "需晶族负责者授权交付。万妙丹炼化会耗去一颗，只辅助合适的瓶颈；晶月液一份耗完即无，炼体效果随身体与修法裁定，均不保证进阶。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-wanmiao-pill",
+          "amount": 1
+        },
+        {
+          "definition_id": "thunder-jingyue-dose",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thunder-jing-restricted-craft",
+      "name": "晶院密传药札",
+      "kind": "item",
+      "placement": "thunder-jing-workshop",
+      "description": "封柜药札记晶族成药传承，外院学徒的试学邀请不含接触此札的许可。",
+      "facts": [
+        {
+          "id": "thunder-jing-restricted-craft-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jing-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-jing-restricted-craft-access-condition",
+          "predicate": "access-condition",
+          "value": {
+            "kind": "text",
+            "value": "须持有保管者许可并具备相关炼丹能力才可查阅和理解；现札不凭一句描述自动生成灵药材料或保证炼成万妙丹。"
+          },
+          "description": "须持有保管者许可并具备相关炼丹能力才可查阅和理解；现札不凭一句描述自动生成灵药材料或保证炼成万妙丹。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-mitian-bell",
+      "name": "迷天神钟",
+      "kind": "item",
+      "placement": "thunder-jiaochi-bell-hall",
+      "description": "雪白巨钟供于翠绿玉桌，钟内灵性与器身相依；外层阵纹可控制局部共鸣，圣器分化须另有高阶主持。",
+      "facts": [
+        {
+          "id": "thunder-mitian-bell-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-mitian-bell-bounded-operation",
+          "predicate": "bounded-operation",
+          "value": {
+            "kind": "text",
+            "value": "当前谛晷能在殿内以二块高阶灵石和二十法力试开隔音共鸣，最多一刻钟，扰动停止须收法；此权限不能制造临时玄天圣器或召来古契约真灵。"
+          },
+          "description": "当前谛晷能在殿内以二块高阶灵石和二十法力试开隔音共鸣，最多一刻钟，扰动停止须收法；此权限不能制造临时玄天圣器或召来古契约真灵。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "thunder-mitian-bell-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-offering-stock",
+      "name": "供奉堂备料",
+      "kind": "container",
+      "placement": "thunder-offering-hall",
+      "description": "公有供物与维护材料，翕衡负责登记；不是管事私产。",
+      "facts": [
+        {
+          "id": "thunder-offering-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 12
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 18
+        }
+      ]
+    },
+    {
+      "id": "thunder-offering-contract-record",
+      "name": "三供位契约记",
+      "kind": "item",
+      "placement": "thunder-offering-hall",
+      "description": "记蹄龙、泰雀、阳鹿三供位的古契约关系和递请程序，未向管事公开三者所在坐标。",
+      "facts": [
+        {
+          "id": "thunder-offering-contract-record-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-offering-contract-record-summoning-boundary",
+          "predicate": "summoning-boundary",
+          "value": {
+            "kind": "text",
+            "value": "须族中具权高阶主持并具备契约实际条件方能提出召请；管事递请不等于强制真灵立即出现。供奉已交出的资源不可留在旧库存。"
+          },
+          "description": "须族中具权高阶主持并具备契约实际条件方能提出召请；管事递请不等于强制真灵立即出现。供奉已交出的资源不可留在旧库存。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wangu-crisis-entry",
+      "name": "万古危急阵内室",
+      "kind": "location",
+      "placement": "thunder-greenlight-office",
+      "description": "门后石阶向下，旧禁制遮住小型阵台；入口不对普通访客开放。",
+      "facts": [
+        {
+          "id": "thunder-wangu-crisis-entry-route-to-thunder-greenlight-office",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-greenlight-office"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-entry-travel-condition-thunder-greenlight-office",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。"
+          },
+          "description": "元姓长老许可且解除内室禁制后可经阶梯入内，未经许可不等于不能尝试闯入。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-entry-route-to-thunder-wangu-crisis-exit",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-crisis-exit"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-entry-travel-condition-thunder-wangu-crisis-exit",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。"
+          },
+          "description": "当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wangu-crisis-exit",
+      "name": "云城外密阵石室",
+      "kind": "location",
+      "placement": "thunder-tianyun",
+      "description": "荒岩内室只有一座传送台和通向荒野的门，外部路程不能由室内视线看尽。",
+      "facts": [
+        {
+          "id": "thunder-wangu-crisis-exit-route-to-thunder-cloud-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-cloud-gate"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-exit-travel-condition-thunder-cloud-gate",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。"
+          },
+          "description": "须从密阵室走出荒野，再经实际长途抵云城；时长依修为、路线和天气，不能把两种口头估计定为永恒速度。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-exit-route-to-thunder-wangu-crisis-entry",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-crisis-entry"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-wangu-crisis-exit-travel-condition-thunder-wangu-crisis-entry",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。"
+          },
+          "description": "当前阵两端完好；元或千机子授权且会此阵者启动，消耗实际高阶灵石四枚、法力四十；一次至多二位普通体型旅人及行李，任一端被毁则不能照此通行。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wangu-crisis-array-a",
+      "name": "万古危急阵内台",
+      "kind": "item",
+      "placement": "thunder-wangu-crisis-entry",
+      "description": "阵台当前完整，灵槽无自生能源，通行需族内授权与两端可用。",
+      "facts": [
+        {
+          "id": "thunder-wangu-crisis-array-a-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wangu-crisis-array-b",
+      "name": "万古危急阵外台",
+      "kind": "item",
+      "placement": "thunder-wangu-crisis-exit",
+      "description": "阵台当前完整，灵槽无自生能源，通行需族内授权与两端可用。",
+      "facts": [
+        {
+          "id": "thunder-wangu-crisis-array-b-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-wangu-crisis-fuel",
+      "name": "万古危急阵用石",
+      "kind": "container",
+      "placement": "thunder-wangu-crisis-entry",
+      "description": "八枚高阶灵石封存，当前只够两次本阵配置。",
+      "facts": [
+        {
+          "id": "thunder-wangu-crisis-fuel-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "high-stone",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "canon-greenlight-yuan-message-case",
+      "name": "元姓驻守的万里符匣",
+      "kind": "container",
+      "placement": "canon-greenlight-yuan",
+      "description": "专用于本族已知接收人的四张传讯符，发出一张就减少一张。",
+      "facts": [
+        {
+          "id": "canon-greenlight-yuan-message-case-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-greenlight-yuan-message-case-message-rule",
+          "predicate": "message-rule",
+          "value": {
+            "kind": "text",
+            "value": "向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。"
+          },
+          "description": "向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-greenlight-yuan-message-case-known-recipient",
+          "predicate": "known-recipient",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-qian-ji-zi"
+          },
+          "description": "known-recipient",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-seal-sheet",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "canon-qian-ji-zi-message-case",
+      "name": "千机子的万里符匣",
+      "kind": "container",
+      "placement": "canon-qian-ji-zi",
+      "description": "专用于本族已知接收人的四张传讯符，发出一张就减少一张。",
+      "facts": [
+        {
+          "id": "canon-qian-ji-zi-message-case-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-wangu-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-qian-ji-zi-message-case-message-rule",
+          "predicate": "message-rule",
+          "value": {
+            "kind": "text",
+            "value": "向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。"
+          },
+          "description": "向约定接收印记发符需耗一张符及五法力；是否实际送达受屏蔽与距离影响。收到的只有写入信息，不取得发送者实时私密坐标。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-qian-ji-zi-message-case-known-recipient",
+          "predicate": "known-recipient",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-greenlight-yuan"
+          },
+          "description": "known-recipient",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-seal-sheet",
+          "amount": 4
+        }
+      ]
     }
   ],
   "existingEntityFacts": [
@@ -19271,9 +23344,10 @@
       "thunder-cloud-high-ranks",
       "thunder-qing-siblings"
     ],
-    "entity:thunder-alliance-seat-7": [
+    "entity:thunder-cloud-people": [
       "thunder-thunder-geography",
-      "thunder-current-life"
+      "thunder-current-life",
+      "thunder-jing-society"
     ],
     "entity:thunder-alliance-seat-8": [
       "thunder-thunder-geography",
@@ -20135,7 +24209,8 @@
     "entity:canon-jiaochi-tu": [
       "thunder-jiaochi-conditions",
       "thunder-current-life",
-      "thunder-current-values"
+      "thunder-current-values",
+      "thunder-tu-ning-forced-ascent"
     ],
     "fact:canon-jiaochi-tu-cultivation-state": [
       "thunder-jiaochi-conditions",
@@ -20158,7 +24233,8 @@
     "entity:canon-jiaochi-ning": [
       "thunder-jiaochi-conditions",
       "thunder-current-life",
-      "thunder-current-values"
+      "thunder-current-values",
+      "thunder-tu-ning-forced-ascent"
     ],
     "fact:canon-jiaochi-ning-cultivation-state": [
       "thunder-jiaochi-conditions",
@@ -21462,7 +25538,8 @@
     ],
     "entity:thunder-firecoral-old-array": [
       "thunder-current-life",
-      "thunder-current-values"
+      "thunder-current-values",
+      "thunder-greenlight-broken-route"
     ],
     "fact:thunder-firecoral-old-array-owned-by": [
       "thunder-current-life"
@@ -21492,23 +25569,14 @@
     "fact:thunder-mojin-return-charms-owned-by": [
       "thunder-current-life"
     ],
-    "fact:thunder-mojin-return-charms-remaining-charms": [
-      "thunder-current-values"
-    ],
     "entity:thunder-mojin-wolves": [
       "thunder-mojin-history",
       "thunder-current-life",
       "thunder-current-values"
     ],
-    "fact:thunder-mojin-wolves-individual-count": [
-      "thunder-current-values"
-    ],
     "entity:thunder-mojin-lizards": [
       "thunder-mojin-history",
       "thunder-current-life",
-      "thunder-current-values"
-    ],
-    "fact:thunder-mojin-lizards-individual-count": [
       "thunder-current-values"
     ],
     "law:thunder-cloud-civic-rules": [
@@ -21683,6 +25751,894 @@
     ],
     "fact:fengyuan-review-thunder-continent-route-conditions-fengyuan-thunder-crossing-sea": [
       "fengyuan-reviewed-current-life"
+    ],
+    "entity:thunder-washi-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-wuluo-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-baimu-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-qianhuan-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-xinmei-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-huoyue-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-haiwang-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-heiru-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-xuehou-people": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-firecoral-islands": [
+      "thunder-firecoral-history",
+      "thunder-current-life"
+    ],
+    "entity:thunder-firecloud-island": [
+      "thunder-firecoral-history",
+      "thunder-current-life"
+    ],
+    "entity:thunder-fireyang-settlement": [
+      "thunder-firecoral-history",
+      "thunder-current-life"
+    ],
+    "entity:thunder-sharp-tooth-settlement": [
+      "thunder-firecoral-history",
+      "thunder-current-life"
+    ],
+    "entity:thunder-scorpion-tail-settlement": [
+      "thunder-firecoral-history",
+      "thunder-current-life"
+    ],
+    "entity:thunder-firecoral-overseas-array": [
+      "thunder-greenlight-broken-route",
+      "thunder-current-life"
+    ],
+    "entity:thunder-firecoral-deepwater": [
+      "thunder-kongyun-crystal-rule",
+      "thunder-current-life"
+    ],
+    "entity:thunder-wuluo-hidden-bay": [
+      "thunder-current-life",
+      "thunder-current-life"
+    ],
+    "entity:thunder-cloud-archive": [
+      "thunder-current-life",
+      "thunder-current-life"
+    ],
+    "entity:thunder-small-clan-court": [
+      "thunder-current-life",
+      "thunder-current-life"
+    ],
+    "entity:thunder-gailing-city": [
+      "thunder-jiaochi-ancient-sites",
+      "thunder-current-life"
+    ],
+    "entity:thunder-tianjiao-mountain": [
+      "thunder-jiaochi-ancient-sites",
+      "thunder-current-life"
+    ],
+    "entity:thunder-jiaochi-bell-hall": [
+      "thunder-jiaochi-ancient-sites",
+      "thunder-current-life"
+    ],
+    "entity:thunder-offering-hall": [
+      "thunder-jiaochi-true-spirit-pact",
+      "thunder-current-life"
+    ],
+    "entity:thunder-northern-ice-domain": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-thunder-lion-den": [
+      "thunder-current-life",
+      "thunder-current-life"
+    ],
+    "fact:thunder-fireyang-settlement-route-to-thunder-sharp-tooth-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-settlement-route-conditions-thunder-sharp-tooth-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-sharp-tooth-settlement-route-to-thunder-fireyang-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-sharp-tooth-settlement-route-conditions-thunder-fireyang-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-sharp-tooth-settlement-route-to-thunder-scorpion-tail-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-sharp-tooth-settlement-route-conditions-thunder-scorpion-tail-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-scorpion-tail-settlement-route-to-thunder-sharp-tooth-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-scorpion-tail-settlement-route-conditions-thunder-sharp-tooth-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-settlement-route-to-thunder-firecoral-overseas-array": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-settlement-route-conditions-thunder-firecoral-overseas-array": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-overseas-array-route-to-thunder-fireyang-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-overseas-array-route-conditions-thunder-fireyang-settlement": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-overseas-array-route-to-thunder-firecoral-deepwater": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-overseas-array-route-conditions-thunder-firecoral-deepwater": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-to-thunder-firecoral-overseas-array": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-conditions-thunder-firecoral-overseas-array": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-to-thunder-wuluo-hidden-bay": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-conditions-thunder-wuluo-hidden-bay": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hidden-bay-route-to-thunder-firecoral-deepwater": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hidden-bay-route-conditions-thunder-firecoral-deepwater": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-to-thunder-greenlight-city": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-deepwater-route-conditions-thunder-greenlight-city": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-greenlight-city-route-to-thunder-firecoral-deepwater": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-greenlight-city-route-conditions-thunder-firecoral-deepwater": [
+      "thunder-firecoral-navigation",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-gate-route-to-thunder-cloud-archive": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-gate-route-conditions-thunder-cloud-archive": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-archive-route-to-thunder-cloud-gate": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-archive-route-conditions-thunder-cloud-gate": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-gate-route-to-thunder-small-clan-court": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-gate-route-conditions-thunder-small-clan-court": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-small-clan-court-route-to-thunder-cloud-gate": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-small-clan-court-route-conditions-thunder-cloud-gate": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jiaochi-frontier-route-to-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jiaochi-frontier-route-conditions-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-to-thunder-jiaochi-frontier": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-conditions-thunder-jiaochi-frontier": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-to-thunder-tianjiao-mountain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-conditions-thunder-tianjiao-mountain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tianjiao-mountain-route-to-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tianjiao-mountain-route-conditions-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tianjiao-mountain-route-to-thunder-jiaochi-bell-hall": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tianjiao-mountain-route-conditions-thunder-jiaochi-bell-hall": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jiaochi-bell-hall-route-to-thunder-tianjiao-mountain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jiaochi-bell-hall-route-conditions-thunder-tianjiao-mountain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-to-thunder-offering-hall": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-gailing-city-route-conditions-thunder-offering-hall": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-hall-route-to-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-hall-route-conditions-thunder-gailing-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-city-route-to-thunder-northern-ice-domain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-city-route-conditions-thunder-northern-ice-domain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-northern-ice-domain-route-to-thunder-cloud-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-northern-ice-domain-route-conditions-thunder-cloud-city": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-northern-ice-domain-route-to-thunder-thunder-lion-den": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-northern-ice-domain-route-conditions-thunder-thunder-lion-den": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-thunder-lion-den-route-to-thunder-northern-ice-domain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-thunder-lion-den-route-conditions-thunder-northern-ice-domain": [
+      "thunder-current-life",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-overseas-array-paired-array": [
+      "thunder-greenlight-broken-route",
+      "thunder-current-life"
+    ],
+    "fact:thunder-firecoral-old-array-paired-array": [
+      "thunder-greenlight-broken-route",
+      "thunder-current-life"
+    ],
+    "fact:thunder-firecoral-overseas-array-status": [
+      "thunder-greenlight-broken-route",
+      "thunder-current-life"
+    ],
+    "quantity:thunder-creature-count": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "quantity:thunder-seal-sheet": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "quantity:thunder-jingyue-dose": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "quantity:thunder-wanmiao-pill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "quantity:thunder-food-ration": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-mojin-wolves-division-boundary": [
+      "thunder-current-values"
+    ],
+    "fact:thunder-mojin-lizards-division-boundary": [
+      "thunder-current-values"
+    ],
+    "fact:thunder-mojin-return-charms-division-boundary": [
+      "thunder-current-values"
+    ],
+    "entity:thunder-firecoral-core-beast": [
+      "thunder-kongyun-crystal-rule",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-core-beast-capability": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-firecoral-core-beast-ecology": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-golden-thunder-lion": [
+      "thunder-golden-thunder-lion",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-golden-thunder-lion-capability": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-golden-thunder-lion-ecology": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-kongyun-core": [
+      "thunder-kongyun-crystal-rule",
+      "thunder-current-life"
+    ],
+    "fact:thunder-kongyun-core-owned-by": [
+      "thunder-kongyun-crystal-rule",
+      "thunder-current-life"
+    ],
+    "fact:thunder-kongyun-core-access-condition": [
+      "thunder-kongyun-crystal-rule",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-fireyang-herbalist": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-herbalist-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-herbalist-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-fireyang-herbalist-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-herbalist-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-herbalist-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-tail-boatkeeper": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tail-boatkeeper-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tail-boatkeeper-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-tail-boatkeeper-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tail-boatkeeper-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-tail-boatkeeper-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-wuluo-hermit": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hermit-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hermit-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-wuluo-hermit-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hermit-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-hermit-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-cloud-copyist": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-copyist-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-copyist-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-cloud-copyist-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-copyist-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-cloud-copyist-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-xinmei-traveler": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-xinmei-traveler-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-xinmei-traveler-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-xinmei-traveler-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-xinmei-traveler-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-xinmei-traveler-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-bell-custodian": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-bell-custodian-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-bell-custodian-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-bell-custodian-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-bell-custodian-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-bell-custodian-affiliation": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-offering-steward": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-steward-cultivation-state": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-steward-learned-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-offering-steward-private-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-steward-private-stock-owned-by": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-steward-affiliation": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-fireyang-herbalist-acquaintance-thunder-tail-boatkeeper": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-tail-boatkeeper-acquaintance-thunder-fireyang-herbalist": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-cloud-copyist-acquaintance-thunder-xinmei-traveler": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-xinmei-traveler-acquaintance-thunder-cloud-copyist": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-bell-custodian-acquaintance-thunder-offering-steward": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-offering-steward-acquaintance-thunder-bell-custodian": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-fireyang-herbs": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-fireyang-herbs-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-island-boat": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-island-boat-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-island-boat-use-condition": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-island-food": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-island-food-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-wuluo-food": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wuluo-food-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-coastal-notes": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-coastal-notes-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-traveler-notes": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-traveler-notes-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-public-race-ledger": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-public-race-ledger-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-public-race-ledger-reading-boundary": [
+      "thunder-island-and-small-peoples",
+      "thunder-current-life"
+    ],
+    "entity:thunder-jing-medicine-stock": [
+      "thunder-jing-refining-resources",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jing-medicine-stock-owned-by": [
+      "thunder-jing-refining-resources",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jing-medicine-stock-use-condition": [
+      "thunder-jing-refining-resources",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-jing-restricted-craft": [
+      "thunder-jing-refining-resources",
+      "thunder-current-life"
+    ],
+    "fact:thunder-jing-restricted-craft-owned-by": [
+      "thunder-jing-refining-resources",
+      "thunder-current-life"
+    ],
+    "fact:thunder-jing-restricted-craft-access-condition": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-mitian-bell": [
+      "thunder-jiaochi-ancient-sites",
+      "thunder-current-life"
+    ],
+    "fact:thunder-mitian-bell-owned-by": [
+      "thunder-jiaochi-ancient-sites",
+      "thunder-current-life"
+    ],
+    "fact:thunder-mitian-bell-bounded-operation": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-offering-stock": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-offering-stock-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-offering-contract-record": [
+      "thunder-jiaochi-true-spirit-pact",
+      "thunder-current-life"
+    ],
+    "fact:thunder-offering-contract-record-owned-by": [
+      "thunder-jiaochi-true-spirit-pact",
+      "thunder-current-life"
+    ],
+    "fact:thunder-offering-contract-record-summoning-boundary": [
+      "thunder-jiaochi-true-spirit-pact",
+      "thunder-current-life"
+    ],
+    "fact:thunder-offering-hall-maintains-offering-to-canon-ti-long": [
+      "thunder-jiaochi-true-spirit-pact"
+    ],
+    "fact:thunder-offering-hall-maintains-offering-to-canon-tai-que": [
+      "thunder-jiaochi-true-spirit-pact"
+    ],
+    "fact:thunder-offering-hall-maintains-offering-to-canon-yang-lu": [
+      "thunder-jiaochi-true-spirit-pact"
+    ],
+    "fact:canon-jiaochi-ning-blood-soul-art": [
+      "thunder-blood-soul-art",
+      "thunder-current-life"
+    ],
+    "fact:thunder-jiaochi-compass-next-use-time": [
+      "thunder-compass-limits",
+      "thunder-current-values"
+    ],
+    "fact:thunder-jiaochi-compass-clock-rule": [
+      "thunder-compass-limits",
+      "thunder-current-values"
+    ],
+    "entity:thunder-wangu-crisis-entry": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "entity:thunder-wangu-crisis-exit": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "entity:thunder-wangu-crisis-array-a": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-array-a-owned-by": [
+      "thunder-current-life"
+    ],
+    "entity:thunder-wangu-crisis-array-b": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-array-b-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-greenlight-office-route-to-thunder-wangu-crisis-entry": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-greenlight-office-travel-condition-thunder-wangu-crisis-entry": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-entry-route-to-thunder-greenlight-office": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-entry-travel-condition-thunder-greenlight-office": [
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-exit-route-to-thunder-cloud-gate": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-exit-travel-condition-thunder-cloud-gate": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-cloud-gate-route-to-thunder-wangu-crisis-exit": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-cloud-gate-travel-condition-thunder-wangu-crisis-exit": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life"
+    ],
+    "fact:thunder-wangu-crisis-entry-route-to-thunder-wangu-crisis-exit": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wangu-crisis-entry-travel-condition-thunder-wangu-crisis-exit": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wangu-crisis-exit-route-to-thunder-wangu-crisis-entry": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wangu-crisis-exit-travel-condition-thunder-wangu-crisis-entry": [
+      "thunder-wangu-secret-transit",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:thunder-wangu-crisis-fuel": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:thunder-wangu-crisis-fuel-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:canon-greenlight-yuan-crisis-array-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:canon-greenlight-yuan-message-case": [
+      "thunder-ten-thousand-li-message",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:canon-greenlight-yuan-message-case-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:canon-qian-ji-zi-crisis-array-skill": [
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "entity:canon-qian-ji-zi-message-case": [
+      "thunder-ten-thousand-li-message",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:canon-qian-ji-zi-message-case-owned-by": [
+      "thunder-current-life"
+    ],
+    "fact:canon-greenlight-yuan-message-case-message-rule": [
+      "thunder-ten-thousand-li-message",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:canon-greenlight-yuan-message-case-known-recipient": [
+      "thunder-current-life"
+    ],
+    "fact:canon-qian-ji-zi-message-case-message-rule": [
+      "thunder-ten-thousand-li-message",
+      "thunder-current-life",
+      "thunder-current-values"
+    ],
+    "fact:canon-qian-ji-zi-message-case-known-recipient": [
+      "thunder-current-life"
     ]
   },
   "quantityDefinitions": [
@@ -21696,6 +26652,62 @@
       "consumption_law_ids": [
         "resource-conservation"
       ]
+    },
+    {
+      "id": "thunder-creature-count",
+      "name": "雷鸣兽群个体",
+      "unit": "只",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "thunder-seal-sheet",
+      "name": "雷鸣符纸",
+      "unit": "张",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "thunder-jingyue-dose",
+      "name": "晶月液",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "thunder-wanmiao-pill",
+      "name": "万妙丹",
+      "unit": "颗",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "thunder-food-ration",
+      "name": "雷鸣行旅粮",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
     }
-  ]
+  ],
+  "agentCognition": []
 }

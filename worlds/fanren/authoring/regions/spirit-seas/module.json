@@ -8407,6 +8407,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "thunder-review-canon-ti-long-receives-offering-from-thunder",
+          "predicate": "receives-offering-from",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "receives-offering-from",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -8512,6 +8524,12 @@
               "name": "阳鹿",
               "description": "长期相邻修行并共受一方古契约供奉的同伴，非同一意志。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jiaochi-power",
+              "name": "角蚩族",
+              "description": "长期供奉本人的族群，古契约联系不抹去自己的判断与条件。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -8549,6 +8567,12 @@
               "local_entity_id": "known-canon-yang-lu",
               "canonical_entity_ids": [
                 "canon-yang-lu"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jiaochi-power",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-power"
               ]
             }
           ],
@@ -8696,6 +8720,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "thunder-review-canon-tai-que-receives-offering-from-thunder",
+          "predicate": "receives-offering-from",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "receives-offering-from",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -8801,6 +8837,12 @@
               "name": "阳鹿",
               "description": "长期相邻修行并共受一方古契约供奉的同伴，非同一意志。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jiaochi-power",
+              "name": "角蚩族",
+              "description": "长期供奉本人的族群，古契约联系不抹去自己的判断与条件。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -8838,6 +8880,12 @@
               "local_entity_id": "known-canon-yang-lu",
               "canonical_entity_ids": [
                 "canon-yang-lu"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jiaochi-power",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-power"
               ]
             }
           ],
@@ -8985,6 +9033,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "thunder-review-canon-yang-lu-receives-offering-from-thunder",
+          "predicate": "receives-offering-from",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-jiaochi-power"
+          },
+          "description": "receives-offering-from",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -9090,6 +9150,12 @@
               "name": "泰雀",
               "description": "长期相邻修行并共受一方古契约供奉的同伴，非同一意志。",
               "status": "observed"
+            },
+            {
+              "id": "thunder-review-thunder-jiaochi-power",
+              "name": "角蚩族",
+              "description": "长期供奉本人的族群，古契约联系不抹去自己的判断与条件。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -9127,6 +9193,12 @@
               "local_entity_id": "known-canon-tai-que",
               "canonical_entity_ids": [
                 "canon-tai-que"
+              ]
+            },
+            {
+              "local_entity_id": "thunder-review-thunder-jiaochi-power",
+              "canonical_entity_ids": [
+                "thunder-jiaochi-power"
               ]
             }
           ],
@@ -16430,7 +16502,8 @@
     "entity:canon-ti-long": [
       "seas-jiaochi-true-spirit-compact",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-thunder-pact-crosslink"
     ],
     "fact:canon-ti-long-cultivation-state": [
       "seas-jiaochi-true-spirit-compact",
@@ -16459,7 +16532,8 @@
     "entity:canon-tai-que": [
       "seas-jiaochi-true-spirit-compact",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-thunder-pact-crosslink"
     ],
     "fact:canon-tai-que-cultivation-state": [
       "seas-jiaochi-true-spirit-compact",
@@ -16488,7 +16562,8 @@
     "entity:canon-yang-lu": [
       "seas-jiaochi-true-spirit-compact",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-thunder-pact-crosslink"
     ],
     "fact:canon-yang-lu-cultivation-state": [
       "seas-jiaochi-true-spirit-compact",
@@ -17430,6 +17505,15 @@
     ],
     "fact:seas-suyin-public-star-chart-copy-cost": [
       "seas-reviewed-current-values"
+    ],
+    "fact:thunder-review-canon-ti-long-receives-offering-from-thunder": [
+      "seas-thunder-pact-crosslink"
+    ],
+    "fact:thunder-review-canon-tai-que-receives-offering-from-thunder": [
+      "seas-thunder-pact-crosslink"
+    ],
+    "fact:thunder-review-canon-yang-lu-receives-offering-from-thunder": [
+      "seas-thunder-pact-crosslink"
     ]
   },
   "agentCognition": [
