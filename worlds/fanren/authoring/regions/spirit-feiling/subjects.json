@@ -54,34 +54,34 @@
     "openingState": "cross-region-unique-subject",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "feiling-yuelong-and-branches"
+      "feiling-old-mahayana-history"
     ],
     "aliases": [],
-    "reason": "离族远游的老者，需按蛮荒封印和游天鲲鹏旧事在相关区定位，不复制为常驻越隆邻居。"
+    "reason": "复用风元所定唯一奕主体；五色孔雀与五晶剑形态皆同人，误写游天鲲鹏或蛮荒封印不再采用。"
   },
   {
     "id": "canon-yuan-yao-reference",
     "label": "元瑶",
     "kind": "person-reference",
-    "openingState": "human-realm-at-opening",
+    "openingState": "later-character-identity-only",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "feiling-no-opening-minghe-campaign"
+      "feiling-yuanyao-arrival-archive"
     ],
     "aliases": [],
-    "reason": "人界唯一人物由乱星海区域建立，未成为鬼婆或青元子门下。"
+    "reason": "原体由人界唯一作者身份索引承接；出生断代不足，不保证T0已有成年人，也不前置鬼婆或青元子师承。"
   },
   {
     "id": "canon-yan-li-reference",
     "label": "妍丽",
     "kind": "person-reference",
-    "openingState": "human-realm-at-opening",
+    "openingState": "later-character-identity-only",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "feiling-no-opening-minghe-campaign"
+      "feiling-yuanyao-arrival-archive"
     ],
     "aliases": [],
-    "reason": "人界唯一人物由乱星海区域建立，未成为鬼婆或青元子门下。"
+    "reason": "原体由人界唯一作者身份索引承接；出生断代不足，不保证T0已有成年人，也不前置鬼婆或青元子师承。"
   },
   {
     "id": "feiling-later-7",
@@ -1551,6 +1551,944 @@
     "claimIds": [
       "feiling-current-life",
       "feiling-current-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "future-feiling-yuan-fei",
+    "label": "袁飞",
+    "kind": "person-reference",
+    "openingState": "later-character-identity-only",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "feiling-longbody-neighbors"
+    ],
+    "aliases": [],
+    "reason": "长身族、越隆老友；晚期获韩救助不前置，确切开篇寿龄/地点无证，保作者身份待自然生成时约束，不造已谢韩恩者。"
+  },
+  {
+    "id": "feiling-minghe-late-place-name",
+    "label": "青元子后期住所称域",
+    "kind": "source-naming-conflict",
+    "openingState": "author-only-source-limitation",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "feiling-source-designation-notes"
+    ],
+    "aliases": [],
+    "reason": "此段反复称地渊，先前为冥河独立空间；人物连续性确定，称域关系不凭单词制造第二青元子或步行跨界。"
+  },
+  {
+    "id": "feiling-city-pillars",
+    "label": "圣城入境柱",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-city-architecture",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-city-arena",
+    "label": "圣城白玉竞技台",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-city-architecture",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-city-guesthouse",
+    "label": "圣山贵宾馆",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-city-architecture",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-transmission-hall",
+    "label": "传灵殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-succession-and-trials",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-sealed-soul-tower",
+    "label": "封灵塔",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sealed-sacred-soul",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-kunpeng-soul-remnant",
+    "label": "鲲鹏残圣魂",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sealed-sacred-soul",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-tianpeng-sacred-inspector",
+    "label": "天鹏鉴形圣器",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sacred-inspection",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-oath-mirror",
+    "label": "镇誓铜镜",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-oath-conditions",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-oath-copy-2",
+    "label": "天鹏之誓第2副卷",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sacred-stock",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-oath-copy-3",
+    "label": "天鹏之誓第3副卷",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sacred-stock",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-thunder-shears",
+    "label": "雷蛟剪",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-thunder-shears",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-other-relics",
+    "label": "其他旧代舍利匣",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-sacred-stock",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-lore-clerk",
+    "label": "竹翎",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-lore-clerk-private-stock",
+    "label": "竹翎私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-lore-map",
+    "label": "入口旧路图",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-lore-survey-offer",
+    "label": "旧图核路委托",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-silver-door",
+    "label": "守墙银门",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-guard-and-gate",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-black-desert",
+    "label": "门后黑地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-guard-and-gate",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-herringbone-pass",
+    "label": "人字峰旧入口",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-layer-passages",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-wanteng-pass",
+    "label": "万藤道",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-layer-passages",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-underground-river",
+    "label": "二层隐河",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-layer-passages",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-corrupt-forest",
+    "label": "腐叶林",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-corrupt-leaf-wood",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-orchid-marsh",
+    "label": "毒兰沼泽",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-poison-orchid-marsh",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-icesha-glacier",
+    "label": "冰煞黑冰川",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-ice-sha-region",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-black-ant-margin",
+    "label": "黑渊飞蚁巢缘",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-abyss-route-hazards",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-blackmist-sea",
+    "label": "黑冥雾海",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-blackmist-and-tribute",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-blackmist-bone-nest",
+    "label": "雾海骨巢",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-blackmist-bonebird",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-bloodflame-mountain",
+    "label": "血焰山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-bloodflame-lake",
+    "label": "血焰熔岩湖",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-bloodflame-palace",
+    "label": "血焰宫",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yinhuo-hall",
+    "label": "阴火殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-muqing-transit-dais",
+    "label": "木仙谷传送高台",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-wood-transit",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-muqing-root-tree",
+    "label": "木青本命灵树",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-muqing-cave-and-servant",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-dixue-second-body",
+    "label": "地血双煞第二躯",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-dixue-body-and-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-poison-bees",
+    "label": "毒兰护花蜂群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-black-ants",
+    "label": "巢缘黑渊飞蚁",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-shadow-bees",
+    "label": "阴蛛蜂群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-icesha-swarm",
+    "label": "冰煞群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-orchid-plants",
+    "label": "可采毒兰",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-mingyan-tree-cluster",
+    "label": "三株冥焰树",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-mingyan-fruit",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-giantflower-nest",
+    "label": "巨灵花窝",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-giant-spirit-flower",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-wood-wine-vessel",
+    "label": "木髓酒坛",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-wood-wine-and-tea",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-blackmist-bird-bones",
+    "label": "九头骨鸟冥尸",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-blackmist-bonebird",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": [],
+    "reason": "古雾已久；准确尸变阶段与本期能力是明确原创定位，非有源年份。"
+  },
+  {
+    "id": "feiling-chungui",
+    "label": "杶龟兽",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-spirit-attendant-one",
+    "label": "青羽灵侍",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-spirit-servants",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-spirit-attendant-two",
+    "label": "白衣灵侍",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-spirit-servants",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-dixue-yellow-bell",
+    "label": "杶龟引路铃",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-bloodflame-palace",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-refining-ground",
+    "label": "越隆炼晶洼地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-crystal-stock",
+    "label": "三属极元晶匣",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-feed-stock",
+    "label": "炼晶备料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-goldwind-array",
+    "label": "金罡风魔阵柱组",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-crucible",
+    "label": "承力银鼎",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-fire-bottle",
+    "label": "封焰细颈瓶",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-red-fan",
+    "label": "赤红羽扇",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-compass",
+    "label": "星象青罗盘",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-black-net",
+    "label": "承力黑网",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-yuelong-craft",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-huyuan-jar",
+    "label": "琥元酒壶",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-huyuan-wine",
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-water-process",
+    "label": "水晶小炉作业册",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-steward",
+    "label": "砚翼",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-steward-private-stock",
+    "label": "砚翼私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-observation-offer",
+    "label": "地气观测邀约",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-blue-ghost-bell",
+    "label": "鬼婆残钟",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-kings-personal-tools",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-muqing-golden-flower",
+    "label": "金花法轮",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-kings-personal-tools",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-liuzu-black-token",
+    "label": "六足乌黑令牌",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-kings-personal-tools",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-liuzu-blue-spindle",
+    "label": "六足蓝梭",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-kings-personal-tools",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-guimian-domain",
+    "label": "鬼面族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-northern-branches",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-guimian-people",
+    "label": "鬼面族",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-northern-branches",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-dujiu-domain",
+    "label": "毒鸠族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-northern-branches",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-dujiu-people",
+    "label": "毒鸠族",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-northern-branches",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yelv-domain",
+    "label": "夜绿族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-interbranch-relations",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yelv-people",
+    "label": "夜绿族",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-interbranch-relations",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-heiling-domain",
+    "label": "黑灵族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-interbranch-relations",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-heiling-people",
+    "label": "黑灵族",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-interbranch-relations",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-nanlong-domain",
+    "label": "南陇族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-branch-name-boundaries",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-nanlong-people",
+    "label": "南陇族",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "feiling-branch-name-boundaries",
+      "feiling-review-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "feiling-yuelong-water-array",
+    "label": "澄水承力盘",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "original",
+    "claimIds": [
+      "feiling-review-current-life",
+      "feiling-review-finite-values"
     ],
     "aliases": []
   }
