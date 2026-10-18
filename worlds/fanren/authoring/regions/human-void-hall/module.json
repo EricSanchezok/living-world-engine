@@ -1074,7 +1074,7 @@
       "name": "四门石厅",
       "kind": "location",
       "placement": "human-void-hall",
-      "description": "石桌凳围绕中转阵，四门通向不同取宝阁。",
+      "description": "石桌凳围绕中转阵，四扇青石门通向不同处所。",
       "facts": [
         {
           "id": "void-stone-hall-route-void-ice",
@@ -1147,6 +1147,19 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "void-stone-hall-exit-options",
+          "predicate": "exit-options",
+          "value": {
+            "kind": "text",
+            "value": "四门开放时三路通往不同宝阁，一路直通下一关；入口通向并非固定。进入后不能原路退出，留在石厅不取宝可等待法阵送出。"
+          },
+          "description": "四门开放时三路通往不同宝阁，一路直通下一关；入口通向并非固定。进入后不能原路退出，留在石厅不取宝可等待法阵送出。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际观察开启的四门和相关禁制，或获得可信的通行说明。"
+          }
         }
       ],
       "meters": [],
@@ -1160,30 +1173,6 @@
       "placement": "human-void-hall",
       "description": "古兵器分置玉台，每台都有独立禁罩。",
       "facts": [
-        {
-          "id": "void-gallery-one-route-void-stone-hall",
-          "predicate": "route-to",
-          "value": {
-            "kind": "entity",
-            "entityId": "void-stone-hall"
-          },
-          "description": "route-to",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
-          "id": "void-gallery-one-condition-void-stone-hall",
-          "predicate": "travel-condition",
-          "value": {
-            "kind": "text",
-            "value": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。"
-          },
-          "description": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。",
-          "access": {
-            "kind": "public"
-          }
-        },
         {
           "id": "void-gallery-one-route-void-gallery-two",
           "predicate": "route-to",
@@ -1204,6 +1193,18 @@
             "value": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。"
           },
           "description": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "void-gallery-one-illumination",
+          "predicate": "illumination",
+          "value": {
+            "kind": "text",
+            "value": "阁外暗黄天空和灰雾中不见红日，局部明暗依此处空间与禁制，不套用外海日出日落。"
+          },
+          "description": "阁外暗黄天空和灰雾中不见红日，局部明暗依此处空间与禁制，不套用外海日出日落。",
           "access": {
             "kind": "public"
           }
@@ -1267,6 +1268,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "void-gallery-two-illumination",
+          "predicate": "illumination",
+          "value": {
+            "kind": "text",
+            "value": "蓝色球罩发出柔和光芒，局部明暗依此处空间与禁制。"
+          },
+          "description": "蓝色球罩发出柔和光芒，局部明暗依此处空间与禁制。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1280,30 +1293,6 @@
       "placement": "human-void-hall",
       "description": "幻阵依据进入者自身心境显化，当前没有行人。",
       "facts": [
-        {
-          "id": "void-illusion-route-void-gallery-two",
-          "predicate": "route-to",
-          "value": {
-            "kind": "entity",
-            "entityId": "void-gallery-two"
-          },
-          "description": "route-to",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
-          "id": "void-illusion-condition-void-gallery-two",
-          "predicate": "travel-condition",
-          "value": {
-            "kind": "text",
-            "value": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。"
-          },
-          "description": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。",
-          "access": {
-            "kind": "public"
-          }
-        },
         {
           "id": "void-illusion-route-void-black-hall",
           "predicate": "route-to",
@@ -12496,7 +12485,7 @@
       "name": "血色披风",
       "kind": "item",
       "placement": "void-gallery-two",
-      "description": "血羽与银丝制成，可消耗大量法力加速，非隐身万能衣。",
+      "description": "双层银丝与暗红羽毛披风，可大幅加快遁速；使用时法力消耗大，控速与转向困难。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -12507,7 +12496,7 @@
       "name": "五色铜环",
       "kind": "item",
       "placement": "void-gallery-two",
-      "description": "五个相连铜环同属一套古宝，有缚敌作用，受境界与对手手段制约。",
+      "description": "五个相连铜环同属一套古宝，可展成护幕，也可收束缚敌。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -13122,7 +13111,7 @@
       "name": "铁火蚁群",
       "kind": "animal-group",
       "placement": "void-black-sand",
-      "description": "包括一只蚁后在内的有限群体，尚未被玄黄镜冻结。",
+      "description": "栖息在黑色矿砂之间的铁火蚁群。",
       "facts": [
         {
           "id": "void-iron-ants-living-count",
@@ -13660,6 +13649,21 @@
       "id": "void-garden-local-light",
       "text": "草原药地按本地空间照明呈现，不从外海昼夜推出此处日落；此标定只覆盖草原及其石山，不推广到鬼雾、黑殿或全部虚天房间。窗口用真实经过时间判定，不以明暗假替一天期限。",
       "severity": "hard"
+    },
+    {
+      "id": "void-gallery-selection",
+      "text": "宝阁取物禁制通常在取得一件后挪移取宝者，禁罩快速复原；不能将打出缺口等于永久解除。实际断绝与空间能量联系的有效手段可短时延迟挪移，但须付出相应能力和耗损，不能保证无限取宝。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-relic-practice",
+      "text": "血色披风高速与耗法并存，使用须考虑路径、转向和操控；五色铜环可护身与缚敌，实际抵挡或束缚成效依目标与对抗条件，不能因对自己试验成功就无条件控制任何人。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-cold-ding-resistance",
+      "text": "乾蓝冰焰的极寒并非所有材料都无法抵挡；耐受的蛛丝、蚕丝或经药术辅助的火蟒仍须按实际强度与维持时间结算。提鼎寒流与吸力随进程变化，保护同行者需要真实防护能力和范围。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -13734,7 +13738,8 @@
     ],
     "entity:void-stone-hall": [
       "void-treasure-gallery",
-      "void-current-life"
+      "void-current-life",
+      "void-gallery-transit-conditions"
     ],
     "entity:void-gallery-one": [
       "void-treasure-gallery",
@@ -13989,14 +13994,6 @@
       "void-treasure-gallery",
       "void-opening-cycle"
     ],
-    "fact:void-gallery-one-route-void-stone-hall": [
-      "void-treasure-gallery",
-      "void-opening-cycle"
-    ],
-    "fact:void-gallery-one-condition-void-stone-hall": [
-      "void-treasure-gallery",
-      "void-opening-cycle"
-    ],
     "fact:void-gallery-one-route-void-gallery-two": [
       "void-treasure-gallery",
       "void-opening-cycle"
@@ -14018,14 +14015,6 @@
       "void-opening-cycle"
     ],
     "fact:void-gallery-two-condition-void-illusion": [
-      "void-treasure-gallery",
-      "void-opening-cycle"
-    ],
-    "fact:void-illusion-route-void-gallery-two": [
-      "void-treasure-gallery",
-      "void-opening-cycle"
-    ],
-    "fact:void-illusion-condition-void-gallery-two": [
       "void-treasure-gallery",
       "void-opening-cycle"
     ],
@@ -15360,11 +15349,13 @@
     ],
     "entity:void-gallery-relic-1": [
       "void-treasure-gallery",
-      "void-bounded-values"
+      "void-bounded-values",
+      "void-gallery-relic-functions"
     ],
     "entity:void-gallery-relic-2": [
       "void-treasure-gallery",
-      "void-bounded-values"
+      "void-bounded-values",
+      "void-gallery-relic-functions"
     ],
     "entity:void-gallery-relic-3": [
       "void-treasure-gallery",
@@ -15731,6 +15722,24 @@
     "law:void-garden-local-light": [
       "void-garden-local-environment",
       "void-bounded-values"
+    ],
+    "fact:void-stone-hall-exit-options": [
+      "void-gallery-transit-conditions"
+    ],
+    "fact:void-gallery-one-illumination": [
+      "void-gallery-transit-conditions"
+    ],
+    "fact:void-gallery-two-illumination": [
+      "void-gallery-transit-conditions"
+    ],
+    "law:void-gallery-selection": [
+      "void-gallery-transit-conditions"
+    ],
+    "law:void-relic-practice": [
+      "void-gallery-relic-functions"
+    ],
+    "law:void-cold-ding-resistance": [
+      "void-iceflame-conditional-resistance"
     ]
   },
   "periodicProperties": [
