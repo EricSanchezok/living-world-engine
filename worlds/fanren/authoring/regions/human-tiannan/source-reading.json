@@ -1,5 +1,5 @@
 {
-  "scope": "当前累计36章有完整读取记录，另有明确段落阅读；二读仅所采用事实，不声明2961候选或全章事实已完成。",
+  "scope": "当前累计38章有完整读取记录，另有明确段落阅读；二读仅所采用事实，不声明2961候选或全章事实已完成。",
   "sourceReads": [
     {
       "chapterId": "qq-21187560",
@@ -74,7 +74,15 @@
       "usedBy": [
         "tiannan-luoyun-elder-history",
         "tiannan-mu-not-born-at-opening",
-        "tiannan-wei-earlier-breakthrough"
+        "tiannan-wei-earlier-breakthrough",
+        "tiannan-nascent-arrival-identity-completion"
+      ],
+      "additionalPasses": [
+        {
+          "reader": "source_completion",
+          "scope": "complete-text-first-pass-and-selected-new-claim-anchors-second-pass",
+          "audit": "candidate-review-2026-10-18-final-archives.json"
+        }
       ]
     },
     {
@@ -344,6 +352,24 @@
       "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
       "usedBy": [
         "tiannan-long-retreat-progress"
+      ]
+    },
+    {
+      "chapterId": "qq-27503989",
+      "sha256": "aa2ab4adbdc5d92caf21726c6fa803e6314013091a827be327a28e814a50cd75",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "tiannan-failed-ascent-and-society"
+      ]
+    },
+    {
+      "chapterId": "qq-27512217",
+      "sha256": "f7ce26910e8d63165c5cdf15b341f889baa2de9e3c2aa6fba5840af367fff1e4",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "tiannan-failed-ascent-and-society"
       ]
     }
   ],
@@ -1283,6 +1309,64 @@
         "qq-27367801",
         "qq-23335297",
         "qq-23345620"
+      ]
+    },
+    {
+      "file": "candidate-review-2026-10-18-final-archives.json",
+      "method": "direct full-paragraph context reading and second-pass new-claim anchors",
+      "scope": "selected-candidates-only-not-complete-chapter-reading",
+      "fullChapterReads": [
+        "qq-27503989",
+        "qq-27512217",
+        "qq-23233871"
+      ],
+      "paragraphs": 141,
+      "chapters": [
+        "qq-25164774",
+        "qq-25181260",
+        "qq-25189734",
+        "qq-25217456",
+        "qq-25302006",
+        "qq-25320773",
+        "qq-25431146",
+        "qq-25443818",
+        "qq-25454727",
+        "qq-25455920",
+        "qq-25556378",
+        "qq-25591422",
+        "qq-25765653",
+        "qq-25800183",
+        "qq-25855118",
+        "qq-25908873",
+        "qq-25932452",
+        "qq-25941274",
+        "qq-25966268",
+        "qq-26218536",
+        "qq-26268715",
+        "qq-26283658",
+        "qq-26312529",
+        "qq-26452692",
+        "qq-26529547",
+        "qq-26664887",
+        "qq-26801173",
+        "qq-26813981",
+        "qq-26821520",
+        "qq-26831207",
+        "qq-27503989",
+        "qq-27512217",
+        "qq-27561987",
+        "qq-27595545",
+        "qq-27615920",
+        "qq-27708906",
+        "qq-27700164",
+        "qq-27734013",
+        "qq-27742669",
+        "qq-27746420",
+        "qq-29514963",
+        "qq-47993911",
+        "qq-48027507",
+        "qq-48089633",
+        "qq-23233871"
       ]
     }
   ],
