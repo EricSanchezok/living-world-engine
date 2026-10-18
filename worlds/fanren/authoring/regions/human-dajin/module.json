@@ -294,6 +294,55 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dajin-jinjing-route-jinjiang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjiang"
+          },
+          "description": "往金江郡的官道仍有距离和路况。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-capital-auction-tradition",
+          "predicate": "market-tradition",
+          "value": {
+            "kind": "text",
+            "value": "大型拍卖有相隔十年的办会传统；举办状态、入场要求与卖品仍须核实当期公告。"
+          },
+          "description": "听过周期不等于知道日期、门路或全部货单。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinjing-route-dajin-jinxi-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinxi-market"
+          },
+          "description": "坊市有隐匿禁制，不知入口的凡人不会仅凭路过自动入内。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际辨认隐匿禁制的入口，或从知情者取得可信指引。"
+          }
+        },
+        {
+          "id": "dajin-jinjing-secret-market-route",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-secret-market-valley"
+          },
+          "description": "远郊约三千里山路；须有实际位置线索和行程，不是城内一步即到。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -1007,7 +1056,20 @@
       "kind": "organization",
       "placement": "dajin-jinjing",
       "description": "凡俗王朝，通过官员、资源和修士委托维持秩序。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "dajin-eight-general-offices",
+          "predicate": "institution",
+          "value": {
+            "kind": "text",
+            "value": "边地有八大将军的职位体系；实际任职、部属和军需分别建档，职位不是无限兵力。"
+          },
+          "description": "官号不自动取得未实际存在的兵员或资源。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -4932,6 +4994,1244 @@
           "amount": 20
         }
       ]
+    },
+    {
+      "id": "dajin-fire-prison",
+      "name": "火狱",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋东南部的大片火山地区，灰黑地面散着火山灰和硫磺热气；无防护的凡人难以生存，进入火山采材须有实际耐热和避险能力。",
+      "facts": [
+        {
+          "id": "dajin-fire-prison-route-dajin-fire-mist-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fire-mist-range"
+          },
+          "description": "外围与红雾山脉相接；越过边缘仍需承担热毒、雷火和迷失风险。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-fire-prison-material-context",
+          "predicate": "environment",
+          "value": {
+            "kind": "text",
+            "value": "高温、火山灰和硫磺气；火属性材料的存在需要现场发现与实际采集。"
+          },
+          "description": "山口有活火山与死火山，不能因知道地名就获得材料。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-fire-mist-range",
+      "name": "火狱中心红雾山脉",
+      "kind": "location",
+      "placement": "dajin-fire-prison",
+      "description": "凝厚红雾笼罩的大片山脉；雾中有危险雷火，神识只能探查受限范围。红雾深处与外围火山有不同风险。",
+      "facts": [
+        {
+          "id": "dajin-fire-mist-range-route-dajin-fire-prison",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fire-prison"
+          },
+          "description": "外围与红雾山脉相接；越过边缘仍需承担热毒、雷火和迷失风险。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-fire-prison-perception-pressure",
+          "predicate": "environment",
+          "value": {
+            "kind": "text",
+            "value": "红雾中神识范围受压，火灵地煞雷火与当地妖兽构成独立危险。"
+          },
+          "description": "具体探查距离和防护结果依修为、器物与当前局势；不保证进阶元婴便安全。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-nanjun",
+      "name": "湳郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋北部与中部交界的平原水乡，城镇间有书院、寺观和商户。",
+      "facts": [
+        {
+          "id": "dajin-nanjun-route-dajin-taichang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-taichang"
+          },
+          "description": "郡内陆路与水路须选择具体载具和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-nanjun-route-dajin-wuguang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wuguang"
+          },
+          "description": "同郡城市间仍有实际路程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-taichang",
+      "name": "太昌城",
+      "kind": "location",
+      "placement": "dajin-nanjun",
+      "description": "太昌府的府城，书院与商铺分布于城中，不同宅院和店铺各有主人。",
+      "facts": [
+        {
+          "id": "dajin-taichang-route-dajin-nanjun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-nanjun"
+          },
+          "description": "郡内陆路与水路须选择具体载具和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-taichang-route-dajin-yutian",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yutian"
+          },
+          "description": "从城外进山，登山与负重耗时须按实际能力处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-wuguang",
+      "name": "武广城",
+      "kind": "location",
+      "placement": "dajin-nanjun",
+      "description": "湳郡的一座名城，往来须走当地道路，不能因同郡而即时到达。",
+      "facts": [
+        {
+          "id": "dajin-wuguang-route-dajin-nanjun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-nanjun"
+          },
+          "description": "同郡城市间仍有实际路程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yutian",
+      "name": "玉田山",
+      "kind": "location",
+      "placement": "dajin-nanjun",
+      "description": "太昌城外十余峰相连的灵山，四季温和，灵植和泉脉有在地生态条件。",
+      "facts": [
+        {
+          "id": "dajin-yutian-route-dajin-taichang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-taichang"
+          },
+          "description": "从城外进山，登山与负重耗时须按实际能力处理。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yutian-route-dajin-huanyun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huanyun"
+          },
+          "description": "山道通往幻云峰。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yutian-route-dajin-huangqing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing"
+          },
+          "description": "玉田山不同峰间须沿路或使用确有能力的飞行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huanyun",
+      "name": "幻云峰",
+      "kind": "location",
+      "placement": "dajin-yutian",
+      "description": "白露书院所在山峰，山路通向半山腰与峰顶。",
+      "facts": [
+        {
+          "id": "dajin-huanyun-route-dajin-yutian",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yutian"
+          },
+          "description": "山道通往幻云峰。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huanyun-route-dajin-bailu-academy",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-bailu-academy"
+          },
+          "description": "沿山道到书院门，门禁不会因到达就消失。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-bailu-academy",
+      "name": "白露书院",
+      "kind": "location",
+      "placement": "dajin-huanyun",
+      "description": "建于千余年前的书院，竹林中分布红墙白楼，学业与修行都要经过实际学习。",
+      "facts": [
+        {
+          "id": "dajin-bailu-admission-policy",
+          "predicate": "admission-policy",
+          "value": {
+            "kind": "text",
+            "value": "已有师承不当然被拒；须查身份、资质和来历。不得仅凭声称清白自动入院，也不凭四灵根保证录取。"
+          },
+          "description": "适用于本院招生，不决定其他宗门标准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-bailu-upper-study",
+          "predicate": "education",
+          "value": {
+            "kind": "text",
+            "value": "上院修行要求培养浩然之气，灵根与法力不能替代读书和相应训练。"
+          },
+          "description": "就读阶段须实际学习。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-bailu-academy-route-dajin-huanyun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huanyun"
+          },
+          "description": "沿山道到书院门，门禁不会因到达就消失。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-sanhuang",
+      "name": "三皇观",
+      "kind": "faction",
+      "placement": "human-dajin",
+      "description": "皇清、皇阳、皇圣三支道观的组织称谓；各支地点、门人和财产分别管理。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangqing",
+      "name": "皇清观",
+      "kind": "location",
+      "placement": "dajin-yutian",
+      "description": "玉田山上的女观，另有男性外观门人居住和办事的区域；内外院通行各有规定。",
+      "facts": [
+        {
+          "id": "dajin-huangqing-branch-of",
+          "predicate": "branch-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-sanhuang"
+          },
+          "description": "三皇观分支。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huangqing-route-dajin-yutian",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yutian"
+          },
+          "description": "玉田山不同峰间须沿路或使用确有能力的飞行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huangqing-route-dajin-huangqing-workshop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing-workshop"
+          },
+          "description": "观内往来须有相应通行资格。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huangqing-route-dajin-tianqing-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianqing-court"
+          },
+          "description": "内院接待与外观活动范围不同。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangyang",
+      "name": "皇阳观",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "三皇观之一，由男修主持；进入须取得本观接待。",
+      "facts": [
+        {
+          "id": "dajin-huangyang-branch-of",
+          "predicate": "branch-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-sanhuang"
+          },
+          "description": "三皇观分支。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangsheng",
+      "name": "皇圣观",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "三皇观之一，由男修主持；与另两观的从属关系不令财产自动共有。",
+      "facts": [
+        {
+          "id": "dajin-huangsheng-branch-of",
+          "predicate": "branch-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-sanhuang"
+          },
+          "description": "三皇观分支。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangqing-workshop",
+      "name": "皇清观炼器别院",
+      "kind": "location",
+      "placement": "dajin-huangqing",
+      "description": "山腰的炼器别院，设炼器阁与依山居住洞窟，器物交付须有实际委托。",
+      "facts": [
+        {
+          "id": "dajin-huangqing-workshop-route-dajin-huangqing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing"
+          },
+          "description": "观内往来须有相应通行资格。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huangqing-workshop-route-dajin-huangqing-earthfire",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing-earthfire"
+          },
+          "description": "进入炼制场所须核对火源、器物及借用权限。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangqing-earthfire",
+      "name": "皇清观地火殿",
+      "kind": "location",
+      "placement": "dajin-huangqing-workshop",
+      "description": "三层地火设施，分别承担材料存放、提炼及地下炼制；操作火源须有技术和权限。",
+      "facts": [
+        {
+          "id": "dajin-huangqing-earthfire-source",
+          "predicate": "environment",
+          "value": {
+            "kind": "text",
+            "value": "地火池接通地火，地下层有一缕地火之精；火源不因进入而被取走或占有。"
+          },
+          "description": "炼制仍须实际工具、原料和控制能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huangqing-earthfire-route-dajin-huangqing-workshop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing-workshop"
+          },
+          "description": "进入炼制场所须核对火源、器物及借用权限。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianqing-court",
+      "name": "天清院",
+      "kind": "location",
+      "placement": "dajin-huangqing",
+      "description": "皇清观内的一处院落，出入由观内管理。",
+      "facts": [
+        {
+          "id": "dajin-tianqing-court-route-dajin-huangqing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huangqing"
+          },
+          "description": "内院接待与外观活动范围不同。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yizhou",
+      "name": "益州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋的一处州域，泰兴坊市位于其中。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-taixing-market",
+      "name": "泰兴坊市",
+      "kind": "location",
+      "placement": "dajin-yizhou",
+      "description": "益州的交易聚落，成交依真实货物和出价，摊位与商铺分别经营。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-fanjun",
+      "name": "樊郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "樊川交易会所在郡域。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-fanchuan-market",
+      "name": "樊川交易场",
+      "kind": "location",
+      "placement": "dajin-fanjun",
+      "description": "樊川交易会使用的集会地点；开放与拍卖须依实际筹办，不保证到访即有指定材料。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-fengzhou-kailong",
+      "name": "丰州开隆府",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋丰州内的府域，鸣剑宗位于当地。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-mingjian-sect",
+      "name": "鸣剑宗",
+      "kind": "location",
+      "placement": "dajin-fengzhou-kailong",
+      "description": "当地修仙宗门，所属器物与来访者私产不同。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-qujun",
+      "name": "曲郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋一处郡域，宗平世家在当地经营。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-zongping-clan",
+      "name": "宗平世家",
+      "kind": "location",
+      "placement": "dajin-qujun",
+      "description": "修仙家族的居地和机构，族藏资源不属于每位族人的个人库存。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xibing-mountain",
+      "name": "西炳山",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋叙述中的山地；其地与居民的具体盟约分开处理。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-heiyang-sect",
+      "name": "黑阳宗",
+      "kind": "faction",
+      "placement": "human-dajin",
+      "description": "大晋魔道宗门，门中身份不自动赋予对外行凶权限，也不代表人人具有同一态度。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinjiang",
+      "name": "金江郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "晋京附近的郡域，道路与城外交通连接，进入京畿仍须遵守当地通行规矩。",
+      "facts": [
+        {
+          "id": "dajin-jinjiang-route-jinjing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjing"
+          },
+          "description": "郡域与京畿相邻，行程按道路、载具和速度实际计算。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huangli",
+      "name": "黄黎山",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "与天岳山脉所在府域相邻一带的山地，山中野物是否出现须有当期证据。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinxi-market",
+      "name": "晋西坊市",
+      "kind": "location",
+      "placement": "dajin-jinjing",
+      "description": "城西一段被隐匿法阵遮掩的商街，街内各家商号分立经营。",
+      "facts": [
+        {
+          "id": "dajin-jinxi-market-route-dajin-jinjing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjing"
+          },
+          "description": "坊市有隐匿禁制，不知入口的凡人不会仅凭路过自动入内。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinxi-market-route-dajin-baoguang-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-baoguang-hall"
+          },
+          "description": "商街通殿门，但参加拍卖须实际资格与开场。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinxi-market-route-dajin-tianji-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-shop"
+          },
+          "description": "商楼开门接待，贵客资格仍需核实。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinxi-market-route-dajin-shuling-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-shuling-shop"
+          },
+          "description": "正常商街往来，不含尚未批准的传送旁路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-baoguang-hall",
+      "name": "宝光殿",
+      "kind": "location",
+      "placement": "dajin-jinxi-market",
+      "description": "坊市内举办大型拍卖的殿堂，入场资格和开场时间依当期公告与实际接待。",
+      "facts": [
+        {
+          "id": "dajin-baoguang-hall-route-dajin-jinxi-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinxi-market"
+          },
+          "description": "商街通殿门，但参加拍卖须实际资格与开场。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-shop",
+      "name": "天机阁晋京商楼",
+      "kind": "location",
+      "placement": "dajin-jinxi-market",
+      "description": "经营空间器物的三层商楼，普通柜台与大额交易接待分区，寄存货物另记权利人。",
+      "facts": [
+        {
+          "id": "dajin-tianji-shop-route-dajin-jinxi-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinxi-market"
+          },
+          "description": "商楼开门接待，贵客资格仍需核实。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-shop-route-dajin-tianji-backyard",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-backyard"
+          },
+          "description": "穿过商号禁制须有许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-shop-route-dajin-tianji-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-store"
+          },
+          "description": "保管处不是对访客开放的无主库房。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-guild",
+      "name": "天机阁",
+      "kind": "faction",
+      "placement": "dajin-tianji-shop",
+      "description": "经营天机屋等器物的商号，主楼与分号有不同保管和议价权限。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-backyard",
+      "name": "天机阁后院",
+      "kind": "location",
+      "placement": "dajin-tianji-shop",
+      "description": "禁制后的院地设一座传送阵，进入须得到商号许可并有实际可用灵石。",
+      "facts": [
+        {
+          "id": "dajin-tianji-backyard-route-dajin-tianji-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-shop"
+          },
+          "description": "穿过商号禁制须有许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-backyard-teleport-dajin-tianji-fixed-space",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-fixed-space"
+          },
+          "description": "固定传送阵相连；需阵法完好、供能和通行许可，不能徒步跨越空间。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-fixed-space",
+      "name": "天机阁试器空间",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "一处固定的灰白碎石空间，无天然灵气和草木；往来须依传送阵，不是可携带袋子。",
+      "facts": [
+        {
+          "id": "dajin-tianji-fixed-space-teleport-dajin-tianji-backyard",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-backyard"
+          },
+          "description": "固定传送阵相连；需阵法完好、供能和通行许可，不能徒步跨越空间。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-store",
+      "name": "天机阁保管处",
+      "kind": "location",
+      "placement": "dajin-tianji-shop",
+      "description": "商号器物分格保管，未售物与寄存物分别登记。",
+      "facts": [
+        {
+          "id": "dajin-tianji-store-route-dajin-tianji-shop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-shop"
+          },
+          "description": "保管处不是对访客开放的无主库房。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-display-palace",
+      "name": "折叠天机府",
+      "kind": "item",
+      "placement": "dajin-tianji-store",
+      "description": "盒内乳白灵光包着一套折叠洞府构件，展开和收取须掌握对应法门并有足够空地。 收拢前须移出活物和灵药；附设兽舍不具有灵兽袋保命能力。",
+      "facts": [
+        {
+          "id": "dajin-tianji-display-palace-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "本商号所存配套器物，转让须获所有者授权。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-folding-state",
+          "predicate": "folding-state",
+          "value": {
+            "kind": "text",
+            "value": "已收拢；只让屋舍及一同炼制的桌椅等死物随之变化，保持同一器物。活物受变幻空间巨压，封闭后又不能吸取外界灵气，不能借此运输住民或长期养兽，药园灵药须先移植。"
+          },
+          "description": "收放不复制器物或资源，随府变化的死物范围不扩展到任意临时置入物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-palace-token",
+      "name": "天机府白玉令",
+      "kind": "item",
+      "placement": "dajin-tianji-store",
+      "description": "可用于控制配套天机府光幕的白玉令牌，持有不等于成为洞府主人。",
+      "facts": [
+        {
+          "id": "dajin-tianji-palace-token-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "本商号所存配套器物，转让须获所有者授权。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-token-controls",
+          "predicate": "controls",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-display-palace"
+          },
+          "description": "配套令牌用于光幕控制，不替代所有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xueling-range",
+      "name": "雪陵山脉",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋一带的山脉，山路与深山地形不同；古墓传闻不能代替已探明入口。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-zhenji-sect",
+      "name": "真极门",
+      "kind": "faction",
+      "placement": "human-dajin",
+      "description": "大晋道门之一，拥有自己的传承和组织；个人知晓的本门历史因职分和阅历而异。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinghuo-sect",
+      "name": "净火宗",
+      "kind": "faction",
+      "placement": "human-dajin",
+      "description": "佛门修行宗派，具体寺院和个人职司须凭实际接触获知。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jiuxiao-hall",
+      "name": "九霄殿构件",
+      "kind": "item",
+      "placement": "dajin-tianji-store",
+      "description": "一座可借用的白石大殿器物，尚未展开悬空。使用须场地、操作法门、授权和真实供能。",
+      "facts": [
+        {
+          "id": "dajin-jiuxiao-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "天机阁可借出的设施，借用不转移所有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-shuling-shop",
+      "name": "漱灵斋",
+      "kind": "location",
+      "placement": "dajin-jinxi-market",
+      "description": "独立私人商楼，阵法用品与接待各有安排；来访不自动知道店主私人交往。",
+      "facts": [
+        {
+          "id": "dajin-shuling-shop-route-dajin-jinxi-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinxi-market"
+          },
+          "description": "正常商街往来，不含尚未批准的传送旁路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinxi-array",
+      "name": "八极分光阵",
+      "kind": "item",
+      "placement": "dajin-jinxi-market",
+      "description": "护卫坊市周界的阵法设施，通行、维护、供能和获准例外由当期管理处理。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-secret-market-valley",
+      "name": "荒山石壁",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "晋京远郊荒山之间的一片石壁，草木茂盛，地势隐蔽。",
+      "facts": [
+        {
+          "id": "dajin-secret-market-valley-route-dajin-secret-market-entry",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-secret-market-entry"
+          },
+          "description": "洞门须令盘、禁制和守门者实际许可；外观不泄露目的地。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-secret-market-entry",
+      "name": "石壁后甬道",
+      "kind": "location",
+      "placement": "dajin-secret-market-valley",
+      "description": "受禁制掩护的洞门与甬道，入内须实际凭证和许可。",
+      "facts": [
+        {
+          "id": "dajin-secret-market-entry-route-dajin-secret-market-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-secret-market-valley"
+          },
+          "description": "洞门须令盘、禁制和守门者实际许可；外观不泄露目的地。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-secret-market-entry-route-dajin-secret-exchange-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-secret-exchange-hall"
+          },
+          "description": "凭身份盘入场并配合符箓，护阵与查验不自动赋予买卖信用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-secret-exchange-hall",
+      "name": "地下交换厅",
+      "kind": "location",
+      "placement": "dajin-secret-market-entry",
+      "description": "环列座位围着中央空地，配有符阵联动的遮形设施；交易只在实际开场时进行。",
+      "facts": [
+        {
+          "id": "dajin-secret-exchange-hall-route-dajin-secret-market-entry",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-secret-market-entry"
+          },
+          "description": "凭身份盘入场并配合符箓，护阵与查验不自动赋予买卖信用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-lingfeng-sect",
+      "name": "灵风门",
+      "kind": "faction",
+      "placement": "dajin-huayun",
+      "description": "华云一带的修仙宗派，门内产业与个人财物分开，具体往来依实际接触。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-shayang-sect",
+      "name": "煞阳宗",
+      "kind": "faction",
+      "placement": "dajin-huayun",
+      "description": "华云一带的修仙宗派，门内产业与个人财物分开，具体往来依实际接触。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinxia-sect",
+      "name": "金霞山",
+      "kind": "faction",
+      "placement": "dajin-huayun",
+      "description": "华云一带的修仙宗派，门内产业与个人财物分开，具体往来依实际接触。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-mingyang-sect",
+      "name": "明阳谷",
+      "kind": "faction",
+      "placement": "dajin-huayun",
+      "description": "华云一带的修仙宗派，门内产业与个人财物分开，具体往来依实际接触。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xueqi-sect",
+      "name": "血凄门",
+      "kind": "faction",
+      "placement": "human-dajin",
+      "description": "大晋魔道宗派，名列当地大宗之中；个人私宝和机构器库分开。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-sanyuan-market",
+      "name": "三元坊市",
+      "kind": "location",
+      "placement": "dajin-huayun",
+      "description": "由三家小宗共同经营的坊市，各类摊位和收益依约分配。",
+      "facts": [
+        {
+          "id": "dajin-sanyuan-managed-dajin-tianfu",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "共同打理不等于各自可独吞所有库存和全部收入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-sanyuan-managed-dajin-jinxia-sect",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinxia-sect"
+          },
+          "description": "共同打理不等于各自可独吞所有库存和全部收入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-sanyuan-managed-dajin-mingyang-sect",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-mingyang-sect"
+          },
+          "description": "共同打理不等于各自可独吞所有库存和全部收入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -4950,6 +6250,36 @@
       "id": "dajin-court-bargaining",
       "text": "处理朝廷、宗门、世家和散修关系时，分别核对资源控制、职分、约定与对方掌握的信息；凡人官位不直接决定修为，修为也不自动转移国库或宗门公产。",
       "severity": "soft"
+    },
+    {
+      "id": "dajin-fire-prison-access",
+      "text": "火狱外围高温与中心红雾分别判断防护、神识和移动能力；普通凡人不能裸身长期生存，修士亦须有实际防护。采材有发现、接近、获取和运输成本，禁地名声不代替具体伤害裁定。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-rejuvenation-crafting",
+      "text": "寒髓或太阳精火的持有不等于回阳水成药；炼制须确有丹方知识、可用材料、可控制火源与必要修炼工序。不能凭天魔宗身份自动获得丹方或库存。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-academy-knowledge-boundary",
+      "text": "入书院或道观只赋予已经获得的身份和学习机会；不得自动知道噬真合元诀、锁心咒、炼器秘术或高层私下计划。招生资格、录取、拜师、资源分配分别按真实条件与决定进行。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-workshop-resources",
+      "text": "使用地火与炼器设施须有真实通行和使用权、配方与操作知识、足量原料及实际耗时；地火之精和指定材料不能由背景文字生成库存，炼器技能不由修为自动替代。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-tianji-space-boundaries",
+      "text": "固定芥子空间、储物器和可折叠天机府分别按其实际能力工作。固定空间需要已相连且完好的传送阵、供能和许可。天机府只使屋舍与同炼的桌椅等死物随之变化；活物遭空间巨压，收缩后封闭而无法吸取外界灵气，收起前须移出活物和药园灵药。收放不能复制空间、住民或资源。购买、展示、持控制令与所有权转移各自单独裁定。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-secret-exchange-operation",
+      "text": "交易会的身份牌只证明有效入场资格，编号不等于在场人数；失效和撤销按当期规则。遮形须实际符箓与完好法阵，不抹消物品、行为和可追查线索。灵石竞价和以物易物均须有真实资源与权利人同意。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -5585,6 +6915,365 @@
     ],
     "law:dajin-court-bargaining": [
       "dajin-court"
+    ],
+    "entity:dajin-fire-prison": [
+      "dajin-fire-prison-geography"
+    ],
+    "entity:dajin-fire-mist-range": [
+      "dajin-fire-prison-geography"
+    ],
+    "fact:dajin-fire-prison-route-dajin-fire-mist-range": [
+      "dajin-fire-prison-geography"
+    ],
+    "fact:dajin-fire-mist-range-route-dajin-fire-prison": [
+      "dajin-fire-prison-geography"
+    ],
+    "fact:dajin-fire-prison-material-context": [
+      "dajin-fire-prison-geography"
+    ],
+    "fact:dajin-fire-prison-perception-pressure": [
+      "dajin-fire-prison-geography"
+    ],
+    "law:dajin-fire-prison-access": [
+      "dajin-fire-prison-geography"
+    ],
+    "law:dajin-rejuvenation-crafting": [
+      "dajin-rejuvenation-ingredients"
+    ],
+    "entity:dajin-nanjun": [
+      "dajin-nanjun-landscape"
+    ],
+    "entity:dajin-taichang": [
+      "dajin-nanjun-landscape"
+    ],
+    "entity:dajin-wuguang": [
+      "dajin-nanjun-landscape"
+    ],
+    "entity:dajin-yutian": [
+      "dajin-bailu-foundation"
+    ],
+    "entity:dajin-huanyun": [
+      "dajin-bailu-foundation"
+    ],
+    "entity:dajin-bailu-academy": [
+      "dajin-bailu-foundation"
+    ],
+    "entity:dajin-sanhuang": [
+      "dajin-huangqing-institutions"
+    ],
+    "entity:dajin-huangqing": [
+      "dajin-huangqing-institutions"
+    ],
+    "entity:dajin-huangyang": [
+      "dajin-huangqing-institutions"
+    ],
+    "entity:dajin-huangsheng": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangqing-branch-of": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangyang-branch-of": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangsheng-branch-of": [
+      "dajin-huangqing-institutions"
+    ],
+    "entity:dajin-huangqing-workshop": [
+      "dajin-huangqing-workshop"
+    ],
+    "entity:dajin-huangqing-earthfire": [
+      "dajin-huangqing-workshop"
+    ],
+    "entity:dajin-tianqing-court": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangqing-earthfire-source": [
+      "dajin-huangqing-workshop"
+    ],
+    "fact:dajin-bailu-admission-policy": [
+      "dajin-academy-admission"
+    ],
+    "fact:dajin-bailu-upper-study": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-nanjun-route-dajin-taichang": [
+      "dajin-nanjun-landscape"
+    ],
+    "fact:dajin-taichang-route-dajin-nanjun": [
+      "dajin-nanjun-landscape"
+    ],
+    "fact:dajin-nanjun-route-dajin-wuguang": [
+      "dajin-nanjun-landscape"
+    ],
+    "fact:dajin-wuguang-route-dajin-nanjun": [
+      "dajin-nanjun-landscape"
+    ],
+    "fact:dajin-taichang-route-dajin-yutian": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-yutian-route-dajin-taichang": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-yutian-route-dajin-huanyun": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-huanyun-route-dajin-yutian": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-huanyun-route-dajin-bailu-academy": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-bailu-academy-route-dajin-huanyun": [
+      "dajin-bailu-foundation"
+    ],
+    "fact:dajin-yutian-route-dajin-huangqing": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangqing-route-dajin-yutian": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-huangqing-route-dajin-huangqing-workshop": [
+      "dajin-huangqing-workshop"
+    ],
+    "fact:dajin-huangqing-workshop-route-dajin-huangqing": [
+      "dajin-huangqing-workshop"
+    ],
+    "fact:dajin-huangqing-workshop-route-dajin-huangqing-earthfire": [
+      "dajin-huangqing-workshop"
+    ],
+    "fact:dajin-huangqing-earthfire-route-dajin-huangqing-workshop": [
+      "dajin-huangqing-workshop"
+    ],
+    "fact:dajin-huangqing-route-dajin-tianqing-court": [
+      "dajin-huangqing-institutions"
+    ],
+    "fact:dajin-tianqing-court-route-dajin-huangqing": [
+      "dajin-huangqing-institutions"
+    ],
+    "entity:dajin-yizhou": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-taixing-market": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-fanjun": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-fanchuan-market": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-fengzhou-kailong": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-mingjian-sect": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-qujun": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-zongping-clan": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-xibing-mountain": [
+      "dajin-southern-localities"
+    ],
+    "entity:dajin-heiyang-sect": [
+      "dajin-confucian-secret-techniques"
+    ],
+    "law:dajin-academy-knowledge-boundary": [
+      "dajin-academy-admission",
+      "dajin-confucian-secret-techniques",
+      "dajin-local-craft-learning"
+    ],
+    "law:dajin-workshop-resources": [
+      "dajin-huangqing-workshop",
+      "dajin-local-craft-learning",
+      "dajin-local-material-kinds"
+    ],
+    "entity:dajin-jinjiang": [
+      "dajin-capital-border-geography"
+    ],
+    "fact:dajin-jinjiang-route-jinjing": [
+      "dajin-capital-border-geography"
+    ],
+    "fact:dajin-jinjing-route-jinjiang": [
+      "dajin-capital-border-geography"
+    ],
+    "entity:dajin-huangli": [
+      "dajin-capital-border-geography"
+    ],
+    "fact:dajin-eight-general-offices": [
+      "dajin-eight-general-institution"
+    ],
+    "fact:dajin-capital-auction-tradition": [
+      "dajin-capital-auction-cycle"
+    ],
+    "entity:dajin-jinxi-market": [
+      "dajin-jinjing-built-form"
+    ],
+    "entity:dajin-baoguang-hall": [
+      "dajin-jinjing-built-form"
+    ],
+    "entity:dajin-tianji-shop": [
+      "dajin-tianji-trading"
+    ],
+    "entity:dajin-tianji-guild": [
+      "dajin-tianji-trading"
+    ],
+    "entity:dajin-tianji-backyard": [
+      "dajin-tianji-fixed-space"
+    ],
+    "entity:dajin-tianji-fixed-space": [
+      "dajin-tianji-fixed-space"
+    ],
+    "entity:dajin-tianji-store": [
+      "dajin-tianji-trading"
+    ],
+    "entity:dajin-tianji-display-palace": [
+      "dajin-tianji-display-palace",
+      "dajin-tianji-living-limit"
+    ],
+    "entity:dajin-tianji-palace-token": [
+      "dajin-tianji-display-palace"
+    ],
+    "fact:dajin-tianji-display-palace-owned-by": [
+      "dajin-tianji-display-palace"
+    ],
+    "fact:dajin-tianji-palace-token-owned-by": [
+      "dajin-tianji-display-palace"
+    ],
+    "fact:dajin-tianji-token-controls": [
+      "dajin-tianji-display-palace"
+    ],
+    "fact:dajin-jinxi-market-route-dajin-jinjing": [
+      "dajin-jinjing-built-form"
+    ],
+    "fact:dajin-jinjing-route-dajin-jinxi-market": [
+      "dajin-jinjing-built-form"
+    ],
+    "fact:dajin-jinxi-market-route-dajin-baoguang-hall": [
+      "dajin-market-access-and-disclosure"
+    ],
+    "fact:dajin-baoguang-hall-route-dajin-jinxi-market": [
+      "dajin-market-access-and-disclosure"
+    ],
+    "fact:dajin-jinxi-market-route-dajin-tianji-shop": [
+      "dajin-tianji-trading"
+    ],
+    "fact:dajin-tianji-shop-route-dajin-jinxi-market": [
+      "dajin-tianji-trading"
+    ],
+    "fact:dajin-tianji-shop-route-dajin-tianji-backyard": [
+      "dajin-tianji-fixed-space"
+    ],
+    "fact:dajin-tianji-backyard-route-dajin-tianji-shop": [
+      "dajin-tianji-fixed-space"
+    ],
+    "fact:dajin-tianji-shop-route-dajin-tianji-store": [
+      "dajin-tianji-trading"
+    ],
+    "fact:dajin-tianji-store-route-dajin-tianji-shop": [
+      "dajin-tianji-trading"
+    ],
+    "fact:dajin-tianji-backyard-teleport-dajin-tianji-fixed-space": [
+      "dajin-tianji-fixed-space"
+    ],
+    "fact:dajin-tianji-fixed-space-teleport-dajin-tianji-backyard": [
+      "dajin-tianji-fixed-space"
+    ],
+    "fact:dajin-tianji-folding-state": [
+      "dajin-tianji-display-palace",
+      "dajin-tianji-living-limit"
+    ],
+    "law:dajin-tianji-space-boundaries": [
+      "dajin-tianji-fixed-space",
+      "dajin-tianji-display-palace",
+      "dajin-tianji-trading",
+      "dajin-tianji-living-limit"
+    ],
+    "entity:dajin-xueling-range": [
+      "dajin-snow-range"
+    ],
+    "entity:dajin-zhenji-sect": [
+      "dajin-zhenji-lineage"
+    ],
+    "entity:dajin-jinghuo-sect": [
+      "dajin-buddhist-tradition"
+    ],
+    "entity:dajin-jiuxiao-hall": [
+      "dajin-auction-venue-rules"
+    ],
+    "fact:dajin-jiuxiao-owner": [
+      "dajin-auction-venue-rules"
+    ],
+    "entity:dajin-shuling-shop": [
+      "dajin-market-array-and-exception"
+    ],
+    "entity:dajin-jinxi-array": [
+      "dajin-market-array-and-exception"
+    ],
+    "entity:dajin-secret-market-valley": [
+      "dajin-underground-admission"
+    ],
+    "entity:dajin-secret-market-entry": [
+      "dajin-underground-admission"
+    ],
+    "entity:dajin-secret-exchange-hall": [
+      "dajin-underground-privacy"
+    ],
+    "fact:dajin-shuling-shop-route-dajin-jinxi-market": [
+      "dajin-market-array-and-exception"
+    ],
+    "fact:dajin-jinxi-market-route-dajin-shuling-shop": [
+      "dajin-market-array-and-exception"
+    ],
+    "fact:dajin-secret-market-entry-route-dajin-secret-market-valley": [
+      "dajin-underground-admission"
+    ],
+    "fact:dajin-secret-market-valley-route-dajin-secret-market-entry": [
+      "dajin-underground-admission"
+    ],
+    "fact:dajin-secret-exchange-hall-route-dajin-secret-market-entry": [
+      "dajin-underground-admission"
+    ],
+    "fact:dajin-secret-market-entry-route-dajin-secret-exchange-hall": [
+      "dajin-underground-admission"
+    ],
+    "fact:dajin-jinjing-secret-market-route": [
+      "dajin-underground-admission"
+    ],
+    "law:dajin-secret-exchange-operation": [
+      "dajin-underground-admission",
+      "dajin-underground-privacy",
+      "dajin-exchange-sequence"
+    ],
+    "entity:dajin-lingfeng-sect": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "entity:dajin-shayang-sect": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "entity:dajin-jinxia-sect": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "entity:dajin-mingyang-sect": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "entity:dajin-xueqi-sect": [
+      "dajin-xueqi-reference"
+    ],
+    "entity:dajin-sanyuan-market": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "fact:dajin-sanyuan-managed-dajin-tianfu": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "fact:dajin-sanyuan-managed-dajin-jinxia-sect": [
+      "dajin-tianfu-commercial-network"
+    ],
+    "fact:dajin-sanyuan-managed-dajin-mingyang-sect": [
+      "dajin-tianfu-commercial-network"
     ]
   }
 }
