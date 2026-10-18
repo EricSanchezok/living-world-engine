@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "moduleId": "shared-foundations",
   "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
-  "status": "exact-selected-records-validated-full-queue-blocked-by-missing-source-evidence",
+  "status": "historical-reuse-checkpoint-superseded",
   "records": [
     {
       "candidateId": "batch-0053-fact-0024",
@@ -3807,5 +3807,11 @@
     "batch-0186-issue-0001",
     "batch-0209-issue-0001"
   ],
-  "approvedForRuntime": false
+  "approvedForRuntime": false,
+  "historicalStatus": "exact-selected-records-validated-full-queue-blocked-by-missing-source-evidence",
+  "supersededBy": {
+    "dispositions": "candidate-dispositions.json",
+    "sourceReading": "candidate-source-reading.json",
+    "validation": "validation.json"
+  }
 }

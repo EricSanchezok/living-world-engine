@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "moduleId": "shared-foundations",
   "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
-  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "status": "historical-reuse-checkpoint-superseded",
   "records": [
     {
       "candidateId": "batch-0053-fact-0024",
@@ -1193,5 +1193,11 @@
     "boundedUncertainty": 4,
     "approvedForRuntime": false,
     "reportHash": "d32d386d956b1220ed139deef73ecc151563109b22109202b66bcfa1f6dabe66"
+  },
+  "historicalStatus": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "supersededBy": {
+    "dispositions": "candidate-dispositions.json",
+    "sourceReading": "candidate-source-reading.json",
+    "validation": "validation.json"
   }
 }
