@@ -126,6 +126,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-inner-star-sea-route-human-huangming-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-huangming-island"
+          },
+          "description": "经实际海路往来，需舟船或御器等通行能力、辨明海向和备足给养，不因知道岛名直接抵达。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -16187,6 +16199,115 @@
           ]
         }
       }
+    },
+    {
+      "id": "human-huangming-island",
+      "name": "皇明岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "内星海的一座中型海岛，近岸可择合适水面停舟。",
+      "facts": [
+        {
+          "id": "human-huangming-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "经实际海路往来，需舟船或御器等通行能力、辨明海向和备足给养，不因知道岛名直接抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-huangming-island-route-innerstar-huangming-landing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-huangming-landing"
+          },
+          "description": "沿岸地步行往来，出海须另有实际交通。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-huangming-landing",
+      "name": "皇明岛近岸登陆带",
+      "kind": "location",
+      "placement": "human-huangming-island",
+      "description": "背风岸边有可落脚的石地，岛内小径可向古石台走。",
+      "facts": [
+        {
+          "id": "innerstar-huangming-landing-route-human-huangming-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-huangming-island"
+          },
+          "description": "沿岸地步行往来，出海须另有实际交通。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-huangming-landing-route-innerstar-huangming-old-array",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-huangming-old-array"
+          },
+          "description": "沿岛内小径到山洞口、再入洞抵达旧石台；须实际走过路段，留意沿途状况。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-huangming-old-array",
+      "name": "皇明古阵遗址",
+      "kind": "location",
+      "placement": "human-huangming-island",
+      "description": "山洞中的旧石台上留有断续阵纹与破损槽口。",
+      "facts": [
+        {
+          "id": "innerstar-huangming-old-array-route-innerstar-huangming-landing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-huangming-landing"
+          },
+          "description": "沿岛内小径到山洞口、再入洞抵达旧石台；须实际走过路段，留意沿途状况。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-huangming-old-array-current-condition",
+          "predicate": "array-condition",
+          "value": {
+            "kind": "text",
+            "value": "阵纹有断损，供能槽空置，没有已验证的接收配对；当前未能启用。"
+          },
+          "description": "石台的当前结构与供能状态。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际抵达石台，具备相应阵法识读能力并逐项检查阵纹、供能槽与当前配对。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -16277,6 +16398,16 @@
       "id": "innerstar-borrowed-treasure-conditions",
       "severity": "hard",
       "text": "取得旧法宝不等于已完成炼化、心神相通或掌握全部神通。可以由他人使用的法宝仍按真实陪炼程度和其认主、器灵、禁制等条件发挥，不得以普通旧飞刀可用为由抹去其他宝物限制。"
+    },
+    {
+      "id": "innerstar-insect-time-and-loss",
+      "severity": "hard",
+      "text": "灵虫的繁殖、孵化、认主和调教必须依种类及实际阶段耗时；常见群居灵虫并非喊出驱虫术就有成熟大群。数量须来自真实繁育或转交，斗法损失不能在结束后自行恢复；有依据的催育仍需真实条件和代价。"
+    },
+    {
+      "id": "innerstar-jiao-individual-capability",
+      "severity": "hard",
+      "text": "蛟类的种族优势不使幼体自动达到八级，也不保证每只纯种越阶必胜；能力依实际个体、血统、修行与交战条件裁定。典籍估计不能直接替代本次战斗结果。"
     }
   ],
   "provenance": {
@@ -18771,6 +18902,46 @@
     ],
     "law:innerstar-borrowed-treasure-conditions": [
       "innerstar-borrowed-treasure-output"
+    ],
+    "entity:human-huangming-island": [
+      "innerstar-huangming-old-geography",
+      "innerstar-huangming-opening"
+    ],
+    "entity:innerstar-huangming-landing": [
+      "innerstar-huangming-opening"
+    ],
+    "entity:innerstar-huangming-old-array": [
+      "innerstar-huangming-old-geography",
+      "innerstar-huangming-opening"
+    ],
+    "fact:human-huangming-island-route-human-inner-star-sea": [
+      "innerstar-huangming-old-geography",
+      "innerstar-huangming-opening"
+    ],
+    "fact:human-inner-star-sea-route-human-huangming-island": [
+      "innerstar-huangming-old-geography",
+      "innerstar-huangming-opening"
+    ],
+    "fact:human-huangming-island-route-innerstar-huangming-landing": [
+      "innerstar-huangming-opening"
+    ],
+    "fact:innerstar-huangming-landing-route-human-huangming-island": [
+      "innerstar-huangming-opening"
+    ],
+    "fact:innerstar-huangming-landing-route-innerstar-huangming-old-array": [
+      "innerstar-huangming-opening"
+    ],
+    "fact:innerstar-huangming-old-array-route-innerstar-huangming-landing": [
+      "innerstar-huangming-opening"
+    ],
+    "fact:innerstar-huangming-old-array-current-condition": [
+      "innerstar-huangming-opening"
+    ],
+    "law:innerstar-insect-time-and-loss": [
+      "innerstar-insect-lifecycle"
+    ],
+    "law:innerstar-jiao-individual-capability": [
+      "innerstar-jiao-species-limit"
     ]
   },
   "periodicProperties": [
