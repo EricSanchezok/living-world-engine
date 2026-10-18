@@ -7,7 +7,20 @@
       "kind": "location",
       "placement": "human-realm",
       "description": "一百零八州的广阔人间疆域，凡俗朝廷与修仙势力交错。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "human-dajin-route-dajin-fangjian-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fangjian-mountain"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -39,6 +52,30 @@
             "value": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。"
           },
           "description": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-liaozhou-route-dajin-guanning",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-guanning"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-liaozhou-route-dajin-wuyuan",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wuyuan"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
           "access": {
             "kind": "public"
           }
@@ -6057,7 +6094,21 @@
       "kind": "location",
       "placement": "human-dajin",
       "description": "大晋一带的山脉，山路与深山地形不同；古墓传闻不能代替已探明入口。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "dajin-xueling-range-route-dajin-feng-vault-door",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-vault-door"
+          },
+          "description": "找到实际瀑布及门后通道，不能仅凭山名定位。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -10245,6 +10296,539 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-guanning",
+      "name": "关宁府",
+      "kind": "location",
+      "placement": "dajin-liaozhou",
+      "description": "辽州西端的府域，聚落、山路与各家院落相互分开。",
+      "facts": [
+        {
+          "id": "dajin-guanning-route-dajin-liaozhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-liaozhou"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-guanning-route-dajin-xunyun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xunyun"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-guanning-route-dajin-xuejiang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xuejiang"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-guanning-route-dajin-feng-estate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-estate"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-guanning-route-dajin-qianguang-temple",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-qianguang-temple"
+          },
+          "description": "沿当地实际道路/山路往来，距离和耗时据行走能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-wuyuan",
+      "name": "五原府",
+      "kind": "location",
+      "placement": "dajin-liaozhou",
+      "description": "与关宁相距遥远的辽州府域，往来须实际行路。",
+      "facts": [
+        {
+          "id": "dajin-wuyuan-route-dajin-liaozhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-liaozhou"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xunyun",
+      "name": "隼云镇",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "黄土街道连接简朴民居的凡俗小镇，镇外能远望山系。",
+      "facts": [
+        {
+          "id": "dajin-xunyun-route-dajin-guanning",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-guanning"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xuejiang",
+      "name": "雪江城",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "靠近雪陵山脉的小城，街巷连接民居与客店。",
+      "facts": [
+        {
+          "id": "dajin-xuejiang-route-dajin-guanning",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-guanning"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-clan",
+      "name": "宁中冯家",
+      "kind": "organization",
+      "placement": "dajin-guanning",
+      "description": "有独立传承与族藏的修仙家族，公产不属于任意来客。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kong-clan",
+      "name": "关宁孔家",
+      "kind": "organization",
+      "placement": "dajin-guanning",
+      "description": "关宁修仙世家，有本族职责和对外往来。",
+      "facts": [
+        {
+          "id": "dajin-kong-lineage",
+          "predicate": "lineage",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tiansheng-sect"
+          },
+          "description": "具有宗门传承联系，不意味着双方库存共有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-zhang-clan",
+      "name": "关宁张家",
+      "kind": "organization",
+      "placement": "dajin-guanning",
+      "description": "关宁修仙世家，保有自己的产业和传承。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jin-clan",
+      "name": "关宁金家",
+      "kind": "organization",
+      "placement": "dajin-guanning",
+      "description": "关宁修仙世家，族产和成员私产分开管理。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-estate",
+      "name": "冯家院落",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "家族日常办事与保管族物的院地。",
+      "facts": [
+        {
+          "id": "dajin-feng-estate-route-dajin-guanning",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-guanning"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-estate-route-dajin-feng-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-store"
+          },
+          "description": "族库入口受保管禁制约束，须得到家族许可。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-store",
+      "name": "冯家保管室",
+      "kind": "location",
+      "placement": "dajin-feng-estate",
+      "description": "有禁制和交接记录的族物保管处，取物须授权。",
+      "facts": [
+        {
+          "id": "dajin-feng-store-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "由冯家保管的族产，实际取用须家族许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-store-route-dajin-feng-estate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-estate"
+          },
+          "description": "从保管室返回院落。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-vault-door",
+      "name": "瀑布后石门",
+      "kind": "location",
+      "placement": "dajin-xueling-range",
+      "description": "石门右下留有小孔，表面禁制阻隔未经许可的进入。",
+      "facts": [
+        {
+          "id": "dajin-feng-vault-door-route-dajin-xueling-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xueling-range"
+          },
+          "description": "由门前返回山中。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-vault-door-route-dajin-feng-vault",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-vault"
+          },
+          "description": "开门后正确操作实际传送阵，五槽供能；禁制或配槽错误会导致失败或空间危险。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得实际方位/图址并辨认入口，所涉禁制、钥匙、许可和供能均满足。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-vault",
+      "name": "冯家密窟",
+      "kind": "location",
+      "placement": "dajin-xueling-range",
+      "description": "温石砌成的隐秘厅室，藏物分架保管，另有一座传送阵。",
+      "facts": [
+        {
+          "id": "dajin-feng-vault-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "由冯家保管的族产，实际取用须家族许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-feng-vault-route-dajin-feng-vault-door",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-vault-door"
+          },
+          "description": "使用相连阵返回门后通道，需要阵况和供能满足。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinluo-sect",
+      "name": "金罗门",
+      "kind": "organization",
+      "placement": "human-dajin",
+      "description": "佛门修行宗派，具有自己的传法和寺院管理制度。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-qianguang-temple",
+      "name": "千光寺旧址",
+      "kind": "location",
+      "placement": "dajin-guanning",
+      "description": "冯家先祖修学过的寺院旧址；建筑的通行与保管需实际确认。",
+      "facts": [
+        {
+          "id": "dajin-qianguang-temple-route-dajin-guanning",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-guanning"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tiansheng-sect",
+      "name": "天圣宗",
+      "kind": "organization",
+      "placement": "human-dajin",
+      "description": "与关宁孔家有传承往来的儒门宗派。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jiuxian-palace",
+      "name": "九仙宫",
+      "kind": "organization",
+      "placement": "human-dajin",
+      "description": "设宫主与统领等职分的修仙势力，成员个人行事不等同整个机构。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-taiyang-sect",
+      "name": "泰阳门",
+      "kind": "organization",
+      "placement": "human-dajin",
+      "description": "大晋的修仙宗派，职司、来客与内部修学分别处理。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-fangjian-mountain",
+      "name": "方尖山",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "修仙者往来的山地，山居与通路须实际辨认。",
+      "facts": [
+        {
+          "id": "dajin-fangjian-mountain-route-human-dajin",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-dajin"
+          },
+          "description": "沿来路返回上级地域，仍须实际行程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-entry-array",
+      "name": "门后传送阵",
+      "kind": "item",
+      "placement": "dajin-feng-vault-door",
+      "description": "石门后十余丈处的小型传送阵，有七八个槽位，并非全部都应放入灵石。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-receiver-array",
+      "name": "密窟接收阵",
+      "kind": "item",
+      "placement": "dajin-feng-vault",
+      "description": "厅角的传送阵与门后阵相连，使用要确认禁制与供能。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-vault-key",
+      "name": "密窟银钥",
+      "kind": "item",
+      "placement": "dajin-feng-store",
+      "description": "银色法器钥匙，与特定石门孔洞及禁制配合使用。",
+      "facts": [
+        {
+          "id": "dajin-feng-vault-key-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "由冯家保管的族产，实际取用须家族许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-old-manual",
+      "name": "冯家佛门旧典",
+      "kind": "item",
+      "placement": "dajin-feng-vault",
+      "description": "族藏旧典保有伏虎功、转轮经、明王诀的传承记录；须实际读懂并具备修炼条件。",
+      "facts": [
+        {
+          "id": "dajin-feng-old-manual-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "由冯家保管的族产，实际取用须家族许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-feng-estate-records",
+      "name": "冯家族产簿",
+      "kind": "item",
+      "placement": "dajin-feng-store",
+      "description": "记录族产事务的文书；持有文书并不能绕过核验直接占有全部产业。",
+      "facts": [
+        {
+          "id": "dajin-feng-estate-records-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-feng-clan"
+          },
+          "description": "由冯家保管的族产，实际取用须家族许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -10342,6 +10926,21 @@
     {
       "id": "dajin-tianjue-body-condition",
       "text": "天绝魔尸须有实际通灵行尸载体，并处理原有神识；强度承接原尸条件和实际炼养，不凭法诀生成重复尸身或默认取代现存主体。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-vault-authorization",
+      "text": "冯家密窟须找到实际入口、取得钥匙并正确供能操作；此阵按正确五个槽位供能，填满所有槽有空间撕裂风险。不得凭持有信物自动改写血缘或取得全部族产。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-tianji-privacy-boundary",
+      "text": "天机屋防窥禁制可被超过其防护的手段破坏，破坏可被屋内使用者察觉；缩放、禁制及实际供能各有限制，不无条件免疫神识。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-buddhist-training-condition",
+      "text": "明王诀须实际法诀、舍利等条件与修习，借煞气锻体有风险，不能只凭境界或得到书名自动学会；舍利形成不按固定境界保证。",
       "severity": "hard"
     }
   ],
@@ -11845,6 +12444,163 @@
     ],
     "law:dajin-tianjue-body-condition": [
       "dajin-tianjue-corpse-boundaries"
+    ],
+    "entity:dajin-guanning": [
+      "dajin-guanning-names"
+    ],
+    "entity:dajin-wuyuan": [
+      "dajin-guanning-names"
+    ],
+    "entity:dajin-xunyun": [
+      "dajin-guanning-names"
+    ],
+    "entity:dajin-xuejiang": [
+      "dajin-guanning-names"
+    ],
+    "entity:dajin-feng-clan": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-kong-clan": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-zhang-clan": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-jin-clan": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-feng-estate": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-feng-store": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-feng-vault-door": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-feng-vault": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-jinluo-sect": [
+      "dajin-liaozhou-institutions"
+    ],
+    "entity:dajin-qianguang-temple": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-tiansheng-sect": [
+      "dajin-liaozhou-institutions"
+    ],
+    "entity:dajin-jiuxian-palace": [
+      "dajin-liaozhou-institutions"
+    ],
+    "entity:dajin-taiyang-sect": [
+      "dajin-liaozhou-institutions"
+    ],
+    "entity:dajin-fangjian-mountain": [
+      "dajin-liaozhou-institutions"
+    ],
+    "entity:dajin-feng-entry-array": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-feng-receiver-array": [
+      "dajin-feng-lineage-and-vault"
+    ],
+    "entity:dajin-feng-vault-key": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-feng-old-manual": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "entity:dajin-feng-estate-records": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-store-owner": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-vault-owner": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-vault-key-owner": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-old-manual-owner": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-estate-records-owner": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-kong-lineage": [
+      "dajin-liaozhou-institutions"
+    ],
+    "law:dajin-vault-authorization": [
+      "dajin-feng-lineage-and-vault",
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "law:dajin-tianji-privacy-boundary": [
+      "dajin-tianji-house-privacy"
+    ],
+    "law:dajin-buddhist-training-condition": [
+      "dajin-buddhist-qualification"
+    ],
+    "fact:dajin-liaozhou-route-dajin-guanning": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-guanning-route-dajin-liaozhou": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-liaozhou-route-dajin-wuyuan": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-wuyuan-route-dajin-liaozhou": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-guanning-route-dajin-xunyun": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-xunyun-route-dajin-guanning": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-guanning-route-dajin-xuejiang": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-xuejiang-route-dajin-guanning": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-guanning-route-dajin-feng-estate": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-estate-route-dajin-guanning": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-guanning-route-dajin-qianguang-temple": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-qianguang-temple-route-dajin-guanning": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:human-dajin-route-dajin-fangjian-mountain": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-fangjian-mountain-route-human-dajin": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-estate-route-dajin-feng-store": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-store-route-dajin-feng-estate": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-xueling-range-route-dajin-feng-vault-door": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-vault-door-route-dajin-xueling-range": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-vault-door-route-dajin-feng-vault": [
+      "dajin-liaozhou-opening-supplement"
+    ],
+    "fact:dajin-feng-vault-route-dajin-feng-vault-door": [
+      "dajin-liaozhou-opening-supplement"
     ]
   }
 }

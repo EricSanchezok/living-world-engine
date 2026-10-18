@@ -4478,9 +4478,12 @@
       "candidateId": "batch-0136-object-0001",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "唯一韩立，封法力、第二婴和护草原车队是成年后状态，不给十岁身份。",
       "evidence": [
         {
           "chapterId": "qq-25018174",
@@ -4504,19 +4507,19 @@
           "anchorSha256": "7398f8334a383eee90d919557ef0f64fe2c346cf6d8d81f888242bbbbb1a6c84"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0003",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“银月”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueling-soul",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "银月复用雪玲器灵主体；受伤交流及读晋文属于后期经历，不生成另一女婢。",
       "evidence": [
         {
           "chapterId": "qq-25040802",
@@ -4533,19 +4536,19 @@
           "anchorSha256": "ffb2b23645f57cb231aadf881b9b8dfe7efa7babf6c999bbccb4446f9645d14a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0011",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“枫岳”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-feng-yue",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "宁中归属由下章本人明确，非永久疑似；枫岳为已夺舍嫡长，与为仆冯枕分开。",
       "evidence": [
         {
           "chapterId": "qq-25040802",
@@ -4560,21 +4563,27 @@
           "start": 2455,
           "end": 2503,
           "anchorSha256": "e8cc0470ee61089619bf735e2520ba76673f67400d44d50c40ca66263012df3b"
+        },
+        {
+          "chapterId": "qq-25075930",
+          "chapterSha256": "71b8ab784b1029e87cda15a9ca4fe80c6950492aee39022653a8fe34d22fabf0",
+          "start": 348,
+          "end": 409,
+          "anchorSha256": "3e450cdc050f0b0bd5c9ecc73d6fbd4b78fad99975be1d8c6ef47a32ffd98f5d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0013",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“白面老者”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-steppe-white-elder"
+      ],
+      "reason": "草原修补元婴参与者；白面描述不能合并白姓化神，此处保后期未名身份。",
       "evidence": [
         {
           "chapterId": "qq-25028017",
@@ -4591,19 +4600,19 @@
           "anchorSha256": "8ee9b5a5884445f24fada302b603530ea6dd0f6a423c64c6014936941e57af7d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0016",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“圣女”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-lin-yinping",
+        "dajin-tianlan-sect-exchanges"
+      ],
+      "reason": "复用后期天澜圣女林银屏，陪客/开灵是该阶段关系，非T0已在任。",
       "evidence": [
         {
           "chapterId": "qq-25028017",
@@ -4613,19 +4622,19 @@
           "anchorSha256": "d2ea63dd8c3cc47e9fec6a587e412216220ebdd73fe5791db0561895a0aa9673"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0017",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-yinluo-fourth",
+        "dajin-yinluo-fourth-identity"
+      ],
+      "reason": "前述捕婴搜魂所得同一第四长老方法，不能再造“阴罗长老”；韩的读取时间不等于术法诞生。",
       "evidence": [
         {
           "chapterId": "qq-25018174",
@@ -4635,19 +4644,19 @@
           "anchorSha256": "9e3e633e98f27ed2b36235d6a57b871546106a40f90de6e411581e2b9624c466"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0026",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“七色玉佩”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-late-signs",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "七彩护罩来自玲霞佩，材质/佛门加持与银色密窟钥匙是两物；后章有实名和家族信物说明。",
       "evidence": [
         {
           "chapterId": "qq-25054492",
@@ -4662,21 +4671,27 @@
           "start": 1954,
           "end": 2087,
           "anchorSha256": "3b4f5e115201831a76384db15568dfff2f1d014fe40c40f4259d52bdba024b5a"
+        },
+        {
+          "chapterId": "qq-25075930",
+          "chapterSha256": "71b8ab784b1029e87cda15a9ca4fe80c6950492aee39022653a8fe34d22fabf0",
+          "start": 193,
+          "end": 232,
+          "anchorSha256": "5f8c1b4cc060ac3c5fe3f30555f5799f093f09d1cc9f58449c7c3e055a7b31d1"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0040",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-yinluo-sect"
+      ],
+      "reason": "同一古宗，个别长老脑中法门不自动成为全宗人人知。",
       "evidence": [
         {
           "chapterId": "qq-25018174",
@@ -4686,19 +4701,19 @@
           "anchorSha256": "9e3e633e98f27ed2b36235d6a57b871546106a40f90de6e411581e2b9624c466"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0041",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-clan",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "后章本人说明辽州关宁，佛门先祖可核；家族身份不再疑似，后期危机不前置。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4715,19 +4730,19 @@
           "anchorSha256": "3b4f5e115201831a76384db15568dfff2f1d014fe40c40f4259d52bdba024b5a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0042",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“佛宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-institutions",
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "佛宗为传统与各佛门宗派泛称，不造统辖全部佛修的单一宗门。",
       "evidence": [
         {
           "chapterId": "qq-25054492",
@@ -4744,19 +4759,19 @@
           "anchorSha256": "3b4f5e115201831a76384db15568dfff2f1d014fe40c40f4259d52bdba024b5a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0043",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin",
+        "dajin-guanning-names"
+      ],
+      "reason": "大晋地界复用，潜入是未来行动。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4773,19 +4788,18 @@
           "anchorSha256": "6d982a6ccdfbf3014a4d07bb0c80c703c2a08a0a01a05695054d535cae199c78"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0059",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“佛宗功法”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "佛力/七色是多种功法概括，解除煞气仍要法诀、舍利与条件，不是所有佛修一招通用解。",
       "evidence": [
         {
           "chapterId": "qq-25054492",
@@ -4802,19 +4816,18 @@
           "anchorSha256": "f76781f954b65cddb8d0c82cf281f3c5ed3b794d3c1d3107577d22d481190edc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-object-0061",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋世家名号”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guanning-names"
+      ],
+      "reason": "典籍解释地姓称名，具体宁中由下章明确；三十六郡/一百零八州不据此补完整层级。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4824,19 +4837,20 @@
           "anchorSha256": "a36b71fb4de2f66abcbce4ad3603b255daf8df0add790cc0bdaa1ab7dfb178a3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0007",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-fourth-identity",
+        "dajin-yinluo-main-seat",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "阴罗炼魂是既有法门；“唯一”限定韩当时可用办法，不能升为全世界只此法；炼虫与持幡是后期。",
       "evidence": [
         {
           "chapterId": "qq-25018174",
@@ -4846,19 +4860,19 @@
           "anchorSha256": "9e3e633e98f27ed2b36235d6a57b871546106a40f90de6e411581e2b9624c466"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0034",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“七色玉佩”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-late-signs",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "实际护主与大衍辨加持有证；特定佩的后期持有不送T0韩或所有冯家人。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4875,19 +4889,19 @@
           "anchorSha256": "c00d9ec3b740edcac505011621a61dc553d4cc1a3dcd35bd1452d4e8c496f06d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0035",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“枫岳”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-feng-yue",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "本段为推断，下章本人明确嫡长并说明家变，故档案采用身份、仍记当时仅推断。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4902,21 +4916,27 @@
           "start": 600,
           "end": 686,
           "anchorSha256": "e30a3babf41dfa5480d86edf4c9af53fae7889ee0139f48869a58a5943ae7fb7"
+        },
+        {
+          "chapterId": "qq-25075930",
+          "chapterSha256": "71b8ab784b1029e87cda15a9ca4fe80c6950492aee39022653a8fe34d22fabf0",
+          "start": 348,
+          "end": 409,
+          "anchorSha256": "3e450cdc050f0b0bd5c9ecc73d6fbd4b78fad99975be1d8c6ef47a32ffd98f5d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0036",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋世家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guanning-names"
+      ],
+      "reason": "地姓命名惯例可回溯；宁中不再须在宁川/西宁猜，不能把韩未知当地理未成立。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4926,19 +4946,18 @@
           "anchorSha256": "a36b71fb4de2f66abcbce4ad3603b255daf8df0add790cc0bdaa1ab7dfb178a3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0037",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "韩特定逃离、解煞并入晋的计划，开篇不封修为或强制走该路线。",
       "evidence": [
         {
           "chapterId": "qq-25052493",
@@ -4955,19 +4974,19 @@
           "anchorSha256": "6d982a6ccdfbf3014a4d07bb0c80c703c2a08a0a01a05695054d535cae199c78"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0136-fact-0053",
       "batchId": "batch-0136",
       "reportHash": "cb6a324509bd712c9a4f4bb1af25a37c6ca0f45e6a2a6ca7835a2cea542abeda",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天澜圣殿”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-tianlan-sect-exchanges",
+        "canon-lin-yinping"
+      ],
+      "reason": "圣女陪访及辨认来人是当期外交事务，不给开篇圣女生成未形成关系。",
       "evidence": [
         {
           "chapterId": "qq-25028017",
@@ -4977,19 +4996,19 @@
           "anchorSha256": "d2ea63dd8c3cc47e9fec6a587e412216220ebdd73fe5791db0561895a0aa9673"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0017",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-clan",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "家族古传及族藏有千余年锚，迁寺改儒仅数百相对时间，不强断T0已完全改儒。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5013,19 +5032,19 @@
           "anchorSha256": "9048c6cfbb1ec7b4a61a5054fde383ed497810b5a0db4c09bd898e359dc7ec1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0018",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“孔家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-kong-clan",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "家族复用；投靠和持苦毒先为枫岳猜测，后期灭族阴谋非当前。",
       "evidence": [
         {
           "chapterId": "qq-25064601",
@@ -5042,19 +5061,19 @@
           "anchorSha256": "c60b381144fb10fd9bfada29302a0cd6abefd46deabb55934910a72e26f7fef8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0019",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“张家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-zhang-clan",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "初述张家与后面三家赵称按同场成员保异文，采用张家一个实体，不造另一完整竞争家族。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5064,19 +5083,19 @@
           "anchorSha256": "c60b381144fb10fd9bfada29302a0cd6abefd46deabb55934910a72e26f7fef8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0020",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-jin-clan",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "初述金家与后同场董称保异文，一组角色一个实体；不全局合并金/董同姓家族。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5086,19 +5105,19 @@
           "anchorSha256": "c60b381144fb10fd9bfada29302a0cd6abefd46deabb55934910a72e26f7fef8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0021",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“千光寺”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-qianguang-temple",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "先祖俗家师承和分支有据，数百年前搬出相对T0不精确，旧址存在回溯但不假定已搬空。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5108,19 +5127,19 @@
           "anchorSha256": "9048c6cfbb1ec7b4a61a5054fde383ed497810b5a0db4c09bd898e359dc7ec1d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0022",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金罗门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-jinluo-sect",
+        "dajin-liaozhou-institutions"
+      ],
+      "reason": "同段金罗门/金罗宗一致，复用一宗不是两佛宗。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5137,19 +5156,20 @@
           "anchorSha256": "eadb402baef471b1eee9cac40da0d7a5032027a905721c673ca89ef6c04df779"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0023",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“九仙宫”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-jiuxian-palace",
+        "dajin-liaozhou-institutions",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "九仙宫独立机构；后期出行小队覆灭不等于全宫灭门。",
       "evidence": [
         {
           "chapterId": "qq-25089266",
@@ -5173,19 +5193,19 @@
           "anchorSha256": "6e90ad103d396dfe75962ec1e392c685e45ba036d7d504fe4194e9dc32a5c402"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0028",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin",
+        "dajin-guanning-names"
+      ],
+      "reason": "地区唯一；关宁明确辽州，水路沿草原天水—舜江实际关联。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5202,19 +5222,19 @@
           "anchorSha256": "d6563b99a6e8c5ebb50bb867462a852c8023707baba626546e5617b9a4646514"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0030",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“关宁府”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guanning",
+        "dajin-guanning-names"
+      ],
+      "reason": "辽州的关宁，不把各州所有同名府城合并；本行程江宁/江陵称法单列源差。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5231,19 +5251,19 @@
           "anchorSha256": "c60b381144fb10fd9bfada29302a0cd6abefd46deabb55934910a72e26f7fef8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0031",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“辽州”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-liaozhou",
+        "dajin-geography"
+      ],
+      "reason": "辽州既有区域，读取时间不等于此州未来诞生。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5253,19 +5273,19 @@
           "anchorSha256": "b96c22ecd020bd8de8b040a183b33417b99ba7b6e9f2d522bc148f21c22d4853"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0032",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天水河”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "steppe-tianshui-river",
+        "dajin-shun-river"
+      ],
+      "reason": "复用草原已建天水河与舜江，不在Dajin造第二天水；“前方百里”限当时车队位置。",
       "evidence": [
         {
           "chapterId": "qq-25087342",
@@ -5282,19 +5302,18 @@
           "anchorSha256": "d6563b99a6e8c5ebb50bb867462a852c8023707baba626546e5617b9a4646514"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0033",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“舜江”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-shun-river"
+      ],
+      "reason": "同一舜江，水系长期存在；上/下游关系不是无条件瞬移。",
       "evidence": [
         {
           "chapterId": "qq-25087342",
@@ -5304,19 +5323,19 @@
           "anchorSha256": "d6563b99a6e8c5ebb50bb867462a852c8023707baba626546e5617b9a4646514"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0036",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天南”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiannan",
+        "dajin-snow-material-kinds"
+      ],
+      "reason": "天南是原地域；灭迹是材料当期所知，不把所有时期天南库存清零。",
       "evidence": [
         {
           "chapterId": "qq-25089266",
@@ -5326,19 +5345,19 @@
           "anchorSha256": "5c9c2b343c1ab9666913fe8f0f0f03326d34579be301bf22a4b79d23980feead"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0037",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "原提取“宗是否真实存在不能确认”错误，古宗明证充足；不能确认的是旁人误认韩长老。",
       "evidence": [
         {
           "chapterId": "qq-25098598",
@@ -5355,19 +5374,19 @@
           "anchorSha256": "a38a9821668c98dccfc414fb4df256c2042aef0228d3d587563657ee24117622"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0044",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金焰石”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-material-index",
+        "dajin-snow-material-kinds"
+      ],
+      "reason": "材料类别与本次货件分开，金焰石可存在，韩抢得具体一枚是后来。",
       "evidence": [
         {
           "chapterId": "qq-25089266",
@@ -5391,19 +5410,19 @@
           "anchorSha256": "2a6ec9ab78055c396fc2ef04e85ee2aff24116a86b6f315e82f3d96308003dc3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0046",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗幡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-evidence-boundary",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "同套已夺残幡，战绩和韩持有不前置；不另生成新镇宗单幡。",
       "evidence": [
         {
           "chapterId": "qq-25098598",
@@ -5420,19 +5439,19 @@
           "anchorSha256": "01a57aedb8eca403ae3632478c63335a357a213c15e0890e1473f25f035c444f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-object-0059",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家密窟”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-feng-vault",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "千余年族藏设施可回溯；后期钥匙交易/全部库存数量不前置。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5449,19 +5468,18 @@
           "anchorSha256": "5d03783e1c139cb6131a9b4013626ba01c11297e2c01b799589680d8730b4a1e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0014",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“佛宗功法”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "既有佛门修炼特点不因后期描述就未来才成立，但并非全部法诀同速或绝对没人主动选。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5471,19 +5489,19 @@
           "anchorSha256": "71f916857dd5700d40591ad4a75831b445373aeb341226e4202f7ab29f3296fa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0036",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金焰石”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-snow-material-kinds",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "材料用途可存当前规则；争抢、现货与难寻观察是后期，不把“未来事件”标签删掉既存材料类别。",
       "evidence": [
         {
           "chapterId": "qq-25089266",
@@ -5500,19 +5518,18 @@
           "anchorSha256": "2a6ec9ab78055c396fc2ef04e85ee2aff24116a86b6f315e82f3d96308003dc3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0038",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“顾统领”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "已经可判为错误身份而非永远未证：韩夺幡不入阴罗，保留顾当时认识。",
       "evidence": [
         {
           "chapterId": "qq-25098598",
@@ -5522,19 +5539,19 @@
           "anchorSha256": "53acc3ee1c36f546e7a9903e5340ea672fc090b4d12e46297afe8b066c233d29"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0042",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天水河”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "steppe-tianshui-river",
+        "dajin-shun-river"
+      ],
+      "reason": "长期水系已在草原落地，取水支汊相对百里不变整个河流固定长度。",
       "evidence": [
         {
           "chapterId": "qq-25087342",
@@ -5558,19 +5575,19 @@
           "anchorSha256": "0bc3aaef13786459d0098afc93650a77301e97dc9f6dbdee9280fdae69d72ad8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0043",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-guanning-names",
+        "dajin-guanning"
+      ],
+      "reason": "关宁属于辽州；韩开篇不知道不妨碍地理客观存在。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5580,19 +5597,20 @@
           "anchorSha256": "b96c22ecd020bd8de8b040a183b33417b99ba7b6e9f2d522bc148f21c22d4853"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0044",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-liaozhou-institutions",
+        "dajin-jinluo-sect",
+        "dajin-jiuxian-palace"
+      ],
+      "reason": "两个组织不同，金罗互称不增一宗，九仙非佛门分支。",
       "evidence": [
         {
           "chapterId": "qq-25075930",
@@ -5609,19 +5627,18 @@
           "anchorSha256": "68d3a7c4421174152aab26a623d6af4a79913209544d01e0f1d959693a8954bc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-fact-0056",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋言语”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-institutions"
+      ],
+      "reason": "语言不同与具体人的学习状态分别保存，突兀族并非无法学大晋语。",
       "evidence": [
         {
           "chapterId": "qq-25089266",
@@ -5631,19 +5648,18 @@
           "anchorSha256": "210fb928255974344cd8fb071982213865e760a9a015eff9ba4b5fb8160f42b8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0137-issue-0002",
       "batchId": "batch-0137",
       "reportHash": "239492275e2f37609e7e291d65d8540779b5882546cd438c6a61af296f3a9858",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立与阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "顾误认已由夺幡连续情节判定，闭合客观身份疑点而保留误认事实。",
       "evidence": [
         {
           "chapterId": "qq-25098598",
@@ -5653,19 +5669,19 @@
           "anchorSha256": "53acc3ee1c36f546e7a9903e5340ea672fc090b4d12e46297afe8b066c233d29"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0001",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "第二婴/虚天鼎/血影遁是韩后期状态，不能开篇装备。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -5689,19 +5705,19 @@
           "anchorSha256": "0ef770d128b83e6a53221e0da82721b7abd7cdcc636be12c57e867df1945dc3a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0003",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“枫岳”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-feng-yue",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "枫岳独立主体，他的错误认定不改变韩所属；没有枫岳T0年龄证据。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -5718,19 +5734,19 @@
           "anchorSha256": "0f9486ed65fc1b806cf92e73f4f1df86fccfb73b77f4a45756caa6cf41b194b2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0004",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯枕”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-feng-zhen",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "冯枕是前段为仆魔修老者，非冯家嫡长枫岳；改名不说明他与家族血缘。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -5740,19 +5756,18 @@
           "anchorSha256": "9b982d8d0fca26913e2bdeb88f3613ba9ae763150ff1149385630c71cd29ebd2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0010",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“王铁枪”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-wang-tieqiang"
+      ],
+      "reason": "二十余年镖师经历的凡人，不可能直接套为数百年前同职开篇NPC。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -5769,19 +5784,19 @@
           "anchorSha256": "f8558ba804b1173b64eb8006ba85d72ca0ed43255bc4600ea5efc57be7076980"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0019",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“古魔”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-devil-valley-detached-soul",
+        "dajin-detached-demon-identity"
+      ],
+      "reason": "横穿草原去晋的重伤古魔为前后连续分魂原躯线，不是新种族个体或已死主魂。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -5798,19 +5813,19 @@
           "anchorSha256": "8f7218d484e933c377bc9f93fdaf816a0fd4468c13cbb30c7fcbfc1e86d04180"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0023",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“鬼罗幡”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-evidence-boundary",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "鬼罗/阴罗幡为同套称名；后期第二婴借残幡疗伤，不复制第二宝物。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -5834,19 +5849,19 @@
           "anchorSha256": "2ee717ecb46bb9bc289fd5363dc2cf1e2d91c56879287916a337274d624c99c4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0035",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin",
+        "dajin-geography"
+      ],
+      "reason": "大晋州域与辽州地理有据，韩被误称魔宗长老不使地域失真。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -5863,10 +5878,7 @@
           "anchorSha256": "5def68a5a41fccf270522d3655e0690597b953038bb1e71b2c89c799cb11a922"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -5973,9 +5985,12 @@
       "candidateId": "batch-0138-object-0038",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天澜草原”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-steppe",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "草原复用；追杀和跨界巡查属于后期行动，不变固定边境敌意。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -5992,19 +6007,19 @@
           "anchorSha256": "3caf843c87d3cf6f2fda4e34e2dc9dbe75f115c8728c56c3440c58b3df65e604"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0045",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "古宗真实，人物据口供误认韩而猜复仇，不能用怀疑取消宗门存在。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6021,19 +6036,19 @@
           "anchorSha256": "a43e4740106d44e51844df3d55d472dbf67f8a721d18687934bd8d95dea66608"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0046",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“九仙宫”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-jiuxian-palace",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "“被灭的九仙宫修士”修饰该出行小队，明确不能写宗门被灭。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6043,19 +6058,18 @@
           "anchorSha256": "a43e4740106d44e51844df3d55d472dbf67f8a721d18687934bd8d95dea66608"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0047",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋十大魔宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-top-sect-reputation"
+      ],
+      "reason": "十大魔宗为地位合称，无共同首脑或统一库存。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6065,19 +6079,19 @@
           "anchorSha256": "5def68a5a41fccf270522d3655e0690597b953038bb1e71b2c89c799cb11a922"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-object-0049",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“慕兰人”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-steppe",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "慕兰族与突兀为不同群体，数十年前战争在韩已成婴后，不在T0写败后状态。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6087,19 +6101,19 @@
           "anchorSha256": "3caf843c87d3cf6f2fda4e34e2dc9dbe75f115c8728c56c3440c58b3df65e604"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0004",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“枫岳”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution",
+        "canon-feng-yue"
+      ],
+      "reason": "枫岳据丹药、幡和实力认错组织，韩不承认；当前客观已知非阴罗而非尚未判断。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6109,19 +6123,18 @@
           "anchorSha256": "9b982d8d0fca26913e2bdeb88f3613ba9ae763150ff1149385630c71cd29ebd2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0005",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“突兀人仙师”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "口供传播了顾的错误，不升级为真籍贯或真职务。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6131,19 +6144,18 @@
           "anchorSha256": "5def68a5a41fccf270522d3655e0690597b953038bb1e71b2c89c799cb11a922"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0006",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天澜圣殿”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "追杀部署是此后作出的选择，T0不预置巡边绞韩队。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6153,19 +6165,19 @@
           "anchorSha256": "d818e9fb8d3a428de4fcf668994cae8702263730088fc0b8d1e20c3cab4175f7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0039",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天澜圣女”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-lin-yinping",
+        "dajin-tianlan-sect-exchanges"
+      ],
+      "reason": "圣女拟赴晋查身份/索物是后期计划，不等于当时已抵晋或开篇必执行。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -6182,19 +6194,19 @@
           "anchorSha256": "0e15f4be55737de191fed5d4f45b7487b23f7e551f7d5155906da651f305d805"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0041",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“古魔”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-devil-valley-detached-soul",
+        "dajin-detached-demon-identity"
+      ],
+      "reason": "坠魔谷逃出的分魂横穿草原与后晋京持两剑相连；此行明显韩成婴后，非无法判相对T0。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -6211,10 +6223,7 @@
           "anchorSha256": "8f7218d484e933c377bc9f93fdaf816a0fd4468c13cbb30c7fcbfc1e86d04180"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -6371,9 +6380,12 @@
       "candidateId": "batch-0138-fact-0047",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-top-sect-reputation"
+      ],
+      "reason": "宗门名望可回溯，已登记不需重建十大共同组织。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6383,19 +6395,18 @@
           "anchorSha256": "5def68a5a41fccf270522d3655e0690597b953038bb1e71b2c89c799cb11a922"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0048",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-yinluo-evidence-boundary"
+      ],
+      "reason": "镇宗幡的社会名望已建；有名不等于每个见物者都能正确辨持有人。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6405,19 +6416,18 @@
           "anchorSha256": "a43e4740106d44e51844df3d55d472dbf67f8a721d18687934bd8d95dea66608"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0049",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“九仙宫”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "灭的是几名九仙宫修士，非原issue开篇判定所称灭门；后期此次死亡可定位。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6427,19 +6437,19 @@
           "anchorSha256": "a43e4740106d44e51844df3d55d472dbf67f8a721d18687934bd8d95dea66608"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0050",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“慕兰人与阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-mulan-war",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "阴罗助慕兰是前段真实战争背景，但复仇目的为圣殿错误解释，不能反推韩的动机。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6449,19 +6459,19 @@
           "anchorSha256": "3caf843c87d3cf6f2fda4e34e2dc9dbe75f115c8728c56c3440c58b3df65e604"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-fact-0051",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋修士与天澜圣殿”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-institutions",
+        "dajin-tianlan-sect-exchanges"
+      ],
+      "reason": "贸易实际可见，但原文不说“大批”；机构往来不自动变永恒联盟或全族敌意。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6471,19 +6481,18 @@
           "anchorSha256": "084e49271adc96af499d7f1971d4979abe7cbda0a718dcc47ecd9207449160e1"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-issue-0001",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立的阴罗宗长老身份”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "错误身份链闭合，保留人物曾信这一谣言，不把主观称呼变客观宗籍。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6500,19 +6509,20 @@
           "anchorSha256": "5def68a5a41fccf270522d3655e0690597b953038bb1e71b2c89c799cb11a922"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-issue-0002",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“彪悍青年身份”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-jiang-jianying",
+        "canon-jiuxian-gu",
+        "dajin-arrival-misattribution"
+      ],
+      "reason": "前章明确江剑英被顾擒，紧接同一尸体已服毒；跨章可关闭姓名、所属、擒者全部三个局部疑问。",
       "evidence": [
         {
           "chapterId": "qq-25109203",
@@ -6527,21 +6537,34 @@
           "start": 52,
           "end": 132,
           "anchorSha256": "4545a850838adcb60fd91dd61cc5045cbfa3110ac6d4276b3f47a21fee488783"
+        },
+        {
+          "chapterId": "qq-25089266",
+          "chapterSha256": "81f2e2d8d79c982bb2b1dd6f0b2a4f6f8099b7cab9e31bfd69590560f4c0a7b4",
+          "start": 1659,
+          "end": 1754,
+          "anchorSha256": "6e90ad103d396dfe75962ec1e392c685e45ba036d7d504fe4194e9dc32a5c402"
+        },
+        {
+          "chapterId": "qq-25089266",
+          "chapterSha256": "81f2e2d8d79c982bb2b1dd6f0b2a4f6f8099b7cab9e31bfd69590560f4c0a7b4",
+          "start": 2960,
+          "end": 3027,
+          "anchorSha256": "e10e619b6ad7e8d976a249c57eb474b9e1ccda19df6459ce0091ac06262d49ee"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0138-issue-0006",
       "batchId": "batch-0138",
       "reportHash": "082d0af6de59e24922d7b998f23d17f962315d6fc42580f861fee45e2439a34f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“古魔出现时间”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-detached-demon-identity"
+      ],
+      "reason": "有坠魔谷主分魂与两剑后文链，明确是开篇后逃亡，不留下无理由时代未定。",
       "evidence": [
         {
           "chapterId": "qq-25151010",
@@ -6551,19 +6574,19 @@
           "anchorSha256": "df42ce8a247c1d7146a3e1f2dcea2925ae73d76e14b7952165926b7b5018b98b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0001",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "韩在晋受创/恢复/交友为成年后行程，身份唯一。",
       "evidence": [
         {
           "chapterId": "qq-25155862",
@@ -6580,19 +6603,19 @@
           "anchorSha256": "4a6dcf6d0653f26fc02d7c45ade462e28c665bc1f1aca8b5c086b1849ad2641a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0026",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“舜江”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-shun-river",
+        "dajin-geography"
+      ],
+      "reason": "既有舜江，汛期冰块异常为救人线索，不是河水永不结冰。",
       "evidence": [
         {
           "chapterId": "qq-25155862",
@@ -6609,19 +6632,18 @@
           "anchorSha256": "486f3077af899d9b3cf89724881fbf621a2335cd54c2f8e03010a99f9e894aa5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0027",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin"
+      ],
+      "reason": "同一大国，资源先验看法不改地域。",
       "evidence": [
         {
           "chapterId": "qq-25155862",
@@ -6638,19 +6660,21 @@
           "anchorSha256": "de535598ae0067539b68c177717ce81d2764911f4f45b34b7bccd33e4f16f425"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0029",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“辽州”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-liaozhou",
+        "dajin-guanning",
+        "dajin-wuyuan",
+        "dajin-guanning-names"
+      ],
+      "reason": "辽州及两府实地纳入；后期行路十余日不是统一行程常数。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -6667,19 +6691,19 @@
           "anchorSha256": "db1342f1669af20c823e7bc7dd7bef559fcad4ef037d9f1628749288e9e4b86a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0033",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“江陵府”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guanning",
+        "dajin-guanning-names"
+      ],
+      "reason": "同一冯密窟行程孤称江陵，紧后明确抵关宁，保源称差异而不建第二密窟府。",
       "evidence": [
         {
           "chapterId": "qq-25178251",
@@ -6689,19 +6713,19 @@
           "anchorSha256": "2ec56e52d2f0dc1c6d17ff54768a2e8c7a5a941fcded01696de0f88b294984ac"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0039",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天圣宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tiansheng-sect",
+        "dajin-liaozhou-institutions"
+      ],
+      "reason": "儒宗及孔家传承有据回溯，孔后期被尸魂操纵不取消原师承。",
       "evidence": [
         {
           "chapterId": "qq-25181260",
@@ -6711,19 +6735,19 @@
           "anchorSha256": "62dccafd0be0a96cdfcd46ee9d66fdbc9afeaf6d5fb41b7c7d3a01369687541f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0040",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机阁”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tianji-guild",
+        "dajin-tianji-house-privacy"
+      ],
+      "reason": "同一天机阁经营天机屋，不能因异地售品造第二商号。",
       "evidence": [
         {
           "chapterId": "qq-25189734",
@@ -6733,19 +6757,19 @@
           "anchorSha256": "d29cb55c52304d5e02bf5ca07809bd84659759420d79a01e8bfeaef30dff04fa"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0047",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“官府”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-court",
+        "dajin-liaozhou-institutions"
+      ],
+      "reason": "官府已有供奉/委托结构，是否干预具体案件看职权和关系，不全服从修士。",
       "evidence": [
         {
           "chapterId": "qq-25167473",
@@ -6755,19 +6779,19 @@
           "anchorSha256": "49f710ae206f452920497604ffaa70dedaabb9f67521678d195d315ead8bf164"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0048",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“佛宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-institutions",
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "泛指佛门宗派；排外和受戒是韩此时理解/筹划，非所有宗派任何访客必须剃度的硬律。",
       "evidence": [
         {
           "chapterId": "qq-25178251",
@@ -6784,19 +6808,18 @@
           "anchorSha256": "0aa326bbdf7c345392c494e1c877cd85a9d2e92e340825edbea7f1e50bde67d3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0049",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“儒门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-institutions"
+      ],
+      "reason": "儒门传统及诸宗不同，关宁多属其影响但四家并非全出同一师门。",
       "evidence": [
         {
           "chapterId": "qq-25189734",
@@ -6813,19 +6836,18 @@
           "anchorSha256": "f3e8b3ddf14289ce550bc5e3277b901c392363032c91be15101ffe46ea7e15dc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0050",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“十大正门与十大魔宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-top-sect-reputation"
+      ],
+      "reason": "声名列表与韩知识范围，不构成全晋仅二十门派。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -6835,19 +6857,19 @@
           "anchorSha256": "1497ccd804cb01e33d4850797cb6f9d1b0baa4e45df8ab13cc3436f91bef1aba"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0054",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机屋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-house-privacy",
+        "dajin-tianji-guild"
+      ],
+      "reason": "器物类别与特定租品/展示府分开；隐私禁制可破且告警，无绝对防窥。",
       "evidence": [
         {
           "chapterId": "qq-25189734",
@@ -6864,19 +6886,18 @@
           "anchorSha256": "44e9d5d4af4bfe6c218c1970d7f19431cb2a05b99d23b88e0e081b71a89d823f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0056",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“飞行法器”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "昂贵稀少为当时低阶经济处境，不是低阶法力不能驾飞器。",
       "evidence": [
         {
           "chapterId": "qq-25167473",
@@ -6893,19 +6914,19 @@
           "anchorSha256": "458c68e64a846796e2aa5dc26228b23427af4aca25e260db440cd5e1a09235bf"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0057",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“灵石”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tianji-house-privacy",
+        "dajin-values"
+      ],
+      "reason": "灵石真实计价资源，租金和各等级价格不当固定普世兑换法则。",
       "evidence": [
         {
           "chapterId": "qq-25189734",
@@ -6922,19 +6943,18 @@
           "anchorSha256": "977726a64619779ce1664863ddced34d35a724fd79c017da4a7be4c2f8509417"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-object-0059",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“灵脉之地”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-spiritual-land-claims"
+      ],
+      "reason": "沿既有明确韩主观皆有主的限制，不把每条未知灵脉自动生成有主产权。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -6944,19 +6964,18 @@
           "anchorSha256": "de535598ae0067539b68c177717ce81d2764911f4f45b34b7bccd33e4f16f425"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0006",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "听大晋语后确认抵晋，是后期位置与认知更新。",
       "evidence": [
         {
           "chapterId": "qq-25155862",
@@ -6966,19 +6985,18 @@
           "anchorSha256": "9ce90405c65cc7b91f310e5d86eedf56fc9c03af6a325cfad5568df35febbb09"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0019",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "韩长老在天南的名头不自动在新区域形成每人认识。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -6988,19 +7006,18 @@
           "anchorSha256": "4a6dcf6d0653f26fc02d7c45ade462e28c665bc1f1aca8b5c086b1849ad2641a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0060",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋修仙界”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "韩对混乱程度的观察，不是世界强制每次路遇必杀人夺宝。",
       "evidence": [
         {
           "chapterId": "qq-25167473",
@@ -7010,19 +7027,18 @@
           "anchorSha256": "542f05371e41a0e8bd731c1e1b4e4ea88fe6199971f0afdfef15e14047ce0883"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0061",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-spiritual-land-claims"
+      ],
+      "reason": "资源竞争背景保留，但“肯定被占”不是全域土地普查。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -7032,19 +7048,18 @@
           "anchorSha256": "de535598ae0067539b68c177717ce81d2764911f4f45b34b7bccd33e4f16f425"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0062",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋修仙界”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "多于本人预料无客观人口总数，不能按十倍观感生固定人数。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -7054,19 +7069,18 @@
           "anchorSha256": "de535598ae0067539b68c177717ce81d2764911f4f45b34b7bccd33e4f16f425"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0063",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋世家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "家族资源/培养能力的地域比较，不是天南血脉无法突破元婴的世界定律。",
       "evidence": [
         {
           "chapterId": "qq-25181260",
@@ -7083,19 +7097,18 @@
           "anchorSha256": "4baf2d958da5a15d15affe3b9b9c2adbeeeadfa6c49619d441b4efbd040c6b25"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0064",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "对曹自称散修是个人掩饰，不抹除韩后期落云职位或T0家庭身份。",
       "evidence": [
         {
           "chapterId": "qq-25164774",
@@ -7105,19 +7118,18 @@
           "anchorSha256": "5d092bf789180fe5b3e0feccbabea274b08cfb1a3402d796f25e59de0f306976"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0139-fact-0100",
       "batchId": "batch-0139",
       "reportHash": "d69ace4957918bd79e6f53a0883923bd31defef2175566daa46362e9f2c17663",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "数月交流逐渐了解区域，不自动给予初入者大晋全知。",
       "evidence": [
         {
           "chapterId": "qq-25167473",
@@ -7127,19 +7139,19 @@
           "anchorSha256": "aefbaf8724b2ce1d9c46eec47b7643b4f068e3c5c4163efde148b0610b4d9901"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0001",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "取族窟/参拍等均韩成年行程，独体唯一。",
       "evidence": [
         {
           "chapterId": "qq-25192885",
@@ -7163,19 +7175,19 @@
           "anchorSha256": "dcf2020386d230e20aec17fafed074e866bf7c73b98a1ed3f7d759d8ece12d40"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0002",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大衍神君”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-da-yan",
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "历史大衍尚在寄神壳；过去旅行与局限可档案，不因后期对话让T0跟韩。",
       "evidence": [
         {
           "chapterId": "qq-25192885",
@@ -7199,19 +7211,19 @@
           "anchorSha256": "8ed69d9af6d6018ca574ccbc0e328c50d16376d83f49bb6fa5aa1e047246bea5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0003",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金元”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-dajin-jinyuan",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "土灵体与低灵根并存，身体化灰而魂被卷走；不把同句尸王旧见转成他是尸王。",
       "evidence": [
         {
           "chapterId": "qq-25192885",
@@ -7235,19 +7247,19 @@
           "anchorSha256": "1a652b29e01965b71354c9af46fe2a74efe73cdb360f921e7dd3eb32b039626e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0011",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“孔斗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-dajin-kong-dou",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "孔斗是后期具体外堂执事，梦引与封忆真实行为非T0同职。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7264,19 +7276,19 @@
           "anchorSha256": "72d078c4703194ab0cbd4f7c36ea762232ad25100941f2523dce2f4af661ecfd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0012",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“悦来客栈老板”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-dajin-yuelai-keeper",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "五十余岁凡人和不知图址明确；不能拉至数百年前仍是同一暗线。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7300,19 +7312,20 @@
           "anchorSha256": "aa29c0ffa73e41b5d430d3b4586e27ea3d4474615fce298402f7cb1461419615"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0013",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家家主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-late-head",
+        "dajin-feng-lineage-and-vault",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "家主岗位与具体父辈、千年先祖分开，缺名字/继承链不硬造同一长生家主。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7329,19 +7342,19 @@
           "anchorSha256": "dcf2020386d230e20aec17fafed074e866bf7c73b98a1ed3f7d759d8ece12d40"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0015",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“绿衫女子”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-auction-green-cousin",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "同场两女明确堂姐妹非同胞，后期年轻筑基不据外貌断T0存活。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7358,19 +7371,19 @@
           "anchorSha256": "d2df32e6de4a9e55ff261ff413f4cd1242e6b9977f44daf20183bf83a97d52e3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0016",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“黄衫女子”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-auction-yellow-cousin",
+        "dajin-snow-material-kinds"
+      ],
+      "reason": "独立堂姐，解释温石是其本地所知，不生成第二绿衫女。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7387,19 +7400,18 @@
           "anchorSha256": "9bbe64cb158f09e01df5a22a3e613714eca4905bb219183e3aedb473d3374b83"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0017",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“蓝袍中年人”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-auction-blue-host"
+      ],
+      "reason": "一次地方主持人，不同于晋京主拍者，也无T0任职证据。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7416,10 +7428,7 @@
           "anchorSha256": "3aef9c2621a3d48a15900f46d2018e3710a1ff140f79264d8a596022a69b4669"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7447,9 +7456,12 @@
       "candidateId": "batch-0140-object-0021",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“雪陵山脉”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-xueling-range",
+        "dajin-guanning-names"
+      ],
+      "reason": "地理复用，古墓与村镇关系有据，失踪传闻不能变无差别必死地。",
       "evidence": [
         {
           "chapterId": "qq-25192885",
@@ -7466,19 +7478,19 @@
           "anchorSha256": "53d92c9b0143bb39f6baf610fa5130c17178e19a7dc9fef3a1fec84945740851"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0022",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“雪岭山脉”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-xueling-range",
+        "dajin-guanning-names"
+      ],
+      "reason": "前章同段“这个雪岭山其实应该叫做雪陵山脉”直接同指，关闭分山疑点；仍保文本异字。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7486,21 +7498,28 @@
           "start": 1335,
           "end": 1475,
           "anchorSha256": "9bbe64cb158f09e01df5a22a3e613714eca4905bb219183e3aedb473d3374b83"
+        },
+        {
+          "chapterId": "qq-25181260",
+          "chapterSha256": "f29ef91949787c9e7da9af7fb4b898829ff665be2c646ba5c3f2de17320c60ab",
+          "start": 437,
+          "end": 528,
+          "anchorSha256": "72d1a9ef9cdef9894d9d9e515c6431b306698224b71477fa0af960dec73b247c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0023",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“隼云镇”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-xunyun",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "聚落回溯，七年前占据与迁民明属后期，不给开篇孔家同样主权。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7510,19 +7529,19 @@
           "anchorSha256": "b3f9d3223be9e616467d4c7e7bc1a98f156396ed69dd21957d80818069848b20"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0024",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“雪江城”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-xuejiang",
+        "dajin-guanning-names"
+      ],
+      "reason": "小城纳地理，后期人口/个别结丹访者不按扫描复制T0。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7539,19 +7558,19 @@
           "anchorSha256": "a9a2e8e8d37deaf7776dc676af16e6f5479a9ac96fba94d85fc413a30cc6429d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0025",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-dajin",
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "地理广阔与物价/人口推断分开，十倍面积不反推每项资源十倍。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7568,19 +7587,19 @@
           "anchorSha256": "16b6dfe7fdf036a7b4fcc96b958fbe97912c43052287419298f34789fa98d39e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0026",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天南”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-tiannan",
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "同一天南；大衍旧游是本人知识限制，不全世界仅数块大陆。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7597,19 +7616,18 @@
           "anchorSha256": "6072242619b85a11944e0b2b33b960a1f6f0d96dc1bdbf5d2218a5906ac0cc3e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0028",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“方尖山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-fangjian-mountain"
+      ],
+      "reason": "方尖山地点回溯；双魔来访谋算是后期事件，不作为山地固有敌意。",
       "evidence": [
         {
           "chapterId": "qq-25203808",
@@ -7626,19 +7644,20 @@
           "anchorSha256": "01a3fc0e790bc29275753280e835c30b8b3baf261783ac3986cd03a3308bf3de"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0030",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“江宁府”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guanning",
+        "dajin-guanning-names",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "此处江宁为同场孔与其余两家控制目标，同连续府域称名异文，不新建第二被控府。",
       "evidence": [
         {
           "chapterId": "qq-25203808",
@@ -7648,19 +7667,19 @@
           "anchorSha256": "e8aab78452c1876694f67f0ad1e3114336fa7c9955f401614c35afdea21cc21c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0032",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“悦来客栈”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-yuelai-late-inn",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "特定后期分店无创立年证据，茶壶暗记不可套所有悦来；未据此把普通悦来全设冯线。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7670,19 +7689,19 @@
           "anchorSha256": "fa5bae68a071c4b36f395da814a40a15f27f204e40bd8713bcd65cd4ae552ed6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0033",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家密窟”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-feng-vault",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "千余年族藏同一密窟；旧址与后期青砖地址流转分开。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7699,19 +7718,19 @@
           "anchorSha256": "aa29c0ffa73e41b5d430d3b4586e27ea3d4474615fce298402f7cb1461419615"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0037",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“孔家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-kong-clan",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "家族有据回溯；后期占镇、外堂执事和会场不倒写。",
       "evidence": [
         {
           "chapterId": "qq-25217456",
@@ -7728,19 +7747,20 @@
           "anchorSha256": "b3f9d3223be9e616467d4c7e7bc1a98f156396ed69dd21957d80818069848b20"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0038",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-clan",
+        "dajin-feng-lineage-and-vault",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "族藏已有，家主失联及韩冒少爷是后期关系，不能为同一机构重复造家。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7757,10 +7777,7 @@
           "anchorSha256": "98d5cc570c4cf14ac929e4064b9f18228e3e2ab251b3d943e7ee377356f774dd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -7788,9 +7805,12 @@
       "candidateId": "batch-0140-object-0042",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“拍卖会”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-shenwang-market",
+        "dajin-tianji-house-privacy"
+      ],
+      "reason": "这次地方三日交易/拍卖是活动非永远组织，收费和收物依本次约定。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7807,19 +7827,19 @@
           "anchorSha256": "691eeecfc8294c0f335c07128a7786ab39cde9730791e62d3e453aea5ae75520"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0043",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“参王大会”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-shenwang-market",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "参王会本次目的由尸魂后章揭示，不建固定必发事件；不能以孔斗此句未答而认永远未知。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7836,19 +7856,19 @@
           "anchorSha256": "4bb45991c9997691c7ef75b7407a4748e2c7eddccefaf0ea21b68c7c0e7de10d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0046",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“火熔晶”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-snow-material-kinds",
+        "dajin-liaozhou-material-index"
+      ],
+      "reason": "矿晶种类与其中一颗伪装晶化丹分开，不给所有火熔晶生成妖魂。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7865,19 +7885,19 @@
           "anchorSha256": "a86eccc595cceeb29b39fc5f85a1606eaf1f568b206894deabecac6e9ee3d1d9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0051",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“青砖”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-feng-late-signs",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "青砖真载地图但凡人不能开，具体藏墙/取走为后期，不把藏匿物免费送T0韩。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7894,19 +7914,20 @@
           "anchorSha256": "567e65550311cda71c0787a335ed02e4fe7abdaf6718c0e90085b9ad4a27e2c2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0052",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“银色钥匙”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-vault-key",
+        "dajin-feng-lineage-and-vault",
+        "dajin-late-liaozhou-journey"
+      ],
+      "reason": "一把实际银钥；后期传递与持钥误认血缘分开，不复制钥匙作剧情奖励。",
       "evidence": [
         {
           "chapterId": "qq-25224470",
@@ -7923,19 +7944,19 @@
           "anchorSha256": "02f86883179377d9a6caf6129e8ea726a1ec559f8f83afda2fd1e501a0b408e0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0053",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机屋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-late-shenwang-market",
+        "dajin-tianji-house-privacy"
+      ],
+      "reason": "租物缩小后归还原主而非韩获得新品；区别器物类别和特定交易。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7952,19 +7973,19 @@
           "anchorSha256": "16d97f252833bc72ed3eab9bd18ae8fc4b0dc8c86c2a733b02e32c3d640faf50"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-object-0056",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“凤尾花”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-snow-material-kinds",
+        "dajin-liaozhou-material-index"
+      ],
+      "reason": "凤尾花类别可有，五百年/790石只此株此成交，不据此生开篇一株。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -7974,19 +7995,18 @@
           "anchorSha256": "69c9a3384d36be563e0355c3a9d52bcb02078ce64f11f75cc3b0b6860bbf7d68"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-fact-0035",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "一次地方拍卖比较不能推出全晋永远比天南贵；未知材料存在不等全域图鉴已知。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -8003,19 +8023,18 @@
           "anchorSha256": "7d72d73fef49a6bf41c78dc2db3c26214316d028c24c6da75a3e397ac49c288e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-fact-0036",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "数量恐怕是韩推断，非人口普查/供需模型常数。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -8025,19 +8044,19 @@
           "anchorSha256": "09d32e97ef8a70a06ed09891b1f0b55c044711b8f9293018ed142c44591e9578"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-fact-0043",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大衍神君”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-da-yan",
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "老者明说至少五六且本人只游两处，知识下界不当完整地图总数。",
       "evidence": [
         {
           "chapterId": "qq-25217456",
@@ -8047,19 +8066,18 @@
           "anchorSha256": "6072242619b85a11944e0b2b33b960a1f6f0d96dc1bdbf5d2218a5906ac0cc3e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0140-issue-0013",
       "batchId": "batch-0140",
       "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋物价与开篇”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "时点和观测范围边界成立，不用后来价格设开篇固定表。",
       "evidence": [
         {
           "chapterId": "qq-25212397",
@@ -8069,19 +8087,20 @@
           "anchorSha256": "16b6dfe7fdf036a7b4fcc96b958fbe97912c43052287419298f34789fa98d39e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0001",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "dajin-late-liaozhou-journey",
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "韩取佛典/解煞与遭围均后期；明王诀既有法理另采，不将其经历强制发生。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8112,19 +8131,21 @@
           "anchorSha256": "f7471b3a7ae619e809311f1f5d34ac7947d70604462934b05e4ff345f11a2db0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0004",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-feng-clan",
+        "dajin-feng-estate-records",
+        "dajin-feng-vault",
+        "dajin-feng-lineage-and-vault"
+      ],
+      "reason": "族产与长久密窟有据，文书持有人仍须产权核验，不因韩后来取出就提前转私产。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8141,19 +8162,20 @@
           "anchorSha256": "8f29deeb1b5d5ef8ff214536a9dd0f9fe77316be5f748f9d805b9788a9421fca"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0005",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“冯家先祖”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-feng-ancestor",
+        "dajin-feng-lineage-and-vault",
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "先祖佛修和开族历史可核，取得特殊功法/选址动机未知保边界，不造当前老祖。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8170,19 +8192,18 @@
           "anchorSha256": "05ea700218da54af06426123ea24c239eb00b692f2b076cddadcbc06cb7fac60"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0015",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“宋大先生”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-taiyang-song"
+      ],
+      "reason": "宋大先生属于后期被引述击伤者；不因称先生与别区宋姓同人，T0出生未定。",
       "evidence": [
         {
           "chapterId": "qq-25253814",
@@ -8192,19 +8213,18 @@
           "anchorSha256": "4ba8059dbadb46eccabc98a8913d3eb56b7f6a063c4bccf4ab208cbc5fc7c030"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0016",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“泰阳门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-taiyang-sect"
+      ],
+      "reason": "泰阳门与宋所属有据，开篇机构回溯补写，后来围攻不前置。",
       "evidence": [
         {
           "chapterId": "qq-25253814",
@@ -8214,19 +8234,19 @@
           "anchorSha256": "4ba8059dbadb46eccabc98a8913d3eb56b7f6a063c4bccf4ab208cbc5fc7c030"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0017",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“雪陵山脉”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-xueling-range",
+        "dajin-guanning-names"
+      ],
+      "reason": "同段明示雪岭/雪陵为同一山，关闭不同山疑点；失踪不是必死规则。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8250,19 +8270,19 @@
           "anchorSha256": "9414ac1fcbf18f69556762169b65988c6f2a2d1b27c64678c6b32fa470da5309"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0141-object-0018",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“关宁府”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-guanning",
+        "dajin-guanning-names"
+      ],
+      "reason": "同府地理，炫烨“插翅难飞”是自信话语不是世界绝对追踪。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8272,10 +8292,7 @@
           "anchorSha256": "d1487268214c20ef5ae5f16e03cb2a511914a54b40192f755f1de0c0670a7ba0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8318,9 +8335,13 @@
       "candidateId": "batch-0141-object-0020",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天南”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiannan",
+        "dajin-court",
+        "dajin-liaozhou-economy-boundary"
+      ],
+      "reason": "地域社会对照保留为大衍经验，不禁止任何天南修士与凡人交往。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8337,10 +8358,7 @@
           "anchorSha256": "7ec585f3ec7c3fbbe97d0931c7de04b21b6f0821d60115b89cfed3f6cee2b8e6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8417,9 +8435,12 @@
       "candidateId": "batch-0141-object-0052",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“灵脉之地”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-spiritual-land-claims",
+        "dajin-buddhist-qualification"
+      ],
+      "reason": "灵地是资源类型，韩后期寻修处不意味着T0资源不存或所有地点无主。",
       "evidence": [
         {
           "chapterId": "qq-25249977",
@@ -8429,10 +8450,7 @@
           "anchorSha256": "191461e10a59eefd9d93e613e559b03dea74728ece4ea7248a69112754778e96"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -8474,9 +8492,12 @@
       "candidateId": "batch-0141-fact-0007",
       "batchId": "batch-0141",
       "reportHash": "9ae2f5ef05fb6dc9d3478329fa41cb42acb279dc308b3f776c54ffd422254ceb",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天南”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiannan",
+        "dajin-court"
+      ],
+      "reason": "世俗密度和交往需要的比较是社会概括，不能作为天南人物无权入世的规范。",
       "evidence": [
         {
           "chapterId": "qq-25229107",
@@ -8486,10 +8507,7 @@
           "anchorSha256": "1c3745fb1e467275d7c98132c35296b02621e1096d67172292d7d0ee3c91a926"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
