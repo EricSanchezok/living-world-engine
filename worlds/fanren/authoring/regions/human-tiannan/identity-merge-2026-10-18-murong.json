@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "source_completion/direct-source-identity/2026-10-18",
+  "apiCalls": 0,
+  "status": "source-only-identity-merge",
+  "retiredId": "tiannan-murong-brothers-reference",
+  "canonicalId": "yue-murong-twins-reference",
+  "statement": "聂盈当年维护雷灵根慕容兄弟，后韩在守阵处向同胞兄弟问聂师姐并回忆旧一面，叙述明确虽然变化大仍能认出。两区指同一对双胞胎，使用唯一群体资料身份，不将兄弟二人压成一个人，也不把后期结丹守阵经历倒放开篇。",
+  "oldSubject": {
+    "id": "tiannan-murong-brothers-reference",
+    "label": "黄枫慕容兄弟",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tiannan-late-alliance-personnel"
+    ],
+    "aliases": [],
+    "reason": "两名结丹同胞，分别姓名未定；不合慕容衫。"
+  },
+  "canonicalSubject": {
+    "id": "yue-murong-twins-reference",
+    "label": "传功阁慕容兄弟",
+    "kind": "group",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-huangfeng-young-sparring"
+    ],
+    "aliases": [],
+    "reason": "后期八九岁双胞胎与雷灵根天赋，不是成年管事慕容衫；开篇未生成这两个孩子。"
+  },
+  "evidence": [
+    {
+      "chapterId": "qq-23702059",
+      "chapterSha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "start": 0,
+      "end": 260,
+      "anchorSha256": "d6d19fbbfc0c62221349a01ebbefa9c1b4fcd9dc64f800488d1c127e4c30f916"
+    },
+    {
+      "chapterId": "qq-23833045",
+      "chapterSha256": "db29bda597441fbfe765203c147e49c9a5396ca6bd18697f5c9d4e34d58bfd5a",
+      "start": 1465,
+      "end": 2415,
+      "anchorSha256": "8608452b356475b4c022977d15710c56351adf541a78bfcfe5be8e974bbfa47a"
+    }
+  ],
+  "changes": [
+    {
+      "candidateId": "batch-0112-object-0014",
+      "before": {
+        "candidateId": "batch-0112-object-0014",
+        "batchId": "batch-0112",
+        "reportHash": "a2a66ce7023fe5d8e5d20648149d4d2f4281ce8127d15629b4f84ee2b6d18769",
+        "disposition": "corrected",
+        "targetIds": [
+          "tiannan-murong-brothers-reference",
+          "tiannan-huanglong-command-and-decoys"
+        ],
+        "reason": "雷法兄弟两名同胞，不合筑基管事慕容衫；牵巨兽是守军无把握计划。",
+        "evidence": [
+          {
+            "chapterId": "qq-23915624",
+            "chapterSha256": "ff31099d2505a589c94124ceb23c01fd9f0d1dd49f735ffac00b8b41ca88733b",
+            "start": 332,
+            "end": 342,
+            "anchorSha256": "3faa02d3dd508cd9ce3628d81ecded389fd8e4f76db06acdf5927e63d9b3fbdb"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "after": {
+        "candidateId": "batch-0112-object-0014",
+        "batchId": "batch-0112",
+        "reportHash": "a2a66ce7023fe5d8e5d20648149d4d2f4281ce8127d15629b4f84ee2b6d18769",
+        "disposition": "corrected",
+        "targetIds": [
+          "yue-murong-twins-reference",
+          "tiannan-huanglong-command-and-decoys"
+        ],
+        "reason": "雷法兄弟两名同胞，不合筑基管事慕容衫；牵巨兽是守军无把握计划。 跨区身份复核：当年受聂盈维护的雷灵根慕容双胞胎与后来黄龙山守阵兄弟，依韩立旧一面及聂师姐回指为同一对兄弟，资料复用 yue-murong-twins-reference；二人合称仍为群体档案，不合成一个人的身体。",
+        "evidence": [
+          {
+            "chapterId": "qq-23915624",
+            "chapterSha256": "ff31099d2505a589c94124ceb23c01fd9f0d1dd49f735ffac00b8b41ca88733b",
+            "start": 332,
+            "end": 342,
+            "anchorSha256": "3faa02d3dd508cd9ce3628d81ecded389fd8e4f76db06acdf5927e63d9b3fbdb"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      }
+    },
+    {
+      "candidateId": "batch-0113-object-0008",
+      "before": {
+        "candidateId": "batch-0113-object-0008",
+        "batchId": "batch-0113",
+        "reportHash": "d99da29958a91cf3066bc6be7100e4e64c1d664c6e0cfd37bb194aaa0d2f48d2",
+        "disposition": "corrected",
+        "targetIds": [
+          "tiannan-murong-brothers-reference",
+          "tiannan-late-alliance-personnel"
+        ],
+        "reason": "同两兄弟逃回，未有各全名，不能硬合慕容衫。",
+        "evidence": [
+          {
+            "chapterId": "qq-23974836",
+            "chapterSha256": "f19b86c5fa6509a270900c42a224acdbb40909b7b409e7b4d9ec90aaafbeb8eb",
+            "start": 844,
+            "end": 855,
+            "anchorSha256": "a4edca83922bf548bf70b9567b19f601e578c0ecb7abe922ff99ff47bd367883"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "after": {
+        "candidateId": "batch-0113-object-0008",
+        "batchId": "batch-0113",
+        "reportHash": "d99da29958a91cf3066bc6be7100e4e64c1d664c6e0cfd37bb194aaa0d2f48d2",
+        "disposition": "corrected",
+        "targetIds": [
+          "yue-murong-twins-reference",
+          "tiannan-late-alliance-personnel"
+        ],
+        "reason": "同两兄弟逃回，未有各全名，不能硬合慕容衫。 跨区身份复核：当年受聂盈维护的雷灵根慕容双胞胎与后来黄龙山守阵兄弟，依韩立旧一面及聂师姐回指为同一对兄弟，资料复用 yue-murong-twins-reference；二人合称仍为群体档案，不合成一个人的身体。",
+        "evidence": [
+          {
+            "chapterId": "qq-23974836",
+            "chapterSha256": "f19b86c5fa6509a270900c42a224acdbb40909b7b409e7b4d9ec90aaafbeb8eb",
+            "start": 844,
+            "end": 855,
+            "anchorSha256": "a4edca83922bf548bf70b9567b19f601e578c0ecb7abe922ff99ff47bd367883"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      }
+    }
+  ],
+  "beforeDispositionHash": "b237a88b6e9d00db811ec323ba22b1ebd77a6e212dda81a77a176a7aa4cae4d1",
+  "afterDispositionHash": "9880b5f9f641ea8948cc4aeae7f0ee18b8cb3236b36a96a5b4d605d8a112bc5a",
+  "subjectsHash": "ec4193ae9567ca383313029797b316fdfde8d7fca7c8a752aee62478b9486c82",
+  "moduleHash": "aa18696bed2e45c8c7a9cf75fe3cc1fd726426e7c29a6a56b861d6aa0b525956",
+  "claimsHash": "8ad7a422f97f5c829ed3f6e0df678f0c4e982f10710241d468387e9c1393986e",
+  "validation": {
+    "moduleId": "human-tiannan",
+    "candidates": 2961,
+    "counts": {
+      "adopted": 72,
+      "corrected": 2177,
+      "history-only": 13,
+      "later-only": 693,
+      "bounded-uncertainty": 6,
+      "transferred": 0,
+      "pending": 0
+    },
+    "completed": 2961,
+    "unresolved": 0,
+    "boundedUncertainty": 6,
+    "approvedForRuntime": false,
+    "reportHash": "9880b5f9f641ea8948cc4aeae7f0ee18b8cb3236b36a96a5b4d605d8a112bc5a"
+  },
+  "limitations": [
+    "只归一来源档案，不改变任何开篇实体、库存、所有权或认知。",
+    "保留原始提取/模型审校及原历史单元审计，其旧ID为当时快照，由本报告显式取代活动引用。",
+    "原Tiannan声明保留守阵及重逢的实际后期边界；当前运行验收资格不升级。"
+  ]
+}
