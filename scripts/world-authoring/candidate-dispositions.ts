@@ -14,6 +14,7 @@ export const candidateDispositionSchema = z.strictObject({
     targetIds: z.array(identity), reason: identity, evidence: z.array(anchor).min(1),
     uncertainty: z.strictObject({ kind: z.enum(["source-underdetermined", "missing-evidence"]), boundary: identity }).nullable(),
     destinationModule: identity.nullable(),
+    evidenceRepair: z.strictObject({ kind: z.literal("unanchored-issue-context"), reason: identity }).optional(),
   })),
 });
 
@@ -65,7 +66,15 @@ export function validateCandidateDispositions(input: unknown, queue: CandidateQu
     const collection = original[{ object: "objects", fact: "facts", issue: "issues" }[candidate.kind] ?? ""];
     if (!Array.isArray(collection) || collection.filter(item => item?.id === row.candidateId).length !== 1) throw new Error(`candidate absent from extraction ${row.candidateId}`);
     const sourceCandidate = collection.find(item => item.id === row.candidateId);
-    if (!Array.isArray(sourceCandidate.evidence) || !sourceCandidate.evidence.some((citation: { chapterId: string }) =>
+    if (row.evidenceRepair) {
+      // Preserve the immutable extraction; repair only an issue that never had an anchor.
+      if (candidate.kind !== "issue" || !Array.isArray(sourceCandidate.evidence) || sourceCandidate.evidence.length !== 0
+        || !Array.isArray(original.chapters) || !original.chapters.length
+        || !original.chapters.every(chapter => typeof chapter === "string")
+        || !row.evidence.every(evidence => (original.chapters as string[]).includes(evidence.chapterId))) {
+        throw new Error(`invalid unanchored issue repair ${row.candidateId}`);
+      }
+    } else if (!Array.isArray(sourceCandidate.evidence) || !sourceCandidate.evidence.some((citation: { chapterId: string }) =>
       row.evidence.some(evidence => evidence.chapterId === citation.chapterId))) throw new Error(`missing candidate source context ${row.candidateId}`);
     if (new Set(row.targetIds).size !== row.targetIds.length) throw new Error(`duplicate target ${row.candidateId}`);
     for (const target of row.targetIds) if (!context.targetIds.has(target)) throw new Error(`unknown editorial target ${target}`);

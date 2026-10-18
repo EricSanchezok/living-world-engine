@@ -17,6 +17,18 @@ function fixture() {
   return { input, queue, context };
 }
 
+function unanchoredIssueFixture() {
+  const f = fixture();
+  const extraction = { batchId: "batch-1", chapters: ["ch-1"], objects: [], facts: [],
+    issues: [{ id: "issue-1", description: "Opening applicability is not directly stated.", evidence: [] }] };
+  const hash = contentHash(extraction);
+  f.context.reports.set("batch-1", extraction);
+  f.queue.candidates = [{ id: "issue-1", kind: "issue", batchId: "batch-1", reportHash: hash }];
+  const row = { ...f.input.records[0], candidateId: "issue-1", reportHash: hash,
+    evidenceRepair: { kind: "unanchored-issue-context", reason: "Read the batch's original chronology passage and retain the original empty citation list." } };
+  return { ...f, extraction, input: { ...f.input, records: [row] } };
+}
+
 describe("candidate editorial dispositions", () => {
   it("resolves base identities without admitting facts or laws as editorial targets", () => {
     const targets = candidateEditorialTargets({ id: "opening", template: { entities: [{ id: "han", facts: [{ id: "own-rank" }] }] } }, [{ id: "opening-night" }],
@@ -60,5 +72,35 @@ describe("candidate editorial dispositions", () => {
     expect(() => validateCandidateDispositions(f.input, f.queue, f.context)).toThrow("unknown editorial target");
     f.input.records[0].targetIds = [];
     expect(() => validateCandidateDispositions(f.input, f.queue, f.context)).toThrow("missing editorial target");
+  });
+  it("accepts an explicit source-bound repair for an originally unanchored issue without changing the extraction", () => {
+    const f = unanchoredIssueFixture(); const before = contentHash(f.extraction);
+    expect(validateCandidateDispositions(f.input, f.queue, f.context)).toMatchObject({ completed: 1, approvedForRuntime: false });
+    expect(contentHash(f.extraction)).toBe(before);
+    expect(f.extraction.issues[0].evidence).toEqual([]);
+  });
+  it("requires the repair annotation and rejects out-of-batch replacement anchors", () => {
+    const f = unanchoredIssueFixture();
+    const { evidenceRepair: omitted, ...row } = f.input.records[0];
+    expect(omitted.kind).toBe("unanchored-issue-context");
+    expect(() => validateCandidateDispositions({ ...f.input, records: [row] }, f.queue, f.context)).toThrow("missing candidate source context");
+    f.input.records[0].evidence.push({ ...row.evidence[0], chapterId: "unrelated-chapter" });
+    expect(() => validateCandidateDispositions(f.input, f.queue, f.context)).toThrow("invalid unanchored issue repair");
+  });
+  it("does not use issue repair to bypass existing citations or repair object and fact evidence", () => {
+    const f = fixture();
+    const evidenceRepair = { kind: "unanchored-issue-context", reason: "Invalid attempt to replace source evidence." };
+    expect(() => validateCandidateDispositions({ ...f.input, records: [{ ...f.input.records[0], evidenceRepair }] }, f.queue, f.context)).toThrow("invalid unanchored issue repair");
+    const issue = unanchoredIssueFixture();
+    const extraction = { ...issue.extraction, issues: [{ ...issue.extraction.issues[0], evidence: [{ chapterId: "ch-1" }] }] };
+    const hash = contentHash(extraction);
+    issue.context.reports.set("batch-1", extraction); issue.queue.candidates[0].reportHash = hash; issue.input.records[0].reportHash = hash;
+    expect(() => validateCandidateDispositions(issue.input, issue.queue, issue.context)).toThrow("invalid unanchored issue repair");
+  });
+  it("still rejects empty or corrupted replacement evidence", () => {
+    const f = unanchoredIssueFixture(); const row = f.input.records[0];
+    expect(() => validateCandidateDispositions({ ...f.input, records: [{ ...row, evidence: [] }] }, f.queue, f.context)).toThrow();
+    row.evidence[0].anchorSha256 = contentHash("fabricated");
+    expect(() => validateCandidateDispositions(f.input, f.queue, f.context)).toThrow("source anchor drift");
   });
 });
