@@ -12140,6 +12140,19 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-xutian-ding-matched-instruction",
+          "predicate": "matched-instruction",
+          "value": {
+            "kind": "text",
+            "value": "鼎身经文指明需炼化其附带冰焰及相配通宝诀；三层分别要求元婴中期、元婴后期和化神。第一层只能借部分威能，器物自行响应与持有者随意开盖不同。"
+          },
+          "description": "鼎身经文指明需炼化其附带冰焰及相配通宝诀；三层分别要求元婴中期、元婴后期和化神。第一层只能借部分威能，器物自行响应与持有者随意开盖不同。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "已处理附带冰焰，并实际持续注灵使鼎身经文显现后阅读；或取得已核实的该鼎相配法诀。"
+          }
         }
       ],
       "meters": [],
@@ -13713,6 +13726,11 @@
     {
       "id": "void-artifact-and-spirit-control",
       "text": "取得玉如意不等完全控制其独立器灵；红黄化身、银狼与器物形态共享既有主体，不重复生成灵魂或物品。实际护持、遁术与响应受施法、器物状态及器灵意愿制约。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-matched-control-practice",
+      "text": "虚天鼎的持有、附带冰焰炼化、相配通宝诀参悟、体内培炼和实际控制权限分别成立。该鼎三层法诀要求依次为元婴中期、元婴后期、化神；第一层的有限驱使不能当作完全操控。不得挪用另一灵宝的法诀直接替代；培炼耗时须依据实际修行，不因知晓经文便瞬间完成。",
       "severity": "hard"
     }
   ],
@@ -15805,6 +15823,12 @@
     ],
     "law:void-artifact-and-spirit-control": [
       "void-ruyi-independent-spirit"
+    ],
+    "fact:canon-xutian-ding-matched-instruction": [
+      "void-matched-tongbao-inscription"
+    ],
+    "law:void-matched-control-practice": [
+      "void-matched-tongbao-inscription"
     ]
   },
   "periodicProperties": [
