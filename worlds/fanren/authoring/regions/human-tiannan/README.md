@@ -27,3 +27,5 @@
 天南边界决战与返宗185候选的直接原段审定；本轮185条具体处置见 [candidate-review-2026-10-18-war-battle.json](candidate-review-2026-10-18-war-battle.json)。并非全区域或真实游玩验收。
 
 天南封魂后西行与入谷前后143候选直接原段审定；本轮143条具体处置见 [candidate-review-2026-10-18-curse-valley.json](candidate-review-2026-10-18-curse-valley.json)。并非全区域或真实游玩验收。
+
+天南出谷返乡、三宗议事与七灵岛后续168候选直接原段审定；本轮168条具体处置见 [candidate-review-2026-10-18-valley-return.json](candidate-review-2026-10-18-valley-return.json)。并非全区域或真实游玩验收。
