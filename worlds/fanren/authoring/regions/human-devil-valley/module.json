@@ -184,7 +184,7 @@
       "name": "坠魔谷口",
       "kind": "location",
       "placement": "human-devil-valley",
-      "description": "山口百丈宽，长通道伸入谷中；密集裂缝使普通飞遁和步行都可能丧命。",
+      "description": "从外面看十余丈宽的山间豁口，上方灰云与灵气异象交织；通道内的古禁和裂缝使普通飞遁和步行都可能遇险。",
       "facts": [
         {
           "id": "dv-mouth-route-dv-foothill-lodge",
@@ -5977,21 +5977,6 @@
               ]
             },
             {
-              "id": "valley-lore",
-              "subjectId": "self",
-              "predicate": "valley-lore",
-              "value": {
-                "kind": "text",
-                "value": "自己没有入过坠魔谷；古书与逃回友人的分神提供过古魔消息，不能指点现在每处坐标。"
-              },
-              "description": "自己没有入过坠魔谷；古书与逃回友人的分神提供过古魔消息，不能指点现在每处坐标。",
-              "stance": "believed",
-              "confidence": 1,
-              "evidenceIds": [
-                "prior-life"
-              ]
-            },
-            {
               "id": "teaching-choice",
               "subjectId": "self",
               "predicate": "teaching-choice",
@@ -6841,9 +6826,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "灰雾、厚躯与各头光柱，三个头仍属一个生命。"
+            "value": "灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。"
           },
-          "description": "灰雾、厚躯与各头光柱，三个头仍属一个生命。",
+          "description": "灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -6970,9 +6955,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "灰雾、厚躯与各头光柱，三个头仍属一个生命。"
+                "value": "灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。"
               },
-              "description": "灰雾、厚躯与各头光柱，三个头仍属一个生命。",
+              "description": "灰雾、青霞护体、疾伸吞物和暂缚腹中宝物；鳞甲坚厚，口中相对脆弱。三个头属一个生命，受伤与护体须承受真实消耗。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -9335,7 +9320,7 @@
       "name": "七色霞禁乱石地",
       "kind": "location",
       "placement": "dv-outer",
-      "description": "乱石间看似可自由行走，进入边界后七色霞光封路；强击会启动反击，地上没有未来死者法宝。",
+      "description": "乱石间看似可自由行走，进入边界后七色霞光封路；强击会启动反击。",
       "facts": [
         {
           "id": "dv-seven-color-array-route-dv-outer",
@@ -9861,7 +9846,8 @@
     ],
     "entity:dv-mouth": [
       "dv-geography",
-      "dv-opening-life"
+      "dv-opening-life",
+      "dv-mouth-and-extent"
     ],
     "entity:dv-outer": [
       "dv-geography",
@@ -11371,7 +11357,8 @@
     "fact:dv-three-headed-python-learned-skill": [
       "dv-ancient-beasts",
       "dv-opening-life",
-      "dv-opening-values"
+      "dv-opening-values",
+      "dv-python-defenses"
     ],
     "fact:dv-three-headed-python-cultivation-path": [
       "dv-ancient-beasts",
