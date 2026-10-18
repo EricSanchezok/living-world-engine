@@ -1455,26 +1455,34 @@
     },
     {
       "id": "unified-package-import",
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "reviews/full-world-import-and-origins.json"
     },
     {
       "id": "nine-origins-state-and-cognition",
-      "status": "sample-entry-and-limited-actions-passed-full-qualification-pending",
-      "evidence": "validation/nine-origin-first-runs.json"
+      "status": "passed-full-package-initialization",
+      "evidence": "reviews/full-world-import-and-origins.json"
     },
     {
       "id": "population-150",
-      "status": "single-low-conflict-checkpoint-passed-long-run-pending",
-      "evidence": "validation/population-probes.json"
+      "status": "passed-single-low-conflict-checkpoint",
+      "evidence": "validation/population-probes.json",
+      "scopeLimit": "长期与高冲突社会演化未覆盖；保留该边界，不以已通过规模试验代替完整包实际游玩。"
     },
     {
       "id": "population-700",
-      "status": "single-low-conflict-checkpoint-passed-long-run-pending",
-      "evidence": "validation/population-probes.json"
+      "status": "passed-single-low-conflict-checkpoint",
+      "evidence": "validation/population-probes.json",
+      "scopeLimit": "长期与高冲突社会演化未覆盖；保留该边界，不以已通过规模试验代替完整包实际游玩。"
     },
     {
       "id": "full-world",
-      "status": "not-run"
+      "status": "passed-bounded-real-play-with-targeted-presentation-repairs",
+      "evidence": "validation/full-world-acceptance.json",
+      "playReview": "validation/full-world-play-review.md",
+      "loadedAgents": 852,
+      "actualActingAgents": 5,
+      "scopeLimit": "完整包实际工作链、必要呈现修复与既有代表行为通过；不表示846名基础人物均已行动或长期高冲突演化穷尽通过。"
     },
     {
       "id": "sample-import-and-nine-entries",

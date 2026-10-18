@@ -1,5 +1,6 @@
 version: 1
-status: nine-sample-entries-validated-full-world-pending
+status: nine-full-package-entries-validated
+validation: reviews/full-world-import-and-origins.json
 time: T0-opening-night
 classification: original
 calibration: 下列原创年龄、数量、价格与器物性能均是设计标定，不能标为原著数字。
@@ -54,7 +55,7 @@ originals:
       - 自身灵根
       - 异常药性的真正成因
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - herbal-home
         - herbal-north-slope
@@ -63,7 +64,7 @@ originals:
         - herbal-shopping-list
         - herbal-delivery
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: merchant-heir
     title: 富商继承人
     realm: human
@@ -119,7 +120,7 @@ originals:
       - 自身灵根
       - 姚客的真实身份与用途
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - lin-old-client-shop
         - lin-old-client
@@ -127,7 +128,7 @@ originals:
         - lin-old-order
         - lin-helper-wage
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: escort-apprentice
     title: 镖局学徒
     realm: human
@@ -180,7 +181,7 @@ originals:
       - 货箱的具体内容
       - 陌生人与尾随者是否一伙
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - escort-stone-bridge
         - escort-destination
@@ -188,7 +189,7 @@ originals:
         - escort-contract
         - escort-fee-balance
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: clan-junior
     title: 修仙家族旁支
     realm: human
@@ -239,7 +240,7 @@ originals:
       - 器座的内部损伤
       - 残谱缺页是否与此物相关
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - shen-workbench
         - shen-wire-stock
@@ -247,7 +248,7 @@ originals:
         - shen-maintenance-debt
         - shen-material-seller
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: foundation-independent
     title: 筑基散修
     realm: human
@@ -298,7 +299,7 @@ originals:
     hidden:
       - 合作地点的完整风险
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - pond-ridge
         - pond-grove
@@ -306,7 +307,7 @@ originals:
         - pond-wenshen-map
         - pond-array
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: core-clan-elder
     title: 结丹家族长者
     realm: human
@@ -387,7 +388,7 @@ originals:
       - 遗址内部状态
       - 交易方全部经营状况
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - xu-old-road
         - xu-ruin-entrance
@@ -397,11 +398,11 @@ originals:
         - xu-cooling-notes
         - xu-cooling-coil
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: spirit-merchant
     title: 灵界化神商行东家
     realm: spirit
-    proposed_location: 天渊城商贸范围中的原创青禾灵材行；商铺与具体位置须完成开篇回溯
+    proposed_location: 天渊城商贸范围中的原创青禾灵材行仓院；天渊城的开篇存在已有据回溯，商铺、东家静室及具体位置为已审定原创补写。
     age: 326
     cultivation: 化神中期
     roots:
@@ -460,7 +461,7 @@ originals:
       - 三箱短缺的实际环节
       - 资源地真实产量
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - spirit-concession-site
         - spirit-surface-samples
@@ -468,11 +469,11 @@ originals:
         - spirit-loading-record
         - spirit-manager-wage
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
   - id: spirit-array-master
     title: 灵界炼虚阵师
     realm: spirit
-    proposed_location: 天渊城修士生活范围中的原创听泉静室；具体居所与人际圈须完成开篇回溯
+    proposed_location: 天渊城修士生活范围中的原创听泉静室及相邻听泉阵室；天渊城的开篇存在已有据回溯，具体居所、位置和人际圈为已审定原创补写。
     age: 782
     cultivation: 炼虚初期
     roots:
@@ -527,7 +528,7 @@ originals:
       - 阵片完整功能
       - 双方凭据能否相互印证
     runtime_support:
-      module: modules/opening-sample.json
+      module: modules/full-world.json
       entity_ids:
         - array-exchange-shop
         - array-broker
@@ -535,7 +536,7 @@ originals:
         - array-borrowing-copy
         - array-repair-stock
       classification: original
-      qualification: authored-state-awaiting-complete-path-live-validation
+      qualification: full-package-initialization-validated
 existing:
   id: han-li
   kind: existing
@@ -544,7 +545,7 @@ existing:
   age: 10
   sources:
     - qq-4631519
-  status: sample-existing-identity-validated
+  status: full-package-existing-identity-validated
   entry: 接管世界中唯一的韩立；保留第一章当夜的家庭、资质和已有知识。
   excluded_future:
     - 已加入七玄门

@@ -26,7 +26,7 @@
 
 [第二十九至三十六批处理记录](coverage/batches-0029-0036.md)记录后续正文引用、结构修订和接续位置；其中的后期人物关系仍不直接进入共同开篇。
 
-[第三十七至四十四批处理记录](coverage/batches-0037-0044.md)记录后续引文与章节归属修订；累计 305 章完成候选提取，整章最终审定仍未完成。
+[第三十七至四十四批处理记录](coverage/batches-0037-0044.md)记录后续引文与章节归属修订；当时累计 305 章完成候选提取，整章最终审定尚未完成；这是历史进度，当前状态见下文交付状态与来源封账。
 
 [候选全域索引](index/README.md)按稳定记录身份连接批次资料，保留同名歧义。[制作分区](coverage/regional-plan.json)与[全域检索线索](index/region-mentions.json)同时覆盖人界、灵界和必要关联空间；字面命中不视为已读、已复核或开篇存在证明。
 
@@ -38,7 +38,9 @@
 
 全书 2,451 个正文单位、398 批输入的当前状态见[来源封账](coverage/source-closure.json)与[章节母表](coverage/chapters.jsonl)。[全局候选清单](reviews/global-candidate-manifest.json)和地区处置合计覆盖 53,818 条候选；8,370 项来源疑点逐条保留处置依据。逐批来源复核、编辑对候选的直接审定和针对性原文回读分开记录，不宣称根代理重新逐字读过整部小说。早期批次日志与[本地阶段验收](reviews/bounded-closing-review.md)保留当时边界，当前制作状态以封账和[世界覆盖表](coverage/world.json)为准。
 
-九种身份的背景、资产权属、具体人物、秘密与开场选择见[出身设计](origins.yaml)。[开篇编写样本](../samples/opening/README.md)是保留的历史阶段产物；新世界使用完整运行包，不再以样本名称作为正式入口。完整包的导入、出身初始化和实际游玩验收另行记录；内容审定通过本身不等于允许合并。
+九种身份的背景、资产权属、具体人物、秘密与开场选择见[出身设计](origins.yaml)。[开篇编写样本](../samples/opening/README.md)是保留的历史阶段产物；新世界使用完整运行包，不再以样本名称作为正式入口。完整包的导入、出身初始化、真实游玩及定点修复见[统一验收记录](validation/full-world-acceptance.json)；内容审定、运行结果和呈现质量分别有证据，不互相替代。
+
+[最终游玩复核](validation/full-world-play-review.md)说明实际完成的盘货与报告、呈现修复、调用量和体验限制。正式世界入口为 `/worlds/fanren`，名称为《凡人修仙传》。
 
 已有实测作为具体行为的证据复用：[首轮](validation/initial-live-runs.json)、[自由移动和法力消耗](validation/followup-live-runs.json)、[盘货报告与御物](validation/compound-action-retest.json)、[六个新增入口](validation/nine-origin-first-runs.json)、[富商付款](validation/merchant-payment-retest.json)、[灵根检测与阵片调查](validation/discovery-live-runs.json)。这些记录保留各自世界版本、失败、修复和保底呈现情况，不改写成最终版本全部玩法通过。
 

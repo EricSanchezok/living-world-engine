@@ -1,0 +1,1098 @@
+{
+  "formatVersion": 1,
+  "status": "accepted-content-and-bounded-real-play",
+  "mergeAllowed": true,
+  "scope": "完整人界、灵界与解释两界所需的关联空间；原著第一章开头的共同时间点。仙界不可探索，未来剧情不强制兑现。",
+  "world": {
+    "id": "fanren",
+    "name": "凡人修仙传",
+    "version": "1.0.0",
+    "worldHash": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721",
+    "modules": 35,
+    "baselineEntities": 5164,
+    "baselineAgents": 846,
+    "origins": 9
+  },
+  "content": {
+    "chapters": 2451,
+    "batches": 398,
+    "previouslyOutstandingBatchesNowComplete": 178,
+    "candidateDispositions": 53818,
+    "sourceFindingsResolved": 8370,
+    "pendingSourceBatches": 0,
+    "pendingSourceFindings": 0,
+    "pendingCandidateDispositions": 0,
+    "claims": 3479,
+    "distinctClaimAnchorsValidated": 22815,
+    "evidence": [
+      {
+        "path": "coverage/source-closure.json",
+        "sha256": "46b60928feab3f827ce48b28757ad7ad14b92a77c32f67c83920ed40757baaeb"
+      },
+      {
+        "path": "reviews/global-candidate-manifest.json",
+        "sha256": "de331c3d6ebb0bf68eccfeb77c4121ef5c92ed75d6e8dfa7a079e82e3d0670be"
+      },
+      {
+        "path": "reviews/full-world.json",
+        "sha256": "1c1b9ddcceda73df3e73ec83b92364544bf91c2e354cb8c167877c31f06b07d3"
+      },
+      {
+        "path": "reviews/full-world-build.json",
+        "sha256": "c5591324ca458c21bc0e5d3bc6525cb7cf522d24ff85b36b1fb8d1d50da7f03c"
+      }
+    ],
+    "sourceLimit": "锁定的完整工作版本已逐批处理；2259章只能与官方预览独立比对，不宣称完整正版正文逐字校勘。逐批来源复核和编辑直接通读范围分别留档。",
+    "sourceReviewCost": {
+      "model": "deepseek-flash",
+      "previouslyPassedBatchesReused": 220,
+      "newlyReviewedBatches": 178,
+      "httpPostRequests": 226,
+      "inputTokens": 9969934,
+      "outputTokens": 8333959,
+      "scope": "178批来源复核独立计账，不与之后的真实游玩或0API本地审定混算。",
+      "evidence": {
+        "path": "validation/source-review-remaining-178.json",
+        "sha256": "ebe78166f4d7d088c93a54acf59c53898ef55657ee7e7f0def57d5abbb12f126"
+      }
+    }
+  },
+  "entryQualification": {
+    "status": "passed",
+    "evidence": {
+      "path": "reviews/full-world-import-and-origins.json",
+      "sha256": "27843b9fe36988c350d3cf9cad51fe667e6843dbe57df43b5149dd62b6de9d83"
+    },
+    "modelCalls": 0,
+    "producerOfRecordedInitialization": "direct-world@15",
+    "checks": [
+      "完整ZIP真实导入",
+      "九入口及唯一韩立",
+      "家庭/师承/雇员双向认知",
+      "个人/家庭/族产分别归属",
+      "境界、真实能力、灵根隐藏状态和既有资产",
+      "全状态回放一致"
+    ],
+    "reuseReason": "世界内容和初始化合同保持不变；后续修复为大属性域编码、新提交后的待办调度、动作表现准入和叙事投影。初始化证据复用，实际演化在producer17新存档验证，后续目标修复另列。"
+  },
+  "localChecks": {
+    "status": "passed-with-targeted-failure-recovery-and-runtime-regression",
+    "priorFullSuite": {
+      "tests": 2792,
+      "initialPassed": 2783,
+      "failedThenRepairedAndRetested": 9,
+      "command": "npm run check:fast",
+      "originalExitCode": 1
+    },
+    "newRuntimeCases": 6,
+    "runtimeFileAfterFix": 19,
+    "registryTestsAfterProducerChange": 9,
+    "typecheck": "passed",
+    "lint": "passed",
+    "governanceGates": 6,
+    "modelCalls": 0,
+    "evidence": [
+      {
+        "path": ".livingworld-cache/fanren-completion/final-checks.json",
+        "sha256": "d852e6981cdadc4f2835430bdd6250effb8d0ecac27ac5b45a5ca746fe509307"
+      },
+      {
+        "path": ".livingworld-cache/fanren-completion/producer16-checks.json",
+        "sha256": "b15a3063a8644a5050730c1b00a7e5434c98f6d0c48ae53a677576725449c539"
+      },
+      {
+        "path": ".livingworld-cache/fanren-completion/property-choice-overflow-freeze.json",
+        "sha256": "1b8850965018501ebf567b73fe0eb99e255c4c0884c1f85e2a96c9e2ac826e86"
+      },
+      {
+        "path": ".livingworld-cache/fanren-completion/producer17-checks.json",
+        "sha256": "6ab2617331f66dc90042575fd83e40c24e2fe850c86a5e63ec98236d17370e8c"
+      }
+    ],
+    "additionalProducer17Cases": {
+      "scheduling": 1,
+      "narrative": 3,
+      "newCases": 4,
+      "schedulingFilePassed": 5,
+      "narrativeFilePassed": 62,
+      "recoveryPassed": 2,
+      "registryPassed": 9
+    },
+    "additionalProducer18": {
+      "status": "passed",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/producer18-checks.json",
+        "sha256": "eaee8c2f13a240878b3329cbca15b10aba6e6465b427653f67366cf98daeafc0"
+      },
+      "runtimeCommitHook": "c3fa736d pre-commit: all six governance gates and staged whitespace passed",
+      "policy": "遵照用户要求不重跑已通过项；复用此前全套通过与定向修复记录，补测本次改变的边界。"
+    }
+  },
+  "reusedPopulationProbes": {
+    "evidence": {
+      "path": "validation/population-probes.json",
+      "sha256": "5ee5966fe497ee246838efc4817413e6c7c9c0fbef09a2e7c05c093b91b5e51a"
+    },
+    "requestedPopulation": [
+      150,
+      700
+    ],
+    "decisionSubjects": [
+      150,
+      700
+    ],
+    "actualActingSubjects": [
+      143,
+      693
+    ],
+    "scope": "各一轮低冲突自治推进；复用已通过的证据，不外推长期、高冲突的社会演化。"
+  },
+  "runtimeQualification": {
+    "status": "passed-bounded-world-play-and-targeted-presentation-repairs",
+    "producer": "direct-world@17",
+    "model": "deepseek-flash",
+    "freeExpansion": false,
+    "runs": [
+      {
+        "label": "producer15 complete-package capacity failure",
+        "status": "failed-fixed-by-producer16",
+        "runId": "2026-10-18T13-53-09-271Z-full-v15-merchant-work",
+        "instanceId": "f09a88ed-ae36-43d8-b8d2-b75473e05e89",
+        "httpPostRequests": 6,
+        "usage": {
+          "input": 89781,
+          "output": 9090,
+          "reasoning": 7070,
+          "invocations": 6,
+          "unknownInput": 0,
+          "unknownOutput": 0
+        },
+        "durationMs": 119512,
+        "loadedAgents": 852,
+        "replayEqual": true,
+        "quantitiesUnchanged": true,
+        "failure": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"questions\",\n      \"a2_fact1\",\n      \"criteria\"\n    ],\n    \"message\": \"Invalid input\"\n  },\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"questions\",\n      \"a3_fact0\",\n      \"criteria\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+        "stop": {
+          "kind": "execution",
+          "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"questions\",\n      \"a2_fact1\",\n      \"criteria\"\n    ],\n    \"message\": \"Invalid input\"\n  },\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"questions\",\n      \"a3_fact0\",\n      \"criteria\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+        },
+        "evidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T13-53-09-271Z-full-v15-merchant-work/report.json",
+          "sha256": "c97da0647bb88785fbaeac9cfce461b7c258c5c469c550095e88ffa7f6c38ca8"
+        }
+      },
+      {
+        "label": "producer16 request and remote travel",
+        "status": "budget-limited-not-qualified",
+        "runId": "2026-10-18T14-09-52-211Z-full-v16-merchant-work",
+        "instanceId": "cdd50c5f-ca46-485c-a920-93ecfcbd5039",
+        "httpPostRequests": 28,
+        "usage": {
+          "input": 1277976,
+          "output": 115793,
+          "reasoning": 93887,
+          "invocations": 28,
+          "unknownInput": 0,
+          "unknownOutput": 0
+        },
+        "durationMs": 526475,
+        "loadedAgents": 852,
+        "replayEqual": true,
+        "quantitiesUnchanged": true,
+        "failure": "Dispatch wall-clock ceiling reached",
+        "stop": {
+          "kind": "wall-budget",
+          "message": "Dispatch wall-clock ceiling reached"
+        },
+        "evidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T14-09-52-211Z-full-v16-merchant-work/report.json",
+          "sha256": "18c0ba20a1afb9bc6fa8c24f17663e762a8aff721c4261eaa5436194a44d9085"
+        }
+      },
+      {
+        "label": "continuation harness registry path error",
+        "status": "zero-api-harness-failure-fixed",
+        "runId": "2026-10-18T14-19-58-710Z-full-v16-merchant-wait",
+        "instanceId": "cdd50c5f-ca46-485c-a920-93ecfcbd5039",
+        "httpPostRequests": 0,
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "invocations": 0,
+          "unknownInput": 0,
+          "unknownOutput": 0
+        },
+        "durationMs": 102401,
+        "loadedAgents": 852,
+        "replayEqual": true,
+        "quantitiesUnchanged": true,
+        "failure": "cannot read model registry snapshot 8c823cfdec172836407c5472f83183c4d44c7323f5914b1b8c6d93e753248238",
+        "stop": {
+          "kind": "execution",
+          "message": "cannot read model registry snapshot 8c823cfdec172836407c5472f83183c4d44c7323f5914b1b8c6d93e753248238"
+        },
+        "evidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T14-19-58-710Z-full-v16-merchant-wait/report.json",
+          "sha256": "a7967d2d350d980a81d5e951ed70430502f2462e1306e4c22473ddbacf09db1a"
+        }
+      },
+      {
+        "label": "producer16 remote follow-through and narrative failure",
+        "status": "failed-fixed-locally-pending-producer17-live",
+        "runId": "2026-10-18T14-23-06-164Z-full-v16-merchant-wait",
+        "instanceId": "cdd50c5f-ca46-485c-a920-93ecfcbd5039",
+        "httpPostRequests": 7,
+        "usage": {
+          "input": 153387,
+          "output": 24268,
+          "reasoning": 22350,
+          "invocations": 7,
+          "unknownInput": 0,
+          "unknownOutput": 0
+        },
+        "durationMs": 298410,
+        "loadedAgents": 852,
+        "replayEqual": true,
+        "quantitiesUnchanged": true,
+        "failure": null,
+        "stop": {
+          "kind": "complete",
+          "message": "The continued wait ended; human review is still required"
+        },
+        "evidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T14-23-06-164Z-full-v16-merchant-wait/report.json",
+          "sha256": "22cfea086288075b6e211161f39aa7358ee2e0a3a2cd50b4dda60fab47243893"
+        }
+      },
+      {
+        "label": "producer17 full-package count-and-report chain",
+        "status": "canonical-chain-passed-presentation-repair-in-progress",
+        "runId": "2026-10-18T14-39-14-077Z-full-v17-merchant-work",
+        "instanceId": "1a27a712-88ab-49d9-b170-e8a9d9083014",
+        "httpPostRequests": 55,
+        "usage": {
+          "input": 2134294,
+          "output": 210730,
+          "reasoning": 179658,
+          "invocations": 55,
+          "unknownInput": 0,
+          "unknownOutput": 0
+        },
+        "durationMs": 1343195,
+        "dispatchDurationMs": 960708,
+        "loadedAgents": 852,
+        "actualActingSubjects": 5,
+        "worldElapsedSeconds": 1390,
+        "finalRevision": 11,
+        "replayEqual": true,
+        "quantitiesUnchanged": true,
+        "sourceUnchanged": true,
+        "failure": null,
+        "stop": {
+          "kind": "complete",
+          "message": "Reviewer verified completed chain after first input; no redundant wait submitted"
+        },
+        "evidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T14-39-14-077Z-full-v17-merchant-work/report.json",
+          "sha256": "1d2bb230179aa9b74f6e535f9ae5eb50f1f78c39f3eb63206804391745112965"
+        },
+        "semanticEvidence": {
+          "path": ".livingworld-cache/fanren-playtests/2026-10-18T14-39-14-077Z-full-v17-merchant-work/semantic-evidence.json",
+          "sha256": "0deef4870e6f20c1a4b7545fe2656f73b4e0f8234310213b7f9e14d15dd8a575"
+        }
+      }
+    ],
+    "canonicalChain": {
+      "status": "passed-root-reviewed",
+      "request": "请去库房清点现有药箱，数清后回前厅告诉我实数；如果现在不能办，也请直接告诉我原因。",
+      "steps": [
+        {
+          "kind": "move",
+          "target": "lin-store",
+          "startedAtSeconds": 0,
+          "completedAtSeconds": 300,
+          "actionId": "rt:action:dbe3b468f5c990b220cbb410d77b35e94cee8edecbdd36e106b78d800c318b5c"
+        },
+        {
+          "kind": "move",
+          "target": "lin-stockroom",
+          "startedAtSeconds": 300,
+          "completedAtSeconds": 600,
+          "actionId": "rt:action:16d4d9d421139db41b90d8855c6a5b5ad7ad291a0b9ed9d57cc4484ce6cac8a5"
+        },
+        {
+          "kind": "observe",
+          "target": "lin-herbs",
+          "startedAtSeconds": 600,
+          "completedAtSeconds": 900,
+          "actionId": "rt:action:10e252110e26ac9a63f35c7a8dedace7be69caaa3d5d7d408847d62914e82a64"
+        },
+        {
+          "kind": "move",
+          "target": "lin-account-room",
+          "startedAtSeconds": 900,
+          "completedAtSeconds": 960,
+          "actionId": "rt:action:e16c023cb84533d8bab44ecbbbc21a384d1f52780b9f4631531aace0c52c3a18"
+        },
+        {
+          "kind": "observe",
+          "target": "lin-stock-ledger",
+          "startedAtSeconds": 960,
+          "completedAtSeconds": 970,
+          "actionId": "rt:action:3c75d38c64523b8076b6a4967001ac021b8bebe8b93f454c4149d5ad8f104b59"
+        },
+        {
+          "kind": "move",
+          "target": "lin-estate",
+          "startedAtSeconds": 970,
+          "completedAtSeconds": 1270,
+          "actionId": "rt:action:1218bf65fa9682e936c83780750b0e70dc336b2564c5787843f6b40465dbd1f1"
+        },
+        {
+          "kind": "speak",
+          "target": "lin-father",
+          "startedAtSeconds": 1270,
+          "completedAtSeconds": 1330,
+          "actionId": "rt:action:9cf8fb501f02b011789ab7afdd48432e29ebb4e748b4dc495a9665a408ff9d0c"
+        }
+      ],
+      "count": 60,
+      "countObservationId": "rt:observation:acdbea6deeadb3edc69f4e7bb6c82d9cf7e50801ad1db39ba532402b68b17901",
+      "playerHeardReportObservationId": "rt:observation:937bc22b19ec3fc989668d0d07aaf2d29f144684c73289206d68aea2d5bcb7e0",
+      "reportDirectedTo": "lin-father",
+      "alsoHeardBy": "participant",
+      "newTradeAuthorized": false,
+      "newPaymentAuthorized": false,
+      "secondWaitSubmitted": false,
+      "whyNoSecondWait": "第一条请求已经完成清点与返回报告，人工关口结束试验，未再派发多余等待。",
+      "limit": "人物关于客户来路、交货风险和生意安排的发言仍是其判断，不升级为客观事实。",
+      "addressedRecipientHearingConfirmed": false,
+      "addressedRecipientLocation": "lin-store",
+      "reportReceiptBoundary": "报告说给林敬亭，玩家在前厅实际听到；父亲仍在药铺，未确认听见。未将被点名等同于实际送达，NPC后续仍可更正或转述。"
+    },
+    "presentationReview": {
+      "status": "passed-targeted-repairs-root-reviewed",
+      "originalBeatCount": 8,
+      "originalFallbackBeats": 2,
+      "targets": [
+        "opening continuation",
+        "late failed-helper recovery attribution",
+        "manager-return inner-thought statement"
+      ],
+      "additionalLocalGuard": "Repeated recovery under identical submission, visible source and failed actor is coalesced without discarding any underlying Ledger error.",
+      "helperHandling": "最后阿柳说话时收杯来自该次独立的、已审定可见动作表现；茶具tidiness仍为待收拾，不能把它写成先前清洁动作已成功。",
+      "qualifiedTargets": [
+        {
+          "target": "opening continuation",
+          "status": "passed",
+          "evidenceTarget": "opening"
+        },
+        {
+          "target": "late failed-helper recovery attribution",
+          "status": "passed-zero-model-direct-status",
+          "evidenceField": "knownRecoveryDirectQualification"
+        },
+        {
+          "target": "manager return, visible manner and elapsed interval",
+          "status": "passed-production-counterfactual-and-real-model-presentation",
+          "evidenceFields": [
+            "mannerAdmissionProbe",
+            "mannerSettlementQualification",
+            "mannerOutboxQualification"
+          ],
+          "evidenceTarget": "manager-return-timed-discourse"
+        }
+      ],
+      "historicalFailuresRetained": true,
+      "scope": "原8段完整阅读后，仅复验失败目标。旧失败段落不重写；当前修复通过独立分支验证，不能把旧fullChainPassed=false改成整轮零错误。"
+    },
+    "fullPackageRunTotals": {
+      "httpPostRequests": 96,
+      "inputTokens": 3655438,
+      "outputTokens": 359881,
+      "scope": "全部完整包试验的成功、预算中止和失败；不含历史来源审定、已复用样本或另列的冻结定点复验。"
+    },
+    "presentationProbes": [
+      {
+        "target": "opening",
+        "automaticResult": "complete",
+        "humanReview": "passed-root-reviewed",
+        "finding": "原请求逐字呈现；夜间与待收拾茶具均有既存依据；未加玩家动作或掌柜不作为。",
+        "postRequests": 2,
+        "creationCalls": 1,
+        "elapsedMs": 47441,
+        "inputTokens": 20004,
+        "outputTokens": 1560,
+        "reasoningTokensSubset": 1331,
+        "sourceHash": "312521db918191a484f5dc083590285d7aa92fcaad5f6c680b3d4432190f4b73",
+        "worldStateHash": "faddac1855e675d3d5418687e709616f156bbd74c6435d3b0cffd9435a3e6b42",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "姚客把来意说给林敬亭听，语气稳当客气，说完便看着对方，等一句准话。“林当家，在下姚某，做药材转手的营生。如今要六十箱寻常药材，每箱愿出二十两，共一千二百两。货若能分批，先交二十箱也是一桩，余下的按您的章程陆续凑齐。只是这货去往何处，还请当家对外不必细问。”",
+          "你对掌柜许素娘说：“请去库房清点现有药箱，数清后回前厅告诉我实数；如果现在不能办，也请直接告诉我原因。”前厅已入夜，桌上的茶具仍搁在那里，等着收拾。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/opening/2026-10-18T15-10-21-210Z/report.json",
+          "sha256": "d85404c4b894e1defe2186aa02f11a88c892e0cbf635fec9898e8d22415df798"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/opening/2026-10-18T15-10-21-210Z/code-fingerprint.json",
+          "sha256": "c2b53a187ec193ea1245bafaa2477d476d0a19b5df1299d1fca5740d0c06ccaa"
+        }
+      },
+      {
+        "target": "late-recovery",
+        "automaticResult": "complete",
+        "humanReview": "semantic-failure",
+        "finding": "虽然自动发表 complete，仍把未提交的处理失败写成半句讲话，并要求重问已经完成的盘货请求。",
+        "postRequests": 3,
+        "creationCalls": 1,
+        "elapsedMs": 104564,
+        "inputTokens": 41473,
+        "outputTokens": 12577,
+        "reasoningTokensSubset": 12260,
+        "sourceHash": "abfdde517772087db6cb0f5b62ade9cd78bc482e041c3be0ea23fe295f16039e",
+        "worldStateHash": "faddac1855e675d3d5418687e709616f156bbd74c6435d3b0cffd9435a3e6b42",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "院里帮着跑腿、按月领工钱的阿柳，这一回轮到她那一段时，话没有走完。前厅里一时接不上她的回话——这不是她推辞，也不是她没应声或没听见，只是那一步停在了半途。",
+          "已经出口的请托仍然作数，你可以再向她问一遍，或者换个人、换个法子去办。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/late-recovery/2026-10-18T15-11-43-598Z/report.json",
+          "sha256": "14a10ca416c4c7c32df82961b7ac33b330b9e2a0d068f1c7583e38a8de3cb876"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/late-recovery/2026-10-18T15-11-43-598Z/code-fingerprint.json",
+          "sha256": "c2b53a187ec193ea1245bafaa2477d476d0a19b5df1299d1fca5740d0c06ccaa"
+        }
+      },
+      {
+        "target": "manager-return",
+        "automaticResult": "complete",
+        "humanReview": "semantic-failure",
+        "finding": "虽然自动发表 complete，把返程300秒写成整段等待五分钟，并从表现推断内心整理措辞。",
+        "postRequests": 2,
+        "creationCalls": 1,
+        "elapsedMs": 49225,
+        "inputTokens": 21873,
+        "outputTokens": 2165,
+        "reasoningTokensSubset": 1950,
+        "sourceHash": "b0a69206100f935e901a403400b35299a1fa2a36a780aeee613fac067cc8fcdb",
+        "worldStateHash": "faddac1855e675d3d5418687e709616f156bbd74c6435d3b0cffd9435a3e6b42",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "约莫又过五分钟，许素娘从外头进了前厅，步子稳而快，像是边走边把要说的话理清。她人已经到了，库房药箱的实数却还没有出口，清点的结果仍未传到前厅。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return/2026-10-18T15-14-24-846Z/report.json",
+          "sha256": "fec07476dd61933248ac8ace16e5b1bcf527a01a38fa16f3f77aacbde3ddc5a5"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return/2026-10-18T15-14-24-846Z/code-fingerprint.json",
+          "sha256": "c2b53a187ec193ea1245bafaa2477d476d0a19b5df1299d1fca5740d0c06ccaa"
+        }
+      },
+      {
+        "target": "late-recovery-repair",
+        "automaticResult": "fallback",
+        "humanReview": "fallback-requires-correct-boundary",
+        "finding": "修复稿仍未准确交代helper处理失败；第一稿错误重试建议被拦，第二稿复述旧报告被拦；保底未补真正恢复说明。",
+        "postRequests": 5,
+        "creationCalls": 2,
+        "elapsedMs": 168479,
+        "inputTokens": 71683,
+        "outputTokens": 21174,
+        "reasoningTokensSubset": 20378,
+        "sourceHash": "abfdde517772087db6cb0f5b62ade9cd78bc482e041c3be0ea23fe295f16039e",
+        "worldStateHash": "faddac1855e675d3d5418687e709616f156bbd74c6435d3b0cffd9435a3e6b42",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "许素娘的话已经说尽：宋济生那四十箱的旧约、库里实数六十箱、以及先探旧客口风再议新单的分寸，都摆在前厅的灯下，不必再问一遍。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/late-recovery-repair/2026-10-18T15-22-13-756Z/report.json",
+          "sha256": "15a9e517bf108603cd7a29d0f057b2b5ecad5f1033bc0a1a22eac4e15b756be7"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/late-recovery-repair/2026-10-18T15-22-13-756Z/code-fingerprint.json",
+          "sha256": "cb6082ddf0ffb40052201fde08bb496471f6e5da731e8db5b334da4f151a57d8"
+        }
+      },
+      {
+        "target": "manager-return-repair",
+        "automaticResult": "fallback",
+        "humanReview": "fallback-on-historical-invalid-manner",
+        "finding": "两次草稿添加未执行手势、场景与错误时间；拦截正确，旧事实保底重复了历史被错误准入的私心句。新的动作准入已另测，不改写旧源。",
+        "postRequests": 4,
+        "creationCalls": 2,
+        "elapsedMs": 118055,
+        "inputTokens": 45737,
+        "outputTokens": 13531,
+        "reasoningTokensSubset": 13078,
+        "sourceHash": "b0a69206100f935e901a403400b35299a1fa2a36a780aeee613fac067cc8fcdb",
+        "worldStateHash": "faddac1855e675d3d5418687e709616f156bbd74c6435d3b0cffd9435a3e6b42",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "你注意到许素娘。长期掌柜，持有旧客户订单。\n许素娘步子稳而快，边走边把要说的话理清。\n行动已完成。\n可见举止：步子稳而快，边走边把要说的话理清。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-repair/2026-10-18T15-26-06-621Z/report.json",
+          "sha256": "ffa42680b7e5d0aa6f9a6866d81f3bc899847610253d3d75294d4af1641c5a55"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-repair/2026-10-18T15-26-06-621Z/code-fingerprint.json",
+          "sha256": "cb6082ddf0ffb40052201fde08bb496471f6e5da731e8db5b334da4f151a57d8"
+        }
+      },
+      {
+        "target": "manager-return-counterfactual",
+        "automaticResult": "complete",
+        "humanReview": "semantic-failure",
+        "finding": "真实引擎重新结算后，私心表现已去除，世界状态与源保持一致；呈现仍把600秒返程写成整段间隔。上一已发表边界为360秒，当前1570秒，实际间隔1210秒，自动审核未发现这一错误。",
+        "postRequests": 2,
+        "creationCalls": 1,
+        "elapsedMs": 78260,
+        "inputTokens": 22088,
+        "outputTokens": 6998,
+        "reasoningTokensSubset": 6808,
+        "sourceHash": "91cb7df289840c505faa1013505577d8b70cd000b1f3d44dd7c17b99525e46ab",
+        "worldStateHash": "913e2c3bfd77cd30ec8e716dd3e69ff7cd3305c269a2d6a4a0fc5ca8d695c809",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "约莫十分钟后，许素娘回到前厅。你要的库房药箱实数还没有交到手上，前厅里也没有新的回话。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-counterfactual/2026-10-18T15-46-09-045Z/report.json",
+          "sha256": "0d77f9f4bf30ab7ef987232aad643ea27a3851f55d8ef3ae072891b89b0439a5"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-counterfactual/2026-10-18T15-46-09-045Z/code-fingerprint.json",
+          "sha256": "88b68f495275eb0c1082ce572e9a3e942747f577b00d8b95ef5d457861b7d4b1"
+        }
+      },
+      {
+        "target": "manager-return-timed-discourse",
+        "automaticResult": "complete",
+        "humanReview": "passed-root-reviewed",
+        "finding": "根审全文：约莫二十分钟符合360→1570的1210秒实际发表间隔；只写掌柜返回与尚未交付实数，没有新增私心、道具、手势、交谈或玩家行动。已执行600秒返程与整个间隔保持分开。",
+        "postRequests": 2,
+        "creationCalls": 1,
+        "elapsedMs": 64083,
+        "inputTokens": 23269,
+        "outputTokens": 4156,
+        "reasoningTokensSubset": 3974,
+        "sourceHash": "91cb7df289840c505faa1013505577d8b70cd000b1f3d44dd7c17b99525e46ab",
+        "worldStateHash": "913e2c3bfd77cd30ec8e716dd3e69ff7cd3305c269a2d6a4a0fc5ca8d695c809",
+        "allIsolationChecksPassed": true,
+        "originalWriteback": false,
+        "finalText": [
+          "又过了约莫二十分钟，许素娘从外头回到前厅。你要的那句实数，她还没有开口。"
+        ],
+        "evidence": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-timed-discourse/2026-10-18T16-02-51-708Z/report.json",
+          "sha256": "4e2ac54624ec40214c024fdd539dc90b0d0d9c219cba6fc4c657812fb0bbbbc0"
+        },
+        "codeFingerprint": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-timed-discourse/2026-10-18T16-02-51-708Z/code-fingerprint.json",
+          "sha256": "2f7f4242ee01ce3cc06dd634edac3ee8bce50686845cb6bf16742b700bad65ca"
+        },
+        "preflightFreeze": {
+          "path": ".livingworld-cache/fanren-completion/frozen-narrative-replay/manager-return-timed-discourse/freeze.json",
+          "sha256": "a607d14f5cb864f69b0813399e4073818b1840aad243c3429464beec6beec794"
+        }
+      }
+    ],
+    "mannerAdmissionProbe": {
+      "status": "passed-targeted-admission",
+      "postRequests": 1,
+      "inputTokens": 77921,
+      "outputTokens": 13687,
+      "reasoningTokensSubset": 13298,
+      "elapsedMs": 73562,
+      "questions": 42,
+      "changedQuestions": [
+        "a0_manner"
+      ],
+      "manner": "unsupported",
+      "actionOutcome": "succeeded",
+      "newDurationAnswer": "s600",
+      "originalDurationAnswer": "s300",
+      "worldStateWritten": false,
+      "limit": "完整42问真实模型重判，只证明目标准入结果，不能等同世界结算，也不声称其他回答全部不变。实际引擎结算由生产边界回归另证。",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/frozen-manner-probe/2026-10-18T15-28-47-455Z/summary.json",
+        "sha256": "42ddd684e880e0187b2d37d8d5912a2cd07bf85ee679adcf900d7d6bb3daeca1"
+      }
+    },
+    "probeTotalsToDate": {
+      "httpPostRequests": 21,
+      "inputTokens": 324048,
+      "outputTokens": 75848,
+      "scope": "全部7个冻结呈现试验（含失败）及1个完整42问准入试验；独立于前述96次完整包调用。"
+    },
+    "costAccounting": {
+      "providerBilledAmount": null,
+      "currency": null,
+      "reason": "供应商响应和固定模型目录均未包含货币账单或单价；没有前后余额差，不能把token数伪装为实际扣费。保留各次请求的输入、输出、缓存命中、推理子集和延迟，供账单对照。",
+      "reasoningIncludedInOutput": true,
+      "retainedFailures": true,
+      "model": "deepseek-flash"
+    },
+    "knownRecoveryDirectQualification": {
+      "status": "passed-root-reviewed",
+      "modelCalls": 0,
+      "entry": "WorldHost -> drainNarratives -> directKnownRecovery",
+      "text": "阿柳（领工钱帮忙，工作需要协商）这一步的回应处理未能完成。已确认的进展仍然保留。",
+      "worldStateUnchanged": true,
+      "sourceUnchanged": true,
+      "noModelProducer": true,
+      "historicalFailuresUnchanged": true,
+      "scope": "只处理首次、已知回应人物且没有新观察或对话的处理失败；语义解释和真实场景继续正常生成。",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/direct-known-recovery/green/report.json",
+        "sha256": "7201bf4cd014f073a2c03a2aa17ec2f7631449440b1164b587a357760aca0fd9"
+      },
+      "codeAndTests": {
+        "path": ".livingworld-cache/fanren-completion/direct-known-recovery/freeze.json",
+        "sha256": "4605af67fc430a140ac3f79f1132199841155deec3d254c5840f81298cc617bc"
+      }
+    },
+    "terminalRecoveryFallbackQualification": {
+      "status": "passed-boundary-only",
+      "modelCalls": 0,
+      "historicalCreativeTrialStillFailed": true,
+      "prefixLimit": "原已发表复述包含未经当前前厅证实的灯具；不可变前缀保持，不把补上准确失败提示当作整段通过。",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/recovery-fallback-local/green/report.json",
+        "sha256": "84eb0a9f7e58a8ff7bbb8be8e024fa24f29b086535d662c06ae1683c2240016d"
+      }
+    },
+    "mannerSettlementQualification": {
+      "status": "passed-root-reviewed",
+      "modelCalls": 0,
+      "recordedRealAnswerUses": 1,
+      "fullQuestionCount": 42,
+      "entry": "prepareActions -> settlePreparedActions -> directPerception",
+      "movementSucceeded": true,
+      "visibleManner": null,
+      "startWorldSeconds": 970,
+      "endWorldSeconds": 1570,
+      "durationSeconds": 600,
+      "quantitiesUnchanged": true,
+      "originalDocumentUnchanged": true,
+      "limit": "隔离分支消费新的真实模型回答；旧游玩300秒返程和报告历史保持不变。本记录本身不等同整段世界或叙事重跑。",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/manager-manner-counterfactual/report.json",
+        "sha256": "3a52348a885fb592afad918c02a7b68282d244e8147e443988138d55c7e8b16c"
+      }
+    },
+    "mannerOutboxQualification": {
+      "status": "passed-root-reviewed",
+      "modelCalls": 0,
+      "entry": "DirectWorldAlgorithm.prepareStep -> completeStep -> commitDirectRecord -> enqueueNarrative",
+      "originalRoot": ".livingworld-cache/fanren-playtests/2026-10-18T14-39-14-077Z-full-v17-merchant-work",
+      "originalInstanceId": "1a27a712-88ab-49d9-b170-e8a9d9083014",
+      "originalDocumentUnchanged": true,
+      "replayEqual": true,
+      "sourceHash": "91cb7df289840c505faa1013505577d8b70cd000b1f3d44dd7c17b99525e46ab",
+      "counterfactualStartSeconds": 970,
+      "counterfactualEndSeconds": 1570,
+      "visibleManner": null,
+      "scope": "消费原动作选择及新的完整42问真实回答，经过正式提交与叙事排队；只推进这一边界，原存档和原报告保持不变。",
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/manager-manner-counterfactual-outbox/report.json",
+        "sha256": "7cb0fa8e4c85ce727ff6a4ed5fa385108b1ad2c6bcdd1d03d8fcfe045e77c7df"
+      },
+      "freeze": {
+        "path": ".livingworld-cache/fanren-completion/manager-manner-counterfactual-outbox/freeze.json",
+        "sha256": "e5da41858dde3987fd15ea79232cd79e5b67e1b71eb4ed59f6e9dfc542bf96d0"
+      }
+    },
+    "releaseProducer": "direct-world@18",
+    "producerEvidenceBoundary": "完整包实际工作链记录为17；未改造原存档。最终修复由固定源、真实模型回答、正式提交与Host呈现验证，记录精确源码指纹；之后18只做producer版本注册与配套引用更新，没有再改执行逻辑。",
+    "publishedTimeProjectionQualification": {
+      "status": "passed-local-and-real-model",
+      "modelCallsInLocalChecks": 0,
+      "previousPublicationSeconds": 360,
+      "currentBoundarySeconds": 1570,
+      "presentationIntervalSeconds": 1210,
+      "actionDurationSeconds": 600,
+      "newTestsPassed": 6,
+      "affectedTestsPassed": 6,
+      "evidence": {
+        "path": ".livingworld-cache/fanren-completion/published-paragraph-time/freeze.json",
+        "sha256": "624ae176faa11d45bd6aaaa74004ab4a5bdd18e748adb487cd4b5c8e39b66147"
+      },
+      "governanceOnlyCorrection": "冻结后将Spec0204的Artifact-Version恢复为仓库支持的格式版本1；该字段不是文档修订号，正文和所有被测源码不变。"
+    },
+    "closingLiveTotals": {
+      "httpPostRequests": 117,
+      "inputTokens": 3979486,
+      "outputTokens": 435729,
+      "scope": "最终完整包的全部5次运行尝试及随后7个呈现/1个准入试验，失败均计入；不含来源178批，也不混入历史样本、150/700规模及更早优化试验。",
+      "totalInputAndOutputTokens": 4415215
+    }
+  },
+  "startup": {
+    "routes": {
+      "/": 200,
+      "/api/worlds": 200,
+      "/api/instances": 200,
+      "/worlds/fanren": 200,
+      "/api/worlds/fanren/start-options": 200
+    },
+    "fullWorldListed": true,
+    "fullWorldName": "凡人修仙传",
+    "fullWorldUrl": "http://127.0.0.1:3111/worlds/fanren",
+    "originsAvailable": 9,
+    "instanceDataDeleted": [],
+    "visualBrowserCheck": "未完成：浏览器工具URL策略拒绝；未尝试绕过，HTTP健康和真实WorldHost运行单独验收。",
+    "dataRoot": ".livingworld-v36",
+    "serviceProcessKeptRunning": true,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/final-startup-v18-health.json",
+      "sha256": "6b93df132d6d22a3af8cbcec355909a61cab2706447559a42624f3f1a224c0a6"
+    },
+    "cleanupEvidence": {
+      "path": ".livingworld-cache/fanren-completion/final-catalog-cleanup.json",
+      "sha256": "47b4f56fcbf1d6499dc91317a725610d873ad019ebd3bc82cfb646f9deacbdac"
+    },
+    "removedObsoleteCatalogWorld": "fanren-opening-sample",
+    "databaseBackup": ".livingworld-cache/fanren-completion/catalog-before-final-cleanup-20261018T160751Z.sqlite",
+    "priorHotReloadFailure": "旧开发进程热更新时worlds接口曾返回500；未单独确证原因。清理开发缓存并启动当前版本后，上述五个入口均为200。"
+  },
+  "limits": [
+    "未声称所有846名人物都在最终游玩中行动；加载人口与实际行动人数单列。",
+    "不将有限场景验证外推为全部可能剧情、长期高冲突演化或所有叙事都无误。",
+    "模型账单金额未知，保留实际输入/输出token；reasoning属于输出的子集，不重复相加。",
+    "原完整工作链排除人工暂停后约16分钟；本次只复验失败边界，不声称已测得优化后的全程延迟。"
+  ],
+  "reusedAcceptanceEvidence": {
+    "independentAudit": {
+      "path": ".livingworld-cache/fanren-completion/final-reused-evidence-audit.json",
+      "sha256": "d639679c81e83458eddc52c9279cb6ad249fec5958febeb4d223c328e693568e"
+    },
+    "conditions": [
+      {
+        "id": "complete-source-and-candidate-coverage",
+        "status": "existing-content-evidence-complete",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/coverage/source-closure.json",
+            "selector": "/counts; /residual",
+            "recordedStatus": "source-and-candidate-evidence-complete"
+          },
+          {
+            "path": "worlds/fanren/authoring/reviews/global-candidate-manifest.json",
+            "selector": "document",
+            "recordedStatus": "global-candidate-disposition-manifest"
+          },
+          {
+            "path": "worlds/fanren/authoring/coverage/world.json",
+            "selector": "/inventory_sealed; /domains",
+            "recordedStatus": "inventory sealed; all eleven domains complete"
+          }
+        ],
+        "supports": [
+          "2451个正文单位、398批、53818条候选、8370项来源疑点已闭合；来源与候选的未处理项为空。",
+          "人界、灵界及必要关联空间均列入制作范围。"
+        ],
+        "limits": [
+          "本审查复用已有封账，不重跑来源核对或重新阅读正文。",
+          "2259章只能与官方预览独立比对；不声称完整正版正文逐字校勘，也不声称某一个人独自通读全部2451章。"
+        ]
+      },
+      {
+        "id": "opening-state-and-source-distinction",
+        "status": "existing-editorial-and-local-state-evidence",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world.json",
+            "selector": "/scope; /limitations",
+            "recordedStatus": "full content review; runtime qualification separate"
+          },
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-build.json",
+            "selector": "/provenance; /regionalReceipts; /archiveImportValidated",
+            "recordedStatus": "full build and archive import validated"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/full-world-acceptance.json",
+            "selector": "/content; /entryQualification",
+            "recordedStatus": "content complete; entry passed"
+          }
+        ],
+        "supports": [
+          "完整模块经过来源、时态和统一装配审签。",
+          "原著未明的开篇人员、位置、资质、资产及数值保留回溯或原创分类。"
+        ],
+        "limits": [
+          "不是对所有可能剧情的穷尽证明；有界未知身份与原著矛盾不因此被强猜为确定事实。",
+          "仙界仅保留解释两界的资料，不开放探索。"
+        ]
+      },
+      {
+        "id": "final-package-import-and-nine-entries",
+        "status": "passed-full-package-initialization",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/archiveImport; /origins; /modelCalls; /networkAttempts",
+            "recordedStatus": "final-full-world-initialization"
+          },
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-build.json",
+            "selector": "/worldHash; /entities; /agents; /originIds",
+            "recordedStatus": "full package built"
+          }
+        ],
+        "supports": [
+          "世界hash为sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721。",
+          "35模块、5164基础实体、846基础Agent；九入口实际导入和初始化，0模型调用、0网络请求、各自回放一致。"
+        ],
+        "limits": [
+          "记录producer为15，初始化合同及世界内容未改变，可复用初始化证据；不能改写成17的真实运行。",
+          "原创出身会追加家人与关联实体，所以各实例人数不同；846是基础人口，不是全部实际行动人数。"
+        ]
+      },
+      {
+        "id": "reciprocal-relations-and-assets",
+        "status": "passed-initialization-with-limited-live-evidence",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/origins/*/knownBy; /origins/*/ownBindingCount; /origins/*/personalFacts; /origins/*/personalQuantities",
+            "recordedStatus": "nine origins initialized and replay equal"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/initial-live-runs.json",
+            "selector": "/cases/2",
+            "recordedStatus": "limited-case-passed"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/nine-origin-first-runs.json",
+            "selector": "/runs/4",
+            "recordedStatus": "limited-case-passed-after-presentation-repair"
+          }
+        ],
+        "supports": [
+          "药童母亲、师父的双向认识和受托12包药材保全有真实交谈证据。",
+          "家族旁支与三名族人交流，提议合作未把族产器座变为私人财产。"
+        ],
+        "limits": [
+          "初始化不是所有关系都已实际互动；不需把每个可能人情兑现与分配选择全部枚举。",
+          "旁支旧轮有一次叙事拒绝后修复，不能记为零错误。"
+        ]
+      },
+      {
+        "id": "unique-han-li-free-choice",
+        "status": "passed-limited-behavior-and-current-initialization",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/origins/8",
+            "recordedStatus": "hanCount=1; admissions=0; replayEqual=true"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/followup-live-runs.json",
+            "selector": "/cases/1",
+            "recordedStatus": "limited-case-passed"
+          }
+        ],
+        "supports": [
+          "旧实玩中拒绝离村学武的发言、父母回应、随后继续行动均已提交。",
+          "实际位置变为village-path，不只是叙事声称移动。",
+          "完整包入口控制既有韩立，没有另行admission。"
+        ],
+        "limits": [
+          "这是韩立拒绝一条原著路线的具体证据，不是所有重大事件分支的穷尽实验。",
+          "初轮失败保留在initial-live-runs，不被后来通过覆写。"
+        ]
+      },
+      {
+        "id": "fixed-root-discovery",
+        "status": "passed-limited-state-and-cognition-with-historical-presentation-fallback",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/origins/*/personalFacts",
+            "recordedStatus": "pre-established discoverable roots"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/discovery-live-runs.json",
+            "selector": "/runs/0/checks",
+            "recordedStatus": "state-and-report-passed-presentation-fallback"
+          }
+        ],
+        "supports": [
+          "目测后玩家没有灵根事实；实际验灵读出原有木水火属性，canonical事实不改。",
+          "检测者法力40→39；玩家得到对话证据而非被伪造为亲自观察。"
+        ],
+        "limits": [
+          "旧轮发生叙事fallback，并曾在后续交谈再次选中已知属性；该历史限制保留，不能称旧轮全面呈现通过。",
+          "不要求重新穷尽遮蔽、反制、重复检测等所有情景；相关通用边界另由已执行回归证明。"
+        ]
+      },
+      {
+        "id": "rootless-origin",
+        "status": "passed-limited-case",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/validation/nine-origin-first-runs.json",
+            "selector": "/runs/2",
+            "recordedStatus": "limited-case-passed"
+          },
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/origins/2/personalFacts; /origins/2/personalMeters",
+            "recordedStatus": "rootless escort initialized"
+          }
+        ],
+        "supports": [
+          "无灵根镖局学徒尝试隔空托物，货物仍在原处，法力保持0。"
+        ],
+        "limits": [
+          "未验证全部护送和人情兑现路线；这些是未覆盖玩法，不能泛化成已知失败。"
+        ]
+      },
+      {
+        "id": "high-stage-abilities",
+        "status": "passed-initialization-and-representative-live-actions",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world-import-and-origins.json",
+            "selector": "/origins/4; /origins/5; /origins/6; /origins/7",
+            "recordedStatus": "high-stage initial state validated"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/nine-origin-first-runs.json",
+            "selector": "/runs/1; /runs/3; /runs/5",
+            "recordedStatus": "limited-cases-passed; foundation presentation repaired"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/compound-action-retest.json",
+            "selector": "/checks",
+            "recordedStatus": "limited-cases-passed"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/discovery-live-runs.json",
+            "selector": "/runs/1",
+            "recordedStatus": "passed-limited-case"
+          }
+        ],
+        "supports": [
+          "筑基御物扣法力200→198；化神御物收回后法力1200→1199、无残留悬浮事实。",
+          "炼虚御物法力1800→1799，争议阵片仍由朋友持有；阵片调查发现已有断点、未自动修复。",
+          "结丹用个人100灵石资助晚辈而族库不变。"
+        ],
+        "limits": [
+          "代表动作可复用，不把旧样本与当前完整包的世界版本混称。",
+          "不要求穷尽所有高阶法术或完整修炼人生；旧呈现拒绝与修复保持可见。"
+        ]
+      },
+      {
+        "id": "resource-ownership-conservation",
+        "status": "passed-limited-state-cases",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/validation/merchant-payment-retest.json",
+            "selector": "/checks/0",
+            "recordedStatus": "payment-state-passed-presentation-fallback"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/nine-origin-first-runs.json",
+            "selector": "/runs/3/checks; /runs/4/checks; /runs/5/checks",
+            "recordedStatus": "limited-case state checks passed"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/compound-action-retest.json",
+            "selector": "/checks",
+            "recordedStatus": "limited-cases-passed"
+          }
+        ],
+        "supports": [
+          "付款个人银两40→35、收款5、商号1200不变；结丹个人2200→2100、收款100、族库9000不变。",
+          "商号店内17箱与货场3箱保持分离；清点与报告没有新增库存。"
+        ],
+        "limits": [
+          "付款旧轮叙事使用fallback，状态通过不等于该轮呈现通过。",
+          "完整包merchant@17的真实盘货与返回报告已另经根审，见runtimeQualification.canonicalChain；复用的旧轮仍保持各自版本与呈现限制。"
+        ]
+      },
+      {
+        "id": "open-future",
+        "status": "authored-contract-and-specific-divergence-evidence",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/reviews/full-world.json",
+            "selector": "/limitations",
+            "recordedStatus": "future state not forced into opening"
+          },
+          {
+            "path": "worlds/fanren/authoring/validation/followup-live-runs.json",
+            "selector": "/cases/1/checks",
+            "recordedStatus": "Han Li refusal and subsequent independent action passed"
+          }
+        ],
+        "supports": [
+          "后期事实、未明开篇身份和当期状态分别建档；拒绝入门方向后仍能继续行动。"
+        ],
+        "limits": [
+          "未声称逐一模拟所有战争、突破或重大事件的条件变更。",
+          "用户允许重大事件依据世界条件发生，并未要求每个原著重大事件都有独立固定事件机制。"
+        ]
+      },
+      {
+        "id": "population-150",
+        "status": "passed-single-low-conflict-checkpoint",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/validation/population-probes.json",
+            "selector": "/runs/0; /protocol; /not_tested",
+            "recordedStatus": "passed-single-low-conflict-checkpoint"
+          }
+        ],
+        "supports": [
+          "150个决策主体、143个实际行动主体；293次真实请求，39072ms；库存与关系事实保持、回放一致、无失败intent。",
+          "原始token、doctor、调用与文件指纹已记录。"
+        ],
+        "limits": [
+          "关系冲突试验次数为0，冲突数为null；未声称高冲突或长期社会演化通过。",
+          "实际账单金额未知，不能用估价代实际账单。",
+          "本次不重跑已通过规模试验。"
+        ]
+      },
+      {
+        "id": "population-700",
+        "status": "passed-single-low-conflict-checkpoint",
+        "evidence": [
+          {
+            "path": "worlds/fanren/authoring/validation/population-probes.json",
+            "selector": "/runs/1; /protocol; /not_tested",
+            "recordedStatus": "passed-single-low-conflict-checkpoint"
+          }
+        ],
+        "supports": [
+          "700个决策主体、693个实际行动主体；1393次真实请求，324895ms；库存与关系事实保持、回放一致、无失败intent。",
+          "原始token、doctor、调用与文件指纹已记录。"
+        ],
+        "limits": [
+          "同样只是一轮低冲突自治，不能替代最终完整包实玩。",
+          "原合成测试院落存在地名笔误，已保留历史说明，不作为原著地理准确性证据。",
+          "长期/高冲突未覆盖是范围限制，不应自动扩成无限验收任务。"
+        ]
+      }
+    ]
+  },
+  "acceptedAt": "2026-10-18T16:10:54.583229+00:00",
+  "runtimeReleaseCommit": "c3fa736d",
+  "playReview": "worlds/fanren/authoring/validation/full-world-play-review.md"
+}
