@@ -1023,7 +1023,7 @@
       "id": "dajin-yinluo-sect",
       "name": "阴罗宗",
       "kind": "organization",
-      "placement": "dajin-yinluo-hall",
+      "placement": "dajin-yinluo-main-hall",
       "description": "魔道宗门，长老、宗主与各分系存在不同利益。",
       "facts": [],
       "meters": [],
@@ -1138,6 +1138,21 @@
               "canon-xiang-zhili"
             ]
           }
+        },
+        {
+          "id": "canon-xiang-zhili-usual-home",
+          "predicate": "usual-home",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xiling-mountain"
+          },
+          "description": "本人的旧居处，不代表当前一定身在其内。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiang-zhili"
+            ]
+          }
         }
       ],
       "meters": [
@@ -1231,6 +1246,12 @@
               "name": "风老怪",
               "description": "长期往来的同道；知道他重视寿元与实际利益。",
               "status": "observed"
+            },
+            {
+              "id": "known-dajin-xiling-mountain",
+              "name": "西灵山",
+              "description": "自己的常用居处，知道从当前所在地实际寻路所需的方向线索。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -1256,6 +1277,12 @@
               "local_entity_id": "known-canon-feng-laoguai",
               "canonical_entity_ids": [
                 "canon-feng-laoguai"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-xiling-mountain",
+              "canonical_entity_ids": [
+                "dajin-xiling-mountain"
               ]
             }
           ],
@@ -1308,6 +1335,21 @@
                 "value": "自己是化神修士。"
               },
               "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-usual-home",
+              "subjectId": "self",
+              "predicate": "usual-home",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-xiling-mountain"
+              },
+              "description": "自己的居处，当前未必身在当地。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -1392,6 +1434,21 @@
             "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
           },
           "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-feng-laoguai"
+            ]
+          }
+        },
+        {
+          "id": "canon-feng-laoguai-usual-home",
+          "predicate": "usual-home",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianwai-island"
+          },
+          "description": "本人的旧居处，不代表当前一定身在其内。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -1491,6 +1548,12 @@
               "name": "向之礼",
               "description": "长期来往的向道友，有事会留后手。",
               "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianwai-island",
+              "name": "天外岛",
+              "description": "自己的常用居处，知道从当前所在地实际寻路所需的方向线索。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -1516,6 +1579,12 @@
               "local_entity_id": "known-canon-xiang-zhili",
               "canonical_entity_ids": [
                 "canon-xiang-zhili"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianwai-island",
+              "canonical_entity_ids": [
+                "dajin-tianwai-island"
               ]
             }
           ],
@@ -1568,6 +1637,21 @@
                 "value": "自己是化神修士。"
               },
               "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-usual-home",
+              "subjectId": "self",
+              "predicate": "usual-home",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-tianwai-island"
+              },
+              "description": "自己的居处，当前未必身在当地。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -5804,7 +5888,7 @@
       "id": "dajin-tianji-guild",
       "name": "天机阁",
       "kind": "faction",
-      "placement": "dajin-tianji-shop",
+      "placement": "dajin-tianji-head-hall",
       "description": "经营天机屋等器物的商号，主楼与分号有不同保管和议价权限。",
       "facts": [],
       "meters": [],
@@ -6919,6 +7003,3248 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-yuzhou",
+      "name": "玉州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋州域之一，山地与凡俗小城相间。",
+      "facts": [
+        {
+          "id": "dajin-yuzhou-route-dajin-yuzhou-small-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yuzhou-small-city"
+          },
+          "description": "州内道路有实际距离。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yuzhou-small-city",
+      "name": "玉州山边小城",
+      "kind": "location",
+      "placement": "dajin-yuzhou",
+      "description": "青石街巷中有民居商铺，普通行人不知隐在巷后的空间入口。",
+      "facts": [
+        {
+          "id": "dajin-yuzhou-small-city-route-dajin-yuzhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yuzhou"
+          },
+          "description": "州内道路有实际距离。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yuzhou-small-city-route-dajin-tianji-current-entrance",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-current-entrance"
+          },
+          "description": "找到当前僻巷障眼墙，不知情凡人不会自动看出入口。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取得当前入口/方位并通过相应禁制或主人许可。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-current-entrance",
+      "name": "僻巷障眼墙",
+      "kind": "location",
+      "placement": "dajin-yuzhou-small-city",
+      "description": "死巷尽头的石墙外观平常，障眼与后续禁制阻隔来客。",
+      "facts": [
+        {
+          "id": "dajin-tianji-current-entrance-route-dajin-yuzhou-small-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yuzhou-small-city"
+          },
+          "description": "从当前出入口返回凡俗街巷。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-current-entrance-route-dajin-tianji-jade-gate",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-jade-gate"
+          },
+          "description": "穿墙及数层禁制后才进入游离空间，空间入口变换会使旧地址失效。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取得当前入口/方位并通过相应禁制或主人许可。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-head-space",
+      "name": "天机总殿空间",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "十余里宽、数百丈高的游离空间；玉门、悬梯和碧殿分列其内，地面有楼阁。",
+      "facts": [
+        {
+          "id": "dajin-tianji-mobile-entrance",
+          "predicate": "entrance-motion",
+          "value": {
+            "kind": "text",
+            "value": "每数年会变换入口，具体下一次时刻未定；当前连接玉州僻巷，变更后须重查位置并改变连通状态。"
+          },
+          "description": "入口变换不使内部所有人同时获得外界新坐标。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-flight-limit",
+          "predicate": "flight-restriction",
+          "value": {
+            "kind": "text",
+            "value": "本地禁空通常使元婴以下不能离地三尺；有出殿者不受限的实例，实际有力抵抗者也有例外，不能推广到空间外。"
+          },
+          "description": "施法者仍须以实际能力或授权穿过本地禁制。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-jade-gate",
+      "name": "天机玉门",
+      "kind": "location",
+      "placement": "dajin-tianji-head-space",
+      "description": "巨玉门前有轮值者和机关卫，进入须取得许可。",
+      "facts": [
+        {
+          "id": "dajin-tianji-jade-gate-route-dajin-tianji-head-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-head-hall"
+          },
+          "description": "沿悬浮玉阶而行，未经许可且能力不足者受禁空约束。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-jade-gate-route-dajin-tianji-current-entrance",
+          "predicate": "transport-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-current-entrance"
+          },
+          "description": "须确认当前相连出口，再通过禁制返回。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取得当前入口/方位并通过相应禁制或主人许可。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-head-hall",
+      "name": "天机殿",
+      "kind": "location",
+      "placement": "dajin-tianji-head-space",
+      "description": "碧绿色大殿悬于空中，玉阶连通玉门，内有议事偏厅。",
+      "facts": [
+        {
+          "id": "dajin-tianji-head-hall-route-dajin-tianji-jade-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-jade-gate"
+          },
+          "description": "沿悬浮玉阶而行，未经许可且能力不足者受禁空约束。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-head-hall-route-dajin-tianji-secret-archive",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-secret-archive"
+          },
+          "description": "藏典楼另有禁制，须实际取令并获授权。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-head-hall-route-dajin-tianji-head-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-head-store"
+          },
+          "description": "调拨物资须实际权限和账目。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-secret-archive",
+      "name": "天机秘法库",
+      "kind": "location",
+      "placement": "dajin-tianji-head-space",
+      "description": "地面藏典楼阁，秘术与出售器具分开保管，取典须有阁主授权。",
+      "facts": [
+        {
+          "id": "dajin-tianji-secret-archive-route-dajin-tianji-head-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-head-hall"
+          },
+          "description": "藏典楼另有禁制，须实际取令并获授权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-head-store",
+      "name": "天机总殿器材库",
+      "kind": "location",
+      "placement": "dajin-tianji-head-space",
+      "description": "维持禁制与机关的材料分柜登记，动用商号资产须核实权限。",
+      "facts": [
+        {
+          "id": "dajin-tianji-head-store-route-dajin-tianji-head-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-head-hall"
+          },
+          "description": "调拨物资须实际权限和账目。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 1200
+        },
+        {
+          "definition_id": "maintenance-material",
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": "dajin-fangmang-range",
+      "name": "邡莽山脉",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "阴罗宗总坛坐落的山脉，山路与宗门防护分层分布。",
+      "facts": [
+        {
+          "id": "dajin-fangmang-range-route-dajin-yinluo-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-main-hall"
+          },
+          "description": "山门有防护和值守，入宗须许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yinluo-main-hall",
+      "name": "阴罗宗总坛",
+      "kind": "location",
+      "placement": "dajin-fangmang-range",
+      "description": "古传宗门的议事与修行本山，进入需通过宗门禁制和值守。",
+      "facts": [
+        {
+          "id": "dajin-yinluo-main-hall-route-dajin-fangmang-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fangmang-range"
+          },
+          "description": "山门有防护和值守，入宗须许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yinluo-main-hall-route-dajin-yinluo-lamp-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-lamp-room"
+          },
+          "description": "宗内秘室，未经许可不得进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yinluo-main-hall-route-dajin-yinluo-corpse-yard",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-corpse-yard"
+          },
+          "description": "炼尸场所须识防护和规程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yinluo-lamp-room",
+      "name": "阴罗元神灯秘室",
+      "kind": "location",
+      "placement": "dajin-yinluo-main-hall",
+      "description": "与主体相连的灯具分座安放；灯况须实际检查，不自行公开传播。",
+      "facts": [
+        {
+          "id": "dajin-yinluo-lamp-room-route-dajin-yinluo-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-main-hall"
+          },
+          "description": "宗内秘室，未经许可不得进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yinluo-corpse-yard",
+      "name": "阴罗炼尸院",
+      "kind": "location",
+      "placement": "dajin-yinluo-main-hall",
+      "description": "炼养尸体与维持禁制的专用场所，材料与尸具必须真实存在。",
+      "facts": [
+        {
+          "id": "dajin-yinluo-corpse-yard-route-dajin-yinluo-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-main-hall"
+          },
+          "description": "炼尸场所须识防护和规程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "maintenance-material",
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "id": "dajin-fengzhou",
+      "name": "封州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋州域，邻接苀郡；不把两者边境当作邡莽总坛位置。",
+      "facts": [
+        {
+          "id": "dajin-fengzhou-route-dajin-xunjun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xunjun"
+          },
+          "description": "沿交界山路通行，不能瞬移越界。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xunjun",
+      "name": "苀郡",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "与封州相接的郡域，边界山路另有实际距离。",
+      "facts": [
+        {
+          "id": "dajin-xunjun-route-dajin-fengzhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fengzhou"
+          },
+          "description": "沿交界山路通行，不能瞬移越界。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-leiyin-court",
+      "name": "雷音宗修行院",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "佛门宗派的一处修行院；确切州县为原著未详的开篇落点。",
+      "facts": [
+        {
+          "id": "dajin-leiyin-court-route-dajin-leiyin-library",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-leiyin-library"
+          },
+          "description": "入藏典处须获得宗门许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-leiyin-sect",
+      "name": "雷音宗",
+      "kind": "organization",
+      "placement": "dajin-leiyin-court",
+      "description": "四大佛宗之一，修法与职位须经历实际传授与修行。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-leiyin-library",
+      "name": "雷音功法阁",
+      "kind": "location",
+      "placement": "dajin-leiyin-court",
+      "description": "保存锻体和佛门法术典籍，查阅与传授须按师承和许可。",
+      "facts": [
+        {
+          "id": "dajin-leiyin-library-route-dajin-leiyin-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-leiyin-court"
+          },
+          "description": "入藏典处须获得宗门许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianwai-island",
+      "name": "天外岛",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "风老怪居处称名，航路和海域方位须实际取得，不凭称呼直达。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-xiling-mountain",
+      "name": "西灵山",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "向之礼的居处称名，所在州和通路须据实际线索辨认。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-space-manual",
+      "name": "裂隙封炼秘卷",
+      "kind": "item",
+      "placement": "dajin-tianji-secret-archive",
+      "description": "真实传承/器物须实际查阅或取用，具备名目不等于人人已会。",
+      "facts": [
+        {
+          "id": "dajin-tianji-space-manual-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "宗派或商号所有，不是个人现钱。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-array-sample",
+      "name": "临时芥子阵具样品",
+      "kind": "item",
+      "placement": "dajin-tianji-head-store",
+      "description": "真实传承/器物须实际查阅或取用，具备名目不等于人人已会。",
+      "facts": [
+        {
+          "id": "dajin-tianji-array-sample-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "宗派或商号所有，不是个人现钱。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-mingwang-manual",
+      "name": "明王诀修学卷",
+      "kind": "item",
+      "placement": "dajin-leiyin-library",
+      "description": "真实传承/器物须实际查阅或取用，具备名目不等于人人已会。",
+      "facts": [
+        {
+          "id": "dajin-mingwang-manual-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-leiyin-sect"
+          },
+          "description": "宗派或商号所有，不是个人现钱。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-fang-yinluo",
+      "name": "房姓宗主",
+      "kind": "person",
+      "placement": "dajin-yinluo-main-hall",
+      "description": "房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "canon-fang-yinluo-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期"
+          },
+          "description": "元婴初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-fang-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-fang-yinluo-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。"
+          },
+          "description": "阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-fang-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-fang-yinluo-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-fang-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "dajin-fang-spouse",
+          "predicate": "spouse",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-lu-yinluo"
+          },
+          "description": "两人目前为伴侣。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-fang-leader",
+          "predicate": "leads",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "承担本宗管理职责，宗产与个人财物不同。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-fang-yinluo-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-fang-yinluo-mana",
+          "definition_id": "mana",
+          "current": 600
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-fang-yinluo-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-fang-yinluo-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-fang-yinluo-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-fang-yinluo-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-fang-yinluo-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-fang-yinluo",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查炼尸院耗材，处理外务馆送来的借用申请。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "房姓宗主",
+              "description": "房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-lu-yinluo",
+              "name": "陆夫人",
+              "description": "陆夫人在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-main-hall",
+              "name": "阴罗宗总坛",
+              "description": "古传宗门的议事与修行本山，进入需通过宗门禁制和值守。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-sect",
+              "name": "阴罗宗",
+              "description": "魔道宗门，长老、宗主与各分系存在不同利益。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-corpse-yard",
+              "name": "阴罗炼尸院",
+              "description": "炼养尸体与维持禁制的专用场所，材料与尸具必须真实存在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-lamp-room",
+              "name": "阴罗元神灯秘室",
+              "description": "与主体相连的灯具分座安放；灯况须实际检查，不自行公开传播。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-yinluo-zhoujian",
+              "name": "周简",
+              "description": "周简在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-fang-yinluo-soul-lamp",
+              "name": "房姓宗主的元神灯",
+              "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-lu-yinluo-soul-lamp",
+              "name": "陆夫人的元神灯",
+              "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-fang-yinluo-practice-tool",
+              "name": "修习用器",
+              "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-lu-yinluo",
+              "canonical_entity_ids": [
+                "canon-lu-yinluo"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-main-hall",
+              "canonical_entity_ids": [
+                "dajin-yinluo-main-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-sect",
+              "canonical_entity_ids": [
+                "dajin-yinluo-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-corpse-yard",
+              "canonical_entity_ids": [
+                "dajin-yinluo-corpse-yard"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-lamp-room",
+              "canonical_entity_ids": [
+                "dajin-yinluo-lamp-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-yinluo-zhoujian",
+              "canonical_entity_ids": [
+                "original-dajin-yinluo-zhoujian"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-fang-yinluo-soul-lamp",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo-soul-lamp"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-lu-yinluo-soul-lamp",
+              "canonical_entity_ids": [
+                "canon-lu-yinluo-soul-lamp"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-fang-yinluo-practice-tool",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo-practice-tool"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-own-canon-fang-yinluo-practice-tool",
+              "subjectId": "known-canon-fang-yinluo-practice-tool",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "本人持有的个人修习器物。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-fang-yinluo-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "元婴初期"
+              },
+              "description": "元婴初期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-fang-yinluo-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。"
+              },
+              "description": "阴罗魔功和低阶炼尸养护；依实际法力操纵现有尸具。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-fang-yinluo-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-fang-spouse",
+              "subjectId": "self",
+              "predicate": "spouse",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-canon-lu-yinluo"
+              },
+              "description": "两人目前为伴侣。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-fang-leader",
+              "subjectId": "self",
+              "predicate": "leads",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-yinluo-sect"
+              },
+              "description": "承担本宗管理职责，宗产与个人财物不同。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-lu-yinluo",
+      "name": "陆夫人",
+      "kind": "person",
+      "placement": "dajin-yinluo-main-hall",
+      "description": "陆夫人在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "canon-lu-yinluo-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹后期"
+          },
+          "description": "结丹后期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-lu-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-lu-yinluo-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "阴罗遁法、隐匿和幻影练习，需要真实法力，虚影不是另一活人。"
+          },
+          "description": "阴罗遁法、隐匿和幻影练习，需要真实法力，虚影不是另一活人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-lu-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-lu-yinluo-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-lu-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "dajin-lu-spouse",
+          "predicate": "spouse",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-fang-yinluo"
+          },
+          "description": "两人目前为伴侣。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-lu-yinluo-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-lu-yinluo-mana",
+          "definition_id": "mana",
+          "current": 240
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-lu-yinluo-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-lu-yinluo-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "canon-lu-yinluo-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-lu-yinluo-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-lu-yinluo-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-lu-yinluo",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "陆夫人在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对本月修炼与外务安排。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "陆夫人",
+              "description": "陆夫人在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-fang-yinluo",
+              "name": "房姓宗主",
+              "description": "房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-main-hall",
+              "name": "阴罗宗总坛",
+              "description": "古传宗门的议事与修行本山，进入需通过宗门禁制和值守。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-sect",
+              "name": "阴罗宗",
+              "description": "魔道宗门，长老、宗主与各分系存在不同利益。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-lamp-room",
+              "name": "阴罗元神灯秘室",
+              "description": "与主体相连的灯具分座安放；灯况须实际检查，不自行公开传播。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-fang-yinluo-soul-lamp",
+              "name": "房姓宗主的元神灯",
+              "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-lu-yinluo-soul-lamp",
+              "name": "陆夫人的元神灯",
+              "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-lu-yinluo-practice-tool",
+              "name": "修习用器",
+              "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-lu-yinluo"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-fang-yinluo",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-main-hall",
+              "canonical_entity_ids": [
+                "dajin-yinluo-main-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-sect",
+              "canonical_entity_ids": [
+                "dajin-yinluo-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-lamp-room",
+              "canonical_entity_ids": [
+                "dajin-yinluo-lamp-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-fang-yinluo-soul-lamp",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo-soul-lamp"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-lu-yinluo-soul-lamp",
+              "canonical_entity_ids": [
+                "canon-lu-yinluo-soul-lamp"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-lu-yinluo-practice-tool",
+              "canonical_entity_ids": [
+                "canon-lu-yinluo-practice-tool"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-own-canon-lu-yinluo-practice-tool",
+              "subjectId": "known-canon-lu-yinluo-practice-tool",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "本人持有的个人修习器物。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-lu-yinluo-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "结丹后期"
+              },
+              "description": "结丹后期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-lu-yinluo-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "阴罗遁法、隐匿和幻影练习，需要真实法力，虚影不是另一活人。"
+              },
+              "description": "阴罗遁法、隐匿和幻影练习，需要真实法力，虚影不是另一活人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-lu-yinluo-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-lu-spouse",
+              "subjectId": "self",
+              "predicate": "spouse",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-canon-fang-yinluo"
+              },
+              "description": "两人目前为伴侣。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-can-ku",
+      "name": "粲苦",
+      "kind": "person",
+      "placement": "dajin-tianji-head-hall",
+      "description": "粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "canon-can-ku-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期"
+          },
+          "description": "元婴初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-can-ku"
+            ]
+          }
+        },
+        {
+          "id": "canon-can-ku-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。"
+          },
+          "description": "经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-can-ku"
+            ]
+          }
+        },
+        {
+          "id": "canon-can-ku-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-can-ku"
+            ]
+          }
+        },
+        {
+          "id": "dajin-can-manager",
+          "predicate": "leads",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "主持商号经营与秘法取用授权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-can-ku-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-can-ku-mana",
+          "definition_id": "mana",
+          "current": 600
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-can-ku-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-can-ku-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-can-ku-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-can-ku-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-can-ku-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-can-ku",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对样品耗材、安排值守并留出修炼时间。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "粲苦",
+              "description": "粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-head-hall",
+              "name": "天机殿",
+              "description": "碧绿色大殿悬于空中，玉阶连通玉门，内有议事偏厅。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-head-space",
+              "name": "天机总殿空间",
+              "description": "十余里宽、数百丈高的游离空间；玉门、悬梯和碧殿分列其内，地面有楼阁。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-jade-gate",
+              "name": "天机玉门",
+              "description": "巨玉门前有轮值者和机关卫，进入须取得许可。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-secret-archive",
+              "name": "天机秘法库",
+              "description": "地面藏典楼阁，秘术与出售器具分开保管，取典须有阁主授权。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-head-store",
+              "name": "天机总殿器材库",
+              "description": "维持禁制与机关的材料分柜登记，动用商号资产须核实权限。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-guild",
+              "name": "天机阁",
+              "description": "经营天机屋等器物的商号，主楼与分号有不同保管和议价权限。",
+              "status": "observed"
+            },
+            {
+              "id": "known-original-dajin-tianji-liqi",
+              "name": "李屺",
+              "description": "李屺在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-can-ku-practice-tool",
+              "name": "修习用器",
+              "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-can-ku"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-head-hall",
+              "canonical_entity_ids": [
+                "dajin-tianji-head-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-head-space",
+              "canonical_entity_ids": [
+                "dajin-tianji-head-space"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-jade-gate",
+              "canonical_entity_ids": [
+                "dajin-tianji-jade-gate"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-secret-archive",
+              "canonical_entity_ids": [
+                "dajin-tianji-secret-archive"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-head-store",
+              "canonical_entity_ids": [
+                "dajin-tianji-head-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-guild",
+              "canonical_entity_ids": [
+                "dajin-tianji-guild"
+              ]
+            },
+            {
+              "local_entity_id": "known-original-dajin-tianji-liqi",
+              "canonical_entity_ids": [
+                "original-dajin-tianji-liqi"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-can-ku-practice-tool",
+              "canonical_entity_ids": [
+                "canon-can-ku-practice-tool"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-own-canon-can-ku-practice-tool",
+              "subjectId": "known-canon-can-ku-practice-tool",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "本人持有的个人修习器物。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-can-ku-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "元婴初期"
+              },
+              "description": "元婴初期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-can-ku-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。"
+              },
+              "description": "经营空间器物，知晓裂隙封炼与临时阵具的区别；秘法不能随口传给陌生来客。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-can-ku-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-can-manager",
+              "subjectId": "self",
+              "predicate": "leads",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-tianji-guild"
+              },
+              "description": "主持商号经营与秘法取用授权。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-yuanzhi",
+      "name": "元智",
+      "kind": "person",
+      "placement": "dajin-leiyin-court",
+      "description": "元智在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "canon-yuanzhi-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期"
+          },
+          "description": "元婴初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yuanzhi"
+            ]
+          }
+        },
+        {
+          "id": "canon-yuanzhi-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。"
+          },
+          "description": "明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yuanzhi"
+            ]
+          }
+        },
+        {
+          "id": "canon-yuanzhi-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yuanzhi"
+            ]
+          }
+        },
+        {
+          "id": "dajin-yuan-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-leiyin-sect"
+          },
+          "description": "佛宗修士的师承职责。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yuan-junior",
+          "predicate": "junior-fellow",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-yanzhu"
+          },
+          "description": "焰竹为同门师弟。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-yuanzhi-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-yuanzhi-mana",
+          "definition_id": "mana",
+          "current": 600
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-yuanzhi-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-yuanzhi-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-yuanzhi-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-yuanzhi-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-yuanzhi-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-yuanzhi",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "元智在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "静修锻体，并审看师弟的修学进度。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "元智",
+              "description": "元智在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-sect",
+              "name": "雷音宗",
+              "description": "四大佛宗之一，修法与职位须经历实际传授与修行。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-court",
+              "name": "雷音宗修行院",
+              "description": "佛门宗派的一处修行院；确切州县为原著未详的开篇落点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-library",
+              "name": "雷音功法阁",
+              "description": "保存锻体和佛门法术典籍，查阅与传授须按师承和许可。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-yanzhu",
+              "name": "焰竹",
+              "description": "焰竹在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-yuanzhi-practice-tool",
+              "name": "修习用器",
+              "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-yuanzhi"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-sect",
+              "canonical_entity_ids": [
+                "dajin-leiyin-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-court",
+              "canonical_entity_ids": [
+                "dajin-leiyin-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-library",
+              "canonical_entity_ids": [
+                "dajin-leiyin-library"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-yanzhu",
+              "canonical_entity_ids": [
+                "canon-yanzhu"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-yuanzhi-practice-tool",
+              "canonical_entity_ids": [
+                "canon-yuanzhi-practice-tool"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-own-canon-yuanzhi-practice-tool",
+              "subjectId": "known-canon-yuanzhi-practice-tool",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "本人持有的个人修习器物。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yuanzhi-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "元婴初期"
+              },
+              "description": "元婴初期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yuanzhi-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。"
+              },
+              "description": "明王诀锻体至第二层；尚未获得第四层肉身强度和完整金刚虚影。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yuanzhi-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-yuan-member",
+              "subjectId": "self",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-leiyin-sect"
+              },
+              "description": "佛宗修士的师承职责。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-yuan-junior",
+              "subjectId": "self",
+              "predicate": "junior-fellow",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-canon-yanzhu"
+              },
+              "description": "焰竹为同门师弟。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-yanzhu",
+      "name": "焰竹",
+      "kind": "person",
+      "placement": "dajin-leiyin-court",
+      "description": "焰竹在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "canon-yanzhu-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹后期"
+          },
+          "description": "结丹后期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yanzhu"
+            ]
+          }
+        },
+        {
+          "id": "canon-yanzhu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "佛门法术与基础锻体，守护心神须真实施术。"
+          },
+          "description": "佛门法术与基础锻体，守护心神须真实施术。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yanzhu"
+            ]
+          }
+        },
+        {
+          "id": "canon-yanzhu-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yanzhu"
+            ]
+          }
+        },
+        {
+          "id": "dajin-yan-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-leiyin-sect"
+          },
+          "description": "佛宗修士的师承职责。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-yan-senior",
+          "predicate": "senior-fellow",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-yuanzhi"
+          },
+          "description": "元智为同门师兄。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-yanzhu-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-yanzhu-mana",
+          "definition_id": "mana",
+          "current": 240
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-yanzhu-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "canon-yanzhu-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "canon-yanzhu-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "canon-yanzhu-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "canon-yanzhu-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-yanzhu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "焰竹在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "完成当日功课后向元智请教。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "焰竹",
+              "description": "焰竹在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-sect",
+              "name": "雷音宗",
+              "description": "四大佛宗之一，修法与职位须经历实际传授与修行。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-court",
+              "name": "雷音宗修行院",
+              "description": "佛门宗派的一处修行院；确切州县为原著未详的开篇落点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-leiyin-library",
+              "name": "雷音功法阁",
+              "description": "保存锻体和佛门法术典籍，查阅与传授须按师承和许可。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-yuanzhi",
+              "name": "元智",
+              "description": "元智在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-yanzhu-practice-tool",
+              "name": "修习用器",
+              "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-yanzhu"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-sect",
+              "canonical_entity_ids": [
+                "dajin-leiyin-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-court",
+              "canonical_entity_ids": [
+                "dajin-leiyin-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-leiyin-library",
+              "canonical_entity_ids": [
+                "dajin-leiyin-library"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-yuanzhi",
+              "canonical_entity_ids": [
+                "canon-yuanzhi"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-yanzhu-practice-tool",
+              "canonical_entity_ids": [
+                "canon-yanzhu-practice-tool"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-own-canon-yanzhu-practice-tool",
+              "subjectId": "known-canon-yanzhu-practice-tool",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "本人持有的个人修习器物。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yanzhu-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "结丹后期"
+              },
+              "description": "结丹后期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yanzhu-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "佛门法术与基础锻体，守护心神须真实施术。"
+              },
+              "description": "佛门法术与基础锻体，守护心神须真实施术。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-canon-yanzhu-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-yan-member",
+              "subjectId": "self",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-leiyin-sect"
+              },
+              "description": "佛宗修士的师承职责。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-yan-senior",
+              "subjectId": "self",
+              "predicate": "senior-fellow",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-canon-yuanzhi"
+              },
+              "description": "元智为同门师兄。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "original-dajin-tianji-liqi",
+      "name": "李屺",
+      "kind": "person",
+      "placement": "dajin-tianji-jade-gate",
+      "description": "李屺在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "original-dajin-tianji-liqi-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期"
+          },
+          "description": "结丹初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-tianji-liqi"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-tianji-liqi-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "熟悉本地通行禁制、机关供能和通报流程。"
+          },
+          "description": "熟悉本地通行禁制、机关供能和通报流程。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-tianji-liqi"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-tianji-liqi-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-tianji-liqi"
+            ]
+          }
+        },
+        {
+          "id": "dajin-liqi-duty",
+          "predicate": "employed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "当值管理通行，不能出售全商号秘法。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-dajin-tianji-liqi-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-dajin-tianji-liqi-mana",
+          "definition_id": "mana",
+          "current": 240
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-dajin-tianji-liqi-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "original-dajin-tianji-liqi-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-tianji-liqi-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-tianji-liqi-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "original-dajin-tianji-liqi-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "original-dajin-tianji-liqi",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "李屺在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "验看机关卫供能，等待来客并先核许可。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "李屺",
+              "description": "李屺在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-jade-gate",
+              "name": "天机玉门",
+              "description": "巨玉门前有轮值者和机关卫，进入须取得许可。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-head-hall",
+              "name": "天机殿",
+              "description": "碧绿色大殿悬于空中，玉阶连通玉门，内有议事偏厅。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-head-space",
+              "name": "天机总殿空间",
+              "description": "十余里宽、数百丈高的游离空间；玉门、悬梯和碧殿分列其内，地面有楼阁。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-current-entrance",
+              "name": "僻巷障眼墙",
+              "description": "死巷尽头的石墙外观平常，障眼与后续禁制阻隔来客。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-guild",
+              "name": "天机阁",
+              "description": "经营天机屋等器物的商号，主楼与分号有不同保管和议价权限。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-can-ku",
+              "name": "粲苦",
+              "description": "粲苦在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-gate-puppet-1",
+              "name": "机关卫1",
+              "description": "金甲外形的机关守卫，受值守者控制并消耗实际供能，不是金甲活人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianji-gate-puppet-2",
+              "name": "机关卫2",
+              "description": "金甲外形的机关守卫，受值守者控制并消耗实际供能，不是金甲活人。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-dajin-tianji-liqi"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-jade-gate",
+              "canonical_entity_ids": [
+                "dajin-tianji-jade-gate"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-head-hall",
+              "canonical_entity_ids": [
+                "dajin-tianji-head-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-head-space",
+              "canonical_entity_ids": [
+                "dajin-tianji-head-space"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-current-entrance",
+              "canonical_entity_ids": [
+                "dajin-tianji-current-entrance"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-guild",
+              "canonical_entity_ids": [
+                "dajin-tianji-guild"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-can-ku",
+              "canonical_entity_ids": [
+                "canon-can-ku"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-gate-puppet-1",
+              "canonical_entity_ids": [
+                "dajin-tianji-gate-puppet-1"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianji-gate-puppet-2",
+              "canonical_entity_ids": [
+                "dajin-tianji-gate-puppet-2"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-original-dajin-tianji-liqi-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "结丹初期"
+              },
+              "description": "结丹初期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-tianji-liqi-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "熟悉本地通行禁制、机关供能和通报流程。"
+              },
+              "description": "熟悉本地通行禁制、机关供能和通报流程。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-tianji-liqi-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-liqi-duty",
+              "subjectId": "self",
+              "predicate": "employed-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-tianji-guild"
+              },
+              "description": "当值管理通行，不能出售全商号秘法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "original-dajin-yinluo-zhoujian",
+      "name": "周简",
+      "kind": "person",
+      "placement": "dajin-yinluo-corpse-yard",
+      "description": "周简在此修学与处理日常职责，做决定先看自己掌握的消息。",
+      "facts": [
+        {
+          "id": "original-dajin-yinluo-zhoujian-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "结丹初期"
+          },
+          "description": "结丹初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-yinluo-zhoujian"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "熟悉低阶尸具保管与养护。"
+          },
+          "description": "熟悉低阶尸具保管与养护。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-yinluo-zhoujian"
+            ]
+          }
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有修炼资格，根系细分未设定。"
+          },
+          "description": "有修炼资格，根系细分未设定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "original-dajin-yinluo-zhoujian"
+            ]
+          }
+        },
+        {
+          "id": "dajin-zhou-duty",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "负责有限尸具维护，不能擅取宗宝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "original-dajin-yinluo-zhoujian-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-mana",
+          "definition_id": "mana",
+          "current": 240
+        }
+      ],
+      "ratings": [
+        {
+          "id": "original-dajin-yinluo-zhoujian-cultivation",
+          "definition_id": "cultivation",
+          "value": 3
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-perception",
+          "definition_id": "perception",
+          "value": 3
+        },
+        {
+          "id": "original-dajin-yinluo-zhoujian-influence",
+          "definition_id": "influence",
+          "value": 2
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "original-dajin-yinluo-zhoujian",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "周简在此修学与处理日常职责，做决定先看自己掌握的消息。",
+            "voice": "按自身经历交谈，重视代价、师承和权限。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "向房宗主汇报现存两具尸具的维护情况。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "周简",
+              "description": "周简在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-corpse-yard",
+              "name": "阴罗炼尸院",
+              "description": "炼养尸体与维持禁制的专用场所，材料与尸具必须真实存在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-main-hall",
+              "name": "阴罗宗总坛",
+              "description": "古传宗门的议事与修行本山，进入需通过宗门禁制和值守。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-sect",
+              "name": "阴罗宗",
+              "description": "魔道宗门，长老、宗主与各分系存在不同利益。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-fang-yinluo",
+              "name": "房姓宗主",
+              "description": "房姓宗主在此修学与处理日常职责，做决定先看自己掌握的消息。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-copper-corpse-1",
+              "name": "铜甲尸具1",
+              "description": "低阶铜甲尸具，未培养成尸王，操纵与养护需要真实法力和材料。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-copper-corpse-2",
+              "name": "铜甲尸具2",
+              "description": "低阶铜甲尸具，未培养成尸王，操纵与养护需要真实法力和材料。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "original-dajin-yinluo-zhoujian"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-corpse-yard",
+              "canonical_entity_ids": [
+                "dajin-yinluo-corpse-yard"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-main-hall",
+              "canonical_entity_ids": [
+                "dajin-yinluo-main-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-sect",
+              "canonical_entity_ids": [
+                "dajin-yinluo-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-fang-yinluo",
+              "canonical_entity_ids": [
+                "canon-fang-yinluo"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-copper-corpse-1",
+              "canonical_entity_ids": [
+                "dajin-yinluo-copper-corpse-1"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-copper-corpse-2",
+              "canonical_entity_ids": [
+                "dajin-yinluo-copper-corpse-2"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人生活、修学和亲见的当前关系。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "knows-original-dajin-yinluo-zhoujian-cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "结丹初期"
+              },
+              "description": "结丹初期",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-yinluo-zhoujian-learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "熟悉低阶尸具保管与养护。"
+              },
+              "description": "熟悉低阶尸具保管与养护。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-original-dajin-yinluo-zhoujian-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "有修炼资格，根系细分未设定。"
+              },
+              "description": "有修炼资格，根系细分未设定。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "knows-dajin-zhou-duty",
+              "subjectId": "self",
+              "predicate": "member-of",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "known-dajin-yinluo-sect"
+              },
+              "description": "负责有限尸具维护，不能擅取宗宝。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-tianji-gate-puppet-1",
+      "name": "机关卫1",
+      "kind": "item",
+      "placement": "dajin-tianji-jade-gate",
+      "description": "金甲外形的机关守卫，受值守者控制并消耗实际供能，不是金甲活人。",
+      "facts": [
+        {
+          "id": "dajin-tianji-gate-puppet-1-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "商号守卫器物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-gate-puppet-1-control",
+          "predicate": "controlled-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-tianji-liqi"
+          },
+          "description": "李屺按通报和防护需要操纵。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": "dajin-yinluo-copper-corpse-1",
+      "name": "铜甲尸具1",
+      "kind": "item",
+      "placement": "dajin-yinluo-corpse-yard",
+      "description": "低阶铜甲尸具，未培养成尸王，操纵与养护需要真实法力和材料。",
+      "facts": [
+        {
+          "id": "dajin-yinluo-copper-corpse-1-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "宗门资产，不是周简私有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianji-gate-puppet-2",
+      "name": "机关卫2",
+      "kind": "item",
+      "placement": "dajin-tianji-jade-gate",
+      "description": "金甲外形的机关守卫，受值守者控制并消耗实际供能，不是金甲活人。",
+      "facts": [
+        {
+          "id": "dajin-tianji-gate-puppet-2-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianji-guild"
+          },
+          "description": "商号守卫器物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianji-gate-puppet-2-control",
+          "predicate": "controlled-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "original-dajin-tianji-liqi"
+          },
+          "description": "李屺按通报和防护需要操纵。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": "dajin-yinluo-copper-corpse-2",
+      "name": "铜甲尸具2",
+      "kind": "item",
+      "placement": "dajin-yinluo-corpse-yard",
+      "description": "低阶铜甲尸具，未培养成尸王，操纵与养护需要真实法力和材料。",
+      "facts": [
+        {
+          "id": "dajin-yinluo-copper-corpse-2-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "宗门资产，不是周简私有。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-fang-yinluo-soul-lamp",
+      "name": "房姓宗主的元神灯",
+      "kind": "item",
+      "placement": "dajin-yinluo-lamp-room",
+      "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+      "facts": [
+        {
+          "id": "canon-fang-yinluo-soul-lamp-subject",
+          "predicate": "linked-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-fang-yinluo"
+          },
+          "description": "该灯与此主体有实际联系。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-fang-yinluo",
+              "canon-lu-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-fang-yinluo-soul-lamp-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "宗门秘室保管的实际灯具。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-fang-yinluo-soul-lamp-state",
+          "predicate": "lamp-state",
+          "value": {
+            "kind": "text",
+            "value": "当前主体存活，灯焰正常。"
+          },
+          "description": "灯况须依实际生命与联系状态改变。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-lu-yinluo-soul-lamp",
+      "name": "陆夫人的元神灯",
+      "kind": "item",
+      "placement": "dajin-yinluo-lamp-room",
+      "description": "灯焰与实际主体联系，需亲自检查，不自动将灯况传给所有宗人。",
+      "facts": [
+        {
+          "id": "canon-lu-yinluo-soul-lamp-subject",
+          "predicate": "linked-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-lu-yinluo"
+          },
+          "description": "该灯与此主体有实际联系。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-fang-yinluo",
+              "canon-lu-yinluo"
+            ]
+          }
+        },
+        {
+          "id": "canon-lu-yinluo-soul-lamp-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "宗门秘室保管的实际灯具。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-lu-yinluo-soul-lamp-state",
+          "predicate": "lamp-state",
+          "value": {
+            "kind": "text",
+            "value": "当前主体存活，灯焰正常。"
+          },
+          "description": "灯况须依实际生命与联系状态改变。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-fang-yinluo-practice-tool",
+      "name": "修习用器",
+      "kind": "item",
+      "placement": "canon-fang-yinluo",
+      "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+      "facts": [
+        {
+          "id": "canon-fang-yinluo-practice-tool-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-fang-yinluo"
+          },
+          "description": "个人修习器物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-lu-yinluo-practice-tool",
+      "name": "修习用器",
+      "kind": "item",
+      "placement": "canon-lu-yinluo",
+      "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+      "facts": [
+        {
+          "id": "canon-lu-yinluo-practice-tool-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-lu-yinluo"
+          },
+          "description": "个人修习器物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-can-ku-practice-tool",
+      "name": "修习用器",
+      "kind": "item",
+      "placement": "canon-can-ku",
+      "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+      "facts": [
+        {
+          "id": "canon-can-ku-practice-tool-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-can-ku"
+          },
+          "description": "个人修习器物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-yuanzhi-practice-tool",
+      "name": "修习用器",
+      "kind": "item",
+      "placement": "canon-yuanzhi",
+      "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+      "facts": [
+        {
+          "id": "canon-yuanzhi-practice-tool-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-yuanzhi"
+          },
+          "description": "个人修习器物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-yanzhu-practice-tool",
+      "name": "修习用器",
+      "kind": "item",
+      "placement": "canon-yanzhu",
+      "description": "个人练习器具，不能凭名称视为后期顶阶法宝。",
+      "facts": [
+        {
+          "id": "canon-yanzhu-practice-tool-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-yanzhu"
+          },
+          "description": "个人修习器物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -6981,6 +10307,26 @@
     {
       "id": "dajin-kuzhu-unique-root-and-trade",
       "text": "天桑多干是同一根系，不生成多株独有神树；万木阵须真实阵眼、供能和完整结构。灵叶、法剑或灵禽羽翎的取得须从现存资源和权属产生，交易争议可协商或冲突，不能固定重现将来来客的比试结果。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-mobile-head-space-boundaries",
+      "text": "天机总殿游离空间不同于晋京试器空间，当前出入口须实际连通、许可和禁制通行；入口移位须改变真实连通，旧地图不能永远直达。禁空是本地有例外的禁制，不是全世界高度限制。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-temporary-space-cost",
+      "text": "临时芥子阵具只适合有限空间，需要大量持续灵石供能或空间灵脉，器具寿限与失效塌陷必须计入；不能将器具自动变成永不耗材、可随身携带的独立世界，也不能保证修复已崩坏裂隙。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-yinluo-corpse-conservation",
+      "text": "铜甲炼尸、乌甲尸王、元神灯与生魂均须对应实际载体和主体。成王须长时炼养与材料，不能复制一具尸体成数万尸群；灯况反映实际联系，不得按原作未来章节预先熄灭。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-buddhist-body-shadow",
+      "text": "明王诀层次和肉身承载必须真实达到；金刚虚影使用本人法力且受损可反噬，不能凭佛门或护法头衔无条件生成后期能力。",
       "severity": "hard"
     }
   ],
@@ -7059,7 +10405,8 @@
       "dajin-hu-qinglei"
     ],
     "entity:dajin-yinluo-sect": [
-      "dajin-yinluo-history"
+      "dajin-yinluo-history",
+      "dajin-yinluo-main-seat"
     ],
     "entity:dajin-yueyang": [
       "dajin-longzhou-sects"
@@ -7821,7 +11168,9 @@
       "dajin-tianji-trading"
     ],
     "entity:dajin-tianji-guild": [
-      "dajin-tianji-trading"
+      "dajin-tianji-trading",
+      "dajin-tianji-head-space",
+      "dajin-tianji-yinluo-opening-life"
     ],
     "entity:dajin-tianji-backyard": [
       "dajin-tianji-fixed-space"
@@ -8101,6 +11450,377 @@
       "dajin-kuzhu-old-island",
       "dajin-kuzhu-method-boundaries",
       "dajin-kuzhu-opening-calibration"
+    ],
+    "entity:dajin-yuzhou": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-yuzhou-small-city": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-current-entrance": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-head-space": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-jade-gate": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-head-hall": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-secret-archive": [
+      "dajin-tianji-space-craft",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-tianji-head-store": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-fangmang-range": [
+      "dajin-yinluo-main-seat"
+    ],
+    "entity:dajin-yinluo-main-hall": [
+      "dajin-yinluo-main-seat"
+    ],
+    "entity:dajin-yinluo-lamp-room": [
+      "dajin-yinluo-main-seat",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-yinluo-corpse-yard": [
+      "dajin-yinluo-main-seat",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-fengzhou": [
+      "dajin-yinluo-main-seat"
+    ],
+    "entity:dajin-xunjun": [
+      "dajin-yinluo-main-seat"
+    ],
+    "entity:dajin-leiyin-court": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-leiyin-sect": [
+      "dajin-buddhist-methods"
+    ],
+    "entity:dajin-leiyin-library": [
+      "dajin-buddhist-methods",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-tianwai-island": [
+      "dajin-two-senior-retreats"
+    ],
+    "entity:dajin-xiling-mountain": [
+      "dajin-two-senior-retreats"
+    ],
+    "fact:dajin-yuzhou-route-dajin-yuzhou-small-city": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yuzhou-small-city-route-dajin-yuzhou": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-fangmang-range-route-dajin-yinluo-main-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-main-hall-route-dajin-fangmang-range": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-fengzhou-route-dajin-xunjun": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-xunjun-route-dajin-fengzhou": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-jade-gate-route-dajin-tianji-head-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-head-hall-route-dajin-tianji-jade-gate": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-head-hall-route-dajin-tianji-secret-archive": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-secret-archive-route-dajin-tianji-head-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-head-hall-route-dajin-tianji-head-store": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-head-store-route-dajin-tianji-head-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-main-hall-route-dajin-yinluo-lamp-room": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-lamp-room-route-dajin-yinluo-main-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-main-hall-route-dajin-yinluo-corpse-yard": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-corpse-yard-route-dajin-yinluo-main-hall": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-leiyin-court-route-dajin-leiyin-library": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-leiyin-library-route-dajin-leiyin-court": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yuzhou-small-city-route-dajin-tianji-current-entrance": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-current-entrance-route-dajin-yuzhou-small-city": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-current-entrance-route-dajin-tianji-jade-gate": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-jade-gate-route-dajin-tianji-current-entrance": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-mobile-entrance": [
+      "dajin-tianji-head-space"
+    ],
+    "fact:dajin-tianji-flight-limit": [
+      "dajin-tianji-head-space"
+    ],
+    "entity:dajin-tianji-space-manual": [
+      "dajin-tianji-space-craft"
+    ],
+    "fact:dajin-tianji-space-manual-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-tianji-array-sample": [
+      "dajin-tianji-temporary-array"
+    ],
+    "fact:dajin-tianji-array-sample-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-mingwang-manual": [
+      "dajin-buddhist-methods"
+    ],
+    "fact:dajin-mingwang-manual-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-fang-yinluo": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-lu-yinluo": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-can-ku": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-can-ku-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-can-ku-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-can-ku-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-yuanzhi": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yuanzhi-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yuanzhi-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yuanzhi-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-yanzhu": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yanzhu-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yanzhu-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yanzhu-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:original-dajin-tianji-liqi": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-tianji-liqi-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-tianji-liqi-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-tianji-liqi-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:original-dajin-yinluo-zhoujian": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-yinluo-zhoujian-cultivation-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-yinluo-zhoujian-learned-skill": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:original-dajin-yinluo-zhoujian-spiritual-root": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-fang-spouse": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-lu-spouse": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-fang-leader": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-can-manager": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yuan-member": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yan-member": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yuan-junior": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yan-senior": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-liqi-duty": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-zhou-duty": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-tianji-gate-puppet-1": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-gate-puppet-1-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-gate-puppet-1-control": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-yinluo-copper-corpse-1": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-copper-corpse-1-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-tianji-gate-puppet-2": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-gate-puppet-2-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-tianji-gate-puppet-2-control": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:dajin-yinluo-copper-corpse-2": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:dajin-yinluo-copper-corpse-2-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-fang-yinluo-soul-lamp": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-soul-lamp-subject": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-soul-lamp-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-soul-lamp-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-lu-yinluo-soul-lamp": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-soul-lamp-subject": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-soul-lamp-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-soul-lamp-state": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-fang-yinluo-practice-tool": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-fang-yinluo-practice-tool-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-lu-yinluo-practice-tool": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-lu-yinluo-practice-tool-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-can-ku-practice-tool": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-can-ku-practice-tool-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-yuanzhi-practice-tool": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yuanzhi-practice-tool-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "entity:canon-yanzhu-practice-tool": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-yanzhu-practice-tool-owner": [
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "fact:canon-feng-laoguai-usual-home": [
+      "dajin-two-senior-retreats"
+    ],
+    "fact:canon-xiang-zhili-usual-home": [
+      "dajin-two-senior-retreats"
+    ],
+    "law:dajin-mobile-head-space-boundaries": [
+      "dajin-tianji-head-space",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "law:dajin-temporary-space-cost": [
+      "dajin-tianji-temporary-array",
+      "dajin-tianji-space-craft"
+    ],
+    "law:dajin-yinluo-corpse-conservation": [
+      "dajin-yinluo-main-seat",
+      "dajin-tianji-yinluo-opening-life"
+    ],
+    "law:dajin-buddhist-body-shadow": [
+      "dajin-buddhist-methods",
+      "dajin-tianji-yinluo-opening-life"
     ]
   }
 }

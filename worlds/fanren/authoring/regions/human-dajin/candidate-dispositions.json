@@ -20904,9 +20904,13 @@
       "candidateId": "batch-0156-object-0003",
       "batchId": "batch-0156",
       "reportHash": "5d2e9c5111850370f9ef063a521b6e129c474f0a8c672739e92c8bf202291cb6",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "dajin-soul-sealing-curse-reference"
+      ],
+      "reason": "此前战场已出现房宗主与陆夫人，昆吾此处沿用同一宗主，后来房又明言妻仇与乾师兄弟；姓名/境界并非全书未明。解咒仅宗主和大长老知是当时信息，不自动让T0全宗都会。",
       "evidence": [
         {
           "chapterId": "qq-25941274",
@@ -20921,12 +20925,65 @@
           "start": 189,
           "end": 217,
           "anchorSha256": "f5b7cfee16375615691c45aa644dcdc2db4272c52856beaeb9092311305c7b8d"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1032,
+          "end": 1131,
+          "anchorSha256": "643ff1f6a25efb3ad220df45ecfca82244964edc07857eef72447f0bfca3a4b2"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1196,
+          "end": 1343,
+          "anchorSha256": "f22b9f87e5611ea59889dea6038d125129ae516021d613edd3dc2b740170f6cf"
+        },
+        {
+          "chapterId": "qq-24131532",
+          "chapterSha256": "d17570a3c853f466aca94b54c09bff5d5fe1fa35979b46460a13c1f2f342cc37",
+          "start": 1902,
+          "end": 1947,
+          "anchorSha256": "6f02b737f7e4a38a9dd5650e33d68057c71b4f8915314f8370f2959e9af6b350"
+        },
+        {
+          "chapterId": "qq-24217376",
+          "chapterSha256": "8d66310a6acae4f240a369e217a598b524fb8f47f44ef9a58cc63879421b88f1",
+          "start": 1159,
+          "end": 1247,
+          "anchorSha256": "63afe3176022686e70a80eb22132436ba764bd1aabf9d2f0b65db915b5584774"
+        },
+        {
+          "chapterId": "qq-24244194",
+          "chapterSha256": "98ae49128af6ce5be659fe26ae3aab7c3b7a51745175e6fe15bca3a35fbc9f09",
+          "start": 706,
+          "end": 783,
+          "anchorSha256": "79a0a9439fec5a717b080d56112717d2f95f4e399e6ecb1d923bc3de7349fe03"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2955,
+          "end": 3115,
+          "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
+        },
+        {
+          "chapterId": "qq-27568481",
+          "chapterSha256": "e29fcc6d504e69abde61babc206117c3466dca24fbaa55bc2686a0c54c02c26d",
+          "start": 321,
+          "end": 386,
+          "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -22371,9 +22428,13 @@
       "candidateId": "batch-0156-issue-0015",
       "batchId": "batch-0156",
       "reportHash": "5d2e9c5111850370f9ef063a521b6e129c474f0a8c672739e92c8bf202291cb6",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主身份”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "dajin-soul-sealing-curse-reference"
+      ],
+      "reason": "本章不在场是位置边界，不能推成身份全书未知：战争前后已称房宗主，后期明文确认同一房姓、妻与乾关系。无全名依旧保留。",
       "evidence": [
         {
           "chapterId": "qq-25941274",
@@ -22388,12 +22449,65 @@
           "start": 189,
           "end": 217,
           "anchorSha256": "f5b7cfee16375615691c45aa644dcdc2db4272c52856beaeb9092311305c7b8d"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1032,
+          "end": 1131,
+          "anchorSha256": "643ff1f6a25efb3ad220df45ecfca82244964edc07857eef72447f0bfca3a4b2"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1196,
+          "end": 1343,
+          "anchorSha256": "f22b9f87e5611ea59889dea6038d125129ae516021d613edd3dc2b740170f6cf"
+        },
+        {
+          "chapterId": "qq-24131532",
+          "chapterSha256": "d17570a3c853f466aca94b54c09bff5d5fe1fa35979b46460a13c1f2f342cc37",
+          "start": 1902,
+          "end": 1947,
+          "anchorSha256": "6f02b737f7e4a38a9dd5650e33d68057c71b4f8915314f8370f2959e9af6b350"
+        },
+        {
+          "chapterId": "qq-24217376",
+          "chapterSha256": "8d66310a6acae4f240a369e217a598b524fb8f47f44ef9a58cc63879421b88f1",
+          "start": 1159,
+          "end": 1247,
+          "anchorSha256": "63afe3176022686e70a80eb22132436ba764bd1aabf9d2f0b65db915b5584774"
+        },
+        {
+          "chapterId": "qq-24244194",
+          "chapterSha256": "98ae49128af6ce5be659fe26ae3aab7c3b7a51745175e6fe15bca3a35fbc9f09",
+          "start": 706,
+          "end": 783,
+          "anchorSha256": "79a0a9439fec5a717b080d56112717d2f95f4e399e6ecb1d923bc3de7349fe03"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2955,
+          "end": 3115,
+          "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
+        },
+        {
+          "chapterId": "qq-27568481",
+          "chapterSha256": "e29fcc6d504e69abde61babc206117c3466dca24fbaa55bc2686a0c54c02c26d",
+          "start": 321,
+          "end": 386,
+          "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -29508,9 +29622,12 @@
       "candidateId": "batch-0192-object-0014",
       "batchId": "batch-0192",
       "reportHash": "bc38095944c9e96f2cc4baa74cb67f87e05d769ac32f7ea4d39d80d10cea9941",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“乾老魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-qian-laomo",
+        "kunwu-yinluo-stock-and-names"
+      ],
+      "reason": "乾老魔复用昆吾唯一主体；持幡旧事属于韩立成婴之后，不能把乾死亡或韩夺幡前置。",
       "evidence": [
         {
           "chapterId": "qq-27503989",
@@ -29520,19 +29637,18 @@
           "anchorSha256": "297eb475b6302d31876df3af2b14cb35fba8d0a089455d7495a9a4c2dad6174d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0192-object-0032",
       "batchId": "batch-0192",
       "reportHash": "bc38095944c9e96f2cc4baa74cb67f87e05d769ac32f7ea4d39d80d10cea9941",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin"
+      ],
+      "reason": "本批重提既有大晋地域，不因韩后来夺宝而把国家判为未来创建。",
       "evidence": [
         {
           "chapterId": "qq-27503989",
@@ -29542,19 +29658,18 @@
           "anchorSha256": "297eb475b6302d31876df3af2b14cb35fba8d0a089455d7495a9a4c2dad6174d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0192-object-0033",
       "batchId": "batch-0192",
       "reportHash": "bc38095944c9e96f2cc4baa74cb67f87e05d769ac32f7ea4d39d80d10cea9941",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“昆吾山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-south-kunwu"
+      ],
+      "reason": "昆吾为既存封山；取得幡的后来行程单列，不能把封山开篇改为已开启。",
       "evidence": [
         {
           "chapterId": "qq-27503989",
@@ -29564,19 +29679,19 @@
           "anchorSha256": "ba702d6e1d9b9e7f2e881f3a05486e0f16314b1cb53210802a865a4416727bf1"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0192-object-0055",
       "batchId": "batch-0192",
       "reportHash": "bc38095944c9e96f2cc4baa74cb67f87e05d769ac32f7ea4d39d80d10cea9941",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“鬼罗幡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "kunwu-yinluo-stock-and-names",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "本章先指手上两杆，再另说魔化一杆留在第二元婴，共三杆阶段持有；不将另杆并入两杆中的第二杆，不改开篇十八幡库存。",
       "evidence": [
         {
           "chapterId": "qq-27503989",
@@ -29591,21 +29706,28 @@
           "start": 425,
           "end": 517,
           "anchorSha256": "ba702d6e1d9b9e7f2e881f3a05486e0f16314b1cb53210802a865a4416727bf1"
+        },
+        {
+          "chapterId": "qq-27503989",
+          "chapterSha256": "aa2ab4adbdc5d92caf21726c6fa803e6314013091a827be327a28e814a50cd75",
+          "start": 267,
+          "end": 356,
+          "anchorSha256": "f64f6cfe8a185c7b6741709eacbe086a83611a47424bbb4fc44b67afb3ac3ec2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0192-fact-0054",
       "batchId": "batch-0192",
       "reportHash": "bc38095944c9e96f2cc4baa74cb67f87e05d769ac32f7ea4d39d80d10cea9941",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“鬼罗幡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "kunwu-yinluo-stock-and-names",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "原提取将另有的魔幡误算进现持两杆。原文两段连续为自晋得两杆、另有魔幡在第二元婴手上，共三杆；全是后期所有权。",
       "evidence": [
         {
           "chapterId": "qq-27503989",
@@ -29613,21 +29735,28 @@
           "start": 357,
           "end": 424,
           "anchorSha256": "297eb475b6302d31876df3af2b14cb35fba8d0a089455d7495a9a4c2dad6174d"
+        },
+        {
+          "chapterId": "qq-27503989",
+          "chapterSha256": "aa2ab4adbdc5d92caf21726c6fa803e6314013091a827be327a28e814a50cd75",
+          "start": 267,
+          "end": 356,
+          "anchorSha256": "f64f6cfe8a185c7b6741709eacbe086a83611a47424bbb4fc44b67afb3ac3ec2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0001",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "唯一韩立T0仍十岁；本段后期峰值、婚姻与落云职位只作阶段资料。“从大晋远赴”与前章重回大晋行程不合，保留原文异常，不另造从晋来的韩立。",
       "evidence": [
         {
           "chapterId": "qq-27512217",
@@ -29651,19 +29780,18 @@
           "anchorSha256": "438cba536bc9d5561b7256655b03c933c27344dbfddcfe7d9b26e9290258d0e3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0015",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin"
+      ],
+      "reason": "两地相距千万里为叙事尺度，不成为自动瞬移距离；大晋沿用既存国家。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29680,19 +29808,19 @@
           "anchorSha256": "ed50af7fb3882e0ce5ddf11427729796f7febf81a8f22e4310319ac6ba436323"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0016",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“玉州”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yuzhou",
+        "dajin-tianji-head-space"
+      ],
+      "reason": "玉州为实际州域；后期入口在玉州不证明游离总殿永远固定，T0同一入口明确补写。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29702,19 +29830,19 @@
           "anchorSha256": "ed50af7fb3882e0ce5ddf11427729796f7febf81a8f22e4310319ac6ba436323"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0017",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“慕兰草原”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-mulan-steppe",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "草原复用既有地理；韩此行约半年不是所有人通行定时，不能将后期部族局势前置。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29731,19 +29859,20 @@
           "anchorSha256": "c0f5c6d4a2a4cc4631549770ac0537a23fae6350167e94184d036601a3084e30"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0018",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-yinluo-main-seat",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "同一古宗；乾死后只剩一后期大修士属后期实力快照，开篇不照抄死亡名单。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29760,19 +29889,19 @@
           "anchorSha256": "01646e256099539cfa826359bd24125828fd9741f8ffbddbc6ce53fea1458a12"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0019",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity"
+      ],
+      "reason": "房姓宗主唯一；跨章陆夫人自称伴侣且宗主明言杀妻，原“方向未明”已被更完整证据纠正。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29787,21 +29916,77 @@
           "start": 186,
           "end": 222,
           "anchorSha256": "b89010127fbbde9e244ff6cdb5bd4ab5061a80c77cd07cd6cab7e0ab31c37262"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1032,
+          "end": 1131,
+          "anchorSha256": "643ff1f6a25efb3ad220df45ecfca82244964edc07857eef72447f0bfca3a4b2"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1196,
+          "end": 1343,
+          "anchorSha256": "f22b9f87e5611ea59889dea6038d125129ae516021d613edd3dc2b740170f6cf"
+        },
+        {
+          "chapterId": "qq-24131532",
+          "chapterSha256": "d17570a3c853f466aca94b54c09bff5d5fe1fa35979b46460a13c1f2f342cc37",
+          "start": 1902,
+          "end": 1947,
+          "anchorSha256": "6f02b737f7e4a38a9dd5650e33d68057c71b4f8915314f8370f2959e9af6b350"
+        },
+        {
+          "chapterId": "qq-24217376",
+          "chapterSha256": "8d66310a6acae4f240a369e217a598b524fb8f47f44ef9a58cc63879421b88f1",
+          "start": 1159,
+          "end": 1247,
+          "anchorSha256": "63afe3176022686e70a80eb22132436ba764bd1aabf9d2f0b65db915b5584774"
+        },
+        {
+          "chapterId": "qq-24244194",
+          "chapterSha256": "98ae49128af6ce5be659fe26ae3aab7c3b7a51745175e6fe15bca3a35fbc9f09",
+          "start": 706,
+          "end": 783,
+          "anchorSha256": "79a0a9439fec5a717b080d56112717d2f95f4e399e6ecb1d923bc3de7349fe03"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2955,
+          "end": 3115,
+          "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
+        },
+        {
+          "chapterId": "qq-27568481",
+          "chapterSha256": "e29fcc6d504e69abde61babc206117c3466dca24fbaa55bc2686a0c54c02c26d",
+          "start": 321,
+          "end": 386,
+          "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0020",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“乾老魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-qian-laomo",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "乾老魔仍用昆吾唯一实体；后期陨落及他人对死因的认知不前置T0。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29818,19 +30003,18 @@
           "anchorSha256": "76314ec65e718948ee7e0e8a6ac2a73ea296baf34655d556b24a9a122dbc5cad"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0021",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“鬼罗幡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "kunwu-yinluo-stock-and-names"
+      ],
+      "reason": "成套鬼罗幡复用昆吾十八幡及重炼规则；韩的夺取目的不改变现有所有权。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29840,10 +30024,7 @@
           "anchorSha256": "93904f7181aa913af69c83e29a9bc6f24b7770ff1e6b06bc440e626418a573b2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -29936,9 +30117,12 @@
       "candidateId": "batch-0193-object-0027",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“坠魔谷”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-devil-valley",
+        "dv-garden-contact"
+      ],
+      "reason": "坠魔谷在天南而非候选误标大晋；只引用该区既存内谷空间接触点，不造第二谷。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29948,19 +30132,19 @@
           "anchorSha256": "e68a8f06f734da223b3120e42967812136a91394a3231b55e1112613cb918063"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0028",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“灵渺园”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dv-remnant-return-timing",
+        "dv-garden-contact"
+      ],
+      "reason": "灵渺/灵缈园残骸仍为人物辨认与推测，复用坠魔谷已有小空间历史，非确认整个灵界药园都在大晋。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29970,19 +30154,19 @@
           "anchorSha256": "e68a8f06f734da223b3120e42967812136a91394a3231b55e1112613cb918063"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0029",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机阁”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-guild",
+        "dajin-tianji-space-craft"
+      ],
+      "reason": "天机阁唯一商号，补总殿与有条件的裂隙封炼传承；与数宗瓜葛未具名，不创造从属大盟。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -29999,19 +30183,19 @@
           "anchorSha256": "f083023b6b669b6e6220ed27230602c3bc2681a9c7893b5dc252e28e65dff4bc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0030",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机殿”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tianji-head-hall",
+        "dajin-tianji-head-space"
+      ],
+      "reason": "总殿、游离空间、玉门和悬阶为实际设施，和晋京试器空间分开。",
       "evidence": [
         {
           "chapterId": "qq-27520142",
@@ -30028,19 +30212,20 @@
           "anchorSha256": "029978ec59fc8f297768214430678a7aa2109d1bd12eed4b118cd24d1f2fecca"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0031",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机府”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-display-palace",
+        "dajin-tianji-living-limit",
+        "dajin-tianji-space-craft"
+      ],
+      "reason": "天机府复用现有展示器物和活物巨压/闭气边界，商品类别不是第二份韩立私产。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30057,19 +30242,18 @@
           "anchorSha256": "51fbecbcd37257bc10634ad6f3866b8ce8531ccae0774fb571177bf1859361dd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0032",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天机屋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tianji-space-craft"
+      ],
+      "reason": "天机屋作为该门工艺类别与天机府并列保存，没有本段数量/当前持有人，不凭泛称生成一间独有房屋。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30079,19 +30263,19 @@
           "anchorSha256": "51fbecbcd37257bc10634ad6f3866b8ce8531ccae0774fb571177bf1859361dd"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0033",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“芥子空间炼制法”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-space-manual",
+        "dajin-tianji-space-craft"
+      ],
+      "reason": "封炼法确有传承但非能随身进入的真正芥子至宝；秘诀放商号秘库，韩尚未购买，不人人全知。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30108,19 +30292,18 @@
           "anchorSha256": "bf33379d14e74dcdccfba79b52afe5e1a3ebfc8b411fc4d2d362b07c4646cd82"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0034",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“芥子法阵”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-temporary-array"
+      ],
+      "reason": "阵法技术和永久秘法分开；按粲苦介绍保留空间大小、耗材、寿限与失败风险，T0掌握时间明示补写。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30130,19 +30313,19 @@
           "anchorSha256": "901b9eba51a61ec16985a2590aea7f67526a72ba844e84d7c9b1f6f679b8ed97"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0035",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“布阵器具”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-array-sample",
+        "dajin-tianji-temporary-array"
+      ],
+      "reason": "阵具是有实际维护成本的样品，七八成不等于全效；不把韩后来拒绝的商品提前送给韩。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30159,19 +30342,19 @@
           "anchorSha256": "901b9eba51a61ec16985a2590aea7f67526a72ba844e84d7c9b1f6f679b8ed97"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0041",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“晋京”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-jinjing",
+        "future-dajin-tianji-exchange"
+      ],
+      "reason": "晋京唯一城市，拍卖/问法为后来遭遇不成为T0所有角色记忆。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30181,19 +30364,18 @@
           "anchorSha256": "e68a8f06f734da223b3120e42967812136a91394a3231b55e1112613cb918063"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0049",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“正魔十大宗门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-top-sect-reputation"
+      ],
+      "reason": "正魔十宗是名望集合；天机阁与其中数家暗有关系，原文未定哪几家，不新造指挥全部宗门的联合组织。",
       "evidence": [
         {
           "chapterId": "qq-27520142",
@@ -30210,19 +30392,18 @@
           "anchorSha256": "6cbf3d60e73cf079f3869e67b7bb763bfee00b77f83b2c1ccee31b69ffb6b22e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0050",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“四大佛宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-buddhist-sect-group"
+      ],
+      "reason": "保留四大佛宗称谓与已知雷音，不凭数目编其余三宗及开篇高阶名单。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30232,19 +30413,20 @@
           "anchorSha256": "e05797e6e147fc93e97d80f27bb6b89153c45795f645715a449c1e51d0b1d9cb"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0051",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“雷音宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-leiyin-sect",
+        "dajin-buddhist-methods",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "雷音宗回溯；三大后期长老是此时阵容，开篇修行院与较低修为生活明确补写。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30261,19 +30443,19 @@
           "anchorSha256": "1046c426bed01918b933c5d26840396e4fb230aaa41f7911b979faa03cab4f40"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0052",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“粲苦”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-can-ku",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "粲苦/同场粲若不分裂人物；晚期元婴中期及戴戒不整体照抄，T0元婴初期经营状态列原创补写。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30290,19 +30472,19 @@
           "anchorSha256": "2da16e53060944beafaf4dfaf8ea3a41d7eea013acea9609177ba398dba3c00d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0053",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“焰竹”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-yanzhu",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "焰竹外观十六七岁而明文元婴中期，不能按外观判未出生；T0结丹及师弟关系为必要补写，非准确年表。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30319,19 +30501,20 @@
           "anchorSha256": "effb3332d0d7e4e5dbeaad1fdf2618207d36350d89e8ee810f6b6a4e6939aa87"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0054",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“元智”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-yuanzhi",
+        "dajin-buddhist-methods",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "元智同一雷音僧；后期大修士、护法、客卿不能整套前置。T0元婴初/第二层与师承生活明示原创。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30348,19 +30531,19 @@
           "anchorSha256": "15a84ff0e5be2f58335beb19116edd4fe84d1a6ec315105f69d112145dddb980"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0055",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“明王决”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-mingwang-manual",
+        "dajin-buddhist-methods"
+      ],
+      "reason": "明王诀术法与元智后期层次分开，修炼才取得肉身强度；不凭文本名称自动达到第四层。",
       "evidence": [
         {
           "chapterId": "qq-27535589",
@@ -30377,19 +30560,19 @@
           "anchorSha256": "cb07b556cc16a3c17ef9ad3f8e5bdbb807e7e9dd23ddcc9c8bf75184dc1843da"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0056",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金刚护法”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-buddhist-sect-group",
+        "dajin-buddhist-methods"
+      ],
+      "reason": "金刚护法是稀少职位，非一名未具名人物，也不自动给元智开篇后期能力。",
       "evidence": [
         {
           "chapterId": "qq-27529246",
@@ -30399,19 +30582,18 @@
           "anchorSha256": "551b4ef2fd1fdc984c77c00d5f43f13659cadf737c5b5d7766b95b489fbb381c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0057",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“金刚虚影秘术”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-buddhist-methods"
+      ],
+      "reason": "金刚虚影来自本人法力、肉身与心神有联系；术法存在早于韩见识，不把观察时当创造时。",
       "evidence": [
         {
           "chapterId": "qq-27548719",
@@ -30428,19 +30610,18 @@
           "anchorSha256": "7a50ae79b0e77d4b93b5b31ec797a193ba220143954f19c029fceafd15d011c7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0063",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“赤红禅杖”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-yuanzhi-later-equipment"
+      ],
+      "reason": "该特定赤杖只有后期持有证据；记录火珊瑚能力但不凭其材料古老就说这根杖T0已归元智。",
       "evidence": [
         {
           "chapterId": "qq-27535589",
@@ -30457,19 +30638,18 @@
           "anchorSha256": "f3622f6981ff00a70aeef1b043b68b8fa794b1f6a6ba3b5297e16f28b8e76c9b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0064",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“翠绿佛珠”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-yuanzhi-later-equipment"
+      ],
+      "reason": "该串佛珠的护幕为实见后期用例，现无具体锻造/归属日期，和普通练习器物分开，不提前赠与。",
       "evidence": [
         {
           "chapterId": "qq-27535589",
@@ -30486,19 +30666,18 @@
           "anchorSha256": "53359f0b4feb5cde18b10d6271c988dc728d3b6442a6c460fb6a014fa3887a02"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0067",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“曹峰维”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-tianji-guards"
+      ],
+      "reason": "曹峰维/曹伟峰同场称名异文只保留一个资料身份；后期结丹守卫不能无依据跨数百年在任。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30515,19 +30694,18 @@
           "anchorSha256": "ea7846e4dad0579a4383836c67da0aa1d0ebfe957229861a8765bb74e67fe053"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0068",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“张掌柜”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-tianji-guards"
+      ],
+      "reason": "此张掌柜是接待此行的黄衫白面分号管事，不凭姓氏合并晋京旧掌柜。后期结丹在任不前置。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30551,19 +30729,19 @@
           "anchorSha256": "f10735a68d5531e0efe3c2baa797b4bd89ad91de6d1ccf7af6cbabe2f6d86b65"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0069",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“昆吾山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-south-kunwu",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "二百多年前魔劫是相对此次赴晋的回顾，开篇昆吾仍封禁，不将读者回述误算成T0历史。",
       "evidence": [
         {
           "chapterId": "qq-27535589",
@@ -30573,19 +30751,20 @@
           "anchorSha256": "14390c792af1624d113e640e6b4929900b6495ddc2821b8ebd88589b820be3ec"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-object-0071",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“机关傀儡武士”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-tianji-gate-puppet-1",
+        "dajin-tianji-gate-puppet-2",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "原文确认门前机关不是活人；T0只标定两具有供能与控制关系的样品，不捏造原著列队总数。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30602,19 +30781,18 @@
           "anchorSha256": "ea7846e4dad0579a4383836c67da0aa1d0ebfe957229861a8765bb74e67fe053"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-fact-0015",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "离落云、取鬼罗为后期韩目标；世界不强迫开篇韩或玩家走这条路。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30624,19 +30802,20 @@
           "anchorSha256": "93904f7181aa913af69c83e29a9bc6f24b7770ff1e6b06bc440e626418a573b2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-fact-0016",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign",
+        "dajin-rejuvenation-ingredients",
+        "dajin-tianji-space-craft"
+      ],
+      "reason": "寻太阳精火炼回阳、求封炼法为此行计划；规则已分别保存，实际目标与拥有不提前。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30653,19 +30832,18 @@
           "anchorSha256": "f51295bf59de3f8dafa583dd00ab560054b8eb0e0df889c5103a7d1f934b3486"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-fact-0017",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "乾陨后宗主独为后期的实力快照，不能当阴罗自开篇仅此大修士。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30675,19 +30853,19 @@
           "anchorSha256": "01646e256099539cfa826359bd24125828fd9741f8ffbddbc6ce53fea1458a12"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0193-fact-0018",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "似乎是韩回忆口气，不抹去前文实见：陆被韩灭躯灭婴、宗主闻讯称夫人。加害方向与伴侣身份可证，事件仍为未来。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30695,12 +30873,65 @@
           "start": 186,
           "end": 222,
           "anchorSha256": "b89010127fbbde9e244ff6cdb5bd4ab5061a80c77cd07cd6cab7e0ab31c37262"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1032,
+          "end": 1131,
+          "anchorSha256": "643ff1f6a25efb3ad220df45ecfca82244964edc07857eef72447f0bfca3a4b2"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1196,
+          "end": 1343,
+          "anchorSha256": "f22b9f87e5611ea59889dea6038d125129ae516021d613edd3dc2b740170f6cf"
+        },
+        {
+          "chapterId": "qq-24131532",
+          "chapterSha256": "d17570a3c853f466aca94b54c09bff5d5fe1fa35979b46460a13c1f2f342cc37",
+          "start": 1902,
+          "end": 1947,
+          "anchorSha256": "6f02b737f7e4a38a9dd5650e33d68057c71b4f8915314f8370f2959e9af6b350"
+        },
+        {
+          "chapterId": "qq-24217376",
+          "chapterSha256": "8d66310a6acae4f240a369e217a598b524fb8f47f44ef9a58cc63879421b88f1",
+          "start": 1159,
+          "end": 1247,
+          "anchorSha256": "63afe3176022686e70a80eb22132436ba764bd1aabf9d2f0b65db915b5584774"
+        },
+        {
+          "chapterId": "qq-24244194",
+          "chapterSha256": "98ae49128af6ce5be659fe26ae3aab7c3b7a51745175e6fe15bca3a35fbc9f09",
+          "start": 706,
+          "end": 783,
+          "anchorSha256": "79a0a9439fec5a717b080d56112717d2f95f4e399e6ecb1d923bc3de7349fe03"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2955,
+          "end": 3115,
+          "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
+        },
+        {
+          "chapterId": "qq-27568481",
+          "chapterSha256": "e29fcc6d504e69abde61babc206117c3466dca24fbaa55bc2686a0c54c02c26d",
+          "start": 321,
+          "end": 386,
+          "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -30742,9 +30973,11 @@
       "candidateId": "batch-0193-issue-0002",
       "batchId": "batch-0193",
       "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主杀妻大仇”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-lu-identity"
+      ],
+      "reason": "局部章的杀妻短语不足，但跨章24131532/24217376/24244194及后来宗主自言已确定，关闭虚假“方向未明”问题。",
       "evidence": [
         {
           "chapterId": "qq-27515832",
@@ -30752,21 +30985,77 @@
           "start": 186,
           "end": 222,
           "anchorSha256": "b89010127fbbde9e244ff6cdb5bd4ab5061a80c77cd07cd6cab7e0ab31c37262"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1032,
+          "end": 1131,
+          "anchorSha256": "643ff1f6a25efb3ad220df45ecfca82244964edc07857eef72447f0bfca3a4b2"
+        },
+        {
+          "chapterId": "qq-24086511",
+          "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+          "start": 1196,
+          "end": 1343,
+          "anchorSha256": "f22b9f87e5611ea59889dea6038d125129ae516021d613edd3dc2b740170f6cf"
+        },
+        {
+          "chapterId": "qq-24131532",
+          "chapterSha256": "d17570a3c853f466aca94b54c09bff5d5fe1fa35979b46460a13c1f2f342cc37",
+          "start": 1902,
+          "end": 1947,
+          "anchorSha256": "6f02b737f7e4a38a9dd5650e33d68057c71b4f8915314f8370f2959e9af6b350"
+        },
+        {
+          "chapterId": "qq-24217376",
+          "chapterSha256": "8d66310a6acae4f240a369e217a598b524fb8f47f44ef9a58cc63879421b88f1",
+          "start": 1159,
+          "end": 1247,
+          "anchorSha256": "63afe3176022686e70a80eb22132436ba764bd1aabf9d2f0b65db915b5584774"
+        },
+        {
+          "chapterId": "qq-24244194",
+          "chapterSha256": "98ae49128af6ce5be659fe26ae3aab7c3b7a51745175e6fe15bca3a35fbc9f09",
+          "start": 706,
+          "end": 783,
+          "anchorSha256": "79a0a9439fec5a717b080d56112717d2f95f4e399e6ecb1d923bc3de7349fe03"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2955,
+          "end": 3115,
+          "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
+        },
+        {
+          "chapterId": "qq-27568481",
+          "chapterSha256": "e29fcc6d504e69abde61babc206117c3466dca24fbaa55bc2686a0c54c02c26d",
+          "start": 321,
+          "end": 386,
+          "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0001",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "唯一韩立，元婴峰值切磋和截杀属后期，不前置入门前少年。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -30783,19 +31072,20 @@
           "anchorSha256": "74706fc126699fcf2f0419a960869a7e34122f73b0ff6442a3565c0f823f1435"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0006",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "房姓宗主与先前身份相同；后期被斩首收婴不改变T0补写的存活状态。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -30810,21 +31100,29 @@
           "start": 2489,
           "end": 2596,
           "anchorSha256": "74706fc126699fcf2f0419a960869a7e34122f73b0ff6442a3565c0f823f1435"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0007",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“乾老魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-qian-laomo",
+        "kunwu-qian-and-five-demons",
+        "dajin-fang-lu-identity"
+      ],
+      "reason": "乾与房为多年师兄弟；五子原祭炼者为乾，但此战五色寒焰是韩后改造不前置。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -30841,10 +31139,7 @@
           "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -30917,9 +31212,13 @@
       "candidateId": "batch-0194-object-0015",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-yinluo-main-seat",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "古传宗门与本山可回溯，后期元婴长老接连被杀的结果单列。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -30936,10 +31235,7 @@
           "anchorSha256": "e0ad40338e8cc2868366f58cc931f1013b08e4f1962c30777d1b810fd5461231"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -30975,9 +31271,12 @@
       "candidateId": "batch-0194-object-0019",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔道十宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-top-sect-reputation",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "魔道十宗为地位集合；失去名额属于实力改变的可能后果，不是不可改写事件。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -30994,19 +31293,19 @@
           "anchorSha256": "6a8d523115f7fa380ad8030c3845d397a1820e2e21ebb2dd8c0b3b0cca32c4c3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0021",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“邡莽山脉”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fangmang-range",
+        "dajin-yinluo-main-seat"
+      ],
+      "reason": "总坛明确在邡莽；韩追出到封州/苀郡交界才截战，不能把两地当同名。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31023,19 +31322,18 @@
           "anchorSha256": "f783fbd7d007d9425fa87c13fa05ef7468d328c52a5e3b93aa2adc022bf82a68"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0022",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin"
+      ],
+      "reason": "后期轰动不会创造第二大晋；事件消息依实际传播。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -31052,19 +31350,19 @@
           "anchorSha256": "3db542270fdee774ffc17fd8ef059dee7ff18a7e2f3e3446200583c7a323d709"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0024",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“封州”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-fengzhou",
+        "dajin-yinluo-main-seat"
+      ],
+      "reason": "封州为地域，边界事件并非其创建时间；州郡绝对坐标不凭本章扩写。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31074,19 +31372,19 @@
           "anchorSha256": "74e50ef1704d3ae7dd767c7e81a87c178cf1beef104eabcaeec55e07ee1f3fd8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0025",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“苀郡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-xunjun",
+        "dajin-yinluo-main-seat"
+      ],
+      "reason": "苀郡与封州相接，不并入阴罗总坛本山；保留源字苀。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31096,19 +31394,19 @@
           "anchorSha256": "74e50ef1704d3ae7dd767c7e81a87c178cf1beef104eabcaeec55e07ee1f3fd8"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0028",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“人界”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-realm",
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "人界复用全局界面；雷震残次品是否流传下界或人界自研，童子未给确定答案，不能据候选断言来源。",
       "evidence": [
         {
           "chapterId": "qq-27553146",
@@ -31125,19 +31423,19 @@
           "anchorSha256": "e2a1e8c1190de01f6f9342fc276657aa4646c4e914219d3b717fb1d33e52ebd3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0039",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“八灵尺”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "kunwu-eight-spirit-ruler",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "八灵尺唯一真体在昆吾开篇封印，不提前归韩；定珠是后来实际施用。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31154,19 +31452,18 @@
           "anchorSha256": "e10c5e65755b7ae8b75e820fee6cba9385e50f4c8194cf3ad98fe6a035386504"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0040",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔髓飞刀”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "魔髓飞刀为韩以后把所得矿物炼成的特定器物；保留刀隐匿需惊神刺配合的限制，不在T0生成第二批魔髓。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31183,19 +31480,19 @@
           "anchorSha256": "ae1302ae6c67a33a0444cbe62eacba256abf07ee04ee01527efb90f56d0bc679"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0046",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“鬼罗幡”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "kunwu-yinluo-stock-and-names",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "同一套幡的后期抢夺目标；沿用十八幡分配与重炼，不追加韩初始库存。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31205,19 +31502,21 @@
           "anchorSha256": "9232a324e9e2b7e2f51b68bef9d3a38f026c42f7aede60a985d13defc5717188"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0049",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“本命元神灯”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-lamp-room",
+        "canon-fang-yinluo-soul-lamp",
+        "canon-lu-yinluo-soul-lamp",
+        "dajin-yinluo-main-seat"
+      ],
+      "reason": "元神灯术与秘室回溯，当前两盏绑定真实存活主体且属明确标定，不提前熄灭或从灯况公开全宗秘密。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -31227,19 +31526,21 @@
           "anchorSha256": "3d60883868ac1d352d749b72a00acb4b91124244e818d4dd545836c808052a48"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0052",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“铜甲炼尸”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-copper-corpse-1",
+        "dajin-yinluo-copper-corpse-2",
+        "dajin-yinluo-main-seat",
+        "dajin-tianji-yinluo-opening-life"
+      ],
+      "reason": "铜甲尸是炼养器物不是天然无限军队；T0只有限两具，后期上千和数万累积不当当前数量。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31256,19 +31557,18 @@
           "anchorSha256": "334e5b52162988e1cd7ae139f234f0e0bf12e160486831b7f3223e4a713613ee"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0053",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“乌甲尸王”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "三乌甲尸王后期已成且即遭五魔吞噬；数百年培育不足以确定T0三王成形，不提前造三名元婴战力。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31285,19 +31585,18 @@
           "anchorSha256": "644d2b61560963319aaeade456a16aa0e9543c94afd01c5dc709617b009c9b6f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-object-0062",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“血云秘术”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "血云是以本体血肉为代价的术式，不是房身死就凭空再生一活人；只录后期用法，开篇没授予未知阶段法术。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31314,19 +31613,19 @@
           "anchorSha256": "628b6eddb63c51fc4ac563ec145cbfc71c34caaec8a84596c8ecf3880ebe936a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0017",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-main-seat",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "古宗/十大地位是组织背景，只有一大修士是乾死后快照，拆开时间，不把古老宗门排到未来。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31336,19 +31635,18 @@
           "anchorSha256": "2e1cba432736f8441a4684feceb8f01ab45c9962c06aaa4209dd0081b6d8a590"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0018",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "截杀与防化神介入是韩此时计划，非T0必然宗门结局。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31358,19 +31656,19 @@
           "anchorSha256": "f783fbd7d007d9425fa87c13fa05ef7468d328c52a5e3b93aa2adc022bf82a68"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0019",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“血骨门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-human-bloodbone-reference",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "七十三潜入修士被灭和毕火毁躯放婴分开；不把毕火魂死，更不能合并血天同名门派。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31387,19 +31685,19 @@
           "anchorSha256": "ce497f9e8f354ba723bb49cb22656cafd6a47f49e525ba82706aa382962ce463"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0020",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign",
+        "dajin-yinluo-main-seat"
+      ],
+      "reason": "半年监视是这次行动的经历，地理本山可回溯而监视成功不预定。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31409,19 +31707,19 @@
           "anchorSha256": "e0ad40338e8cc2868366f58cc931f1013b08e4f1962c30777d1b810fd5461231"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0021",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "宗主认出韩、说杀妻及听闻乾寒死讯的认知分别保留；死亡结果不变成开篇人物记忆。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31438,19 +31736,18 @@
           "anchorSha256": "56c7609c821f73494617860633771e63daea2205f284d4ba0f4fc8ba308a0f77"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0022",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "三尸当期出场等级为大概、隐隐，不能精标全部元婴中期，也不前置三王。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31467,19 +31764,21 @@
           "anchorSha256": "c35418929fbbd90532b6088ce676f0a2f1297451987621406cb01872c56cd0b5"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0023",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“五子同心魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-qian-laomo",
+        "dajin-fang-lu-identity",
+        "kunwu-qian-and-five-demons",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "原祭炼者乾、房熟识的师门关系可核；韩驱使和寒焰改造仍后期。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31489,19 +31788,19 @@
           "anchorSha256": "86b90274832a2c66ebbd9d21d4cb8c5082ee2581322abd76558c2922fb785d17"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0025",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-main-seat",
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "数百年从数万累计炼尸筛出三王，不等于数万T0同时存货；数百年的模糊起点不足倒推出开篇三王已成。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31511,19 +31810,18 @@
           "anchorSha256": "644d2b61560963319aaeade456a16aa0e9543c94afd01c5dc709617b009c9b6f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0028",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "房战甲/飞剑和背后韩傀儡两银剑为一次交手，不造同名第二真身，也不给开篇后期装备。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31540,19 +31838,18 @@
           "anchorSha256": "36ce9c7a542e3d8793ccc10b59d50490f612cd1eddf2e5dde4ddfeb5d7465b83"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0029",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“三焰扇”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "三焰扇本次扇柱、宗主首次见而警惕是后期战斗事实，不倒写为开篇已知韩武器。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31569,19 +31866,18 @@
           "anchorSha256": "6b1c126ccfcd38ac3f21c0198ab3188a973aec95253f56b66f43b178f94df6f0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0030",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“疾风九变”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "疾风九变是韩后修炼术与此次避锥，开篇无修为不能因出身接管自动拥有。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31598,19 +31894,19 @@
           "anchorSha256": "41fda13485135f5dd719c9b9c515dc3fbeed74b4184ff03c35753b9df10982b7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0032",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔髓飞刀”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "先惊神刺收缩神念再暗刀斩首；不是飞刀无条件必杀，惊神剌/失神剌同场词形保留。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31625,21 +31921,28 @@
           "start": 248,
           "end": 335,
           "anchorSha256": "ae1302ae6c67a33a0444cbe62eacba256abf07ee04ee01527efb90f56d0bc679"
+        },
+        {
+          "chapterId": "qq-27573670",
+          "chapterSha256": "5d5f165952530daf5a163484f5cf1ae6bc46c80d3bac858c20fb873e5885d693",
+          "start": 17,
+          "end": 92,
+          "anchorSha256": "7cbf2dd3c53b39e0d417679a136ab65d0e57b7a5575398ad5b0f8216e52a3f38"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0033",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“辟邪神雷”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "房尸血肉化攻被韩神雷击散为当场相克；血肉载体和实际雷法俱不可省略。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31649,19 +31952,18 @@
           "anchorSha256": "628b6eddb63c51fc4ac563ec145cbfc71c34caaec8a84596c8ecf3880ebe936a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0034",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“破灭法目”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "破灭目乌光打断这次元婴瞬移；不是全人界瞬移禁止，也不赋予开篇韩。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31678,19 +31980,19 @@
           "anchorSha256": "e109639f82221bee080ef89f40313ee1f2864091d9f77f52817ee397caad05c6"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0035",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“虚天鼎”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xutian-ding",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "青丝拘婴是后期韩操鼎用例；鼎开篇唯一真体仍虚天殿，不能在房宗主遗物里复制一个鼎。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31714,19 +32016,18 @@
           "anchorSha256": "bcb4edab24690c2e6492d4c4a712b2bf0c923b234e44251b30b2d6a2a866f852"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0037",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "搜魂获防御与五六在宗长老是当时信息，不作为T0名单，更不直接给其他角色全知。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31736,19 +32037,18 @@
           "anchorSha256": "6379955a9a96175b69f24fb34b1315e4cac1f6a36e02dc4ce802dd702ec15ec9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0038",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "韩以失去大修士、六七长老为条件推测衰落；推测与随后真实结果分开，不写强制灭宗规则。",
       "evidence": [
         {
           "chapterId": "qq-27573670",
@@ -31758,19 +32058,18 @@
           "anchorSha256": "6a8d523115f7fa380ad8030c3845d397a1820e2e21ebb2dd8c0b3b0cca32c4c3"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0040",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“黑色圆球”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-late-corpses-and-tools"
+      ],
+      "reason": "黑珠与北域红珠是两枚雷震残次品；童子未知道制造/传入来源，保留独立个体和未知制作年代，不把新取得时间当诞生时间。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -31787,19 +32086,18 @@
           "anchorSha256": "08963288e9ea374e919ac061112a98148fa10ec05db41e2fae6f69caff699fa9"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0043",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "半年七八元婴含宗主失踪且灯灭、召回共守才停，不能夸成全宗尽灭；不预定玩家世界必走同路。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -31830,19 +32128,19 @@
           "anchorSha256": "d29dc06849626f3893f170a27c0d155873f1135a5fe09cdaa8115abf658ab1d4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0044",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“本命元神灯”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-main-seat",
+        "dajin-yinluo-lamp-room"
+      ],
+      "reason": "灯与主体的既存联系不因读者后来首次看见才生效；用真实绑定灯具落实，灯灭仍依实际状态。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -31852,10 +32150,7 @@
           "anchorSha256": "3d60883868ac1d352d749b72a00acb4b91124244e818d4dd545836c808052a48"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -31956,9 +32251,12 @@
       "candidateId": "batch-0194-fact-0053",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔道十宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign",
+        "dajin-top-sect-reputation"
+      ],
+      "reason": "宗门蚕食是这场衰落后的利益行动；不把旁白局势判断写成所有魔门永远一致行动。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -31975,19 +32273,18 @@
           "anchorSha256": "9ad595de6af3a25b7e4195bf949b531703c2df022caf31891d9aeffe326891b7"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-issue-0001",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主证据锚点”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-lu-identity"
+      ],
+      "reason": "当前引用切片确为“房老魔！”完整原句；身份另有整段明说房姓为宗主，不以补标点本身证明身份。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -31995,21 +32292,27 @@
           "start": 1493,
           "end": 1501,
           "anchorSha256": "2168d4d337daed2c362761130c3d95ed88d4cc5de08146399fbdf25957c8c368"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-issue-0002",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“三焰扇证据锚点”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "连续切片与原段核对通过；后期扇击首次相见仍放事件档案，不借机器引文修复宣称开篇可用。",
       "evidence": [
         {
           "chapterId": "qq-27568481",
@@ -32019,19 +32322,18 @@
           "anchorSha256": "6b1c126ccfcd38ac3f21c0198ab3188a973aec95253f56b66f43b178f94df6f0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-issue-0003",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“引用编号校正”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "已逐一对照本批原段、候选现有切片与完整战斗上下文；所列编号问题已修复，仍保留战斗阶段和惊神剌词形差异。",
       "evidence": [
         {
           "chapterId": "qq-27583989",
@@ -32062,19 +32364,19 @@
           "anchorSha256": "12408f2fae366bb46fb2dc677efdd2b6069cbc53daa0bbb9d089e7d18b8f3f1c"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-issue-0007",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主姓名”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-fang-lu-identity",
+        "canon-fang-yinluo"
+      ],
+      "reason": "仅有房姓/宗主/房老魔，不编全名；同姓称谓合并依据连续场景明确指出而非单姓猜测。",
       "evidence": [
         {
           "chapterId": "qq-27561987",
@@ -32089,12 +32391,16 @@
           "start": 2489,
           "end": 2596,
           "anchorSha256": "74706fc126699fcf2f0419a960869a7e34122f73b0ff6442a3565c0f823f1435"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32366,9 +32672,12 @@
       "candidateId": "batch-0195-object-0006",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“苦竹老人”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ku-zhu",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "苦竹复用唯一岛主；人傀儡夺翎是后期遭遇，开篇不预知韩对手身份。",
       "evidence": [
         {
           "chapterId": "qq-27621026",
@@ -32385,10 +32694,7 @@
           "anchorSha256": "3eb6d94ada09237486339b27a09e4e4c2f17ad15454f4d99362bf6066163b758"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32423,9 +32729,13 @@
       "candidateId": "batch-0195-object-0011",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "前章房宗主被韩斩躯收婴，宴会韩承认同次截杀；同一身份不新造未具名死宗主。",
       "evidence": [
         {
           "chapterId": "qq-27621026",
@@ -32433,21 +32743,29 @@
           "start": 1593,
           "end": 1658,
           "anchorSha256": "c220a5ed2e25cdfab53395abd7d5af5b8b8efa511c7f8e5889a846a343fa895c"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0195-object-0012",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“房道友”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "前章直接把房姓和阴罗宗主相等，席间房道友陨落是同一死讯的不同称呼；修正断章导致的不可合并。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -32462,12 +32780,16 @@
           "start": 1425,
           "end": 1517,
           "anchorSha256": "7fdb65dd600decef0310701bfbc84c995df56d0119a20222e5a41c92a6f2fdea"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32682,9 +33004,12 @@
       "candidateId": "batch-0195-object-0025",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天外岛”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-tianwai-island",
+        "dajin-two-senior-retreats"
+      ],
+      "reason": "天外岛为风前辈居处名，保持未知海域且不强迫开篇风本人在岛。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -32694,19 +33019,19 @@
           "anchorSha256": "f1f288515a165d61c8e11b4ab4d1218214bacea19585bb86efc19c17d187ac5f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0195-object-0026",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“西灵山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-xiling-mountain",
+        "dajin-two-senior-retreats"
+      ],
+      "reason": "西灵山为向前辈居处名，保持未知州域且不复制第二向之礼。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -32716,10 +33041,7 @@
           "anchorSha256": "f1f288515a165d61c8e11b4ab4d1218214bacea19585bb86efc19c17d187ac5f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32928,9 +33250,12 @@
       "candidateId": "batch-0195-object-0035",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔道十宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-top-sect-reputation",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "十大地位集合与阴罗后期可能被除名分开，非当前固定联合体。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -32940,10 +33265,7 @@
           "anchorSha256": "c9fbfbbe1d892bd609da96c3429eb522c0a3777e43af824aa712353ddd54b031"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33156,9 +33478,11 @@
       "candidateId": "batch-0195-fact-0026",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“太一门”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-late-coercive-marriage-context"
+      ],
+      "reason": "原文是宴会强掳女修语境下太一等可能指责、魔道旁门较常见的社会叙述；不能改成正道一定保护、所有魔修必抢，权势不能替代他人意愿。",
       "evidence": [
         {
           "chapterId": "qq-27628060",
@@ -33168,10 +33492,7 @@
           "anchorSha256": "6e695293cea7706cc2876621e5611c0bdd6cd76ccebab3b022493dd2d02995f2"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33521,9 +33842,12 @@
       "candidateId": "batch-0195-issue-0001",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“房道友与阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-fang-lu-identity",
+        "canon-fang-yinluo"
+      ],
+      "reason": "同前后章明确身份链，房道友=房姓阴罗宗主；不是靠同姓推断。此issue的局部未明不足抵销前文直接证据。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -33538,12 +33862,16 @@
           "start": 1593,
           "end": 1658,
           "anchorSha256": "c220a5ed2e25cdfab53395abd7d5af5b8b8efa511c7f8e5889a846a343fa895c"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33701,9 +34029,13 @@
       "candidateId": "batch-0196-object-0009",
       "batchId": "batch-0196",
       "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗宗主”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-fang-yinluo",
+        "dajin-fang-lu-identity",
+        "future-dajin-final-yinluo-campaign"
+      ],
+      "reason": "宴会宾客仍在推断死讯是人物知识界限，不能把读者已目睹的被斩收婴改成客观未定；T0不前置死亡。",
       "evidence": [
         {
           "chapterId": "qq-27636819",
@@ -33711,12 +34043,16 @@
           "start": 1710,
           "end": 1821,
           "anchorSha256": "8fe6771c4bf6a48f8d8c48e3a2900e93e3f6ab8d58689ea595b959ed880c6b53"
+        },
+        {
+          "chapterId": "qq-27561987",
+          "chapterSha256": "8a8019348557eba5c298a9e0068ce25c3bd9c3353a1e9520e71f0ff10b390de7",
+          "start": 2597,
+          "end": 2639,
+          "anchorSha256": "69877214e7cf1fced242f2301e3203d953ca2a75b7bc30cb316aadea6bb60820"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
