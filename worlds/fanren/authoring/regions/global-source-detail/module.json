@@ -1,0 +1,315 @@
+{
+  "id": "global-source-detail",
+  "entities": [],
+  "existingEntityFacts": [
+    {
+      "entityId": "canon-mo-juren",
+      "facts": [
+        {
+          "id": "global-detail-mo-martial-knowledge",
+          "predicate": "martial-repertoire",
+          "value": {
+            "kind": "text",
+            "value": "掌握魔银手、闻风辨音及咫尺天涯近身身法。魔银手能抗常见刃口，不保证抗仙家法器；闻风辨音依声音和距离，咫尺天涯是快速实际移步，不能穿墙瞬移。知道象甲功九层与训练代价；九层刀枪水火无伤和创者无痛是流传说法，不能据此保证达到无敌。"
+          },
+          "description": "掌握魔银手、闻风辨音及咫尺天涯近身身法。魔银手能抗常见刃口，不保证抗仙家法器；闻风辨音依声音和距离，咫尺天涯是快速实际移步，不能穿墙瞬移。知道象甲功九层与训练代价；九层刀枪水火无伤和创者无痛是流传说法，不能据此保证达到无敌。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-mo-four-remedy-knowledge",
+          "predicate": "remedy-knowledge",
+          "value": {
+            "kind": "text",
+            "value": "掌握黄龙丹、金髓丸、清灵散与养精丹等旧方：前二助益适合层次的功力，清灵散针对多种常见毒而非任何毒咒，养精丹治内外伤而非复活术。珍稀材料尚未配齐，知道药方不等有成药，必须取得合适材料并按步骤实际炮制。"
+          },
+          "description": "掌握黄龙丹、金髓丸、清灵散与养精丹等旧方：前二助益适合层次的功力，清灵散针对多种常见毒而非任何毒咒，养精丹治内外伤而非复活术。珍稀材料尚未配齐，知道药方不等有成药，必须取得合适材料并按步骤实际炮制。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        },
+        {
+          "id": "global-detail-mo-chansi-knowledge",
+          "predicate": "poison-knowledge",
+          "value": {
+            "kind": "text",
+            "value": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。"
+          },
+          "description": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-blink-sword-manual",
+      "facts": [
+        {
+          "id": "global-detail-blink-text-contents",
+          "predicate": "readable-technique-contents",
+          "value": {
+            "kind": "text",
+            "value": "以光线、视觉误差、地形与行动时机配合身法和器具；招式分有细部变化。书中要求不以已成内家真气的路线兼练，并须耐性与合适天赋；这些学习条件不保证刺杀必成。实际借阅、读懂和练习后才能获得相应招式。"
+          },
+          "description": "以光线、视觉误差、地形与行动时机配合身法和器具；招式分有细部变化。书中要求不以已成内家真气的路线兼练，并须耐性与合适天赋；这些学习条件不保证刺杀必成。实际借阅、读懂和练习后才能获得相应招式。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际获准接触传本并阅读相应段落。"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-seven-arts-hall",
+      "facts": [
+        {
+          "id": "global-detail-seven-arts-old-techniques",
+          "predicate": "available-martial-instruction",
+          "value": {
+            "kind": "text",
+            "value": "门内旧武学包括偏灵巧的缠丝手和偏刚猛的狂蟒劲；学习须教习愿教、本人训练与时间，不因进入堂院即全会。具体传授资格依门内管理。"
+          },
+          "description": "门内旧武学包括偏灵巧的缠丝手和偏刚猛的狂蟒劲；学习须教习愿教、本人训练与时间，不因进入堂院即全会。具体传授资格依门内管理。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际询问知情教习或查阅获准的门内目录。"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-yu-zitong",
+      "facts": [
+        {
+          "id": "global-detail-yu-soul-state-knowledge",
+          "predicate": "soul-resource-condition",
+          "value": {
+            "kind": "text",
+            "value": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。"
+          },
+          "description": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-yu-zitong",
+              "canon-mo-juren"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [
+    {
+      "agent_id": "canon-mo-juren",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "本人此前实际学习与经历；不包含后来别人的试验。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-mo-martial-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-martial-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "掌握魔银手、闻风辨音及咫尺天涯近身身法。魔银手能抗常见刃口，不保证抗仙家法器；闻风辨音依声音和距离，咫尺天涯是快速实际移步，不能穿墙瞬移。知道象甲功九层与训练代价；九层刀枪水火无伤和创者无痛是流传说法，不能据此保证达到无敌。"
+            },
+            "description": "掌握魔银手、闻风辨音及咫尺天涯近身身法。魔银手能抗常见刃口，不保证抗仙家法器；闻风辨音依声音和距离，咫尺天涯是快速实际移步，不能穿墙瞬移。知道象甲功九层与训练代价；九层刀枪水火无伤和创者无痛是流传说法，不能据此保证达到无敌。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-mo-four-remedy-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-four-remedy-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "掌握黄龙丹、金髓丸、清灵散与养精丹等旧方：前二助益适合层次的功力，清灵散针对多种常见毒而非任何毒咒，养精丹治内外伤而非复活术。珍稀材料尚未配齐，知道药方不等有成药，必须取得合适材料并按步骤实际炮制。"
+            },
+            "description": "掌握黄龙丹、金髓丸、清灵散与养精丹等旧方：前二助益适合层次的功力，清灵散针对多种常见毒而非任何毒咒，养精丹治内外伤而非复活术。珍稀材料尚未配齐，知道药方不等有成药，必须取得合适材料并按步骤实际炮制。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-mo-chansi-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-chansi-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。"
+            },
+            "description": "知道普通迷药神仙倒；熟悉所记缠香丝的配方与混合毒性：入血初期行内家真气会促毒，替换材料会改变具体毒性和所需解药；需要真实药材与炮制时间，不能见毒名便知对方的完整配比。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          },
+          {
+            "id": "global-detail-mo-seven-ghost-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-mo-seven-ghost-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "知道七鬼噬魂大法须准备相应银刃并以身喂鬼、耗自身精元，只能暂得法力和短暂返青；不是补回寿元的永久解法。"
+            },
+            "description": "知道七鬼噬魂大法须准备相应银刃并以身喂鬼、耗自身精元，只能暂得法力和短暂返青；不是补回寿元的永久解法。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-yu-zitong",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "global-source-detail-prior-training",
+            "kind": "observation",
+            "description": "本人此前实际学习与经历；不包含后来别人的试验。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "global-detail-yu-soul-state-knowledge",
+            "subjectId": "self",
+            "predicate": "global-detail-yu-soul-state-knowledge",
+            "value": {
+              "kind": "text",
+              "value": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。"
+            },
+            "description": "记得七鬼噬魂大法需相应银刃和仪式，以身体精元换暂时法力而非永远年轻；目前肉身已失，普通元神随施术和时间消耗所携法力，不能靠原肉身打坐补回，需另求真实可行的恢复方式。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "global-source-detail-prior-training"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "laws": [
+    {
+      "id": "global-detail-mortal-herb-supply",
+      "text": "常用凡俗药材可培育，珍稀高龄草药通常更难获得，野采需真实地理与风险；世家长期种植、收购不使所有世家自动拥有百年药。黄龙草、苦莲花、忘忧果、三乌草属于可辨药草，药性与年龄须依据具体植株；名称、配方或传闻不生成植株、年限和库存。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-remedy-treatment-limits",
+      "text": "黄龙丹、金髓丸须服炼才可能助益适合的低阶功力，不直接授予境界；药力跟不上境界与长期服用失效分别判断。清灵散能解多种毒却不是万能解药，尸虫不因服此药便自动消失。养精丹可显著缓和内外伤、止血与促进恢复，但不能起死回生；具体伤势、药量和病因仍需判断。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-mixed-poison-response",
+      "text": "缠香丝须实际配制并入体，初期妄运内家真气会促毒；久留入骨可造成严重萎缩并需对症药持续抑制。可替材料使毒性与解药不同，不能仅会一张通方便自动解另一制法。本文凡俗难解不排除后续确有依据的高阶救治；中毒威胁不强改人的意志。土菇花有毒且能妨碍普通离体元神施术，实际强弱、剂量与防护须核，不保证对一切境界神魂必杀。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-seven-ghost-expenditure",
+      "text": "施七鬼噬魂大法需要真实备妥相应银刃和仪式条件，以施者身体及精元供养，暂获法力与简单法术能力；不永久返龄、不凭宣言补满精元。能否重施受剩余生命精元与伤势制约。具体七刃必须在世界有实物来源，知道术名不生成器具。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-basic-fire-conditions",
+      "text": "已学火弹术者需实际施法凝成小火球并用法力推动；可产生熔伤普通精钢的高温，落水不必自然熄灭，但不能由此保证破一切水系禁术或护盾。范围、控制、修为和剩余法力影响结果，持球近战也必须实际控制且承担距离风险。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-basic-wind-conditions",
+      "text": "已学御风诀者将辅助术施于自身，以持续微量法力支持加速奔行，并代替这段奔行的常规体力负担；法力耗尽或停止施法即失加速。此诀不能直接加持另一人，也不能跳过路径、障碍或移动时间。",
+      "severity": "hard"
+    },
+    {
+      "id": "global-detail-control-spell-qualification",
+      "text": "旧入门控物/驱物口诀要求相配的可驱对象及有效施法；普通家具刀剑和各种法器不能仅凭同一口诀自动驱使。新获得器物需要辨认并掌握对应驱法；此初学限制不构成禁止一切高阶搬运、御物或神通的普遍铁律。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "fact:global-detail-mo-martial-knowledge": [
+      "global-detail-elephant-and-mo-martial"
+    ],
+    "cognition:canon-mo-juren": [
+      "global-detail-elephant-and-mo-martial",
+      "global-detail-four-remedy-limits",
+      "global-detail-mixed-poison-conditions",
+      "global-detail-seven-ghost-and-soul-cost"
+    ],
+    "law:global-detail-mortal-herb-supply": [
+      "global-detail-herb-economy-and-kinds"
+    ],
+    "fact:global-detail-mo-four-remedy-knowledge": [
+      "global-detail-four-remedy-limits"
+    ],
+    "law:global-detail-remedy-treatment-limits": [
+      "global-detail-four-remedy-limits"
+    ],
+    "fact:global-detail-blink-text-contents": [
+      "global-detail-qixuan-manual-contents"
+    ],
+    "fact:global-detail-seven-arts-old-techniques": [
+      "global-detail-qixuan-manual-contents"
+    ],
+    "law:global-detail-mixed-poison-response": [
+      "global-detail-mixed-poison-conditions"
+    ],
+    "fact:global-detail-mo-chansi-knowledge": [
+      "global-detail-mixed-poison-conditions"
+    ],
+    "law:global-detail-seven-ghost-expenditure": [
+      "global-detail-seven-ghost-and-soul-cost"
+    ],
+    "fact:global-detail-yu-soul-state-knowledge": [
+      "global-detail-seven-ghost-and-soul-cost"
+    ],
+    "cognition:canon-yu-zitong": [
+      "global-detail-seven-ghost-and-soul-cost"
+    ],
+    "law:global-detail-basic-fire-conditions": [
+      "global-detail-basic-fire-and-wind"
+    ],
+    "law:global-detail-basic-wind-conditions": [
+      "global-detail-basic-fire-and-wind"
+    ],
+    "law:global-detail-control-spell-qualification": [
+      "global-detail-control-spell-and-target"
+    ]
+  }
+}
