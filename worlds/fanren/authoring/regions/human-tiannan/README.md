@@ -29,3 +29,5 @@
 天南封魂后西行与入谷前后143候选直接原段审定；本轮143条具体处置见 [candidate-review-2026-10-18-curse-valley.json](candidate-review-2026-10-18-curse-valley.json)。并非全区域或真实游玩验收。
 
 天南出谷返乡、三宗议事与七灵岛后续168候选直接原段审定；本轮168条具体处置见 [candidate-review-2026-10-18-valley-return.json](candidate-review-2026-10-18-valley-return.json)。并非全区域或真实游玩验收。
+
+天南晚期返乡、两次典礼、二婴与弟子连续场景281候选逐项原段审定；本轮281条具体处置见 [candidate-review-2026-10-18-late-home.json](candidate-review-2026-10-18-late-home.json)。并非全区域或真实游玩验收。
