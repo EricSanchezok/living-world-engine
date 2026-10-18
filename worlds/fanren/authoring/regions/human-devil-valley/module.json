@@ -6091,9 +6091,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "保留古魔记忆与魂术，封印有效时不能跨厅夺舍或远程搬原躯。"
+            "value": "保留古魔魂术、藏形、魔焰、污秽宝物与双头四臂魔化知识；施展须可用的身体和力量，污秽能力并非无限。封钵有效时不能跨厅夺舍或远程搬原躯；夺舍也不自动读全原主记忆。"
           },
-          "description": "保留古魔记忆与魂术，封印有效时不能跨厅夺舍或远程搬原躯。",
+          "description": "保留古魔魂术、藏形、魔焰、污秽宝物与双头四臂魔化知识；施展须可用的身体和力量，污秽能力并非无限。封钵有效时不能跨厅夺舍或远程搬原躯；夺舍也不自动读全原主记忆。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -6244,9 +6244,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "保留古魔记忆与魂术，封印有效时不能跨厅夺舍或远程搬原躯。"
+                "value": "保留古魔魂术、藏形、魔焰、污秽宝物与双头四臂魔化知识；施展须可用的身体和力量，污秽能力并非无限。封钵有效时不能跨厅夺舍或远程搬原躯；夺舍也不自动读全原主记忆。"
               },
-              "description": "保留古魔记忆与魂术，封印有效时不能跨厅夺舍或远程搬原躯。",
+              "description": "保留古魔魂术、藏形、魔焰、污秽宝物与双头四臂魔化知识；施展须可用的身体和力量，污秽能力并非无限。封钵有效时不能跨厅夺舍或远程搬原躯；夺舍也不自动读全原主记忆。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -10904,7 +10904,8 @@
     ],
     "entity:dv-yellow-sword": [
       "dv-ancient-relics",
-      "dv-opening-values"
+      "dv-opening-values",
+      "dv-later-combat-equipment"
     ],
     "fact:dv-yellow-sword-unclaimed": [
       "dv-ancient-relics"
@@ -11308,9 +11309,8 @@
       "dv-opening-values"
     ],
     "fact:canon-xueyan-ancient-demon-learned-skill": [
-      "dv-two-souls-one-body",
       "dv-main-soul-seal",
-      "dv-opening-values"
+      "dv-main-soul-combat-limits"
     ],
     "fact:canon-xueyan-ancient-demon-embodiment": [
       "dv-two-souls-one-body",
