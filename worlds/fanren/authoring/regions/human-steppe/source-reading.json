@@ -114,7 +114,18 @@
       "firstPass": "world_content完整读取本章缓存工作本。",
       "secondPass": "采用锚点及邻近上下文已再次对照。",
       "usedBy": [
-        "steppe-beast-descent"
+        "steppe-beast-descent",
+        "steppe-tianlan-tribes-and-rites",
+        "steppe-feng-and-jiuxian-continuity",
+        "steppe-tianlan-descent-boundaries",
+        "steppe-xu-sun-lin-and-artifacts"
+      ],
+      "additionalPasses": [
+        {
+          "reader": "source_completion",
+          "scope": "complete-text-first-pass-and-selected-new-claim-anchors-second-pass",
+          "audit": "candidate-review-2026-10-18-tianlan-journey-and-descent.json"
+        }
       ]
     },
     {
@@ -486,6 +497,65 @@
         "qq-24275829",
         "qq-24244194",
         "qq-24261534"
+      ]
+    },
+    {
+      "file": "candidate-review-2026-10-18-tianlan-journey-and-descent.json",
+      "method": "direct full-paragraph context reading and second-pass new-claim anchors",
+      "scope": "selected-candidates-only-not-complete-chapter-reading",
+      "fullChapterReads": [
+        "qq-25109203"
+      ],
+      "paragraphs": 201,
+      "chapters": [
+        "qq-24325735",
+        "qq-24407188",
+        "qq-24394357",
+        "qq-24419728",
+        "qq-24404166",
+        "qq-24431334",
+        "qq-24473411",
+        "qq-24445870",
+        "qq-24443900",
+        "qq-24568103",
+        "qq-24608831",
+        "qq-24622521",
+        "qq-24648246",
+        "qq-24634707",
+        "qq-24718257",
+        "qq-24770304",
+        "qq-24877773",
+        "qq-24854777",
+        "qq-24865193",
+        "qq-24867123",
+        "qq-24879566",
+        "qq-24900714",
+        "qq-24913979",
+        "qq-24972253",
+        "qq-24983181",
+        "qq-25007571",
+        "qq-25006010",
+        "qq-25016706",
+        "qq-24994726",
+        "qq-24985857",
+        "qq-25018174",
+        "qq-25028017",
+        "qq-25039887",
+        "qq-25054492",
+        "qq-25040802",
+        "qq-25052493",
+        "qq-25064601",
+        "qq-25087342",
+        "qq-25075930",
+        "qq-25077325",
+        "qq-25089266",
+        "qq-25098598",
+        "qq-25109203",
+        "qq-25123806",
+        "qq-25117864",
+        "qq-25151010",
+        "qq-25130826",
+        "qq-25142318"
       ]
     }
   ]
