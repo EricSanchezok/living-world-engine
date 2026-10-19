@@ -1744,7 +1744,7 @@ html[data-cg-motion="reduced"] .cg-perspective-workspace *, html[data-cg-motion=
 .cg-start-deck__toolbar svg { width: 1rem; }
 .cg-start-deck__viewport { min-width: 0; overflow-x: auto; overscroll-behavior-inline: contain; scroll-padding-inline: 0.2rem; scroll-snap-type: inline mandatory; scrollbar-color: var(--cg-muted-foreground) var(--cg-transparent); scrollbar-width: thin; }
 .cg-start-deck { display: flex; gap: 1rem; padding: 0.2rem 0.2rem 0.85rem; }
-.cg-start-card { min-width: 0; flex: 0 0 max(18rem, calc((100% - 1rem) / 2)); scroll-snap-align: center; cursor: pointer; }
+.cg-start-card { position: relative; min-width: 0; flex: 0 0 max(18rem, calc((100% - 1rem) / 2)); scroll-snap-align: center; cursor: pointer; }
 .cg-start-card > input { position: absolute; opacity: 0; pointer-events: none; }
 .cg-start-card__surface { height: 100%; display: grid; grid-template-rows: 12rem minmax(12rem, 1fr); overflow: hidden; border: 1px solid var(--cg-border); border-radius: calc(var(--cg-radius) + 0.65rem); background: var(--cg-card); }
 .cg-start-card > input:checked + .cg-start-card__surface { border-color: var(--cg-ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--cg-ring) 18%, var(--cg-transparent)); }

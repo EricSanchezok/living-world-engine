@@ -122,6 +122,7 @@ export function WorldDetail({
   const [startError, setStartError] = useState("");
   const [nameError, setNameError] = useState("");
   const cardRefs = useRef<Array<HTMLLabelElement | null>>([]);
+  const deckViewportRef = useRef<HTMLDivElement>(null);
   const displayNameRef = useRef<HTMLInputElement>(null);
   const startDialogRef = useRef<HTMLElement>(null);
   const startTriggerRef = useRef<HTMLButtonElement>(null);
@@ -210,11 +211,17 @@ export function WorldDetail({
       setOriginId(choice.origin.id);
     }
     const systemReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    cardRefs.current[index]?.scrollIntoView({
-      behavior: preferences.reduceMotion || systemReduceMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
-    });
+    const viewport = deckViewportRef.current;
+    const card = cardRefs.current[index];
+    if (viewport && card) {
+      const viewportBounds = viewport.getBoundingClientRect();
+      const cardBounds = card.getBoundingClientRect();
+      viewport.scrollTo({
+        left: viewport.scrollLeft + cardBounds.left - viewportBounds.left
+          - (viewport.clientWidth - cardBounds.width) / 2,
+        behavior: preferences.reduceMotion || systemReduceMotion ? "auto" : "smooth",
+      });
+    }
   }
 
   function continueStart(): void {
@@ -427,7 +434,7 @@ export function WorldDetail({
                                     ><ChevronRight aria-hidden="true" /></button>
                                   </div>
                                 </div>
-                                <div className="cg-start-deck__viewport">
+                                <div className="cg-start-deck__viewport" ref={deckViewportRef}>
                                   <div className="cg-start-deck">
                                     {choices.map((choice, index) => (
                                       <StartChoiceCard
