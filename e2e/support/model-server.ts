@@ -39,7 +39,7 @@ function contextFrom(body: Record<string, unknown>): Record<string, unknown> {
 
 
 function decisionAnswers(questions: Record<string, DecisionQuestionV2>) {
-  const values: Record<string, string> = { operation: "observe", interaction: "world_action", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
+  const values: Record<string, string> = { operation: "observe", interaction: "world_action", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", duration: "default", resource: "none", goal: "none" };
   return Object.fromEntries(Object.entries(questions).map(([id, question]): [string, Record<string, unknown>] => {
     if (question.type === "noul") return [id, { type: "noul", noul: id === "expression" ? 0 : 1 }];
     if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
@@ -132,6 +132,7 @@ const server = createServer(async (request, response) => {
       return;
     }
     const model = String(body.model);
+    const role = (context.roleContract as { role?: string } | undefined)?.role;
     const responseId = `e2e-response:${model}:${Date.now()}`;
     const streamChunk = (content: string, finished = false) => response.write(`data: ${JSON.stringify({
       id: responseId, object: "chat.completion.chunk", created: 0, model,
@@ -166,8 +167,8 @@ const server = createServer(async (request, response) => {
       : (suggestionContext.discourse?.exchanges.length ?? 0) < 2
         ? ["询问守门人石门后的道路", "检查石门上可见的痕迹", "整理接下来探索的打算"]
         : ["向守门人说明来意", "寻找庭院中的其他出口", "回顾刚得到的线索"] }
-      : reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
-      ...(autonomous ? { urgency: 0.5 } : {}),
+      : reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action", activitySite: "current",
+      ...(autonomous ? { urgency: 0.5 } : { durationReference: { basis: "ordinary", count: null } }),
       requestAnalysis: { authorizedSteps: [requestText], establishedReceipts: [], remainingSteps: [requestText] },
       action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, readingAnswers[id]!.choice])),
         attempt: requestText || "清点随身物资", utterance: null, manner: null, literalQuote: "none" },
@@ -179,7 +180,7 @@ const server = createServer(async (request, response) => {
       : scene?.observations ? { paragraphs: scene.speech?.length
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)
       : ["你查看了眼前的情况。石门仍在面前，随身物资也清点清楚了。"] }
-      : model === "e2e-truth" ? truthOutput(context) : agentOutput(context);
+      : role?.startsWith("agent-") ? agentOutput(context) : truthOutput(context);
     if (body.stream === true) {
       response.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
       streamChunk(JSON.stringify(output), true);

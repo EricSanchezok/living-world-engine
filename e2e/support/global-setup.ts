@@ -11,7 +11,7 @@ function model(id: string) {
     reasoning: true,
     reasoning_options: [
       { type: "toggle" },
-      { type: "effort", values: ["high", "max"] },
+      { type: "effort", values: ["low"] },
     ],
     tool_call: true,
     structured_output: true,
@@ -45,8 +45,7 @@ export default async function globalSetup(): Promise<void> {
         id: "deepseek",
         name: "E2E DeepSeek",
         models: {
-          "e2e-truth": model("e2e-truth"),
-          "e2e-agent": model("e2e-agent"),
+          "deepseek-flash": model("deepseek-flash"),
         },
       },
     }), {
