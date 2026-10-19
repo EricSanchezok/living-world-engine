@@ -66,7 +66,7 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
     expect(report.narrativeExpansion).toBe(false);
   });
 
-  it("admits all twelve existing identities with their assets, reciprocal contacts, contracts and saved cognition", async () => {
+  it("offers all twelve Origins and starts each with its existing assets, contacts, contracts and saved cognition", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "night-city-origins-")), filename = path.join(root, "world.sqlite");
     const provider = makeProvider(); await provider.registry.capture();
     let database = new LocalDatabase(filename, { heartbeat: false });
@@ -75,16 +75,26 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
       const imported = database.importWorld(archive(), provider.catalog);
       expect(imported.id).toBe("cyberpunk2077-night-city");
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: provider.gateway });
+      const options = host.worldStartOptions(imported.id);
+      expect(options.world.participation).toBe("open");
+      expect(options.origins.map(origin => origin.id)).toEqual(roles.map(role => role.id));
+      expect(options.observerAvailable).toBe(true);
+      const seed = 20261019;
+      const before = database.load(imported.id, seed, provider.catalog).initialState;
       for (const role of roles) {
-        const callsBefore = provider.transport.mock.calls.length;
-        const created = await host.createInstance({ worldId: imported.id, start: { kind: "observer" } });
-        expect(provider.transport.mock.calls).toHaveLength(callsBefore);
-        const id = created.summary.id, before = database.readInstance(id).document.state;
-        const takeover = await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: role.id } });
-        expect(takeover.conversation?.participantId).toBeTruthy();
-        expect(provider.transport.mock.calls).toHaveLength(callsBefore + 1);
+        const origin = options.origins.find(entry => entry.id === role.id)!;
+        expect(origin).toMatchObject({ kind: "existing", identityName: before.truth.entities[role.id]!.name });
+        expect(origin.location).toBe(before.truth.entities[role.work]!.name);
+        expect(origin.relationshipHooks).toHaveLength(role.contacts.length);
+        const created = await host.createInstance({ worldId: imported.id, seed,
+          start: { kind: "origin", originId: origin.id, displayName: origin.identityName!, appearance: "", motivation: "" } });
+        const id = created.summary.id;
+        expect(created.conversation?.participantId).toBeTruthy();
+        expect(created.participants[0]!.agentId).toBe(role.id);
         const document = database.readInstance(id).document, state = document.state;
-        expect(Object.values(document.participants)[0]!.arrival.generated).toBe(true);
+        expect(Object.values(document.participants)[0]!.arrival.scene).toContain(origin.fantasy);
+        expect(state.admissions).toEqual([]);
+        expect(state.revision).toBe(0);
         expect(state.truth).toEqual(before.truth);
         expect(state.agents[role.id]).toEqual(before.agents[role.id]);
         expect(Object.values(state.agents)).toHaveLength(coverage.counts.agents);
@@ -108,7 +118,7 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
         }
         saved.set(id, { role, state });
       }
-      expect(provider.transport).toHaveBeenCalledTimes(roles.length);
+      expect(provider.transport).not.toHaveBeenCalled();
       database.close(); database = new LocalDatabase(filename, { heartbeat: false });
       const restored = new WorldHost({ repository: database, store: database, ledger: database, provider: provider.gateway });
       for (const [id, { role, state }] of saved) {
