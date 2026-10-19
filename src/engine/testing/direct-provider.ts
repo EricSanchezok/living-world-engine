@@ -24,6 +24,42 @@ export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire
 
 interface TestReading { state: Record<string, unknown>; catalog: Record<string, Record<string, string>>;
   cognition: Record<string, DecisionQuestionV2>; exactQuotes: Record<string, string> }
+
+/** Fixtures describe semantic decisions; the HTTP boundary still returns the actual joint query shape. */
+function testWorldQueries(questions: Record<string, DecisionQuestionV2>, native: boolean) {
+  const logical = { ...questions };
+  const groups: Array<{ id: string; question: DecisionQuestionV2; kind: string; sourceIds: string[] }> = [];
+  for (const [id, question] of Object.entries(questions)) {
+    const instructions = question.instructions as { task?: unknown; queryPlan?: unknown };
+    const task = native ? instructions.task as typeof instructions : instructions;
+    const plan = task?.queryPlan as { kind: string; dimensions?: { delivery: Record<string, unknown>; actorVisibility: Record<string, unknown> };
+      components: Array<{ version: string; instructions: Record<string, unknown> }> } | undefined;
+    if (!plan) continue;
+    const data = (task as unknown as { data: { premises: unknown; sourceQuestionIds: string[] } }).data;
+    delete logical[id];
+    for (const [index, item] of plan.components.entries()) {
+      const instructions = { ...item.instructions, data: data.premises } as DecisionQuestionV2["instructions"];
+      const keys = plan.kind === "resource" ? index === 0 ? ["apply", "none", "unknown"]
+        : Object.keys((question as Extract<DecisionQuestionV2, { type: "choice" }>).criteria).filter(key => key.startsWith("apply_")).map(key => key.slice(6))
+        : Object.keys(index === 0 ? plan.dimensions!.delivery : plan.dimensions!.actorVisibility);
+      logical[data.sourceQuestionIds[index]!] = { type: "choice", version: item.version,
+        instructions: native ? { rules: "Apply state.policy", task: instructions } : instructions,
+        criteria: Object.fromEntries(keys.map(key => [key, key])) };
+    }
+    groups.push({ id, question, kind: plan.kind, sourceIds: data.sourceQuestionIds });
+  }
+  return { questions: logical, encode(response: unknown) {
+    if (response instanceof Response || !groups.length) return response;
+    const answers = { ...response as Record<string, { choice?: string }> };
+    for (const group of groups) {
+      const [left, right] = group.sourceIds.map(id => answers[id]?.choice);
+      const value = group.kind === "resource" ? left === "none" ? "not_applicable" : left === "unknown" ? "unresolved" : `apply_${right}` : `${left}_${right}`;
+      group.sourceIds.forEach(id => delete answers[id]);
+      answers[group.id] = nativeChoice(group.question, value);
+    }
+    return answers;
+  } };
+}
 function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "questions"> {
   const choice = (criteria: Record<string, string>): DecisionQuestionV2 => ({ type: "choice", version: "test-reading", instructions: "Scripted interpretation boundary", criteria });
   return { state: reading.state, questions: { ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) => [id, choice(criteria)])),
@@ -103,7 +139,13 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
         response = { durationReference: { basis: candidate?.transition ? "phase_occurrence" : /^d\d+$/u.test(duration) ? "elapsed" : duration === "unresolved" ? "unresolved" : "ordinary",
           count: candidate?.transition ? 1 : null }, ...response };
       }
-    } else response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
+    } else {
+      const query = decision ?? (wire.questions ? wire : undefined);
+      const planned = query ? testWorldQueries(query.questions, Boolean(wire.questions)) : undefined;
+      response = await (decision ? respond({ ...wire, ...decision, questions: planned!.questions }, calls)
+        : wire.questions ? respond({ ...wire, questions: planned!.questions }, calls) : create ? create(wire) : respond(wire, calls));
+      if (planned) response = planned.encode(response);
+    }
     if (response instanceof Response) return response;
     if (decision) response = { answers: Object.fromEntries(Object.entries(response as Record<string, Record<string, unknown>>).map(([id, answer]) =>
       [id, answer[String(answer.type)]])) };

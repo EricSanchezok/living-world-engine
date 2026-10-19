@@ -4,6 +4,7 @@ import { contentHash } from "../models/model-audit";
 import type { JsonValue } from "../runtime/json";
 import type { DirectDecisionUse, DirectRuntimeState } from "./contracts";
 import { dependencyVersions } from "./state";
+import { compileWorldQueryPlan, type WorldQueryGroup } from "./query-plan";
 
 function wireValue<T>(value: T): T {
   if (Array.isArray(value)) return value.map(wireValue) as T;
@@ -18,26 +19,37 @@ export class DirectDecisions {
   private ordinals: Record<string, number> = {};
   constructor(readonly provider: StructuredModelProvider, readonly control: DirectRuntimeState, readonly scope: ModelExecutionScope) {}
   next(subject: string): number { return this.ordinals[subject] = (this.ordinals[subject] ?? 0) + 1; }
+  askWorld(state: JsonValue, reads: Record<string, string>, questions: Record<string, DecisionQuestionV2>, groups: WorldQueryGroup[]) {
+    return this.ask(null, state, reads, questions, this.control.models, undefined, groups);
+  }
   async ask(owner: string | null, state: JsonValue, reads: Record<string, string>, questions: Record<string, DecisionQuestionV2>, profiles = this.control.models,
-    instructionProfile?: DecisionInstructionProfile) {
+    instructionProfile?: DecisionInstructionProfile, queryGroups: WorldQueryGroup[] = []) {
     // Optional TypeScript fields have the same meaning before and after JSON persistence.
     state = wireValue(state); questions = wireValue(questions);
     const batch: DecisionBatchV2 = { version: 2, view: owner ? { kind: "agent", agentId: owner, projectionHash: contentHash(state) }
       : { kind: "world", projectionHash: contentHash(state) }, state: structuredClone(state), questions: structuredClone(questions), dependencies: dependencyVersions(this.control, reads) };
-    const key = contentHash({ batch, profiles, catalog: this.control.modelCatalogHash, registry: this.control.registryHash, prompt: decisionPromptV2(instructionProfile).version });
+    if (owner && queryGroups.length) throw new Error("World query plans cannot combine private decision perspectives");
+    const plan = queryGroups.length ? compileWorldQueryPlan(batch.questions, queryGroups) : null;
+    const key = contentHash({ batch, plan: plan?.hash ?? null, profiles, catalog: this.control.modelCatalogHash, registry: this.control.registryHash, prompt: decisionPromptV2(instructionProfile).version });
     const cached = this.control.cache[key];
     if (cached) { this.uses.push({ batch, result: cached, reused: true }); return cached.answers; }
     const subjectId = owner ?? "world";
+    const plannedState = plan ? { ...state as Record<string, JsonValue>, worldQueryPlan: { ...plan.summary, policies: plan.policies } } : state;
+    const dispatched = plan ? { ...batch, state: plannedState, view: { ...batch.view, projectionHash: contentHash(plannedState) }, questions: plan.questions } : batch;
     const result = await executeDecisionV2(this.provider, { ...this.scope, subjectId, profileId: profiles.decision,
       memorySubjects: owner ? [owner] : Object.keys((state as { deliveredEvidence?: Record<string, unknown> }).deliveredEvidence ?? {}),
       fallbackProfileId: profiles.fallback, modelRegistrySnapshotHash: this.control.registryHash,
-      allocateInvocation: () => this.next(subjectId), instructionProfile, batch });
+      allocateInvocation: () => this.next(subjectId), instructionProfile, batch: dispatched });
     const { audits, ...saved } = result;
+    if (plan) {
+      saved.answers = plan.restore(saved.answers);
+      saved.diagnostics.push(`${plan.summary.version}: ${plan.summary.logicalQuestions} logical questions -> ${plan.summary.physicalQuestions} physical queries; source ${plan.hash}`);
+    }
     this.modelAudits.push(...audits);
     this.control.cache[key] = saved;
     const keys = Object.keys(this.control.cache);
     if (keys.length > 256) delete this.control.cache[keys[0]!];
-    this.uses.push({ batch, result: saved, reused: false }); return result.answers;
+    this.uses.push({ batch, result: saved, reused: false }); return saved.answers;
   }
   audits() { return this.modelAudits; }
 }

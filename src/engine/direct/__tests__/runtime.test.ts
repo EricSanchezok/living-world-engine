@@ -354,8 +354,10 @@ describe("direct world through the actual simulation entry", () => {
     for (const wire of wires) {
       const state = wire.state.context;
       expect(state.actions.length).toBeGreaterThan(0);
-      for (const q of Object.values(wire.questions) as Array<{ instructions: { task: { data: { actionId: string; action?: unknown } } } }>) {
-        const data = q.instructions.task.data;
+      expect(state.worldQueryPlan.physicalQuestions).toBe(Object.keys(wire.questions).length);
+      expect(state.worldQueryPlan.logicalQuestions).toBeGreaterThan(state.worldQueryPlan.physicalQuestions);
+      for (const q of Object.values(wire.questions) as Array<{ instructions: { task: { data: { actionId?: string; action?: unknown; premises?: { actionId: string; action?: unknown } } } } }>) {
+        const data = q.instructions.task.data.premises ?? q.instructions.task.data;
         expect(data.action).toBeUndefined();
         expect(state.actions.some((frame: { id: string }) => frame.id === data.actionId)).toBe(true);
       }

@@ -7,6 +7,7 @@ import { loadPromptAsset } from "../prompts";
 import { applyWorldDeltaOperation } from "../runtime/transaction";
 import { contentHash } from "../models/model-audit";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
+import type { WorldQueryGroup } from "./query-plan";
 import type { JsonValue } from "../runtime/json";
 import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from "../mechanics/resolution";
 import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
@@ -75,6 +76,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const rejected: Array<{ actionId: string; reason: "outside_scope" | "unknown" }> = [];
   if (!frames.length) return { prepared: [] as PreparedDirectAction[], rejected, reads: {} as Record<string, string>, audits };
   const view = localWorldView(state, definition, frames, decisions.scope.memory), questions: Record<string, DecisionQuestionV2> = {};
+  const queryGroups: WorldQueryGroup[] = [];
   const playerAuthorization = Object.fromEntries(frames.filter(frame => frame.submissionId).map(frame => {
     const submission = decisions.control.intents[frame.actorId]?.activeSubmission;
     const started = state.history.findIndex(entry => entry.directEvent?.frames.some(previous => previous.submissionId === frame.submissionId));
@@ -253,6 +255,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
             { apply: "This concrete action actually performs the resource-changing operation described by this law", none: "This action does not perform that operation", unknown: "The operation cannot yet be established" });
           questions[id] = question("amount required IF this resource-changing law applies; this answer is ignored when the law does not apply", data,
             { none: "No actual resource change under this law", ...Object.fromEntries(amounts.map(amount => [`n${amount}`, `${amount} ${resource.unit}`])) });
+          queryGroups.push({ kind: "resource", id, applicabilityId: `${id}_applies`, amountId: id });
         }
       }
       const conditions = orderedValues(state.truth.mechanics.conditionProfiles);
@@ -319,6 +322,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const contact = contactQuestions(frame, recipient, state.truth.placements[recipient] === state.truth.placements[frame.actorEntityId]);
       questions[`${prefix}_delivery${ordinal}`] = contact.delivery;
       questions[`${prefix}_actor_visibility${ordinal}`] = contact.actorVisibility;
+      queryGroups.push({ kind: "perception", id: `${prefix}_contact${ordinal}`,
+        deliveryId: `${prefix}_delivery${ordinal}`, visibilityId: `${prefix}_actor_visibility${ordinal}` });
       const witness = Object.values(state.agents).find(agent => agent.entityId === recipient);
       if (witness && isPassiveWitness(frame, recipient)) {
         questions[`${prefix}_relevance${ordinal}`] = contact.relevance;
@@ -334,7 +339,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
   }
   if ([...candidates.values()].some(recipients => recipients.length)) Object.assign(view.state as object, { contactPolicy, recipientConcerns });
-  let answers = await decisions.ask(null, view.state, view.reads, questions);
+  let answers = await decisions.askWorld(view.state, view.reads, questions, queryGroups);
   if (groupedEffects.size) answers = { ...answers, ...Object.fromEntries([...groupedEffects].map(([id, grouped]) => [id,
     { type: "choice" as const, choice: grouped.decode(answers), probabilities: null, confidence: null }])) };
   for (const [index, frame] of frames.entries()) if (frame.submissionId) {
