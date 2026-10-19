@@ -7,6 +7,7 @@ import { contentHash } from "./model-audit";
 import { NativeDecisionContextLimitError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
 import { decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2, type DecisionInstructionProfile } from "./decision-v2";
 import { runtimeEventEmitter, type RuntimeCorrelation } from "../runtime/observability";
+import type { RequestContextBudget } from "./context-budget";
 
 const nativeInference: ResolvedModelInference = {
   thinking: null, effort: null, reasoningBudgetTokens: null, reasoningSummary: null,
@@ -56,30 +57,32 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
   }
 
   async generate<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>, contextJson: string,
-    transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
+    transportCorrelation?: RuntimeCorrelation, contextBudget?: RequestContextBudget): Promise<ModelAdapterResult> {
+    if (!contextBudget?.nativeContextMode) throw new ModelConfigurationError("Native transport requires its gateway context budget");
     return withModelRequestDeadline(binding.profile.request_timeout_ms, request.abortSignal,
-      signal => this.generateWithinDeadline(binding, request, contextJson, signal, transportCorrelation));
+      signal => this.generateWithinDeadline(binding, request, contextJson, signal, contextBudget, transportCorrelation));
   }
 
   private async generateWithinDeadline<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>, contextJson: string,
-    signal: AbortSignal, transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
+    signal: AbortSignal, contextBudget: RequestContextBudget, transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
     const description = this.describe(binding, request);
     const { batch, wire } = nativeContext(JSON.parse(contextJson), nativeInstructionProfile(request).profile);
     const url = `${this.account.base_url.replace(/\/$/u, "")}/systemone`;
     const body = JSON.stringify({ model: binding.modelId, ...wire });
+    const contextHeaders: Record<string, string> = contextBudget.nativeContextMode === "long" ? { "TypeSafe-Danger-Zone-Long-Context": "true" } : {};
     const observe = request.observer?.mode === "full" ? runtimeEventEmitter(request.observer) : undefined;
     observe?.({ event: "model.transport.request.raw", correlation: transportCorrelation,
-      payload: { url, method: "POST", headers: { "content-type": "application/json", authorization: "[redacted]" }, body } });
+      payload: { url, method: "POST", headers: { "content-type": "application/json", authorization: "[redacted]", ...contextHeaders }, body } });
     const response = await this.fetchImplementation(url, {
-      method: "POST", headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },
+      method: "POST", headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json", ...contextHeaders },
       body, signal, redirect: "error",
     });
     const text = await readModelResponseText(response, signal);
     observe?.({ event: "model.transport.response.raw", correlation: transportCorrelation,
       payload: { url, status: response.status, headers: Object.fromEntries(response.headers), body: text } });
     if (!response.ok) {
-      if ([400, 413, 422].includes(response.status) && /(?:context|token|sequence).{0,50}(?:limit|length|exceed|maximum|too long)|(?:exceed|maximum).{0,50}(?:context|token|sequence)/iu.test(text)) {
-        throw new NativeDecisionContextLimitError(`TypeSafe rejected the actual context: HTTP ${response.status}`);
+      if ([400, 413, 422].includes(response.status) && /max_tokens_exceeded|(?:context|token|sequence).{0,50}(?:limit|length|exceed|maximum|too long)|(?:exceed|maximum).{0,50}(?:context|token|sequence)/iu.test(text)) {
+        throw new NativeDecisionContextLimitError(`TypeSafe rejected the actual context: HTTP ${response.status}`, contextBudget.nativeContextMode);
       }
       const error = new ModelTransportError(`TypeSafe returned HTTP ${response.status}`, {
         statusCode: response.status, retriable: [408, 429].includes(response.status) || response.status >= 500,

@@ -29,7 +29,7 @@ profiles:
     request_timeout_ms: 300000
     max_output_tokens: 131072
     # Application-level UTF-8 request budget; this is not the provider's
-    # token-based context window. Oversized batches are split before transport.
+    # token-based context window. The complete wire request must fit this cap.
     max_input_bytes: 4000000
     inference:
       thinking: disabled
@@ -58,6 +58,10 @@ Accounts can independently opt into `network.dns_over_https_url`, an HTTPS endpo
 原生运行时的 Profile `allowed_roles` 分别授权 `decision` 与 `creation`，每次调用按精确职责校验。世界裁决与 Agent 私有决策使用各自的 Profile，具体任务仍保留独立的提示词与审计身份。`max_input_bytes` 是完整序列化模型请求的硬上限，也是 Observation 分批的 Context 预算。推理字段使用统一语义：`auto` 表示不发送该参数；显式 thinking、effort、reasoning budget、sampling 或其他控制只有在快照声明支持时才可进入 transport，不支持时在请求前失败。
 
 Profiles can declare `max_input_tokens` to lower the input capacity and `max_question_tokens` for a native shared-state-plus-question limit. These fields govern the [Agent memory preflight](agent-memory.md#capacity-and-scheduling); they are not provider inference parameters. The model snapshot remains the context-capacity authority, with output space reserved for generative requests.
+
+A TypeSafe profile can explicitly declare `long_context_tokens` (up to 262000). The gateway compares the calibrated full-request and shared-state-plus-largest-question estimates with the default limits, using the selected instruction profile's actual wire policy. Only an exceeded default token limit selects long context; it raises both effective token budgets while preserving explicit operator input and byte caps. The same plan governs memory pressure, `nativeContextMode` in request identity, and the adapter's `TypeSafe-Danger-Zone-Long-Context: true` header. Requests within both defaults omit the header. A provider-confirmed default overflow permits one complete long-context retry; a rejected long request uses the existing full-batch fallback without repeating the long attempt. Other provider errors do not escalate context mode. See [decision 0270](../decisions/0270-demand-driven-native-context.md).
+
+The bundled profile leaves this capability unconfigured. [Recorded gameplay qualification](../research/2026-10-19-jev-long-context-qualification.md) found materially incorrect native world and publication judgments; transport acceptance is not semantic qualification. The capability is available to explicitly qualified profiles and comparison runs, while the bundled game's model routing and publication checks retain their existing behavior.
 
 结构化请求可以携带服务端任务拥有的 `inferenceOverrides`。网关先按实例绑定的 Profile 和快照选择模型，再验证并应用推理覆盖；覆盖不改变账户、模型或原始目录。有效 Profile、覆盖参数和实际 inference 一起进入请求哈希与 Ledger，调用探针复用同一策略。按需建议、NPC 联合行动解读、重要记忆压缩和被拒旁白的既有修复使用此入口声明各自的推理策略；其他调用使用其 Profile 设置。
 

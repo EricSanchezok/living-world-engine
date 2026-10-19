@@ -28,6 +28,7 @@ import { recoverUnmatchedClosers, UNMATCHED_CLOSER_RECOVERY } from "./unmatched-
 import { recoverTerminalRootCloser, TERMINAL_ROOT_CLOSER_RECOVERY } from "./terminal-root-closer-recovery";
 import { completeDeepSeekJsonStream } from "./deepseek-json-stream";
 import { TypeSafeModelAdapter } from "./typesafe-adapter";
+import type { RequestContextBudget } from "./context-budget";
 
 export interface ModelAdapterResult {
   value: unknown;
@@ -57,6 +58,7 @@ export interface ModelProviderAdapter {
     request: StructuredModelRequest<T>,
     contextJson: string,
     transportCorrelation?: RuntimeCorrelation,
+    contextBudget?: RequestContextBudget,
   ): Promise<ModelAdapterResult>;
 }
 

@@ -1,5 +1,5 @@
 import type { ResolvedModelBinding } from "./model-registry";
-import { decisionWireContextV2, type DecisionBatchV2 } from "./decision-v2";
+import { decisionPromptV2, decisionWireContextV2, type DecisionBatchV2 } from "./decision-v2";
 import type { MemoryPressure } from "../cognition/memory";
 
 /** Rolling upper envelope, ordered by dispatch rather than response arrival. */
@@ -36,27 +36,40 @@ export function estimateTokens(value: unknown): number {
       : part.codePointAt(0)! > 127 ? 2 : 1), 0);
 }
 
+export type RequestContextBudget = MemoryPressure & {
+  uncalibratedInputTokens: number; calibration: number; requestUtf8Bytes: number;
+  nativeContextMode?: "default" | "long";
+};
+
 export function requestPressure(binding: ResolvedModelBinding, context: unknown,
-  prompt: { system: string; userMessage: string; schemaJson: string; requestUtf8Bytes: number }, calibration = 1): MemoryPressure & {
-    uncalibratedInputTokens: number; calibration: number; requestUtf8Bytes: number;
-  } {
+  prompt: { system: string; userMessage: string; schemaJson: string; requestUtf8Bytes: number }, calibration = 1,
+  nativeContextRetry = false): RequestContextBudget {
   const native = binding.account.protocol === "typesafe-systemone";
   const capacity = binding.model.limit.context ?? Infinity;
-  const inputLimit = Math.min(binding.profile.max_input_tokens ?? Infinity,
+  let inputLimit = Math.min(binding.profile.max_input_tokens ?? Infinity,
     native ? capacity : Math.max(1, capacity - binding.profile.max_output_tokens));
   let input = estimateTokens([prompt.system, prompt.userMessage, prompt.schemaJson]) + 128;
   let question = 0;
   let requestUtf8Bytes = prompt.requestUtf8Bytes;
   if (native) {
-    const wire = decisionWireContextV2((context as { decision: DecisionBatchV2 }).decision);
+    const instructionProfile = prompt.system === decisionPromptV2("publication").system ? "publication" : undefined;
+    const wire = decisionWireContextV2((context as { decision: DecisionBatchV2 }).decision, instructionProfile);
     input = estimateTokens(wire) + 128;
     question = estimateTokens(wire.state) + Math.max(...Object.values(wire.questions).map(value => estimateTokens(value))) + 128;
     requestUtf8Bytes = Buffer.byteLength(JSON.stringify({ model: binding.modelId, ...wire }), "utf8");
   }
   // Both are estimates of the same tokenizer, not exact per-question provider counts.
   const estimatedInputTokens = Math.ceil(input * calibration), estimatedQuestionTokens = Math.ceil(question * calibration);
-  const questionLimit = binding.profile.max_question_tokens;
+  let questionLimit = binding.profile.max_question_tokens;
+  const extended = binding.profile.long_context_tokens;
+  const longContext = native && extended !== undefined && (nativeContextRetry || estimatedInputTokens > capacity ||
+    questionLimit !== undefined && estimatedQuestionTokens > questionLimit);
+  if (longContext) {
+    inputLimit = Math.min(binding.profile.max_input_tokens ?? Infinity, extended);
+    questionLimit = extended;
+  }
   return { estimatedInputTokens, inputLimit, uncalibratedInputTokens: input, calibration, requestUtf8Bytes,
+    ...(native ? { nativeContextMode: longContext ? "long" as const : "default" as const } : {}),
     ...(native && questionLimit ? { estimatedQuestionTokens, questionLimit } : {}),
     ratio: Math.max(estimatedInputTokens / inputLimit,
       native && questionLimit ? estimatedQuestionTokens / questionLimit : 0,

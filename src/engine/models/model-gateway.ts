@@ -452,7 +452,17 @@ export class ModelGateway implements StructuredModelProvider {
     });
     const contextJson = promptBytes.contextJson;
     const contextAudit = preparedContext.measure(contextJson);
+    const decisionView = (context as { decision?: { view?: { kind?: string } } })?.decision?.view?.kind ?? "";
+    const calibrationKey = `${binding.accountId}:${binding.modelMetadataHash}:${request.schemaName}:${decisionView}:${tokenLanguageBand(promptBytes.userMessage)}`;
+    const calibrationSequence = this.tokenCalibration.next();
+    const calibration = this.tokenCalibration.factor(calibrationKey);
+    if (request.nativeContextRetry && (account.protocol !== "typesafe-systemone" || !profile.long_context_tokens)) {
+      throw new ModelConfigurationError("Native context retry requires a configured long-context capability");
+    }
+    const pressure = requestPressure(binding, context, { ...promptBytes, system: request.system }, calibration, request.nativeContextRetry);
+    const requestUtf8Bytes = pressure.requestUtf8Bytes;
     const rendering = {
+      ...(pressure.nativeContextMode ? { nativeContextMode: pressure.nativeContextMode } : {}),
       ...(request.inferenceOverrides ? { inferenceOverrides: request.inferenceOverrides } : {}),
       ...(profile.response_transport ? { responseTransport: profile.response_transport } : {}),
       ...(request.jsonObjectPostlude !== undefined ? { jsonObjectPostlude: request.jsonObjectPostlude } : {}),
@@ -488,12 +498,6 @@ export class ModelGateway implements StructuredModelProvider {
       context,
     };
     const requestHash = contentHash(requestDocument);
-    const decisionView = (context as { decision?: { view?: { kind?: string } } })?.decision?.view?.kind ?? "";
-    const calibrationKey = `${binding.accountId}:${binding.modelMetadataHash}:${request.schemaName}:${decisionView}:${tokenLanguageBand(promptBytes.userMessage)}`;
-    const calibrationSequence = this.tokenCalibration.next();
-    const calibration = this.tokenCalibration.factor(calibrationKey);
-    const pressure = requestPressure(binding, context, { ...promptBytes, system: request.system }, calibration);
-    const requestUtf8Bytes = pressure.requestUtf8Bytes;
     // A capacity rebuild is preflight work, not an outstanding model invocation.
     const preflightCorrelation = { ...correlation, modelInvocationId: undefined, modelInvocation: undefined };
     if (pressure.ratio >= 0.8) observe?.({ event: "model.memory.pressure", correlation: preflightCorrelation,
@@ -501,7 +505,10 @@ export class ModelGateway implements StructuredModelProvider {
       payload: { ...pressure, inputLimit: Number.isFinite(pressure.inputLimit) ? pressure.inputLimit : null, versions: requestMemoryVersions(context) } });
     try {
       if (request.memory) await request.memory.pressure(request.memorySubjects ?? [request.subjectId], pressure, request.abortSignal, requestMemoryVersions(context));
-      if (!request.memory && request.priority === "background" && pressure.ratio >= 1) throw new ContextLimitExceededError("Background model request exceeds its input budget");
+      if (account.protocol === "typesafe-systemone" && pressure.ratio > 1 ||
+        !request.memory && request.priority === "background" && pressure.ratio >= 1) {
+        throw new ContextLimitExceededError("Complete model request exceeds its selected input budget");
+      }
       if (requestUtf8Bytes > profile.max_input_bytes) {
         throw new ContextLimitExceededError(
           `model profile ${request.profileId} request is ${requestUtf8Bytes} bytes; ` +
@@ -601,6 +608,7 @@ export class ModelGateway implements StructuredModelProvider {
               request.observer === observer ? request : { ...request, observer },
               contextJson,
               transportCorrelation,
+              pressure,
             );
           },
         });

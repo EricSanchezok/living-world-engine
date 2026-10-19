@@ -91,8 +91,9 @@ function diagnosticAnswers(answers: Record<string, DecisionAnswerV2>): string[] 
     return notes;
   });
 }
-function nativeOverflow(error: unknown): boolean {
-  return error instanceof NativeDecisionContextLimitError || error instanceof Error && error.cause !== error && nativeOverflow(error.cause);
+function nativeOverflow(error: unknown): NativeDecisionContextLimitError | undefined {
+  return error instanceof NativeDecisionContextLimitError ? error
+    : error instanceof Error && error.cause !== error ? nativeOverflow(error.cause) : undefined;
 }
 function contextOverflow(error: unknown): boolean {
   return error instanceof ContextLimitExceededError || error instanceof Error && error.cause !== error && contextOverflow(error.cause);
@@ -110,7 +111,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
     : { type: "score", score: raw as number, probabilities: null, confidence: null, legend: null };
   let repairUsed = false;
   const repairDiagnostics: string[] = [];
-  const run = async (part: DecisionBatchV2, profileId: string, fallback: "context-limit" | null): Promise<Record<string, DecisionAnswerV2>> => {
+  const run = async (part: DecisionBatchV2, profileId: string, fallback: "context-limit" | null, nativeContextRetry = false): Promise<Record<string, DecisionAnswerV2>> => {
     provider.catalog.assertProfile(profileId, "decision");
     const native = provider.catalog.account(provider.catalog.profile(profileId).account_id).protocol === "typesafe-systemone";
     dispatches.push({ questionIds: Object.keys(part.questions), profileId, fallback });
@@ -118,6 +119,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
       const result = await provider.generateStructured({ ...request, modelInvocation: request.allocateInvocation?.() ?? ordinal++,
         // Each physical invocation receives a fresh gateway identity, including splits.
         modelInvocationId: undefined, profileId, role: "decision", schemaName: "DecisionBatchV2",
+        ...(nativeContextRetry ? { nativeContextRetry: true } : {}),
         inferenceOverrides: native ? undefined : request.inferenceOverrides,
         ...prompt, promptVersion: prompt.version, context: { decision: native ? part : templateDecisionBatchV2(part) },
         schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });
@@ -148,6 +150,10 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
         return { ...valid, ...await run({ ...part, questions: invalid }, profileId, fallback) };
       }
       if (!contextOverflow(error) || !native) throw error;
+      if (!nativeContextRetry && nativeOverflow(error)?.contextMode === "default" && provider.catalog.profile(profileId).long_context_tokens) {
+        repairDiagnostics.push("Native default context overflow: retry the complete batch once with long context");
+        return run(part, profileId, fallback, true);
+      }
       if (!request.fallbackProfileId || provider.catalog.account(provider.catalog.profile(request.fallbackProfileId).account_id).protocol === "typesafe-systemone") throw error;
       repairDiagnostics.push(`${nativeOverflow(error) ? "Actual native context overflow" : "Native input budget exhausted after preflight"}: preserve the shared state and all questions in one fallback request`);
       return run(part, request.fallbackProfileId, "context-limit");

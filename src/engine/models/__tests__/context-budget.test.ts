@@ -29,6 +29,22 @@ it("learns downward only from repeated usage, raises immediately, and ages sampl
   expect(tokenLanguageBand("English conversation")).not.toBe(tokenLanguageBand("中文对话和长期记忆"));
 });
 describe("complete native request pressure", () => {
+  it("admits a complete oversized native state with the configured long-context capacity", async () => {
+    const f = directTestProvider(() => ({}));
+    const binding = resolveModelProfile(f.catalog, await f.registry.capture(), "decision-jev");
+    binding.profile = { ...binding.profile, max_question_tokens: 32000, long_context_tokens: 262000 };
+    binding.model.limit.context = 64000;
+    const state = { history: "长期经历。".repeat(5000) };
+    const context = { decision: { version: 2, state, dependencies: {},
+      view: { kind: "world", projectionHash: contentHash(state) },
+      questions: { a: { type: "noul", version: "1", instructions: "Is the record consistent?" } } } };
+    const prompt = { system: "system", ...structuredPromptBytes({ system: "system", userPrompt: "user", context, schema: z.object({}) }) };
+    const pressure = requestPressure(binding, context, prompt);
+    expect(pressure.estimatedQuestionTokens).toBeGreaterThan(32000);
+    expect(pressure.inputLimit).toBe(262000);
+    expect(pressure.questionLimit).toBe(262000);
+    expect(pressure.ratio).toBeLessThan(1);
+  });
   it("learns from existing gateway usage without sharing Agent and world calibration or making extra calls", async () => {
     const f = directTestProvider(wire => Response.json({ model: wire.model,
       answers: Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question)])),

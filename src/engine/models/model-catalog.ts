@@ -125,6 +125,7 @@ const profileSchema = z.object({
   max_input_bytes: positiveIntegerSchema.default(262_144),
   max_input_tokens: positiveIntegerSchema.optional(),
   max_question_tokens: positiveIntegerSchema.optional(),
+  long_context_tokens: positiveIntegerSchema.max(262000).optional(),
   inference: modelInferenceSchema,
 }).strict();
 
@@ -236,6 +237,10 @@ export class ModelCatalog {
       }
       if (new Set(profile.allowed_roles).size !== profile.allowed_roles.length) {
         throw new Error(`model profile ${profileId} has duplicate allowed roles`);
+      }
+      if (profile.long_context_tokens && (parsed.accounts[profile.account_id]!.protocol !== "typesafe-systemone" ||
+        !profile.max_question_tokens || profile.long_context_tokens <= profile.max_question_tokens)) {
+        throw new Error(`model profile ${profileId} long context requires a native account and a smaller default question budget`);
       }
     }
     for (const providerId of Object.keys(parsed.model_overrides)) {

@@ -44,6 +44,8 @@ export interface ModelExecutionScope {
 }
 
 export interface StructuredModelRequest<T> extends ModelExecutionScope {
+  /** Native admission retry after a provider-confirmed default-context overflow. */
+  nativeContextRetry?: boolean;
   /** Trusted task policy, validated against the pinned model and included in request evidence. */
   inferenceOverrides?: Partial<ModelInferenceConfig>;
   /** Presentation-only cumulative text callback. Callers publish complete, validated segments. */
@@ -170,7 +172,9 @@ export class ContextLimitExceededError extends ModelConfigurationError {
 }
 
 /** A native provider rejected an actual HTTP request for its context/token limit. */
-export class NativeDecisionContextLimitError extends ContextLimitExceededError {}
+export class NativeDecisionContextLimitError extends ContextLimitExceededError {
+  constructor(message: string, readonly contextMode: "default" | "long" = "default") { super(message); }
+}
 
 export interface ModelSemanticRepairErrorOptions extends ErrorOptions {
   audit?: ModelExecutionAudit;
